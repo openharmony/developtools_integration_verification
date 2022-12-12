@@ -1,39 +1,46 @@
-# developtools_integration_verification
+# 集成验证部件
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+## 简介
+集成验证包含门禁冒烟和每日构建两个功能：
+- 门禁冒烟对开发者的提交进行基本功能、部件功能和按场景的端到端测试；
+- 每日构建定时取master和release分支代码进行版本归档、全量TDD测试、最小系统测试和部件化的架构看护检查。
 
-#### 软件架构
-软件架构说明
+**图1** 集成验证架构图
 
+![架构图](figures/arch.png)
 
-#### 安装教程
+## 目录
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+```undefined
+/developtools/integration_verification
+├── cases                       # 用例
+│   ├── daily                   # 每日构建
+│   │   └── mini_system         # 最小系统测试
+│   └── smoke                   # 门禁冒烟
+│       ├── audio               # 音频用例
+│       ├── basic               # 基础功能用例
+│       │   ├── screenshot32
+│       │   └── screenshot64
+│       ├── distributed         # 分布式场景端到端用例
+│       └── video               # 视频用例
+├── test                        # 自测试用例
+└── tools                       # 公共工具集
+    └── rom_ram_analyzer        # ROM/RAM分析工具
+```
 
-#### 使用说明
+## 说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 使用说明
+#### 关联仓和冒烟用例
+当新建仓或仓对应系统功能发生变化时，通常需要在门禁中添加和修改冒烟用例的关联。关联关系通过cases/smoke/repo_cases_matrix.csv文件配置，文件第一列为仓名，从第二列为部件名称，第三列开始为不同形态的开发板（包括虚拟开发板），仓与开发板的交集中填写测试用例名称。示例如下：
 
-#### 参与贡献
+| repoistory | bundle     | board1                | board2                | ...  |
+| ---------- | ---------- | --------------------- | --------------------- | ---- |
+| repo1      | component1 | test_case1            | test_case1;test_case2 | ...  |
+| repo2      | component2 | test_case1;test_case2 | test_case1            | ...  |
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+一般一个测试用例对应一个可执行文件，在门禁构建时产生和烧录设备。
 
+## 相关仓
 
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+[**developtools\_integration\_verification**](https://gitee.com/openharmony/developtools_integration_verification/blob/master/README_zh.md)
