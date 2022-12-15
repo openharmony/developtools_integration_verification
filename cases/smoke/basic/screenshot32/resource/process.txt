@@ -17,7 +17,6 @@ huks_service
 memmgrservice
 bluetooth_servi
 pulseaudio
-accessibility
 resource_schedu
 bgtaskmgr_servi
 audio_policy
