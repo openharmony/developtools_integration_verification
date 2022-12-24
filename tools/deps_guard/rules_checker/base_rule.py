@@ -32,7 +32,7 @@ class BaseRule(object):
 		print(info)
 
 	def get_help_url(self):
-		return "https://gitee.com/openharmony/developtools_integration_verification/deps_guard/rules/%s/README.md" % self.__class__.RULE_NAME
+		return "https://gitee.com/openharmony/developtools_integration_verification/tools/deps_guard/rules/%s/README.md" % self.__class__.RULE_NAME
 
 	# To be override
 	def check(self):
