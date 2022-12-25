@@ -41,6 +41,9 @@ class SAParser(object):
 	def load(mgr, out_root_path):
 		all_sa = {}
 		path = os.path.join(out_root_path, "packages/phone/system/profile")
+		if not os.path.exists(path):
+			return
+
 		for f in os.listdir(path):
 			full_name = os.path.join(path, f)
 			if os.path.isfile(full_name) and f.endswith(".xml"):

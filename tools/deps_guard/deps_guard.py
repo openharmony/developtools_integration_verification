@@ -3,7 +3,7 @@
 
 from elf_file_mgr import ElfFileMgr
 
-def createArgParser():
+def __createArgParser():
 	import argparse
 
 	parser = argparse.ArgumentParser(description='Check architecture information from compiled output files.')
@@ -19,14 +19,22 @@ def createArgParser():
 
 	return parser
 
-if __name__ == '__main__':
-
-	parser = createArgParser()
-	args = parser.parse_args()
-
-	# Scan
-	mgr = ElfFileMgr(args.input)
+def deps_guard(out_path, args=None):
+	mgr = ElfFileMgr(out_path)
 	mgr.scan_all_files()
 
 	from rules_checker import check_all_rules
-	check_all_rules(mgr, args)
+
+	passed = check_all_rules(mgr, args)
+	if passed:
+		print("All rules passed")
+		return
+
+	raise Exception("ERROR: deps_guard failed.")
+
+if __name__ == '__main__':
+
+	parser = __createArgParser()
+	args = parser.parse_args()
+
+	deps_guard(args.input, args)

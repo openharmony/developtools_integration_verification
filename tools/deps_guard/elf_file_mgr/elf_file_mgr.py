@@ -14,18 +14,11 @@ class ElfFileWithDepsInfo(ElfFile):
 		self["deps"] = []
 		self["dependedBy"] = []
 
-		self["deps_indirect"] = []
-		self["dependedBy_indirect"] = []
-		self["deps_total"] = 0
-		self["dependedBy_total"] = 0
-
-		self._cached = False
-
 	def __eq__(self, other):
 		if not isinstance(other, ElfFileWithDepsInfo):
 			return NotImplemented
 
-		return self["id"] == other["id"]#and self["name"] == other["name"]
+		return self["id"] == other["id"]
 
 	def dependsOn(self, mod):
 		for dep in self["deps"]:
@@ -33,18 +26,11 @@ class ElfFileWithDepsInfo(ElfFile):
 				return True
 		return False
 
-	def getAllDependedModules(self):
-		res = []
-		for dep in self["deps"]:
-			res.append(dep["callee"])
-		return res + self["deps_indirect"]
-
 	def __repr__(self):
 		return self.__str__()
 
 	def __str__(self):
-		#return "%s deps:%s\n%s deps_indirect:%s" % (self["name"], self.getDepends(), self["name"], self.getIndirectDepends())
-		return "%s:%d deps(%d) depsTotal(%d) dependedBy(%d)" % (self["name"], self["id"], len(self["deps"]), len(self["deps"]) + len(self["deps_indirect"]), len(self["dependedBy"]))
+		return "%s:%d deps(%d) dependedBy(%d)" % (self["name"], self["id"], len(self["deps"]), len(self["dependedBy"]))
 
 class Dependency(dict):
 	def __init__(self, idx, caller, callee):
@@ -105,19 +91,6 @@ class ElfFileMgr(object):
 
 		self._maxDepth = 0
 		self._maxTotalDepends = 0
-
-		print("Build indirect dependence tree for %d ELF files now ..." % len(self._elfFiles))
-
-		for mod in self._elfFiles:
-			mod["_recursiveFinished"] = False
-		for mod in self._elfFiles:
-			self.__update_indirect_deps_recursive(mod)
-		for mod in self._elfFiles:
-			mod["_recursiveFinished"] = False
-		for mod in self._elfFiles:
-			self.__update_indirect_dependedBy_recursive(mod)
-		for mod in self._elfFiles:
-			del mod["_recursiveFinished"]
 
 		print("Load compile information now ...")
 		CompileInfoLoader.load(self, self._product_out_path)
@@ -274,101 +247,14 @@ class ElfFileMgr(object):
 	def get_all_deps(self):
 		return self._deps
 
-	def __update_indirect_dependedBy_recursive(self, mod):
-		# Already finished
-		if mod["_recursiveFinished"]:
-			return mod["dependedBy_depth"]
-
-		maxDepth = 0
-		for item in mod["dependedBy"]:
-			# update caller first
-			caller = item["caller"]
-			depth = self.__update_indirect_dependedBy_recursive(caller)
-			if depth > maxDepth:
-				maxDepth = depth
-			for dep in caller["dependedBy"]:
-				grand_caller = dep["caller"]
-				if grand_caller.dependsOn(mod):
-					continue
-				if grand_caller in mod["dependedBy_indirect"]:
-					continue
-				mod["dependedBy_indirect"].append(grand_caller)
-			for dep in caller["dependedBy_indirect"]:
-				if dep.dependsOn(mod):
-					continue
-				if dep in mod["dependedBy_indirect"]:
-					continue
-				mod["dependedBy_indirect"].append(dep)
-
-		if len(mod["dependedBy"]) > 0:
-			maxDepth = maxDepth + 1
-
-		mod["_recursiveFinished"] = True
-		mod["dependedBy_depth"] = maxDepth
-
-		if maxDepth > self._maxDepth:
-			self._maxDepth = maxDepth
-		depsTotal = len(mod["dependedBy"]) + len(mod["dependedBy_indirect"])
-		if depsTotal > self._maxTotalDepends:
-			self._maxTotalDepends = depsTotal
-
-		mod["dependedBy_total"] = depsTotal
-
-		return maxDepth
-
-	def __update_indirect_deps_recursive(self, mod):
-		# Already finished
-		if mod["_recursiveFinished"]:
-			return mod["depth"]
-
-		maxDepth = 0
-		for item in mod["deps"]:
-			# update child first
-			child = item["callee"]
-			depth = self.__update_indirect_deps_recursive(child)
-			if depth > maxDepth:
-				maxDepth = depth
-			for dep in child["deps"]:
-				if mod.dependsOn(dep["callee"]):
-					continue
-				if dep["callee"] in mod["deps_indirect"]:
-					continue
-				mod["deps_indirect"].append(dep["callee"])
-			for dep in child["deps_indirect"]:
-				if mod.dependsOn(dep):
-					continue
-				if dep in mod["deps_indirect"]:
-					continue
-				mod["deps_indirect"].append(dep)
-
-		if len(mod["deps"]) > 0:
-			maxDepth = maxDepth + 1
-
-		mod["_recursiveFinished"] = True
-		mod["depth"] = maxDepth
-
-		if maxDepth > self._maxDepth:
-			self._maxDepth = maxDepth
-		depsTotal = len(mod["deps"]) + len(mod["deps_indirect"])
-		if depsTotal > self._maxTotalDepends:
-			self._maxTotalDepends = depsTotal
-
-		mod["deps_total"] = depsTotal
-
-		return maxDepth
-
 if __name__ == '__main__':
 	mgr = ElfFileMgr("/home/z00325844/demo/archinfo/assets/rk3568/3.2.7.5")
 	mgr.scan_all_files()
 	elf = mgr.get_elf_by_path("system/lib/libskia_ohos.z.so")
 	print("Get skia now ...")
-	#print(len(elf["deps_indirect"]))
-	#print(len(elf["dependedBy_indirect"]))
-	#print(elf["deps_indirect"][0])
 
 	res = mgr.get_elf_by_path("system/lib/platformsdk/libhmicui18n.z.so")
 	print(res)
 	#print(mgr.get_all())
-	#print(elf["deps_indirect"])
 	#print(elf.matchCalls())
 	#print(len(elf["dependedBy"]))
