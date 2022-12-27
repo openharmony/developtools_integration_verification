@@ -1,5 +1,4 @@
 [
-   "screenlock_client",
    "fileio",
    "downloadsingle",
    "tel_call_manager_api",
@@ -8,7 +7,6 @@
    "accessibility",
    "stationary",
    "remote_file_share_native",
-   "screenlock_utils",
    "window_animation",
    "cryptoframework_napi",
    "rdb",
@@ -25,7 +23,5 @@
    "buffer",
    "medical",
    "devicestatus",
-   "geolocation",
-   "screenlock",
-   "screenlock_server"
+   "geolocation"
 ]
