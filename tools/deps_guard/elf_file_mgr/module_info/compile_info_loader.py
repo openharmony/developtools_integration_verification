@@ -68,24 +68,8 @@ class CompileInfoLoader(object):
 		return res
 
 	@staticmethod
-	def __load_predefined_module_info():
-		cur_file_dir = os.path.dirname(os.path.realpath(__file__))
-		with open(os.path.join(cur_file_dir, "modules.json")) as f:
-			info = json.load(f)
-		try:
-			with open(os.path.join(cur_file_dir, "modules-ex.json")) as f:
-				info_ex = json.load(f)
-			info = info + info_ex
-		except:
-			pass
-
-		return info
-
-	@staticmethod
 	def load(mgr, product_out_path):
 		info = CompileInfoLoader.__load_output_module_info(product_out_path)
-		if not info:
-			info = CompileInfoLoader.__load_predefined_module_info()
 
 		defaultInfo = {
 			"subsystem": "unknown",
@@ -99,12 +83,13 @@ class CompileInfoLoader(object):
 			"labelPath": ""
 		}
 
-		for item in info:
-			elf = mgr.get_elf_by_path(item["name"])
-			if not elf:
-				continue
-			for k in defaultInfo.keys():
-				elf[k] = item[k]
+		if info:
+			for item in info:
+				elf = mgr.get_elf_by_path(item["name"])
+				if not elf:
+					continue
+				for k in defaultInfo.keys():
+					elf[k] = item[k]
 
 		unknown_items = []
 		for elf in mgr.get_all():
@@ -231,33 +216,6 @@ class CompileInfoLoader(object):
 				caller["modGroup"] = "pentry"
 			if callee["sa_id"] > 0 or callee["type"] == "bin":
 				callee["modGroup"] = "pentry"
-
-		# Set innerapi_chc_indirect modGroup and platformsdk
-		for mod in platformsdks:
-			for m in mod.getAllDependedModules():
-				if m not in platformsdks and m not in chipsetsdks:
-					if m["modGroup"] == "private":
-						m["modGroup"] = "innerapi_chc_indirect"
-					#elif m["modGroup"] == "innerapi_cc":
-					#	m["modGroup"] = "innerapi_chc"
-
-		# Set innerapi_chc_indirect modGroup and chipsetsdk
-		for mod in chipsetsdks:
-			for m in mod.getAllDependedModules():
-				if m not in platformsdks and m not in chipsetsdks:
-					if m["modGroup"] == "private":
-						m["modGroup"] = "innerapi_chc_indirect"
-					#elif m["modGroup"] == "innerapi_cc":
-					#	m["modGroup"] = "innerapi_chc"
-
-		# Set innerapi_cc_indirect
-		for mod in innerapi_ccs:
-			if mod["modGroup"] != "innerapi_cc":
-				continue
-			for m in mod.getAllDependedModules():
-				if m not in innerapi_ccs and m not in platformsdks and m not in chipsetsdks:
-					if m["modGroup"] == "private":
-						m["modGroup"] = "innerapi_cc_indirect"
 
 if __name__ == "__main__":
 	import sqlite3

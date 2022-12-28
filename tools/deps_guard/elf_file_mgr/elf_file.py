@@ -58,7 +58,26 @@ class ElfFile(dict):
 	def library_depends(self):
 		if not os.access(self._f, os.F_OK):
 			raise Exception("Cannot find lib: " + self._f)
-		return command("mklibs-readelf", "--print-needed", self._f_safe)
+		dynamics = command("readelf", "--dynamic", self._f_safe)
+		res = []
+		for line in dynamics:
+			pos = line.find("(NEEDED)")
+			if pos <= 0:
+				continue
+			line = line[pos + 8:]
+			line = line.strip()
+			if not line.startswith("Shared library:"):
+				continue
+			line = line[15:]
+			line = line.strip()
+			if line.startswith("["):
+				line = line[1:]
+			if line.endswith("]"):
+				line = line[:-1]
+			line = line.strip()
+			res.append(line)
+		return res
+
 
 if __name__ == '__main__':
 	import elf_walker

@@ -9,7 +9,7 @@ def check_all_rules(mgr, args):
 	if not napi.check():
 		passed = False
 
-	if args.no_fail:
+	if args and args.no_fail:
 		return True
 
 	return passed
