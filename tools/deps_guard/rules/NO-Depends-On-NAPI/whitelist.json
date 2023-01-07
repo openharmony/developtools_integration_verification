@@ -13,15 +13,8 @@
    "distributeddataobject_impl",
    "medialibrary",
    "image",
-   "media_avplayer",
+   "featureability",
 
-   "rpc",
-   "uri",
-   "url",
-   "xml",
-   "convertxml",
-   "buffer",
    "medical",
-   "devicestatus",
-   "geolocation"
+   "devicestatus"
 ]

@@ -31,8 +31,14 @@ class BaseRule(object):
 	def log(self, info):
 		print(info)
 
+	def warn(self, info):
+		print("\033[35m[WARNING]\x1b[0m: %s" % info)
+
+	def error(self, info):
+		print("\033[91m[NOT ALLOWED]\x1b[0m: %s" % info)
+
 	def get_help_url(self):
-		return "https://gitee.com/openharmony/developtools_integration_verification/tools/deps_guard/rules/%s/README.md" % self.__class__.RULE_NAME
+		return "https://gitee.com/openharmony/developtools_integration_verification/tree/master/tools/deps_guard/rules/%s/README.md" % self.__class__.RULE_NAME
 
 	# To be override
 	def check(self):

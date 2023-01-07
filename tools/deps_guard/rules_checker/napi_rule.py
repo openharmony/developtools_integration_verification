@@ -26,14 +26,11 @@ class NapiRule(BaseRule):
 			if targetName in lists:
 				continue
 
-			self.log("NOT ALLOWED: napi module %s depended by:" % mod["name"])
+			self.error("napi module %s depended by:" % mod["name"])
 			for dep in mod["dependedBy"]:
 				caller = dep["caller"]
 				self.log("   module [%s] defined in [%s]" % (caller["name"], caller["labelPath"]))
 			passed = False
-
-		if not passed:
-			self.log("  Please refer to: %s" % self.get_help_url())
 
 		return passed
 
