@@ -51,6 +51,8 @@ class CompileInfoLoader(object):
 				info["moduleName"] = item["label_name"]
 			else:
 				info["moduleName"] = ""
+			if "version_script" in item:
+				info["version_script"] = item["version_script"]
 			info["third_party"] = False
 			info["chipset"] = False
 			info["napi"] = False
@@ -80,7 +82,8 @@ class CompileInfoLoader(object):
 			"napi": False,
 			"innerapi": False,
 			"sa_id": 0,
-			"labelPath": ""
+			"labelPath": "",
+			"version_script": ""
 		}
 
 		if info:
@@ -89,7 +92,8 @@ class CompileInfoLoader(object):
 				if not elf:
 					continue
 				for k in defaultInfo.keys():
-					elf[k] = item[k]
+					if k in item:
+						elf[k] = item[k]
 
 		unknown_items = []
 		for elf in mgr.get_all():
@@ -106,7 +110,8 @@ class CompileInfoLoader(object):
 				unknown = defaultInfo.copy()
 				unknown["name"] = elf["path"]
 				for k in defaultInfo.keys():
-					defaultInfo[k] = elf[k]
+					if k in elf:
+						defaultInfo[k] = elf[k]
 				unknown_items.append(unknown)
 
 			if elf["path"].startswith("system/lib64/module/") or elf["path"].startswith("system/lib/module/"):
