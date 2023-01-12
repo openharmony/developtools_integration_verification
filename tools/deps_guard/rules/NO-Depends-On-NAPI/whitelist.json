@@ -16,5 +16,7 @@
    "featureability",
 
    "medical",
-   "devicestatus"
+   "devicestatus",
+   "hiappevent",
+   "hiappevent_v9"
 ]
