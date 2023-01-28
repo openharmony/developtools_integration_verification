@@ -85,6 +85,7 @@
 1. 获取整个rom_ram_analyzer目录
 2. hdc可用
 2. 设备已连接
+3. 系统已烧录
 3. python3.8及以后
 4. 安装requirements
    ```txt
