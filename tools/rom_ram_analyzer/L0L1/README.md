@@ -13,7 +13,7 @@
 1. 扫描BUILD.gn文件,收集各个target的编译产物及其对应的component_name, subsystem_name信息,并存储到config.yaml中的gn_info_file字段指定的json文件中
 2. 根据配置文件config.yaml扫描产品的编译产物目录,得到真实的编译产物信息(主要是大小)
 3. 用真实的编译产物与从BUILD.gn中收集的信息进行匹配,从而得到编译产物-大小-所属部件的对应信息
-4. 如果匹配失败,会直接利用grep到项目路径下进行搜索,尝试利用出现次数最多的BUILD.gn文件进行部件归属
+4. 如果匹配失败,会直接利用grep到项目路径下进行搜索
 5. 如果还搜索失败,则将其归属到others
 
 
@@ -21,9 +21,9 @@
 
 1. 修改config.yaml
    - project_path:oh项目根路径
-   - output_file:保存最终结果的文件的名字[optional]
+   - output_file:保存结果的文件的名字[optional]
 2. `python3 rom_analysis.py --product_name {your_product_name} [--recollect_gn bool]`运行代码,其中recollect_gn表示是需要重新扫描BUILD.gn还是直接使用已有结果.eg: `python3 rom_analysis.py --product_name ipcamera_hispark_taurus`
-3. 最终会产生4个json文件及一个xls文件,如果是默认配置,各文件描述如下:
+3. 运行完毕会产生4个json文件及一个xls文件,如果是默认配置,各文件描述如下:
    - gn_info.json:BUILD.gn的分析结果
    - sub_com_info.json:从bundle.json中进行分析获得的各部件及其对应根目录的信息
    - {product_name}_product.json:该产品实际的编译产物信息,根据config.yaml进行收集
