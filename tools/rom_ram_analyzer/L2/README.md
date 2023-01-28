@@ -34,7 +34,7 @@
      -h, --help            show this help message and exit
      -v, -version          show program\'s version number and exit
      -p PROJECT_PATH, --project_path PROJECT_PATH
-                           root path of openharmony. eg: -p ~/openharmony
+                           root path of oh. eg: -p ~/oh
      -j MODULE_INFO_JSON, --module_info_json MODULE_INFO_JSON
                            path of out/{product_name}/packages/phone/system_module_info.json
      -n PRODUCT_NAME, --product_name PRODUCT_NAME
@@ -49,7 +49,7 @@
 1. 使用示例
    ```shell
    python3 rom_analyzer.py -p ~/nomodify_oh/ -j ../system_module_info.json -n rk3568 -d system -d vendor -d updater -o demo/demo -e True
-   # oh：rootpath of openharmony
+   # oh：rootpath of oh
    # rk3568: product_name, same as out/{product_name}
    # demo/demo: path of output file, where the second 'demo' is the basename of output file
    # -e True：output result in excel format additionally
@@ -85,6 +85,7 @@
 1. 获取整个rom_ram_analyzer目录
 2. hdc可用
 2. 设备已连接
+3. 系统已烧录
 3. python3.8及以后
 4. 安装requirements
    ```txt
@@ -108,7 +109,7 @@
      -h, --help            show this help message and exit
      -v, -version          show program\'s version number and exit
      -x XML_PATH, --xml_path XML_PATH
-                           path of xml file. eg: -x ~/openharmony/out/rk3568/packages/phone/system/profile
+                           path of xml file. eg: -x ~/oh/out/rk3568/packages/phone/system/profile
      -c CFG_PATH, --cfg_path CFG_PATH
                            path of cfg files. eg: -c ./cfgs/
      -j ROM_RESULT, --rom_result ROM_RESULT

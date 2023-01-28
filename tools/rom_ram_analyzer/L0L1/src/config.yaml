@@ -1,0 +1,126 @@
+#  Copyright (c) 2022 Huawei Device Co., Ltd.
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+# root:
+project_path: ~/oh
+# 从bundle.json中取出的component和subsystem_name的信息
+# used by get_subsystem_component.py config.py
+subsystem_component_json:
+  save: true
+  filename: sub_com_info.json
+  
+output_file: result
+
+# gn info
+gn_info_file: gn_info.json
+# 注意:如果target_type有了更改,要相应改变config.py中collector_config
+target_type:
+  - shared_library
+  - ohos_shared_library
+  - static_library
+  - ohos_static_library
+  - executable
+  - ohos_executable
+  - lite_library
+  - ohos_hap
+  - ohos_prebuilt_etc
+  - ohos_prebuilt_para
+  - ohos_sa_profile
+  - ohos_prebuilt_shared_library
+  - lite_component
+  
+
+# 要分析的编译产物的根目录及各类型对应的子目录
+product_dir:
+  ipcamera_hispark_taurus:
+    root: out/hispark_taurus/ipcamera_hispark_taurus/rootfs
+    relative:
+      bin: bin
+      so: usr/lib
+      etc: etc
+    rest: True  # 是否分析其他目录下的并归到etc
+  ipcamera_hispark_taurus_linux:
+    root: out/hispark_taurus/ipcamera_hispark_taurus_linux/rootfs
+    relative:
+      bin: bin
+      so: usr/lib
+      etc: etc
+    rest: True
+  wifiiot_hispark_pegasus:
+    root: out/hispark_pegasus/wifiiot_hispark_pegasus
+    relative:
+      a: libs
+      etc: etc
+    rest: False 
+# 各类型文件的匹配顺序
+query_order:  
+  ipcamera_hispark_taurus:
+    so: 
+      - shared_library
+      - ohos_shared_library
+      - ohos_prebuilt_shared_library
+      - lite_library
+      - lite_component
+      
+    a:
+      - static_library
+      - ohos_static_library
+      - lite_library
+      
+    bin:
+      - executable
+      - ohos_executable
+      - lite_component
+      
+  ipcamera_hispark_taurus_linux:
+    so: 
+      - shared_library
+      - ohos_shared_library
+      - ohos_prebuilt_shared_library
+      - lite_library
+      - lite_component
+      
+    a:
+      - static_library
+      - ohos_static_library
+      - lite_library
+      
+    bin:
+      - executable
+      - ohos_executable
+      - lite_component
+      
+  wifiiot_hispark_pegasus: 
+    a: 
+      - static_library
+      - ohos_static_library
+      - lite_library
+      
+
+# extension and prefix of products
+default_extension:
+  shared_library: .so
+  static_library: .a
+  app: .hap
+
+default_prefix:
+  shared_library: lib
+  static_library: lib
+# black list for command 'grep'
+black_list:
+  - .repo
+  - .ccache
+  - doc
+  - test
+  - build
+  - out

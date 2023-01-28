@@ -6,9 +6,9 @@ import typing
 from copy import deepcopy
 from typing import *
 
-from packages.basic_tool import BasicTool
-from packages.gn_common_tool import GnCommonTool
-from packages.simple_excel_writer import SimpleExcelWriter
+from pkgs.basic_tool import BasicTool
+from pkgs.gn_common_tool import GnCommonTool
+from pkgs.simple_excel_writer import SimpleExcelWriter
 
 debug = bool(sys.gettrace())
 

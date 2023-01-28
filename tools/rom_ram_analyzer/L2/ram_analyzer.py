@@ -9,7 +9,7 @@ import subprocess
 import typing
 import xml.dom.minidom as dom
 
-from packages.simple_excel_writer import SimpleExcelWriter
+from pkgs.simple_excel_writer import SimpleExcelWriter
 
 debug = True if sys.gettrace() else False
 
