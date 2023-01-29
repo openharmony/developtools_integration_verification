@@ -19,10 +19,18 @@
 
 ## 使用
 
-1. 修改config.yaml
-   - project_path:oh项目根路径
-   - output_file:保存结果的文件的名字[optional]
-2. `python3 rom_analysis.py --product_name {your_product_name} [--recollect_gn bool]`运行代码,其中recollect_gn表示是需要重新扫描BUILD.gn还是直接使用已有结果.eg: `python3 rom_analysis.py --product_name ipcamera_hispark_taurus`
+前置条件：
+
+1. 获取整个rom_ram_analyzer目录
+1. 对系统进行编译
+1. linux平台
+1. python3.8及以后
+1. 安装requirements
+    ```txt
+    xlwt==1.3.0
+    ```
+
+1. `python3 rom_analysis.py --product_name {your_product_name} --oh_path {root_path_of_oh} [--recollect_gn bool]`运行代码,其中recollect_gn表示是需要重新扫描BUILD.gn还是直接使用已有结果.eg: `python3 rom_analysis.py --product_name ipcamera_hispark_taurus`
 3. 运行完毕会产生4个json文件及一个xls文件,如果是默认配置,各文件描述如下:
    - gn_info.json:BUILD.gn的分析结果
    - sub_com_info.json:从bundle.json中进行分析获得的各部件及其对应根目录的信息

@@ -14,7 +14,7 @@
 
 1. 获取整个rom_ram_analyzer目录
 1. 对系统进行编译
-1. linux平台
+1. rom分析在linux平台,ram分析在windows平台
 1. python3.8及以后
 1. 安装requirements
     ```txt
