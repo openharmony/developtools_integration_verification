@@ -12,7 +12,7 @@
 #  limitations under the License.
 
 # root:
-project_path: ~/oh
+# project_path: ~/oh
 # 从bundle.json中取出的component和subsystem_name的信息
 # used by get_subsystem_component.py config.py
 subsystem_component_json:

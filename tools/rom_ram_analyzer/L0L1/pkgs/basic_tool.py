@@ -19,7 +19,6 @@ import os
 import re
 import glob
 import logging
-from deprecated.sphinx import deprecated
 from typing import *
 
 

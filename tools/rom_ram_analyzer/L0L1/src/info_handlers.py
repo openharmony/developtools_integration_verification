@@ -15,5 +15,5 @@ def hap_name_handler(paragraph: Text):
 def target_type_handler(paragraph: Text):
     tt = GnVariableParser.string_parser("target_type", paragraph).strip('"')
     if not tt:
-        logging.warning("parse 'target_type' failed, maybe it's a variable")
+        logging.info("parse 'target_type' failed, maybe it's a variable")
     return tt
