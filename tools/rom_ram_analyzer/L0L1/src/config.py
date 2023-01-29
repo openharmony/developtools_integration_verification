@@ -17,11 +17,29 @@ from info_handlers import extension_handler, hap_name_handler, target_type_handl
 只给rom_analysis.py使用
 """
 
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="analysis rom size of L0 and L1 product")
+    parser.add_argument("-p", "--product_name", type=str, default="ipcamera_hispark_taurus_linux",
+                        help="product name. eg: -p ipcamera_hispark_taurus")
+    parser.add_argument("-o", "--oh_path", type=str,
+                        default=".", help="root path of openharmony")
+    parser.add_argument("-r", "--recollect_gn", type=bool,
+                        default=True, help="if recollect gn info or not")
+    args = parser.parse_args()
+    return args
+
+
+_args = parse_args()
+
 # # global variables
 configs = SimpleYamlTool.read_yaml("config.yaml")
 result_dict: Dict[str, Any] = dict()
 
-project_path = BasicTool.abspath(configs.get("project_path"))
+# project_path = BasicTool.abspath(configs.get("project_path"))
+project_path = _args.oh_path
+product_name = _args.product_name
+recollect_gn = _args.recollect_gn
 _sc_json: Dict[Text, Text] = configs.get("subsystem_component_json")
 _sc_save = _sc_json.get("save")
 _target_type = configs["target_type"]

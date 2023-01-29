@@ -13,7 +13,7 @@ from threading import RLock
 import collections
 
 from gn_lineno_collector import gn_lineno_collect
-from config import result_dict, collector_config, configs, project_path, sub_com_dict
+from config import result_dict, collector_config, configs, project_path, sub_com_dict, product_name, recollect_gn
 # from gn_info_collect import GnInfoCollector
 from pkgs.basic_tool import BasicTool
 from pkgs.gn_common_tool import GnCommonTool
@@ -31,15 +31,15 @@ from pkgs.simple_excel_writer import SimpleExcelWriter
 """
 
 
-def parse_args():
-    parser = argparse.ArgumentParser(
-        description="analysis rom size of L0 and L1 product")
-    parser.add_argument("-p", "--product_name", type=str, default="ipcamera_hispark_taurus_linux",
-                        help="product name. eg: -p ipcamera_hispark_taurus")
-    parser.add_argument("-r", "--recollect_gn", type=bool,
-                        default=True, help="if recollect gn info or not")
-    args = parser.parse_args()
-    return args
+# def parse_args():
+#     parser = argparse.ArgumentParser(
+#         description="analysis rom size of L0 and L1 product")
+#     parser.add_argument("-p", "--product_name", type=str, default="ipcamera_hispark_taurus_linux",
+#                         help="product name. eg: -p ipcamera_hispark_taurus")
+#     parser.add_argument("-r", "--recollect_gn", type=bool,
+#                         default=True, help="if recollect gn info or not")
+#     args = parser.parse_args()
+#     return args
 
 
 class RomAnalysisTool:
@@ -270,10 +270,7 @@ class RomAnalysisTool:
 
 
 def main():
-    args = parse_args()
-    product_name = args.product_name
-    re_collect_gn_info = args.recollect_gn
-    if re_collect_gn_info:
+    if recollect_gn:
         RomAnalysisTool.collect_gn_info()
     product_dict: Dict[str, List[str]
                        ] = RomAnalysisTool.collect_product_info(product_name)
