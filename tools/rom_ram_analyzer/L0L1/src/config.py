@@ -35,7 +35,6 @@ _args = parse_args()
 configs = SimpleYamlTool.read_yaml("config.yaml")
 result_dict: Dict[str, Any] = dict()
 
-# project_path = BasicTool.abspath(configs.get("project_path"))
 project_path = BasicTool.abspath(_args.oh_path)
 product_name = _args.product_name
 recollect_gn = _args.recollect_gn
