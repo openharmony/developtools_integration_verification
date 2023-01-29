@@ -4,7 +4,6 @@ import argparse
 import json
 from typing import *
 
-# from gn_lineno_collector import gn_lineno_collect
 import preprocess
 from pkgs.simple_yaml_tool import SimpleYamlTool
 from pkgs.basic_tool import do_nothing, BasicTool
@@ -36,8 +35,7 @@ _args = parse_args()
 configs = SimpleYamlTool.read_yaml("config.yaml")
 result_dict: Dict[str, Any] = dict()
 
-# project_path = BasicTool.abspath(configs.get("project_path"))
-project_path = _args.oh_path
+project_path = BasicTool.abspath(_args.oh_path)
 product_name = _args.product_name
 recollect_gn = _args.recollect_gn
 _sc_json: Dict[Text, Text] = configs.get("subsystem_component_json")
