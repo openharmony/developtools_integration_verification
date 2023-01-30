@@ -9,18 +9,26 @@ class BaseRule(object):
 
 	def __init__(self, mgr, args):
 		self._mgr = mgr
-		self.__load_white_lists(args)
+		self._args = args
+		self.__white_lists = self.load_files("whitelist.json")
 
-	def __load_white_lists(self, args):
+	def load_files(self, name):
+		rules_dir = []
+		rules_dir.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules"))
+		if self._args and self._args.rules:
+			rules_dir = rules_dir + self._args.rules
+
 		res = []
-		if args and args.rules:
-			rules_path = args.rules
-		else:
-			rules_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules")
+		for d in rules_dir:
+			rules_file = os.path.join(d, self.__class__.RULE_NAME, name)
+			try:
+				with open(rules_file, "r") as f:
+					jsonstr = "".join([ line.strip() for line in f if not line.strip().startswith("//") ])
+					res = res + json.loads(jsonstr)
+			except:
+				pass
 
-		rules_file = os.path.join(rules_path, self.__class__.RULE_NAME, "whitelist.json")
-		with open(rules_file, "rb") as f:
-			self.__white_lists = json.load(f)
+		return res
 
 	def get_mgr(self):
 		return self._mgr

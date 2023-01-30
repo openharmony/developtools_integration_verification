@@ -3,16 +3,21 @@
 
 from .napi_rule import NapiRule
 from .sa_rule import SaRule
+from .hdi_rule import HdiRule
+from .chipsetsdk import ChipsetSDKRule
 
 def check_all_rules(mgr, args):
 	rules = [
 		NapiRule,
-		SaRule
+		SaRule,
+		HdiRule,
+		ChipsetSDKRule
 	]
 
 	passed = True
 	for rule in rules:
 		r = rule(mgr, args)
+		r.log("Do %s rule checking now:" % rule.RULE_NAME)
 		if not r.check():
 			passed = False
 
