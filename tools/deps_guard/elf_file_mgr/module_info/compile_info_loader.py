@@ -83,7 +83,9 @@ class CompileInfoLoader(object):
 			"innerapi": False,
 			"sa_id": 0,
 			"labelPath": "",
-			"version_script": ""
+			"version_script": "",
+			"shlib_type": "",
+			"innerapi_tags": ""
 		}
 
 		if info:
@@ -202,11 +204,11 @@ class CompileInfoLoader(object):
 				# For Chipset SDK modules detection
 				if callee["modGroup"] not in ("publicapi", "pentry"):
 					callee["modGroup"] = "innerapi_chc" # Cross high level component
-
-				dep["chipsetsdk"] = True
-				callee["chipsetsdk"] = True
-				if callee not in chipsetsdks:
-					chipsetsdks.append(callee)
+				if callee["hdiType"] != "hdi_proxy": # hdi proxy modules can be called by both system and chipset
+					dep["chipsetsdk"] = True
+					callee["chipsetsdk"] = True
+					if callee not in chipsetsdks:
+						chipsetsdks.append(callee)
 			elif dep["external"] == True:
 				if callee not in innerapi_ccs:
 					innerapi_ccs.append(callee)

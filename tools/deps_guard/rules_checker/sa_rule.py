@@ -58,10 +58,9 @@ class SaRule(BaseRule):
 		if len(non_sa_with_sa_shlib_type) > 0:
 			passed = False
 			for mod in non_sa_with_sa_shlib_type:
-				self.error('\033[91m[NOT ALLOWED]\x1b[0m: non sa module %s with shlib_type="sa", %s' % (mod["name"], mod["labelPath"]))
+				self.error('non sa module %s with shlib_type="sa", %s' % (mod["name"], mod["labelPath"]))
 
 		return passed
 
 	def check(self):
-		self.log("Do %s rule checking now:" % self.__class__.RULE_NAME)
 		return self.__check_depends_on_sa()

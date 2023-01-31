@@ -1,1 +1,65 @@
-[]
+[
+	"libc.so",
+	"libc++.so",
+	"liblog.so",
+	"libhilog.so",
+	"libhisysevent.z.so",
+	"libservice_checker.z.so",
+	"libbegetutil.z.so",
+	"libbeget_proxy.z.so",
+	"libutils.z.so",
+	"libsec_shared.z.so",
+	"libhdi.z.so",
+	"libhdf_utils.z.so",
+	"libhdf_ipc_adapter.z.so",
+	"libipc_single.z.so",
+	"libdisplay_gralloc.z.so",
+
+	// Third party libraries
+	"libdrm.so",
+	"libpng.z.so",
+	"libxml2.z.so",
+	"libexif.z.so",
+	"libcjson.z.so",
+	"libjsoncpp.z.so",
+	"libnl_share.z.so",
+	"libprotobuf.z.so",
+	"libshared_libz.z.so",
+	"libcrypto_openssl.z.so",
+
+	"libudev.z.so",
+	"libsurface.z.so",
+	"libsamgr_proxy.z.so",
+	"libhril_innerkits.z.so",
+	"libpower_proxy_1.0.z.so",
+
+	"libbuffer_producer_sequenceable_1.0.z.so",
+	"libbuffer_handle_sequenceable_1.0.z.so",
+
+	// To be optimized
+	"libprotobuf_lite.z.so",
+	"libdmabufheap.z.so",
+	"libtinyxml2.z.so",
+	"libgralloc_priv.z.so",
+	"libsync_fence.z.so",
+
+	// chipset modules can be depended by system directly
+	"libosalbase.z.so",
+	"libmetadata.z.so",
+
+	"libdisplay_device.z.so",
+	"libdisplay_layer.z.so",
+
+	"libdispdev.z.so",
+	"libproperty.z.so",
+	"libhril_innerkits_ext.z.so",
+	"libhdi_input.z.so",
+
+	"libhitrace_meter.so",
+	"libinit_stub_empty.so",
+
+	// by libdisplay_layer_video.z.so for hispark taurus platform
+	"libhdi_video_layer_client.z.so",
+	// by libwpa.z.so for hispark taurus platform
+	"libwifi_driver_client.z.so"
+]
