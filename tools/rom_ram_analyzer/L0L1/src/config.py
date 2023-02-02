@@ -8,18 +8,17 @@ import preprocess
 from pkgs.simple_yaml_tool import SimpleYamlTool
 from pkgs.basic_tool import do_nothing, BasicTool
 from get_subsystem_component import SC
-from post_handlers import SOPostHandler, APostHandler, DefaultPostHandler, HAPPostHandler, LiteLibPostHandler, LiteLibS2MPostHandler
-from template_processor import BaseProcessor, DefaultProcessor, StrResourceProcessor, ListResourceProcessor, LiteComponentPostHandler
-from target_name_parser import *
-from info_handlers import extension_handler, hap_name_handler, target_type_handler
+from misc import *
+from template_processor import *
 """
 只给rom_analysis.py使用
 """
 
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="analysis rom size of L0 and L1 product")
-    parser.add_argument("-p", "--product_name", type=str, default="ipcamera_hispark_taurus_linux",
+    parser.add_argument("-p", "--product_name", type=str,
                         help="product name. eg: -p ipcamera_hispark_taurus")
     parser.add_argument("-o", "--oh_path", type=str,
                         default=".", help="root path of openharmony")
@@ -35,11 +34,10 @@ _args = parse_args()
 configs = SimpleYamlTool.read_yaml("config.yaml")
 result_dict: Dict[str, Any] = dict()
 
-# project_path = BasicTool.abspath(configs.get("project_path"))
 project_path = BasicTool.abspath(_args.oh_path)
 product_name = _args.product_name
 recollect_gn = _args.recollect_gn
-_sc_json: Dict[Text, Text] = configs.get("subsystem_component_json")
+_sc_json: Dict[Text, Text] = configs.get("subsystem_component")
 _sc_save = _sc_json.get("save")
 _target_type = configs["target_type"]
 _sc_output_path = _sc_json.get("filename")

@@ -11,18 +11,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# root:
-# project_path: ~/oh
-# 从bundle.json中取出的component和subsystem_name的信息
-# used by get_subsystem_component.py config.py
-subsystem_component_json:
-  save: true
-  filename: sub_com_info.json
-  
-output_file: result
 
-# gn info
-gn_info_file: gn_info.json
 # 注意:如果target_type有了更改,要相应改变config.py中collector_config
 target_type:
   - shared_library
@@ -38,74 +27,95 @@ target_type:
   - ohos_sa_profile
   - ohos_prebuilt_shared_library
   - lite_component
-  
 
-# 要分析的编译产物的根目录及各类型对应的子目录
-product_dir:
-  ipcamera_hispark_taurus:
+subsystem_component:
+  save: true
+  filename: sub_com_info.json
+gn_info_file: gn_info.json
+
+ipcamera_hispark_taurus: 
+  product_infofile: ipcamera_hispark_taurus_product.json # 编译产物的信息
+  output_name: ipcamera_hispark_taurus_result.json # 输出文件的名字
+  product_dir: # [required]
     root: out/hispark_taurus/ipcamera_hispark_taurus/rootfs
-    relative:
+    relative: 
       bin: bin
       so: usr/lib
       etc: etc
-    rest: True  # 是否分析其他目录下的并归到etc
-  ipcamera_hispark_taurus_linux:
+    rest: True  # 是否分析其他目录下的并归到etc(copy的文件)
+  query_order: 
+    so: 
+      - shared_library
+      - ohos_shared_library
+      - ohos_prebuilt_shared_library
+      - lite_library
+      - lite_component      
+    bin:
+      - executable
+      - ohos_executable
+      - lite_component
+
+ipcamera_hispark_taurus_linux:
+  product_infofile: ipcamera_hispark_taurus_linux_product.json
+  output_name: ipcamera_hispark_taurus_linux_result.json
+  product_dir:
     root: out/hispark_taurus/ipcamera_hispark_taurus_linux/rootfs
     relative:
       bin: bin
       so: usr/lib
       etc: etc
     rest: True
-  wifiiot_hispark_pegasus:
+  query_order:
+    so: 
+      - shared_library
+      - ohos_shared_library
+      - ohos_prebuilt_shared_library
+      - lite_library
+      - lite_component
+    bin:
+      - executable
+      - ohos_executable
+      - lite_component
+
+wifiiot_hispark_pegasus:
+  product_infofile: wifiiot_hispark_pegasus_product.json
+  output_name: wifiiot_hispark_pegasus_result.json
+  product_dir:
     root: out/hispark_pegasus/wifiiot_hispark_pegasus
     relative:
       a: libs
       etc: etc
     rest: False 
-# 各类型文件的匹配顺序
-query_order:  
-  ipcamera_hispark_taurus:
-    so: 
-      - shared_library
-      - ohos_shared_library
-      - ohos_prebuilt_shared_library
-      - lite_library
-      - lite_component
-      
-    a:
-      - static_library
-      - ohos_static_library
-      - lite_library
-      
-    bin:
-      - executable
-      - ohos_executable
-      - lite_component
-      
-  ipcamera_hispark_taurus_linux:
-    so: 
-      - shared_library
-      - ohos_shared_library
-      - ohos_prebuilt_shared_library
-      - lite_library
-      - lite_component
-      
-    a:
-      - static_library
-      - ohos_static_library
-      - lite_library
-      
-    bin:
-      - executable
-      - ohos_executable
-      - lite_component
-      
-  wifiiot_hispark_pegasus: 
+  query_order:
     a: 
       - static_library
       - ohos_static_library
       - lite_library
-      
+
+rk3568: # rk的目前从packages/phone/system_module_info.json中分析准确度更高,因为rk基本都使用的是ohos_xxx,而L0和L1的更多的是使用的gn原生target template
+  product_infofile: rk3568_product.json
+  output_name: rk3568_result.json
+  product_dir:
+    root: out/rk3568/packages/phone/system
+    relative:
+      so: lib
+      bin: bin
+      hap: app
+      etc: etc
+    rest: True 
+  query_order:
+    so: 
+      - ohos_shared_library
+      - shared_library
+      - ohos_prebuilt_shared_library
+      - lite_library
+      - lite_component
+    bin: 
+      - ohos_executable
+      - executable
+      - lite_component
+    hap: 
+      - ohos_hap
 
 # extension and prefix of products
 default_extension:

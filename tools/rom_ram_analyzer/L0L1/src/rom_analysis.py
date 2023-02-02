@@ -11,12 +11,13 @@ from concurrent.futures import ThreadPoolExecutor, Future
 from threading import RLock
 import collections
 
-from gn_lineno_collector import gn_lineno_collect
-from config import result_dict, collector_config, configs, project_path, sub_com_dict, product_name, recollect_gn
+from config import result_dict, collector_config, configs, \
+    project_path, sub_com_dict, product_name, recollect_gn
 # from gn_info_collect import GnInfoCollector
 from pkgs.basic_tool import BasicTool
 from pkgs.gn_common_tool import GnCommonTool
 from pkgs.simple_excel_writer import SimpleExcelWriter
+from misc import gn_lineno_collect
 
 
 """
@@ -28,17 +29,6 @@ from pkgs.simple_excel_writer import SimpleExcelWriter
 
 对于找不到的,可以模糊匹配,如,有产物libxxx,则可以在所有的BUILD.gn中搜索xxx,并设置一个阀值予以过滤
 """
-
-
-# def parse_args():
-#     parser = argparse.ArgumentParser(
-#         description="analysis rom size of L0 and L1 product")
-#     parser.add_argument("-p", "--product_name", type=str, default="ipcamera_hispark_taurus_linux",
-#                         help="product name. eg: -p ipcamera_hispark_taurus")
-#     parser.add_argument("-r", "--recollect_gn", type=bool,
-#                         default=True, help="if recollect gn info or not")
-#     args = parser.parse_args()
-#     return args
 
 
 class RomAnalysisTool:
@@ -55,9 +45,37 @@ class RomAnalysisTool:
             json.dump(result_dict, f, indent=4)
 
     @classmethod
-    def __find_files(cls, product_name: str) -> Dict[str, List[str]]:
-        product_dir: Dict[str, Dict] = configs["product_dir"].get(
-            f"{product_name}")
+    def _add_rest_dir(cls, top_dir: str, rela_path: str, sub_path: str, dir_list: List[str]) -> None:
+        """
+        dir_list:相对于原始top目录的所有子目录的全路径
+        """
+        if not sub_path:
+            return
+        # 将其他目录添加到dir_list
+        all_subdir = os.listdir(os.path.join(top_dir, rela_path))
+        for d in all_subdir:
+            t = os.path.join(rela_path, d)
+            if os.path.isdir(os.path.join(top_dir, t)) and t not in dir_list:
+                dir_list.append(t)
+        # 移除sub_path的当前层级的目录
+        t = sub_path.split(os.sep)
+        if os.path.join(rela_path, t[0]) in dir_list:
+            dir_list.remove(os.path.join(rela_path, t[0]))
+        else:
+            logging.error(
+                f"'{os.path.join(rela_path,t[0])}' not in '{top_dir}'")
+        sp = str()
+        if len(t) == 1:
+            return
+        elif len(t) == 2:
+            sp = t[1]
+        else:
+            sp = os.path.join(*t[1:])
+        cls._add_rest_dir(top_dir, os.path.join(rela_path, t[0]), sp, dir_list)
+
+    @classmethod
+    def _find_files(cls, product_name: str) -> Dict[str, List[str]]:
+        product_dir: Dict[str, Dict] = configs[product_name]["product_dir"]
         if not product_name:
             logging.error(
                 f"product_name '{product_name}' not found in the config.yaml")
@@ -84,14 +102,7 @@ class RomAnalysisTool:
             rest_dir_list: List[str] = os.listdir(
                 root_dir)  # 除了配置在relative下之外的所有剩余目录,全部归到etc下
             for v in relative_dir.values():
-                # FIXME 对于配置文件中relative包含/的,如a/b/c,需要进一步特殊处理
-                if '/' in v:
-                    v = os.path.split(v)[0]
-                if v in rest_dir_list:
-                    rest_dir_list.remove(v)
-                else:
-                    logging.warning(
-                        f"config error: {v} not found in {product_dir}")
+                cls._add_rest_dir(root_dir, str(), v, rest_dir_list)
             if "etc" not in product_dict.keys():
                 product_dict["etc"] = list()
             for r in rest_dir_list:
@@ -101,8 +112,8 @@ class RomAnalysisTool:
 
     @classmethod
     def collect_product_info(cls, product_name: str):
-        product_dict: Dict[str, List[str]] = cls.__find_files(product_name)
-        with open(f"{product_name}_product.json", 'w', encoding='utf-8') as f:
+        product_dict: Dict[str, List[str]] = cls._find_files(product_name)
+        with open(configs[product_name]["product_infofile"], 'w', encoding='utf-8') as f:
             json.dump(product_dict, f, indent=4)
         return product_dict
 
@@ -130,21 +141,27 @@ class RomAnalysisTool:
         rom_size_dict["size"] += size
 
     @classmethod
-    def _fuzzy_match(cls, file_name: str) -> Tuple[str, str, str]:
+    def _fuzzy_match(cls, file_name: str, extra_black_list: Tuple[str] = ("test",)) -> Tuple[str, str, str]:
+        """
+        直接grep,利用出现次数最多的BUILD.gn去定位subsystem_name和component_name"""
         _, base_name = os.path.split(file_name)
         if base_name.startswith("lib"):
             base_name = base_name[3:]
         if base_name.endswith(".a"):
             base_name = base_name[:base_name.index(".a")]
-        if base_name.endswith(".z.so"):
+        elif base_name.endswith(".z.so"):
             base_name = base_name[:base_name.index(".z.so")]
         elif base_name.endswith(".so"):
             base_name = base_name[:base_name.index(".so")]
         exclude_dir = [os.path.join(project_path, x)
                        for x in configs["black_list"]]
-        exclude_dir.append("test")
-        grep_result: List[str] = BasicTool.grep_ern(base_name, project_path, include="BUILD.gn", exclude=tuple(exclude_dir
-                                                                                                               ), post_handler=lambda x: list(filter(lambda x: len(x) > 0, x.split('\n'))))
+        exclude_dir.extend(list(extra_black_list))
+        grep_result: List[str] = BasicTool.grep_ern(
+            base_name,
+            project_path,
+            include="BUILD.gn",
+            exclude=tuple(exclude_dir),
+            post_handler=lambda x: list(filter(lambda x: len(x) > 0, x.split('\n'))))
         if not grep_result:
             return str(), str(), str()
         gn_dict: Dict[str, int] = collections.defaultdict(int)
@@ -158,7 +175,7 @@ class RomAnalysisTool:
         return str(), str(), str()
 
     @classmethod
-    def save_as_xls(cls, result_dict: Dict, product_name: str) -> None:
+    def _save_as_xls(cls, result_dict: Dict, product_name: str) -> None:
         header = ["subsystem_name", "component_name",
                   "output_file", "size(Byte)"]
         tmp_dict = copy.deepcopy(result_dict)
@@ -199,11 +216,8 @@ class RomAnalysisTool:
             excel_writer.write_merge(subsystem_start_row, subsystem_col, subsystem_end_row, subsystem_col,
                                      subsystem_name)
             subsystem_start_row = subsystem_end_row + 1
-        output_name = configs["output_file"]
-        ot, base_name = os.path.split(output_name)
-        ol = list(ot)
-        ol.append(product_name + "_" + base_name+".xls")
-        output_name = os.path.join(*ol)
+        output_name: str = configs[product_name]["output_name"]
+        output_name = output_name.replace(".json", ".xls")
         excel_writer.save(output_name)
 
     @ classmethod
@@ -212,7 +226,7 @@ class RomAnalysisTool:
         with open(gn_info_file, 'r', encoding='utf-8') as f:
             gn_info = json.load(f)
         query_order: Dict[str, List[str]
-                          ] = configs["query_order"][product_name]
+                          ] = configs[product_name]["query_order"]
         query_order["etc"] = configs["target_type"]
         rom_size_dict: Dict = dict()
         # prodcut_dict: {"a":["a.txt", ...]}
@@ -259,13 +273,9 @@ class RomAnalysisTool:
                         "file_name": f.replace(project_path, ""),
                         "size": size,
                     }, rom_size_dict)
-        ot, base_output_filename = os.path.split(configs["output_file"])
-        ol = list(ot)
-        ol.append(product_name + "_"+base_output_filename+".json")
-        output_file = os.path.join(*ol)
-        with open(output_file, 'w', encoding='utf-8') as f:
+        with open(configs[product_name]["output_name"], 'w', encoding='utf-8') as f:
             json.dump(rom_size_dict, f, indent=4)
-        cls.save_as_xls(rom_size_dict, product_name)
+        cls._save_as_xls(rom_size_dict, product_name)
 
 
 def main():
@@ -278,3 +288,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # t = os.listdir(
+    #     "/home/aodongbiao/developtools_integration_verification/tools")
+    # RomAnalysisTool._add_rest_dir(
+    #     "/home/aodongbiao/developtools_integration_verification/tools", "", "rom_ram_analyzer/L2/pkgs", t)
+    # print(t)

@@ -18,11 +18,7 @@ import itertools
 import os
 import re
 import glob
-import logging
 from typing import *
-
-
-# warnings.filterwarnings("always")
 
 
 def do_nothing(x: Any) -> Any:
@@ -30,38 +26,6 @@ def do_nothing(x: Any) -> Any:
 
 
 class BasicTool:
-    VERSION = 1.0
-
-    @classmethod
-    def contains_keywords(cls, wrapper: Any, key_words: tuple) -> bool:
-        """
-        判断target中是否包含key_words中的元素
-        :param wrapper: 可以使用 x in y 语法的y
-        :param key_words: 待进行判断的关键词
-        :return: 标识wrapper中是否包含key_words中元素的一个bool值
-        """
-        for k in key_words:
-            if k in wrapper:
-                return True
-        return False
-
-    @classmethod
-    def is_empty_iter(cls, itera: Iterator) -> Tuple[Iterator, bool]:
-        """
-        判断iterator是否为空，因为会改变原来的iterator，所以需要返回一个和原来iterator相同的iter
-        :param itera: 迭代器
-        :return: 包含原迭代器内容的迭代器，原迭代器是否为空
-        """
-        itera, peek = itertools.tee(itera)
-        empty_flag = False
-        try:
-            next(peek)
-        except StopIteration:
-            empty_flag = True
-        finally:
-            ...
-        return itera, empty_flag
-
     @classmethod
     def find_files_with_pattern(cls, folder: str, pattern: str = "/**", recursive: bool = True, apply_abs: bool = True,
                                 real_path: bool = True, de_duplicate: bool = True, is_sort: bool = True,
