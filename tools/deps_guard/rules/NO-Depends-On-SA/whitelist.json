@@ -3,7 +3,6 @@
 	"libnetsys_native_manager.z.so",
 	"libresschedsvc.z.so",
 	"libedmservice.z.so",
-	"libabilityms.z.so",
 	"libavsession_service.z.so",
 	"libtime_service.z.so",
 	"libgeofence_service.z.so",
