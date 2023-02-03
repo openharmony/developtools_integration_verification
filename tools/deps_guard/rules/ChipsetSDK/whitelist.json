@@ -61,5 +61,6 @@
 	// by libdisplay_layer_video.z.so for hispark taurus platform
 	"libhdi_video_layer_client.z.so",
 	// by libwpa.z.so for hispark taurus platform
-	"libwifi_driver_client.z.so"
+	"libwifi_driver_client.z.so",
+	"libffrt.z.so"
 ]
