@@ -62,5 +62,7 @@
 	"libhdi_video_layer_client.z.so",
 	// by libwpa.z.so for hispark taurus platform
 	"libwifi_driver_client.z.so",
+	"librtg_interface.z.so",
+	"libconcurrent_task_client.z.so",
 	"libffrt.z.so"
 ]
