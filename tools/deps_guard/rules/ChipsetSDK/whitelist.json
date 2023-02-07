@@ -3,6 +3,7 @@
 	"libc++.so",
 	"liblog.so",
 	"libhilog.so",
+	"libhilog_ndk.z.so",
 	"libhisysevent.z.so",
 	"libservice_checker.z.so",
 	"libbegetutil.z.so",
