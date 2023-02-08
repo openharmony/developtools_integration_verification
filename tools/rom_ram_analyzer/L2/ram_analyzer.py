@@ -70,7 +70,6 @@ class RamAnalyzer:
         blank_pattern = re.compile(r"\s+(?#匹配一个或多个空格)")
         return re.sub(blank_pattern, ' ', content.strip()).split()
 
-    __SS_Mode = typing.Literal["Pss", "Vss", "Rss", "Uss"]  # 提示输入
     __ss_dict: typing.Dict[str, int] = {
         "Pss": 2,
         "Vss": 3,
@@ -79,7 +78,7 @@ class RamAnalyzer:
     }
 
     @classmethod
-    def __parse_hidumper_mem(cls, content: typing.Text, device_num: str, ss: __SS_Mode = "Pss") -> typing.Dict[
+    def __parse_hidumper_mem(cls, content: typing.Text, device_num: str, ss: str = "Pss") -> typing.Dict[
         typing.Text, int]:
         """
         解析：hidumper --meme的结果

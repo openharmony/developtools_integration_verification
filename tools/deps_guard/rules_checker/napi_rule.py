@@ -35,5 +35,4 @@ class NapiRule(BaseRule):
 		return passed
 
 	def check(self):
-		self.log("Do %s rule checking now:" % self.__class__.RULE_NAME)
 		return self.__check_depends_on_napi()

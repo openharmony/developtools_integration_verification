@@ -11,7 +11,7 @@ def __createArgParser():
 	parser.add_argument('-i', '--input',
 						help='input asset files root directory', required=True)
 
-	parser.add_argument('-r', '--rules',
+	parser.add_argument('-r', '--rules', action='append',
 						help='rules directory', required=False)
 
 	parser.add_argument('-n', '--no-fail',

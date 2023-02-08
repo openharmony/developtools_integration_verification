@@ -38,7 +38,7 @@ ohos_shared_library(sample_sa_module) {
 }
 ```
 
-同样，非SA模块不要增加shlib_type标识。
+同样，非SA模块不要增加shlib_type="sa"标识。
 
 ### 2.2 不允许依赖SA模块
 
