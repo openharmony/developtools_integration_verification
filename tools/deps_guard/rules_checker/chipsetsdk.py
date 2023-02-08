@@ -73,9 +73,14 @@ class ChipsetSDKRule(BaseRule):
 					continue
 
 				if callee not in chipsetsdks:
-					chipsetsdks.append(callee)
+					if "hdiType" not in callee or callee["hdiType"] != "hdi_proxy":
+						chipsetsdks.append(callee)
 				# If callee is in Chipset SDK white list module, it is OK
 				if callee["name"] in lists:
+					continue
+
+				# If callee is asan library, it is OK
+				if callee["name"].endswith(".asan.so"):
 					continue
 
 				# If callee is hdi proxy module, it is OK
