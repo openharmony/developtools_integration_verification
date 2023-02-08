@@ -39,10 +39,9 @@ class HDCTool:
         stderr = str(cp.stderr)
         return device_num in stderr or device_num in stdout
 
-    __MODE = typing.Literal["stdout", "stderr"]
 
     @classmethod
-    def exec(cls, args: list, output_from: __MODE = "stdout"):
+    def exec(cls, args: list, output_from: str = "stdout"):
         cp = subprocess.run(args, capture_output=True)
         if output_from == "stdout":
             return cp.stdout.decode()
@@ -408,7 +407,7 @@ def get_args():
     parser.add_argument("-n", "--device_num", type=str, required=True,
                         help="device number to be collect hidumper info. eg: -n 7001005458323933328a01fce16d3800")
     parser.add_argument("-o", "--output_filename", default="ram_analysis_result", type=str,
-                        help="base name of output file, default: rom_analysis_result. eg: -o ram_analysis_result")
+                        help="base name of output file, default: ram_analysis_result. eg: -o ram_analysis_result")
     parser.add_argument("-e", "--excel", type=bool, default=False,
                         help="if output result as excel, default: False. eg: -e True")
     args = parser.parse_args()

@@ -27,6 +27,7 @@ target_type:
   - ohos_sa_profile
   - ohos_prebuilt_shared_library
   - lite_component
+  
 
 subsystem_component:
   save: true
@@ -49,11 +50,13 @@ ipcamera_hispark_taurus:
       - ohos_shared_library
       - ohos_prebuilt_shared_library
       - lite_library
-      - lite_component      
+      - lite_component   
+         
     bin:
       - executable
       - ohos_executable
       - lite_component
+      
 
 ipcamera_hispark_taurus_linux:
   product_infofile: ipcamera_hispark_taurus_linux_product.json
@@ -72,10 +75,12 @@ ipcamera_hispark_taurus_linux:
       - ohos_prebuilt_shared_library
       - lite_library
       - lite_component
+      
     bin:
       - executable
       - ohos_executable
       - lite_component
+      
 
 wifiiot_hispark_pegasus:
   product_infofile: wifiiot_hispark_pegasus_product.json
@@ -91,6 +96,7 @@ wifiiot_hispark_pegasus:
       - static_library
       - ohos_static_library
       - lite_library
+      
 
 rk3568: # rk的目前从packages/phone/system_module_info.json中分析准确度更高,因为rk基本都使用的是ohos_xxx,而L0和L1的更多的是使用的gn原生target template
   product_infofile: rk3568_product.json
@@ -110,10 +116,12 @@ rk3568: # rk的目前从packages/phone/system_module_info.json中分析准确度
       - ohos_prebuilt_shared_library
       - lite_library
       - lite_component
+      
     bin: 
       - ohos_executable
       - executable
       - lite_component
+      
     hap: 
       - ohos_hap
 

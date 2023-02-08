@@ -22,8 +22,8 @@ def parse_args():
                         help="product name. eg: -p ipcamera_hispark_taurus")
     parser.add_argument("-o", "--oh_path", type=str,
                         default=".", help="root path of openharmony")
-    parser.add_argument("-r", "--recollect_gn", type=bool,
-                        default=True, help="if recollect gn info or not")
+    parser.add_argument("-g", "--recollect_gn", action="store_false", help="recollect gn info or not")
+    parser.add_argument("-s", "--recollect_sc", action="store_false", help="recollect subsystem_component info or not")
     args = parser.parse_args()
     return args
 
@@ -37,11 +37,16 @@ result_dict: Dict[str, Any] = dict()
 project_path = BasicTool.abspath(_args.oh_path)
 product_name = _args.product_name
 recollect_gn = _args.recollect_gn
+_recollect_sc = _args.recollect_sc
 _sc_json: Dict[Text, Text] = configs.get("subsystem_component")
 _sc_save = _sc_json.get("save")
 _target_type = configs["target_type"]
 _sc_output_path = _sc_json.get("filename")
-sub_com_dict: Dict = SC.run(project_path, _sc_output_path, _sc_save)
+if _recollect_sc:
+    sub_com_dict: Dict = SC.run(project_path, _sc_output_path, _sc_save)
+else:
+    with open(_sc_output_path, 'r', encoding='utf-8') as f:
+        sub_com_dict = json.load(f)
 
 collector_config: Tuple[BaseProcessor] = (
     DefaultProcessor(project_path=project_path,    # 项目根路径
@@ -123,7 +128,7 @@ collector_config: Tuple[BaseProcessor] = (
                          "extension": extension_handler,
                      },
                      unit_post_handler=LiteLibPostHandler(),
-                     S2MPostHandler=LiteLibS2MPostHandler,
+                     ud_post_handler=LiteLibS2MPostHandler,
                      ),
     DefaultProcessor(project_path=project_path,    # hap有个hap_name
                      result_dict=result_dict,

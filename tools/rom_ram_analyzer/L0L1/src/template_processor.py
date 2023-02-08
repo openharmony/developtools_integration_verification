@@ -13,10 +13,8 @@
 # limitations under the License.
 #
 
-from threading import RLock
 from typing import *
 from abc import ABC, abstractmethod
-from collections import defaultdict
 import os
 import logging
 
@@ -49,7 +47,7 @@ class BaseProcessor(ABC):
                      Text], Union[str, list]]] = dict(),
                  unit_post_handler: BasePostHandler = do_nothing,
                  resource_field: str = None,
-                 S2MPostHandler: Callable[[Dict, Dict], None] = None
+                 ud_post_handler: Callable[[Dict, Dict], None] = None
                  ):
         """
         :param project_path: 项目根路径
@@ -62,7 +60,7 @@ class BaseProcessor(ABC):
                            SourceParser是对target段落进行分析处理的Callable，接受一个字符串作为参数
         :param unit_post_handler: 对最终要存储的结果字典进行后处理，应当返回一个字符串作为存储时的key，且该key应为预期产物去除前后缀后的名字
         :resource_field: 针对资源类target,资源字段,如files = ["a.txt","b.txt"],则field为files
-        :S2MPostHandler: 将一个target保存为多个多个的处理器
+        :ud_post_handler: 参数为unit和result_dict的handler
         """
         if target_type not in result_dict.keys():
             result_dict[target_type] = dict()
@@ -77,7 +75,7 @@ class BaseProcessor(ABC):
         self.other_info_handlers = other_info_handlers
         self.unit_post_handler = unit_post_handler
         self.resource_field = resource_field
-        self.S2MPostHandler = S2MPostHandler
+        self.ud_post_handler = ud_post_handler
 
     def _append(self, key: str, unit: Dict) -> None:
         """
@@ -150,8 +148,8 @@ class DefaultProcessor(BaseProcessor):
             result[k] = h(paragraph)
         key = self.unit_post_handler(result)
         self._append(key, result)
-        if self.S2MPostHandler:
-            self.S2MPostHandler(result, self.result_dict)
+        if self.ud_post_handler:
+            self.ud_post_handler(result, self.result_dict)
 
     def run(self):
         for gn_path, line_no_list in self.gn_file_line_no_dict.items():
@@ -181,17 +179,6 @@ class StrResourceProcessor(DefaultProcessor):
     def helper(self, target_name: str, paragraph: str, gn_path: str, line_no: int, _sub: str, _com: str) -> Tuple[str]:
         resources = GnVariableParser.string_parser(
             self.resource_field, paragraph)
-        # if not resources.strip('"'):
-        #     return
-        # if GnCommonTool.contains_gn_variable(resources):
-        #     resources = GnCommonTool.replace_gn_variables(
-        #         resources, gn_path, self.project_path).strip('"')
-        # # FIXME 如果出现换行导致的在replace_gn_variables里面没有查找到变量的对应值,则直接取target_name作为resources
-        # if GnCommonTool.contains_gn_variable(resources):
-        #     resources = target_name
-        # else:
-        #     resources = resources.strip('"')
-        ################start
         if not resources:
             return
         _, resources = os.path.split(resources.strip('"'))
@@ -199,7 +186,6 @@ class StrResourceProcessor(DefaultProcessor):
         if GnCommonTool.contains_gn_variable(resources):
             resources = GnCommonTool.replace_gn_variables(
                 resources, gn_path, self.project_path).strip('"')
-        ################end
         sub = GnVariableParser.string_parser("subsystem_name", paragraph)
         com = GnVariableParser.string_parser("part_name", paragraph)
         sub, sub_from = _gn_var_process(self.project_path, sub, _sub, gn_path, "gn", "json")
