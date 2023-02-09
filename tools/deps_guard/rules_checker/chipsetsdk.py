@@ -12,7 +12,9 @@ class ChipsetSDKRule(BaseRule):
 	def __is_chipsetsdk_tagged(self, mod):
 		if not "innerapi_tags" in mod:
 			return False
-		if "chipsetsdk" in mod["innerapi_tags"] or "csdk" in mod["innerapi_tags"]:
+		if "ndk" in mod["innerapi_tags"]:
+			return True
+		if mod["innerapi_tags"].endswith("chipsetsdk") or "chipsetsdk," in mod["innerapi_tags"]:
 			return True
 		return False
 

@@ -1,18 +1,5 @@
 [
-   "fileio",
-   "downloadsingle",
-   "tel_call_manager_api",
-   "rpc",
-   "color_picker",
    "accessibility",
-   "stationary",
    "remote_file_share_native",
-   "window_animation",
-   "cryptoframework_napi",
-   "rdb",
-   "distributeddataobject_impl",
-   "medialibrary",
-   "image",
-   "medical",
-   "devicestatus"
+   "medialibrary"
 ]
