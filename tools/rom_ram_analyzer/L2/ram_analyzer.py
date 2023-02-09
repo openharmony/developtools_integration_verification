@@ -39,10 +39,9 @@ class HDCTool:
         stderr = str(cp.stderr)
         return device_num in stderr or device_num in stdout
 
-    __MODE = typing.Literal["stdout", "stderr"]
 
     @classmethod
-    def exec(cls, args: list, output_from: __MODE = "stdout"):
+    def exec(cls, args: list, output_from: str = "stdout"):
         cp = subprocess.run(args, capture_output=True)
         if output_from == "stdout":
             return cp.stdout.decode()
@@ -71,7 +70,6 @@ class RamAnalyzer:
         blank_pattern = re.compile(r"\s+(?#匹配一个或多个空格)")
         return re.sub(blank_pattern, ' ', content.strip()).split()
 
-    __SS_Mode = typing.Literal["Pss", "Vss", "Rss", "Uss"]  # 提示输入
     __ss_dict: typing.Dict[str, int] = {
         "Pss": 2,
         "Vss": 3,
@@ -80,7 +78,7 @@ class RamAnalyzer:
     }
 
     @classmethod
-    def __parse_hidumper_mem(cls, content: typing.Text, device_num: str, ss: __SS_Mode = "Pss") -> typing.Dict[
+    def __parse_hidumper_mem(cls, content: typing.Text, device_num: str, ss: str = "Pss") -> typing.Dict[
         typing.Text, int]:
         """
         解析：hidumper --meme的结果
@@ -408,7 +406,7 @@ def get_args():
     parser.add_argument("-n", "--device_num", type=str, required=True,
                         help="device number to be collect hidumper info. eg: -n 7001005458323933328a01fce16d3800")
     parser.add_argument("-o", "--output_filename", default="ram_analysis_result", type=str,
-                        help="base name of output file, default: rom_analysis_result. eg: -o ram_analysis_result")
+                        help="base name of output file, default: ram_analysis_result. eg: -o ram_analysis_result")
     parser.add_argument("-e", "--excel", type=bool, default=False,
                         help="if output result as excel, default: False. eg: -e True")
     args = parser.parse_args()

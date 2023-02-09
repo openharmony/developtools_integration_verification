@@ -117,7 +117,7 @@
      -n DEVICE_NUM, --device_num DEVICE_NUM
                            device number to be collect hidumper info. eg: -n 7001005458323933328a01fce16d3800
      -o OUTPUT_FILENAME, --output_filename OUTPUT_FILENAME
-                           base name of output file, default: rom_analysis_result. eg: -o ram_analysis_result
+                           base name of output file, default: ram_analysis_result. eg: -o ram_analysis_result
      -e EXCEL, --excel EXCEL
                            if output result as excel, default: False. eg: -e True
    ```
