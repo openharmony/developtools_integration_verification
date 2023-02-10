@@ -123,7 +123,7 @@ class RamAnalyzer:
         return process_pss_dict
 
     @classmethod
-    def process_hidumper_info(cls, device_num: str, ss: __SS_Mode) -> typing.Dict[str, int]:
+    def process_hidumper_info(cls, device_num: str, ss:str) -> typing.Dict[str, int]:
         """
         处理进程名与对应进程大小
         """
@@ -246,7 +246,7 @@ class RamAnalyzer:
         return process_elf_dict
 
     @classmethod
-    def __save_result_as_excel(cls, data_dict: dict, filename: str, ss: __SS_Mode):
+    def __save_result_as_excel(cls, data_dict: dict, filename: str, ss: str):
         """
         保存结果到excel中
         """
@@ -309,7 +309,7 @@ class RamAnalyzer:
 
     @classmethod
     def analysis(cls, cfg_path: str, xml_path: str, rom_result_json: str, device_num: str,
-                 output_file: str, ss: __SS_Mode, output_excel: bool):
+                 output_file: str, ss: str, output_excel: bool):
         """
         process size subsystem/component so so_size
         """
