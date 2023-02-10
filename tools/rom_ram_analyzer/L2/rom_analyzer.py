@@ -27,13 +27,21 @@ class RomAnalyzer:
         for unit in product_list:
             dest: List = unit.get("dest")
             if dest is None:
-                print("warning: keyword 'dest' not found in {}".format(system_module_info_json))
+                print("warning: keyword 'dest' not found in {}".format(
+                    system_module_info_json))
                 continue
             label: Text = unit.get("label")
             gn_path = component_name = subsystem_name = None
             if label:
-                gn_path = os.path.join(project_path, label.split(':')[0].lstrip('/'), "BUILD.gn")
-                component_name, subsystem_name = GnCommonTool.find_part_subsystem(gn_path, project_path)
+                gn_path = os.path.join(project_path, label.split(':')[
+                                       0].lstrip('/'), "BUILD.gn")
+                component_name = unit.get("part_name")
+                subsystem_name = unit.get("subsystem_name")
+                if (not component_name) or (not subsystem_name):
+                    cn, sn = GnCommonTool.find_part_subsystem(
+                        gn_path, project_path)
+                    component_name = cn if not component_name else component_name
+                    subsystem_name = sn if not subsystem_name else subsystem_name
             else:
                 print("warning: keyword 'label' not found in {}".format(unit))
             for target in dest:
@@ -46,7 +54,8 @@ class RomAnalyzer:
 
     @classmethod
     def __save_result_as_excel(cls, result_dict: dict, output_name: str):
-        header = ["subsystem_name", "component_name", "output_file", "size(Byte)"]
+        header = ["subsystem_name", "component_name",
+                  "output_file", "size(Byte)"]
         tmp_dict = deepcopy(result_dict)
         excel_writer = SimpleExcelWriter("rom")
         excel_writer.set_sheet_header(headers=header)
@@ -66,7 +75,8 @@ class RomAnalyzer:
             subsystem_end_row += subsystem_file_count
 
             for component_name in subsystem_dict.keys():
-                component_dict: Dict[str, int] = subsystem_dict.get(component_name)
+                component_dict: Dict[str, int] = subsystem_dict.get(
+                    component_name)
                 component_size = component_dict.get("size")
                 component_file_count = component_dict.get("file_count")
                 del component_dict["file_count"]
@@ -95,16 +105,18 @@ class RomAnalyzer:
             }
         }
         """
-        component_name = "others" if unit.get("component_name") is None else unit.get("component_name")
-        subsystem_name = "others" if unit.get("subsystem_name") is None else unit.get("subsystem_name")
+        component_name = "others" if unit.get(
+            "component_name") is None else unit.get("component_name")
+        subsystem_name = "others" if unit.get(
+            "subsystem_name") is None else unit.get("subsystem_name")
         size = unit.get("size")
         relative_filepath = unit.get("relative_filepath")
-        if result_dict.get(subsystem_name) is None:
+        if result_dict.get(subsystem_name) is None: # 子系统
             result_dict[subsystem_name] = dict()
             result_dict[subsystem_name]["size"] = 0
             result_dict[subsystem_name]["file_count"] = 0
 
-        if result_dict.get(subsystem_name).get(component_name) is None:
+        if result_dict.get(subsystem_name).get(component_name) is None: # 部件
             result_dict[subsystem_name][component_name] = dict()
             result_dict[subsystem_name][component_name]["size"] = 0
             result_dict[subsystem_name][component_name]["file_count"] = 0
@@ -113,6 +125,7 @@ class RomAnalyzer:
         result_dict[subsystem_name][component_name]["size"] += size
         result_dict[subsystem_name][component_name]["file_count"] += 1
         result_dict[subsystem_name][component_name][relative_filepath] = size
+
 
     @classmethod
     def analysis(cls, system_module_info_json: Text, product_dirs: List[str],
@@ -125,20 +138,21 @@ class RomAnalyzer:
         output_file: basename of output file
         """
         project_path = BasicTool.get_abs_path(project_path)
-        phone_dir = os.path.join(project_path, "out", product_name, "packages", "phone")
+        phone_dir = os.path.join(
+            project_path, "out", product_name, "packages", "phone")
         product_dirs = [os.path.join(phone_dir, d) for d in product_dirs]
-        product_info_dict = cls.__collect_product_info(system_module_info_json, project_path)  # 所有产物信息
+        product_info_dict = cls.__collect_product_info(
+            system_module_info_json, project_path)  # 所有产物信息
         result_dict: Dict[Text:Dict] = dict()
         for d in product_dirs:
             file_list: List[Text] = BasicTool.find_all_files(d)
             for f in file_list:
                 size = os.path.getsize(f)
                 relative_filepath = f.replace(phone_dir, "").lstrip(os.sep)
-                unit: Dict[Text, Any] = product_info_dict.get(relative_filepath)
+                unit: Dict[Text, Any] = product_info_dict.get(
+                    relative_filepath)
                 if unit is None:
-                    unit = {
-                        "relative_filepath": relative_filepath,
-                    }
+                    unit = dict()
                 unit["size"] = size
                 unit["relative_filepath"] = relative_filepath
                 cls.__put(unit, result_dict)
@@ -161,7 +175,8 @@ def get_args():
                         help="root path of openharmony. eg: -p ~/openharmony")
     parser.add_argument("-j", "--module_info_json", required=True, type=str,
                         help="path of out/{product_name}/packages/phone/system_module_info.json")
-    parser.add_argument("-n", "--product_name", required=True, type=str, help="product name. eg: -n rk3568")
+    parser.add_argument("-n", "--product_name", required=True,
+                        type=str, help="product name. eg: -n rk3568")
     parser.add_argument("-d", "--product_dir", required=True, action="append",
                         help="subdirectories of out/{product_name}/packages/phone to be counted."
                              "eg: -d system -d vendor")
@@ -181,4 +196,5 @@ if __name__ == '__main__':
     product_dirs = args.product_dir
     output_file = args.output_file
     output_excel = args.excel
-    RomAnalyzer.analysis(module_info_json, product_dirs, project_path, product_name, output_file, output_excel)
+    RomAnalyzer.analysis(module_info_json, product_dirs,
+                         project_path, product_name, output_file, output_excel)
