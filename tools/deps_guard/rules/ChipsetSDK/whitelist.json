@@ -5,6 +5,7 @@
 	"libhilog.so",
 	"libhilog_ndk.z.so",
 	"libhisysevent.z.so",
+	"libhicollie.z.so",
 	"libservice_checker.z.so",
 	"libbegetutil.z.so",
 	"libbeget_proxy.z.so",
@@ -57,7 +58,6 @@
 	"libhdi_input.z.so",
 
 	"libhitrace_meter.so",
-	"libinit_stub_empty.so",
 
 	// by libdisplay_layer_video.z.so for hispark taurus platform
 	"libhdi_video_layer_client.z.so",
