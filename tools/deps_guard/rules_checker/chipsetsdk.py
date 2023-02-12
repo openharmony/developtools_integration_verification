@@ -14,7 +14,7 @@ class ChipsetSDKRule(BaseRule):
 			return False
 		if "ndk" in mod["innerapi_tags"]:
 			return True
-		if mod["innerapi_tags"].endswith("chipsetsdk") or "chipsetsdk," in mod["innerapi_tags"]:
+		if "chipsetsdk" in mod["innerapi_tags"]:
 			return True
 		return False
 

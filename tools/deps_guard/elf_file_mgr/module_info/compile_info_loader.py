@@ -30,9 +30,8 @@ class CompileInfoLoader(object):
 			else:
 				#print("%s has no label" % info["name"])
 				info["labelPath"] = ""
-			pos = info["labelPath"].find("(")
-			if pos > 0:
-				info["labelPath"] = info["labelPath"][:pos]
+			if info["labelPath"].find("(") > 0:
+				info["labelPath"] = info["labelPath"][:info["labelPath"].find("(")]
 			if "subsystem_name" in item:
 				info["subsystem"] = item["subsystem_name"]
 			else:
@@ -57,14 +56,11 @@ class CompileInfoLoader(object):
 			info["chipset"] = False
 			info["napi"] = False
 			info["innerapi"] = False
+			info["innerapi_declared"] = False
 			if "shlib_type" in item:
 				info["shlib_type"] = item["shlib_type"]
-				if "innerapi" == info["shlib_type"]:
-					info["innerapi"] = True
 			if "innerapi_tags" in item:
-				info["innerapi_tags"] = ",".join(item["innerapi_tags"])
-				if "chipsetsdk" in item["innerapi_tags"] or "platformsdk" in item["innerapi_tags"]:
-					info["innerapi"] = True
+				info["innerapi_tags"] = item["innerapi_tags"]
 			info["sa_id"] = 0
 			res.append(info)
 		return res
@@ -80,12 +76,13 @@ class CompileInfoLoader(object):
 			"third_party": False,
 			"chipset": False,
 			"napi": False,
-			"innerapi": False,
 			"sa_id": 0,
 			"labelPath": "",
 			"version_script": "",
 			"shlib_type": "",
-			"innerapi_tags": ""
+			"innerapi": False,
+			"innerapi_tags": [],
+			"innerapi_declared": False
 		}
 
 		if info:
@@ -126,7 +123,7 @@ class CompileInfoLoader(object):
 			if "shlib_type" not in elf:
 				elf["shlib_type"] = ""
 			if "innerapi_tags" not in elf:
-				elf["innerapi_tags"] = ""
+				elf["innerapi_tags"] = []
 			if elf["labelPath"].startswith("//third_party/"):
 				elf["third_party"] = True
 
@@ -186,6 +183,7 @@ class CompileInfoLoader(object):
 			else:
 				caller["deps_external"].append(dep)
 				callee["dependedBy_external"].append(dep)
+				callee["innerapi"] = True
 				dep["external"] = True
 
 				callee["modGroup"] = "innerapi_cc" # Cross component
