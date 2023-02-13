@@ -8,6 +8,7 @@ import sys
 import subprocess
 import typing
 import xml.dom.minidom as dom
+from pprint import pprint
 
 from pkgs.simple_excel_writer import SimpleExcelWriter
 
@@ -332,7 +333,7 @@ class RamAnalyzer:
 
         def get(key: typing.Any, dt: typing.Dict[str, typing.Any]):
             for k, v in dt.items():
-                if k.startswith(key) or key == v[0]:
+                if k.startswith(key) or (len(v) > 0 and key == v[0]):
                     # 要么uinput_inject的对应key为mmi_uinput_inject。对于此类特殊处理，即：如果service_name找不到，但是直接执行的bin等于这个名字，也认为找到
                     return v
 
@@ -345,7 +346,7 @@ class RamAnalyzer:
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
                 result_dict[process_name]["init"] = dict()
-                result_dict[process_name]["init"][bin if len(bin) != 0 else "UNKOWN"] = size
+                result_dict[process_name]["init"][bin if len(bin) != 0 else "UNKNOWN"] = size
                 continue
             # 如果是hap，特殊处理
             if (process_name.startswith("com.") or process_name.startswith("ohos.")):
@@ -358,22 +359,24 @@ class RamAnalyzer:
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
                 result_dict[process_name][component_name] = dict()
-                result_dict[process_name][component_name][hap_name if len(hap_name) != 0 else "UNKOWN"] = size
+                result_dict[process_name][component_name][hap_name if len(hap_name) != 0 else "UNKNOWN"] = size
                 continue
             so_list: list = get(process_name, process_elf_dict)  # 得到进程相关的elf文件list
             if so_list is None:
                 print("warning: process '{}' not found in .xml or .cfg".format(process_name))
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
-                result_dict[process_name]["UNKOWN"] = dict()
-                result_dict[process_name]["UNKOWN"]["UNKOWN"] = int()
+                result_dict[process_name]["UNKNOWN"] = dict()
+                result_dict[process_name]["UNKNOWN"]["UNKNOWN"] = int()
                 continue
             result_dict[process_name] = dict()
             result_dict[process_name]["size"] = process_size
             for so in so_list:
                 unit = so_info_dict.get(so)
                 if unit is None:
-                    print("warning: '{}' in {} not found in json from rom_analysis".format(so, process_name))
+                    result_dict[process_name]["UNKNOWN"] = dict()
+                    result_dict[process_name]["UNKNOWN"][so] = int()
+                    print("warning: '{}' in {} not found in json from rom analysis result".format(so, process_name))
                     continue
                 component_name = unit.get("component_name")
                 so_size = unit.get("size")
