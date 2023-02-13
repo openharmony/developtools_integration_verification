@@ -57,6 +57,7 @@ class Dependency(dict):
 from .module_info import CompileInfoLoader
 from .hdi import HdiParser
 from .sa import SAParser
+from .innerapi import InnerAPILoader
 
 class ElfFileMgr(object):
 	def __init__(self, product_out_path=None, elfFileClass=None, dependenceClass = None):
