@@ -111,41 +111,6 @@ def file_from_dev(src, dst):
     return enter_cmd(cmd, 1, 1)
 
 
-def image_check(str, testnum=1):
-    conn = sqlite3.connect(str)
-    cursor_image = conn.cursor()
-    cursor_video = conn.cursor()
-    print_to_log("SmokeTest:: start to check media library path")
-    try:
-        print_to_log("SmokeTest:: select * from  files where mime_type = image/*")
-        cursor_image.execute("""select * from  files where mime_type = "image/*" """)
-    except:
-        print_to_log("SmokeTest:: error: media_library.db cannot be found, please check media library path")
-        return -1
-    if testnum == 2:
-        try:
-            print_to_log("SmokeTest:: select * from  files where mime_type = video/mp4")
-            cursor_video.execute("""select * from  files where mime_type = "video/mp4" """)
-        except:
-            print_to_log("SmokeTest:: error: media_library.db cannot be found, please check media library path")
-            return -1
-    print_to_log("SmokeTest:: media library is ok")
-    image_result = cursor_image.fetchone()
-    video_result = cursor_video.fetchone()
-    print_to_log("SmokeTest:: image: {}".format(image_result))
-    print_to_log("SmokeTest:: video: {}".format(video_result))
-    print_to_log("SmokeTest:: start to check photos and videos in the album")
-    if image_result is not None and testnum == 1:
-        print_to_log("SmokeTest:: success: There are some photos in the album!!")
-        return 1
-    elif image_result is not None and video_result is not None and testnum == 2:
-        print_to_log("SmokeTest:: success: There are some photos and videos in the album!!")
-        return 1
-    else:
-        print_to_log("SmokeTest:: error: There are no photos or videos in the album!!")
-        return -1
-
-
 def connect_check():
     connection_status = enter_cmd("hdc_std list targets", 2)
     connection_cnt = 0
@@ -257,6 +222,14 @@ def classify_hist_with_split(image1, image2, size=(256, 256)):
     return sub_data
 
 
+def crop_picture(prefix, pic):
+    pic_path = "{}/{}_{}".format(args.save_path, prefix, pic)
+    save_path = "{}/{}_{}".format(args.save_path, prefix, pic)
+    im = cv2.imread(pic_path)
+    im = im[80:1200, 0:720]
+    cv2.imwrite(save_path, im)
+
+
 def cmp_picture(prefix, pic, num=1):
     if num == 1:
         img1_path = "{}/{}".format(args.anwser_path, pic)
@@ -288,7 +261,7 @@ if __name__ == "__main__":
     parser.add_argument('--anwser_path', type=str, default = 'D:\\DeviceTestTools\\screenshot\\resource')
     parser.add_argument('--save_path', type=str, default = 'D:\\DeviceTestTools\\screenshot')
     parser.add_argument('--device_num', type=str, default = 'null')
-    parser.add_argument('--pr_url', type=str, default = 'https://gitee.com/openharmony/applications_sample_wifi_iot/')
+    parser.add_argument('--pr_url', type=str, default = 'https://gitee.com/openharmony/developtools_integration_verification')
     args = parser.parse_args()
 
     if args.device_num == 'null':
@@ -410,8 +383,17 @@ if __name__ == "__main__":
             else:
                 picture_save(picture_path)
                 print_to_log("SmokeTest:: error:testcase 0, distributed failed!")
+                sys_exit()
         enter_shell_cmd("ifconfig eth0 down", 1)
 
+    if "arkui_ace_engine" in args.pr_url or "developtools_integration_verification" in args.pr_url:
+        if args.test_num == "1/2":
+            args.test_num = "3/2"
+        elif args.test_num == "2/2":
+            args.test_num = "4/2"
+        else:
+            args.test_num = "1/1"
+    print(args.pr_url)
     try:
         args.test_num.index('/')
         idx_total = args.test_num.split('/')
@@ -475,6 +457,7 @@ if __name__ == "__main__":
                         similarity = global_pos['cmp_cmd-level'][1]
                     print_to_log("SmokeTest:: start to contrast screenshot")
                     pic = "{}{}".format(single_action[2], ".jpeg")
+                    crop_picture(prefix, pic)
                     pic_similarity = cmp_picture(prefix, pic)
                     print_to_log("SmokeTest:: picture similarity is {}%".format(pic_similarity))
                     if len(single_action) == 3 or len(single_action) == 4:
@@ -505,14 +488,6 @@ if __name__ == "__main__":
                 elif type(single_action[1]) == str and single_action[1] == 'sandbox_path_check':
                     next_cmd = ""
                     if sandbox_check("com.ohos.medialibrary.medialibrarydata") == 1 and testok == 1:
-                        testok = 1
-                    else:
-                        testok = -1
-                elif type(single_action[1]) == str and single_action[1] == 'photo_check':
-                    next_cmd = ""
-                    pic_value = image_check("{}\\media_library.db".format(os.path.normpath(args.save_path)), 1)
-                    video_value = image_check("{}\\media_library.db".format(os.path.normpath(args.save_path)), 2)
-                    if pic_value == 1 and video_value == 1 and testok == 1:
                         testok = 1
                     else:
                         testok = -1
