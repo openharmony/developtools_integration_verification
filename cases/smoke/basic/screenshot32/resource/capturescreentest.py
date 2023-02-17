@@ -383,7 +383,6 @@ if __name__ == "__main__":
             else:
                 picture_save(picture_path)
                 print_to_log("SmokeTest:: error:testcase 0, distributed failed!")
-                sys_exit()
         enter_shell_cmd("ifconfig eth0 down", 1)
 
     if "arkui_ace_engine" in args.pr_url or "developtools_integration_verification" in args.pr_url:
