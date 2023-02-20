@@ -27,6 +27,8 @@ import sqlite3
 import shutil
 import numpy
 import cv2
+import pytesseract
+from pytesseract import Output
 from PIL import Image
 
 
@@ -150,45 +152,47 @@ def picture_save(pic_path):
                 print_to_log("SmokeTest:: send {} to save_path Successfully".format(file_path))
 
 
-def connect_wifi(tools_path):
-    enter_shell_cmd("mkdir /data/l2tool", 1)
-    file_to_dev(os.path.normpath(os.path.join(tools_path, "l2tool/busybox")), "/data/l2tool/")
-    file_to_dev(os.path.normpath(os.path.join(tools_path, "l2tool/dhcpc.sh")), "/data/l2tool/")
-    file_to_dev(os.path.normpath(os.path.join(tools_path, "l2tool/wpa_supplicant.conf")), "/data/l2tool/")
-    enter_shell_cmd("wpa_supplicant -B -d -i wlan0 -c /data/l2tool/wpa_supplicant.conf", 1)
-    enter_shell_cmd("chmod 777 ./data/l2tool/busybox", 1)
-    cnt = 2
-    while cnt:
-        try:
-            print_to_log("SmokeTest:: hdc_std shell ./data/l2tool/busybox udhcpc -i wlan0 -s /data/l2tool/dhcpc.sh")
-            p = subprocess.check_output(shlex.split("hdc_std -t {} shell ./data/l2tool/busybox udhcpc -i wlan0 -s \
-            /data/l2tool/dhcpc.sh".format(args.device_num)), timeout=8)
-            print_to_log(p.decode(encoding="utf-8"))
-            with open(os.path.join(args.save_path, 'test_{}.bat'.format(args.device_num)),\
-            mode='a', encoding='utf-8') as cmd_f:
-                cmd_f.write('hdc_std shell ./data/l2tool/busybox udhcpc -i wlan0 -s /data/l2tool/dhcpc.sh' + '\n')
-            cmd_f.close()
-            ret_code = 0
-        except subprocess.TimeoutExpired as time_e:
-            print_to_log(time_e)
-            ret_code = 1
-        if ret_code == 0:
-            ip = re.findall(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b", p.decode(encoding="utf-8"))
-            print_to_log(ip)
-            if len(ip) <= 0:
-                break
-            if len(re.findall(r'(?<!\d)\d{1,3}\.\d{1,3}\.\d{1,3}(?=\.\d)', ip[0])) <= 0:
-                break
-            gate = str(re.findall(r'(?<!\d)\d{1,3}\.\d{1,3}\.\d{1,3}(?=\.\d)', ip[0])[0]) + ".1"
-            print_to_log(gate)
-            ifconfig="ifconfig wlan0 {}".format(ip[0])
-            enter_shell_cmd(ifconfig)
-            routeconfig="./data/l2tool/busybox route add default gw {} dev wlan0".format(gate)
-            enter_shell_cmd(routeconfig)
-            break
-        print_to_log("try {}".format(cnt))
-        cnt -= 1
-        time.sleep(5)
+def get_coordinate(path, target):
+    coordinate = []
+    img = cv2.imread(path)
+    tessdata_dir_config = '--tessdata-dir "C:\\Program Files (x86)\\Tesseract-OCR\\tessdata"'
+    data = pytesseract.image_to_data(img, output_type=Output.DICT, config=tessdata_dir_config, lang='eng')
+    for i in range(len(data['text'])):
+        if data['text'][i] == target:
+            (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
+            dx = int(x + w / 2)
+            dy = int(y + h / 2)
+            coordinate.append(dx)
+            coordinate.append(dy)
+    return coordinate
+
+
+def connect_wifi(prefix, pic):
+    data = get_coordinate("{}\\{}_{}".format(args.save_path, prefix, pic), "testapold_Wi-Fi5")
+    try:
+        data = get_coordinate("{}\\{}_{}".format(args.save_path, prefix, pic), "testapold_Wi-Fi5")
+        wait_time_one = 0.5
+        wait_time_two = 2
+        enter_shell_cmd("uinput -M -m {} {} -c 0".format(data[0], data[1]), wait_time_two)
+        enter_shell_cmd("uinput -M -m 360 200 -c 0")
+        enter_shell_cmd("uinput -M -m 680 810 -c 0", wait_time_one)
+        enter_shell_cmd("uinput -M -m 80 910 -c 0", wait_time_one)
+        enter_shell_cmd("uinput -M -m 150 910 -c 0", wait_time_one)
+        enter_shell_cmd("uinput -M -m 150 910 -c 0", wait_time_one)
+        enter_shell_cmd("uinput -M -m 110 810 -c 0", wait_time_one)
+        enter_shell_cmd("uinput -M -m 50 1150 -c 0", wait_time_two)
+        enter_shell_cmd("uinput -M -m 680 810 -c 0", wait_time_one)
+        enter_shell_cmd("uinput -M -m 50 1150 -c 0", wait_time_two)
+        enter_shell_cmd("uinput -M -m 250 810 -c 0", wait_time_one)
+        enter_shell_cmd("uinput -M -m 220 910 -c 0", wait_time_one)
+        enter_shell_cmd("uinput -M -m 50 1150 -c 0", wait_time_two)
+        enter_shell_cmd("uinput -M -m 40 810 -c 0", wait_time_one)
+        enter_shell_cmd("uinput -M -m 500 1020 -c 0", wait_time_one)
+        enter_shell_cmd("uinput -M -m 50 1150 -c 0", wait_time_two)
+        enter_shell_cmd("uinput -M -m 680 690 -c 0")
+        enter_shell_cmd("uinput -M -m 550 680 -c 0", single_action[0])
+    except Exception as e:
+        print_to_log("SmokeTest:: wifi list loading errror!")
 
 
 def calculate(image1, image2):
@@ -222,19 +226,19 @@ def classify_hist_with_split(image1, image2, size=(256, 256)):
     return sub_data
 
 
-def crop_picture(prefix, pic):
-    pic_path = "{}/{}_{}".format(args.save_path, prefix, pic)
-    save_path = "{}/{}_{}".format(args.save_path, prefix, pic)
+def crop_picture(prefix, pic, crop_range):
+    pic_path = "{}\\{}_{}".format(args.save_path, prefix, pic)
+    save_path = "{}\\{}_{}".format(args.save_path, prefix, pic)
     im = cv2.imread(pic_path)
-    im = im[80:1200, 0:720]
+    im = im[crop_range[0]:crop_range[1], crop_range[2]:crop_range[3]]
     cv2.imwrite(save_path, im)
 
 
 def cmp_picture(prefix, pic, num=1):
     if num == 1:
-        img1_path = "{}/{}".format(args.anwser_path, pic)
-    img2_path = "{}/{}_{}".format(args.save_path, prefix, pic)
-    cmp_init = numpy.array([1])
+        img1_path = "{}\\{}".format(args.anwser_path, pic)
+    img2_path = "{}\\{}_{}".format(args.save_path, prefix, pic)
+    cmp_init = 0
     try:
         cmp_result = classify_hist_with_split(img1_path, img2_path)
         print("compare result:" + "%.6f%%" % (cmp_result * 100))
@@ -287,7 +291,7 @@ if __name__ == "__main__":
         file_from_dev("/data/log/hilog/system_start_log_{}.tar".format(args.device_num), args.save_path)
         connect_check()
         launcher_similarity = shot_and_cmp("launcher.jpeg")
-        if launcher_similarity >= 80:
+        if launcher_similarity >= 90:
             print_to_log("SmokeTest:: launcher screenshot comparison is ok!")
             break
         elif reboot_cnt >= 1:
@@ -385,13 +389,18 @@ if __name__ == "__main__":
                 print_to_log("SmokeTest:: error:testcase 0, distributed failed!")
         enter_shell_cmd("ifconfig eth0 down", 1)
 
-    if "arkui_ace_engine" in args.pr_url or "developtools_integration_verification" in args.pr_url:
-        if args.test_num == "1/2":
-            args.test_num = "3/2"
-        elif args.test_num == "2/2":
-            args.test_num = "4/2"
-        else:
-            args.test_num = "1/1"
+    special_warehouse = [
+        "arkui_ace_engine",
+        "developtools_integration_verification",
+        "graphic_graphic_2d",
+        "windowmanager"]
+
+    for warehouse in special_warehouse:
+        if warehouse in args.pr_url:
+            if args.test_num == "1/2":
+                args.test_num = "3/2"
+            elif args.test_num == "2/2":
+                args.test_num = "4/2"
     print(args.pr_url)
     try:
         args.test_num.index('/')
@@ -431,8 +440,10 @@ if __name__ == "__main__":
                 mode='a', encoding='utf-8') as cmd_f:
                     cmd_f.write("\nSmokeTest::::::Last failed, try again \n")
                 cmd_f.close()
+            if idx == 1:
+                testcnt = 1
             if single_app['entry'] != "":
-                enter_shell_cmd(call_app_cmd, 5)
+                enter_shell_cmd(call_app_cmd, 4)
             print_to_log("SmokeTest:: execute command {}".format(single_app['all_actions']))
             prefix = args.device_num
             raw_pic_name = ''
@@ -450,18 +461,23 @@ if __name__ == "__main__":
                 elif type(single_action[1]) == str and single_action[1] == 'cmp_cmd-level':
                     next_cmd = ""
                     sys.stdout.flush()
-                    if len(single_action) == 4 or len(single_action) == 5:
+                    if len(single_action) >= 4:
                         similarity = single_action[3]
                     else:
                         similarity = global_pos['cmp_cmd-level'][1]
+                        similarity = int(similarity)
                     print_to_log("SmokeTest:: start to contrast screenshot")
                     pic = "{}{}".format(single_action[2], ".jpeg")
-                    crop_picture(prefix, pic)
+                    crop_range = [80, 1200, 0, 720]
+                    if len(single_action) == 5:
+                        crop_range = single_app[single_action[4]]
+                    crop_picture(prefix, pic, crop_range)
                     pic_similarity = cmp_picture(prefix, pic)
                     print_to_log("SmokeTest:: picture similarity is {}%".format(pic_similarity))
-                    if len(single_action) == 3 or len(single_action) == 4:
+                    if len(single_action) >= 3:
                         if pic_similarity >= similarity:
-                            testok = 1
+                            if testok != -1:
+                                testok = 1
                             print_to_log("SmokeTest:: {} screenshot check is ok".format(pic))
                         else:
                             testok = -1
@@ -483,7 +499,8 @@ if __name__ == "__main__":
                         os.path.normpath(os.path.join(args.tools_path, single_action[2])), single_action[3]))
                 elif type(single_action[1]) == str and single_action[1] == 'connect_wifi':
                     next_cmd = ""
-                    connect_wifi(args.tools_path)
+                    pic = "{}{}".format(single_action[2], ".jpeg")
+                    connect_wifi(prefix, pic)
                 elif type(single_action[1]) == str and single_action[1] == 'sandbox_path_check':
                     next_cmd = ""
                     if sandbox_check("com.ohos.medialibrary.medialibrarydata") == 1 and testok == 1:
@@ -496,8 +513,9 @@ if __name__ == "__main__":
                         p = enter_shell_cmd("ps -elf", single_action[0])
                         result = "".join(p)
                         findsome = result.find(single_action[2], 0, len(result))
-                        if findsome != -1 and testok == 1:
-                            testok = 1
+                        if findsome != -1:
+                            if testok != -1:
+                                testok = 1
                             print_to_log("SmokeTest:: \"{}\" is ok, find process \"{}\"!".format(single_action[1],\
                             single_action[2]))
                         else:
