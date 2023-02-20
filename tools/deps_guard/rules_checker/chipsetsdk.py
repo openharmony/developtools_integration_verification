@@ -38,7 +38,7 @@ class ChipsetSDKRule(BaseRule):
 				gotHeaders = True
 				base = innerapi["header_base"]
 				for f in innerapi["header_files"]:
-					item["headers"].append(base + "/" + f)
+					item["headers"].append(os.path.join(base, f))
 			headers.append(item)
 
 		try:
