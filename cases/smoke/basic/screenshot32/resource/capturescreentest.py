@@ -158,23 +158,25 @@ def connect_wifi(prefix, pic):
         data = get_coordinate("{}\\{}_{}".format(args.save_path, prefix, pic), "testapold")
         enter_shell_cmd("uinput -M -m {} {} -c 0".format(data[0], data[1]), WAIT_TIME_TWO)
         enter_shell_cmd("uinput -M -m 360 200 -c 0")
-        enter_shell_cmd("uinput -M -m 680 810 -c 0", WAIT_TIME_HALF)
-        enter_shell_cmd("uinput -M -m 80 910 -c 0", WAIT_TIME_HALF)
-        enter_shell_cmd("uinput -M -m 150 910 -c 0", WAIT_TIME_HALF)
-        enter_shell_cmd("uinput -M -m 150 910 -c 0", WAIT_TIME_HALF)
-        enter_shell_cmd("uinput -M -m 110 810 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 680 810 -c 0", WAIT_TIME_ONE)
+        enter_shell_cmd("uinput -M -m 80 910 -c 0", WAIT_TIME_ONE)
+        enter_shell_cmd("uinput -M -m 150 910 -c 0", WAIT_TIME_ONE)
+        enter_shell_cmd("uinput -M -m 150 910 -c 0", WAIT_TIME_ONE)
+        enter_shell_cmd("uinput -M -m 110 810 -c 0", WAIT_TIME_ONE)
         enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
-        enter_shell_cmd("uinput -M -m 680 810 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 680 810 -c 0", WAIT_TIME_ONE)
         enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
-        enter_shell_cmd("uinput -M -m 250 810 -c 0", WAIT_TIME_HALF)
-        enter_shell_cmd("uinput -M -m 220 910 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 250 810 -c 0", WAIT_TIME_ONE)
+        enter_shell_cmd("uinput -M -m 220 910 -c 0", WAIT_TIME_ONE)
         enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
-        enter_shell_cmd("uinput -M -m 40 810 -c 0", WAIT_TIME_HALF)
-        enter_shell_cmd("uinput -M -m 500 1020 -c 0", WAIT_TIME_HALF)
-        enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
+        enter_shell_cmd("uinput -M -m 40 810 -c 0", WAIT_TIME_ONE)
+        enter_shell_cmd("uinput -M -m 500 1020 -c 0", WAIT_TIME_ONE)
+        enter_shell_cmd("snapshot_display -f /data/screen_test/{}".format("testapold.jpeg"))
+        file_from_dev("/data/screen_test/{}".format("testapold.jpeg"), args.save_path)
         enter_shell_cmd("uinput -M -m 680 690 -c 0")
         enter_shell_cmd("uinput -M -m 550 680 -c 0", single_action[0])
     except Exception as e:
+        print(e)
         print_to_log("SmokeTest:: wifi list loading errror!")
 
 
@@ -317,7 +319,6 @@ if __name__ == "__main__":
     cmp_status = 0
     global_pos = all_app[0]
     
-    WAIT_TIME_HALF = 0.5
     WAIT_TIME_ONE = 1
     WAIT_TIME_TWO = 2
     WAIT_TIME_FOUR = 4
@@ -438,6 +439,8 @@ if __name__ == "__main__":
                 mode='a', encoding='utf-8') as cmd_f:
                     cmd_f.write("\nSmokeTest::::::Last failed, try again \n")
                 cmd_f.close()
+            if idx == 1:
+                testcnt = 1
             if single_app['entry'] != "":
                 enter_shell_cmd(call_app_cmd, WAIT_TIME_FOUR)
             print_to_log("SmokeTest:: execute command {}".format(single_app['all_actions']))
