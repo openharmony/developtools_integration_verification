@@ -27,6 +27,8 @@ import sqlite3
 import shutil
 import numpy
 import cv2
+import pytesseract
+from pytesseract import Output
 from PIL import Image
 
 
@@ -136,59 +138,44 @@ def sandbox_check(process):
         return 1
 
 
-def is_image_file(filename):
-    IMG_EXTENSIONS = ['.png', '.PNG', 'jpeg']
-    return any(filename.endswith(extension) for extension in IMG_EXTENSIONS)
+def get_coordinate(path, target):
+    coordinate = []
+    img = cv2.imread(path)
+    tessdata_dir_config = '--tessdata-dir "C:\\Program Files (x86)\\Tesseract-OCR\\tessdata"'
+    data = pytesseract.image_to_data(img, output_type=Output.DICT, config=tessdata_dir_config, lang='eng')
+    for i in range(len(data['text'])):
+        if data['text'][i] == target:
+            (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
+            dx = int(x + w / 2)
+            dy = int(y + h / 2)
+            coordinate.append(dx)
+            coordinate.append(dy)
+    return coordinate
 
 
-def picture_save(pic_path):
-    for root, dirs, files in os.walk(pic_path):
-        for file in files:
-            file_path = os.path.join(root, file)
-            if is_image_file(file_path):
-                shutil.copy2(file_path, args.save_path)
-                print_to_log("SmokeTest:: send {} to save_path Successfully".format(file_path))
-
-
-def connect_wifi(tools_path):
-    enter_shell_cmd("mkdir /data/l2tool", 1)
-    file_to_dev(os.path.normpath(os.path.join(tools_path, "l2tool/busybox")), "/data/l2tool/")
-    file_to_dev(os.path.normpath(os.path.join(tools_path, "l2tool/dhcpc.sh")), "/data/l2tool/")
-    file_to_dev(os.path.normpath(os.path.join(tools_path, "l2tool/wpa_supplicant.conf")), "/data/l2tool/")
-    enter_shell_cmd("wpa_supplicant -B -d -i wlan0 -c /data/l2tool/wpa_supplicant.conf", 1)
-    enter_shell_cmd("chmod 777 ./data/l2tool/busybox", 1)
-    cnt = 2
-    while cnt:
-        try:
-            print_to_log("SmokeTest:: hdc_std shell ./data/l2tool/busybox udhcpc -i wlan0 -s /data/l2tool/dhcpc.sh")
-            p = subprocess.check_output(shlex.split("hdc_std -t {} shell ./data/l2tool/busybox udhcpc -i wlan0 -s \
-            /data/l2tool/dhcpc.sh".format(args.device_num)), timeout=8)
-            print_to_log(p.decode(encoding="utf-8"))
-            with open(os.path.join(args.save_path, 'test_{}.bat'.format(args.device_num)),\
-            mode='a', encoding='utf-8') as cmd_f:
-                cmd_f.write('hdc_std shell ./data/l2tool/busybox udhcpc -i wlan0 -s /data/l2tool/dhcpc.sh' + '\n')
-            cmd_f.close()
-            ret_code = 0
-        except subprocess.TimeoutExpired as time_e:
-            print_to_log(time_e)
-            ret_code = 1
-        if ret_code == 0:
-            ip = re.findall(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b", p.decode(encoding="utf-8"))
-            print_to_log(ip)
-            if len(ip) <= 0:
-                break
-            if len(re.findall(r'(?<!\d)\d{1,3}\.\d{1,3}\.\d{1,3}(?=\.\d)', ip[0])) <= 0:
-                break
-            gate = str(re.findall(r'(?<!\d)\d{1,3}\.\d{1,3}\.\d{1,3}(?=\.\d)', ip[0])[0]) + ".1"
-            print_to_log(gate)
-            ifconfig="ifconfig wlan0 {}".format(ip[0])
-            enter_shell_cmd(ifconfig)
-            routeconfig="./data/l2tool/busybox route add default gw {} dev wlan0".format(gate)
-            enter_shell_cmd(routeconfig)
-            break
-        print_to_log("try {}".format(cnt))
-        cnt -= 1
-        time.sleep(5)
+def connect_wifi(prefix, pic):
+    try:
+        data = get_coordinate("{}\\{}_{}".format(args.save_path, prefix, pic), "testapold")
+        enter_shell_cmd("uinput -M -m {} {} -c 0".format(data[0], data[1]), WAIT_TIME_TWO)
+        enter_shell_cmd("uinput -M -m 360 200 -c 0")
+        enter_shell_cmd("uinput -M -m 680 810 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 80 910 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 150 910 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 150 910 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 110 810 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
+        enter_shell_cmd("uinput -M -m 680 810 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
+        enter_shell_cmd("uinput -M -m 250 810 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 220 910 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
+        enter_shell_cmd("uinput -M -m 40 810 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 500 1020 -c 0", WAIT_TIME_HALF)
+        enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
+        enter_shell_cmd("uinput -M -m 680 690 -c 0")
+        enter_shell_cmd("uinput -M -m 550 680 -c 0", single_action[0])
+    except Exception as e:
+        print_to_log("SmokeTest:: wifi list loading errror!")
 
 
 def calculate(image1, image2):
@@ -222,19 +209,21 @@ def classify_hist_with_split(image1, image2, size=(256, 256)):
     return sub_data
 
 
-def crop_picture(prefix, pic):
-    pic_path = "{}/{}_{}".format(args.save_path, prefix, pic)
-    save_path = "{}/{}_{}".format(args.save_path, prefix, pic)
+def crop_picture(prefix, pic, crop_range):
+    pic_path = "{}\\{}_{}".format(args.save_path, prefix, pic)
+    save_path = "{}\\{}_{}".format(args.save_path, prefix, pic)
     im = cv2.imread(pic_path)
-    im = im[80:1200, 0:720]
+    im = im[crop_range[0]:crop_range[1], crop_range[2]:crop_range[3]]
     cv2.imwrite(save_path, im)
 
 
 def cmp_picture(prefix, pic, num=1):
     if num == 1:
-        img1_path = "{}/{}".format(args.anwser_path, pic)
-    img2_path = "{}/{}_{}".format(args.save_path, prefix, pic)
-    cmp_init = numpy.array([1])
+        img1_path = "{}\\{}".format(args.anwser_path, pic)
+    else:
+        img1_path = "{}\\2_{}".format(args.anwser_path, pic)
+    img2_path = "{}\\{}_{}".format(args.save_path, prefix, pic)
+    cmp_init = 0
     try:
         cmp_result = classify_hist_with_split(img1_path, img2_path)
         print("compare result:" + "%.6f%%" % (cmp_result * 100))
@@ -253,15 +242,70 @@ def shot_and_cmp(image):
     return similarity
 
 
+def distributed_test():
+    if "1/2" in args.test_num or "2/2" in args.test_num:
+        report_path = os.path.normpath(os.path.join(args.save_path, "distributed_report.txt"))
+        if args.test_num == "2/2":
+            enter_shell_cmd("ifconfig eth0 192.168.0.1", WAIT_TIME_ONE)
+            ping_result = enter_shell_cmd("ping 192.168.0.2 -i 1 -c 2", 3)
+            file_is_exist = enter_shell_cmd("cd /data; find . -name distributed_report.txt")
+            ping_cnt = 0
+            wait_cnt = 0
+            while "2 packets transmitted, 2 received" not in ping_result and ping_cnt < 20:
+                ping_result = enter_shell_cmd("ping 192.168.0.2 -i 1 -c 2", WAIT_TIME_FOUR)
+                ping_cnt += 1
+            if ping_cnt == 30:
+                print_to_log("SmokeTest:: Ping failed, timeout of 80s")
+                sys_exit()
+            while "distributed_report.txt" not in file_is_exist and wait_cnt < 30:
+                print_to_log("SmokeTest:: waiting for the distributed test to end ")
+                file_is_exist = enter_shell_cmd("cd /data; find . -name distributed_report.txt", WAIT_TIME_FOUR)
+                wait_cnt += 1
+        elif args.test_num == "1/2":
+            enter_shell_cmd("ifconfig eth0 192.168.0.2", WAIT_TIME_ONE)
+            ping_result = enter_shell_cmd("ping 192.168.0.1 -i 1 -c 2", WAIT_TIME_FOUR)
+            ping_cnt = 0
+            while "2 packets transmitted, 2 received" not in ping_result and ping_cnt < 20:
+                ping_result = enter_shell_cmd("ping 192.168.0.1 -i 1 -c 2", WAIT_TIME_FOUR)
+                ping_cnt += 1
+            if ping_cnt == 30:
+                print_to_log("SmokeTest:: Ping failed, timeout of 80s")
+            print_to_log("SmokeTest:: ##### case 0 : distributed test start #####")
+            execute_path = os.path.normpath(os.path.join(args.tools_path, "resource"))
+            os.system("cd {} && python distributedtest.py --path {}".format(execute_path, args.save_path))
+            distributed_result = ""
+            try:
+                with open(report_path, mode='r', encoding='utf-8', errors='ignore') as f:
+                    f.seek(0)
+                    distributed_result = f.read()
+                f.close()
+            except Exception as reason:
+                print_to_log("SmokeTest:: distributed_report.txt is not exist!")
+            if "distributedcalc" in distributed_result:
+                print_to_log("SmokeTest:: testcase 0, distributed is ok!")
+            else:
+                print_to_log("SmokeTest:: error:testcase 0, distributed failed!")
+                sys_exit()
+        enter_shell_cmd("ifconfig eth0 down", WAIT_TIME_ONE)
+
+
+def open_wlan():
+    enter_shell_cmd("aa start -a com.ohos.settings.MainAbility -b com.ohos.settings", WAIT_TIME_FOUR)
+    enter_shell_cmd("uinput -M -m 300 300 -c 0", WAIT_TIME_TWO)
+    enter_shell_cmd("uinput -M -m 640 200 -c 0", WAIT_TIME_FOUR)
+    time.sleep(WAIT_TIME_TWO)
+    enter_shell_cmd("killall com.ohos.settings", WAIT_TIME_TWO)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='manual to this script')
-    parser.add_argument('--config', type=str, default = './app_capture_screen_test_config.json')
+    parser.add_argument('--config', type=str, default = '.\\app_capture_screen_test_config.json')
     parser.add_argument('--test_num', type=str, default = '1/1')
     parser.add_argument('--tools_path', type=str, default = 'D:\\DeviceTestTools\\screenshot\\')
     parser.add_argument('--anwser_path', type=str, default = 'D:\\DeviceTestTools\\screenshot\\resource')
     parser.add_argument('--save_path', type=str, default = 'D:\\DeviceTestTools\\screenshot')
     parser.add_argument('--device_num', type=str, default = 'null')
-    parser.add_argument('--pr_url', type=str, default = 'https://gitee.com/openharmony/developtools_integration_verification')
+    parser.add_argument('--pr_url', type=str, default = 'developtools_integration_verification')
     args = parser.parse_args()
 
     if args.device_num == 'null':
@@ -272,6 +316,11 @@ if __name__ == "__main__":
         all_app = json.load(f)
     cmp_status = 0
     global_pos = all_app[0]
+    
+    WAIT_TIME_HALF = 0.5
+    WAIT_TIME_ONE = 1
+    WAIT_TIME_TWO = 2
+    WAIT_TIME_FOUR = 4
 
     reboot_cnt = 2
     while reboot_cnt:
@@ -280,14 +329,14 @@ if __name__ == "__main__":
         rmlock_cnt = 3
         while rmlock_cnt:
             enter_shell_cmd("uinput -T -m 425 1000 425 400;power-shell wakeup;uinput -T -m 425 400 425 1000;\
-            power-shell setmode 602;uinput -T -m 425 1000 425 400;", 1)
+            power-shell setmode 602;uinput -T -m 425 1000 425 400;", WAIT_TIME_ONE)
             rmlock_cnt -= 1
-        enter_shell_cmd("hilog -w stop", 1)
-        enter_shell_cmd("cd /data/log/hilog && tar -cf system_start_log_{}.tar *".format(args.device_num), 1)
+        enter_shell_cmd("hilog -w stop", WAIT_TIME_ONE)
+        enter_shell_cmd("cd /data/log/hilog && tar -cf system_start_log_{}.tar *".format(args.device_num), WAIT_TIME_ONE)
         file_from_dev("/data/log/hilog/system_start_log_{}.tar".format(args.device_num), args.save_path)
         connect_check()
         launcher_similarity = shot_and_cmp("launcher.jpeg")
-        if launcher_similarity >= 80:
+        if launcher_similarity >= 90:
             print_to_log("SmokeTest:: launcher screenshot comparison is ok!")
             break
         elif reboot_cnt >= 1:
@@ -330,68 +379,26 @@ if __name__ == "__main__":
     else:
         print_to_log("SmokeTest:: first processes check is ok")
 
-    power_state = enter_shell_cmd("hidumper -s 3308", 1)
+    power_state = enter_shell_cmd("hidumper -s 3308", WAIT_TIME_ONE)
     if "State=2" not in power_state:
         print_to_log("SmokeTest:: DISPLAY POWER MANAGER DUMP State=0")
         sys_exit()
 
-    if "1/2" in args.test_num or "2/2" in args.test_num:
-        enter_shell_cmd("param set persist.ace.testmode.enabled 1")
-        enter_shell_cmd("rm /data/log/hilog/*;hilog -r;hilog -Q pidoff;hilog -Q domainoff;hilog -G 512M;hilog -b D")
-        picture_path = os.path.normpath(os.path.join(args.tools_path, "DistributedTest\\testcases"))
-        report_path = os.path.normpath(os.path.join(args.tools_path, "DistributedTest\\testcases\\report.txt"))
-        if args.test_num == "2/2":
-            enter_shell_cmd("ifconfig eth0 192.168.0.1", 1)
-            ping_result = enter_shell_cmd("ping 192.168.0.2 -i 1 -c 2", 3)
-            file_is_exist = enter_shell_cmd("cd /data; find . -name report.txt")
-            ping_cnt = 0
-            wait_cnt = 0
-            while "2 packets transmitted, 2 received" not in ping_result and ping_cnt < 60:
-                ping_result = enter_shell_cmd("ping 192.168.0.2 -i 1 -c 2", 3)
-                ping_cnt += 1
-            if ping_cnt == 60:
-                print_to_log("SmokeTest:: Ping failed, timeout of 3 minutes")
-                sys_exit()
-            while "report.txt" not in file_is_exist and wait_cnt < 60:
-                print_to_log("SmokeTest:: waiting for the distributed test to end ")
-                file_is_exist = enter_shell_cmd("cd /data; find . -name report.txt", 3)
-                wait_cnt += 1
-        elif args.test_num == "1/2":
-            enter_shell_cmd("ifconfig eth0 192.168.0.2", 1)
-            ping_result = enter_shell_cmd("ping 192.168.0.1 -i 1 -c 2", 3)
-            ping_cnt = 0
-            while "2 packets transmitted, 2 received" not in ping_result and ping_cnt < 60:
-                ping_result = enter_shell_cmd("ping 192.168.0.1 -i 1 -c 2", 3)
-                ping_cnt += 1
-            if ping_cnt == 60:
-                print_to_log("SmokeTest:: Ping failed, timeout of 3 minutes")
-            print_to_log("SmokeTest:: ##### case 0 : distributed test start #####")
-            execute_path = os.path.normpath(os.path.join(args.tools_path, "DistributedTest"))
-            print_to_log("SmokeTest:: execute_path {}".format(execute_path))
-            os.system("cd {} && python main.py run -l DistributedTest".format(execute_path))
-            distributed_result = ""
-            try:
-                with open(report_path, mode='r', encoding='utf-8', errors='ignore') as f:
-                    f.seek(0)
-                    distributed_result = f.read()
-                f.close()
-            except Exception as reason:
-                print_to_log("SmokeTest:: report.txt is not exist!")
-            if "distributedcalc" in distributed_result:
-                picture_save(picture_path)
-                print_to_log("SmokeTest:: testcase 0, distributed is ok!")
-            else:
-                picture_save(picture_path)
-                print_to_log("SmokeTest:: error:testcase 0, distributed failed!")
-        enter_shell_cmd("ifconfig eth0 down", 1)
+    distributed_test()
+    open_wlan()
 
-    if "arkui_ace_engine" in args.pr_url or "developtools_integration_verification" in args.pr_url:
-        if args.test_num == "1/2":
-            args.test_num = "3/2"
-        elif args.test_num == "2/2":
-            args.test_num = "4/2"
-        else:
-            args.test_num = "1/1"
+    special_warehouse = [
+        "arkui_ace_engine",
+        "developtools_integration_verification",
+        "graphic_graphic_2d",
+        "windowmanager"]
+
+    for warehouse in special_warehouse:
+        if warehouse in args.pr_url:
+            if args.test_num == "1/2":
+                args.test_num = "3/2"
+            elif args.test_num == "2/2":
+                args.test_num = "4/2"
     print(args.pr_url)
     try:
         args.test_num.index('/')
@@ -432,7 +439,7 @@ if __name__ == "__main__":
                     cmd_f.write("\nSmokeTest::::::Last failed, try again \n")
                 cmd_f.close()
             if single_app['entry'] != "":
-                enter_shell_cmd(call_app_cmd, 5)
+                enter_shell_cmd(call_app_cmd, WAIT_TIME_FOUR)
             print_to_log("SmokeTest:: execute command {}".format(single_app['all_actions']))
             prefix = args.device_num
             raw_pic_name = ''
@@ -443,25 +450,46 @@ if __name__ == "__main__":
                         pic_name = "{}{}".format(single_action[2], ".jpeg")
                     else:
                         pic_name = "{}{}".format(single_app['app_name'], ".jpeg")
-                    enter_shell_cmd("rm /data/screen_test/*{}".format(pic_name), 1)
-                    enter_shell_cmd(capture_screen_cmd.format(prefix, pic_name), 1)
+                    enter_shell_cmd("rm /data/screen_test/*{}".format(pic_name), WAIT_TIME_ONE)
+                    enter_shell_cmd(capture_screen_cmd.format(prefix, pic_name), WAIT_TIME_ONE)
                     file_from_dev("/data/screen_test/{}_{}".format(prefix, pic_name), args.save_path)
                     next_cmd = ""
+                elif type(single_action[1]) == str and single_action[1] == 'cmp_twice':
+                    next_cmd = ""
+                    sys.stdout.flush()
+                    pic = "{}{}".format(single_action[2], ".jpeg")
+                    similarity = single_action[3]
+                    crop_range = single_app[single_action[4]]
+                    crop_picture(prefix, pic, crop_range)
+                    first_similarity = cmp_picture(prefix, pic)
+                    second_similarity = cmp_picture(prefix, pic, WAIT_TIME_TWO)
+                    print_to_log("SmokeTest:: first picture similarity is {}%".format(first_similarity))
+                    print_to_log("SmokeTest:: second picture similarity is {}%".format(second_similarity))
+                    if first_similarity >= similarity or second_similarity >= similarity:
+                        if testok != -1:
+                            testok = 1
+                        print_to_log("SmokeTest:: {} screenshot check is ok".format(pic))
+                    else:
+                        testok = -1
+                        print_to_log("SmokeTest:: {} screenshot check is abnarmal".format(pic))
                 elif type(single_action[1]) == str and single_action[1] == 'cmp_cmd-level':
                     next_cmd = ""
                     sys.stdout.flush()
-                    if len(single_action) == 4 or len(single_action) == 5:
+                    if len(single_action) == 4:
                         similarity = single_action[3]
                     else:
                         similarity = global_pos['cmp_cmd-level'][1]
+                        similarity = int(similarity)
                     print_to_log("SmokeTest:: start to contrast screenshot")
                     pic = "{}{}".format(single_action[2], ".jpeg")
-                    crop_picture(prefix, pic)
+                    crop_range = [80, 1200, 0, 720]
+                    crop_picture(prefix, pic, crop_range)
                     pic_similarity = cmp_picture(prefix, pic)
                     print_to_log("SmokeTest:: picture similarity is {}%".format(pic_similarity))
-                    if len(single_action) == 3 or len(single_action) == 4:
+                    if len(single_action) >= 3:
                         if pic_similarity >= similarity:
-                            testok = 1
+                            if testok != -1:
+                                testok = 1
                             print_to_log("SmokeTest:: {} screenshot check is ok".format(pic))
                         else:
                             testok = -1
@@ -483,28 +511,14 @@ if __name__ == "__main__":
                         os.path.normpath(os.path.join(args.tools_path, single_action[2])), single_action[3]))
                 elif type(single_action[1]) == str and single_action[1] == 'connect_wifi':
                     next_cmd = ""
-                    connect_wifi(args.tools_path)
+                    pic = "{}{}".format(single_action[2], ".jpeg")
+                    connect_wifi(prefix, pic)
                 elif type(single_action[1]) == str and single_action[1] == 'sandbox_path_check':
                     next_cmd = ""
                     if sandbox_check("com.ohos.medialibrary.medialibrarydata") == 1 and testok == 1:
                         testok = 1
                     else:
                         testok = -1
-                elif type(single_action[1]) == str and single_action[1] == 'process_check':
-                    next_cmd = ""
-                    if len(single_action) == 3:
-                        p = enter_shell_cmd("ps -elf", single_action[0])
-                        result = "".join(p)
-                        findsome = result.find(single_action[2], 0, len(result))
-                        if findsome != -1 and testok == 1:
-                            testok = 1
-                            print_to_log("SmokeTest:: \"{}\" is ok, find process \"{}\"!".format(single_action[1],\
-                            single_action[2]))
-                        else:
-                            testok = -1
-                            print_to_log("SmokeTest:: \"{}\" failed, not find process \"{}\"!".format(single_action[1],\
-                            single_action[2]))
-                        sys.stdout.flush()
                 elif type(single_action[1]) == str and single_action[1] == 'process_crash_check':
                     next_cmd = ""
                     if len(single_action) == 3:
