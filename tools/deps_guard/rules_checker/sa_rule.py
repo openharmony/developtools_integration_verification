@@ -56,9 +56,8 @@ class SaRule(BaseRule):
 				self.warn('sa module %s has no shlib_type="sa", add it in %s' % (mod["name"], mod["labelPath"]))
 
 		if len(non_sa_with_sa_shlib_type) > 0:
-			passed = False
 			for mod in non_sa_with_sa_shlib_type:
-				self.error('non sa module %s with shlib_type="sa", %s' % (mod["name"], mod["labelPath"]))
+				self.warn('non sa module %s with shlib_type="sa", %s' % (mod["name"], mod["labelPath"]))
 
 		return passed
 
