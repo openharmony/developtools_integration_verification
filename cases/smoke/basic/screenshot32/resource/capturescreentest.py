@@ -139,17 +139,27 @@ def sandbox_check(process):
 
 
 def get_coordinate(path, target):
+    wifi_numbers = 8
+    height = 97
+    wifi_range = [236, 286, 45, 300]
     coordinate = []
     img = cv2.imread(path)
     tessdata_dir_config = '--tessdata-dir "C:\\Program Files (x86)\\Tesseract-OCR\\tessdata"'
-    data = pytesseract.image_to_data(img, output_type=Output.DICT, config=tessdata_dir_config, lang='eng')
-    for i in range(len(data['text'])):
-        if data['text'][i] == target:
-            (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
-            dx = int(x + w / 2)
-            dy = int(y + h / 2)
-            coordinate.append(dx)
-            coordinate.append(dy)
+    while wifi_numbers:
+        wifi_range[0] += height
+        wifi_range[1] += height
+        print_to_log(wifi_range)
+        data_img = img[wifi_range[0]:wifi_range[1], wifi_range[2]:wifi_range[3]]
+        data = pytesseract.image_to_data(data_img, output_type=Output.DICT, config=tessdata_dir_config, lang='eng')
+        for i in range(len(data['text'])):
+            if data['text'][i] == target:
+                dx = int((wifi_range[2] + wifi_range[3]) / 2)
+                dy = int((wifi_range[0] + wifi_range[1]) / 2)
+                coordinate.append(dx)
+                coordinate.append(dy)
+        wifi_numbers -= 1
+        if coordinate:
+            break
     return coordinate
 
 
@@ -171,9 +181,10 @@ def connect_wifi(prefix, pic):
         enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
         enter_shell_cmd("uinput -M -m 40 810 -c 0", WAIT_TIME_ONE)
         enter_shell_cmd("uinput -M -m 500 1020 -c 0", WAIT_TIME_ONE)
+        enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_ONE)
+        enter_shell_cmd("uinput -M -m 680 690 -c 0")
         enter_shell_cmd("snapshot_display -f /data/screen_test/{}".format("testapold.jpeg"))
         file_from_dev("/data/screen_test/{}".format("testapold.jpeg"), args.save_path)
-        enter_shell_cmd("uinput -M -m 680 690 -c 0")
         enter_shell_cmd("uinput -M -m 550 680 -c 0", single_action[0])
     except Exception as e:
         print(e)
