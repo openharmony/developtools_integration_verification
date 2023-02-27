@@ -250,32 +250,48 @@ class RamAnalyzer:
     def __save_result_as_excel(cls, data_dict: dict, filename: str, ss: str):
         """
         保存结果到excel中
+        进程名:{
+            "size": xxx,
+            子系统名:{
+                部件名:{
+                    二进制文件: xxx,
+                    ...
+                }
+            }
+        }
         """
         tmp_dict = copy.deepcopy(data_dict)
         writer = SimpleExcelWriter("ram_info")
         writer.set_sheet_header(
-            ["process_name", "process_size({}, KB)".format(ss), "component_name", "elf_name", "elf_size(KB)"])
+            ["process_name", "process_size({}, KB)".format(ss), "subsystem_name","component_name", "elf_name", "elf_size(KB)"])
         process_start_r = 1
         process_end_r = 0
         process_c = 0
+        subsystem_c = 2
+        subsystem_start_r = 1
+        subsystem_end_r = 0
         process_size_c = 1
         component_start_r = 1
         component_end_r = 0
-        component_c = 2
+        component_c = 3
         for process_name in tmp_dict.keys():
             process_val_dict: typing.Dict[str, typing.Dict[str, int]] = tmp_dict.get(process_name)
             process_size = process_val_dict.get("size")
             delete_values_from_dict(process_val_dict, ["size"])
-            for component_name, component_val_dict in process_val_dict.items():
-                elf_count_of_component = len(component_val_dict)
-                for elf_name, size in component_val_dict.items():
-                    writer.append_line([process_name, process_size, component_name, elf_name, "%.2f" % (size / 1024)])
-                component_end_r += elf_count_of_component
-                # 重写component
-                writer.write_merge(component_start_r, component_c, component_end_r,
-                                   component_c, component_name)
-                component_start_r = component_end_r + 1
-                process_end_r += elf_count_of_component
+            for subsystem_name, subsystem_val_dict in process_val_dict.items(): # 遍历subsystem
+                for component_name, component_val_dict in subsystem_val_dict.items():   # 遍历component
+                    elf_count_of_component = len(component_val_dict)
+                    for elf_name, size in component_val_dict.items():   # 遍里elf
+                        writer.append_line([process_name, process_size, subsystem_name, component_name, elf_name, "%.2f" % (size / 1024)])
+                    component_end_r += elf_count_of_component
+                    subsystem_end_r += elf_count_of_component
+                    # 重写component
+                    writer.write_merge(component_start_r, component_c, component_end_r,
+                                    component_c, component_name)
+                    component_start_r = component_end_r + 1
+                    process_end_r += elf_count_of_component
+                writer.write_merge(subsystem_start_r, subsystem_c, subsystem_end_r, subsystem_c, subsystem_name)
+                subsystem_start_r = subsystem_end_r+1
             writer.write_merge(process_start_r, process_c, process_end_r, process_c, process_name)
             writer.write_merge(process_start_r, process_size_c, process_end_r, process_size_c, process_size)
             process_start_r = process_end_r + 1
@@ -305,8 +321,8 @@ class RamAnalyzer:
                         continue
                     if not evaluator(service_name, k):
                         continue
-                    return True, os.path.split(k)[-1], cn, v
-        return False, str(), str(), int()
+                    return True, os.path.split(k)[-1],sn, cn, v
+        return False, str(), str(), str(), int()
 
     @classmethod
     def analysis(cls, cfg_path: str, xml_path: str, rom_result_json: str, device_num: str,
@@ -338,19 +354,21 @@ class RamAnalyzer:
                     return v
 
         for process_name, process_size in process_size_dict.items():  # 从进程出发
+            # 如果部件是init,特殊处理
             if process_name == "init":
-                _, bin, _, size = cls.find_elf_size_from_rom_result(process_name, "startup", "init",
+                _, elf,_, _, size = cls.find_elf_size_from_rom_result(process_name, "startup", "init",
                                                                     lambda x, y: os.path.split(y)[
                                                                                      -1].lower() == x.lower(),
                                                                     rom_result_dict)
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
-                result_dict[process_name]["init"] = dict()
-                result_dict[process_name]["init"][bin if len(bin) != 0 else "UNKNOWN"] = size
+                result_dict[process_name]["startup"] = dict()
+                result_dict[process_name]["startup"]["init"] = dict()
+                result_dict[process_name]["startup"]["init"][elf if len(elf) != 0 else "UNKNOWN"] = size
                 continue
             # 如果是hap，特殊处理
             if (process_name.startswith("com.") or process_name.startswith("ohos.")):
-                _, hap_name, component_name, size = cls.find_elf_size_from_rom_result(process_name, "*", "*",
+                _, hap_name, subsystem_name, component_name, size = cls.find_elf_size_from_rom_result(process_name, "*", "*",
                                                                                       lambda x, y: len(
                                                                                           y.split(
                                                                                               '/')) >= 3 and x.lower().startswith(
@@ -358,16 +376,17 @@ class RamAnalyzer:
                                                                                       rom_result_dict)
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
-                result_dict[process_name][component_name] = dict()
-                result_dict[process_name][component_name][hap_name if len(hap_name) != 0 else "UNKNOWN"] = size
+                result_dict[process_name][subsystem_name] = dict()
+                result_dict[process_name][subsystem_name][component_name] = dict()
+                result_dict[process_name][subsystem_name][component_name][hap_name if len(hap_name) != 0 else "UNKNOWN"] = size
                 continue
             so_list: list = get(process_name, process_elf_dict)  # 得到进程相关的elf文件list
             if so_list is None:
                 print("warning: process '{}' not found in .xml or .cfg".format(process_name))
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
-                result_dict[process_name]["UNKNOWN"] = dict()
-                result_dict[process_name]["UNKNOWN"]["UNKNOWN"] = int()
+                result_dict[process_name]["UNKNOWN"]["UNKNOWN"] = dict()
+                result_dict[process_name]["UNKNOWN"]["UNKNOWN"]["UNKNOWN"] = int()
                 continue
             result_dict[process_name] = dict()
             result_dict[process_name]["size"] = process_size
@@ -375,14 +394,18 @@ class RamAnalyzer:
                 unit = so_info_dict.get(so)
                 if unit is None:
                     result_dict[process_name]["UNKNOWN"] = dict()
-                    result_dict[process_name]["UNKNOWN"][so] = int()
+                    result_dict[process_name]["UNKNOWN"]["UNKNOWN"] = dict()
+                    result_dict[process_name]["UNKNOWN"]["UNKNOWN"][so] = int()
                     print("warning: '{}' in {} not found in json from rom analysis result".format(so, process_name))
                     continue
                 component_name = unit.get("component_name")
+                subsystem_name = unit.get("subsystem_name")
                 so_size = unit.get("size")
-                if result_dict.get(process_name).get(component_name) is None:
-                    result_dict[process_name][component_name] = dict()
-                result_dict[process_name][component_name][so] = so_size
+                if result_dict.get(process_name).get(subsystem_name) is None:
+                    result_dict[process_name][subsystem_name] = dict()
+                if result_dict.get(process_name).get(subsystem_name).get(component_name) is None:
+                    result_dict[process_name][subsystem_name][component_name] = dict()
+                result_dict[process_name][subsystem_name][component_name][so] = so_size
         base_dir, _ = os.path.split(output_file)
         if len(base_dir) != 0 and not os.path.isdir(base_dir):
             os.makedirs(base_dir, exist_ok=True)
