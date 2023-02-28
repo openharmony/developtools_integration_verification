@@ -396,7 +396,6 @@ if __name__ == "__main__":
         print_to_log("SmokeTest:: DISPLAY POWER MANAGER DUMP State=0")
         sys_exit()
 
-    distributed_test()
     open_wlan()
 
     special_warehouse = [
