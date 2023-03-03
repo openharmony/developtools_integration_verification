@@ -232,7 +232,6 @@ if __name__ == '__main__':
         
           deps = [
             "//base/useriam/pin_auth/frameworks:pinauth_ipc",
-            "//base/useriam/user_auth_framework/common/executors:userauth_executors",
             "//third_party/openssl:libcrypto_shared",
           ]
         
@@ -244,6 +243,7 @@ if __name__ == '__main__':
             "hiviewdfx_hilog_native:libhilog",
             "ipc:ipc_core",
             "safwk:system_ability_fwk",
+            "user_auth_framework:userauth_executors",
           ]
           t = [
           1,
