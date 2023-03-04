@@ -37,7 +37,6 @@ battery_stats
 sensors
 media_service
 wifi_manager_se
-distributedsche
 installs
 hiview
 telephony
