@@ -116,7 +116,7 @@ class RamAnalyzer:
             if line.isspace():
                 continue
             processed: typing.List[typing.Text] = cls.__hidumper_mem_line_process(line)
-            if not processed[0].isnumeric():  # 如果第一列不是数字（pid），就过
+            if not processed or not processed[0].isnumeric():  # 如果第一列不是数字（pid），就过
                 continue
             name = processed[1]  # 否则的话就取名字，和对应的size
             size = int(processed[cls.__ss_dict.get(ss)])
@@ -385,6 +385,7 @@ class RamAnalyzer:
                 print("warning: process '{}' not found in .xml or .cfg".format(process_name))
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
+                result_dict[process_name]["UNKNOWN"] = dict()
                 result_dict[process_name]["UNKNOWN"]["UNKNOWN"] = dict()
                 result_dict[process_name]["UNKNOWN"]["UNKNOWN"]["UNKNOWN"] = int()
                 continue
