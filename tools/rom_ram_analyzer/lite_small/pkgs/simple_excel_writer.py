@@ -1,5 +1,5 @@
 import xlwt
-from xlwt import Worksheet, Pattern, Alignment, Font, XFStyle
+from xlwt import Worksheet, Pattern as PTRN, Alignment as ALGT, Font as FT, XFStyle as XFSL
 import typing
 import logging
 from typing import Optional
@@ -18,22 +18,22 @@ class SimpleExcelWriter:
         }
         self.__default_sheet_name = default_sheet_name
         # 表头样式
-        self.__head_style = XFStyle()
+        self.__head_style = XFSL()
         # 内容样式
-        self.__content_style = XFStyle()
+        self.__content_style = XFSL()
         # 字体
-        ft = Font()
+        ft = FT()
         ft.bold = True
 
         # 设置背景颜色
-        ptrn = Pattern()
-        ptrn.pattern = Pattern.SOLID_PATTERN
+        ptrn = PTRN()
+        ptrn.pattern = PTRN.SOLID_PATTERN
         ptrn.pattern_fore_colour = 22  # 背景颜色
 
         # 居中对齐
-        algmt = Alignment()
-        algmt.horz = Alignment.HORZ_CENTER  # 水平方向
-        algmt.vert = Alignment.VERT_CENTER  # 垂直方向
+        algmt = ALGT()
+        algmt.horz = ALGT.HORZ_CENTER  # 水平方向
+        algmt.vert = ALGT.VERT_CENTER  # 垂直方向
         self.__head_style.font = ft
         self.__head_style.alignment = algmt
         self.__head_style.pattern = ft
