@@ -5,6 +5,7 @@ import logging
 from abc import ABC, abstractmethod
 from collections import defaultdict
 from typing import *
+from pprint import pprint
 import preprocess
 from pkgs.gn_common_tool import GnVariableParser
 from pkgs.simple_yaml_tool import SimpleYamlTool

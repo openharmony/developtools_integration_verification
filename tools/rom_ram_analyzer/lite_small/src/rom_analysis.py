@@ -49,32 +49,38 @@ class RomAnalysisTool:
         """
         :top_dir 顶层目录,不会变化
         :rela_path 最顶层的值为空
-        :sub_path 相对于top_dir的路径,最外层是包含在dir_list当中的
-        :dir_list 相对于原始top目录的所有子目录的全路径
+        :sub_path 一般是a/b/c这种形式
+        :dir_list 相对于原始top目录的子目录的全路径
+        example: 
+        /
+        |-a
+        |-b
+        |-c
+        |-|-d
+        |-|-e
+        |-|-f
+        |-|-|-g
+        |-|-|-h
+        top_dir: /
+        rela_path: ""
+        sub_path: c/e
+        dir_list: [c]
+        => [c/d, c/f], assume 'a' and 'b' has been removed from dir_list
         """
-        if not sub_path:
+        if (not sub_path) or (os.sep not in sub_path):
             return
         # 将其他目录添加到dir_list
-        all_subdir = os.listdir(os.path.join(top_dir, rela_path))
-        for d in all_subdir:
-            t = os.path.join(rela_path, d)
-            if os.path.isdir(os.path.join(top_dir, t)) and t not in dir_list:
-                dir_list.append(t)
-        # 移除sub_path的当前层级的目录
-        t = sub_path.split(os.sep)
-        if os.path.join(rela_path, t[0]) in dir_list:
-            dir_list.remove(os.path.join(rela_path, t[0]))
-        else:
-            logging.error(
-                f"'{os.path.join(rela_path,t[0])}' not in '{top_dir}'")
-        sp = str()
-        if len(t) == 1:
+        t, sub_sub_path = sub_path.split(os.sep, 1)   # 如果是c/e,分割成c,e
+        t = os.path.join(rela_path, t)
+        if t in dir_list:
+            dir_list.remove(t)
+        sub_sub_dir_list = os.listdir(os.path.join(top_dir, t))
+        for ssdl in sub_sub_dir_list:
+            if os.path.join(rela_path,sub_path) != os.path.join(t,ssdl):
+                dir_list.append(os.path.join(t, ssdl))
+        if not sub_sub_dir_list:
             return
-        elif len(t) == 2:
-            sp = t[1]
-        else:
-            sp = os.path.join(*t[1:])
-        cls._add_rest_dir(top_dir, os.path.join(rela_path, t[0]), sp, dir_list)
+        cls._add_rest_dir(top_dir, t, sub_sub_path, dir_list)        
 
     @classmethod
     def _find_files(cls, product_name: str) -> Dict[str, List[str]]:
@@ -105,7 +111,11 @@ class RomAnalysisTool:
             rest_dir_list: List[str] = os.listdir(
                 root_dir)  # 除了配置在relative下之外的所有剩余目录,全部归到etc下
             for v in relative_dir.values():
-                cls._add_rest_dir(root_dir, str(), v, rest_dir_list)
+                if v in rest_dir_list:
+                    rest_dir_list.remove(v)
+            for v in relative_dir.values():
+                if os.sep in v:
+                    cls._add_rest_dir(root_dir, str(), v, rest_dir_list)
             if "etc" not in product_dict.keys():
                 product_dict["etc"] = list()
             for r in rest_dir_list:
@@ -242,6 +252,8 @@ class RomAnalysisTool:
         # prodcut_dict: {"so":["a.so", ...]}
         for t, l in product_dict.items():
             for f in l:  # 遍历所有文件
+                if os.path.isdir(f):
+                    continue
                 # query_order: {"a":[static_library", ...]}
                 find_flag = False
                 type_list = query_order.get(t)
@@ -252,7 +264,8 @@ class RomAnalysisTool:
                         f"'{t}' not found in query_order of the config.yaml")
                     break
                 for tn in type_list:    # tn example: ohos_shared_library
-                    output_dict: Dict[str, Dict] = gn_info.get(tn)  # 这个模板对应的所有可能编译产物
+                    output_dict: Dict[str, Dict] = gn_info.get(
+                        tn)  # 这个模板对应的所有可能编译产物
                     if not output_dict:
                         logging.warning(
                             f"'{tn}' not found in the {gn_info_file}")
@@ -279,7 +292,7 @@ class RomAnalysisTool:
                         }, rom_size_dict)
                         find_flag = True
                 if not find_flag:
-                    cls._put("others", "others", {
+                    cls._put("NOTFOUND", "NOTFOUND", {
                         "file_name": f.replace(project_path, ""),
                         "size": size,
                     }, rom_size_dict)
@@ -298,8 +311,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # t = os.listdir(
-    #     "/home/aodongbiao/developtools_integration_verification/tools")
-    # RomAnalysisTool._add_rest_dir(
-    #     "/home/aodongbiao/developtools_integration_verification/tools", "", "rom_ram_analyzer/L2/pkgs", t)
-    # print(t)
+    # relative_dir = ["bin", "usr/lib", "etc"]
+    # root_dir = "/home/aodongbiao/oh/out/hispark_taurus/ipcamera_hispark_taurus/rootfs"
+    # rest_dir_list = os.listdir(root_dir)
+    # RomAnalysisTool._find_files("ipcamera_hispark_taurus")

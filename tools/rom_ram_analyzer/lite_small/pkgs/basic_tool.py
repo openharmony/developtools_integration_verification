@@ -117,7 +117,7 @@ class BasicTool:
         if include:
             cmd += f" --include='{include}'"
         for e in exclude:
-            cmd += f" --exclude-dir={e}"
+            cmd += f" --exclude-dir='{e}'"
         o = cls.execute(cmd)
         if post_handler:
             o = post_handler(o)

@@ -147,6 +147,10 @@ class DefaultProcessor(BaseProcessor):
             self.project_path, sub, _sub, gn_path, "gn", "json", True)
         com, com_from = _gn_var_process(
             self.project_path, com, _com, gn_path, "gn", "json", True)
+        if not sub:
+            sub = "UNDEFINED"
+        if not com:
+            com = "UNDEFINED"
         result = {
             "gn_path": gn_path,
             "target_type": self.target_type,

@@ -141,4 +141,11 @@ black_list:
   - doc
   - test
   - build
-  - out
+  # 排除out目录,为了避免排除其他路径下的out目录,这里详细列出了out下的所有目录
+  - out/gen
+  - out/hispark_pegasus
+  - out/hispark_taurus
+  - out/kernel
+  - out/preloader
+  - out/rk3568
+  # 如果发现了跨形态的错误,如:检查A形态,但是发现将A形态的产品归属到B形态下了,则也可以将B形态的对应路径加在这里进行过滤
