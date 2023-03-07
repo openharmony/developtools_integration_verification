@@ -94,10 +94,20 @@ class BaseProcessor(ABC):
                 gn_path, self.project_path))
             return "", ""
         gp = gn_path.replace(self.project_path, "").lstrip(os.sep)
+        alter_list = list()
         for k, v in self.sc_dict.items():
             if gp.startswith(k):
-                return v.get("subsystem"), v.get("component")
-        return "", ""
+                alter_list.append(k)
+                # return v.get("subsystem"), v.get("component")
+        if not alter_list:
+            return str(), str()
+
+        def bylength(str1: str, str2: str):
+            return len(str1)-len(str2)
+        pprint(alter_list)
+        alter_list.sort(cmp=bylength)
+        pprint(alter_list)
+        return alter_list[0].get("subsystem"), alter_list[0].get("component")
 
     @abstractmethod
     def run(self):
@@ -139,8 +149,10 @@ class DefaultProcessor(BaseProcessor):
                                                 output_name, target_name, gn_path, "target_name", "target_name", True)
         sub = GnVariableParser.string_parser("subsystem_name", paragraph)
         com = GnVariableParser.string_parser("part_name", paragraph)
-        sub, sub_from = _gn_var_process(self.project_path, sub, _sub, gn_path, "gn", "json", True)
-        com, com_from = _gn_var_process(self.project_path, com, _com, gn_path, "gn", "json", True)
+        sub, sub_from = _gn_var_process(
+            self.project_path, sub, _sub, gn_path, "gn", "json", True)
+        com, com_from = _gn_var_process(
+            self.project_path, com, _com, gn_path, "gn", "json", True)
         result = {
             "gn_path": gn_path,
             "target_type": self.target_type,
@@ -197,8 +209,10 @@ class StrResourceProcessor(DefaultProcessor):
                 resources, gn_path, self.project_path).strip('"')
         sub = GnVariableParser.string_parser("subsystem_name", paragraph)
         com = GnVariableParser.string_parser("part_name", paragraph)
-        sub, sub_from = _gn_var_process(self.project_path, sub, _sub, gn_path, "gn", "json")
-        com, com_from = _gn_var_process(self.project_path, com, _com, gn_path, "gn", "json")
+        sub, sub_from = _gn_var_process(
+            self.project_path, sub, _sub, gn_path, "gn", "json")
+        com, com_from = _gn_var_process(
+            self.project_path, com, _com, gn_path, "gn", "json")
         _, file_name = os.path.split(resources)
         result = {
             "gn_path": gn_path,
@@ -227,8 +241,10 @@ class ListResourceProcessor(DefaultProcessor):
             return
         sub = GnVariableParser.string_parser("subsystem_name", paragraph)
         com = GnVariableParser.string_parser("part_name", paragraph)
-        sub, sub_from = _gn_var_process(self.project_path, sub, _sub, gn_path, "gn", "json")
-        com, com_from = _gn_var_process(self.project_path, com, _com, gn_path, "gn", "json")
+        sub, sub_from = _gn_var_process(
+            self.project_path, sub, _sub, gn_path, "gn", "json")
+        com, com_from = _gn_var_process(
+            self.project_path, com, _com, gn_path, "gn", "json")
         for ff in resources:
             _, file_name = os.path.split(ff)
             result = {
