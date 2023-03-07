@@ -134,8 +134,8 @@ default_extension:
 default_prefix:
   shared_library: lib
   static_library: lib
-# black list for command 'grep'
-black_list:
+# black list for command 'grep', it should be the subdirectory of the root path of oh
+black_list: 
   - .repo
   - .ccache
   - doc

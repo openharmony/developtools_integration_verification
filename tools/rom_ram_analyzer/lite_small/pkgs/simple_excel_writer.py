@@ -36,7 +36,7 @@ class SimpleExcelWriter:
         algmt.vert = ALGT.VERT_CENTER  # 垂直方向
         self.__head_style.font = ft
         self.__head_style.alignment = algmt
-        self.__head_style.pattern = ft
+        self.__head_style.pattern = ptrn
         self.__content_style.alignment = algmt
 
     def __increment_y(self, sheet_name: str, value: int = 1) -> int:

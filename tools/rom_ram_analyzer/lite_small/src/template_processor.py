@@ -92,22 +92,16 @@ class BaseProcessor(ABC):
         if not gn_path.startswith(self.project_path):
             logging.error("gn_path and project_path is not consistent: gn_path={}, project_path={}".format(
                 gn_path, self.project_path))
-            return "", ""
+            return str(), str()
         gp = gn_path.replace(self.project_path, "").lstrip(os.sep)
         alter_list = list()
         for k, v in self.sc_dict.items():
             if gp.startswith(k):
                 alter_list.append(k)
-                # return v.get("subsystem"), v.get("component")
         if not alter_list:
             return str(), str()
-
-        def bylength(str1: str, str2: str):
-            return len(str1)-len(str2)
-        pprint(alter_list)
-        alter_list.sort(cmp=bylength)
-        pprint(alter_list)
-        return alter_list[0].get("subsystem"), alter_list[0].get("component")
+        alter_list.sort(key=lambda x: len(x), reverse=True)
+        return self.sc_dict[alter_list[0]].get("subsystem"),  self.sc_dict[alter_list[0]].get("component")
 
     @abstractmethod
     def run(self):

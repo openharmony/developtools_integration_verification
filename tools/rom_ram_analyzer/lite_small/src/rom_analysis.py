@@ -47,7 +47,10 @@ class RomAnalysisTool:
     @classmethod
     def _add_rest_dir(cls, top_dir: str, rela_path: str, sub_path: str, dir_list: List[str]) -> None:
         """
-        dir_list:相对于原始top目录的所有子目录的全路径
+        :top_dir 顶层目录,不会变化
+        :rela_path 最顶层的值为空
+        :sub_path 相对于top_dir的路径,最外层是包含在dir_list当中的
+        :dir_list 相对于原始top目录的所有子目录的全路径
         """
         if not sub_path:
             return
@@ -86,7 +89,7 @@ class RomAnalysisTool:
         relative_dir: Dict[str, str] = product_dir.get("relative")
         if not relative_dir:
             logging.warning(
-                f"'{relative_dir}' of {product_name} not found in the config.yaml")
+                f"'relative_dir' of {product_name} not found in the config.yaml")
             exit(1)
         # 除了so a hap bin外的全部归到etc里面
         for k, v in relative_dir.items():
@@ -141,7 +144,7 @@ class RomAnalysisTool:
         rom_size_dict["size"] += size
 
     @classmethod
-    def _fuzzy_match(cls, file_name: str, extra_black_list: Tuple[str] = ("test",)) -> Tuple[str, str, str]:
+    def _fuzzy_match(cls, file_name: str, filter_path_keyword: Tuple[str] = ("test",)) -> Tuple[str, str, str]:
         """
         直接grep,利用出现次数最多的BUILD.gn去定位subsystem_name和component_name"""
         _, base_name = os.path.split(file_name)
@@ -153,15 +156,22 @@ class RomAnalysisTool:
             base_name = base_name[:base_name.index(".z.so")]
         elif base_name.endswith(".so"):
             base_name = base_name[:base_name.index(".so")]
-        exclude_dir = [os.path.join(project_path, x)
-                       for x in configs["black_list"]]
-        exclude_dir.extend(list(extra_black_list))
+        # exclude_dir = [os.path.join(project_path, x)
+        #                for x in configs["black_list"]]
+        exclude_dir = configs["black_list"]
         grep_result: List[str] = BasicTool.grep_ern(
             base_name,
             project_path,
             include="BUILD.gn",
             exclude=tuple(exclude_dir),
             post_handler=lambda x: list(filter(lambda x: len(x) > 0, x.split('\n'))))
+        tmp = list()
+        for gr in grep_result:
+            for item in filter_path_keyword:
+                if item in gr:
+                    continue
+                tmp.append(gr)
+        grep_result = tmp
         if not grep_result:
             return str(), str(), str()
         gn_dict: Dict[str, int] = collections.defaultdict(int)
