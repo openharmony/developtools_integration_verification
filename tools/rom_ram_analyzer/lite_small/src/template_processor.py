@@ -136,6 +136,10 @@ def _gn_var_process(project_path: str, gn_v: str, alt_v: str, gn_path: str, ifro
 
 
 class DefaultProcessor(BaseProcessor):
+    
+    @property
+    def UNDEFINED(self):
+        return "UNDEFINED"
 
     def helper(self, target_name: str, paragraph: str, gn_path: str, line_no: int, _sub: str, _com: str) -> Tuple[str]:
         output_name = GnVariableParser.string_parser("output_name", paragraph)
@@ -148,9 +152,9 @@ class DefaultProcessor(BaseProcessor):
         com, com_from = _gn_var_process(
             self.project_path, com, _com, gn_path, "gn", "json", True)
         if not sub:
-            sub = "UNDEFINED"
+            sub = self.UNDEFINED
         if not com:
-            com = "UNDEFINED"
+            com = self.UNDEFINED
         result = {
             "gn_path": gn_path,
             "target_type": self.target_type,
@@ -211,6 +215,10 @@ class StrResourceProcessor(DefaultProcessor):
             self.project_path, sub, _sub, gn_path, "gn", "json")
         com, com_from = _gn_var_process(
             self.project_path, com, _com, gn_path, "gn", "json")
+        if not sub:
+            sub = self.UNDEFINED
+        if not com:
+            com = self.UNDEFINED
         _, file_name = os.path.split(resources)
         result = {
             "gn_path": gn_path,
@@ -243,6 +251,10 @@ class ListResourceProcessor(DefaultProcessor):
             self.project_path, sub, _sub, gn_path, "gn", "json")
         com, com_from = _gn_var_process(
             self.project_path, com, _com, gn_path, "gn", "json")
+        if not sub:
+            sub = self.UNDEFINED
+        if not com:
+            com = self.UNDEFINED
         for ff in resources:
             _, file_name = os.path.split(ff)
             result = {
@@ -262,6 +274,10 @@ class ListResourceProcessor(DefaultProcessor):
             key = self.unit_post_handler(result)
             self._append(key, result)
 
+class TargetProcessor(DefaultProcessor):
+    def helper(self, target_name: str, paragraph: str, gn_path: str, line_no: int, _sub: str, _com: str) -> Tuple[str]:
+        
+        ...
 
 if __name__ == '__main__':
     ...

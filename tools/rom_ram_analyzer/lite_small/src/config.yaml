@@ -27,6 +27,7 @@ target_type:
   - ohos_sa_profile
   - ohos_prebuilt_shared_library
   - lite_component
+  # - target
   
 
 subsystem_component:

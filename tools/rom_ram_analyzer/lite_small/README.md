@@ -42,7 +42,11 @@
 
 主要是在config.py中配置Processor,并在config.yaml中添加相应内容
 
+## 如何提高准确率
+
+1. 如果已知编译产物不可能从某些目录下的BUILD.gn产生,则可以将其加入到config.yaml的black_list,从而不对该目录下的BUILD.gn进行扫描,以减少出错概率
+
 ## 后续工作
 
 1. 部分log的输出有待优化
-1. 准确率有待进一步提升
+1. 新增对target(a,b)类型的检查
