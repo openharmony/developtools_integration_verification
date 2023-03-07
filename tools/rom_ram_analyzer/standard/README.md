@@ -15,7 +15,7 @@
 1. 获取整个rom_ram_analyzer目录
 1. 对系统进行编译
 1. rom分析在linux平台,ram分析在windows平台
-1. python3.8及以后
+1. python3及以后
 1. 安装requirements
     ```txt
     xlwt==1.3.0
@@ -86,7 +86,7 @@
 2. hdc可用
 2. 设备已连接
 3. 系统已烧录
-3. python3.8及以后
+3. python3
 4. 安装requirements
    ```txt
    xlwt==1.3.0
@@ -132,9 +132,12 @@
 {
    进程名:{
        "size": 本进程占用内存的大小,
-       部件名: {
-           elf文件名: elf文件大小 
-           ...
+       子系统名: {
+            部件名: {
+               elf文件名: elf文件大小 
+               ...
+            }
+            ...
        }
        ...
    },

@@ -17,6 +17,7 @@ from typing import *
 from abc import ABC, abstractmethod
 import os
 import logging
+from pprint import pprint
 
 from pkgs.basic_tool import do_nothing, BasicTool
 from pkgs.gn_common_tool import GnCommonTool, GnVariableParser
@@ -92,9 +93,9 @@ class BaseProcessor(ABC):
             logging.error("gn_path and project_path is not consistent: gn_path={}, project_path={}".format(
                 gn_path, self.project_path))
             return "", ""
-        k = gn_path.replace(self.project_path, "").lstrip(os.sep)
+        gp = gn_path.replace(self.project_path, "").lstrip(os.sep)
         for k, v in self.sc_dict.items():
-            if k.startswith(k):
+            if gp.startswith(k):
                 return v.get("subsystem"), v.get("component")
         return "", ""
 
@@ -107,6 +108,14 @@ class BaseProcessor(ABC):
 
 
 def _gn_var_process(project_path: str, gn_v: str, alt_v: str, gn_path: str, ifrom: str, efrom: str, strip_quote: bool = False) -> Tuple[str, str]:
+    """
+    :param project_path:项目根路径
+    :gn_v:gn中的值(可能为变量或空)
+    :alt_v: 如果gn_v为空,则直接使用alt_v代替
+    :gn_path: gn文件的路径
+    :ifrom: 如果gn_v不为空,则其来自哪个字段
+    :efrom: 如果gn_v为空,则其(准确来说是alt_v)来自哪个字段
+    """
     if strip_quote:
         gn_v = gn_v.strip('"')
     if gn_v:

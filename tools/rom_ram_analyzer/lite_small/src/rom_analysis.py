@@ -229,7 +229,7 @@ class RomAnalysisTool:
                           ] = configs[product_name]["query_order"]
         query_order["etc"] = configs["target_type"]
         rom_size_dict: Dict = dict()
-        # prodcut_dict: {"a":["a.txt", ...]}
+        # prodcut_dict: {"so":["a.so", ...]}
         for t, l in product_dict.items():
             for f in l:  # 遍历所有文件
                 # query_order: {"a":[static_library", ...]}
@@ -240,9 +240,9 @@ class RomAnalysisTool:
                 if not type_list:
                     logging.warning(
                         f"'{t}' not found in query_order of the config.yaml")
-                    continue
+                    break
                 for tn in type_list:    # tn example: ohos_shared_library
-                    output_dict: Dict[str, Dict] = gn_info.get(tn)
+                    output_dict: Dict[str, Dict] = gn_info.get(tn)  # 这个模板对应的所有可能编译产物
                     if not output_dict:
                         logging.warning(
                             f"'{tn}' not found in the {gn_info_file}")

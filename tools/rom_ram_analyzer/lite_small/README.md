@@ -6,7 +6,7 @@
 
 ## 支持产品
 
-目标是支持所有的产品,但是目前由于配置文件没设计好,只支持:ipcamera_hispark_taurus ipcamera_hispark_taurus_linux wifiiot_hispark_pegasus
+支持产品:ipcamera_hispark_taurus ipcamera_hispark_taurus_linux wifiiot_hispark_pegasus
 
 ## 代码思路
 
@@ -24,14 +24,14 @@
 1. 获取整个本文件所在的整个目录
 1. 对系统进行编译
 1. linux平台
-1. python3.8及以后
+1. python3
 1. 安装requirements
     ```txt
     xlwt==1.3.0
     ```
 
-1. `python3 rom_analysis.py --product_name {your_product_name} --oh_path {root_path_of_oh} [--recollect_gn bool]`运行代码,其中recollect_gn表示是需要重新扫描BUILD.gn还是直接使用已有结果.eg: `python3 rom_analysis.py --product_name ipcamera_hispark_taurus`
-3. 运行完毕会产生4个json文件及一个xls文件,如果是默认配置,各文件描述如下:
+1. `python3 rom_analysis.py --product_name {your_product_name} --oh_path {root_path_of_oh} [--recollect_gn bool] [--recollect_sc bool]`运行代码,其中recollect_gn表示是需要重新扫描BUILD.gn还是直接使用已有结果,recollect_sc表示是需要重新扫描子系统和部件信息还是直接使用已有的.eg: `python3 rom_analysis.py --product_name ipcamera_hispark_taurus`.
+1. 运行完毕会产生4个json文件及一个xls文件,如果是默认配置,各文件描述如下:
    - gn_info.json:BUILD.gn的分析结果
    - sub_com_info.json:从bundle.json中进行分析获得的各部件及其对应根目录的信息
    - {product_name}_product.json:该产品实际的编译产物信息,根据config.yaml进行收集
@@ -45,3 +45,4 @@
 ## 后续工作
 
 1. 部分log的输出有待优化
+1. 准确率有待进一步提升
