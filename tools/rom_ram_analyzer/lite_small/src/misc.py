@@ -43,6 +43,7 @@ def gn_lineno_collect(match_pattern: str, project_path: str) -> DefaultDict[str,
     :param match_pattern: 进行grep的pattern，支持扩展的正则
     :param project_path: 项目路径（搜索路径）
     :return: {gn_file: [line_no_1, line_no_2, ..]}
+    """
     black_list = _config.get("black_list")
     def handler(content: Text) -> List[str]:
         return list(filter(lambda y: len(y) > 0, list(map(lambda x: x.strip(), content.split("\n")))))
