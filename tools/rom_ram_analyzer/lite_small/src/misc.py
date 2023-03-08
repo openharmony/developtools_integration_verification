@@ -46,12 +46,18 @@ def gn_lineno_collect(match_pattern: str, project_path: str) -> DefaultDict[str,
     :return: {gn_file: [line_no_1, line_no_2, ..]}
     """
     black_list = _config.get("black_list")
+    tbl = [x for x in black_list if os.sep in x]
 
     def handler(content: Text) -> List[str]:
-        return list(filter(lambda y: len(y) > 0, list(map(lambda x: x.strip(), content.split("\n")))))
+        t = list(filter(lambda y: len(y) > 0, list(
+            map(lambda x: x.strip(), content.split("\n")))))
+        for item in tbl:
+            p = os.path.join(project_path, item)
+            t = list(filter(lambda x: p not in x, t))
+        return t
 
-    grep_list = BasicTool.grep_ern(match_pattern, path=project_path, include="BUILD.gn", exclude=tuple(black_list),
-                                   post_handler=handler)
+    grep_list = BasicTool.grep_ern(match_pattern, path=project_path,
+                                   include="BUILD.gn", exclude=tuple(black_list), post_handler=handler)
     gn_line_dict: DefaultDict[str, List[int]] = defaultdict(list)
     for gl in grep_list:
         gn_file, line_no, _ = gl.split(":")
@@ -234,10 +240,8 @@ def TargetS2MPostHandler(unit: Dict, result_dict: Dict) -> None:
     tmp_a["real_target_type"] = "static_library"
     k = LiteLibPostHandler()(tmp_a)
     result_dict["target"][k] = tmp_a
-    
+
     tmp_s = copy.deepcopy(unit)
     tmp_s["real_target_type"] = "shared_library"
     k = LiteLibPostHandler()(tmp_s)
     result_dict["target"][k] = tmp_s
-    pprint(tmp_a)
-    pprint(tmp_s)

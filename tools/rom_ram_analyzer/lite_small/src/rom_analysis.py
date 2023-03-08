@@ -166,15 +166,21 @@ class RomAnalysisTool:
             base_name = base_name[:base_name.index(".z.so")]
         elif base_name.endswith(".so"):
             base_name = base_name[:base_name.index(".so")]
-        # exclude_dir = [os.path.join(project_path, x)
-        #                for x in configs["black_list"]]
         exclude_dir = configs["black_list"]
+        tbl = [x for x in exclude_dir if os.sep in x]
+        def handler(content: Text) -> List[str]:
+            t = list(filter(lambda y: len(y) > 0, list(
+                map(lambda x: x.strip(), content.split("\n")))))
+            for item in tbl:
+                p = os.path.join(project_path, item)
+                t = list(filter(lambda x: p not in x, t))
+            return t
         grep_result: List[str] = BasicTool.grep_ern(
             base_name,
             project_path,
             include="BUILD.gn",
             exclude=tuple(exclude_dir),
-            post_handler=lambda x: list(filter(lambda x: len(x) > 0, x.split('\n'))))
+            post_handler=handler)
         tmp = list()
         for gr in grep_result:
             for item in filter_path_keyword:
