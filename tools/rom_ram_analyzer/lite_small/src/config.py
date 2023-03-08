@@ -204,18 +204,17 @@ collector_config: Tuple[BaseProcessor] = (
                      },
                      unit_post_handler=LiteComponentPostHandler(),
                      ),
-    # TargetProcessor(project_path=project_path,
-    #                 result_dict=result_dict,
-    #                 target_type=_target_type[13],
-    #                 match_pattern=fr"^( *){_target_type[13]}\(.*?\, .*?\)",
-    #                 sub_com_dict=sub_com_dict,
-    #                 target_name_parser=TargetNameParser.second_parser,
-    #                 other_info_handlers={
-    #                     "real_target_type": target_type_handler,
-    #                     #  "extension": extension_handler,
-    #                 },
-    #                 unit_post_handler=LiteComponentPostHandler(),
-    #                 )
+    DefaultProcessor(project_path=project_path,
+                    result_dict=result_dict,
+                    target_type=_target_type[13],
+                    match_pattern=fr"^( *){_target_type[13]}\(.*?\, .*?\)",
+                    sub_com_dict=sub_com_dict,
+                    target_name_parser=TargetNameParser.second_parser,
+                    other_info_handlers={
+                    },
+                    unit_post_handler=DefaultPostHandler(),
+                    ud_post_handler=TargetS2MPostHandler
+                    )
 )
 
 __all__ = ["configs", "result_dict", "collector_config", "sub_com_dict"]

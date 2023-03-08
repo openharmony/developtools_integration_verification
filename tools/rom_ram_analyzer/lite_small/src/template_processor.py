@@ -274,10 +274,6 @@ class ListResourceProcessor(DefaultProcessor):
             key = self.unit_post_handler(result)
             self._append(key, result)
 
-class TargetProcessor(DefaultProcessor):
-    def helper(self, target_name: str, paragraph: str, gn_path: str, line_no: int, _sub: str, _com: str) -> Tuple[str]:
-        
-        ...
 
 if __name__ == '__main__':
     ...

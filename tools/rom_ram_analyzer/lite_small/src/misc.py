@@ -46,6 +46,7 @@ def gn_lineno_collect(match_pattern: str, project_path: str) -> DefaultDict[str,
     :return: {gn_file: [line_no_1, line_no_2, ..]}
     """
     black_list = _config.get("black_list")
+
     def handler(content: Text) -> List[str]:
         return list(filter(lambda y: len(y) > 0, list(map(lambda x: x.strip(), content.split("\n")))))
 
@@ -225,3 +226,18 @@ def LiteLibS2MPostHandler(unit: Dict, result_dict: Dict) -> None:
         k = LiteLibPostHandler()(new_new_unit)
         new_new_unit["description"] = "may not exist"
         result_dict["lite_library"][k] = new_new_unit
+
+
+def TargetS2MPostHandler(unit: Dict, result_dict: Dict) -> None:
+    unit["description"] = "may not exist"
+    tmp_a = copy.deepcopy(unit)
+    tmp_a["real_target_type"] = "static_library"
+    k = LiteLibPostHandler()(tmp_a)
+    result_dict["target"][k] = tmp_a
+    
+    tmp_s = copy.deepcopy(unit)
+    tmp_s["real_target_type"] = "shared_library"
+    k = LiteLibPostHandler()(tmp_s)
+    result_dict["target"][k] = tmp_s
+    pprint(tmp_a)
+    pprint(tmp_s)
