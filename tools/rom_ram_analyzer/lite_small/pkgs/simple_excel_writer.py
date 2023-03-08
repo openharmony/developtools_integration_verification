@@ -1,5 +1,5 @@
 import xlwt
-from xlwt import Worksheet
+from xlwt import Worksheet, Pattern as PTRN, Alignment as ALGT, Font as FT, XFStyle as XFSL
 import typing
 import logging
 from typing import Optional
@@ -18,27 +18,26 @@ class SimpleExcelWriter:
         }
         self.__default_sheet_name = default_sheet_name
         # 表头样式
-        self.__head_style = xlwt.XFStyle()
+        self.__head_style = XFSL()
         # 内容样式
-        self.__content_style = xlwt.XFStyle()
+        self.__content_style = XFSL()
         # 字体
-        font = xlwt.Font()
-        font.bold = True
+        ft = FT()
+        ft.bold = True
 
         # 设置背景颜色
-        pattern = xlwt.Pattern()
-        pattern.pattern = xlwt.Pattern.SOLID_PATTERN
-        pattern.pattern_fore_colour = 22  # 背景颜色
+        ptrn = PTRN()
+        ptrn.pattern = PTRN.SOLID_PATTERN
+        ptrn.pattern_fore_colour = 22  # 背景颜色
 
         # 居中对齐
-        alignment = xlwt.Alignment()
-        alignment.horz = xlwt.Alignment.HORZ_CENTER  # 水平方向
-        alignment.vert = xlwt.Alignment.VERT_CENTER  # 垂直方向
-
-        self.__head_style.font = font
-        self.__head_style.alignment = alignment
-        self.__head_style.pattern = pattern
-        self.__content_style.alignment = alignment
+        algmt = ALGT()
+        algmt.horz = ALGT.HORZ_CENTER  # 水平方向
+        algmt.vert = ALGT.VERT_CENTER  # 垂直方向
+        self.__head_style.font = ft
+        self.__head_style.alignment = algmt
+        self.__head_style.pattern = ptrn
+        self.__content_style.alignment = algmt
 
     def __increment_y(self, sheet_name: str, value: int = 1) -> int:
         if sheet_name in self.__sheet_pos.keys():

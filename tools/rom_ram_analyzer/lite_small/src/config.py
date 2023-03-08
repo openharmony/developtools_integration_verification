@@ -22,8 +22,10 @@ def parse_args():
                         help="product name. eg: -p ipcamera_hispark_taurus")
     parser.add_argument("-o", "--oh_path", type=str,
                         default=".", help="root path of openharmony")
-    parser.add_argument("-g", "--recollect_gn", action="store_false", help="recollect gn info or not")
-    parser.add_argument("-s", "--recollect_sc", action="store_false", help="recollect subsystem_component info or not")
+    parser.add_argument("-g", "--recollect_gn",
+                        action="store_false", help="recollect gn info or not")
+    parser.add_argument("-s", "--recollect_sc", action="store_false",
+                        help="recollect subsystem_component info or not")
     args = parser.parse_args()
     return args
 
@@ -202,6 +204,17 @@ collector_config: Tuple[BaseProcessor] = (
                      },
                      unit_post_handler=LiteComponentPostHandler(),
                      ),
+    DefaultProcessor(project_path=project_path,
+                    result_dict=result_dict,
+                    target_type=_target_type[13],
+                    match_pattern=fr"^( *){_target_type[13]}\(.*?\, .*?\)",
+                    sub_com_dict=sub_com_dict,
+                    target_name_parser=TargetNameParser.second_parser,
+                    other_info_handlers={
+                    },
+                    unit_post_handler=DefaultPostHandler(),
+                    ud_post_handler=TargetS2MPostHandler
+                    )
 )
 
 __all__ = ["configs", "result_dict", "collector_config", "sub_com_dict"]

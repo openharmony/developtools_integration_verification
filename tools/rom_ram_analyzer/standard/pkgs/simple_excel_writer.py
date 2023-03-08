@@ -1,5 +1,6 @@
 import xlwt
 from xlwt import Worksheet
+from xlwt import Pattern as PTRN, Alignment as ALMT, Font as FT, XFStyle as XFSTL
 import typing
 from typing import Optional
 from collections.abc import Iterable
@@ -17,27 +18,27 @@ class SimpleExcelWriter:
         }
         self.__default_sheet_name = default_sheet_name
         # 表头样式
-        self.__head_style = xlwt.XFStyle()
+        self.__head_style = XFSTL()
         # 内容样式
-        self.__content_style = xlwt.XFStyle()
+        self.__content_style = XFSTL()
         # 字体
-        font = xlwt.Font()
-        font.bold = True
-
-        # 居中对齐
-        alignment = xlwt.Alignment()
-        alignment.horz = xlwt.Alignment.HORZ_CENTER  # 水平方向
-        alignment.vert = xlwt.Alignment.VERT_CENTER  # 垂直方向
+        ft = FT()
+        ft.bold = True
 
         # 设置背景颜色
-        pattern = xlwt.Pattern()
-        pattern.pattern = xlwt.Pattern.SOLID_PATTERN
-        pattern.pattern_fore_colour = 22  # 背景颜色
+        ptrn = PTRN()
+        ptrn.pattern = PTRN.SOLID_PATTERN
+        ptrn.pattern_fore_colour = 22  # 背景颜色
 
-        self.__head_style.font = font
-        self.__head_style.alignment = alignment
-        self.__head_style.pattern = pattern
-        self.__content_style.alignment = alignment
+        # 居中对齐
+        algmt = ALMT()
+        algmt.horz = ALMT.HORZ_CENTER  # 水平方向
+        algmt.vert = ALMT.VERT_CENTER  # 垂直方向
+
+        self.__head_style.font = ft
+        self.__head_style.alignment = algmt
+        self.__head_style.pattern = ptrn
+        self.__content_style.alignment = algmt
 
     def __increment_y(self, sheet_name: str, value: int = 1) -> int:
         if sheet_name in self.__sheet_pos.keys():

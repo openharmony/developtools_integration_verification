@@ -5,6 +5,7 @@ import logging
 from abc import ABC, abstractmethod
 from collections import defaultdict
 from typing import *
+from pprint import pprint
 import preprocess
 from pkgs.gn_common_tool import GnVariableParser
 from pkgs.simple_yaml_tool import SimpleYamlTool
@@ -44,14 +45,19 @@ def gn_lineno_collect(match_pattern: str, project_path: str) -> DefaultDict[str,
     :param project_path: 项目路径（搜索路径）
     :return: {gn_file: [line_no_1, line_no_2, ..]}
     """
-    black_list = map(lambda x: os.path.join(
-        project_path, x), _config.get("black_list"))
+    black_list = _config.get("black_list")
+    tbl = [x for x in black_list if os.sep in x]
 
     def handler(content: Text) -> List[str]:
-        return list(filter(lambda y: len(y) > 0, list(map(lambda x: x.strip(), content.split("\n")))))
+        t = list(filter(lambda y: len(y) > 0, list(
+            map(lambda x: x.strip(), content.split("\n")))))
+        for item in tbl:
+            p = os.path.join(project_path, item)
+            t = list(filter(lambda x: p not in x, t))
+        return t
 
-    grep_list = BasicTool.grep_ern(match_pattern, path=project_path, include="BUILD.gn", exclude=tuple(black_list),
-                                   post_handler=handler)
+    grep_list = BasicTool.grep_ern(match_pattern, path=project_path,
+                                   include="BUILD.gn", exclude=tuple(black_list), post_handler=handler)
     gn_line_dict: DefaultDict[str, List[int]] = defaultdict(list)
     for gl in grep_list:
         gn_file, line_no, _ = gl.split(":")
@@ -226,3 +232,16 @@ def LiteLibS2MPostHandler(unit: Dict, result_dict: Dict) -> None:
         k = LiteLibPostHandler()(new_new_unit)
         new_new_unit["description"] = "may not exist"
         result_dict["lite_library"][k] = new_new_unit
+
+
+def TargetS2MPostHandler(unit: Dict, result_dict: Dict) -> None:
+    unit["description"] = "may not exist"
+    tmp_a = copy.deepcopy(unit)
+    tmp_a["real_target_type"] = "static_library"
+    k = LiteLibPostHandler()(tmp_a)
+    result_dict["target"][k] = tmp_a
+
+    tmp_s = copy.deepcopy(unit)
+    tmp_s["real_target_type"] = "shared_library"
+    k = LiteLibPostHandler()(tmp_s)
+    result_dict["target"][k] = tmp_s

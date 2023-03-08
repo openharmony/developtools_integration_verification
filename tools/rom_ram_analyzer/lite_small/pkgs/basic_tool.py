@@ -113,10 +113,11 @@ class BasicTool:
         TODO 将cls.execute用subprocess代替
         """
         cmd = f"grep -Ern '{pattern}' '{cls.abspath(path)}'"
+        # E:启用正则表达式  r:递归搜索  n:显示行号
         if include:
             cmd += f" --include='{include}'"
         for e in exclude:
-            cmd += f" --exclude-dir={e}"
+            cmd += f" --exclude-dir='{e}'"
         o = cls.execute(cmd)
         if post_handler:
             o = post_handler(o)
@@ -137,6 +138,8 @@ class BasicTool:
 
 
 if __name__ == '__main__':
-    for i in BasicTool.grep_ern("^( *)ohos_shared_library", "/home/aodongbiao/oh", include="BUILD.gn", exclude=("out", "doc", ".ccache"), post_handler=lambda x: x.split('\n')):
+    res = BasicTool.grep_ern("^( *)ohos_prebuilt_shared_library", "/home/aodongbiao/oh", include="BUILD.gn", exclude=("/home/aodongbiao/oh/out","doc", ".ccache"), post_handler=lambda x: x.split('\n'))
+    # print(res)
+    for i in res:
         if "oh/out" in i:
             print(i)

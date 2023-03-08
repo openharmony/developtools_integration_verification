@@ -17,6 +17,7 @@ from typing import *
 from abc import ABC, abstractmethod
 import os
 import logging
+from pprint import pprint
 
 from pkgs.basic_tool import do_nothing, BasicTool
 from pkgs.gn_common_tool import GnCommonTool, GnVariableParser
@@ -91,12 +92,16 @@ class BaseProcessor(ABC):
         if not gn_path.startswith(self.project_path):
             logging.error("gn_path and project_path is not consistent: gn_path={}, project_path={}".format(
                 gn_path, self.project_path))
-            return "", ""
-        k = gn_path.replace(self.project_path, "").lstrip(os.sep)
+            return str(), str()
+        gp = gn_path.replace(self.project_path, "").lstrip(os.sep)
+        alter_list = list()
         for k, v in self.sc_dict.items():
-            if k.startswith(k):
-                return v.get("subsystem"), v.get("component")
-        return "", ""
+            if gp.startswith(k):
+                alter_list.append(k)
+        if not alter_list:
+            return str(), str()
+        alter_list.sort(key=lambda x: len(x), reverse=True)
+        return self.sc_dict[alter_list[0]].get("subsystem"),  self.sc_dict[alter_list[0]].get("component")
 
     @abstractmethod
     def run(self):
@@ -107,6 +112,14 @@ class BaseProcessor(ABC):
 
 
 def _gn_var_process(project_path: str, gn_v: str, alt_v: str, gn_path: str, ifrom: str, efrom: str, strip_quote: bool = False) -> Tuple[str, str]:
+    """
+    :param project_path:项目根路径
+    :gn_v:gn中的值(可能为变量或空)
+    :alt_v: 如果gn_v为空,则直接使用alt_v代替
+    :gn_path: gn文件的路径
+    :ifrom: 如果gn_v不为空,则其来自哪个字段
+    :efrom: 如果gn_v为空,则其(准确来说是alt_v)来自哪个字段
+    """
     if strip_quote:
         gn_v = gn_v.strip('"')
     if gn_v:
@@ -123,6 +136,10 @@ def _gn_var_process(project_path: str, gn_v: str, alt_v: str, gn_path: str, ifro
 
 
 class DefaultProcessor(BaseProcessor):
+    
+    @property
+    def UNDEFINED(self):
+        return "UNDEFINED"
 
     def helper(self, target_name: str, paragraph: str, gn_path: str, line_no: int, _sub: str, _com: str) -> Tuple[str]:
         output_name = GnVariableParser.string_parser("output_name", paragraph)
@@ -130,8 +147,14 @@ class DefaultProcessor(BaseProcessor):
                                                 output_name, target_name, gn_path, "target_name", "target_name", True)
         sub = GnVariableParser.string_parser("subsystem_name", paragraph)
         com = GnVariableParser.string_parser("part_name", paragraph)
-        sub, sub_from = _gn_var_process(self.project_path, sub, _sub, gn_path, "gn", "json", True)
-        com, com_from = _gn_var_process(self.project_path, com, _com, gn_path, "gn", "json", True)
+        sub, sub_from = _gn_var_process(
+            self.project_path, sub, _sub, gn_path, "gn", "json", True)
+        com, com_from = _gn_var_process(
+            self.project_path, com, _com, gn_path, "gn", "json", True)
+        if not sub:
+            sub = self.UNDEFINED
+        if not com:
+            com = self.UNDEFINED
         result = {
             "gn_path": gn_path,
             "target_type": self.target_type,
@@ -188,8 +211,14 @@ class StrResourceProcessor(DefaultProcessor):
                 resources, gn_path, self.project_path).strip('"')
         sub = GnVariableParser.string_parser("subsystem_name", paragraph)
         com = GnVariableParser.string_parser("part_name", paragraph)
-        sub, sub_from = _gn_var_process(self.project_path, sub, _sub, gn_path, "gn", "json")
-        com, com_from = _gn_var_process(self.project_path, com, _com, gn_path, "gn", "json")
+        sub, sub_from = _gn_var_process(
+            self.project_path, sub, _sub, gn_path, "gn", "json")
+        com, com_from = _gn_var_process(
+            self.project_path, com, _com, gn_path, "gn", "json")
+        if not sub:
+            sub = self.UNDEFINED
+        if not com:
+            com = self.UNDEFINED
         _, file_name = os.path.split(resources)
         result = {
             "gn_path": gn_path,
@@ -218,8 +247,14 @@ class ListResourceProcessor(DefaultProcessor):
             return
         sub = GnVariableParser.string_parser("subsystem_name", paragraph)
         com = GnVariableParser.string_parser("part_name", paragraph)
-        sub, sub_from = _gn_var_process(self.project_path, sub, _sub, gn_path, "gn", "json")
-        com, com_from = _gn_var_process(self.project_path, com, _com, gn_path, "gn", "json")
+        sub, sub_from = _gn_var_process(
+            self.project_path, sub, _sub, gn_path, "gn", "json")
+        com, com_from = _gn_var_process(
+            self.project_path, com, _com, gn_path, "gn", "json")
+        if not sub:
+            sub = self.UNDEFINED
+        if not com:
+            com = self.UNDEFINED
         for ff in resources:
             _, file_name = os.path.split(ff)
             result = {

@@ -47,31 +47,40 @@ class RomAnalysisTool:
     @classmethod
     def _add_rest_dir(cls, top_dir: str, rela_path: str, sub_path: str, dir_list: List[str]) -> None:
         """
-        dir_list:相对于原始top目录的所有子目录的全路径
+        :top_dir 顶层目录,不会变化
+        :rela_path 最顶层的值为空
+        :sub_path 一般是a/b/c这种形式
+        :dir_list 相对于原始top目录的子目录的全路径
+        example: 
+        /
+        |-a
+        |-b
+        |-c
+        |-|-d
+        |-|-e
+        |-|-f
+        |-|-|-g
+        |-|-|-h
+        top_dir: /
+        rela_path: ""
+        sub_path: c/e
+        dir_list: [c]
+        => [c/d, c/f], assume 'a' and 'b' has been removed from dir_list
         """
-        if not sub_path:
+        if (not sub_path) or (os.sep not in sub_path):
             return
         # 将其他目录添加到dir_list
-        all_subdir = os.listdir(os.path.join(top_dir, rela_path))
-        for d in all_subdir:
-            t = os.path.join(rela_path, d)
-            if os.path.isdir(os.path.join(top_dir, t)) and t not in dir_list:
-                dir_list.append(t)
-        # 移除sub_path的当前层级的目录
-        t = sub_path.split(os.sep)
-        if os.path.join(rela_path, t[0]) in dir_list:
-            dir_list.remove(os.path.join(rela_path, t[0]))
-        else:
-            logging.error(
-                f"'{os.path.join(rela_path,t[0])}' not in '{top_dir}'")
-        sp = str()
-        if len(t) == 1:
+        t, sub_sub_path = sub_path.split(os.sep, 1)   # 如果是c/e,分割成c,e
+        t = os.path.join(rela_path, t)
+        if t in dir_list:
+            dir_list.remove(t)
+        sub_sub_dir_list = os.listdir(os.path.join(top_dir, t))
+        for ssdl in sub_sub_dir_list:
+            if os.path.join(rela_path,sub_path) != os.path.join(t,ssdl):
+                dir_list.append(os.path.join(t, ssdl))
+        if not sub_sub_dir_list:
             return
-        elif len(t) == 2:
-            sp = t[1]
-        else:
-            sp = os.path.join(*t[1:])
-        cls._add_rest_dir(top_dir, os.path.join(rela_path, t[0]), sp, dir_list)
+        cls._add_rest_dir(top_dir, t, sub_sub_path, dir_list)        
 
     @classmethod
     def _find_files(cls, product_name: str) -> Dict[str, List[str]]:
@@ -86,7 +95,7 @@ class RomAnalysisTool:
         relative_dir: Dict[str, str] = product_dir.get("relative")
         if not relative_dir:
             logging.warning(
-                f"'{relative_dir}' of {product_name} not found in the config.yaml")
+                f"'relative_dir' of {product_name} not found in the config.yaml")
             exit(1)
         # 除了so a hap bin外的全部归到etc里面
         for k, v in relative_dir.items():
@@ -102,7 +111,11 @@ class RomAnalysisTool:
             rest_dir_list: List[str] = os.listdir(
                 root_dir)  # 除了配置在relative下之外的所有剩余目录,全部归到etc下
             for v in relative_dir.values():
-                cls._add_rest_dir(root_dir, str(), v, rest_dir_list)
+                if v in rest_dir_list:
+                    rest_dir_list.remove(v)
+            for v in relative_dir.values():
+                if os.sep in v:
+                    cls._add_rest_dir(root_dir, str(), v, rest_dir_list)
             if "etc" not in product_dict.keys():
                 product_dict["etc"] = list()
             for r in rest_dir_list:
@@ -141,7 +154,7 @@ class RomAnalysisTool:
         rom_size_dict["size"] += size
 
     @classmethod
-    def _fuzzy_match(cls, file_name: str, extra_black_list: Tuple[str] = ("test",)) -> Tuple[str, str, str]:
+    def _fuzzy_match(cls, file_name: str, filter_path_keyword: Tuple[str] = ("test",)) -> Tuple[str, str, str]:
         """
         直接grep,利用出现次数最多的BUILD.gn去定位subsystem_name和component_name"""
         _, base_name = os.path.split(file_name)
@@ -153,15 +166,28 @@ class RomAnalysisTool:
             base_name = base_name[:base_name.index(".z.so")]
         elif base_name.endswith(".so"):
             base_name = base_name[:base_name.index(".so")]
-        exclude_dir = [os.path.join(project_path, x)
-                       for x in configs["black_list"]]
-        exclude_dir.extend(list(extra_black_list))
+        exclude_dir = configs["black_list"]
+        tbl = [x for x in exclude_dir if os.sep in x]
+        def handler(content: Text) -> List[str]:
+            t = list(filter(lambda y: len(y) > 0, list(
+                map(lambda x: x.strip(), content.split("\n")))))
+            for item in tbl:
+                p = os.path.join(project_path, item)
+                t = list(filter(lambda x: p not in x, t))
+            return t
         grep_result: List[str] = BasicTool.grep_ern(
             base_name,
             project_path,
             include="BUILD.gn",
             exclude=tuple(exclude_dir),
-            post_handler=lambda x: list(filter(lambda x: len(x) > 0, x.split('\n'))))
+            post_handler=handler)
+        tmp = list()
+        for gr in grep_result:
+            for item in filter_path_keyword:
+                if item in gr:
+                    continue
+                tmp.append(gr)
+        grep_result = tmp
         if not grep_result:
             return str(), str(), str()
         gn_dict: Dict[str, int] = collections.defaultdict(int)
@@ -229,9 +255,11 @@ class RomAnalysisTool:
                           ] = configs[product_name]["query_order"]
         query_order["etc"] = configs["target_type"]
         rom_size_dict: Dict = dict()
-        # prodcut_dict: {"a":["a.txt", ...]}
+        # prodcut_dict: {"so":["a.so", ...]}
         for t, l in product_dict.items():
             for f in l:  # 遍历所有文件
+                if os.path.isdir(f):
+                    continue
                 # query_order: {"a":[static_library", ...]}
                 find_flag = False
                 type_list = query_order.get(t)
@@ -240,9 +268,10 @@ class RomAnalysisTool:
                 if not type_list:
                     logging.warning(
                         f"'{t}' not found in query_order of the config.yaml")
-                    continue
+                    break
                 for tn in type_list:    # tn example: ohos_shared_library
-                    output_dict: Dict[str, Dict] = gn_info.get(tn)
+                    output_dict: Dict[str, Dict] = gn_info.get(
+                        tn)  # 这个模板对应的所有可能编译产物
                     if not output_dict:
                         logging.warning(
                             f"'{tn}' not found in the {gn_info_file}")
@@ -269,7 +298,7 @@ class RomAnalysisTool:
                         }, rom_size_dict)
                         find_flag = True
                 if not find_flag:
-                    cls._put("others", "others", {
+                    cls._put("NOTFOUND", "NOTFOUND", {
                         "file_name": f.replace(project_path, ""),
                         "size": size,
                     }, rom_size_dict)
@@ -288,8 +317,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # t = os.listdir(
-    #     "/home/aodongbiao/developtools_integration_verification/tools")
-    # RomAnalysisTool._add_rest_dir(
-    #     "/home/aodongbiao/developtools_integration_verification/tools", "", "rom_ram_analyzer/L2/pkgs", t)
-    # print(t)
+    # relative_dir = ["bin", "usr/lib", "etc"]
+    # root_dir = "/home/aodongbiao/oh/out/hispark_taurus/ipcamera_hispark_taurus/rootfs"
+    # rest_dir_list = os.listdir(root_dir)
+    # RomAnalysisTool._find_files("ipcamera_hispark_taurus")

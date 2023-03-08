@@ -15,7 +15,7 @@
 1. 获取整个rom_ram_analyzer目录
 1. 对系统进行编译
 1. rom分析在linux平台,ram分析在windows平台
-1. python3.8及以后
+1. python3及以后
 1. 安装requirements
     ```txt
     xlwt==1.3.0
@@ -55,7 +55,7 @@
    # -e True：output result in excel format additionally
    ```
 
-## 输出格式说明(json)
+## 输出格式介绍(json)
 
 
 ```json
@@ -69,6 +69,10 @@
    ...
 }
 ```
+
+## 附加说明
+
+1. 由于目前standard产品使用的基本都是自定义的template,能够有效收集更多信息,因此相较于lite_small的分析脚本,本脚本能够具有更高的准确率,请放心使用
 
 # ram_analyzer.py
 
@@ -86,7 +90,7 @@
 2. hdc可用
 2. 设备已连接
 3. 系统已烧录
-3. python3.8及以后
+3. python3
 4. 安装requirements
    ```txt
    xlwt==1.3.0
@@ -132,9 +136,12 @@
 {
    进程名:{
        "size": 本进程占用内存的大小,
-       部件名: {
-           elf文件名: elf文件大小 
-           ...
+       子系统名: {
+            部件名: {
+               elf文件名: elf文件大小 
+               ...
+            }
+            ...
        }
        ...
    },
