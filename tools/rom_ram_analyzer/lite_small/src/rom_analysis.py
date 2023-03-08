@@ -270,6 +270,8 @@ class RomAnalysisTool:
                         f"'{t}' not found in query_order of the config.yaml")
                     break
                 for tn in type_list:    # tn example: ohos_shared_library
+                    if find_flag:   # 如果已经在前面的template中找到了,后面的就不必再查找
+                        break
                     output_dict: Dict[str, Dict] = gn_info.get(
                         tn)  # 这个模板对应的所有可能编译产物
                     if not output_dict:
@@ -284,7 +286,7 @@ class RomAnalysisTool:
                     cls._put(d["subsystem_name"],
                              d["component_name"], d, rom_size_dict)
                     find_flag = True
-                if not find_flag:
+                if not find_flag:   # 如果指定序列中的template都没有查找到,则模糊匹配
                     # fuzzy match
                     psesudo_gn, sub, com = cls._fuzzy_match(f)
                     if sub and com:
@@ -297,7 +299,7 @@ class RomAnalysisTool:
                             "size": size,
                         }, rom_size_dict)
                         find_flag = True
-                if not find_flag:
+                if not find_flag:   # 模糊匹配都没有匹配到的,归属到NOTFOUND
                     cls._put("NOTFOUND", "NOTFOUND", {
                         "file_name": f.replace(project_path, ""),
                         "size": size,
