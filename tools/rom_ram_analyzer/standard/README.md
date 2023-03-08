@@ -55,7 +55,7 @@
    # -e True：output result in excel format additionally
    ```
 
-## 输出格式说明(json)
+## 输出格式介绍(json)
 
 
 ```json
@@ -69,6 +69,10 @@
    ...
 }
 ```
+
+## 其他说明
+
+1. 由于目前standard产品使用的基本都是自定义的template,能够有效收集更多信息,因此相较于lite_small的分析脚本,本脚本能够具有更高的准确率,请放心使用
 
 # ram_analyzer.py
 
