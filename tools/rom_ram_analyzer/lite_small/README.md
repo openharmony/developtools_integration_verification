@@ -91,7 +91,7 @@ ipcamera_hispark_taurus: # 产品名称,需要和命令行参数中的-p参数�
 
 ## 新增template
 
-主要是在config.py中配置Processor,并在config.yaml中添加相应内容
+为了提高准确率,本工具是按照gn的template类型对BUILD.gn进行扫描,因此如果BUILD.gn中新增了template,需要在代码层数进行相应的更改.主要是在config.py中配置Processor,并在config.yaml中添加相应内容
 
 ## 如何提高准确率
 
