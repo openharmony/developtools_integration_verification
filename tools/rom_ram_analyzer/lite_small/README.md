@@ -31,7 +31,7 @@
 **子系统及部件的查找过程**
 
 1. 先查找target声明中的subsystem_name字段和part_name字段,如果查找到,则使用target声明中的作为结果
-1. 否则到get_subsystem_component.py的运行结果(默认是会保存到sub_com_info.json文件)中查找,将该结果作为最终结果
+1. 否则到get_subsystem_component.py的运行结果(默认是会保存到sub_com_info.json文件)中查找
 1. 如果上述两个地方都没有查找到,则使用UNDEFINED作为子系统名和部件名进行保存
 
 **建议**
@@ -67,7 +67,7 @@
 ```yaml
 ipcamera_hispark_taurus: # 产品名称,需要和命令行参数中的-p参数一致
   product_infofile: ipcamera_hispark_taurus_product.json # 保存编译产物信息的json文件
-  output_name: ipcamera_hispark_taurus_result.json # 保存最终结果的文件的名字
+  output_name: ipcamera_hispark_taurus_result.json # 保存结果的文件的名字
   product_dir: # [required]
     root: out/hispark_taurus/ipcamera_hispark_taurus/rootfs # 待分析的编译产物的根目录
     relative: # 针对性分析的子目录,key无所谓,value应当是root的子目录. 作者通常是使用so作为动态库文件目录的key,bin作为可执行文件目录的key,a作为静态库文件目录的key
