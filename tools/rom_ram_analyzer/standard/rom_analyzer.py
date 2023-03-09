@@ -12,6 +12,8 @@ from pkgs.simple_excel_writer import SimpleExcelWriter
 
 debug = bool(sys.gettrace())
 
+NOTFOUND = "NOTFOUND"
+
 
 class RomAnalyzer:
     @classmethod
@@ -105,18 +107,18 @@ class RomAnalyzer:
             }
         }
         """
-        component_name = "others" if unit.get(
+        component_name = NOTFOUND if unit.get(
             "component_name") is None else unit.get("component_name")
-        subsystem_name = "others" if unit.get(
+        subsystem_name = NOTFOUND if unit.get(
             "subsystem_name") is None else unit.get("subsystem_name")
         size = unit.get("size")
         relative_filepath = unit.get("relative_filepath")
-        if result_dict.get(subsystem_name) is None: # 子系统
+        if result_dict.get(subsystem_name) is None:  # 子系统
             result_dict[subsystem_name] = dict()
             result_dict[subsystem_name]["size"] = 0
             result_dict[subsystem_name]["file_count"] = 0
 
-        if result_dict.get(subsystem_name).get(component_name) is None: # 部件
+        if result_dict.get(subsystem_name).get(component_name) is None:  # 部件
             result_dict[subsystem_name][component_name] = dict()
             result_dict[subsystem_name][component_name]["size"] = 0
             result_dict[subsystem_name][component_name]["file_count"] = 0
@@ -125,7 +127,6 @@ class RomAnalyzer:
         result_dict[subsystem_name][component_name]["size"] += size
         result_dict[subsystem_name][component_name]["file_count"] += 1
         result_dict[subsystem_name][component_name][relative_filepath] = size
-
 
     @classmethod
     def analysis(cls, system_module_info_json: Text, product_dirs: List[str],

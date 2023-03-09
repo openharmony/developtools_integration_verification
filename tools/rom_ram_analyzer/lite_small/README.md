@@ -6,7 +6,12 @@
 
 ## 支持产品
 
-支持产品:ipcamera_hispark_taurus ipcamera_hispark_taurus_linux wifiiot_hispark_pegasus
+理论上可以支持所有产品,只要在config.yaml中进行了配置即可,目前已配置产品包括:
+1. ipcamera_hispark_taurus
+1. ipcamera_hispark_taurus_linux 
+1. wifiiot_hispark_pegasus
+1. hispark_pegasus_mini_system
+1. hispark_taurus_mini_system
 
 ## 代码思路
 
@@ -22,6 +27,12 @@
 1. 关于NOTFOUND:表示对应的编译产物没有在BUILD.gn的扫描结果中匹配(包括模糊匹配)到
 1. 本工具是基于gn的template进行匹配,如果新增了自定义的template,则需要相应在代码中进行配置
 1. 由于本工具是进行的静态扫描,且部分gn文件中使用了较为复杂的gn语法,因此本工具的**准确率无法达到100%,结果仅供参考**
+
+**子系统及部件的查找过程**
+
+1. 先查找target声明中的subsystem_name字段和part_name字段,如果查找到,则使用target声明中的作为结果
+1. 否则到get_subsystem_component.py的运行结果(默认是会保存到sub_com_info.json文件)中查找
+1. 如果上述两个地方都没有查找到,则使用UNDEFINED作为子系统名和部件名进行保存
 
 **建议**
 
@@ -48,9 +59,39 @@
    - {product_name}_result.json:各部件的rom大小分析结果
    - {product_name}_result.xls:各部件的rom大小分析结果
 
+## 新增对产品的支持
+
+*rk3568因为主要使用的是自定义的template,所以能够在编译阶段收集更多有效信息,因此建议使用standard目录下的脚本进行分析*
+
+在config.yaml中进行配置即可,格式说明如下:
+```yaml
+ipcamera_hispark_taurus: # 产品名称,需要和命令行参数中的-p参数一致
+  product_infofile: ipcamera_hispark_taurus_product.json # 保存编译产物信息的json文件
+  output_name: ipcamera_hispark_taurus_result.json # 保存结果的文件的名字
+  product_dir: # [required]
+    root: out/hispark_taurus/ipcamera_hispark_taurus/rootfs # 待分析的编译产物的根目录
+    relative: # 针对性分析的子目录,key无所谓,value应当是root的子目录. 作者通常是使用so作为动态库文件目录的key,bin作为可执行文件目录的key,a作为静态库文件目录的key
+      bin: bin
+      so: usr/lib
+      etc: etc
+    rest: True  # 是否将上面root目录下除了relative指定的目录归到etc并进行匹配
+  query_order:  # 匹配顺序,key应当何relative字段中的key一致,value应当在上面的target_type字段中,脚本会按照配置的顺序对文件进行匹配.对于归类为etc的产品,会匹配target_type中的所有模板类型,找到即可.因此query_order中无需配置etc项.
+    so: 
+      - shared_library
+      - ohos_shared_library
+      - ohos_prebuilt_shared_library
+      - lite_library
+      - lite_component   
+      - target
+    bin:
+      - executable
+      - ohos_executable
+      - lite_component
+```
+
 ## 新增template
 
-主要是在config.py中配置Processor,并在config.yaml中添加相应内容
+为了提高准确率,本工具是按照gn的template类型对BUILD.gn进行扫描,因此如果BUILD.gn中新增了template,需要在代码层数进行相应的更改.主要是在config.py中配置Processor,并在config.yaml中添加相应内容
 
 ## 如何提高准确率
 
@@ -58,4 +99,4 @@
 
 ## 后续工作
 
-1. 部分log的输出有待优化
+1. 对target(xxx,yyy)中,xxx/yyy为变量的情况可进一步优化

@@ -2,6 +2,7 @@ import os
 import sys
 import argparse
 import json
+import logging
 from typing import *
 
 import preprocess
@@ -30,6 +31,7 @@ def parse_args():
     return args
 
 
+logging.basicConfig(level=logging.INFO)
 _args = parse_args()
 
 # # global variables
@@ -45,6 +47,8 @@ _sc_save = _sc_json.get("save")
 _target_type = configs["target_type"]
 _sc_output_path = _sc_json.get("filename")
 if _recollect_sc:
+    logging.info(
+        "satrt scanning subsystem_name and component via get_subsystem_comonent.py")
     sub_com_dict: Dict = SC.run(project_path, _sc_output_path, _sc_save)
 else:
     with open(_sc_output_path, 'r', encoding='utf-8') as f:
@@ -205,16 +209,16 @@ collector_config: Tuple[BaseProcessor] = (
                      unit_post_handler=LiteComponentPostHandler(),
                      ),
     DefaultProcessor(project_path=project_path,
-                    result_dict=result_dict,
-                    target_type=_target_type[13],
-                    match_pattern=fr"^( *){_target_type[13]}\(.*?\, .*?\)",
-                    sub_com_dict=sub_com_dict,
-                    target_name_parser=TargetNameParser.second_parser,
-                    other_info_handlers={
-                    },
-                    unit_post_handler=DefaultPostHandler(),
-                    ud_post_handler=TargetS2MPostHandler
-                    )
+                     result_dict=result_dict,
+                     target_type=_target_type[13],
+                     match_pattern=fr"^( *){_target_type[13]}\(.*?\, .*?\)",
+                     sub_com_dict=sub_com_dict,
+                     target_name_parser=TargetNameParser.second_parser,
+                     other_info_handlers={
+                     },
+                     unit_post_handler=DefaultPostHandler(),
+                     ud_post_handler=TargetS2MPostHandler
+                     )
 )
 
 __all__ = ["configs", "result_dict", "collector_config", "sub_com_dict"]

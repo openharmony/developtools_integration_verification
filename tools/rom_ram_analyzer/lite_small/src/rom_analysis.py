@@ -34,6 +34,7 @@ from misc import gn_lineno_collect
 class RomAnalysisTool:
     @classmethod
     def collect_gn_info(cls):
+        logging.info("start scanning BUILD.gn")
         with ThreadPoolExecutor(max_workers=len(collector_config) + 1) as pool:
             future_list: List[Future] = list()
             for c in collector_config:
@@ -76,11 +77,11 @@ class RomAnalysisTool:
             dir_list.remove(t)
         sub_sub_dir_list = os.listdir(os.path.join(top_dir, t))
         for ssdl in sub_sub_dir_list:
-            if os.path.join(rela_path,sub_path) != os.path.join(t,ssdl):
+            if os.path.join(rela_path, sub_path) != os.path.join(t, ssdl):
                 dir_list.append(os.path.join(t, ssdl))
         if not sub_sub_dir_list:
             return
-        cls._add_rest_dir(top_dir, t, sub_sub_path, dir_list)        
+        cls._add_rest_dir(top_dir, t, sub_sub_path, dir_list)
 
     @classmethod
     def _find_files(cls, product_name: str) -> Dict[str, List[str]]:
@@ -125,6 +126,7 @@ class RomAnalysisTool:
 
     @classmethod
     def collect_product_info(cls, product_name: str):
+        logging.info("start scanning compile products")
         product_dict: Dict[str, List[str]] = cls._find_files(product_name)
         with open(configs[product_name]["product_infofile"], 'w', encoding='utf-8') as f:
             json.dump(product_dict, f, indent=4)
@@ -154,9 +156,10 @@ class RomAnalysisTool:
         rom_size_dict["size"] += size
 
     @classmethod
-    def _fuzzy_match(cls, file_name: str, filter_path_keyword: Tuple[str] = ("test",)) -> Tuple[str, str, str]:
+    def _fuzzy_match(cls, file_name: str, filter_path_keyword: Tuple[str] = tuple()) -> Tuple[str, str, str]:
         """
         直接grep,利用出现次数最多的BUILD.gn去定位subsystem_name和component_name"""
+        logging.info(f"fuzzy match: {file_name}")
         _, base_name = os.path.split(file_name)
         if base_name.startswith("lib"):
             base_name = base_name[3:]
@@ -168,6 +171,7 @@ class RomAnalysisTool:
             base_name = base_name[:base_name.index(".so")]
         exclude_dir = configs["black_list"]
         tbl = [x for x in exclude_dir if os.sep in x]
+
         def handler(content: Text) -> List[str]:
             t = list(filter(lambda y: len(y) > 0, list(
                 map(lambda x: x.strip(), content.split("\n")))))
@@ -181,14 +185,16 @@ class RomAnalysisTool:
             include="BUILD.gn",
             exclude=tuple(exclude_dir),
             post_handler=handler)
-        tmp = list()
-        for gr in grep_result:
-            for item in filter_path_keyword:
-                if item in gr:
-                    continue
-                tmp.append(gr)
-        grep_result = tmp
+        if filter_path_keyword:
+            tmp = list()
+            for gr in grep_result:
+                for item in filter_path_keyword:
+                    if item in gr:
+                        continue
+                    tmp.append(gr)
+            grep_result = tmp
         if not grep_result:
+            logging.info(f"fuzzy match failed.")
             return str(), str(), str()
         gn_dict: Dict[str, int] = collections.defaultdict(int)
         for g in grep_result:
@@ -197,11 +203,17 @@ class RomAnalysisTool:
         gn_file, _ = collections.Counter(gn_dict).most_common(1)[0]
         for k, v in sub_com_dict.items():
             if gn_file.startswith(k):
-                return gn_file, v.get("subsystem"), v.get("component")
+                s = v.get("subsystem")
+                c = v.get("component")
+                logging.info(
+                    f"fuzzy match success: subsystem_name={s}, component_name={c}")
+                return gn_file, s, c
+        logging.info(f"fuzzy match failed.")
         return str(), str(), str()
 
     @classmethod
     def _save_as_xls(cls, result_dict: Dict, product_name: str) -> None:
+        logging.info("saving as xls...")
         header = ["subsystem_name", "component_name",
                   "output_file", "size(Byte)"]
         tmp_dict = copy.deepcopy(result_dict)
@@ -245,17 +257,19 @@ class RomAnalysisTool:
         output_name: str = configs[product_name]["output_name"]
         output_name = output_name.replace(".json", ".xls")
         excel_writer.save(output_name)
+        logging.info("save as xls success.")
 
     @ classmethod
     def analysis(cls, product_name: str, product_dict: Dict[str, List[str]]):
+        logging.info("start analyzing...")
         gn_info_file = configs["gn_info_file"]
         with open(gn_info_file, 'r', encoding='utf-8') as f:
             gn_info = json.load(f)
         query_order: Dict[str, List[str]
                           ] = configs[product_name]["query_order"]
-        query_order["etc"] = configs["target_type"]
+        query_order["etc"] = configs["target_type"] # etc会查找所有的template
         rom_size_dict: Dict = dict()
-        # prodcut_dict: {"so":["a.so", ...]}
+        # prodcut_dict: {"so":["a.so", ...], "etc":["b.txt",...]}
         for t, l in product_dict.items():
             for f in l:  # 遍历所有文件
                 if os.path.isdir(f):
@@ -307,6 +321,7 @@ class RomAnalysisTool:
         with open(configs[product_name]["output_name"], 'w', encoding='utf-8') as f:
             json.dump(rom_size_dict, f, indent=4)
         cls._save_as_xls(rom_size_dict, product_name)
+        logging.info("success")
 
 
 def main():
