@@ -267,9 +267,9 @@ class RomAnalysisTool:
             gn_info = json.load(f)
         query_order: Dict[str, List[str]
                           ] = configs[product_name]["query_order"]
-        query_order["etc"] = configs["target_type"]
+        query_order["etc"] = configs["target_type"] # etc会查找所有的template
         rom_size_dict: Dict = dict()
-        # prodcut_dict: {"so":["a.so", ...]}
+        # prodcut_dict: {"so":["a.so", ...], "etc":["b.txt",...]}
         for t, l in product_dict.items():
             for f in l:  # 遍历所有文件
                 if os.path.isdir(f):

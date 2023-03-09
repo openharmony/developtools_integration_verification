@@ -6,7 +6,12 @@
 
 ## 支持产品
 
-支持产品:ipcamera_hispark_taurus ipcamera_hispark_taurus_linux wifiiot_hispark_pegasus
+理论上可以支持所有产品,只要在config.yaml中进行了配置即可,目前已配置产品包括:
+1. ipcamera_hispark_taurus
+1. ipcamera_hispark_taurus_linux 
+1. wifiiot_hispark_pegasus
+1. hispark_pegasus_mini_system
+1. hispark_taurus_mini_system
 
 ## 代码思路
 
@@ -53,6 +58,36 @@
    - {product_name}_product.json:该产品实际的编译产物信息,根据config.yaml进行收集
    - {product_name}_result.json:各部件的rom大小分析结果
    - {product_name}_result.xls:各部件的rom大小分析结果
+
+## 新增对产品的支持
+
+*rk3568因为主要使用的是自定义的template,所以能够在编译阶段收集更多有效信息,因此建议使用standard目录下的脚本进行分析*
+
+在config.yaml中进行配置即可,格式说明如下:
+```yaml
+ipcamera_hispark_taurus: # 产品名称,需要和命令行参数中的-p参数一致
+  product_infofile: ipcamera_hispark_taurus_product.json # 保存编译产物信息的json文件
+  output_name: ipcamera_hispark_taurus_result.json # 保存最终结果的文件的名字
+  product_dir: # [required]
+    root: out/hispark_taurus/ipcamera_hispark_taurus/rootfs # 待分析的编译产物的根目录
+    relative: # 针对性分析的子目录,key无所谓,value应当是root的子目录. 作者通常是使用so作为动态库文件目录的key,bin作为可执行文件目录的key,a作为静态库文件目录的key
+      bin: bin
+      so: usr/lib
+      etc: etc
+    rest: True  # 是否将上面root目录下除了relative指定的目录归到etc并进行匹配
+  query_order:  # 匹配顺序,key应当何relative字段中的key一致,value应当在上面的target_type字段中,脚本会按照配置的顺序对文件进行匹配.对于归类为etc的产品,会匹配target_type中的所有模板类型,找到即可.因此query_order中无需配置etc项.
+    so: 
+      - shared_library
+      - ohos_shared_library
+      - ohos_prebuilt_shared_library
+      - lite_library
+      - lite_component   
+      - target
+    bin:
+      - executable
+      - ohos_executable
+      - lite_component
+```
 
 ## 新增template
 
