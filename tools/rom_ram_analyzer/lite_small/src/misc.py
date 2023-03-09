@@ -28,8 +28,6 @@ def hap_name_handler(paragraph: Text):
 
 def target_type_handler(paragraph: Text):
     tt = GnVariableParser.string_parser("target_type", paragraph).strip('"')
-    if not tt:
-        logging.info("parse 'target_type' failed, maybe it's a variable")
     return tt
 
 
@@ -220,8 +218,6 @@ def LiteLibS2MPostHandler(unit: Dict, result_dict: Dict) -> None:
         new_unit["description"] = "may not exist"
         result_dict["lite_library"][k] = new_unit
     else:
-        logging.warning(
-            f"target type should be 'shared_library' or 'static_library', but got '{rt}'")
         new_unit["real_target_type"] = "shared_library"
         k = LiteLibPostHandler()(new_unit)
         new_unit["description"] = "may not exist"

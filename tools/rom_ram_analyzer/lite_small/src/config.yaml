@@ -144,7 +144,7 @@ black_list:
   - .repo
   - .ccache
   - doc
-  - test
+  # - test
   - build
   # 排除out目录,为了避免排除其他路径下的out目录,这里详细列出了out下的所有目录
   - out/gen
