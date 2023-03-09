@@ -102,6 +102,18 @@ class BasePostHandler(ABC):
         return self.run(unit)
 
 
+def add_prefix(content: str, prefix: str) -> str:
+    if content and (not content.startswith(prefix)):
+        return prefix+content
+    return content
+
+
+def add_postfix(content: str, postfix: str) -> str:
+    if content and (not content.endswith(postfix)):
+        return content+postfix
+    return content
+
+
 class DefaultPostHandler(BasePostHandler):
     def run(self, unit: Dict[str, AnyStr]):
         return unit["output_name"]
@@ -115,7 +127,7 @@ class HAPPostHandler(BasePostHandler):
         extension = _config.get("default_extension").get("app")
         gn_hap_name = unit.get("hap_name")
         if gn_hap_name:
-            return gn_hap_name+extension
+            return add_postfix(gn_hap_name, extension)
         return unit["output_name"]+extension
 
 
@@ -132,9 +144,8 @@ class SOPostHandler(BasePostHandler):
             extension = _config.get("default_extension").get("shared_library")
         if not extension.startswith('.'):
             extension = '.'+extension
-        if output_name.startswith(prefix):
-            return output_name+extension
-        return prefix+output_name+extension
+        output_name = add_postfix(output_name, extension)
+        return add_prefix(output_name, prefix)
 
 
 class APostHandler(BasePostHandler):
@@ -147,9 +158,8 @@ class APostHandler(BasePostHandler):
         extension: str = _config.get("default_extension").get("static_library")
         if not extension.startswith('.'):
             extension = '.'+extension
-        if output_name.startswith(prefix):
-            return output_name+extension
-        return prefix+output_name+extension
+        output_name = add_postfix(output_name, extension)
+        return add_prefix(output_name, prefix)
 
 
 class LiteLibPostHandler(BasePostHandler):
@@ -168,11 +178,10 @@ class LiteLibPostHandler(BasePostHandler):
         else:
             prefix = str()
             extension = str()
-        if not extension.startswith('.'):
+        if extension and (not extension.startswith('.')):
             extension = '.'+extension
-        if output_name.startswith(prefix):
-            return output_name+extension
-        return prefix+output_name+extension
+        output_name = add_postfix(output_name, extension)
+        return add_prefix(output_name, prefix)
 
 
 class LiteComponentPostHandler(BasePostHandler):
@@ -191,9 +200,10 @@ class LiteComponentPostHandler(BasePostHandler):
                 unit["description"] = "virtual node"
             prefix = str()
             extension = str()
-        if not extension.startswith('.'):
+        if extension and (not extension.startswith('.')):
             extension = '.'+extension
-        return prefix+output_name+extension
+        output_name = add_postfix(output_name, extension)
+        return add_prefix(output_name, prefix)
 
 
 class TargetPostHandler(BasePostHandler):
