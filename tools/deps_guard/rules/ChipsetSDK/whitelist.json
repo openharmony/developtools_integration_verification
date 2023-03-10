@@ -12,7 +12,7 @@
 	"libutils.z.so",
 	"libsec_shared.z.so",
 	"libhdi.z.so",
-	"libhdf_utils.z.so",
+	"libpub_utils.z.so",
 	"libhdf_ipc_adapter.z.so",
 	"libipc_single.z.so",
 	"libdisplay_gralloc.z.so",
