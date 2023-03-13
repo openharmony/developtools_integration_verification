@@ -1,8 +1,6 @@
 [
 	"liblbsservice_locator.z.so",
 	"libnetsys_native_manager.z.so",
-	"libresschedsvc.z.so",
 	"libavsession_service.z.so",
-	"libcomponent_sched_server.z.so",
 	"libsg_collect_service.z.so"
 ]
