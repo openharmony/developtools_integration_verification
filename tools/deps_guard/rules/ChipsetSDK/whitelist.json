@@ -16,6 +16,7 @@
 	"libhdf_ipc_adapter.z.so",
 	"libipc_single.z.so",
 	"libdisplay_gralloc.z.so",
+	"libhdifd_parcelable.z.so",
 
 	// Third party libraries
 	"libdrm.so",
