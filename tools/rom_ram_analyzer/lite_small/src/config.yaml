@@ -167,9 +167,9 @@ hispark_pegasus_mini_system:
       - lite_library
       - target
 
-rk3568: # rk的目前从packages/phone/system_module_info.json中分析准确度更高,因为rk基本都使用的是ohos_xxx,而lite/small的更多的是使用的gn原生target template
-  product_infofile: rk3568_product.json
-  output_name: rk3568_result.json
+rk3568_mini_system: # rk的目前从packages/phone/system_module_info.json中分析准确度更高,因为rk基本都使用的是ohos_xxx,而lite/small的更多的是使用的gn原生target template
+  product_infofile: rk3568_mini_system_product.json
+  output_name: rk3568_mini_system_result.json
   product_dir:
     root: out/rk3568/packages/phone/system
     relative:
