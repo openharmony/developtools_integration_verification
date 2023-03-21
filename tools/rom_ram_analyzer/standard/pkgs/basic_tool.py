@@ -28,6 +28,5 @@ class BasicTool:
 
 
 if __name__ == '__main__':
-    # print(BasicTool.get_abs_path("~/git/.."))
     for i in BasicTool.find_all_files(".", apply_abs=False):
         print(i)

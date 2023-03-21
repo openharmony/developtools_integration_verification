@@ -116,13 +116,11 @@ class RomAnalyzer:
     @classmethod
     def __put(cls, unit: typing.Dict[Text, Any], result_dict: typing.Dict[Text, Dict]):
         """
-        {
         subsystem_name:{
                 component_name: {
                     file_name: file_size
                 }
             }
-        }
         """
         component_name = NOTFOUND if unit.get(
             "component_name") is None else unit.get("component_name")

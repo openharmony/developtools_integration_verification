@@ -227,7 +227,6 @@ class RamAnalyzer:
                 cls.__parse_process_xml(os.path.join(profile_path, xml_base_name), result_dict)
             else:
                 # 直接执行
-                # process_name = os.path.split(first)[-1]
                 if result_dict.get(process_name) is None:
                     result_dict[process_name] = list()
                 result_dict.get(process_name).append(os.path.split(first)[-1])
@@ -238,7 +237,6 @@ class RamAnalyzer:
         """
         从out/{product_name}/packages/phone/sa_profile/merged_sa查找xml文件并处理得到进程与so的对应关系
         """
-        # xml_path = os.path.join(product_path, "packages", "phone", "sa_profile", "merged_sa")
         # 从merged_sa里面收集
         xml_list = glob.glob(xml_path + os.sep + "*[.]xml", recursive=True)
         process_elf_dict: typing.Dict[str, typing.List[str]] = dict()

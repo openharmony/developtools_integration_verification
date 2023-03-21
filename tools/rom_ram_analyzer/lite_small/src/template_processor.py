@@ -36,8 +36,6 @@ class BaseProcessor(ABC):
         def call():
             # your implementation
 
-    DerivedClass(project_path,result_dict,...)
-    DerivedClass()
     """
 
     def __init__(self,

@@ -30,7 +30,6 @@ import collections
 
 from config import result_dict, collector_config, configs, \
     project_path, sub_com_dict, product_name, recollect_gn
-# from gn_info_collect import GnInfoCollector
 from pkgs.basic_tool import BasicTool
 from pkgs.gn_common_tool import GnCommonTool
 from pkgs.simple_excel_writer import SimpleExcelWriter
@@ -286,12 +285,10 @@ class RomAnalysisTool:
                           ] = configs[product_name]["query_order"]
         query_order["etc"] = configs["target_type"] # etc会查找所有的template
         rom_size_dict: Dict = dict()
-        # prodcut_dict: {"so":["a.so", ...], "etc":["b.txt",...]}
         for t, l in product_dict.items():
             for f in l:  # 遍历所有文件
                 if os.path.isdir(f):
                     continue
-                # query_order: {"a":[static_library", ...]}
                 find_flag = False
                 type_list = query_order.get(t)
                 _, base_name = os.path.split(f)
@@ -351,7 +348,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # relative_dir = ["bin", "usr/lib", "etc"]
-    # root_dir = "/home/aodongbiao/oh/out/hispark_taurus/ipcamera_hispark_taurus/rootfs"
-    # rest_dir_list = os.listdir(root_dir)
-    # RomAnalysisTool._find_files("ipcamera_hispark_taurus")
