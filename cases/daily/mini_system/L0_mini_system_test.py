@@ -58,7 +58,6 @@ def WriteToComPort(com_port, cmd):
 def ReadFromComPort(com_port, timeout):
     time_start = datetime.datetime.now()
     time_end = time_start
-    #print((time_end - time_start).seconds)
     global com_output
     com_output = ''
     while (time_end - time_start).seconds < timeout:
@@ -97,7 +96,6 @@ if __name__ == "__main__":
     print('enter AT+SYSINFO')
     time.sleep(3)
     hivew_proc_find = re.findall('hiview,id=\d{1,3},status=\d{1,10},pri=\d{1,3},size=', com_output)
-    #Bootstrap_proc_find = re.findall('Bootstrap,id=\d{1,3},status=\d{1,10},pri=\d{1,3},size=', com_output)
     print(hivew_proc_find)
     if type(hivew_proc_find) == list and len(hivew_proc_find) > 0:
         PrintToLog('hivew_proc found')

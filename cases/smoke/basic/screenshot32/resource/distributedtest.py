@@ -114,7 +114,6 @@ def distributed_calc():
     crop_picture("pin.jpeg", "pin_code.jpeg", crop_range)
     enter_shell_cmd("uinput -M -m 340 530 -c 0", time_two, sn1)
     enter_shell_cmd("uinput -M -m 340 530 -c 0", time_two, sn1)
-    #Enter pin code
     enter_shell_cmd("uinput -M -m 60 1145 -c 0", time_two, sn1)
     code = orc(f"{args.path}\\pin_code.jpeg")
     pin_code = re.findall("[0-9]{6}", code)[0]
@@ -130,7 +129,6 @@ def distributed_calc():
     enter_shell_cmd("uinput -M -m 60 1145 -c 0", time_two, sn1)
     enter_shell_cmd("uinput -M -m 500 600 -c 0", time_two, sn1)
     enter_shell_cmd("killall ohos.samples.distributedcalc", time_two, sn1)
-    #Pull up the opposite device
     enter_shell_cmd("aa start -a ohos.samples.distributedcalc.MainAbility -b ohos.samples.distributedcalc",\
         time_four, sn1)
     enter_shell_cmd("uinput -M -m 610 110 -c 0", time_two, sn1)

@@ -52,13 +52,11 @@ def PrintToLog(str):
 
 def WriteToComPort(com_port, cmd):
     len = com_port.write(cmd.encode('utf-8'))
-    #print('{}'.format(len))
     return
 
 def ReadFromComPort(com_port, timeout):
     time_start = datetime.datetime.now()
     time_end = time_start
-    #print((time_end - time_start).seconds)
     global com_output
     com_output = ''
     while (time_end - time_start).seconds < timeout:
