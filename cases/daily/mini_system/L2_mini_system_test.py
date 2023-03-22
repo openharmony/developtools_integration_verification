@@ -33,7 +33,6 @@ def GetDirSize(dir_path):
         for name in files:
             if not os.path.islink(os.path.join(root, name)):
                 sz = os.path.getsize(os.path.join(root, name))
-                #print('{} : {}byte'.format(os.path.join(root, name), sz))
                 size += sz
     PrintToLog('total size: {:.2f}M'.format(size/1024/1024))
     return size
@@ -133,7 +132,6 @@ if __name__ == "__main__":
     else:
         PrintToLog("First processes check is ok\n")
 
-    # check processes usage
     res = EnterCmd("hdc_std -t {} shell hidumper --mem".format(args.device_num), 0, 1)
     process_usage = int(res.split(':')[-1].split()[0]) / 1024
     if process_usage > 40:
@@ -144,10 +142,8 @@ if __name__ == "__main__":
 
     time.sleep(10)
 
-    #key processes second check, and cmp to first check
     PrintToLog("\n\n########## Second check key processes start ##############")
     second_check_lose_process = []
-    #for pname in two_check_process_list + other_process_list:
     for pname in two_check_process_list:
         pids = EnterCmd("hdc_std -t {} shell pidof {}".format(args.device_num, pname), 0, 1)
         try:
