@@ -277,14 +277,4 @@ part_name = "updater"
 """
     s = "\"${updater_faultloggerd_cfg}\""
     print(GnCommonTool.contains_gn_variable(s))
-    # print(GnVariableParser.string_parser("updater_faultloggerd_cfg",s))
-    # print(re.search(
-    #     "updater_faultloggerd_cfg *= *[\n]?(\".*?\")", s, flags=re.S | re.M).group())
-    # print(GnVariableParser.list_parser("t", cc))
-    # print(len(GnVariableParser.list_parscer("t", cc)))
-    # print(TargetNameParser.second_parser(cc))
-    # print(GnCommonTool._find_gn_variable_list("a/${b}${e}/$c"))
-    # print(GnCommonTool._find_gn_variable_list("abc_$abc"))
-    # print(GnCommonTool.find_values_of_variable(
-    #     "\"${OHOS_PROFILER_SUBSYS_NAME}\"", path="/home/aodongbiao/oh/third_party/abseil-cpp/absl/strings/BUILD.gn", stop_tail="/home/aodongbiao/oh"))
     ...
