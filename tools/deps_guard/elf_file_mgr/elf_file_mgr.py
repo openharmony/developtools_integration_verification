@@ -239,7 +239,6 @@ class ElfFileMgr(object):
 		if name in self._basename_dict:
 			return self._basename_dict[name][0]
 
-		#print("Library [" + name + "] not found, try find by soft links:")
 		return self.__get_link_file(name)
 
 	def get_all(self):
@@ -256,6 +255,3 @@ if __name__ == '__main__':
 
 	res = mgr.get_elf_by_path("system/lib/platformsdk/libhmicui18n.z.so")
 	print(res)
-	#print(mgr.get_all())
-	#print(elf.matchCalls())
-	#print(len(elf["dependedBy"]))

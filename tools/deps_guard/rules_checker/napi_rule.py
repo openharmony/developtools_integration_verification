@@ -15,7 +15,6 @@ class NapiRule(BaseRule):
 
 		# Check if any napi modules has dependedBy
 		for mod in self.get_mgr().get_all():
-			#print("Check %s now " % mod["path"])
 			if not mod["napi"]:
 				continue
 

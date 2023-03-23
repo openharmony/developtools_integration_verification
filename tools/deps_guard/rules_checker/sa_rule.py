@@ -18,7 +18,6 @@ class SaRule(BaseRule):
 
 		# Check if any napi modules has dependedBy
 		for mod in self.get_mgr().get_all():
-			#print("Check %s now " % mod["path"])
 			is_sa = False
 			if "sa_id" in mod and mod["sa_id"] > 0:
 				is_sa = True

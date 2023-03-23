@@ -22,13 +22,11 @@ class CompileInfoLoader(object):
 				if len(item["dest"]) > 1:
 					info["name"] = item["dest"][1]
 				else:
-					#print("Updater module %s ignored" % info["name"])
 					continue
 
 			if "label" in item:
 				info["labelPath"] = item["label"]
 			else:
-				#print("%s has no label" % info["name"])
 				info["labelPath"] = ""
 			if info["labelPath"].find("(") > 0:
 				info["labelPath"] = info["labelPath"][:info["labelPath"].find("(")]
@@ -178,8 +176,6 @@ class CompileInfoLoader(object):
 			if caller["componentName"] == callee["componentName"]:
 				caller["deps_internal"].append(dep)
 				callee["dependedBy_internal"].append(dep)
-				#if caller["napi"]:
-				#	dep["external"] = True
 			else:
 				caller["deps_external"].append(dep)
 				callee["dependedBy_external"].append(dep)
@@ -229,5 +225,3 @@ if __name__ == "__main__":
 	cursor = conn.cursor()
 
 	mgr = elf_modules.ElfModuleMgr(cursor)
-
-	#CompileInfoLoader.load(mgr, "modules.json")
