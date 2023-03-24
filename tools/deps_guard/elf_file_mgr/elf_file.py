@@ -33,7 +33,6 @@ class ElfFile(dict):
 		else:
 			self["type"] = "bin"
 		self["path"] = file[len(prefix):]
-		#self.__extract_elf_size()
 
 	def __eq__(self, other):
 		if not isinstance(other, ElfFile):

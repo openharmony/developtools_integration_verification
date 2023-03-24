@@ -43,7 +43,6 @@ class ChipsetSDKRule(BaseRule):
 			path = sdk["labelPath"][:sdk["labelPath"].find(":")]
 			item = {"chipsetsdk": sdk["name"], "path": path, "headers": []}
 			if sdk["componentName"] not in info:
-				#print("%s:%s has no innerapi info" % (sdk["name"], sdk["componentName"]))
 				headers.append(item)
 				continue
 

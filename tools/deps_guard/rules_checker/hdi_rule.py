@@ -33,7 +33,6 @@ class HdiRule(BaseRule):
 
 		# Check if any napi modules has dependedBy
 		for mod in self.get_mgr().get_all():
-			#print("Check %s now " % mod["path"])
 			is_hdi = False
 			if "hdiType" in mod and mod["hdiType"] == "hdi_service":
 				is_hdi = True
