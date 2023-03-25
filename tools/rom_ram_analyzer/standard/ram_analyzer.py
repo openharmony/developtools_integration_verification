@@ -116,7 +116,6 @@ class RamAnalyzer:
             for line in line_list:
                 process_name = line.split()[7]
                 if process_name.startswith('['):
-                    # 内核进程
                     continue
                 process_name_list.append(process_name)
             return process_name_list

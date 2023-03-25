@@ -140,7 +140,6 @@ class BasicTool:
 
 if __name__ == '__main__':
     res = BasicTool.grep_ern("^( *)ohos_prebuilt_shared_library", "/home/aodongbiao/oh", include="BUILD.gn", exclude=("/home/aodongbiao/oh/out","doc", ".ccache"), post_handler=lambda x: x.split('\n'))
-    # print(res)
     for i in res:
         if "oh/out" in i:
             print(i)

@@ -142,7 +142,4 @@ __all__ = ["SC"]
 
 if __name__ == '__main__':
     ohos_path, output_path = parse_args()
-    # info = get_subsystem_components_modified(ohos_path)
-    # export_to_json(info, output_path)
-    # print_warning_info()
     SC.run(ohos_path, output_path)
