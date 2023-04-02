@@ -41,7 +41,6 @@ telephony
 camera_service
 foundation
 hdcd
-disp_gralloc_host
 light_host
 vibrator_host
 sensor_host
