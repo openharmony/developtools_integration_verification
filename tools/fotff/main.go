@@ -23,15 +23,17 @@ import (
 	"fotff/rec"
 	"fotff/res"
 	"fotff/tester"
+	"fotff/tester/common"
 	"fotff/tester/manual"
 	testermock "fotff/tester/mock"
 	"fotff/tester/smoke"
 	"fotff/tester/xdevice"
 	"fotff/utils"
-	"github.com/sirupsen/logrus"
-	"github.com/spf13/cobra"
 	"os"
 	"path/filepath"
+
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/cobra"
 )
 
 var newPkgMgrFuncs = map[string]pkg.NewFunc{
@@ -42,6 +44,7 @@ var newPkgMgrFuncs = map[string]pkg.NewFunc{
 var newTesterFuncs = map[string]tester.NewFunc{
 	"mock":    testermock.NewTester,
 	"manual":  manual.NewTester,
+	"common":  common.NewTester,
 	"xdevice": xdevice.NewTester,
 	"smoke":   smoke.NewTester,
 }
