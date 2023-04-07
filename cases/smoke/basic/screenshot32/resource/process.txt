@@ -30,7 +30,6 @@ distributeddata
 useriam
 inputmethod_ser
 ui_service
-distributedfile
 netmanager
 sensors
 media_service
