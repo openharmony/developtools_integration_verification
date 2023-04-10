@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package dayu200
+package gitee_common
 
 import (
 	"context"
@@ -25,48 +25,47 @@ import (
 	"path/filepath"
 )
 
-// These commands are copied from ci project.
-const (
-	preCompileCMD = `rm -rf prebuilts/clang/ohos/darwin-x86_64/clang-480513;rm -rf prebuilts/clang/ohos/windows-x86_64/clang-480513;rm -rf prebuilts/clang/ohos/linux-x86_64/clang-480513;bash build/prebuilts_download.sh`
-	// compileCMD is copied from ci project and trim useless build-target 'make_test' to enhance build efficiency.
-	compileCMD = `echo 'start' && export NO_DEVTOOL=1 && export CCACHE_LOG_SUFFIX="dayu200-arm32" && export CCACHE_NOHASHDIR="true" && export CCACHE_SLOPPINESS="include_file_ctime" && ./build.sh --product-name rk3568 --ccache --build-target make_all --gn-args enable_notice_collection=false`
-	rmOutCMD   = `rm -rf out`
-)
-
-// This list is copied from ci project. Some of them are not available, has been annotated.
-var imgList = []string{
-	"out/rk3568/packages/phone/images/MiniLoaderAll.bin",
-	"out/rk3568/packages/phone/images/boot_linux.img",
-	"out/rk3568/packages/phone/images/parameter.txt",
-	"out/rk3568/packages/phone/images/system.img",
-	"out/rk3568/packages/phone/images/uboot.img",
-	"out/rk3568/packages/phone/images/userdata.img",
-	"out/rk3568/packages/phone/images/vendor.img",
-	"out/rk3568/packages/phone/images/resource.img",
-	"out/rk3568/packages/phone/images/config.cfg",
-	"out/rk3568/packages/phone/images/ramdisk.img",
-	// "out/rk3568/packages/phone/images/chipset.img",
-	"out/rk3568/packages/phone/images/sys_prod.img",
-	"out/rk3568/packages/phone/images/chip_prod.img",
-	"out/rk3568/packages/phone/images/updater.img",
-	// "out/rk3568/packages/phone/updater/bin/updater_binary",
+type BuildConfig struct {
+	Pkg           string
+	PreCompileCMD string
+	CompileCMD    string
+	ImgList       []string
 }
 
-// pkgAvailable returns true if all necessary images are all available to flash.
-func (m *Manager) pkgAvailable(pkg string) bool {
-	for _, img := range imgList {
+func (m *Manager) Build(config BuildConfig, ctx context.Context) error {
+	if m.PkgAvailable(config) {
+		return nil
+	}
+	logrus.Infof("%s is not available", config.Pkg)
+	err := m.BuildNoRetry(config, false, ctx)
+	if err == nil {
+		return nil
+	}
+	logrus.Errorf("build pkg %s err: %v", config.Pkg, err)
+	logrus.Infof("rm out and build pkg %s again...", config.Pkg)
+	err = m.BuildNoRetry(config, true, ctx)
+	if err == nil {
+		return nil
+	}
+	logrus.Errorf("build pkg %s err: %v", config.Pkg, err)
+	return err
+}
+
+// PkgAvailable returns true if all necessary images are all available to flash.
+func (m *Manager) PkgAvailable(config BuildConfig) bool {
+	for _, img := range config.ImgList {
 		imgName := filepath.Base(img)
-		if _, err := os.Stat(filepath.Join(m.Workspace, pkg, imgName)); err != nil {
+		if _, err := os.Stat(filepath.Join(m.Workspace, config.Pkg, imgName)); err != nil {
 			return false
 		}
 	}
 	return true
 }
 
-// build obtain an available server, download corresponding codes, and run compile commands
+// BuildNoRetry obtain an available server, download corresponding codes, and run compile commands
 // to build the corresponding package images, then transfer these images to the 'pkg' directory.
-func (m *Manager) build(pkg string, rm bool, ctx context.Context) error {
-	logrus.Infof("now build %s", pkg)
+func (m *Manager) BuildNoRetry(config BuildConfig, rm bool, ctx context.Context) error {
+	logrus.Infof("now Build %s", config.Pkg)
 	server := res.GetBuildServer()
 	defer res.ReleaseBuildServer(server)
 	cmd := fmt.Sprintf("mkdir -p %s && cd %s && repo init -u https://gitee.com/openharmony/manifest.git", server.WorkSpace, server.WorkSpace)
@@ -74,7 +73,7 @@ func (m *Manager) build(pkg string, rm bool, ctx context.Context) error {
 		return fmt.Errorf("remote: mkdir error: %w", err)
 	}
 	if err := utils.TransFileViaSSH(utils.Upload, server.Addr, server.User, server.Passwd,
-		fmt.Sprintf("%s/.repo/manifest.xml", server.WorkSpace), filepath.Join(m.Workspace, pkg, "manifest_tag.xml")); err != nil {
+		fmt.Sprintf("%s/.repo/manifest.xml", server.WorkSpace), filepath.Join(m.Workspace, config.Pkg, "manifest_tag.xml")); err != nil {
 		return fmt.Errorf("upload and replace manifest error: %w", err)
 	}
 	// 'git lfs install' may fail due to some git hooks. Call 'git lfs update --force' before install to avoid this situation.
@@ -82,25 +81,25 @@ func (m *Manager) build(pkg string, rm bool, ctx context.Context) error {
 	if err := utils.RunCmdViaSSHContext(ctx, server.Addr, server.User, server.Passwd, cmd); err != nil {
 		return fmt.Errorf("remote: repo sync error: %w", err)
 	}
-	cmd = fmt.Sprintf("cd %s && %s", server.WorkSpace, preCompileCMD)
+	cmd = fmt.Sprintf("cd %s && %s", server.WorkSpace, config.PreCompileCMD)
 	if err := utils.RunCmdViaSSHContextNoRetry(ctx, server.Addr, server.User, server.Passwd, cmd); err != nil {
 		return fmt.Errorf("remote: pre-compile command error: %w", err)
 	}
 	if rm {
-		cmd = fmt.Sprintf("cd %s && %s", server.WorkSpace, rmOutCMD)
+		cmd = fmt.Sprintf("cd %s && rm -rf out", server.WorkSpace)
 		if err := utils.RunCmdViaSSHContext(ctx, server.Addr, server.User, server.Passwd, cmd); err != nil {
 			return fmt.Errorf("remote: rm ./out command error: %w", err)
 		}
 	}
-	cmd = fmt.Sprintf("cd %s && %s", server.WorkSpace, compileCMD)
+	cmd = fmt.Sprintf("cd %s && %s", server.WorkSpace, config.CompileCMD)
 	if err := utils.RunCmdViaSSHContextNoRetry(ctx, server.Addr, server.User, server.Passwd, cmd); err != nil {
 		return fmt.Errorf("remote: compile command error: %w", err)
 	}
 	// has been built already, pitiful if canceled, so continue copying
-	for _, f := range imgList {
+	for _, f := range config.ImgList {
 		imgName := filepath.Base(f)
 		if err := utils.TransFileViaSSH(utils.Download, server.Addr, server.User, server.Passwd,
-			fmt.Sprintf("%s/%s", server.WorkSpace, f), filepath.Join(m.Workspace, pkg, imgName)); err != nil {
+			fmt.Sprintf("%s/%s", server.WorkSpace, f), filepath.Join(m.Workspace, config.Pkg, imgName)); err != nil {
 			return fmt.Errorf("download file %s error: %w", f, err)
 		}
 	}

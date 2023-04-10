@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,38 +16,62 @@
 package dayu200
 
 import (
-	"code.cloudfoundry.org/archiver/extractor"
 	"context"
-	"fmt"
 	"fotff/pkg"
+	"fotff/pkg/gitee_common"
 	"fotff/res"
 	"fotff/utils"
 	"github.com/sirupsen/logrus"
-	"os"
-	"path/filepath"
 	"strconv"
 	"strings"
-	"time"
 )
 
 type Manager struct {
-	ArchiveDir     string `key:"archive_dir" default:"."`
-	FromCI         string `key:"download_from_ci" default:"false"`
-	Workspace      string `key:"workspace" default:"."`
+	ArchiveDir     string `key:"archive_dir" default:"archive"`
+	WatchCI        string `key:"watch_ci" default:"false"`
+	Workspace      string `key:"workspace" default:"workspace"`
 	Branch         string `key:"branch" default:"master"`
 	FlashTool      string `key:"flash_tool" default:"python"`
 	LocationIDList string `key:"location_id_list"`
-	locations      map[string]string
-	fromCI         bool
+
+	*gitee_common.Manager
+	locations map[string]string
+}
+
+// These commands are copied from ci project.
+const (
+	preCompileCMD = `rm -rf prebuilts/clang/ohos/darwin-x86_64/clang-480513;rm -rf prebuilts/clang/ohos/windows-x86_64/clang-480513;rm -rf prebuilts/clang/ohos/linux-x86_64/clang-480513;bash build/prebuilts_download.sh`
+	// compileCMD is copied from ci project and trim useless build-target 'make_test' to enhance build efficiency.
+	compileCMD = `echo 'start' && export NO_DEVTOOL=1 && export CCACHE_LOG_SUFFIX="dayu200-arm32" && export CCACHE_NOHASHDIR="true" && export CCACHE_SLOPPINESS="include_file_ctime" && ./build.sh --product-name rk3568 --ccache --build-target make_all --gn-args enable_notice_collection=false`
+)
+
+// This list is copied from ci project. Some of them are not available, has been annotated.
+var imgList = []string{
+	"out/rk3568/packages/phone/images/MiniLoaderAll.bin",
+	"out/rk3568/packages/phone/images/boot_linux.img",
+	"out/rk3568/packages/phone/images/parameter.txt",
+	"out/rk3568/packages/phone/images/system.img",
+	"out/rk3568/packages/phone/images/uboot.img",
+	"out/rk3568/packages/phone/images/userdata.img",
+	"out/rk3568/packages/phone/images/vendor.img",
+	"out/rk3568/packages/phone/images/resource.img",
+	"out/rk3568/packages/phone/images/config.cfg",
+	"out/rk3568/packages/phone/images/ramdisk.img",
+	// "out/rk3568/packages/phone/images/chipset.img",
+	"out/rk3568/packages/phone/images/sys_prod.img",
+	"out/rk3568/packages/phone/images/chip_prod.img",
+	"out/rk3568/packages/phone/images/updater.img",
+	// "out/rk3568/packages/phone/updater/bin/updater_binary",
 }
 
 func NewManager() pkg.Manager {
 	var ret Manager
 	utils.ParseFromConfigFile("dayu200", &ret)
-	var err error
-	if ret.fromCI, err = strconv.ParseBool(ret.FromCI); err != nil {
-		logrus.Panicf("can not parse 'download_from_ci', please check")
+	watchCI, err := strconv.ParseBool(ret.WatchCI)
+	if err != nil {
+		logrus.Panicf("can not parse 'watch_ci', please check")
 	}
+	ret.Manager = gitee_common.NewManager("dayu200", ret.Branch, ret.ArchiveDir, ret.Workspace, watchCI)
 	devs := res.DeviceList()
 	locs := strings.Split(ret.LocationIDList, ",")
 	if len(devs) != len(locs) {
@@ -57,125 +81,23 @@ func NewManager() pkg.Manager {
 	for i, loc := range locs {
 		ret.locations[devs[i]] = loc
 	}
-	go ret.cleanupOutdated()
 	return &ret
-}
-
-func (m *Manager) cleanupOutdated() {
-	t := time.NewTicker(24 * time.Hour)
-	for {
-		<-t.C
-		es, err := os.ReadDir(m.Workspace)
-		if err != nil {
-			logrus.Errorf("can not read %s: %v", m.Workspace, err)
-			continue
-		}
-		for _, e := range es {
-			if !e.IsDir() {
-				continue
-			}
-			path := filepath.Join(m.Workspace, e.Name())
-			info, err := e.Info()
-			if err != nil {
-				logrus.Errorf("can not read %s info: %v", path, err)
-				continue
-			}
-			if time.Now().Sub(info.ModTime()) > 7*24*time.Hour {
-				logrus.Warnf("%s outdated, cleanning up its contents...", path)
-				m.cleanupPkgFiles(path)
-			}
-		}
-	}
-}
-
-func (m *Manager) cleanupPkgFiles(path string) {
-	es, err := os.ReadDir(path)
-	if err != nil {
-		logrus.Errorf("can not read %s: %v", path, err)
-		return
-	}
-	for _, e := range es {
-		if e.Name() == "manifest_tag.xml" || e.Name() == "__last_issue__" {
-			continue
-		}
-		if err := os.RemoveAll(filepath.Join(path, e.Name())); err != nil {
-			logrus.Errorf("remove %s fail: %v", filepath.Join(path, e.Name()), err)
-		}
-	}
 }
 
 // Flash function implements pkg.Manager. Flash images in the 'pkg' directory to the given device.
 // If not all necessary images are available in the 'pkg' directory, will build them.
 func (m *Manager) Flash(device string, pkg string, ctx context.Context) error {
 	logrus.Infof("now flash %s", pkg)
-	if !m.pkgAvailable(pkg) {
-		logrus.Infof("%s is not available", pkg)
-		if err := m.build(pkg, false, ctx); err != nil {
-			logrus.Errorf("build pkg %s err: %v", pkg, err)
-			logrus.Infof("build pkg %s again...", pkg)
-			if err = m.build(pkg, true, ctx); err != nil {
-				logrus.Errorf("build pkg %s err: %v", pkg, err)
-				return err
-			}
-		}
+	buildConfig := gitee_common.BuildConfig{
+		Pkg:           pkg,
+		PreCompileCMD: preCompileCMD,
+		CompileCMD:    compileCMD,
+		ImgList:       imgList,
+	}
+	if err := m.Build(buildConfig, ctx); err != nil {
+		logrus.Errorf("build %s fail, err: %v", pkg, err)
+		return err
 	}
 	logrus.Infof("%s is available now, start to flash it", pkg)
 	return m.flashDevice(device, pkg, ctx)
-}
-
-func (m *Manager) Steps(from, to string) (pkgs []string, err error) {
-	if from == to {
-		return nil, fmt.Errorf("steps err: 'from' %s and 'to' %s are the same", from, to)
-	}
-	if c, found := utils.CacheGet("dayu200_steps", from+"__to__"+to); found {
-		logrus.Infof("steps from %s to %s are cached", from, to)
-		logrus.Infof("steps: %v", c.([]string))
-		return c.([]string), nil
-	}
-	if pkgs, err = m.stepsFromGitee(from, to); err != nil {
-		logrus.Errorf("failed to gen steps from gitee, err: %v", err)
-		logrus.Warnf("fallback to getting steps from CI...")
-		if pkgs, err = m.stepsFromCI(from, to); err != nil {
-			return pkgs, err
-		}
-		return pkgs, nil
-	}
-	utils.CacheSet("dayu200_steps", from+"__to__"+to, pkgs)
-	return pkgs, nil
-}
-
-func (m *Manager) LastIssue(pkg string) (string, error) {
-	data, err := os.ReadFile(filepath.Join(m.Workspace, pkg, "__last_issue__"))
-	return string(data), err
-}
-
-func (m *Manager) GetNewer(cur string) (string, error) {
-	var newFile string
-	if m.fromCI {
-		newFile = m.getNewerFromCI(cur + ".tar.gz")
-	} else {
-		newFile = pkg.GetNewerFileFromDir(m.ArchiveDir, cur+".tar.gz", func(files []os.DirEntry, i, j int) bool {
-			ti, _ := getPackageTime(files[i].Name())
-			tj, _ := getPackageTime(files[j].Name())
-			return ti.Before(tj)
-		})
-	}
-	ex := extractor.NewTgz()
-	dirName := newFile
-	for filepath.Ext(dirName) != "" {
-		dirName = strings.TrimSuffix(dirName, filepath.Ext(dirName))
-	}
-	dir := filepath.Join(m.Workspace, dirName)
-	if _, err := os.Stat(dir); err == nil {
-		return dirName, nil
-	}
-	logrus.Infof("extracting %s to %s...", filepath.Join(m.ArchiveDir, newFile), dir)
-	if err := ex.Extract(filepath.Join(m.ArchiveDir, newFile), dir); err != nil {
-		return dirName, err
-	}
-	return dirName, nil
-}
-
-func (m *Manager) PkgDir(pkg string) string {
-	return filepath.Join(m.Workspace, pkg)
 }

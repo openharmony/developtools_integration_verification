@@ -17,10 +17,6 @@ package pkg
 
 import (
 	"context"
-	"github.com/sirupsen/logrus"
-	"os"
-	"sort"
-	"time"
 )
 
 type NewFunc func() Manager
@@ -36,26 +32,4 @@ type Manager interface {
 	GetNewer(cur string) (string, error)
 	// PkgDir returns where pkg exists in the filesystem.
 	PkgDir(pkg string) string
-}
-
-func GetNewerFileFromDir(dir string, cur string, less func(files []os.DirEntry, i, j int) bool) string {
-	for {
-		files, err := os.ReadDir(dir)
-		if err != nil {
-			logrus.Errorf("read dir %s err: %s", dir, err)
-			time.Sleep(10 * time.Second)
-			continue
-		}
-		sort.Slice(files, func(i, j int) bool {
-			return less(files, i, j)
-		})
-		if len(files) != 0 {
-			f := files[len(files)-1]
-			if f.Name() != cur {
-				logrus.Infof("new package found, name: %s", f.Name())
-				return f.Name()
-			}
-		}
-		time.Sleep(10 * time.Second)
-	}
 }

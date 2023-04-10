@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package dayu200
+package gitee_common
 
 import (
 	"encoding/json"
@@ -53,11 +53,11 @@ type Tag struct {
 }
 
 func (m *Manager) stepsFromCI(from, to string) (pkgs []string, err error) {
-	startTime, err := getPackageTime(from)
+	startTime, err := parseTime(from)
 	if err != nil {
 		return nil, err
 	}
-	endTime, err := getPackageTime(to)
+	endTime, err := parseTime(to)
 	if err != nil {
 		return nil, err
 	}
@@ -69,9 +69,6 @@ func (m *Manager) getAllStepsFromTags(from, to time.Time) (pkgs []string, err er
 	if err != nil {
 		return nil, err
 	}
-	sort.Slice(tags, func(i, j int) bool {
-		return tags[i].Timestamp < tags[j].Timestamp
-	})
 	for _, tag := range tags {
 		pkg, err := m.genTagPackage(tag)
 		if err != nil {
@@ -125,6 +122,9 @@ func (m *Manager) getAllTags(from, to time.Time) (ret []*Tag, err error) {
 		}
 		pageNum++
 	}
+	sort.Slice(ret, func(i, j int) bool {
+		return ret[i].Timestamp < ret[j].Timestamp
+	})
 	return ret, nil
 }
 

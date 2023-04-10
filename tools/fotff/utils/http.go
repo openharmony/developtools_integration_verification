@@ -25,7 +25,11 @@ import (
 )
 
 func DoSimpleHttpReqRaw(method string, url string, body []byte, header map[string]string) (response *http.Response, err error) {
-	for i := 0; i < 3; i++ {
+	maxRetry := len(proxyList)
+	if maxRetry < 3 {
+		maxRetry = 3
+	}
+	for i := 0; i < maxRetry; i++ {
 		if response, err = doSimpleHttpReqImpl(method, url, body, header); err == nil {
 			return
 		}
@@ -36,7 +40,11 @@ func DoSimpleHttpReqRaw(method string, url string, body []byte, header map[strin
 
 func DoSimpleHttpReq(method string, url string, body []byte, header map[string]string) (ret []byte, err error) {
 	var resp *http.Response
-	for i := 0; i < 3; i++ {
+	maxRetry := len(proxyList)
+	if maxRetry < 3 {
+		maxRetry = 3
+	}
+	for i := 0; i < maxRetry; i++ {
 		if resp, err = doSimpleHttpReqImpl(method, url, body, header); err == nil {
 			ret, err = io.ReadAll(resp.Body)
 			resp.Body.Close()
