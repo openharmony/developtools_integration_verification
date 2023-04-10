@@ -68,8 +68,7 @@ func (t *Tester) DoTestTask(device string, ctx context.Context) ([]tester.Result
 // DoTestCase run the specified test case on the specified device
 func (t *Tester) DoTestCase(device string, testCase string, ctx context.Context) (tester.Result, error) {
 	args := strings.Split(t.Param, " ")
-	args = append(args, testCaseFlag)
-	args = append(args, testCase)
+	args = append(args, []string{testCaseFlag, testCase}...)
 	if device != "" {
 		args = append(args, []string{deviceFlag, device}...)
 	}
