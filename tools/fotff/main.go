@@ -19,6 +19,7 @@ import (
 	"context"
 	"fotff/pkg"
 	"fotff/pkg/dayu200"
+	"fotff/pkg/gitee_build"
 	"fotff/pkg/mock"
 	"fotff/rec"
 	"fotff/res"
@@ -26,6 +27,7 @@ import (
 	"fotff/tester/common"
 	"fotff/tester/manual"
 	testermock "fotff/tester/mock"
+	"fotff/tester/pkg_available"
 	"fotff/tester/smoke"
 	"fotff/tester/xdevice"
 	"fotff/utils"
@@ -37,16 +39,18 @@ import (
 )
 
 var newPkgMgrFuncs = map[string]pkg.NewFunc{
-	"mock":    mock.NewManager,
-	"dayu200": dayu200.NewManager,
+	"mock":        mock.NewManager,
+	"dayu200":     dayu200.NewManager,
+	"gitee_build": gitee_build.NewManager,
 }
 
 var newTesterFuncs = map[string]tester.NewFunc{
-	"mock":    testermock.NewTester,
-	"manual":  manual.NewTester,
-	"common":  common.NewTester,
-	"xdevice": xdevice.NewTester,
-	"smoke":   smoke.NewTester,
+	"mock":          testermock.NewTester,
+	"manual":        manual.NewTester,
+	"common":        common.NewTester,
+	"xdevice":       xdevice.NewTester,
+	"smoke":         smoke.NewTester,
+	"pkg_available": pkg_available.NewTester,
 }
 
 var rootCmd *cobra.Command

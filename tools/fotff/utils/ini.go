@@ -19,6 +19,7 @@ import (
 	"github.com/Unknwon/goconfig"
 	"github.com/sirupsen/logrus"
 	"reflect"
+	"strings"
 )
 
 // ParseFromConfigFile parse ini file and set values by the tag of fields.
@@ -46,6 +47,22 @@ func ParseFromConfigFile(section string, p any) {
 				v = rt.Elem().Field(i).Tag.Get("default")
 			}
 			rv.Elem().Field(i).SetString(v)
+		case reflect.Slice:
+			if rt.Elem().Field(i).Type.Elem().Kind() != reflect.String {
+				break
+			}
+			key := rt.Elem().Field(i).Tag.Get("key")
+			if key == "" {
+				continue
+			}
+			var v string
+			if conf != nil {
+				v, err = conf.GetValue(section, key)
+			}
+			if conf == nil || err != nil {
+				v = rt.Elem().Field(i).Tag.Get("default")
+			}
+			rv.Elem().Field(i).Set(reflect.ValueOf(strings.Split(v, ",")))
 		case reflect.Struct:
 			ParseFromConfigFile(section, rv.Elem().Field(i).Addr().Interface())
 		}

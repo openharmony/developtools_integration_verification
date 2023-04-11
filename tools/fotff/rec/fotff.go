@@ -146,18 +146,7 @@ func flashAndTest(m pkg.Manager, t tester.Tester, pkg string, testcase string, c
 	device := res.GetDevice()
 	defer res.ReleaseDevice(device)
 	if err := m.Flash(device, pkg, ctx); err != nil && !errors.Is(err, context.Canceled) {
-		// Sometimes we need to find out the first compilation failure. Treat it as a normal test failure to re-use this framework.
-		var cfg struct {
-			AllowBuildError string `key:"allow_build_err"`
-		}
-		utils.ParseFromConfigFile("", &cfg)
-		if cfg.AllowBuildError != "true" {
-			return false, newFellows, err
-		}
-		logrus.Warnf("can not flash %s to %s, assume it as a failure: %v", pkg, device, err)
-		for _, cases := range append(fellows, testcase) {
-			results = append(results, tester.Result{TestCaseName: cases, Status: tester.ResultFail})
-		}
+		return false, newFellows, err
 	} else {
 		if err = t.Prepare(m.PkgDir(pkg), device, ctx); err != nil {
 			return false, newFellows, err

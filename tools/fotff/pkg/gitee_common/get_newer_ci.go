@@ -13,10 +13,11 @@
  * limitations under the License.
  */
 
-package dayu200
+package gitee_common
 
 import (
 	"encoding/json"
+	"fmt"
 	"fotff/utils"
 	"github.com/sirupsen/logrus"
 	"io"
@@ -45,22 +46,18 @@ type DailyBuildsResp struct {
 }
 
 type DailyBuild struct {
-	Id         string `json:"id"`
-	ImgObsPath string `json:"imgObsPath"`
+	CurrentStatus   string `json:"currentStatus"`
+	BuildStartTime  string `json:"buildStartTime"`
+	BuildFailReason string `json:"buildFailReason"`
+	Id              string `json:"id"`
+	ObsPath         string `json:"obsPath"`
+	ImgObsPath      string `json:"imgObsPath"`
 }
 
-func (m *Manager) getNewerFromCI(cur string) string {
+func (m *Manager) loopCI(param DailyBuildsQueryParam, cur string, getFn func(cur string, resp *DailyBuild) string) string {
 	for {
 		file := func() string {
-			var q = DailyBuildsQueryParam{
-				ProjectName: "openharmony",
-				Branch:      m.Branch,
-				Component:   "dayu200",
-				BuildStatus: "success",
-				PageNum:     1,
-				PageSize:    1,
-			}
-			data, err := json.Marshal(q)
+			data, err := json.Marshal(param)
 			if err != nil {
 				logrus.Errorf("can not marshal query param: %v", err)
 				return ""
@@ -75,19 +72,13 @@ func (m *Manager) getNewerFromCI(cur string) string {
 				logrus.Errorf("can not unmarshal resp [%s]: %v", string(resp), err)
 				return ""
 			}
-			if len(dailyBuildsResp.Result.DailyBuildVos) != 0 {
-				url := dailyBuildsResp.Result.DailyBuildVos[0].ImgObsPath
-				if filepath.Base(url) != cur {
-					logrus.Infof("new package found, name: %s", filepath.Base(url))
-					file, err := m.downloadToWorkspace(url)
-					if err != nil {
-						logrus.Errorf("can not download package %s: %v", url, err)
-						return ""
-					}
-					return file
-				}
+			if len(dailyBuildsResp.Result.DailyBuildVos) == 0 {
+				return ""
 			}
-			return ""
+			if dailyBuildsResp.Result.DailyBuildVos[0].CurrentStatus != "end" {
+				return ""
+			}
+			return getFn(cur, dailyBuildsResp.Result.DailyBuildVos[0])
 		}()
 		if file != "" {
 			return file
@@ -96,7 +87,39 @@ func (m *Manager) getNewerFromCI(cur string) string {
 	}
 }
 
+func (m *Manager) getNewerFromCI(cur string) string {
+	return m.loopCI(DailyBuildsQueryParam{
+		ProjectName: "openharmony",
+		Branch:      m.Branch,
+		Component:   m.Component,
+		BuildStatus: "success",
+		PageNum:     1,
+		PageSize:    1,
+	}, cur, m.getNewerDailyBuild)
+}
+
+func (m *Manager) getNewerDailyBuild(cur string, db *DailyBuild) string {
+	p := db.ImgObsPath
+	if p == "" {
+		p = db.ObsPath
+	}
+	if filepath.Base(p) == cur {
+		return ""
+	}
+	logrus.Infof("new package found, name: %s", filepath.Base(p))
+	file, err := m.downloadToWorkspace(p)
+	if err != nil {
+		logrus.Errorf("can not download package %s: %v", p, err)
+		return ""
+	}
+	return file
+}
+
 func (m *Manager) downloadToWorkspace(url string) (string, error) {
+	if _, err := parseTime(filepath.Base(url)); err != nil {
+		logrus.Errorf("can not get package time from %s, skipping", filepath.Base(url))
+		return "", fmt.Errorf("can not get package time from %s, skipping", filepath.Base(url))
+	}
 	logrus.Infof("downloading %s", url)
 	resp, err := utils.DoSimpleHttpReqRaw(http.MethodGet, url, nil, nil)
 	if err != nil {

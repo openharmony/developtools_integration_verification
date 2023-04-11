@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package dayu200
+package gitee_common
 
 import (
 	"fotff/vcs"
