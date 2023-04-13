@@ -372,6 +372,9 @@ class RamAnalyzer:
                     return v
 
         for process_name, process_size in process_size_dict.items():  # 从进程出发
+            if not process_name:
+                print("warning: an empty 'process_name' has been found.")
+                continue
             # 如果部件是init,特殊处理
             if process_name == "init":
                 _, elf,_, _, size = cls.find_elf_size_from_rom_result(process_name, "startup", "init",
