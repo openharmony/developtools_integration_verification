@@ -64,7 +64,8 @@ func init() {
 	}
 	runCmd := initRunCmd(m, t)
 	flashCmd := initFlashCmd(m)
-	rootCmd.AddCommand(runCmd, flashCmd)
+	testCmd := initTestCmd(m, t)
+	rootCmd.AddCommand(runCmd, flashCmd, testCmd)
 }
 
 func initRunCmd(m pkg.Manager, t tester.Tester) *cobra.Command {
@@ -98,6 +99,31 @@ func initFlashCmd(m pkg.Manager) *cobra.Command {
 	flashCmd.PersistentFlags().StringVarP(&device, "device", "d", "", "device sn")
 	flashCmd.MarkPersistentFlagRequired("package")
 	return flashCmd
+}
+
+func initTestCmd(m pkg.Manager, t tester.Tester) *cobra.Command {
+	var targetPkg, device, testCase string
+	testCmd := &cobra.Command{
+		Use:   "test",
+		Short: "build and flash and test the given package on the specified device",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			opt := &rec.FlashAndTestOptions{
+				M:        m,
+				T:        t,
+				Version:  targetPkg,
+				Device:   device,
+				TestCase: testCase,
+			}
+			return rec.FlashAndTest(context.TODO(), opt)
+		},
+	}
+	testCmd.PersistentFlags().StringVarP(&targetPkg, "package", "p", "", "package directory")
+	testCmd.PersistentFlags().StringVarP(&device, "device", "d", "", "target device sn")
+	testCmd.PersistentFlags().StringVarP(&testCase, "testcase", "t", "", "test case to run")
+	testCmd.MarkPersistentFlagRequired("package")
+	testCmd.MarkPersistentFlagRequired("device")
+
+	return testCmd
 }
 
 func main() {
