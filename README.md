@@ -43,4 +43,4 @@
 
 ## 相关仓
 
-[**developtools\_integration\_verification**](https://gitee.com/openharmony/developtools_integration_verification/blob/master/README_zh.md)
+[**developtools\_integration\_verification**](https://gitee.com/openharmony/developtools_integration_verification)
