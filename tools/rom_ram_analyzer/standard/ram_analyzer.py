@@ -109,6 +109,7 @@ class RamAnalyzer:
             for lname in __process_name_list:
                 if lname.startswith(hname):
                     return lname
+            return str()
 
         def process_ps_ef(content: str) -> list:
             line_list = content.strip().split("\n")[1:]
@@ -136,8 +137,12 @@ class RamAnalyzer:
             if not processed or not processed[0].isnumeric():  # 如果第一列不是数字（pid），就过
                 continue
             name = processed[1]  # 否则的话就取名字，和对应的size
-            size = int(processed[cls.__ss_dict.get(ss)])
-            process_pss_dict[find_full_process_name(name)] = size
+            size = int(processed[cls.__ss_dict.get(ss)])*1024   # kilo byte to byte
+            full_process_name = find_full_process_name(name)
+            if not full_process_name:
+                print(f"warning: process \"{full_process_name}\" not found in not found int the result of command \"ps -ef\"")
+                continue
+            process_pss_dict[full_process_name] = size
         return process_pss_dict
 
     @classmethod
