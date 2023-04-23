@@ -65,9 +65,9 @@
 ```json
 {
    子系统名: {
-       "size": 整个子系统输出文件的总大小,
+       "size": 整个子系统输出文件的总大小(单位：字节),
        "file_count":  整个子系统产生的文件数,
-       输出文件名: 本文件的大小,
+       输出文件名: 本文件的大小(单位：字节),
        ...
    },  
    ...
@@ -83,6 +83,8 @@
 ## 功能介绍
 
 基于out/{product_name}/packages/phone下所有cfg文件、out/{product_name}/packages/phone/system/profile下所有xml文件，分析各进程及对应部件的ram占用（默认取Pss）
+
+可供参考命令：`mkdir xml && cp $(find ~/oh/out/rk3568/packages/phone/system/profile -name *.xml | xargs) xml`
 
 结果以json与xls格式存储，其中，json格式是必输出的，xls格式需要-e参数控制。
 
@@ -139,10 +141,10 @@
 ```json
 {
    进程名:{
-       "size": 本进程占用内存的大小,
+       "size": 本进程占用内存的大小（单位：字节）,
        子系统名: {
             部件名: {
-               elf文件名: elf文件大小 
+               elf文件名: elf文件大小(单位：字节)
                ...
             }
             ...
