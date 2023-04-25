@@ -18,6 +18,8 @@ const (
 	testResultPass = "pass"
 	testCaseFlag   = "--test-case"
 	deviceFlag     = "--device"
+	resultPathFlag = "--result-path"
+	resultFileFlag = "--result-file"
 )
 
 // Tester is the common tester for most kinds of tests
@@ -54,6 +56,8 @@ func (t *Tester) DoTestTask(device string, ctx context.Context) ([]tester.Result
 	if device != "" {
 		args = append(args, []string{deviceFlag, device}...)
 	}
+	args = append(args, []string{resultPathFlag, t.ResultPath}...)
+	args = append(args, []string{resultFileFlag, t.ResultFile}...)
 	if err := utils.ExecContext(ctx, t.Tool, args...); err != nil {
 		if errors.Is(err, context.Canceled) {
 			return nil, err
@@ -72,6 +76,8 @@ func (t *Tester) DoTestCase(device string, testCase string, ctx context.Context)
 	if device != "" {
 		args = append(args, []string{deviceFlag, device}...)
 	}
+	args = append(args, []string{resultPathFlag, t.ResultPath}...)
+	args = append(args, []string{resultFileFlag, t.ResultFile}...)
 	defaultResult := tester.Result{}
 	if err := utils.ExecContext(ctx, t.Tool, args...); err != nil {
 		if errors.Is(err, context.Canceled) {
@@ -104,6 +110,8 @@ func (t *Tester) DoTestCases(device string, testCases []string, ctx context.Cont
 	if device != "" {
 		args = append(args, []string{deviceFlag, device}...)
 	}
+	args = append(args, []string{resultPathFlag, t.ResultPath}...)
+	args = append(args, []string{resultFileFlag, t.ResultFile}...)
 	if err := utils.ExecContext(ctx, t.Tool, args...); err != nil {
 		if errors.Is(err, context.Canceled) {
 			return nil, err
