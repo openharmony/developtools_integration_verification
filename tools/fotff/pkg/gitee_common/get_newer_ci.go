@@ -90,7 +90,7 @@ func (m *Manager) loopCI(param DailyBuildsQueryParam, cur string, getFn func(cur
 func (m *Manager) getNewerFromCI(cur string) string {
 	return m.loopCI(DailyBuildsQueryParam{
 		ProjectName: "openharmony",
-		Branch:      m.Branch,
+		Branch:      m.ManifestBranch,
 		Component:   m.Component,
 		BuildStatus: "success",
 		PageNum:     1,

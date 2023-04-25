@@ -46,7 +46,7 @@ func (m *Manager) GetNewerOrFail(cur string) (string, error) {
 func (m *Manager) getNewerOrFailFromCI(cur string) string {
 	return m.loopCI(DailyBuildsQueryParam{
 		ProjectName: "openharmony",
-		Branch:      m.Branch,
+		Branch:      m.ManifestBranch,
 		Component:   m.Component,
 		PageNum:     1,
 		PageSize:    1,
@@ -79,7 +79,7 @@ func (m *Manager) getNewerDailyBuildOrFail(cur string, db *DailyBuild) string {
 
 func (m *Manager) genFailedPackage(lastSuccessTime, failedBuildStartTime time.Time) string {
 	pkg := fmt.Sprintf("%s_%s_build_fail", m.Component, failedBuildStartTime.Format("20060102_150405"))
-	logrus.Infof("getting failed package manifest for %s(%s) at %s", m.Component, m.Branch, failedBuildStartTime)
+	logrus.Infof("getting failed package manifest for %s(%s) at %s", m.Component, m.ManifestBranch, failedBuildStartTime)
 	tags, err := m.getAllTags(lastSuccessTime, failedBuildStartTime)
 	if err != nil {
 		logrus.Errorf("can not get latest tag from ci, err: %v", err)

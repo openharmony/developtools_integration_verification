@@ -85,7 +85,7 @@ func (m *Manager) getAllTags(from, to time.Time) (ret []*Tag, err error) {
 	for {
 		var q = TagQueryParam{
 			ProjectName:  "openharmony",
-			Branch:       m.Branch,
+			Branch:       m.ManifestBranch,
 			ManifestFile: "default.xml",
 			StartTime:    from.Local().Format("2006-01-02"),
 			EndTime:      to.Local().Format("2006-01-02"),
