@@ -25,13 +25,14 @@ import (
 )
 
 type Manager struct {
-	ArchiveDir    string   `key:"archive_dir" default:"archive"`
-	Workspace     string   `key:"workspace" default:"workspace"`
-	Branch        string   `key:"branch" default:"master"`
-	Component     string   `key:"component"`
-	PreCompileCMD string   `key:"pre_compile_cmd"`
-	CompileCMD    string   `key:"compile_cmd"`
-	ImageList     []string `key:"image_list"`
+	ArchiveDir     string   `key:"archive_dir" default:"archive"`
+	Workspace      string   `key:"workspace" default:"workspace"`
+	Branch         string   `key:"branch" default:"master"`
+	ManifestBranch string   `key:"manifest_branch" default:"master"`
+	Component      string   `key:"component"`
+	PreCompileCMD  string   `key:"pre_compile_cmd"`
+	CompileCMD     string   `key:"compile_cmd"`
+	ImageList      []string `key:"image_list"`
 
 	*gitee_common.Manager
 }
@@ -39,7 +40,7 @@ type Manager struct {
 func NewManager() pkg.Manager {
 	var ret Manager
 	utils.ParseFromConfigFile("gitee_build", &ret)
-	ret.Manager = gitee_common.NewManager(ret.Component, ret.Branch, ret.ArchiveDir, ret.Workspace, true)
+	ret.Manager = gitee_common.NewManager(ret.Component, ret.Branch, ret.ManifestBranch, ret.ArchiveDir, ret.Workspace, true)
 	return &ret
 }
 

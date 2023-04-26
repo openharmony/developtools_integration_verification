@@ -31,6 +31,7 @@ type Manager struct {
 	WatchCI        string `key:"watch_ci" default:"false"`
 	Workspace      string `key:"workspace" default:"workspace"`
 	Branch         string `key:"branch" default:"master"`
+	ManifestBranch string `key:"manifest_branch" default:"master"`
 	FlashTool      string `key:"flash_tool" default:"python"`
 	LocationIDList string `key:"location_id_list"`
 
@@ -71,7 +72,7 @@ func NewManager() pkg.Manager {
 	if err != nil {
 		logrus.Panicf("can not parse 'watch_ci', please check")
 	}
-	ret.Manager = gitee_common.NewManager("dayu200", ret.Branch, ret.ArchiveDir, ret.Workspace, watchCI)
+	ret.Manager = gitee_common.NewManager("dayu200", ret.Branch, ret.ManifestBranch, ret.ArchiveDir, ret.Workspace, watchCI)
 	devs := res.DeviceList()
 	locs := strings.Split(ret.LocationIDList, ",")
 	if len(devs) != len(locs) {

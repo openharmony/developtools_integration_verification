@@ -63,7 +63,7 @@ func (m *Manager) stepsFromGitee(from, to string) (pkgs []string, err error) {
 		return nil, err
 	}
 	logrus.Infof("find %d repo updates from %s to %s", len(updates), from, to)
-	steps, err := getAllStepsFromGitee(startTime, endTime, m.Branch, updates)
+	steps, err := getAllStepsFromGitee(startTime, endTime, m.Branch, m.ManifestBranch, updates)
 	if err != nil {
 		return nil, err
 	}
@@ -94,8 +94,8 @@ func (m *Manager) getRepoUpdates(from, to string) (updates []vcs.ProjectUpdate, 
 	return vcs.GetRepoUpdates(m1, m2)
 }
 
-func getAllStepsFromGitee(startTime, endTime time.Time, branch string, updates []vcs.ProjectUpdate) (ret []Step, err error) {
-	allMRs, err := getAllMRs(startTime, endTime, branch, updates)
+func getAllStepsFromGitee(startTime, endTime time.Time, branch string, manifestBranch string, updates []vcs.ProjectUpdate) (ret []Step, err error) {
+	allMRs, err := getAllMRs(startTime, endTime, branch, manifestBranch, updates)
 	if err != nil {
 		return nil, err
 	}
@@ -106,13 +106,13 @@ func getAllStepsFromGitee(startTime, endTime time.Time, branch string, updates [
 	return combineIssuesToStep(issueInfos)
 }
 
-func getAllMRs(startTime, endTime time.Time, branch string, updates []vcs.ProjectUpdate) (allMRs []*gitee.Commit, err error) {
+func getAllMRs(startTime, endTime time.Time, branch string, manifestBranch string, updates []vcs.ProjectUpdate) (allMRs []*gitee.Commit, err error) {
 	var once sync.Once
 	for _, update := range updates {
 		var prs []*gitee.Commit
 		if update.P1.StructureDiff(update.P2) {
 			once.Do(func() {
-				prs, err = gitee.GetBetweenTimeMRs("openharmony", "manifest", branch, startTime, endTime)
+				prs, err = gitee.GetBetweenTimeMRs("openharmony", "manifest", manifestBranch, startTime, endTime)
 			})
 			if update.P1 != nil {
 				var p1 []*gitee.Commit

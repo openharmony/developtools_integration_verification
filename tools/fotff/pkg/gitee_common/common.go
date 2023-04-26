@@ -28,20 +28,22 @@ import (
 )
 
 type Manager struct {
-	Component  string
-	Branch     string
-	ArchiveDir string
-	Workspace  string
-	WatchCI    bool
+	Component      string
+	Branch         string
+	ManifestBranch string
+	ArchiveDir     string
+	Workspace      string
+	WatchCI        bool
 }
 
-func NewManager(component string, branch string, archiveDir string, workspace string, watchCI bool) *Manager {
+func NewManager(component string, branch string, manifestBranch string, archiveDir string, workspace string, watchCI bool) *Manager {
 	var ret = Manager{
-		Component:  component,
-		Branch:     branch,
-		ArchiveDir: archiveDir,
-		Workspace:  workspace,
-		WatchCI:    watchCI,
+		Component:      component,
+		Branch:         branch,
+		ManifestBranch: manifestBranch,
+		ArchiveDir:     archiveDir,
+		Workspace:      workspace,
+		WatchCI:        watchCI,
 	}
 	go ret.cleanupOutdated()
 	return &ret
