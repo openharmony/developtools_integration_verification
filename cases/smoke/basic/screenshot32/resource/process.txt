@@ -10,7 +10,6 @@ appspawn
 hilogd
 samgr
 storage_daemon
-udevd
 uinput_inject
 multimodalinput
 huks_service
