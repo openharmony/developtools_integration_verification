@@ -27,6 +27,7 @@
 1. 关于NOTFOUND:表示对应的编译产物没有在BUILD.gn的扫描结果中匹配(包括模糊匹配)到
 1. 本工具是基于gn的template进行匹配,如果新增了自定义的template,则需要相应在代码中进行配置
 1. 由于本工具是进行的静态扫描,且部分gn文件中使用了较为复杂的gn语法,因此本工具的**准确率无法达到100%,结果仅供参考**
+1. rk3568因为主要使用的是自定义的template,所以能够在编译阶段收集更多有效信息,因此建议使用standard目录下的脚本进行分析
 
 **子系统及部件的查找过程**
 
@@ -51,17 +52,16 @@
     xlwt==1.3.0
     ```
 
-1. `python3 rom_analysis.py --product_name {your_product_name} --oh_path {root_path_of_oh} [-g] [-s]`运行代码,其中-g表示直接使用上次扫描的BUILD.gn的结果,-s表示直接使用已有的子系统和部件信息,默认都会重新扫描.eg: `python3 rom_analysis.py --product_name ipcamera_hispark_taurus`.
+1. `python3 rom_analysis.py --product_name {your_product_name} --oh_path {root_path_of_oh} [-g] [-s] [-b]`运行代码,其中-g表示直接使用上次扫描的BUILD.gn的结果,-s表示直接使用已有的子系统和部件信息,此二者默认都会重新扫描, -b表示在结果中添加各部件的baseline信息（根据bundle.json）.eg: `python3 rom_analysis.py --product_name ipcamera_hispark_taurus -b`.
 1. 运行完毕会产生4个json文件及一个xls文件,如果是默认配置,各文件描述如下:
    - gn_info.json:BUILD.gn的分析结果
    - sub_com_info.json:从bundle.json中进行分析获得的各部件及其对应根目录的信息
    - {product_name}_product.json:该产品实际的编译产物信息,根据config.yaml进行收集
-   - {product_name}_result.json:各部件的rom大小分析结果
-   - {product_name}_result.xls:各部件的rom大小分析结果
+   - **{product_name}_result.json:各部件的rom大小分析结果**
+   - **{product_name}_result.xls:各部件的rom大小分析结果**
+   - rom_ram_baseline.json：各部件在bundle.json中定义的rom和ram的基线
 
 ## 新增对产品的支持
-
-*rk3568因为主要使用的是自定义的template,所以能够在编译阶段收集更多有效信息,因此建议使用standard目录下的脚本进行分析*
 
 在config.yaml中进行配置即可,格式说明如下:
 ```yaml
@@ -100,3 +100,6 @@ ipcamera_hispark_taurus: # 产品名称,需要和命令行参数中的-p参数�
 ## 后续工作
 
 1. 对target(xxx,yyy)中,xxx/yyy为变量的情况可进一步优化
+1. 重构
+1. 在config.yaml中允许人为配置以进一步提高准确性
+1. 单位自适应

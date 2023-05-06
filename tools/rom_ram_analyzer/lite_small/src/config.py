@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This file is a configuration for scaning the BUILD.gn to collection compile 
+# This file is a configuration for scaning the BUILD.gn to collection compile
 # products.
 
 
@@ -43,14 +43,16 @@ def parse_args():
     parser.add_argument("-o", "--oh_path", type=str,
                         default=".", help="root path of openharmony")
     parser.add_argument("-g", "--recollect_gn",
-                        action="store_false", help="recollect gn info or not")
+                        action="store_false", help="recollect gn info or not(-g)")
     parser.add_argument("-s", "--recollect_sc", action="store_false",
-                        help="recollect subsystem_component info or not")
+                        help="recollect subsystem_component info or not(-s)")
+    parser.add_argument("-b", "--baseline", action="store_true",
+                        help="add baseline of component to the result(-b) or not.")
     args = parser.parse_args()
     return args
 
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.NOTSET)
 _args = parse_args()
 
 # # global variables
@@ -60,6 +62,7 @@ result_dict: Dict[str, Any] = dict()
 project_path = BasicTool.abspath(_args.oh_path)
 product_name = _args.product_name
 recollect_gn = _args.recollect_gn
+baseline = _args.baseline
 _recollect_sc = _args.recollect_sc
 _sc_json: Dict[Text, Text] = configs.get("subsystem_component")
 _sc_save = _sc_json.get("save")

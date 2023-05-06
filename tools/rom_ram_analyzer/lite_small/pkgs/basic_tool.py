@@ -20,6 +20,40 @@ import os
 import re
 import glob
 from typing import *
+import unittest
+
+__all__ = ["translate_str_unit", "BasicTool", "do_nothing", "get_unit"]
+
+
+def get_unit(x: str) -> str:
+    pattern = r"[a-z|A-Z]*$"
+    unit = re.search(pattern, x).group()
+    return unit
+
+
+class TestGetUnit(unittest.TestCase):
+    def test_TB(self):
+        self.assertEqual(get_unit("1TB"), "TB")
+
+
+def translate_str_unit(x: str, dest: str, prefix: str = "~") -> float:
+    src_unit = get_unit(x)
+    trans_dict: Dict[str, int] = {
+        "Byte": 1,
+        "byte": 1,
+        "KB": 1024,
+        "kb": 1024,
+        "MB": 1024*1024,
+        "M": 1024*1024,
+        "GB": 1024*1024*1024,
+        "G": 1024*1024*1024
+    }
+    if src_unit not in trans_dict.keys():
+        raise Exception(
+        f"unsupport unit: {src_unit}. only support {list(trans_dict.keys())}")
+    x = float(x.lstrip(prefix).rstrip(src_unit))
+    return round(x*(trans_dict.get(src_unit)/trans_dict.get(dest)),2)
+    
 
 
 def do_nothing(x: Any) -> Any:
@@ -138,8 +172,43 @@ class BasicTool:
         return output
 
 
+class TestUnitTrans(unittest.TestCase):
+    def test_Byte(self):
+        self.assertEqual(translate_str_unit("~1MB", "KB"), 1024.00)
+
+    # def test_byte(self):
+    #     self.assertEqual(translate_str_unit("1byte"), 1)
+
+    # def test_KB(self):
+    #     self.assertEqual(translate_str_unit("1KB"), 1024)
+
+    # def test_kb(self):
+    #     self.assertEqual(translate_str_unit("1kb"), 1024)
+
+    # def test_MB(self):
+    #     self.assertEqual(translate_str_unit("1MB"), 1024*1024)
+
+    # def test_M(self):
+    #     self.assertEqual(translate_str_unit("1M"), 1024*1024)
+
+    # def test_GB(self):
+    #     self.assertEqual(translate_str_unit("1GB"), 1024*1024*1024)
+
+    # def test_G(self):
+    #     self.assertEqual(translate_str_unit("1G"), 1024*1024*1024)
+
+    # def test_TB(self):
+    #     with self.assertRaises(Exception):
+    #         translate_str_unit("1TB")
+
+    # def test_prefix(self):
+    #     self.assertEqual(translate_str_unit("~1MB"), 1024*1024)
+
+
 if __name__ == '__main__':
-    res = BasicTool.grep_ern("^( *)ohos_prebuilt_shared_library", "/home/aodongbiao/oh", include="BUILD.gn", exclude=("/home/aodongbiao/oh/out","doc", ".ccache"), post_handler=lambda x: x.split('\n'))
-    for i in res:
-        if "oh/out" in i:
-            print(i)
+    # res = BasicTool.grep_ern("^( *)ohos_prebuilt_shared_library", "/home/aodongbiao/oh", include="BUILD.gn", exclude=("/home/aodongbiao/oh/out","doc", ".ccache"), post_handler=lambda x: x.split('\n'))
+    # for i in res:
+    #     if "oh/out" in i:
+    #         print(i)
+
+    unittest.main()

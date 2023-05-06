@@ -10,7 +10,7 @@
 
 ## 支持产品
 
-主要是rk3568系列,已测试产品包括rk3568 rk3568_mini_system
+主要是rk3568系列,已测试产品包括rk3568、rk3568_mini_system
 
 ## 使用说明
 
@@ -30,32 +30,32 @@
 1. `-h`或`--help`命令查看帮助
    ```shell
    > python3 rom_analyzer.py -h
-   usage: rom_analyzer.py [-h] [-v] -p PROJECT_PATH -j MODULE_INFO_JSON -n PRODUCT_NAME -d PRODUCT_DIR [-o OUTPUT_FILE] [-e EXCEL]
-   
+   usage: rom_analyzer.py [-h] [-v] -p PROJECT_PATH -j MODULE_INFO_JSON -n PRODUCT_NAME -d PRODUCT_DIR [-b] [-o OUTPUT_FILE] [-e EXCEL]
+
    analyze rom size of component.
-   
-   optional arguments:
-     -h, --help            show this help message and exit
-     -v, -version          show program\'s version number and exit
-     -p PROJECT_PATH, --project_path PROJECT_PATH
-                           root path of oh. eg: -p ~/oh
-     -j MODULE_INFO_JSON, --module_info_json MODULE_INFO_JSON
+
+   options:
+   -h, --help            show this help message and exit
+   -v, -version          show program\'s version number and exit
+   -p PROJECT_PATH, --project_path PROJECT_PATH
+                           root path of openharmony. eg: -p ~/openharmony
+   -j MODULE_INFO_JSON, --module_info_json MODULE_INFO_JSON
                            path of out/{product_name}/packages/phone/system_module_info.json
-     -n PRODUCT_NAME, --product_name PRODUCT_NAME
+   -n PRODUCT_NAME, --product_name PRODUCT_NAME
                            product name. eg: -n rk3568
-     -d PRODUCT_DIR, --product_dir PRODUCT_DIR
+   -d PRODUCT_DIR, --product_dir PRODUCT_DIR
                            subdirectories of out/{product_name}/packages/phone to be counted.eg: -d system -d vendor
-     -o OUTPUT_FILE, --output_file OUTPUT_FILE
+   -b, --baseline        add baseline of component to the result(-b) or not.
+   -o OUTPUT_FILE, --output_file OUTPUT_FILE
                            basename of output file, default: rom_analysis_result. eg: demo/rom_analysis_result
-     -e EXCEL, --excel EXCEL
+   -e EXCEL, --excel EXCEL
                            if output result as excel, default: False. eg: -e True
    ```
 1. 使用示例
    ```shell
-   python3 rom_analyzer.py -p ~/nomodify_oh/ -j ../system_module_info.json -n rk3568 -d system -d vendor -d updater -o demo/demo -e True
+   python3 rom_analyzer.py -p ~/oh/ -j ~/oh/out/rk3568/packages/phone/system_module_info.json -n rk3568 -d system -d vendor -d updater -e True -b
    # oh：rootpath of oh
-   # rk3568: product_name, same as out/{product_name}
-   # demo/demo: path of output file, where the second 'demo' is the basename of output file
+   # -b: add baseline of to the result
    # -e True：output result in excel format additionally
    ```
 
@@ -67,7 +67,13 @@
    子系统名: {
        "size": 整个子系统输出文件的总大小(单位：字节),
        "file_count":  整个子系统产生的文件数,
-       输出文件名: 本文件的大小(单位：字节),
+       部件名: {
+         "size": 部件的大小（单位：字节），
+         "file_count": 部件对应的文件数,
+         "baseline": 部件的baseline（根据bundle.json生成）,
+         "编译产物文件名": 编译产物大小（单位：字节）
+         ...
+       }
        ...
    },  
    ...
@@ -76,15 +82,15 @@
 
 ## 附加说明
 
-1. 由于目前standard产品使用的基本都是自定义的template,能够有效收集更多信息,因此相较于lite_small的分析脚本,本脚本能够具有更高的准确率,请放心使用
+1. 由于目前standard产品使用的基本都是自定义的template,能够有效收集更多信息,因此相较于lite_small的分析脚本,本脚本能够具有更高的准确率,可以放心使用（不出意外的话
 
 # ram_analyzer.py
 
 ## 功能介绍
 
-基于out/{product_name}/packages/phone下所有cfg文件、out/{product_name}/packages/phone/system/profile下所有xml文件，分析各进程及对应部件的ram占用（默认取Pss）
+基于out/{product_name}/packages/phone下所有cfg文件、out/{product_name}/packages/phone/system/profile下所有xml文件，rom的分析结果，（rom_ram_baseline.json——可以在rom分析阶段通过-b参数生成）分析各进程及对应部件的ram占用（默认取Pss）
 
-可供参考命令：`mkdir xml && cp $(find ~/oh/out/rk3568/packages/phone/system/profile -name *.xml | xargs) xml`
+收集cfg、xml文件的可供参考命令：`mkdir xml && cp $(find ~/oh/out/rk3568/packages/phone/system/profile -name *.xml | xargs) xml`
 
 结果以json与xls格式存储，其中，json格式是必输出的，xls格式需要-e参数控制。
 
@@ -104,6 +110,7 @@
 5. 准备好相关数据：
    1. out/{product_name}/packages/phone下所有cfg文件，并将其放置于同一个目录中（ps：同名文件仅保存一份即可）
    1. out/{product_name}/packages/phone/system/profile下所有xml文件
+   1. rom_ram_baseline.json——如果需要在结果中生成基线信息
 6. 运行rom_analyzer.py产生的json结果一份（即-o参数对应的文件，默认rom_analysis_result.json）
 
 命令介绍：
@@ -111,40 +118,70 @@
 1. 使用`-h`或`--help`查看帮助
    ```shell
    > python .\ram_analyzer.py -h
-   usage: ram_analyzer.py [-h] [-v] -x XML_PATH -c CFG_PATH [-j ROM_RESULT] -n DEVICE_NUM [-o OUTPUT_FILENAME] [-e EXCEL]
-   
+   usage: ram_analyzer.py [-h] [-v] -x XML_PATH -c CFG_PATH [-j ROM_RESULT] -n DEVICE_NUM [-b BASELINE_FILE]
+                       [-o OUTPUT_FILENAME] [-e EXCEL]
+
    analyze ram size of component
-   
+
    optional arguments:
-     -h, --help            show this help message and exit
-     -v, -version          show program\'s version number and exit
-     -x XML_PATH, --xml_path XML_PATH
-                           path of xml file. eg: -x ~/oh/out/rk3568/packages/phone/system/profile
-     -c CFG_PATH, --cfg_path CFG_PATH
+   -h, --help            show this help message and exit
+   -v, -version          show program\'s version number and exit
+   -x XML_PATH, --xml_path XML_PATH
+                           path of xml file. eg: -x ~/openharmony/out/rk3568/packages/phone/system/profile
+   -c CFG_PATH, --cfg_path CFG_PATH
                            path of cfg files. eg: -c ./cfgs/
-     -j ROM_RESULT, --rom_result ROM_RESULT
-                           json file produced by rom_analyzer_v1.0.py, default: ./rom_analysis_result.json.eg: -j ./demo/rom_analysis_result.json
-     -n DEVICE_NUM, --device_num DEVICE_NUM
+   -j ROM_RESULT, --rom_result ROM_RESULT
+                           json file produced by rom_analyzer_v1.0.py, default: ./rom_analysis_result.json.eg: -j
+                           ./demo/rom_analysis_result.json
+   -n DEVICE_NUM, --device_num DEVICE_NUM
                            device number to be collect hidumper info. eg: -n 7001005458323933328a01fce16d3800
-     -o OUTPUT_FILENAME, --output_filename OUTPUT_FILENAME
+   -b BASELINE_FILE, --baseline_file BASELINE_FILE
+                           baseline file of rom and ram generated by rom analysis.
+   -o OUTPUT_FILENAME, --output_filename OUTPUT_FILENAME
                            base name of output file, default: ram_analysis_result. eg: -o ram_analysis_result
-     -e EXCEL, --excel EXCEL
+   -e EXCEL, --excel EXCEL
                            if output result as excel, default: False. eg: -e True
    ```
 2. 使用示例：
    ```shell
-   python .\ram_analyzer.py -x .\profile\ -c .\init\ -n 7001005458323933328a01fce16d3800 -j .\rom_analysis_result.json -o /demo/demo -e True
-   # demo/demo: path of output file, where the second 'demo' is the basename of output file
-   # -e True：output result in excel format additionally
+    python ram_analyzer.py -x xml -c cfg -j rom_analysis_result.json -n 7001005458323933328a59a140913900 -b rom_ram_baseline.json -e True
+   # -x xml：指定xml文件的存放路径为xml目录，-c cfg类似
+   # -b rom_ram_baseline.json：指定rom与ram的基线信息文件（可在rom统计阶段使用-b参数生成）
+   # -e True：生成xls格式的结果文件
    ```
+3. 生成文件说明：
+   1. refactored_ram_analysis_result.json：结果文件
+   1. ram_analysis_result.json：结果文件（供看板使用）
+   1. ram_analysis_result.xls：xls格式存储结果文件
+
 ## 输出格式说明（json）
+
+1. refactored_ram_analysis_result.json
 ```json
 {
-   进程名:{
+   "子系统名":{
+      "size": 子系统下所有进程占用内存的大小（单位：Byte）,
+      "部件名":{
+         "size": 部件下所有进程占用内存的大小（单位：Byte）,
+         "进程名":{
+            "size": 本进程占用内存的大小（单位：Byte）,
+            "elf":{
+               "拉起本进程的二进制文件名": 该二进制文件的大小（单位：Byte）,
+            }
+         }
+      }
+   }
+}
+```
+
+1. ram_analysis_result.json
+```json
+{
+   "进程名":{
        "size": 本进程占用内存的大小（单位：字节）,
-       子系统名: {
-            部件名: {
-               elf文件名: elf文件大小(单位：字节)
+       "子系统名": {
+            "部件名": {
+               "elf文件名": elf文件大小(单位：字节)
                ...
             }
             ...
@@ -154,3 +191,8 @@
    ...
 }
 ```
+
+## 后续工作
+
+
+1. 考虑适当简化逻辑

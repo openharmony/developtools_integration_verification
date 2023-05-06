@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # This file is to implement the rom analyzation of standard device.
-# 
+#
 
 import argparse
 import copy
@@ -26,6 +26,7 @@ import sys
 import subprocess
 import typing
 import xml.dom.minidom as dom
+from typing import Dict
 from pprint import pprint
 
 from pkgs.simple_excel_writer import SimpleExcelWriter
@@ -57,7 +58,6 @@ class HDCTool:
         stdout = str(cp.stdout)
         stderr = str(cp.stderr)
         return device_num in stderr or device_num in stdout
-
 
     @classmethod
     def exec(cls, args: list, output_from: str = "stdout"):
@@ -98,7 +98,7 @@ class RamAnalyzer:
 
     @classmethod
     def __parse_hidumper_mem(cls, content: typing.Text, device_num: str, ss: str = "Pss") -> typing.Dict[
-        typing.Text, int]:
+            typing.Text, int]:
         """
         解析：hidumper --meme的结果
         返回{process_name: pss}形式的字典
@@ -133,26 +133,31 @@ class RamAnalyzer:
                 break
             if line.isspace():
                 continue
-            processed: typing.List[typing.Text] = cls.__hidumper_mem_line_process(line)
-            if not processed or not processed[0].isnumeric():  # 如果第一列不是数字（pid），就过
+            processed: typing.List[typing.Text] = cls.__hidumper_mem_line_process(
+                line)
+            # 如果第一列不是数字（pid），就过
+            if not processed or not processed[0].isnumeric():
                 continue
             name = processed[1]  # 否则的话就取名字，和对应的size
-            size = int(processed[cls.__ss_dict.get(ss)])*1024   # kilo byte to byte
+            size = int(processed[cls.__ss_dict.get(ss)]) * \
+                1024   # kilo byte to byte
             full_process_name = find_full_process_name(name)
             if not full_process_name:
-                print(f"warning: process \"{full_process_name}\" not found in not found int the result of command \"ps -ef\"")
+                print(
+                    f"warning: process \"{full_process_name}\" not found in not found int the result of command \"ps -ef\"")
                 continue
             process_pss_dict[full_process_name] = size
         return process_pss_dict
 
     @classmethod
-    def process_hidumper_info(cls, device_num: str, ss:str) -> typing.Dict[str, int]:
+    def process_hidumper_info(cls, device_num: str, ss: str) -> typing.Dict[str, int]:
         """
         处理进程名与对应进程大小
         """
 
         def exec_once() -> typing.Dict[str, int]:
-            stdout = HDCTool.exec(["hdc", "-t", device_num, "shell", "hidumper", "--mem"])
+            stdout = HDCTool.exec(
+                ["hdc", "-t", device_num, "shell", "hidumper", "--mem"])
             name_size_dict = cls.__parse_hidumper_mem(stdout, device_num, ss)
             return name_size_dict
 
@@ -179,7 +184,8 @@ class RamAnalyzer:
         process = info.getElementsByTagName("process")[0]
         process_name = process.childNodes[0].data
         result_dict[process_name] = list()
-        libs = info.getElementsByTagName("loadlibs")[0].getElementsByTagName("libpath")
+        libs = info.getElementsByTagName(
+            "loadlibs")[0].getElementsByTagName("libpath")
         for lib in libs:
             so = lib.childNodes[0].data
             result_dict.get(process_name).append(os.path.split(so)[-1])
@@ -197,11 +203,14 @@ class RamAnalyzer:
             rom_info_dict = json.load(f)
         elf_info_dict: typing.Dict[str, typing.Dict[str, str]] = dict()
         for subsystem_name in rom_info_dict.keys():
-            sub_val_dict: typing.Dict[str, typing.Any] = rom_info_dict.get(subsystem_name)
+            sub_val_dict: typing.Dict[str, typing.Any] = rom_info_dict.get(
+                subsystem_name)
             delete_values_from_dict(sub_val_dict, ["size", "file_count"])
             for component_name in sub_val_dict.keys():
-                component_val_dict: typing.Dict[str, str] = sub_val_dict.get(component_name)
-                delete_values_from_dict(component_val_dict, ["size", "file_count"])
+                component_val_dict: typing.Dict[str, str] = sub_val_dict.get(
+                    component_name)
+                delete_values_from_dict(component_val_dict, [
+                                        "size", "file_count"])
                 for file_name, size in component_val_dict.items():
                     file_basename: str = os.path.split(file_name)[-1]
                     elf_info_dict[file_basename] = {
@@ -228,7 +237,8 @@ class RamAnalyzer:
             if first.endswith("sa_main"):
                 # 由sa_main去来起进程
                 xml_base_name = os.path.split(path_list[0])[-1]
-                cls.__parse_process_xml(os.path.join(profile_path, xml_base_name), result_dict)
+                cls.__parse_process_xml(os.path.join(
+                    profile_path, xml_base_name), result_dict)
             else:
                 # 直接执行
                 if result_dict.get(process_name) is None:
@@ -237,7 +247,7 @@ class RamAnalyzer:
 
     @classmethod
     def get_process_so_relationship(cls, xml_path: str, cfg_path: str, profile_path: str) -> typing.Dict[
-        str, typing.List[str]]:
+            str, typing.List[str]]:
         """
         从out/{product_name}/packages/phone/sa_profile/merged_sa查找xml文件并处理得到进程与so的对应关系
         """
@@ -267,54 +277,92 @@ class RamAnalyzer:
         return process_elf_dict
 
     @classmethod
-    def __save_result_as_excel(cls, data_dict: dict, filename: str, ss: str):
+    def __save_result_as_excel(cls, data_dict: dict, filename: str, ss: str, baseline_file: str):
         """
         保存结果到excel中
-        进程名:{
-            "size": xxx,
-            子系统名:{
-                部件名:{
-                    二进制文件: xxx,
-                    ...
+        子系统：{
+            "size": 1234,
+            部件：{
+                "size":123,
+                "base_line":124,
+                进程：{
+                    "size":12,
+                    "elf":{
+                        "elf_file_1":elf_size,
+                        ...
+                    }
                 }
             }
         }
         """
         tmp_dict = copy.deepcopy(data_dict)
         writer = SimpleExcelWriter("ram_info")
-        writer.set_sheet_header(
-            ["process_name", "process_size({}, KB)".format(ss), "subsystem_name","component_name", "elf_name", "elf_size(KB)"])
-        process_start_r = 1
-        process_end_r = 0
-        process_c = 0
-        subsystem_c = 2
+        header = header = [
+            "subsystem_name", "component_name", "component_size(ram, Byte)", "process_name", f"process_size({ss}, Byte)", "elf", "elf_size(Byte)"
+        ]
+        if baseline_file:
+            header = [
+                "subsystem_name", "component_name", "component_size(ram, Byte)", "baseline", "process_name", f"process_size({ss}, Byte)", "elf", "elf_size(Byte)"
+            ]
+        writer.set_sheet_header(header)
+        subsystem_c = 0
         subsystem_start_r = 1
         subsystem_end_r = 0
-        process_size_c = 1
+
+        component_c = 1
         component_start_r = 1
         component_end_r = 0
-        component_c = 3
-        for process_name in tmp_dict.keys():
-            process_val_dict: typing.Dict[str, typing.Dict[str, int]] = tmp_dict.get(process_name)
-            process_size = process_val_dict.get("size")
-            delete_values_from_dict(process_val_dict, ["size"])
-            for subsystem_name, subsystem_val_dict in process_val_dict.items(): # 遍历subsystem
-                for component_name, component_val_dict in subsystem_val_dict.items():   # 遍历component
-                    elf_count_of_component = len(component_val_dict)
-                    for elf_name, size in component_val_dict.items():   # 遍里elf
-                        writer.append_line([process_name, process_size, subsystem_name, component_name, elf_name, "%.2f" % (size / 1024)])
-                    component_end_r += elf_count_of_component
-                    subsystem_end_r += elf_count_of_component
-                    # 重写component
-                    writer.write_merge(component_start_r, component_c, component_end_r,
-                                    component_c, component_name)
-                    component_start_r = component_end_r + 1
-                    process_end_r += elf_count_of_component
-                writer.write_merge(subsystem_start_r, subsystem_c, subsystem_end_r, subsystem_c, subsystem_name)
-                subsystem_start_r = subsystem_end_r+1
-            writer.write_merge(process_start_r, process_c, process_end_r, process_c, process_name)
-            writer.write_merge(process_start_r, process_size_c, process_end_r, process_size_c, process_size)
-            process_start_r = process_end_r + 1
+        component_size_c = 2
+        baseline_c = 3
+
+        process_start_r = 1
+        process_end_r = 0
+        process_c = 4
+        process_size_c = 5
+        if not baseline_file:
+            process_c -= 1
+            process_size_c -= 1
+        for subsystem_name, subsystem_info in tmp_dict.items():
+            subsystem_size = subsystem_info.get("size")
+            if subsystem_size:
+                del subsystem_info["size"]
+            for component_name, component_info in subsystem_info.items():
+                component_size = component_info.get("size")
+                component_baseline = component_info.get("baseline")
+                if "size" in component_info.keys():
+                    del component_info["size"]
+                if "baseline" in component_info.keys():
+                    del component_info["baseline"]
+                for process_name, process_info in component_info.items():
+                    process_size = process_info.get("size")
+                    elf_info = process_info.get("elf")
+                    for elf_name, elf_size in elf_info.items():
+                        line = [subsystem_name, component_name, component_size,
+                                process_name, process_size, elf_name, elf_size]
+                        if baseline_file:
+                            line = [subsystem_name, component_name, component_size,
+                                    component_baseline, process_name, process_size, elf_name, elf_size]
+                        writer.append_line(line)
+                    elf_count = len(elf_info)
+                    process_end_r += elf_count
+                    component_end_r += elf_count
+                    subsystem_end_r += elf_count
+                    writer.write_merge(
+                        process_start_r, process_c, process_end_r, process_c, process_name)
+                    writer.write_merge(
+                        process_start_r, process_size_c, process_end_r, process_size_c, process_size)
+                    process_start_r = process_end_r+1
+                writer.write_merge(component_start_r, component_c,
+                                   component_end_r, component_c, component_name)
+                writer.write_merge(component_start_r, component_size_c,
+                                   component_end_r, component_size_c, component_size)
+                if baseline_file:
+                    writer.write_merge(component_start_r, baseline_c,
+                                       component_end_r, baseline_c, component_baseline)
+                component_start_r = component_end_r + 1
+            writer.write_merge(subsystem_start_r, subsystem_c,
+                               subsystem_end_r, subsystem_c, subsystem_name)
+            subsystem_start_r = subsystem_end_r+1
         writer.save(filename)
 
     @classmethod
@@ -328,25 +376,43 @@ class RamAnalyzer:
         evaluator：评估elf文件的从phone下面开始的路径与service_name的关系，评判如何才是找到了
         returns: 是否查找到，elf文件名，部件名，size
         """
-        subsystem_name_list = [subsystem_name] if subsystem_name != "*" else rom_result_dict.keys()
+        subsystem_name_list = [
+            subsystem_name] if subsystem_name != "*" else rom_result_dict.keys()
         for sn in subsystem_name_list:
             sub_val_dict = rom_result_dict.get(sn)
-            component_name_list = [component_name] if component_name != '*' else sub_val_dict.keys()
+            component_name_list = [
+                component_name] if component_name != '*' else sub_val_dict.keys()
             for cn in component_name_list:
                 if cn == "size" or cn == "file_count":
                     continue
-                component_val_dict: typing.Dict[str, int] = sub_val_dict.get(cn)
+                component_val_dict: typing.Dict[str,
+                                                int] = sub_val_dict.get(cn)
                 for k, v in component_val_dict.items():
                     if k == "size" or k == "file_count":
                         continue
                     if not evaluator(service_name, k):
                         continue
-                    return True, os.path.split(k)[-1],sn, cn, v
+                    return True, os.path.split(k)[-1], sn, cn, v
         return False, str(), str(), str(), int()
 
     @classmethod
+    def add_baseline(self, refactored_result_dict: Dict, baseline_file: str) -> None:
+        with open(baseline_file, 'r', encoding='utf-8') as f:
+            baseline_dict = json.load(f)
+        for subsystem_name, subsystem_info in refactored_result_dict.items():
+            for component_name, component_info in subsystem_info.items():
+                if component_name == "size":
+                    continue
+                if not baseline_dict.get(subsystem_name):
+                    continue
+                if not baseline_dict[subsystem_name].get(component_name):
+                    continue
+                component_info["baseline"] = baseline_dict[subsystem_name][component_name].get(
+                    "ram")
+
+    @classmethod
     def analysis(cls, cfg_path: str, xml_path: str, rom_result_json: str, device_num: str,
-                 output_file: str, ss: str, output_excel: bool):
+                 output_file: str, ss: str, output_excel: bool, baseline_file: str):
         """
         process size subsystem/component so so_size
         """
@@ -364,7 +430,8 @@ class RamAnalyzer:
             rom_result_json)
         process_elf_dict: typing.Dict[str, typing.List[str]] = cls.get_process_so_relationship(xml_path, cfg_path,
                                                                                                profile_path)
-        process_size_dict: typing.Dict[str, int] = cls.process_hidumper_info(device_num, ss)
+        process_size_dict: typing.Dict[str, int] = cls.process_hidumper_info(
+            device_num, ss)
         result_dict: typing.Dict[str, typing.Dict[str, typing.Any]] = dict()
 
         def get(key: typing.Any, dt: typing.Dict[str, typing.Any]):
@@ -379,33 +446,37 @@ class RamAnalyzer:
                 continue
             # 如果部件是init,特殊处理
             if process_name == "init":
-                _, elf,_, _, size = cls.find_elf_size_from_rom_result(process_name, "startup", "init",
-                                                                    lambda x, y: os.path.split(y)[
-                                                                                     -1].lower() == x.lower(),
-                                                                    rom_result_dict)
+                _, elf, _, _, size = cls.find_elf_size_from_rom_result(process_name, "startup", "init",
+                                                                       lambda x, y: os.path.split(y)[
+                                                                           -1].lower() == x.lower(),
+                                                                       rom_result_dict)
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
                 result_dict[process_name]["startup"] = dict()
                 result_dict[process_name]["startup"]["init"] = dict()
-                result_dict[process_name]["startup"]["init"][elf if len(elf) != 0 else "UNKNOWN"] = size
+                result_dict[process_name]["startup"]["init"][elf if len(
+                    elf) != 0 else "UNKNOWN"] = size
                 continue
             # 如果是hap，特殊处理
             if (process_name.startswith("com.") or process_name.startswith("ohos.")):
                 _, hap_name, subsystem_name, component_name, size = cls.find_elf_size_from_rom_result(process_name, "*", "*",
-                                                                                      lambda x, y: len(
-                                                                                          y.split(
-                                                                                              '/')) >= 3 and x.lower().startswith(
-                                                                                          y.split('/')[2].lower()),
-                                                                                      rom_result_dict)
+                                                                                                      lambda x, y: len(
+                                                                                                          y.split(
+                                                                                                              '/')) >= 3 and x.lower().startswith(
+                                                                                                          y.split('/')[2].lower()),
+                                                                                                      rom_result_dict)
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
                 result_dict[process_name][subsystem_name] = dict()
                 result_dict[process_name][subsystem_name][component_name] = dict()
-                result_dict[process_name][subsystem_name][component_name][hap_name if len(hap_name) != 0 else "UNKNOWN"] = size
+                result_dict[process_name][subsystem_name][component_name][hap_name if len(
+                    hap_name) != 0 else "UNKNOWN"] = size
                 continue
-            so_list: list = get(process_name, process_elf_dict)  # 得到进程相关的elf文件list
+            # 得到进程相关的elf文件list
+            so_list: list = get(process_name, process_elf_dict)
             if so_list is None:
-                print("warning: process '{}' not found in .xml or .cfg".format(process_name))
+                print("warning: process '{}' not found in .xml or .cfg".format(
+                    process_name))
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
                 result_dict[process_name]["UNKNOWN"] = dict()
@@ -420,7 +491,8 @@ class RamAnalyzer:
                     result_dict[process_name]["UNKNOWN"] = dict()
                     result_dict[process_name]["UNKNOWN"]["UNKNOWN"] = dict()
                     result_dict[process_name]["UNKNOWN"]["UNKNOWN"][so] = int()
-                    print("warning: '{}' in {} not found in json from rom analysis result".format(so, process_name))
+                    print("warning: '{}' in {} not found in json from rom analysis result".format(
+                        so, process_name))
                     continue
                 component_name = unit.get("component_name")
                 subsystem_name = unit.get("subsystem_name")
@@ -434,9 +506,42 @@ class RamAnalyzer:
         if len(base_dir) != 0 and not os.path.isdir(base_dir):
             os.makedirs(base_dir, exist_ok=True)
         with open(output_file + ".json", 'w', encoding='utf-8') as f:
-            f.write(json.dumps(result_dict, indent=4))
+            # f.write(json.dumps(result_dict, indent=4))
+            json.dump(result_dict, f, indent=4)
+        refactored_result: Dict[str, Dict] = refacotr_result(result_dict)
+        if baseline_file:
+            cls.add_baseline(refactored_result, baseline_file)
+        with open(f"refactored_{output_file}.json", 'w', encoding='utf-8') as f:
+            json.dump(refactored_result, f, indent=4)
         if output_excel:
-            cls.__save_result_as_excel(result_dict, output_file + ".xls", ss)
+            cls.__save_result_as_excel(
+                refactored_result, output_file + ".xls", ss, baseline_file)
+
+
+def refacotr_result(ram_result: Dict[str, Dict]) -> Dict[str, Dict]:
+    refactored_ram_dict: Dict[str, Dict] = dict()
+    for process_name, process_info in ram_result.items():
+        process_size = process_info.get("size")
+        del process_info["size"]
+        for subsystem_name, subsystem_info in process_info.items():
+            for component_name, component_info in subsystem_info.items():
+                for elf_name, elf_size in component_info.items():
+                    if not refactored_ram_dict.get(subsystem_name):
+                        refactored_ram_dict[subsystem_name] = dict()
+                        refactored_ram_dict[subsystem_name]["size"] = 0
+                    if not refactored_ram_dict[subsystem_name].get(component_name):
+                        refactored_ram_dict[subsystem_name][component_name] = dict(
+                        )
+                        refactored_ram_dict[subsystem_name][component_name]["size"] = 0
+                    refactored_ram_dict[subsystem_name][component_name][process_name] = dict(
+                    )
+                    refactored_ram_dict[subsystem_name][component_name][process_name]["size"] = process_size
+                    refactored_ram_dict[subsystem_name][component_name][process_name]["elf"] = dict(
+                    )
+                    refactored_ram_dict[subsystem_name][component_name][process_name]["elf"][elf_name] = elf_size
+                    refactored_ram_dict[subsystem_name]["size"] += process_size
+                    refactored_ram_dict[subsystem_name][component_name]["size"] += process_size
+    return refactored_ram_dict
 
 
 def get_args():
@@ -455,6 +560,8 @@ def get_args():
                              "eg: -j ./demo/rom_analysis_result.json")
     parser.add_argument("-n", "--device_num", type=str, required=True,
                         help="device number to be collect hidumper info. eg: -n 7001005458323933328a01fce16d3800")
+    parser.add_argument("-b", "--baseline_file", type=str, default="",
+                        help="baseline file of rom and ram generated by rom analysis.")
     parser.add_argument("-o", "--output_filename", default="ram_analysis_result", type=str,
                         help="base name of output file, default: ram_analysis_result. eg: -o ram_analysis_result")
     parser.add_argument("-e", "--excel", type=bool, default=False,
@@ -470,6 +577,7 @@ if __name__ == '__main__':
     rom_result = args.rom_result
     device_num = args.device_num
     output_filename = args.output_filename
+    baseline_file = args.baseline_file
     output_excel = args.excel
     RamAnalyzer.analysis(cfg_path, profile_path, rom_result,
-                         device_num=device_num, output_file=output_filename, ss="Pss", output_excel=output_excel)
+                         device_num=device_num, output_file=output_filename, ss="Pss", output_excel=output_excel, baseline_file=baseline_file)

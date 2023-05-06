@@ -29,10 +29,11 @@ from threading import RLock
 import collections
 
 from config import result_dict, collector_config, configs, \
-    project_path, sub_com_dict, product_name, recollect_gn
+    project_path, sub_com_dict, product_name, recollect_gn, baseline
 from pkgs.basic_tool import BasicTool
 from pkgs.gn_common_tool import GnCommonTool
 from pkgs.simple_excel_writer import SimpleExcelWriter
+from pkgs.rom_ram_baseline_collector import RomRamBaselineCollector
 from misc import gn_lineno_collect
 
 
@@ -149,7 +150,7 @@ class RomAnalysisTool:
         return product_dict
 
     @classmethod
-    def _put(cls, sub: str, com: str, unit: Dict, rom_size_dict: Dict):
+    def _put(cls, sub: str, com: str, unit: Dict, rom_size_dict: Dict, com_size_baseline: str = str()):
         size = unit.get("size")
         if not rom_size_dict.get("size"):   # 总大小
             rom_size_dict["size"] = 0
@@ -163,6 +164,10 @@ class RomAnalysisTool:
             rom_size_dict[sub][com]["filelist"] = list()
             rom_size_dict[sub][com]["size"] = 0
             rom_size_dict[sub][com]["count"] = 0
+
+        if (sub != "NOTFOUND" and sub != "UNDEFINED" and com != "NOTFOUND" and com != "UNDEFINED") \
+                and (not rom_size_dict.get(sub).get(com).get("baseline")) and baseline:
+            rom_size_dict[sub][com]["baseline"] = com_size_baseline
 
         rom_size_dict[sub][com]["filelist"].append(unit)
         rom_size_dict[sub][com]["size"] += size
@@ -228,10 +233,13 @@ class RomAnalysisTool:
         return str(), str(), str()
 
     @classmethod
-    def _save_as_xls(cls, result_dict: Dict, product_name: str) -> None:
+    def _save_as_xls(cls, result_dict: Dict, product_name: str, baseline: bool) -> None:
         logging.info("saving as xls...")
         header = ["subsystem_name", "component_name",
                   "output_file", "size(Byte)"]
+        if baseline:
+            header = ["subsystem_name", "component_name", "baseline",
+                      "output_file", "size(Byte)"]
         tmp_dict = copy.deepcopy(result_dict)
         excel_writer = SimpleExcelWriter("rom")
         excel_writer.set_sheet_header(headers=header)
@@ -241,6 +249,7 @@ class RomAnalysisTool:
         component_start_row = 1
         component_end_row = 0
         component_col = 1
+        baseline_col = 2
         del tmp_dict["size"]
         for subsystem_name in tmp_dict.keys():
             subsystem_dict = tmp_dict.get(subsystem_name)
@@ -255,6 +264,9 @@ class RomAnalysisTool:
                     component_name)
                 component_size = component_dict.get("size")
                 component_file_count = component_dict.get("count")
+                component_baseline = component_dict.get("baseline")
+                if component_baseline:
+                    del component_dict["baseline"]
                 del component_dict["count"]
                 del component_dict["size"]
                 component_end_row += component_file_count
@@ -262,10 +274,17 @@ class RomAnalysisTool:
                 for fileinfo in component_dict.get("filelist"):
                     file_name = fileinfo.get("file_name")
                     file_size = fileinfo.get("size")
-                    excel_writer.append_line(
-                        [subsystem_name, component_name, file_name, file_size])
+                    line = [subsystem_name, component_name,
+                            file_name, file_size]
+                    if baseline:
+                        line = [subsystem_name, component_name,
+                                component_baseline, file_name, file_size]
+                    excel_writer.append_line(line)
                 excel_writer.write_merge(component_start_row, component_col, component_end_row, component_col,
                                          component_name)
+                if baseline:
+                    excel_writer.write_merge(component_start_row, baseline_col, component_end_row, baseline_col,
+                                             component_baseline)
                 component_start_row = component_end_row + 1
             excel_writer.write_merge(subsystem_start_row, subsystem_col, subsystem_end_row, subsystem_col,
                                      subsystem_name)
@@ -278,12 +297,16 @@ class RomAnalysisTool:
     @ classmethod
     def analysis(cls, product_name: str, product_dict: Dict[str, List[str]]):
         logging.info("start analyzing...")
+        rom_ram_baseline: Dict[str, Dict] = RomRamBaselineCollector.collect(
+            project_path)
+        with open("rom_ram_baseline.json", 'w', encoding='utf-8') as f:
+            json.dump(rom_ram_baseline, f, indent=4)
         gn_info_file = configs["gn_info_file"]
         with open(gn_info_file, 'r', encoding='utf-8') as f:
             gn_info = json.load(f)
         query_order: Dict[str, List[str]
                           ] = configs[product_name]["query_order"]
-        query_order["etc"] = configs["target_type"] # etc会查找所有的template
+        query_order["etc"] = configs["target_type"]  # etc会查找所有的template
         rom_size_dict: Dict = dict()
         for t, l in product_dict.items():
             for f in l:  # 遍历所有文件
@@ -311,13 +334,21 @@ class RomAnalysisTool:
                         continue
                     d["size"] = size
                     d["file_name"] = f.replace(project_path, "")
+                    if rom_ram_baseline.get(d["subsystem_name"]) and rom_ram_baseline.get(d["subsystem_name"]).get(d["component_name"]):
+                        component_rom_baseline = rom_ram_baseline.get(
+                            d["subsystem_name"]).get(d["component_name"]).get("rom")
                     cls._put(d["subsystem_name"],
-                             d["component_name"], d, rom_size_dict)
+                             d["component_name"], d, rom_size_dict, component_rom_baseline)
+                    if d["component_name"] == "unionman_products":
+                        print(d)
                     find_flag = True
                 if not find_flag:   # 如果指定序列中的template都没有查找到,则模糊匹配
                     # fuzzy match
                     psesudo_gn, sub, com = cls._fuzzy_match(f)
                     if sub and com:
+                        if rom_ram_baseline.get(sub) and rom_ram_baseline.get(sub).get(com):
+                            component_rom_baseline = rom_ram_baseline.get(
+                                sub).get(com).get("baseline")
                         cls._put(sub, com, {
                             "subsystem_name": sub,
                             "component_name": com,
@@ -325,7 +356,7 @@ class RomAnalysisTool:
                             "description": "fuzzy match",
                             "file_name": f.replace(project_path, ""),
                             "size": size,
-                        }, rom_size_dict)
+                        }, rom_size_dict, component_rom_baseline)
                         find_flag = True
                 if not find_flag:   # 模糊匹配都没有匹配到的,归属到NOTFOUND
                     cls._put("NOTFOUND", "NOTFOUND", {
@@ -334,7 +365,7 @@ class RomAnalysisTool:
                     }, rom_size_dict)
         with open(configs[product_name]["output_name"], 'w', encoding='utf-8') as f:
             json.dump(rom_size_dict, f, indent=4)
-        cls._save_as_xls(rom_size_dict, product_name)
+        cls._save_as_xls(rom_size_dict, product_name, baseline)
         logging.info("success")
 
 

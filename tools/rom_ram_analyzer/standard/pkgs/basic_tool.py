@@ -25,6 +25,19 @@ class BasicTool:
     @classmethod
     def get_abs_path(cls, path: str) -> str:
         return os.path.abspath(os.path.expanduser(path))
+    
+    @classmethod
+    def execute(cls, cmd: str, post_processor: Callable[[Text], Text] = lambda x:x) -> Any:
+        """
+        封装popen，返回标准输出的列表
+        :param post_processor: 对执行结果进行处理
+        :param cmd: 待执行的命令
+        :return: 经处理过后的字符串列表
+
+        """
+        output = os.popen(cmd).read()
+        output = post_processor(output)
+        return output
 
 
 if __name__ == '__main__':

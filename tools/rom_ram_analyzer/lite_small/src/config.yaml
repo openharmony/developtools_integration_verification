@@ -12,6 +12,7 @@
 #  limitations under the License.
 
 
+
 # 注意:如果target_type有了更改,要相应改变config.py中collector_config
 target_type:
   - shared_library
@@ -44,6 +45,7 @@ default_extension:
 default_prefix:
   shared_library: lib
   static_library: lib
+
 # black list for command 'grep', it should be the subdirectory of the root path of oh
 black_list: 
   - .repo
