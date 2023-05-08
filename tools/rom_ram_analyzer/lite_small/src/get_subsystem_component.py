@@ -139,7 +139,3 @@ class SC:
 
 
 __all__ = ["SC"]
-
-if __name__ == '__main__':
-    ohos_path, output_path = parse_args()
-    SC.run(ohos_path, output_path)

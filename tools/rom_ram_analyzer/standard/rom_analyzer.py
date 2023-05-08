@@ -23,6 +23,7 @@ import typing
 from copy import deepcopy
 from typing import *
 
+from pkgs.rom_ram_baseline_collector import RomRamBaselineCollector
 from pkgs.basic_tool import BasicTool
 from pkgs.gn_common_tool import GnCommonTool
 from pkgs.simple_excel_writer import SimpleExcelWriter
@@ -33,6 +34,7 @@ NOTFOUND = "NOTFOUND"
 
 
 class RomAnalyzer:
+
     @classmethod
     def __collect_product_info(cls, system_module_info_json: Text,
                                project_path: Text) -> Dict[Text, Dict[Text, Text]]:
@@ -72,9 +74,12 @@ class RomAnalyzer:
         return product_info_dict
 
     @classmethod
-    def __save_result_as_excel(cls, result_dict: dict, output_name: str):
+    def __save_result_as_excel(cls, result_dict: dict, output_name: str, add_baseline: bool):
         header = ["subsystem_name", "component_name",
                   "output_file", "size(Byte)"]
+        if add_baseline:
+            header = ["subsystem_name", "component_name", "baseline",
+                      "output_file", "size(Byte)"]
         tmp_dict = deepcopy(result_dict)
         excel_writer = SimpleExcelWriter("rom")
         excel_writer.set_sheet_header(headers=header)
@@ -84,7 +89,8 @@ class RomAnalyzer:
         component_start_row = 1
         component_end_row = 0
         component_col = 1
-
+        if add_baseline:
+            baseline_col = 2
         for subsystem_name in tmp_dict.keys():
             subsystem_dict = tmp_dict.get(subsystem_name)
             subsystem_size = subsystem_dict.get("size")
@@ -98,15 +104,24 @@ class RomAnalyzer:
                     component_name)
                 component_size = component_dict.get("size")
                 component_file_count = component_dict.get("file_count")
+                baseline = component_dict.get("baseline")
                 del component_dict["file_count"]
                 del component_dict["size"]
+                if add_baseline:
+                    del component_dict["baseline"]
                 component_end_row += component_file_count
 
                 for file_name, size in component_dict.items():
-                    excel_writer.append_line(
-                        [subsystem_name, component_name, file_name, size])
+                    line = [subsystem_name, component_name, file_name, size]
+                    if add_baseline:
+                        line = [subsystem_name, component_name,
+                                baseline, file_name, size]
+                    excel_writer.append_line(line)
                 excel_writer.write_merge(component_start_row, component_col, component_end_row, component_col,
                                          component_name)
+                if add_baseline:
+                    excel_writer.write_merge(component_start_row, baseline_col, component_end_row, baseline_col,
+                                             baseline)
                 component_start_row = component_end_row + 1
             excel_writer.write_merge(subsystem_start_row, subsystem_col, subsystem_end_row, subsystem_col,
                                      subsystem_name)
@@ -114,22 +129,32 @@ class RomAnalyzer:
         excel_writer.save(output_name + ".xls")
 
     @classmethod
-    def __put(cls, unit: typing.Dict[Text, Any], result_dict: typing.Dict[Text, Dict]):
+    def __put(cls, unit: typing.Dict[Text, Any], result_dict: typing.Dict[Text, Dict], baseline_dict: Dict[str, Any], add_baseline: bool):
+
         component_name = NOTFOUND if unit.get(
             "component_name") is None else unit.get("component_name")
         subsystem_name = NOTFOUND if unit.get(
             "subsystem_name") is None else unit.get("subsystem_name")
+
+        def get_rom_baseline():
+            if (not baseline_dict.get(subsystem_name)) or (not baseline_dict.get(subsystem_name).get(component_name)):
+                return str()
+            return baseline_dict.get(subsystem_name).get(component_name).get("rom")
         size = unit.get("size")
         relative_filepath = unit.get("relative_filepath")
-        if result_dict.get(subsystem_name) is None:  # 子系统
+        if result_dict.get(subsystem_name) is None: #   子系统
             result_dict[subsystem_name] = dict()
             result_dict[subsystem_name]["size"] = 0
             result_dict[subsystem_name]["file_count"] = 0
 
-        if result_dict.get(subsystem_name).get(component_name) is None:  # 部件
+        if result_dict.get(subsystem_name).get(component_name) is None: # 部件
             result_dict[subsystem_name][component_name] = dict()
             result_dict[subsystem_name][component_name]["size"] = 0
             result_dict[subsystem_name][component_name]["file_count"] = 0
+            if add_baseline:
+                result_dict[subsystem_name][component_name]["baseline"] = get_rom_baseline(
+                )
+
         result_dict[subsystem_name]["size"] += size
         result_dict[subsystem_name]["file_count"] += 1
         result_dict[subsystem_name][component_name]["size"] += size
@@ -138,7 +163,7 @@ class RomAnalyzer:
 
     @classmethod
     def analysis(cls, system_module_info_json: Text, product_dirs: List[str],
-                 project_path: Text, product_name: Text, output_file: Text, output_execel: bool):
+                 project_path: Text, product_name: Text, output_file: Text, output_execel: bool, add_baseline: bool):
         """
         system_module_info_json: json文件
         product_dirs：要处理的产物的路径列表如["vendor", "system/"]
@@ -147,11 +172,15 @@ class RomAnalyzer:
         output_file: basename of output file
         """
         project_path = BasicTool.get_abs_path(project_path)
+        rom_baseline_dict: Dict[str, Any] = RomRamBaselineCollector.collect(
+            project_path)
+        with open("rom_ram_baseline.json", 'w', encoding='utf-8') as f:
+            json.dump(rom_baseline_dict, f, indent=4)
         phone_dir = os.path.join(
             project_path, "out", product_name, "packages", "phone")
         product_dirs = [os.path.join(phone_dir, d) for d in product_dirs]
         product_info_dict = cls.__collect_product_info(
-            system_module_info_json, project_path)  # 所有产物信息
+            system_module_info_json, project_path) # 所有产物信息
         result_dict: Dict[Text:Dict] = dict()
         for d in product_dirs:
             file_list: List[Text] = BasicTool.find_all_files(d)
@@ -164,14 +193,14 @@ class RomAnalyzer:
                     unit = dict()
                 unit["size"] = size
                 unit["relative_filepath"] = relative_filepath
-                cls.__put(unit, result_dict)
+                cls.__put(unit, result_dict, rom_baseline_dict, add_baseline)
         output_dir, _ = os.path.split(output_file)
         if len(output_dir) != 0:
             os.makedirs(output_dir, exist_ok=True)
         with open(output_file + ".json", 'w', encoding='utf-8') as f:
             f.write(json.dumps(result_dict, indent=4))
         if output_execel:
-            cls.__save_result_as_excel(result_dict, output_file)
+            cls.__save_result_as_excel(result_dict, output_file, add_baseline)
 
 
 def get_args():
@@ -189,6 +218,8 @@ def get_args():
     parser.add_argument("-d", "--product_dir", required=True, action="append",
                         help="subdirectories of out/{product_name}/packages/phone to be counted."
                              "eg: -d system -d vendor")
+    parser.add_argument("-b", "--baseline", action="store_true",
+                        help="add baseline of component to the result(-b) or not.")
     parser.add_argument("-o", "--output_file", type=str, default="rom_analysis_result",
                         help="basename of output file, default: rom_analysis_result. eg: demo/rom_analysis_result")
     parser.add_argument("-e", "--excel", type=bool, default=False,
@@ -205,5 +236,6 @@ if __name__ == '__main__':
     product_dirs = args.product_dir
     output_file = args.output_file
     output_excel = args.excel
+    add_baseline = args.baseline
     RomAnalyzer.analysis(module_info_json, product_dirs,
-                         project_path, product_name, output_file, output_excel)
+                         project_path, product_name, output_file, output_excel, add_baseline)

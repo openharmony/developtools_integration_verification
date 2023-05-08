@@ -122,15 +122,3 @@ class SimpleExcelWriter:
 
     def save(self, file_name: str):
         self.__book.save(file_name)
-
-
-if __name__ == '__main__':
-    writer = SimpleExcelWriter(default_sheet_name="first")
-    writer.add_sheet("second")
-    writer.add_sheet("third")
-    writer.set_sheet_header(["h", "m", "n"])
-    writer.append_line([1, 2, 3])
-    writer.append_line([2, 3, 4], "second")
-    writer.append_line([3, 4, 5], "third")
-    writer.append_line([3, 2, 1])
-    writer.save("demo.xls")
