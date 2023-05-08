@@ -244,9 +244,3 @@ collector_config: Tuple[BaseProcessor] = (
 )
 
 __all__ = ["configs", "result_dict", "collector_config", "sub_com_dict"]
-
-if __name__ == '__main__':
-    for c in collector_config:
-        c.run()
-    with open("demo.json", 'w', encoding='utf-8') as f:
-        json.dump(result_dict, f)

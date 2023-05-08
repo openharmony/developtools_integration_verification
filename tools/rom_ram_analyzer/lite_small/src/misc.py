@@ -34,8 +34,6 @@ _config = SimpleYamlTool.read_yaml("config.yaml")
 """
 ===============info handlers===============
 """
-
-
 def extension_handler(paragraph: Text):
     return GnVariableParser.string_parser("output_extension", paragraph).strip('"')
 

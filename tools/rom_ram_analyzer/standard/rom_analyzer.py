@@ -142,12 +142,12 @@ class RomAnalyzer:
             return baseline_dict.get(subsystem_name).get(component_name).get("rom")
         size = unit.get("size")
         relative_filepath = unit.get("relative_filepath")
-        if result_dict.get(subsystem_name) is None:  # 子系统
+        if result_dict.get(subsystem_name) is None: #   子系统
             result_dict[subsystem_name] = dict()
             result_dict[subsystem_name]["size"] = 0
             result_dict[subsystem_name]["file_count"] = 0
 
-        if result_dict.get(subsystem_name).get(component_name) is None:  # 部件
+        if result_dict.get(subsystem_name).get(component_name) is None: # 部件
             result_dict[subsystem_name][component_name] = dict()
             result_dict[subsystem_name][component_name]["size"] = 0
             result_dict[subsystem_name][component_name]["file_count"] = 0
@@ -180,7 +180,7 @@ class RomAnalyzer:
             project_path, "out", product_name, "packages", "phone")
         product_dirs = [os.path.join(phone_dir, d) for d in product_dirs]
         product_info_dict = cls.__collect_product_info(
-            system_module_info_json, project_path)  # 所有产物信息
+            system_module_info_json, project_path) # 所有产物信息
         result_dict: Dict[Text:Dict] = dict()
         for d in product_dirs:
             file_list: List[Text] = BasicTool.find_all_files(d)

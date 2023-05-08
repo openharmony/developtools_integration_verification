@@ -138,9 +138,9 @@ class RamAnalyzer:
             # 如果第一列不是数字（pid），就过
             if not processed or not processed[0].isnumeric():
                 continue
-            name = processed[1]  # 否则的话就取名字，和对应的size
+            name = processed[1] # 否则的话就取名字，和对应的size
             size = int(processed[cls.__ss_dict.get(ss)]) * \
-                1024   # kilo byte to byte
+                1024 # kilo byte to byte
             full_process_name = find_full_process_name(name)
             if not full_process_name:
                 print(
@@ -440,7 +440,7 @@ class RamAnalyzer:
                     # 要么uinput_inject的对应key为mmi_uinput_inject。对于此类特殊处理，即：如果service_name找不到，但是直接执行的bin等于这个名字，也认为找到
                     return v
 
-        for process_name, process_size in process_size_dict.items():  # 从进程出发
+        for process_name, process_size in process_size_dict.items(): # 从进程出发
             if not process_name:
                 print("warning: an empty 'process_name' has been found.")
                 continue
@@ -506,7 +506,6 @@ class RamAnalyzer:
         if len(base_dir) != 0 and not os.path.isdir(base_dir):
             os.makedirs(base_dir, exist_ok=True)
         with open(output_file + ".json", 'w', encoding='utf-8') as f:
-            # f.write(json.dumps(result_dict, indent=4))
             json.dump(result_dict, f, indent=4)
         refactored_result: Dict[str, Dict] = refacotr_result(result_dict)
         if baseline_file:
