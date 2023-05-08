@@ -34,7 +34,7 @@ def __createArgParser():
 
 	return parser
 
-def deps_guard(out_path, args=None):
+def _deps_guard_module(out_path, args=None):
 	mgr = ElfFileMgr(out_path)
 	mgr.scan_all_files()
 
@@ -46,6 +46,23 @@ def deps_guard(out_path, args=None):
 		return
 
 	raise Exception("ERROR: deps_guard failed.")
+
+def _startup_guard_module(out_path, args):
+    import sys
+    import os
+    for path in sys.path:
+        if path.endswith("developtools/integration_verification/tools/deps_guard"):
+            sys.path.append(os.path.join(
+                path, "../startup_guard"))
+            break
+
+    from startup_guard import startup_guard
+
+    startup_guard(out_path, args)
+
+def deps_guard(out_path, args=None):
+    _deps_guard_module(out_path, args)
+    _startup_guard_module(out_path, args)
 
 if __name__ == '__main__':
 
