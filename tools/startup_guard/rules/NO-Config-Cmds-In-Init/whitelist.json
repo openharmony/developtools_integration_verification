@@ -1,0 +1,54 @@
+[
+    {
+        "cmds": [   
+            {
+                "cmd":"mount_fstab",
+                "location":[
+                    "/system/etc/init.cfg"
+                ]
+            }, {
+                "cmd":"load_access_token_id",
+                "location":[
+                    "/system/etc/init/access_token.cfg"
+                ]
+            }, {
+                "cmd":"init_global_key",
+                "location":[
+                    "/system/etc/init.cfg"
+                ]
+            }],
+            "start-modes": [
+                {
+                    "start-mode":"condition",
+                    "service":[
+                        "hilogd",
+                        "wifi_hal_service",
+                        "hdcd",
+                        "hiprofilerd",
+                        "pulseaudio",
+                        "huks_service",
+                        "hiprofiler_plugins",
+                        "watchdog_service",
+                        "pinauth",
+                        "hiprofiler_daemon",
+                        "multimodalinput",
+                        "udevd_service",
+                        "mmi_uinput_service"
+                    ]
+                }, {
+                    "start-mode":"boot",
+                    "service":[
+                        "hiview",
+                        "storage_daemon",
+                        "samgr",
+                        "thermal_protector",
+                        "appspawn",
+                        "param_watcher",
+                        "device_manager",
+                        "storage_manager",
+                        "hdf_devmgr"
+                    ]
+                }
+            ]
+    }
+]
