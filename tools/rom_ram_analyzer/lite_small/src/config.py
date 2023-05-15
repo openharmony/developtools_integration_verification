@@ -48,6 +48,8 @@ def parse_args():
                         help="recollect subsystem_component info or not(-s)")
     parser.add_argument("-b", "--baseline", action="store_true",
                         help="add baseline of component to the result(-b) or not.")
+    parser.add_argument("-u", "--unit_adaptive",
+                        action="store_true", help="unit adaptive")
     args = parser.parse_args()
     return args
 
@@ -58,11 +60,14 @@ _args = parse_args()
 # # global variables
 configs = SimpleYamlTool.read_yaml("config.yaml")
 result_dict: Dict[str, Any] = dict()
-
-project_path = BasicTool.abspath(_args.oh_path)
 product_name = _args.product_name
+if product_name not in configs.keys():
+    print(f"error: product_name '{product_name}' illegal")
+    exit(-1)
+project_path = BasicTool.abspath(_args.oh_path)
 recollect_gn = _args.recollect_gn
 baseline = _args.baseline
+unit_adapt = _args.unit_adaptive
 _recollect_sc = _args.recollect_sc
 _sc_json: Dict[Text, Text] = configs.get("subsystem_component")
 _sc_save = _sc_json.get("save")
@@ -240,7 +245,41 @@ collector_config: Tuple[BaseProcessor] = (
                      },
                      unit_post_handler=DefaultPostHandler(),
                      ud_post_handler=TargetS2MPostHandler
-                     )
+                     ),
+    DefaultProcessor(project_path=project_path,
+                     result_dict=result_dict,
+                     target_type=_target_type[14],
+                     match_pattern=fr"^( *){_target_type[14]}\(.*?\)",
+                     sub_com_dict=sub_com_dict,
+                     target_name_parser=TargetNameParser.single_parser,
+                     other_info_handlers={
+                         "output_extension":extension_handler
+                     },
+                     unit_post_handler=UnittestPostHandler(),
+                     ),
+    DefaultProcessor(project_path=project_path,
+                     result_dict=result_dict,
+                     target_type=_target_type[15],
+                     match_pattern=fr"^( *){_target_type[15]}\(.*?\)",
+                     sub_com_dict=sub_com_dict,
+                     target_name_parser=TargetNameParser.single_parser,
+                     other_info_handlers={
+                         "hap_name": hap_name_handler,
+                         "mode": mod_handler,
+                     },
+                     unit_post_handler=HapPackPostHandler(),
+                     ),
+    ListResourceProcessor(project_path=project_path,
+                          result_dict=result_dict,
+                          target_type=_target_type[16],
+                          match_pattern=fr"^( *){_target_type[16]}\(.*?\)",
+                          sub_com_dict=sub_com_dict,
+                          target_name_parser=TargetNameParser.single_parser,
+                          other_info_handlers={
+                          },
+                          unit_post_handler=DefaultPostHandler(),
+                          resource_field="sources"
+                          ),
 )
 
 __all__ = ["configs", "result_dict", "collector_config", "sub_com_dict"]

@@ -203,5 +203,10 @@ class GnVariableParser:
         """
         result = BasicTool.re_group_1(
             content, r"{} *= *(\[.*?\])".format(var), flags=re.S | re.M)
-        result = ast.literal_eval(result.strip())
-        return result
+        result_list = list()
+        for item in result.lstrip('[').rstrip(']').split('\n'):
+            item = item.strip().strip(',"')
+            if not item:
+                continue
+            result_list.append(item)
+        return result_list

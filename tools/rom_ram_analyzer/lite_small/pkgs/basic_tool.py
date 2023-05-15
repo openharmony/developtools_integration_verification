@@ -22,13 +22,25 @@ import glob
 from typing import *
 import unittest
 
-__all__ = ["translate_str_unit", "BasicTool", "do_nothing", "get_unit"]
+__all__ = ["translate_str_unit", "BasicTool", "do_nothing", "get_unit", "unit_adaptive"]
 
+
+def unit_adaptive(size: int) -> str:
+    unit_list = ["Byte", "KB", "MB", "GB"]
+    index = 0
+    while index < len(unit_list) and size >= 1024:
+        size /= 1024
+        index += 1
+    if index == len(unit_list):
+        index = len(unit_list)-1
+        size *= 1024
+    return str(round(size))+unit_list[index]
 
 def get_unit(x: str) -> str:
     pattern = r"[a-z|A-Z]*$"
     unit = re.search(pattern, x).group()
     return unit
+
 
 def translate_str_unit(x: str, dest: str, prefix: str = "~") -> float:
     src_unit = get_unit(x)

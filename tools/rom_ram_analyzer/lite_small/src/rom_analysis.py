@@ -29,8 +29,8 @@ from threading import RLock
 import collections
 
 from config import result_dict, collector_config, configs, \
-    project_path, sub_com_dict, product_name, recollect_gn, baseline
-from pkgs.basic_tool import BasicTool
+    project_path, sub_com_dict, product_name, recollect_gn, baseline, unit_adapt
+from pkgs.basic_tool import BasicTool, unit_adaptive
 from pkgs.gn_common_tool import GnCommonTool
 from pkgs.simple_excel_writer import SimpleExcelWriter
 from pkgs.rom_ram_baseline_collector import RomRamBaselineCollector
@@ -179,6 +179,7 @@ class RomAnalysisTool:
     @classmethod
     def _fuzzy_match(cls, file_name: str, filter_path_keyword: Tuple[str] = tuple()) -> Tuple[str, str, str]:
         """
+        TODO 应当先遍历gn_info进行匹配
         直接grep,利用出现次数最多的BUILD.gn去定位subsystem_name和component_name"""
         logging.info(f"fuzzy match: {file_name}")
         _, base_name = os.path.split(file_name)
@@ -294,20 +295,67 @@ class RomAnalysisTool:
         excel_writer.save(output_name)
         logging.info("save as xls success.")
 
+    @classmethod
+    def _result_unit_adaptive(cls, result_dict: Dict[str, Dict]) -> None:
+        total_size = unit_adaptive(result_dict["size"])
+        del result_dict["size"]
+        for subsystem_name, subsystem_info in result_dict.items():
+            sub_size = unit_adaptive(subsystem_info["size"])
+            count = subsystem_info["count"]
+            del subsystem_info["size"]
+            del subsystem_info["count"]
+            for component_name, component_info in subsystem_info.items():
+                component_info["size"] = unit_adaptive(component_info["size"])
+            subsystem_info["size"] = sub_size
+            subsystem_info["count"] = count
+        result_dict["size"] = total_size
+
+    @classmethod
+    def _match_manual_configured(cls, manual_config_info: Dict[str, Dict], compiled_files: Dict[str, List], compiled_root_path: str, result_dict: Dict[str, Dict]) -> None:
+        for file_path, file_info in manual_config_info.items():
+            full_path = os.path.join(
+                project_path, compiled_root_path, file_path)
+            if not os.path.isfile(full_path):
+                logging.warning(f"config error: {file_path} is not a file.")
+                continue
+            file_info["size"] = os.path.getsize(full_path)
+            file_info["file_name"] = full_path
+            cls._put(file_info["subsystem"],
+                     file_info["component"], file_info, result_dict)
+            for _, v in compiled_files.items():
+                if full_path not in v:
+                    continue
+                index = v.index(full_path)
+                del v[index]
+                break
+
     @ classmethod
     def analysis(cls, product_name: str, product_dict: Dict[str, List[str]]):
+        """analysis the rom of lite/small product
+
+        Args:
+            product_name (str): product name configured in the yaml
+            product_dict (Dict[str, List[str]]): result dict of compiled product file
+                format:
+                    "bin":[...],
+                    "so":[...]
+                    ...
+        """
         logging.info("start analyzing...")
         rom_ram_baseline: Dict[str, Dict] = RomRamBaselineCollector.collect(
             project_path)
         with open("rom_ram_baseline.json", 'w', encoding='utf-8') as f:
             json.dump(rom_ram_baseline, f, indent=4)
-        gn_info_file = configs["gn_info_file"]
+        gn_info_file = configs["gn_info_file"] # filename to save gn_info
         with open(gn_info_file, 'r', encoding='utf-8') as f:
             gn_info = json.load(f)
         query_order: Dict[str, List[str]
-                          ] = configs[product_name]["query_order"]
+                          ] = configs[product_name]["query_order"] # query order of the gn template to be matched
         query_order["etc"] = configs["target_type"] # etc会查找所有的template
         rom_size_dict: Dict = dict()
+        if "manual_config" in configs[product_name].keys():
+            cls._match_manual_configured(
+                configs[product_name]["manual_config"], product_dict, configs[product_name]["product_dir"]["root"], rom_size_dict)
         for t, l in product_dict.items():
             for f in l: # 遍历所有文件
                 if os.path.isdir(f):
@@ -339,8 +387,6 @@ class RomAnalysisTool:
                             d["subsystem_name"]).get(d["component_name"]).get("rom")
                     cls._put(d["subsystem_name"],
                              d["component_name"], d, rom_size_dict, component_rom_baseline)
-                    if d["component_name"] == "unionman_products":
-                        print(d)
                     find_flag = True
                 if not find_flag: # 如果指定序列中的template都没有查找到,则模糊匹配
                     # fuzzy match
@@ -363,6 +409,8 @@ class RomAnalysisTool:
                         "file_name": f.replace(project_path, ""),
                         "size": size,
                     }, rom_size_dict)
+        if unit_adapt:
+            cls._result_unit_adaptive(rom_size_dict)
         with open(configs[product_name]["output_name"], 'w', encoding='utf-8') as f:
             json.dump(rom_size_dict, f, indent=4)
         cls._save_as_xls(rom_size_dict, product_name, baseline)
