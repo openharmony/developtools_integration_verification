@@ -34,6 +34,8 @@ _config = SimpleYamlTool.read_yaml("config.yaml")
 """
 ===============info handlers===============
 """
+
+
 def extension_handler(paragraph: Text):
     return GnVariableParser.string_parser("output_extension", paragraph).strip('"')
 
@@ -45,6 +47,10 @@ def hap_name_handler(paragraph: Text):
 def target_type_handler(paragraph: Text):
     tt = GnVariableParser.string_parser("target_type", paragraph).strip('"')
     return tt
+
+
+def mod_handler(paragraph: Text):
+    return GnVariableParser.string_parser("mode", paragraph).strip('"')
 
 
 """
@@ -132,7 +138,27 @@ def add_postfix(content: str, postfix: str) -> str:
 
 class DefaultPostHandler(BasePostHandler):
     def run(self, unit: Dict[str, AnyStr]):
+        if "extension" in unit.keys() and (not unit["output_name"].endswith(unit["extension"])):
+            out = unit["output_name"].rstrip(
+                ".")+"."+unit["extension"].lstrip(".")
+            return out
         return unit["output_name"]
+
+
+class UnittestPostHandler(BasePostHandler):
+    def run(self, unit: Dict[str, AnyStr]):
+        if "output_extension" in unit.keys() and (not unit["output_name"].endswith(unit["output_extension"])):
+            out = unit["output_name"].rstrip(
+                ".")+"."+unit["output_extension"].lstrip(".")
+            return out
+        return unit["output_name"]
+
+
+class HapPackPostHandler(BasePostHandler):
+    def run(self, unit: Dict[str, AnyStr]):
+        hap_name = unit.get("hap_name")
+        mode = unit.get("mode")
+        return hap_name + "." + mode
 
 
 class HAPPostHandler(BasePostHandler):

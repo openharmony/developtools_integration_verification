@@ -96,10 +96,4 @@ ipcamera_hispark_taurus: # 产品名称,需要和命令行参数中的-p参数�
 ## 如何提高准确率
 
 1. 如果已知编译产物不可能从某些目录下的BUILD.gn产生,则可以将其对应目录加入到config.yaml的black_list,从而不对该目录下的BUILD.gn进行扫描,以减少出错概率
-
-## 后续工作
-
-1. 对target(xxx,yyy)中,xxx/yyy为变量的情况可进一步优化
-1. 重构
-1. 在config.yaml中允许人为配置以进一步提高准确性
-1. 单位自适应
+1. 对于已知检测错误的或NOTFOUND的编译产物，如果知道其正确的部件和子系统，可在config.yaml中的manual_config进行配置

@@ -24,7 +24,7 @@ from copy import deepcopy
 from typing import *
 
 from pkgs.rom_ram_baseline_collector import RomRamBaselineCollector
-from pkgs.basic_tool import BasicTool
+from pkgs.basic_tool import BasicTool, unit_adaptive
 from pkgs.gn_common_tool import GnCommonTool
 from pkgs.simple_excel_writer import SimpleExcelWriter
 
@@ -142,7 +142,7 @@ class RomAnalyzer:
             return baseline_dict.get(subsystem_name).get(component_name).get("rom")
         size = unit.get("size")
         relative_filepath = unit.get("relative_filepath")
-        if result_dict.get(subsystem_name) is None: #   子系统
+        if result_dict.get(subsystem_name) is None: # 子系统
             result_dict[subsystem_name] = dict()
             result_dict[subsystem_name]["size"] = 0
             result_dict[subsystem_name]["file_count"] = 0
@@ -162,8 +162,22 @@ class RomAnalyzer:
         result_dict[subsystem_name][component_name][relative_filepath] = size
 
     @classmethod
+    def result_unit_adaptive(self, result_dict:Dict[str,Dict])->None:
+        for subsystem_name, subsystem_info in result_dict.items():
+                size = unit_adaptive(subsystem_info["size"])
+                count = subsystem_info["file_count"]
+                if "size" in subsystem_info.keys():
+                    del subsystem_info["size"]
+                if "file_count" in subsystem_info.keys():
+                    del subsystem_info["file_count"]
+                for component_name, component_info in subsystem_info.items():
+                    component_info["size"] = unit_adaptive(component_info["size"])
+                subsystem_info["size"] = size
+                subsystem_info["file_count"] = count
+
+    @classmethod
     def analysis(cls, system_module_info_json: Text, product_dirs: List[str],
-                 project_path: Text, product_name: Text, output_file: Text, output_execel: bool, add_baseline: bool):
+                 project_path: Text, product_name: Text, output_file: Text, output_execel: bool, add_baseline: bool, unit_adapt: bool):
         """
         system_module_info_json: json文件
         product_dirs：要处理的产物的路径列表如["vendor", "system/"]
@@ -197,6 +211,8 @@ class RomAnalyzer:
         output_dir, _ = os.path.split(output_file)
         if len(output_dir) != 0:
             os.makedirs(output_dir, exist_ok=True)
+        if unit_adapt:
+            cls.result_unit_adaptive(result_dict)
         with open(output_file + ".json", 'w', encoding='utf-8') as f:
             f.write(json.dumps(result_dict, indent=4))
         if output_execel:
@@ -222,6 +238,8 @@ def get_args():
                         help="add baseline of component to the result(-b) or not.")
     parser.add_argument("-o", "--output_file", type=str, default="rom_analysis_result",
                         help="basename of output file, default: rom_analysis_result. eg: demo/rom_analysis_result")
+    parser.add_argument("-u", "--unit_adaptive",
+                        action="store_true", help="unit adaptive")
     parser.add_argument("-e", "--excel", type=bool, default=False,
                         help="if output result as excel, default: False. eg: -e True")
     args = parser.parse_args()
@@ -237,5 +255,6 @@ if __name__ == '__main__':
     output_file = args.output_file
     output_excel = args.excel
     add_baseline = args.baseline
+    unit_adapt = args.unit_adaptive
     RomAnalyzer.analysis(module_info_json, product_dirs,
-                         project_path, product_name, output_file, output_excel, add_baseline)
+                         project_path, product_name, output_file, output_excel, add_baseline, unit_adapt)

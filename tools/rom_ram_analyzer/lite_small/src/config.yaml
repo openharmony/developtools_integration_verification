@@ -29,8 +29,10 @@ target_type:
   - ohos_prebuilt_shared_library
   - lite_component
   - target
+  - unittest
+  - hap_pack
+  - copy
   
-
 subsystem_component:
   save: true
   filename: sub_com_info.json
@@ -51,7 +53,6 @@ black_list:
   - .repo
   - .ccache
   - doc
-  # - test
   - build
   # 排除out目录,为了避免排除其他路径下的out目录,这里详细列出了out下的所有目录
   - out/gen
@@ -73,6 +74,7 @@ ipcamera_hispark_taurus:
       bin: bin
       so: usr/lib
       etc: etc
+      hap: system/internal
     rest: True  # 是否将上面root目录下除了relative指定的目录归到etc并进行匹配
   query_order:  # 匹配顺序,key应当何relative字段中的key一致,value应当在上面的target_type字段中
     so: 
@@ -82,11 +84,20 @@ ipcamera_hispark_taurus:
       - lite_library
       - lite_component   
       - target
-         
+      - unittest
     bin:
       - executable
       - ohos_executable
       - lite_component
+      - unittest
+    hap: 
+      - hap_pack
+  # 对于脚本无法自动检测或误测部分，在这里手动配置
+  # manual_config:
+  #   usr/lib/libplugin_demuxer_ffmpeg.so: # start with out
+  #     subsystem: test_manual_config # [required]
+  #     component: test_manual_config # [required]
+  #     other_detail_info_key: other_detail_info_value # [optional]
       
 
 ipcamera_hispark_taurus_linux:
@@ -98,6 +109,7 @@ ipcamera_hispark_taurus_linux:
       bin: bin
       so: usr/lib
       etc: etc
+      hap: system/internal
     rest: True
   query_order:
     so: 
@@ -107,11 +119,15 @@ ipcamera_hispark_taurus_linux:
       - lite_library
       - lite_component
       - target
-      
+      - unittest
+    hap: 
+      - hap_pack
     bin:
       - executable
       - ohos_executable
       - lite_component
+      - unittest
+
 
 hispark_taurus_mini_system:
   product_infofile: hispark_taurus_mini_system_product.json
@@ -131,11 +147,12 @@ hispark_taurus_mini_system:
       - lite_library
       - lite_component
       - target
-      
+      - unittest
     bin:
       - executable
       - ohos_executable
       - lite_component
+      - unittest
 
 wifiiot_hispark_pegasus:
   product_infofile: wifiiot_hispark_pegasus_product.json
@@ -169,7 +186,7 @@ hispark_pegasus_mini_system:
       - lite_library
       - target
 
-rk3568_mini_system: # rk的目前从packages/phone/system_module_info.json中分析准确度更高,因为rk基本都使用的是ohos_xxx,而lite/small的更多的是使用的gn原生target template
+rk3568: # rk的目前从packages/phone/system_module_info.json中分析准确度更高,因为rk基本都使用的是ohos_xxx,而lite/small的更多的是使用的gn原生target template
   product_infofile: rk3568_mini_system_product.json
   output_name: rk3568_mini_system_result.json
   product_dir:
@@ -188,12 +205,13 @@ rk3568_mini_system: # rk的目前从packages/phone/system_module_info.json中分
       - lite_library
       - lite_component
       - target
-      
+      - unittest
     bin: 
       - ohos_executable
       - executable
       - lite_component
-      
+      - unittest
     hap: 
       - ohos_hap
+      - hap_pack
 

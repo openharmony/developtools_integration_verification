@@ -37,6 +37,16 @@ class RomRamBaselineCollector:
 
     @classmethod
     def collect(cls, oh_path: str) -> Dict[str, Dict]:
+        """
+        从bundle.json文件中收集rom、ram的baseline信息
+        返回结果：
+        "subsystem_name":{
+            "component_name":{
+                "rom":"123KB,   # the value may be "" or null
+                "ram":"234KB"
+            }
+        }
+        """
         def post_handler(x:str)->list:
             x = x.split("\n")
             y = [item for item in x if item]

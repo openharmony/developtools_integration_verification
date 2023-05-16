@@ -5,6 +5,16 @@ import glob
 from pathlib import Path
 from typing import *
 
+def unit_adaptive(size: int) -> str:
+    unit_list = ["Byte", "KB", "MB", "GB"]
+    index = 0
+    while index < len(unit_list) and size >= 1024:
+        size /= 1024
+        index += 1
+    if index == len(unit_list):
+        index = len(unit_list)-1
+        size *= 1024
+    return str(round(size,2))+unit_list[index]
 
 class BasicTool:
     @classmethod
