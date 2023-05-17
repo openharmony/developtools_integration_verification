@@ -112,7 +112,7 @@ class cmdRule(BaseRule):
 
         passed = True
         for key, item in parser._services.items():
-            if item.get("secon") is None:
+            if item.get("secon") == "":
                 output_str = "%s \'secon\' is empty" % key
                 self.warn("%s" % str(output_str))
                 passed = False
