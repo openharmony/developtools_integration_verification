@@ -371,5 +371,7 @@
     "persist.xts.devattest.authresult",
     "llvm.debug.service.",
     "persist.edm.edm_enable",
-    "persist.edm."
+    "persist.edm.",
+    "persist.usb.setting.gadget_conn_prompt",
+    "persist.usb.setting."
 ]
