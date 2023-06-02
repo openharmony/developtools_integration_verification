@@ -18,6 +18,8 @@
   [NOT ALLOWED]: 'init_global_key' is invalid, in /system/etc/init.cfg<br>
   [NOT ALLOWED]: 'storage_daemon' cannot be started in boot mode<br>
   [NOT ALLOWED]: 'hilogd' cannot be started in conditional mode<br> 
+  [WARNING]: selinux status is xxx
+  [WARNING]: xxx 'secon' is empty
 ```
 
 ## 3. 违规场景及处理方案建议
