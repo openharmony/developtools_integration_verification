@@ -18,6 +18,7 @@
 	"libdisplay_gralloc.z.so",
 	"libhdifd_parcelable.z.so",
 	"libconfigpolicy_util.z.so",
+    "libimage_source_ndk.z.so",
 
 	// Third party libraries
 	"libdrm.so",
