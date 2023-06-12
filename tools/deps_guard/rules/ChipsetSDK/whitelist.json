@@ -19,6 +19,8 @@
 	"libhdifd_parcelable.z.so",
 	"libconfigpolicy_util.z.so",
 
+	"libstd.dylib.so",
+
 	// Third party libraries
 	"libdrm.so",
 	"libpng.z.so",
