@@ -25,6 +25,7 @@
 	"libimage_receiver_ndk.z.so",
 	"libimage_source_ndk.z.so",
 	"libstd.dylib.so",
+	"libmindspore_lite_ndk.so",
 
 	// Third party libraries
 	"libdrm.so",
