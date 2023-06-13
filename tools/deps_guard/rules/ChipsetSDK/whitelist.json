@@ -5,6 +5,7 @@
 	"libhilog.so",
 	"libhilog_ndk.z.so",
 	"libhitrace_ndk.z.so",
+	"libohaudio.so",
 	"libhisysevent.z.so",
 	"libhicollie.z.so",
 	"libservice_checker.z.so",
