@@ -13,11 +13,11 @@
 编译时会提示如下类型的告警：
 
   ```
-  [NOT ALLOWED]: 'mount_fstab' is invalid, in /system/etc/init.cfg<br>
-  [NOT ALLOWED]: 'load_access_token_id' is invalid, in /system/etc/init/access_token.cfg<br>
-  [NOT ALLOWED]: 'init_global_key' is invalid, in /system/etc/init.cfg<br>
-  [NOT ALLOWED]: 'storage_daemon' cannot be started in boot mode<br>
-  [NOT ALLOWED]: 'hilogd' cannot be started in conditional mode<br> 
+  [NOT ALLOWED]: 'mount_fstab' is invalid, in /system/etc/init.cfg
+  [NOT ALLOWED]: 'load_access_token_id' is invalid, in /system/etc/init/access_token.cfg
+  [NOT ALLOWED]: 'init_global_key' is invalid, in /system/etc/init.cfg
+  [NOT ALLOWED]: 'storage_daemon' cannot be started in boot mode
+  [NOT ALLOWED]: 'hilogd' cannot be started in conditional mode
   [WARNING]: selinux status is xxx
   [WARNING]: xxx 'secon' is empty
 ```
