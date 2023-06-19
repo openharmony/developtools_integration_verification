@@ -32,7 +32,8 @@
 	"libprotobuf.z.so",
 	"libshared_libz.z.so",
 	"libcrypto_openssl.z.so",
-
+	"libcrypto_openssl.so",
+	"libunwind.z.so",
 	"libudev.z.so",
 	"libsurface.z.so",
 	"libsamgr_proxy.z.so",
@@ -64,6 +65,12 @@
 	"libhdi_input.z.so",
 
 	"libhitrace_meter.so",
+	"libmapper_service_1.0.z.so",
+	"libinput_interfaces_service_1.0.z.so",
+	"libhdf_utils.z.so",
+	"libdisplay_buffer_vdi_impl.z.so",
+	"libdisplay_buffer_vendor.z.so",
+	"libcodec_hdi_omx_callback_type_service_impl.z.so",
 
 	// by libdisplay_layer_video.z.so for hispark taurus platform
 	"libhdi_video_layer_client.z.so",
