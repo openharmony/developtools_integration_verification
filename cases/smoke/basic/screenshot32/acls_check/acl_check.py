@@ -1,3 +1,16 @@
+# -*- coding: utf-8 -*-
+# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import os
 import sys
 
@@ -35,13 +48,13 @@ def whitelist_check(whitelist, acls):
         raise
 
 
-def main():
+def main(sn):
     set_log_content(LogLevel(2).name, log_tag,
                     '-------------------------- ACL check begin --------------------------')
     try:
-        hdc_command(GENERATING_TOKEN_INFO_COMMAND)
-        hdc_command(DOWNLOAD_TOKEN_INFO_COMMAND)
-        hdc_command(CLEAR_TOKEN_INFO_FILE)
+        hdc_command(GENERATING_TOKEN_INFO_COMMAND.format(sn, TOKEN_INFO_URL))
+        hdc_command(DOWNLOAD_TOKEN_INFO_COMMAND.format(sn, TOKEN_INFO_URL, DOWNLOAD_TOKEN_INFO_URL))
+        hdc_command(CLEAR_TOKEN_INFO_FILE.format(sn, TOKEN_INFO_URL))
         file = read_txt(DOWNLOAD_TOKEN_INFO_URL)
         clear_token_info_txt(DOWNLOAD_TOKEN_INFO_URL)
         acls_dict = check_and_get(file)
@@ -58,4 +71,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    sn = sys.argv[1]
+    main(sn)
