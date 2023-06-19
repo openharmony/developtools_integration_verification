@@ -31,12 +31,7 @@ def check_all_rules(mgr, args):
         r.log("Do %s rule checking now:" % rule.RULE_NAME)
         if not r.__check__():
             passed = False
-        else:
-            passed = True
-
-        if not passed:
             r.log("  Please refer to: \033[91m%s\x1b[0m" % r.get_help_url())
-            pass
 
     if args and args.no_fail:
         return True
