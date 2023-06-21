@@ -172,26 +172,28 @@ class RamAnalyzer:
         return exec_once()
 
     @classmethod
-    def __parse_process_xml(cls, file_path: str, result_dict: typing.Dict[str, typing.List[str]]):
+    def __parse_process_json(cls, file_path: str, result_dict: typing.Dict[str, typing.List[str]]):
         """
-        解析xml文件，结存存入 result_dict中，格式：{process_name: os_list}
+        解析json文件，结存存入 result_dict中，格式：{process_name: os_list}
         其中，so_list中是so的base_name
         """
-        if not (os.path.isfile(file_path) and file_path.endswith(".xml")):
-            print("warning: {} not exist or not a xml file".format(file_path))
+        if not (os.path.isfile(file_path) and file_path.endswith(".json")):
+            print("warning: {} not exist or not a json file".format(file_path))
             return
-        doc = dom.parse(file_path)
-        info = doc.getElementsByTagName("info")[0]
-        process = info.getElementsByTagName("process")[0]
-        process_name = process.childNodes[0].data
-        result_dict[process_name] = list()
-        libs = info.getElementsByTagName(
-            "loadlibs")[0].getElementsByTagName("libpath")
-        for lib in libs:
-            so = lib.childNodes[0].data
-            result_dict.get(process_name).append(os.path.split(so)[-1])
-            if debug:
-                print(process_name, " ", so)
+        with open(file_path, 'r', encoding='utf-8') as f:
+            j_content:typing.Dict[str, typing.Any] = json.load(f)
+        if "process" not in j_content.keys() or "systemability" not in j_content.keys():
+            print(f"warning: {file_path} has no field 'process' or 'systemability'")
+            return
+        process_name:str = j_content.get("process")
+        elf_list:typing.List[str] = list()
+        for sa in j_content.get("systemability"):
+            libpath:str = sa.get("libpath")
+            if not libpath:
+                continue
+            elf_list.append(libpath)
+        result_dict[process_name] = elf_list
+
 
     @classmethod
     def get_elf_info_from_rom_result(cls, rom_result_json: str) -> typing.Dict[str, typing.Dict[str, str]]:
@@ -238,7 +240,7 @@ class RamAnalyzer:
             if first.endswith("sa_main"):
                 # 由sa_main去来起进程
                 xml_base_name = os.path.split(path_list[0])[-1]
-                cls.__parse_process_xml(os.path.join(
+                cls.__parse_process_json(os.path.join(
                     profile_path, xml_base_name), result_dict)
             else:
                 # 直接执行
@@ -247,25 +249,15 @@ class RamAnalyzer:
                 result_dict.get(process_name).append(os.path.split(first)[-1])
 
     @classmethod
-    def get_process_so_relationship(cls, xml_path: str, cfg_path: str, profile_path: str) -> typing.Dict[
+    def get_process_so_relationship(cls,cfg_path: str, profile_path: str) -> typing.Dict[
             str, typing.List[str]]:
         """
-        从out/{product_name}/packages/phone/sa_profile/merged_sa查找xml文件并处理得到进程与so的对应关系
+        parse the relationship between process and elf file
         """
         # 从merged_sa里面收集
-        xml_list = glob.glob(xml_path + os.sep + "*[.]xml", recursive=True)
+        # json_list = glob.glob(json_path + os.sep + "*[.]json", recursive=True)
         process_elf_dict: typing.Dict[str, typing.List[str]] = dict()
-        for xml in xml_list:
-            if debug:
-                print("parsing: ", xml)
-            try:
-                cls.__parse_process_xml(xml, process_elf_dict)
-            except:
-                print("parse '{}' failed".format(xml))
-            finally:
-                ...
-        # 从system/etc/init/*.cfg中收集，如果是sa_main拉起的，则从system/profile/*.xml中进行解析
-        cfg_list = glob.glob(cfg_path + os.sep + "*[.]cfg", recursive=True)
+        cfg_list = glob.glob(cfg_path + os.sep + "*.cfg", recursive=True)
         for cfg in cfg_list:
             if debug:
                 print("parsing: ", cfg)
@@ -429,7 +421,7 @@ class RamAnalyzer:
             subsystem_info["size"] = sub_size
                 
     @classmethod
-    def analysis(cls, cfg_path: str, xml_path: str, rom_result_json: str, device_num: str,
+    def analysis(cls, cfg_path: str, json_path: str, rom_result_json: str, device_num: str,
                  output_file: str, ss: str, output_excel: bool, baseline_file: str, unit_adapt:bool):
         """
         process size subsystem/component so so_size
@@ -446,8 +438,8 @@ class RamAnalyzer:
         so_info_dict: typing.Dict[
             str, typing.Dict[str["component_name|subsystem_name|size"], str]] = cls.get_elf_info_from_rom_result(
             rom_result_json)
-        process_elf_dict: typing.Dict[str, typing.List[str]] = cls.get_process_so_relationship(xml_path, cfg_path,
-                                                                                               profile_path)
+        process_elf_dict: typing.Dict[str, typing.List[str]] = cls.get_process_so_relationship(cfg_path,
+                                                                                               json_path)
         process_size_dict: typing.Dict[str, int] = cls.process_hidumper_info(
             device_num, ss)
         result_dict: typing.Dict[str, typing.Dict[str, typing.Any]] = dict()
@@ -493,7 +485,7 @@ class RamAnalyzer:
             # 得到进程相关的elf文件list
             so_list: list = get(process_name, process_elf_dict)
             if so_list is None:
-                print("warning: process '{}' not found in .xml or .cfg".format(
+                print("warning: process '{}' not found in .json or .cfg".format(
                     process_name))
                 result_dict[process_name] = dict()
                 result_dict[process_name]["size"] = process_size
@@ -571,8 +563,8 @@ def get_args():
     )
     parser.add_argument("-v", "-version", action="version",
                         version=f"version {VERSION}")
-    parser.add_argument("-x", "--xml_path", type=str, required=True,
-                        help="path of xml file. eg: -x ~/openharmony/out/rk3568/packages/phone/system/profile")
+    parser.add_argument("-s", "--json_path", type=str, required=True,
+                        help="path of sa json file. eg: -x ~/openharmony/out/rk3568/packages/phone/system/profile")
     parser.add_argument("-c", "--cfg_path", type=str, required=True,
                         help="path of cfg files. eg: -c ./cfgs/")
     parser.add_argument("-j", "--rom_result", type=str, default="./rom_analysis_result.json",
@@ -591,11 +583,13 @@ def get_args():
     args = parser.parse_args()
     return args
 
+def abspath(path:str)->str:
+    return os.path.abspath(os.path.expanduser(path))
 
 if __name__ == '__main__':
     args = get_args()
-    cfg_path = args.cfg_path
-    profile_path = args.xml_path
+    cfg_path = abspath(args.cfg_path)
+    profile_path = abspath(args.json_path)
     rom_result = args.rom_result
     device_num = args.device_num
     output_filename = args.output_filename
