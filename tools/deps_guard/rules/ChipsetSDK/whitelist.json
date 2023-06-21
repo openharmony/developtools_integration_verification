@@ -19,9 +19,6 @@
 	"libdisplay_gralloc.z.so",
 	"libhdifd_parcelable.z.so",
 	"libconfigpolicy_util.z.so",
-	"libpixelmap_ndk.z.so",
-	"libimage_ndk.z.so",
-	"libimage_receiver_ndk.z.so",
 
 	"libstd.dylib.so",
 
