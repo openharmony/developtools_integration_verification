@@ -90,7 +90,7 @@
 
 基于out/{product_name}/packages/phone下所有cfg文件、out/{product_name}/packages/phone/system/profile下所有json文件，rom的分析结果，（rom_ram_baseline.json——可以在rom分析阶段通过-b参数生成）分析各进程及对应部件的ram占用（默认取Pss）
 
-收集cfg、json文件的可供参考命令：`mkdir cfgs && cp $(find ~/oh/out/rk3568/packages/phone -name *.cfs | xargs) cfgs`
+收集cfg、json文件的可供参考命令：`mkdir cfgs && cp $(find ~/oh/out/rk3568/packages/phone -name *.cfg | xargs) cfgs`
 
 结果以json与xls格式存储，其中，json格式是必输出的，xls格式需要-e参数控制。
 

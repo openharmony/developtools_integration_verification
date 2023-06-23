@@ -22,10 +22,11 @@ import sys
 import typing
 from copy import deepcopy
 from typing import *
-
+import re
+import subprocess
 from pkgs.rom_ram_baseline_collector import RomRamBaselineCollector
 from pkgs.basic_tool import BasicTool, unit_adaptive
-from pkgs.gn_common_tool import GnCommonTool
+from pkgs.gn_common_tool import GnCommonTool, GnVariableParser
 from pkgs.simple_excel_writer import SimpleExcelWriter
 
 debug = bool(sys.gettrace())
@@ -33,27 +34,80 @@ debug = bool(sys.gettrace())
 NOTFOUND = "NOTFOUND"
 
 
+class PreCollector:
+    """
+    collect some info that system_module_info.json dosn't contains
+    """
+
+    def __init__(self, project_path: str) -> None:
+        self.info_dict: Dict[str, Any] = dict()
+        self.project_path = BasicTool.get_abs_path(project_path)
+        self.result_dict = dict()
+
+    def _process_single_sa(self, item: str, start_pattern: str):
+        gn, _, _ = item.split(':')
+        with open(gn, 'r', encoding='utf-8') as f:
+            content = f.read()
+        p_itr: Iterator[re.Match] = BasicTool.match_paragraph(
+            content=content, start_pattern=start_pattern)
+        for p in p_itr:
+            p_content = p.group()
+            files: List[str] = GnVariableParser.list_parser(
+                "sources", p_content)
+            component_name, subsystem_name = GnCommonTool.find_part_subsystem(
+                gn, self.project_path)
+            for f in files:
+                f = f.split('/')[-1]
+                self.result_dict[f] = {
+                    "subsystem_name": subsystem_name,
+                    "component_name": component_name,
+                    "gn_path": gn
+                }
+
+    def collect_sa_profile(self):
+        grep_kw = r"ohos_sa_profile"
+        grep_cmd = f"grep -rn '{grep_kw}' --include=BUILD.gn {self.project_path}"
+        content = BasicTool.execute(
+            grep_cmd, post_processor=lambda x: x.split('\n'))
+        for item in content:
+            if not item:
+                continue
+            self._process_single_sa(item, start_pattern=grep_kw)
+
+
 class RomAnalyzer:
 
     @classmethod
     def __collect_product_info(cls, system_module_info_json: Text,
-                               project_path: Text) -> Dict[Text, Dict[Text, Text]]:
+                               project_path: Text, extra_info: Dict[str, Dict]) -> Dict[Text, Dict[Text, Text]]:
         """
         根据system_module_info.json生成target字典
+        format:
+            {
+                "{file_name}":{
+                    "{subsytem_name}": abc,
+                    "{component_name}": def,
+                    "{gn_path}": ghi
+                }
+            }
+        if the unit of system_module_info.json has not field "label" and the "type" is "sa_profile",
+        find the subsystem_name and component_name in the BUILD.gn
         """
         with open(system_module_info_json, 'r', encoding='utf-8') as f:
             product_list = json.loads(f.read())
         project_path = BasicTool.get_abs_path(project_path)
         product_info_dict: Dict[Text, Dict[Text, Text]] = dict()
         for unit in product_list:
+            cs_flag = False
             dest: List = unit.get("dest")
-            if dest is None:
+            if not dest:
                 print("warning: keyword 'dest' not found in {}".format(
                     system_module_info_json))
                 continue
             label: Text = unit.get("label")
             gn_path = component_name = subsystem_name = None
             if label:
+                cs_flag = True
                 gn_path = os.path.join(project_path, label.split(':')[
                                        0].lstrip('/'), "BUILD.gn")
                 component_name = unit.get("part_name")
@@ -66,11 +120,18 @@ class RomAnalyzer:
             else:
                 print("warning: keyword 'label' not found in {}".format(unit))
             for target in dest:
-                product_info_dict[target] = {
-                    "component_name": component_name,
-                    "subsystem_name": subsystem_name,
-                    "gn_path": gn_path,
-                }
+                if cs_flag:
+                    product_info_dict[target] = {
+                        "component_name": component_name,
+                        "subsystem_name": subsystem_name,
+                        "gn_path": gn_path,
+                    }
+                else:
+                    tmp = target.split('/')[-1]
+                    pre_info = extra_info.get(tmp)
+                    if not pre_info:
+                        continue
+                    product_info_dict[target] = pre_info
         return product_info_dict
 
     @classmethod
@@ -142,12 +203,12 @@ class RomAnalyzer:
             return baseline_dict.get(subsystem_name).get(component_name).get("rom")
         size = unit.get("size")
         relative_filepath = unit.get("relative_filepath")
-        if result_dict.get(subsystem_name) is None: # 子系统
+        if result_dict.get(subsystem_name) is None:  # 子系统
             result_dict[subsystem_name] = dict()
             result_dict[subsystem_name]["size"] = 0
             result_dict[subsystem_name]["file_count"] = 0
 
-        if result_dict.get(subsystem_name).get(component_name) is None: # 部件
+        if result_dict.get(subsystem_name).get(component_name) is None:  # 部件
             result_dict[subsystem_name][component_name] = dict()
             result_dict[subsystem_name][component_name]["size"] = 0
             result_dict[subsystem_name][component_name]["file_count"] = 0
@@ -162,18 +223,18 @@ class RomAnalyzer:
         result_dict[subsystem_name][component_name][relative_filepath] = size
 
     @classmethod
-    def result_unit_adaptive(self, result_dict:Dict[str,Dict])->None:
+    def result_unit_adaptive(self, result_dict: Dict[str, Dict]) -> None:
         for subsystem_name, subsystem_info in result_dict.items():
-                size = unit_adaptive(subsystem_info["size"])
-                count = subsystem_info["file_count"]
-                if "size" in subsystem_info.keys():
-                    del subsystem_info["size"]
-                if "file_count" in subsystem_info.keys():
-                    del subsystem_info["file_count"]
-                for component_name, component_info in subsystem_info.items():
-                    component_info["size"] = unit_adaptive(component_info["size"])
-                subsystem_info["size"] = size
-                subsystem_info["file_count"] = count
+            size = unit_adaptive(subsystem_info["size"])
+            count = subsystem_info["file_count"]
+            if "size" in subsystem_info.keys():
+                del subsystem_info["size"]
+            if "file_count" in subsystem_info.keys():
+                del subsystem_info["file_count"]
+            for component_name, component_info in subsystem_info.items():
+                component_info["size"] = unit_adaptive(component_info["size"])
+            subsystem_info["size"] = size
+            subsystem_info["file_count"] = count
 
     @classmethod
     def analysis(cls, system_module_info_json: Text, product_dirs: List[str],
@@ -193,8 +254,11 @@ class RomAnalyzer:
         phone_dir = os.path.join(
             project_path, "out", product_name, "packages", "phone")
         product_dirs = [os.path.join(phone_dir, d) for d in product_dirs]
+        pre_collector = PreCollector(project_path)
+        pre_collector.collect_sa_profile()
+        extra_product_info_dict: Dict[str, Dict] = pre_collector.result_dict
         product_info_dict = cls.__collect_product_info(
-            system_module_info_json, project_path) # 所有产物信息
+            system_module_info_json, project_path, extra_info=extra_product_info_dict)  # collect product info from json file
         result_dict: Dict[Text:Dict] = dict()
         for d in product_dirs:
             file_list: List[Text] = BasicTool.find_all_files(d)
@@ -203,7 +267,10 @@ class RomAnalyzer:
                 relative_filepath = f.replace(phone_dir, "").lstrip(os.sep)
                 unit: Dict[Text, Any] = product_info_dict.get(
                     relative_filepath)
-                if unit is None:
+                if not unit:
+                    bf = f.split('/')[-1]
+                    unit: Dict[Text, Any] = product_info_dict.get(bf)
+                if not unit:
                     unit = dict()
                 unit["size"] = size
                 unit["relative_filepath"] = relative_filepath
@@ -258,3 +325,5 @@ if __name__ == '__main__':
     unit_adapt = args.unit_adaptive
     RomAnalyzer.analysis(module_info_json, product_dirs,
                          project_path, product_name, output_file, output_excel, add_baseline, unit_adapt)
+    # collector = PreCollector("~/oh_nomodify")
+    # collector.collect_sa_profile()
