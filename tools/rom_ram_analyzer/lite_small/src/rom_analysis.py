@@ -330,8 +330,7 @@ class RomAnalysisTool:
                 break
 
     @classmethod
-    def _iterate_all_template_type(cls, type_list: List[str], gn_info: Dict, gn_info_file: str, base_name: str,
-                                   rom_ram_baseline: Dict, rom_size_dict: Dict, f: str, size: int):
+    def _iterate_all_template_type(cls, type_list: List[str], gn_info: Dict, gn_info_file: str, base_name: str, rom_ram_baseline: Dict, rom_size_dict: Dict, f: str, size: int):
         find_flag = False
         component_rom_baseline = None
         for tn in type_list:  # tn example: ohos_shared_library

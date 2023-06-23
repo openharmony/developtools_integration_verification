@@ -15,7 +15,7 @@
 
 ## 代码思路
 
-1. 扫描BUILD.gn文件,收集各个target的编译产物及其对应的component_name, subsystem_name信息,并存储到config.yaml中的gn_info_file字段指定的json文件中
+1. 扫描BUILD.gn文件,收集各个target的编译产物及其对应的component_name, subsystem_name信息,并存储到config.yaml中的gn_info_file字段指定的json文件中。如果BUILD.gn中没有查找到，则直接使用get_subsytem_component.py中预先收集好的数据（根据bundle.json）
 2. 根据配置文件config.yaml扫描产品的编译产物目录,得到真实的编译产物信息(主要是大小)
 3. 用真实的编译产物与从BUILD.gn中收集的信息进行匹配,从而得到编译产物-大小-所属部件的对应信息
 4. 如果匹配失败,会直接利用grep到项目路径下进行模糊搜索,取出现次数top1的BUILD.gn,并根据该BUILD.gn文件去查找子系统和部件

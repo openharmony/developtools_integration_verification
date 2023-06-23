@@ -12,6 +12,10 @@
 
 主要是rk3568系列,已测试产品包括rk3568、rk3568_mini_system
 
+## 实现思路
+
+利用编译构建自动生成的out/rk3568/packages/phone/system_module_info.json中已有的信息重新组织，对于其中没有子系统和部件的文件，手动查找。目前已知ohos_sa_profile没有
+
 ## 使用说明
 
 前置条件：
@@ -30,7 +34,7 @@
 1. `-h`或`--help`命令查看帮助
    ```shell
    > python3 rom_analyzer.py -h
-   usage: rom_analyzer.py [-h] [-v] -p PROJECT_PATH -j MODULE_INFO_JSON -n PRODUCT_NAME -d PRODUCT_DIR [-b] [-o OUTPUT_FILE] [-e EXCEL]
+   usage: rom_analyzer.py [-h] [-v] -p PROJECT_PATH -j MODULE_INFO_JSON -n PRODUCT_NAME -d PRODUCT_DIR [-b] [-o OUTPUT_FILE] [-u] [-e EXCEL]
 
    analyze rom size of component.
 
@@ -48,6 +52,7 @@
    -b, --baseline        add baseline of component to the result(-b) or not.
    -o OUTPUT_FILE, --output_file OUTPUT_FILE
                            basename of output file, default: rom_analysis_result. eg: demo/rom_analysis_result
+   -u, --unit_adaptive   unit adaptive
    -e EXCEL, --excel EXCEL
                            if output result as excel, default: False. eg: -e True
    ```
@@ -55,7 +60,7 @@
    ```shell
    python3 rom_analyzer.py -p ~/oh/ -j ~/oh/out/rk3568/packages/phone/system_module_info.json -n rk3568 -d system -d vendor -d updater -e True -b
    # oh：rootpath of oh
-   # -b: add baseline of to the result
+   # -b: add baseline info to the result
    # -e True：output result in excel format additionally
    ```
 

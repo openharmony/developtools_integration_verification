@@ -43,7 +43,7 @@ class HDCTool:
         True：可用
         False：不可用
         """
-        cp = subprocess.run(["hdc"], capture_output=True)
+        cp = subprocess.run(["hdc", "--help"], capture_output=True)
         stdout = str(cp.stdout)
         stderr = str(cp.stderr)
         return verify_str in stdout or verify_str in stderr
@@ -406,13 +406,13 @@ class RamAnalyzer:
 
     @classmethod
     def refactored_result_unit_adaptive(cls, result_dict: Dict[str, Dict]) -> None:
-        for _, subsystem_info in result_dict.items():
+        for subsystem_name, subsystem_info in result_dict.items():
             sub_size = unit_adaptive(subsystem_info["size"])
             del subsystem_info["size"]
-            for _, component_info in subsystem_info.items():
+            for component_name, component_info in subsystem_info.items():
                 com_size = unit_adaptive(component_info["size"])
                 del component_info["size"]
-                for _, process_info in component_info.items():
+                for process_name, process_info in component_info.items():
                     pro_size = unit_adaptive(process_info["size"])
                     del process_info["size"]
                     for elf_name, elf_size in process_info["elf"].items():
@@ -422,95 +422,16 @@ class RamAnalyzer:
             subsystem_info["size"] = sub_size
 
     @classmethod
-    def verify(cls, device_num: str) -> bool:
-        if not HDCTool.verify_hdc():
-            print("error: Command 'hdc' not found")
-            return False
-        if not HDCTool.verify_device(device_num):
-            print("error: {} is inaccessible or not found".format(device_num))
-            return False
-        return True
-
-    @classmethod
-    def get(key: typing.Any, dt: typing.Dict[str, typing.Any]):
-        for k, v in dt.items():
-            if k.startswith(key) or (len(v) > 0 and key == v[0]):
-                # 要么uinput_inject的对应key为mmi_uinput_inject。对于此类特殊处理，即：如果service_name找不到，但是直接执行的bin等于这个名字，也认为找到
-                return v
-
-    @classmethod
-    def _process_process_info(cls, process_name: str, result_dict: Dict, process_size: int,
-                              rom_result_dict: Dict, process_elf_dict: Dict, so_info_dict: Dict,):
-        # 如果部件是init,特殊处理
-        if process_name == "init":
-            _, elf, _, _, size = cls.find_elf_size_from_rom_result(process_name, "startup", "init",
-                                                                   lambda x, y: os.path.split(y)[
-                                                                       -1].lower() == x.lower(),
-                                                                   rom_result_dict)
-            result_dict[process_name] = dict()
-            result_dict[process_name]["size"] = process_size
-            result_dict[process_name]["startup"] = dict()
-            result_dict[process_name]["startup"]["init"] = dict()
-            result_dict[process_name]["startup"]["init"][elf if len(
-                elf) != 0 else "UNKNOWN"] = size
-            return
-        # 如果是hap，特殊处理
-        if (process_name.startswith("com.") or process_name.startswith("ohos.")):
-            _, hap_name, subsystem_name, component_name, size = cls.find_elf_size_from_rom_result(process_name, "*", "*",
-                                                                                                  lambda x, y: len(
-                                                                                                      y.split(
-                                                                                                          '/')) >= 3 and x.lower().startswith(
-                                                                                                      y.split('/')[2].lower()),
-                                                                                                  rom_result_dict)
-            result_dict[process_name] = dict()
-            result_dict[process_name]["size"] = process_size
-            result_dict[process_name][subsystem_name] = dict()
-            result_dict[process_name][subsystem_name][component_name] = dict()
-            result_dict[process_name][subsystem_name][component_name][hap_name if len(
-                hap_name) != 0 else "UNKNOWN"] = size
-            return
-        # 得到进程相关的elf文件list
-        so_list: list = cls.get(process_name, process_elf_dict)
-        if so_list is None:
-            print("warning: process '{}' not found in .json or .cfg".format(
-                process_name))
-            result_dict[process_name] = dict()
-            result_dict[process_name]["size"] = process_size
-            result_dict[process_name]["UNKNOWN"] = dict()
-            result_dict[process_name]["UNKNOWN"]["UNKNOWN"] = dict()
-            result_dict[process_name]["UNKNOWN"]["UNKNOWN"]["UNKNOWN"] = int()
-            return
-        result_dict[process_name] = dict()
-        result_dict[process_name]["size"] = process_size
-        for so in so_list:
-            unit = so_info_dict.get(so)
-            if unit is None:
-                result_dict[process_name]["UNKNOWN"] = dict()
-                result_dict[process_name]["UNKNOWN"]["UNKNOWN"] = dict()
-                result_dict[process_name]["UNKNOWN"]["UNKNOWN"][so] = int()
-                print("warning: '{}' in {} not found in json from rom analysis result".format(
-                    so, process_name))
-                continue
-            component_name = unit.get("component_name")
-            subsystem_name = unit.get("subsystem_name")
-            so_size = unit.get("size")
-            if result_dict.get(process_name).get(subsystem_name) is None:
-                result_dict[process_name][subsystem_name] = dict()
-            if result_dict.get(process_name).get(subsystem_name).get(component_name) is None:
-                result_dict[process_name][subsystem_name][component_name] = dict()
-            result_dict[process_name][subsystem_name][component_name][so] = so_size
-
-    @classmethod
-    def _collect_sa_profile_info(cls, project_path:str):
-        ...
-
-    @classmethod
     def analysis(cls, cfg_path: str, json_path: str, rom_result_json: str, device_num: str,
                  output_file: str, ss: str, output_excel: bool, baseline_file: str, unit_adapt: bool):
         """
         process size subsystem/component so so_size
         """
-        if not cls.verify(device_num):
+        if not HDCTool.verify_hdc():
+            print("error: Command 'hdc' not found")
+            return
+        if not HDCTool.verify_device(device_num):
+            print("error: {} is inaccessible or not found".format(device_num))
             return
         with open(rom_result_json, 'r', encoding='utf-8') as f:
             rom_result_dict: typing.Dict = json.loads(f.read())
@@ -523,12 +444,75 @@ class RamAnalyzer:
         process_size_dict: typing.Dict[str, int] = cls.process_hidumper_info(
             device_num, ss)
         result_dict: typing.Dict[str, typing.Dict[str, typing.Any]] = dict()
+
+        def get(key: typing.Any, dt: typing.Dict[str, typing.Any]):
+            for k, v in dt.items():
+                if k.startswith(key) or (len(v) > 0 and key == v[0]):
+                    # 要么uinput_inject的对应key为mmi_uinput_inject。对于此类特殊处理，即：如果service_name找不到，但是直接执行的bin等于这个名字，也认为找到
+                    return v
+
         for process_name, process_size in process_size_dict.items():  # 从进程出发
             if not process_name:
                 print("warning: an empty 'process_name' has been found.")
                 continue
-            cls._process_process_info(
-                process_name, result_dict, process_size, rom_result_dict, process_elf_dict, so_info_dict)
+            # 如果部件是init,特殊处理
+            if process_name == "init":
+                _, elf, _, _, size = cls.find_elf_size_from_rom_result(process_name, "startup", "init",
+                                                                       lambda x, y: os.path.split(y)[
+                                                                           -1].lower() == x.lower(),
+                                                                       rom_result_dict)
+                result_dict[process_name] = dict()
+                result_dict[process_name]["size"] = process_size
+                result_dict[process_name]["startup"] = dict()
+                result_dict[process_name]["startup"]["init"] = dict()
+                result_dict[process_name]["startup"]["init"][elf if len(
+                    elf) != 0 else "UNKNOWN"] = size
+                continue
+            # 如果是hap，特殊处理
+            if (process_name.startswith("com.") or process_name.startswith("ohos.")):
+                _, hap_name, subsystem_name, component_name, size = cls.find_elf_size_from_rom_result(process_name, "*", "*",
+                                                                                                      lambda x, y: len(
+                                                                                                          y.split(
+                                                                                                              '/')) >= 3 and x.lower().startswith(
+                                                                                                          y.split('/')[2].lower()),
+                                                                                                      rom_result_dict)
+                result_dict[process_name] = dict()
+                result_dict[process_name]["size"] = process_size
+                result_dict[process_name][subsystem_name] = dict()
+                result_dict[process_name][subsystem_name][component_name] = dict()
+                result_dict[process_name][subsystem_name][component_name][hap_name if len(
+                    hap_name) != 0 else "UNKNOWN"] = size
+                continue
+            # 得到进程相关的elf文件list
+            so_list: list = get(process_name, process_elf_dict)
+            if so_list is None:
+                print("warning: process '{}' not found in .json or .cfg".format(
+                    process_name))
+                result_dict[process_name] = dict()
+                result_dict[process_name]["size"] = process_size
+                result_dict[process_name]["UNKNOWN"] = dict()
+                result_dict[process_name]["UNKNOWN"]["UNKNOWN"] = dict()
+                result_dict[process_name]["UNKNOWN"]["UNKNOWN"]["UNKNOWN"] = int()
+                continue
+            result_dict[process_name] = dict()
+            result_dict[process_name]["size"] = process_size
+            for so in so_list:
+                unit = so_info_dict.get(so)
+                if unit is None:
+                    result_dict[process_name]["UNKNOWN"] = dict()
+                    result_dict[process_name]["UNKNOWN"]["UNKNOWN"] = dict()
+                    result_dict[process_name]["UNKNOWN"]["UNKNOWN"][so] = int()
+                    print("warning: '{}' in {} not found in json from rom analysis result".format(
+                        so, process_name))
+                    continue
+                component_name = unit.get("component_name")
+                subsystem_name = unit.get("subsystem_name")
+                so_size = unit.get("size")
+                if result_dict.get(process_name).get(subsystem_name) is None:
+                    result_dict[process_name][subsystem_name] = dict()
+                if result_dict.get(process_name).get(subsystem_name).get(component_name) is None:
+                    result_dict[process_name][subsystem_name][component_name] = dict()
+                result_dict[process_name][subsystem_name][component_name][so] = so_size
         base_dir, _ = os.path.split(output_file)
         if len(base_dir) != 0 and not os.path.isdir(base_dir):
             os.makedirs(base_dir, exist_ok=True)

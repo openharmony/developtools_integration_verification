@@ -325,5 +325,3 @@ if __name__ == '__main__':
     unit_adapt = args.unit_adaptive
     RomAnalyzer.analysis(module_info_json, product_dirs,
                          project_path, product_name, output_file, output_excel, add_baseline, unit_adapt)
-    # collector = PreCollector("~/oh_nomodify")
-    # collector.collect_sa_profile()
