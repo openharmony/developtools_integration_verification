@@ -63,7 +63,7 @@ def ReadFromComPort(com_port, timeout):
     while (time_end - time_start).seconds < timeout:
         com_output_once = ''
         while com_port.inWaiting() > 0:
-            com_output_once += com_port.read(com_port.inWaiting()).decode()
+            com_output_once += com_port.read(com_port.inWaiting()).decode('ISO-8859-1')
         if com_output_once != '':
             com_output += com_output_once
             print('{}'.format(com_output_once), end='')
