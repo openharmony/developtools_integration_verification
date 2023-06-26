@@ -88,7 +88,7 @@ class RomAnalysisTool:
         if (not sub_path) or (os.sep not in sub_path):
             return
         # 将其他目录添加到dir_list
-        t, sub_sub_path = sub_path.split(os.sep, 1) # 如果是c/e,分割成c,e
+        t, sub_sub_path = sub_path.split(os.sep, 1)  # 如果是c/e,分割成c,e
         t = os.path.join(rela_path, t)
         if t in dir_list:
             dir_list.remove(t)
@@ -107,7 +107,7 @@ class RomAnalysisTool:
             logging.error(
                 f"product_name '{product_name}' not found in the config.yaml")
             exit(1)
-        product_path_dit: Dict[str, str] = dict() # 存储编译产物的类型及目录
+        product_path_dit: Dict[str, str] = dict()  # 存储编译产物的类型及目录
         root_dir = product_dir.get("root")
         root_dir = os.path.join(project_path, root_dir)
         relative_dir: Dict[str, str] = product_dir.get("relative")
@@ -120,14 +120,14 @@ class RomAnalysisTool:
             product_path_dit[k] = os.path.join(root_dir, v)
         # 查找编译产物信息
         # product_dict格式: {"so": ["a.so", "b.so"]}
-        product_dict: Dict[str, List[str]] = dict() # 存储编译产物的名称
+        product_dict: Dict[str, List[str]] = dict()  # 存储编译产物的名称
         for k, v in product_path_dit.items():
             if not os.path.exists(v):
                 logging.warning(f"dir '{v}' not exist")
-            product_dict[k] = BasicTool.find_files_with_pattern(v) # v是全路径
+            product_dict[k] = BasicTool.find_files_with_pattern(v)  # v是全路径
         if product_dir.get("rest"):
             rest_dir_list: List[str] = os.listdir(
-                root_dir) # 除了配置在relative下之外的所有剩余目录,全部归到etc下
+                root_dir)  # 除了配置在relative下之外的所有剩余目录,全部归到etc下
             for v in relative_dir.values():
                 if v in rest_dir_list:
                     rest_dir_list.remove(v)
@@ -152,14 +152,14 @@ class RomAnalysisTool:
     @classmethod
     def _put(cls, sub: str, com: str, unit: Dict, rom_size_dict: Dict, com_size_baseline: str = str()):
         size = unit.get("size")
-        if not rom_size_dict.get("size"): # 总大小
+        if not rom_size_dict.get("size"):  # 总大小
             rom_size_dict["size"] = 0
-        if not rom_size_dict.get(sub): # 子系统大小
+        if not rom_size_dict.get(sub):  # 子系统大小
             rom_size_dict[sub]: Dict[str, Dict] = dict()
             rom_size_dict[sub]["size"] = 0
             rom_size_dict[sub]["count"] = 0
 
-        if not rom_size_dict.get(sub).get(com): # 部件
+        if not rom_size_dict.get(sub).get(com):  # 部件
             rom_size_dict.get(sub)[com] = dict()
             rom_size_dict[sub][com]["filelist"] = list()
             rom_size_dict[sub][com]["size"] = 0
@@ -329,7 +329,70 @@ class RomAnalysisTool:
                 del v[index]
                 break
 
-    @ classmethod
+    @classmethod
+    def _iterate_all_template_type(cls, type_list: List[str], gn_info: Dict, gn_info_file: str, base_name: str, rom_ram_baseline: Dict, rom_size_dict: Dict, f: str, size: int):
+        find_flag = False
+        component_rom_baseline = None
+        for tn in type_list:  # tn example: ohos_shared_library
+            if find_flag:  # 如果已经在前面的template中找到了,后面的就不必再查找
+                break
+            output_dict: Dict[str, Dict] = gn_info.get(
+                tn)  # 这个模板对应的所有可能编译产物
+            if not output_dict:
+                logging.warning(
+                    f"'{tn}' not found in the {gn_info_file}")
+                continue
+            d = output_dict.get(base_name)
+            if not d:
+                continue
+            d["size"] = size
+            d["file_name"] = f.replace(project_path, "")
+            if rom_ram_baseline.get(d["subsystem_name"]) and rom_ram_baseline.get(d["subsystem_name"]).get(d["component_name"]):
+                component_rom_baseline = rom_ram_baseline.get(
+                    d["subsystem_name"]).get(d["component_name"]).get("rom")
+            cls._put(d["subsystem_name"],
+                     d["component_name"], d, rom_size_dict, component_rom_baseline)
+            find_flag = True
+        if not find_flag:  # 如果指定序列中的template都没有查找到,则模糊匹配
+            # fuzzy match
+            psesudo_gn, sub, com = cls._fuzzy_match(f)
+            if sub and com:
+                if rom_ram_baseline.get(sub) and rom_ram_baseline.get(sub).get(com):
+                    component_rom_baseline = rom_ram_baseline.get(
+                        sub).get(com).get("baseline")
+                cls._put(sub, com, {
+                    "subsystem_name": sub,
+                    "component_name": com,
+                    "psesudo_gn_path": psesudo_gn,
+                    "description": "fuzzy match",
+                    "file_name": f.replace(project_path, ""),
+                    "size": size,
+                }, rom_size_dict, component_rom_baseline)
+                find_flag = True
+        if not find_flag:  # 模糊匹配都没有匹配到的,归属到NOTFOUND
+            cls._put("NOTFOUND", "NOTFOUND", {
+                "file_name": f.replace(project_path, ""),
+                "size": size,
+            }, rom_size_dict)
+
+    @classmethod
+    def _subsystem_component_for_all_product_file(cls, product_dict: Dict[str, List[str]], query_order: Dict[str, List[str]],
+                                                  gn_info: Dict, gn_info_file: str, rom_ram_baseline: Dict, rom_size_dict: Dict):
+        for t, l in product_dict.items():
+            for f in l:  # 遍历所有文件
+                if os.path.isdir(f):
+                    continue
+                type_list = query_order.get(t)
+                _, base_name = os.path.split(f)
+                size = os.path.getsize(f)
+                if not type_list:
+                    logging.warning(
+                        f"'{t}' not found in query_order of the config.yaml")
+                    break
+                cls._iterate_all_template_type(
+                    type_list, gn_info, gn_info_file, base_name, rom_ram_baseline, rom_size_dict, f, size)
+
+    @classmethod
     def analysis(cls, product_name: str, product_dict: Dict[str, List[str]]):
         """analysis the rom of lite/small product
 
@@ -346,69 +409,18 @@ class RomAnalysisTool:
             project_path)
         with open("rom_ram_baseline.json", 'w', encoding='utf-8') as f:
             json.dump(rom_ram_baseline, f, indent=4)
-        gn_info_file = configs["gn_info_file"] # filename to save gn_info
+        gn_info_file = configs["gn_info_file"]  # filename to save gn_info
         with open(gn_info_file, 'r', encoding='utf-8') as f:
             gn_info = json.load(f)
         query_order: Dict[str, List[str]
-                          ] = configs[product_name]["query_order"] # query order of the gn template to be matched
-        query_order["etc"] = configs["target_type"] # etc会查找所有的template
+                          ] = configs[product_name]["query_order"]  # query order of the gn template to be matched
+        query_order["etc"] = configs["target_type"]  # etc会查找所有的template
         rom_size_dict: Dict = dict()
         if "manual_config" in configs[product_name].keys():
             cls._match_manual_configured(
                 configs[product_name]["manual_config"], product_dict, configs[product_name]["product_dir"]["root"], rom_size_dict)
-        for t, l in product_dict.items():
-            for f in l: # 遍历所有文件
-                if os.path.isdir(f):
-                    continue
-                find_flag = False
-                type_list = query_order.get(t)
-                _, base_name = os.path.split(f)
-                size = os.path.getsize(f)
-                if not type_list:
-                    logging.warning(
-                        f"'{t}' not found in query_order of the config.yaml")
-                    break
-                for tn in type_list: # tn example: ohos_shared_library
-                    if find_flag: # 如果已经在前面的template中找到了,后面的就不必再查找
-                        break
-                    output_dict: Dict[str, Dict] = gn_info.get(
-                        tn) # 这个模板对应的所有可能编译产物
-                    if not output_dict:
-                        logging.warning(
-                            f"'{tn}' not found in the {gn_info_file}")
-                        continue
-                    d = output_dict.get(base_name)
-                    if not d:
-                        continue
-                    d["size"] = size
-                    d["file_name"] = f.replace(project_path, "")
-                    if rom_ram_baseline.get(d["subsystem_name"]) and rom_ram_baseline.get(d["subsystem_name"]).get(d["component_name"]):
-                        component_rom_baseline = rom_ram_baseline.get(
-                            d["subsystem_name"]).get(d["component_name"]).get("rom")
-                    cls._put(d["subsystem_name"],
-                             d["component_name"], d, rom_size_dict, component_rom_baseline)
-                    find_flag = True
-                if not find_flag: # 如果指定序列中的template都没有查找到,则模糊匹配
-                    # fuzzy match
-                    psesudo_gn, sub, com = cls._fuzzy_match(f)
-                    if sub and com:
-                        if rom_ram_baseline.get(sub) and rom_ram_baseline.get(sub).get(com):
-                            component_rom_baseline = rom_ram_baseline.get(
-                                sub).get(com).get("baseline")
-                        cls._put(sub, com, {
-                            "subsystem_name": sub,
-                            "component_name": com,
-                            "psesudo_gn_path": psesudo_gn,
-                            "description": "fuzzy match",
-                            "file_name": f.replace(project_path, ""),
-                            "size": size,
-                        }, rom_size_dict, component_rom_baseline)
-                        find_flag = True
-                if not find_flag: # 模糊匹配都没有匹配到的,归属到NOTFOUND
-                    cls._put("NOTFOUND", "NOTFOUND", {
-                        "file_name": f.replace(project_path, ""),
-                        "size": size,
-                    }, rom_size_dict)
+        cls._subsystem_component_for_all_product_file(
+            product_dict, query_order, gn_info, gn_info_file, rom_ram_baseline, rom_size_dict)
         if unit_adapt:
             cls._result_unit_adaptive(rom_size_dict)
         with open(configs[product_name]["output_name"], 'w', encoding='utf-8') as f:

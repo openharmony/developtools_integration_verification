@@ -1,5 +1,12 @@
 import os
 import json
+import re
+from typing import *
+
+if __name__ == '__main__':
+    from basic_tool import BasicTool
+else:
+    from pkgs.basic_tool import BasicTool
 
 
 class GnCommonTool:
@@ -98,21 +105,8 @@ class GnCommonTool:
         return part_name, subsystem_name
 
     @classmethod
-    def find_part_subsystem(cls, gn_file: str, project_path: str) -> tuple:
-        """
-        查找gn_file对应的part_name和subsystem
-        如果在gn中找不到，就到bundle.json中去找
-        """
-        part_name = None
-        subsystem_name = None
-        part_var_flag = False  # 标识这个变量从gn中取出的原始值是不是变量
-        subsystem_var_flag = False
-        var_list = list()
-        part_name_pattern = r"part_name *=\s*\S*"
-        subsystem_pattern = r"subsystem_name *=\s*\S*"
-        meta_grep_pattern = "grep -E '{}' {} | head -n 1"
-        part_cmd = meta_grep_pattern.format(part_name_pattern, gn_file)
-        subsystem_cmd = meta_grep_pattern.format(subsystem_pattern, gn_file)
+    def _parse_part_subsystem(cls, part_var_flag: bool, subsystem_var_flag: bool, var_list: List[str], part_cmd: str, subsystem_cmd: str, gn_file: str, project_path: str) -> Tuple[str, str]:
+        part_name = subsystem_name = None
         part = os.popen(part_cmd).read().strip()
         if len(part) != 0:
             part = part.split('=')[-1].strip()
@@ -145,13 +139,63 @@ class GnCommonTool:
                 tuple(var_list), gn_file, project_path)[0]
             subsystem_name = t if t is not None and len(
                 t) != 0 else subsystem_name
-        if part_name is not None and subsystem_name is not None:
+        return part_name, subsystem_name
+
+    @classmethod
+    def find_part_subsystem(cls, gn_file: str, project_path: str) -> tuple:
+        """
+        查找gn_file对应的part_name和subsystem
+        如果在gn中找不到，就到bundle.json中去找
+        """
+        part_var_flag = False  # 标识这个变量从gn中取出的原始值是不是变量
+        subsystem_var_flag = False
+        var_list = list()
+        part_name_pattern = r"part_name *=\s*\S*"
+        subsystem_pattern = r"subsystem_name *=\s*\S*"
+        meta_grep_pattern = "grep -E '{}' {} | head -n 1"
+        part_cmd = meta_grep_pattern.format(part_name_pattern, gn_file)
+        subsystem_cmd = meta_grep_pattern.format(subsystem_pattern, gn_file)
+
+        part_name, subsystem_name = cls._parse_part_subsystem(part_var_flag, subsystem_var_flag,
+                                                              var_list, part_cmd, subsystem_cmd, gn_file, project_path)
+        if part_name and subsystem_name:
             return part_name, subsystem_name
         # 如果有一个没有找到，就要一层层去找bundle.json文件
         t_part_name, t_subsystem_name = cls.__find_part_subsystem_from_bundle(
             gn_file, stop_tail=project_path)
-        if t_part_name is not None:
+        if t_part_name:
             part_name = t_part_name
-        if t_subsystem_name is not None:
+        if t_subsystem_name:
             subsystem_name = t_subsystem_name
         return part_name, subsystem_name
+
+class GnVariableParser:
+    @classmethod
+    def string_parser(cls, var: str, content: str) -> str:
+        """
+        解析值为字符串的变量,没有对引号进行去除,如果是a = b这种b为变量的,则无法匹配
+        :param content: 要进行解析的内容
+        :param var: 变量名
+        :return: 变量值[str]
+        """
+        result = BasicTool.re_group_1(
+            content, r"{} *= *[\n]?(\".*?\")".format(var), flags=re.S | re.M)
+        return result
+
+    @classmethod
+    def list_parser(cls, var: str, content: str) -> List[str]:
+        """
+        解析值为列表的变量，list的元素必须全为数字或字符串,且没有对引号进行去除,如果是a = b这种b为变量的,则无法匹配
+        :param var: 变量名
+        :param content: 要进行
+        :return: 变量值[List]
+        """
+        result = BasicTool.re_group_1(
+            content, r"{} *= *(\[.*?\])".format(var), flags=re.S | re.M)
+        result_list = list()
+        for item in result.lstrip('[').rstrip(']').split('\n'):
+            item = item.strip().strip(',"')
+            if not item:
+                continue
+            result_list.append(item)
+        return result_list
