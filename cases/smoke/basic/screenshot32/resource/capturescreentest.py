@@ -28,6 +28,8 @@ import shutil
 import numpy
 import cv2
 import pytesseract
+sys.path.append(os.path.dirname(os.path.realpath(__file__)).replace('resource', 'acls_check'))
+from acl_check import *
 from pytesseract import Output
 from PIL import Image
 
@@ -394,6 +396,19 @@ if __name__ == "__main__":
     power_state = enter_shell_cmd("hidumper -s 3308", WAIT_TIME_ONE)
     if "State=2" not in power_state:
         print_to_log("SmokeTest:: DISPLAY POWER MANAGER DUMP State=0")
+        sys_exit()
+
+    main(args.device_num)
+    native_sa = os.path.normpath(os.path.join(args.tools_path, "acls_check", "native_sa.log"))
+    try:
+        with open(native_sa, mode='r', encoding='utf-8', errors='ignore') as native_file:
+            native_file.seek(0)
+            acl_result = native_file.read()
+        native_file.close()
+    except Exception as reason:
+        print_to_log("SmokeTest:: error: native_sa.log are not exist!")
+    if "ACL check failed" in acl_result:
+        print_to_log("SmokeTest:: error: acl check failed")
         sys_exit()
 
     open_wlan()
