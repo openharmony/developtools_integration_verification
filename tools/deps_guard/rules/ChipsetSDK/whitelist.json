@@ -23,7 +23,7 @@
 	"libpixelmap_ndk.z.so",
 	"libimage_ndk.z.so",
 	"libimage_receiver_ndk.z.so",
-
+	"libimage_source_ndk.z.so",
 	"libstd.dylib.so",
 
 	// Third party libraries
