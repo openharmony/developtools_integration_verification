@@ -56,7 +56,7 @@ def main(sn):
         hdc_command(DOWNLOAD_TOKEN_INFO_COMMAND.format(sn, TOKEN_INFO_URL.format(sn), DOWNLOAD_TOKEN_INFO_URL.format(sn)))
         hdc_command(CLEAR_TOKEN_INFO_FILE.format(sn, TOKEN_INFO_URL.format(sn)))
         file = read_txt(DOWNLOAD_TOKEN_INFO_URL.format(sn))
-        clear_token_info_txt(DOWNLOAD_TOKEN_INFO_URL.format(sn))
+        # clear_token_info_txt(DOWNLOAD_TOKEN_INFO_URL.format(sn))
         acls_dict = check_and_get(file)
         acl_whitelist = read_json(PATH + 'acl_whitelist.json')
         whitelist = get_acl_dict(acl_whitelist)
