@@ -64,7 +64,7 @@
         "kill_camera": ["killall com.ohos.camera"],
         "kill_photos": ["killall com.ohos.photos"],
         "all_actions": [
-            [1, "open_camera_log"], [5, "start_camera"], [3, "take_photos-x-y"], [2, "convert_to_video-x-y"], [3, "take_photos-x-y"], [2, "stop_video-x-y"], [6, "convert_to_photos-x-y"],
+            [1, "open_camera_log"], [5, "start_camera"], [3, "take_photos-x-y"], [2, "convert_to_video-x-y"], [3, "take_photos-x-y"], [2, "stop_video-x-y"], [11, "convert_to_photos-x-y"],
             [1, "recover_log"], [1, "check_result"], [1, "shot_cmd", "camera"], [1, "compress_log"], [1, "check_photos"], [1, "get_file_from_dev", "/data/log/hilog/camera_log.tar"],
             [1, "kill_camera"], [1, "kill_photos"]
         ]
