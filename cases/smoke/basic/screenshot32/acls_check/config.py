@@ -24,7 +24,7 @@ PATH = os.path.dirname(os.path.realpath(__file__)) + SYS_SEQ
 # 脚本的执行日志
 LOG_FILE = PATH + SYS_SEQ + "native_sa.log"
 # 设备上生成的token info 文件名
-TOKEN_INFO_NAME = 'token_info_{}.txt'.format(time.time_ns())
+TOKEN_INFO_NAME = 'token_info_'+ str(time.time_ns()) +'_{}.txt'
 # 设备上生成文件存放位置
 TOKEN_INFO_URL = '/data/{}'.format(TOKEN_INFO_NAME)
 # 设备上文件生成命令
