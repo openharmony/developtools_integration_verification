@@ -58,19 +58,19 @@ def start(param):
             scriptpath =os.path.dirname(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
             loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool.exe")
             logger.info(loader_tool_path)
-            mycmd = "%s LD" % loader_tool_path
-            try:
-                num = send_cmd(mycmd)
-                if num != 2:
-                    logger.info("try again!")
-                    time.sleep(40)
-                    num = send_cmd(mycmd)
-                    if num != 2:
-                        logger.error("有设备断连，全部处置为真隔离状态！")
-                        errorcode = 200
-            except Exception as f:
-                logger.error(f)
-            logger.info(errorcode)
+#           mycmd = "%s LD" % loader_tool_path
+#            try:
+#                num = send_cmd(mycmd)
+#                if num != 2:
+#                    logger.info("try again!")
+#                    time.sleep(40)
+#                    num = send_cmd(mycmd)
+#                    if num != 2:
+#                        logger.error("有设备断连，全部处置为真隔离状态！")
+#                        errorcode = 200
+#            except Exception as f:
+#               logger.error(f)
+#            logger.info(errorcode)
             if errorcode == 99:
                 logger.error("upgrade success ,but Smoke failed, the fatal problem occurs.")
                 return 99
