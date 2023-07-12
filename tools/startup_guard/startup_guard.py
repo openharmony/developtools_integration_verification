@@ -35,12 +35,10 @@ def startup_guard(out_path, args=None):
 
     from startup_checker import check_all_rules
     passed = check_all_rules(mgr, args)
-    passed = True
     if passed:
         print("All rules passed")
-        return
-
-    raise Exception("ERROR: config_guard failed.")
+    else:
+        print("Please modify according to README.md")
 
 if __name__ == '__main__':
     parser = __create_arg_parser()

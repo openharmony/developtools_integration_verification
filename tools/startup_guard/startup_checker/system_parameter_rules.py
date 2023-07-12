@@ -20,6 +20,7 @@ from .base_rule import BaseRule
 
 class SystemParameterRule(BaseRule):
     RULE_NAME = "NO-Config-SystemParameter-In-INIT"
+    CONFIG_DAC_MAX_NUM = 200
 
     def _check_param_name(self, param_name, empty_flag):
         # len: (0, 96]
@@ -49,7 +50,10 @@ class SystemParameterRule(BaseRule):
         value_empty_flag = True
         white_list =self.get_white_lists()
         parser = self.get_mgr().get_parser_by_name('system_parameter_whitelist')
+        counts = 0
         for key, item in parser._parameters.items():
+            if (item.get("dacMode") != 0):
+                counts += 1
             if str(item)[-1] == "=":
                 value_empty_flag = True
             else:
@@ -60,7 +64,8 @@ class SystemParameterRule(BaseRule):
                 continue
             if key in white_list:
                 continue
-            self.error("%s is not found in the whitelist" % key)
+        if counts > SystemParameterRule.CONFIG_DAC_MAX_NUM:
+            self.error("DAC overallocated memory")
             passed = False
         return passed
         

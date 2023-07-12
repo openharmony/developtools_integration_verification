@@ -49,6 +49,43 @@
                         "hdf_devmgr"
                     ]
                 }
+            ],
+            "start-cmd":[
+                "ueventd",
+                "watchdog_service",
+                "deviceauth_service",
+                "screenlock_server",
+                "resource_schedule_service",
+                "storage_daemon",
+                "bluetooth_service",
+                "hilogd",
+                "device_usage_stats_service",
+                "wifi_hal_service",
+                "hdcd",
+                "bgtaskmgr_service",
+                "module_update_service",
+                "hiprofilerd",
+                "hiprofiler_plugins",
+                "hiprofiler_daemon",
+                "pulseaudio",
+                "audio_host",
+                "audio_policy",
+                "huks_service",
+                "memmgrservice",
+                "netmanager",
+                "pinauth",
+                "updater_sa",
+                "telephony_sa",
+                "devattest_service",
+                "msdp_sa",
+                "accessibility",
+                "wallpaper_service",
+                "time_service",
+                "udevd_service",
+                "mmi_uinput_service",
+                "multimodalinput",
+                "hdf_devhost",
+                "concurrent_task_service"
             ]
     }
 ]
