@@ -85,5 +85,6 @@
 	"libipc_core.z.so",
 	"librtg_interface.z.so",
 	"libconcurrent_task_client.z.so",
-	"libffrt.z.so"
+	"libffrt.z.so",
+	"libbtcommon.z.so"
 ]
