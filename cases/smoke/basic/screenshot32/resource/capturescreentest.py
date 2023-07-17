@@ -350,7 +350,10 @@ if __name__ == "__main__":
         file_from_dev("/data/log/hilog/system_start_log_{}.tar".format(args.device_num), args.save_path)
         connect_check()
         launcher_similarity = shot_and_cmp("launcher.jpeg")
-        if launcher_similarity >= 90:
+        power_state = enter_shell_cmd("hidumper -s 3308", WAIT_TIME_ONE)
+        if "State=2" not in power_state:
+            print_to_log("SmokeTest:: ERROR, DISPLAY POWER MANAGER DUMP State ≠ 2")
+        if launcher_similarity >= 90 and "State=2" in power_state:
             print_to_log("SmokeTest:: launcher screenshot comparison is ok!")
             break
         elif reboot_cnt >= 1:
@@ -392,11 +395,6 @@ if __name__ == "__main__":
         sys_exit()
     else:
         print_to_log("SmokeTest:: first processes check is ok")
-
-    power_state = enter_shell_cmd("hidumper -s 3308", WAIT_TIME_ONE)
-    if "State=2" not in power_state:
-        print_to_log("SmokeTest:: DISPLAY POWER MANAGER DUMP State=0")
-        sys_exit()
 
     main(args.device_num)
     native_sa = os.path.normpath(os.path.join(args.tools_path, "acls_check", "native_sa.log"))
