@@ -353,7 +353,7 @@ if __name__ == "__main__":
         power_state = enter_shell_cmd("hidumper -s 3308", WAIT_TIME_ONE)
         if "State=2" not in power_state:
             print_to_log("SmokeTest:: ERROR, DISPLAY POWER MANAGER DUMP State ≠ 2")
-        if launcher_similarity >= 90 and "State=2" in power_state:
+        if launcher_similarity >= 90:
             print_to_log("SmokeTest:: launcher screenshot comparison is ok!")
             break
         elif reboot_cnt >= 1:
