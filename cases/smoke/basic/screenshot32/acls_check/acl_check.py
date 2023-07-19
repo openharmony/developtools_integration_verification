@@ -32,7 +32,7 @@ def whitelist_check(whitelist, acls):
                 for acl in v:
                     if acl not in temp:
                         check_pass = False
-                        set_log_content(LogLevel(2).name, log_tag, log_tag + '->whitelist_check',
+                        set_log_content(LogLevel(2).name, log_tag + '->whitelist_check',
                                         'precessName = {} the acl = {} trustlist is not configured.'.format(k, acl))
             else:
                 check_pass = False
