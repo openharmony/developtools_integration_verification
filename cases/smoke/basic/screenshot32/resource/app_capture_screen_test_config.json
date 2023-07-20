@@ -2,8 +2,6 @@
     {
         "DEVICE_1":[5, 6, 7, 8, 9, 10],
         "DEVICE_2":[1, 2, 3, 4],
-        "DEVICE_3":[5, 6, 7, 8, 9, 10],
-        "DEVICE_4":[1, 2, 3, 4],
         "recent-x-y":[515, 1240],
         "recent_del-x-y":[360, 1170],
         "permisson_ok-x-y":[500, 1130],
@@ -30,7 +28,7 @@
         "crop_range":[140, 450, 30, 500],
         "kill_settings": ["killall com.ohos.settings"],
         "all_actions": [
-            [1, "shot_cmd", "settings"], [1, "cmp_cmd-level", "settings"], [8, "wlan-x-y"], [2, "shot_cmd", "wlan_list"], [20, "connect_wifi", "wlan_list"], [1, "shot_cmd", "wifi"],
+            [1, "shot_cmd", "settings"], [1, "cmp_cmd-level", "settings"], [8, "wlan-x-y"], [2, "shot_cmd", "wlan_list"], [15, "connect_wifi", "wlan_list"], [1, "shot_cmd", "wifi"],
             [1, "shot_cmd", "wifi_connection_status"], [1, "cmp_twice", "wifi", 90, "crop_range"], [1, "kill_settings"]
         ]
     },
@@ -57,7 +55,7 @@
         "entry": "",
         "check_result":["cd /data/log/hilog && grep -nr PreviewOutputCallback", "OnFrameStarted"],
         "compress_log":["cd /data/log/hilog && tar -cf camera_log.tar *"],
-        "open_camera_log":["rm /data/log/hilog/* && hilog -b X;hilog -b D -T CAMERA;hilog -r"],
+        "open_camera_log":["rm -rf /data/log/hilog/* && hilog -b X;hilog -b D -T CAMERA;hilog -r"],
         "start_camera":["aa start -a com.ohos.camera.MainAbility -b com.ohos.camera"],
         "recover_log":["cd data/log/hilog/;hilog -x > camera_log.txt;hilog -b D"],
         "check_photos":["aa dump -a | grep com.ohos.photos.MainAbility", "com.ohos.photos"],
@@ -86,7 +84,7 @@
         "app_name": "video_test",
         "entry": "",
         "mk_test_dir":["mkdir -p /data/app/el2/100/base/ohos.acts.multimedia.video.videoplayer/haps/entry/files"],
-        "start_video_log":["rm /data/log/hilog/* && hilog -r && hilog -Q pidoff;hilog -G 512M;hilog -w start -l 400000000 -m none"],
+        "start_video_log":["rm -rf /data/log/hilog/* && hilog -r && hilog -Q pidoff;hilog -G 512M;hilog -w start -l 400000000 -m none"],
         "start_test":["aa test -p ohos.acts.multimedia.video.videoplayer -b ohos.acts.multimedia.video.videoplayer -s unittest OpenHarmonyTestRunner -w 2000000 -s timeout 60000", "Failure: 0, Error: 0, Pass: 1"],
         "compress_log":["cd /data/log/hilog && tar -cf video_log.tar *"],
         "kill_video": ["killall ohos.acts.multimedia.video.videoplayer"],

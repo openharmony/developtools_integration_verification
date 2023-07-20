@@ -39,13 +39,12 @@ def print_to_log(str):
     time = datetime.datetime.now()
     str = "[{}] {}".format(time, str)
     print(str)
-    with open(os.path.join(args.save_path, 'test_{}.log'.format(args.device_num)),\
-    mode='a', encoding='utf-8') as log_file:
+    with open(os.path.join(args.save_path, 'test_{}.log'.format(args.device_num)),mode='a', encoding='utf-8') as file:
         console = sys.stdout
-        sys.stdout = log_file
+        sys.stdout = file
         print(str)
         sys.stdout = console
-    log_file.close()
+    file.close()
 
 
 def enter_cmd(mycmd, waittime=0, printresult=1):
@@ -70,24 +69,15 @@ def enter_cmd(mycmd, waittime=0, printresult=1):
             cmd_retry_cnt += 1
             p.kill()
     if printresult == 1:
-        with open(os.path.join(args.save_path, 'test_{}.bat'.format(args.device_num)),\
-        mode='a', encoding='utf-8') as cmd_f:
-            cmd_f.write(mycmd + '\n')
-        cmd_f.close()
         print_to_log(mycmd)
         print_to_log(result)
         sys.stdout.flush()
     if waittime != 0:
         time.sleep(waittime)
-        if printresult == 1:
-            with open(os.path.join(args.save_path, 'test_{}.bat'.format(args.device_num)),\
-            mode='a', encoding='utf-8') as cmd_f:
-                cmd_f.write("ping -n {} 127.0.0.1>null\n".format(waittime))
-            cmd_f.close()
     return result
 
 
-def enter_shell_cmd(shellcmd, waittime=0, printresult=1):
+def enter_shell_cmd(shellcmd, waittime=1, printresult=1):
     if shellcmd == "":
         return
     cmd = "hdc_std -t {} shell \"{}\"".format(args.device_num, shellcmd)
@@ -101,8 +91,8 @@ def sys_exit():
     enter_shell_cmd("cd /data/log/faultlog/faultlogger && tar -cf after_test_jscrash{}.tar jscrash*".format(args.device_num))
     file_from_dev("/data/log/faultlog/faultlogger/after_test_jscrash{}.tar".format(args.device_num), \
     os.path.normpath(args.save_path))
-    print_to_log("SmokeTest:: SmokeTest find some key problems!")
-    print_to_log("SmokeTest:: End of check, test failed!")
+    print_to_log("SmokeTest: SmokeTest find some key problems!")
+    print_to_log("SmokeTest: End of check, test failed!")
     sys.exit(98)
 
 
@@ -123,21 +113,21 @@ def connect_check():
         connection_status = enter_cmd("hdc_std list targets", 2)
         connection_cnt += 1
     if connection_cnt == 15:
-        print_to_log("SmokeTest:: Device disconnection!!")
-        print_to_log("SmokeTest:: End of check, test failed!")
+        print_to_log("SmokeTest: Device disconnection!!")
+        print_to_log("SmokeTest: End of check, test failed!")
         sys.exit(101)
 
 
 def sandbox_check(process):
-    print_to_log("SmokeTest:: start to check sandbox path")
+    print_to_log("SmokeTest: start to check sandbox path")
     medialibrarydata_pidnum = enter_shell_cmd("pgrep -f {}".format(process), 1)
     medialibrarydata_pidnum = medialibrarydata_pidnum.strip()
     sandboxf = enter_shell_cmd("echo \"ls /storage/media/local/\"|nsenter -t {} -m sh".format(medialibrarydata_pidnum), 1)
     if "files" not in sandboxf:
-        print_to_log("SmokeTest:: error: can not find sandbox path : /storage/media/local/files")
+        print_to_log("SmokeTest: error: can not find sandbox path : /storage/media/local/files")
         return -1
     else:
-        print_to_log("SmokeTest:: success: find sandbox path : /storage/media/local/files")
+        print_to_log("SmokeTest: success: find sandbox path : /storage/media/local/files")
         return 1
 
 
@@ -171,27 +161,18 @@ def connect_wifi(prefix, pic):
         data = get_coordinate("{}\\{}_{}".format(args.save_path, prefix, pic), "testapold")
         enter_shell_cmd("uinput -M -m {} {} -c 0".format(data[0], data[1]), WAIT_TIME_TWO)
         enter_shell_cmd("uinput -M -m 360 200 -c 0")
-        enter_shell_cmd("uinput -M -m 680 810 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 80 910 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 150 910 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 150 910 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 110 810 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
-        enter_shell_cmd("uinput -M -m 680 810 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
-        enter_shell_cmd("uinput -M -m 250 810 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 220 910 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_TWO)
-        enter_shell_cmd("uinput -M -m 40 810 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 500 1020 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 50 1150 -c 0", WAIT_TIME_ONE)
-        enter_shell_cmd("uinput -M -m 680 690 -c 0")
+        enter_shell_cmd("uinput -K -d 2032 -u 2032 -d 2017 -u 2017 -d 2035 -u 2035 -d 2035 -u 2035 -d 2039 -u 2039 -d 2000 -u 2000 -d 2034 -u 2034 -d 2020 -u 2020 -d 2001 -u 2001")
+        enter_shell_cmd("uinput -M -m 360 200 -c 0")
+        enter_shell_cmd("uinput -M -m 50 1140 -c 0")
+        enter_shell_cmd("uinput -M -m 500 1020 -c 0")
+        enter_shell_cmd("uinput -M -m 50 1140 -c 0")
+        enter_shell_cmd("uinput -K -d 2054 -u 2054")
         enter_shell_cmd("snapshot_display -f /data/screen_test/{}".format("testapold.jpeg"))
         file_from_dev("/data/screen_test/{}".format("testapold.jpeg"), args.save_path)
         enter_shell_cmd("uinput -M -m 550 680 -c 0", single_action[0])
     except Exception as e:
         print(e)
-        print_to_log("SmokeTest:: wifi list loading errror!")
+        print_to_log("SmokeTest: wifi list loading errror!")
 
 
 def calculate(image1, image2):
@@ -254,7 +235,7 @@ def shot_and_cmp(image):
     enter_shell_cmd("snapshot_display -f /data/screen_test/{}_{}".format(prefix, image))
     file_from_dev("/data/screen_test/{}_{}".format(prefix, image), args.save_path)
     similarity = cmp_picture(prefix, image)
-    print_to_log("SmokeTest:: launcher similarity is {}%".format(similarity))
+    print_to_log("SmokeTest: launcher similarity is {}%".format(similarity))
     return similarity
 
 
@@ -262,7 +243,7 @@ def distributed_test():
     if "1/2" in args.test_num or "2/2" in args.test_num:
         report_path = os.path.normpath(os.path.join(args.save_path, "distributed_report.txt"))
         if args.test_num == "2/2":
-            enter_shell_cmd("ifconfig eth0 192.168.0.1", WAIT_TIME_ONE)
+            enter_shell_cmd("ifconfig eth0 192.168.0.1")
             ping_result = enter_shell_cmd("ping 192.168.0.2 -i 1 -c 2", 3)
             file_is_exist = enter_shell_cmd("cd /data; find . -name distributed_report.txt")
             ping_cnt = 0
@@ -271,22 +252,22 @@ def distributed_test():
                 ping_result = enter_shell_cmd("ping 192.168.0.2 -i 1 -c 2", WAIT_TIME_FOUR)
                 ping_cnt += 1
             if ping_cnt == 30:
-                print_to_log("SmokeTest:: Ping failed, timeout of 80s")
+                print_to_log("SmokeTest: Ping failed, timeout of 80s")
                 sys_exit()
             while "distributed_report.txt" not in file_is_exist and wait_cnt < 30:
-                print_to_log("SmokeTest:: waiting for the distributed test to end ")
+                print_to_log("SmokeTest: waiting for the distributed test to end ")
                 file_is_exist = enter_shell_cmd("cd /data; find . -name distributed_report.txt", WAIT_TIME_FOUR)
                 wait_cnt += 1
         elif args.test_num == "1/2":
-            enter_shell_cmd("ifconfig eth0 192.168.0.2", WAIT_TIME_ONE)
+            enter_shell_cmd("ifconfig eth0 192.168.0.2")
             ping_result = enter_shell_cmd("ping 192.168.0.1 -i 1 -c 2", WAIT_TIME_FOUR)
             ping_cnt = 0
             while "2 packets transmitted, 2 received" not in ping_result and ping_cnt < 20:
                 ping_result = enter_shell_cmd("ping 192.168.0.1 -i 1 -c 2", WAIT_TIME_FOUR)
                 ping_cnt += 1
             if ping_cnt == 30:
-                print_to_log("SmokeTest:: Ping failed, timeout of 80s")
-            print_to_log("SmokeTest:: ##### case 0 : distributed test start #####")
+                print_to_log("SmokeTest: Ping failed, timeout of 80s")
+            print_to_log("SmokeTest: ##### case 0 : distributed test start #####")
             execute_path = os.path.normpath(os.path.join(args.tools_path, "resource"))
             os.system("cd {} && python distributedtest.py --path {}".format(execute_path, args.save_path))
             distributed_result = ""
@@ -296,13 +277,13 @@ def distributed_test():
                     distributed_result = f.read()
                 f.close()
             except Exception as reason:
-                print_to_log("SmokeTest:: distributed_report.txt do not exist!")
+                print_to_log("SmokeTest: distributed_report.txt do not exist!")
             if "distributedcalc" in distributed_result:
-                print_to_log("SmokeTest:: testcase 0, distributed is ok!")
+                print_to_log("SmokeTest: testcase 0, distributed is ok!")
             else:
-                print_to_log("SmokeTest:: error:testcase 0, distributed failed!")
+                print_to_log("SmokeTest: error:testcase 0, distributed failed!")
                 sys_exit()
-        enter_shell_cmd("ifconfig eth0 down", WAIT_TIME_ONE)
+        enter_shell_cmd("ifconfig eth0 down")
 
 
 def open_wlan():
@@ -333,7 +314,6 @@ if __name__ == "__main__":
     cmp_status = 0
     global_pos = all_app[0]
     
-    WAIT_TIME_ONE = 1
     WAIT_TIME_TWO = 2
     WAIT_TIME_FOUR = 4
 
@@ -341,34 +321,34 @@ if __name__ == "__main__":
     while reboot_cnt:
         reboot_cnt -= 1
         enter_shell_cmd("mkdir -p /data/screen_test/train_set")
+        enter_shell_cmd("power-shell wakeup;power-shell setmode 602")
         rmlock_cnt = 3
         while rmlock_cnt:
-            enter_shell_cmd("uinput -T -m 425 1000 425 400;power-shell wakeup;uinput -T -m 425 400 425 1000;\
-            power-shell setmode 602;uinput -T -m 425 1000 425 400;", WAIT_TIME_ONE)
+            enter_shell_cmd("uinput -T -m 425 400 425 1000;uinput -T -m 425 1000 425 400")
             rmlock_cnt -= 1
-        enter_shell_cmd("hilog -w stop", WAIT_TIME_ONE)
-        enter_shell_cmd("cd /data/log/hilog && tar -cf system_start_log_{}.tar *".format(args.device_num), WAIT_TIME_ONE)
+        enter_shell_cmd("hilog -w stop")
+        enter_shell_cmd("cd /data/log/hilog && tar -cf system_start_log_{}.tar *".format(args.device_num))
         file_from_dev("/data/log/hilog/system_start_log_{}.tar".format(args.device_num), args.save_path)
         connect_check()
         launcher_similarity = shot_and_cmp("launcher.jpeg")
-        power_state = enter_shell_cmd("hidumper -s 3308", WAIT_TIME_ONE)
+        power_state = enter_shell_cmd("hidumper -s 3308")
         if "State=2" not in power_state:
-            print_to_log("SmokeTest:: ERROR, DISPLAY POWER MANAGER DUMP State ≠ 2")
+            print_to_log("SmokeTest: ERROR, DISPLAY POWER MANAGER DUMP State ≠ 2")
         if launcher_similarity >= 90:
-            print_to_log("SmokeTest:: launcher screenshot comparison is ok!")
+            print_to_log("SmokeTest: launcher screenshot comparison is ok!")
             break
         elif reboot_cnt >= 1:
-            print_to_log("SmokeTest:: launcher screenshot comparison failed, reboot and try!!!")
+            print_to_log("SmokeTest: launcher screenshot comparison failed, reboot and try!!!")
             enter_shell_cmd("rm -rf /data/*;reboot")
             for i in range(5):
                 enter_cmd("hdc_std list targets", 10)
         else:
-            print_to_log("SmokeTest:: launcher screenshot comparison failed")
+            print_to_log("SmokeTest: launcher screenshot comparison failed")
             sys_exit()
 
     enter_shell_cmd("cat /proc/`pidof foundation`/smaps_rollup")
 
-    print_to_log("\nSmokeTest:: ########## First check key processes start ##############")
+    print_to_log("\nSmokeTest: ########## First check key processes start ##############")
     lose_process = []
     process_pid = {}
     with open(os.path.normpath(os.path.join(args.tools_path, "resource/process.txt")), "r+") as f:
@@ -392,10 +372,10 @@ if __name__ == "__main__":
                 lose_process.append(pname)
 
     if lose_process:
-        print_to_log("SmokeTest:: error: %s, These processes do not exist!!!" % lose_process)
+        print_to_log("SmokeTest: error: %s, These processes do not exist!!!" % lose_process)
         sys_exit()
     else:
-        print_to_log("SmokeTest:: first processes check is ok")
+        print_to_log("SmokeTest: first processes check is ok")
 
     apl_check_main(args.device_num)
     apl_compare = os.path.normpath(os.path.join(args.tools_path, "APL_compare_03", "apl_compare.log"))
@@ -405,9 +385,9 @@ if __name__ == "__main__":
             apl_result = compare_file.read()
         compare_file.close()
     except Exception as reason:
-        print_to_log("SmokeTest:: error: apl_compare.log do not exist!")
+        print_to_log("SmokeTest: error: apl_compare.log do not exist!")
     if "APL Check failed" in apl_result:
-        print_to_log("SmokeTest:: error: apl check failed")
+        print_to_log("SmokeTest: error: apl check failed")
         sys_exit()
 
     main(args.device_num)
@@ -418,31 +398,16 @@ if __name__ == "__main__":
             acl_result = native_file.read()
         native_file.close()
     except Exception as reason:
-        print_to_log("SmokeTest:: error: native_sa.log do not exist!")
+        print_to_log("SmokeTest: error: native_sa.log do not exist!")
     if "ACL check failed" in acl_result:
-        print_to_log("SmokeTest:: error: acl check failed")
+        print_to_log("SmokeTest: error: acl check failed")
         sys_exit()
 
-    open_wlan()
-
-    special_warehouse = [
-        "arkui_ace_engine",
-        "developtools_integration_verification",
-        "graphic_graphic_2d",
-        "windowmanager"]
-
-    for warehouse in special_warehouse:
-        if warehouse in args.pr_url:
-            if args.test_num == "1/2":
-                args.test_num = "3/2"
-            elif args.test_num == "2/2":
-                args.test_num = "4/2"
-    print(args.pr_url)
     try:
         args.test_num.index('/')
         idx_total = args.test_num.split('/')
         if len(idx_total) != 2:
-            print_to_log("SmokeTest:: test_num is invaild !!!")
+            print_to_log("SmokeTest: test_num is invaild !!!")
             sys_exit()
         elif idx_total[1] == '1':
             idx_list = list(range(1, len(all_app)))
@@ -451,9 +416,10 @@ if __name__ == "__main__":
     except ValueError as e:
         print_to_log(e)
         idx_list = list(map(eval, args.test_num.split()))
-    print_to_log("SmokeTest:: start to carry out the following testcases: ")
-    print_to_log("SmokeTest:: testcase number: {} ".format(idx_list))
+    print_to_log("SmokeTest: start to carry out the following testcases: ")
+    print_to_log("SmokeTest: testcase number: {} ".format(idx_list))
 
+    open_wlan()
     fail_idx_list = []
     fail_name_list = []
     smoke_first_failed = ''
@@ -462,25 +428,15 @@ if __name__ == "__main__":
         sys.stdout.flush()
         call_app_cmd = single_app['entry']
         capture_screen_cmd = "snapshot_display -f /data/screen_test/{}_{}"
-        print_to_log("\nSmokeTest:: ##### case {} : {} test start #####".format(idx, single_app['app_name']))
-        with open(os.path.join(args.save_path, 'test_{}.bat'.format(args.device_num)),\
-        mode='a', encoding='utf-8') as cmd_f:
-            cmd_f.write("\nSmokeTest::::::case {} --- {} test start \n".format(idx, single_app['app_name']))
-        cmd_f.close()
+        print_to_log("\nSmokeTest: ##### case {} : {} test start #####".format(idx, single_app['app_name']))
         testcnt = 3
         while testcnt:
             testok = 0
             if testcnt != 3:
-                print_to_log("SmokeTest:: this testcase try again >>>>>>:\n")
-                with open(os.path.join(args.save_path, 'test_{}.bat'.format(args.device_num)),\
-                mode='a', encoding='utf-8') as cmd_f:
-                    cmd_f.write("\nSmokeTest::::::Last failed, try again \n")
-                cmd_f.close()
-            if idx == 1:
-                testcnt = 1
+                print_to_log("SmokeTest: this testcase try again >>>>>>:\n")
             if single_app['entry'] != "":
                 enter_shell_cmd(call_app_cmd, WAIT_TIME_FOUR)
-            print_to_log("SmokeTest:: execute command {}".format(single_app['all_actions']))
+            print_to_log("SmokeTest: execute command {}".format(single_app['all_actions']))
             prefix = args.device_num
             raw_pic_name = ''
             pic_name = ''
@@ -490,8 +446,8 @@ if __name__ == "__main__":
                         pic_name = "{}{}".format(single_action[2], ".jpeg")
                     else:
                         pic_name = "{}{}".format(single_app['app_name'], ".jpeg")
-                    enter_shell_cmd("rm /data/screen_test/*{}".format(pic_name), WAIT_TIME_ONE)
-                    enter_shell_cmd(capture_screen_cmd.format(prefix, pic_name), WAIT_TIME_ONE)
+                    enter_shell_cmd("rm /data/screen_test/*{}".format(pic_name))
+                    enter_shell_cmd(capture_screen_cmd.format(prefix, pic_name))
                     file_from_dev("/data/screen_test/{}_{}".format(prefix, pic_name), args.save_path)
                     next_cmd = ""
                 elif type(single_action[1]) == str and single_action[1] == 'cmp_twice':
@@ -503,15 +459,15 @@ if __name__ == "__main__":
                     crop_picture(prefix, pic, crop_range)
                     first_similarity = cmp_picture(prefix, pic)
                     second_similarity = cmp_picture(prefix, pic, WAIT_TIME_TWO)
-                    print_to_log("SmokeTest:: first picture similarity is {}%".format(first_similarity))
-                    print_to_log("SmokeTest:: second picture similarity is {}%".format(second_similarity))
+                    print_to_log("SmokeTest: first picture similarity is {}%".format(first_similarity))
+                    print_to_log("SmokeTest: second picture similarity is {}%".format(second_similarity))
                     if first_similarity >= similarity or second_similarity >= similarity:
                         if testok != -1:
                             testok = 1
-                        print_to_log("SmokeTest:: {} screenshot check is ok".format(pic))
+                        print_to_log("SmokeTest: {} screenshot check is ok".format(pic))
                     else:
                         testok = -1
-                        print_to_log("SmokeTest:: {} screenshot check is abnarmal".format(pic))
+                        print_to_log("SmokeTest: {} screenshot check is abnarmal".format(pic))
                 elif type(single_action[1]) == str and single_action[1] == 'cmp_cmd-level':
                     next_cmd = ""
                     sys.stdout.flush()
@@ -520,20 +476,20 @@ if __name__ == "__main__":
                     else:
                         similarity = global_pos['cmp_cmd-level'][1]
                         similarity = int(similarity)
-                    print_to_log("SmokeTest:: start to contrast screenshot")
+                    print_to_log("SmokeTest: start to contrast screenshot")
                     pic = "{}{}".format(single_action[2], ".jpeg")
                     crop_range = [80, 1200, 0, 720]
                     crop_picture(prefix, pic, crop_range)
                     pic_similarity = cmp_picture(prefix, pic)
-                    print_to_log("SmokeTest:: picture similarity is {}%".format(pic_similarity))
+                    print_to_log("SmokeTest: picture similarity is {}%".format(pic_similarity))
                     if len(single_action) >= 3:
                         if pic_similarity >= similarity:
                             if testok != -1:
                                 testok = 1
-                            print_to_log("SmokeTest:: {} screenshot check is ok".format(pic))
+                            print_to_log("SmokeTest: {} screenshot check is ok".format(pic))
                         else:
                             testok = -1
-                            print_to_log("SmokeTest:: {} screenshot check is abnarmal".format(pic))
+                            print_to_log("SmokeTest: {} screenshot check is abnarmal".format(pic))
                 elif type(single_action[1]) == str and single_action[1] == 'install_hap':
                     next_cmd = ""
                     if len(single_action) == 3:
@@ -568,12 +524,12 @@ if __name__ == "__main__":
                         findsome = result.find(single_action[2], 0, len(result))
                         if findsome != -1:
                             testok = -1
-                            print_to_log("SmokeTest:: \"{}\" error:find fatal crash \"{}\"!".format(single_action[1],\
+                            print_to_log("SmokeTest: \"{}\" error:find fatal crash \"{}\"!".format(single_action[1],\
                             single_action[2]))
                             sys_exit()
                         else:
                             testok = 1
-                            print_to_log("SmokeTest:: \"{}\" result is ok, not find fatal\
+                            print_to_log("SmokeTest: \"{}\" result is ok, not find fatal\
                             crash \"{}\"!".format(single_action[1], single_action[2]))
                         sys.stdout.flush()
                 elif type(single_action[1]) == str:
@@ -589,12 +545,10 @@ if __name__ == "__main__":
                             findsome = result.find(target_[1], 0, len(result))
                             if findsome != -1:
                                 testok = 1
-                                print_to_log("SmokeTest:: \"{}\" check result is ok, find \"{}\"!".format(target_[0],\
-                                target_[1]))
+                                print_to_log("SmokeTest: \"{}\" check ok, find \"{}\"!".format(target_[0], target_[1]))
                             else:
                                 testok = -1
-                                print_to_log("SmokeTest:: \"{}\" result is not ok, not find \"{}\"!".format(target_[0],\
-                                target_[1]))
+                                print_to_log("SmokeTest: \"{}\" check failed, no \"{}\"!".format(target_[0],target_[1]))
                             sys.stdout.flush()
                     else:
                         next_cmd = "uinput -M -m {} {} -c 0".format(target_[0], target_[1])
@@ -603,19 +557,19 @@ if __name__ == "__main__":
                 enter_shell_cmd(next_cmd, single_action[0])
 
             if testok == 1:
-                print_to_log("SmokeTest:: testcase {}, {} is ok!".format(idx, single_app['app_name']))
+                print_to_log("SmokeTest: testcase {}, {} is ok!".format(idx, single_app['app_name']))
                 testcnt = 0
             elif testok == -1 and smoke_first_failed == '':
                 if testcnt == 1:
                     fail_idx_list.append(idx)
                     fail_name_list.append(single_app['app_name'])
                     smoke_first_failed = single_app['app_name']
-                    print_to_log("SmokeTest:: error:testcase {}, {} is failed!".format(idx, single_app['app_name']))
+                    print_to_log("SmokeTest: error:testcase {}, {} is failed!".format(idx, single_app['app_name']))
                 testcnt -= 1
             elif testok == -1 and smoke_first_failed != '':
                 fail_idx_list.append(idx)
                 fail_name_list.append(single_app['app_name'])
-                print_to_log("SmokeTest:: error:testcase {}, {} is failed!".format(idx, single_app['app_name']))
+                print_to_log("SmokeTest: error:testcase {}, {} is failed!".format(idx, single_app['app_name']))
                 testcnt = 0
             else:
                 testcnt = 0
@@ -627,23 +581,22 @@ if __name__ == "__main__":
     fail_str_list = [str(x) for x in fail_idx_list]
     reboot_test_num = " ".join(fail_str_list)
     if len(fail_idx_list) != 0:
-        print_to_log("SmokeTest:: failed testcase number: {} ".format(fail_str_list))
-        print_to_log("SmokeTest:: check \"reboot\" in reboot.txt".format(args.save_path))
+        print_to_log("SmokeTest: failed testcase number: {} ".format(fail_str_list))
+        print_to_log("SmokeTest: check \"reboot\" in reboot.txt".format(args.save_path))
         with open(os.path.normpath(os.path.join(args.tools_path, "reboot.txt")), mode='a+') as f:
             f.seek(0)
             reboot_result = f.read()
         f.close()
         if len(reboot_result) < 1 and reboot_cnt >= 1:
-            print_to_log("SmokeTest:: no \"reboot\" found in the reboot.txt")
-            print_to_log("SmokeTest:: the device will reboot and try the failed testcase")
-            print_to_log("SmokeTest:: mkdir {}\\reboot".format(args.save_path))
+            print_to_log("SmokeTest: no \"reboot\"  found in the reboot.txt")
+            print_to_log("SmokeTest: the device will reboot and try the failed testcase")
+            print_to_log("SmokeTest: mkdir {}\\reboot".format(args.save_path))
             os.system("mkdir {}\\reboot".format(args.save_path))
-            print_to_log("SmokeTest:: write \"reboot\" into reboot.txt".format(args.save_path))
+            print_to_log("SmokeTest: write \"reboot\" into reboot.txt".format(args.save_path))
             with open(os.path.normpath(os.path.join(args.tools_path, "reboot.txt")), mode='w') as f:
                 f.write("reboot")
             f.close()
-            print_to_log("SmokeTest:: error: name {}, index {}, failed, rm /data/* and reboot".format(fail_name_list,\
-            fail_idx_list))
+            print_to_log("SmokeTest: error: name {}, index {}, failed, reboot".format(fail_name_list,fail_idx_list))
             enter_shell_cmd("rm -rf /data/* && reboot")
             reboot_result_list = enter_cmd("hdc_std list targets", 2)
             number = 0
@@ -662,10 +615,9 @@ if __name__ == "__main__":
             else:
                 sys.exit(101)
         else:
-            print_to_log("SmokeTest:: error: name {}, index {}, these testcase is failed".format(fail_name_list,\
-            fail_idx_list))
+            print_to_log("SmokeTest: error: name {}, index {}, failed".format(fail_name_list, fail_idx_list))
             sys_exit()
     else:
-        print_to_log("SmokeTest:: all testcase is ok")
-        print_to_log("SmokeTest:: End of check, test succeeded!")
+        print_to_log("SmokeTest: all testcase is ok")
+        print_to_log("SmokeTest: End of check, test succeeded!")
         sys.exit(0)
