@@ -23,13 +23,14 @@ import re
 import subprocess
 import shlex
 import datetime
-import sqlite3
 import shutil
 import numpy
 import cv2
 import pytesseract
 sys.path.append(os.path.dirname(os.path.realpath(__file__)).replace('resource', 'acls_check'))
+sys.path.append(os.path.dirname(os.path.realpath(__file__)).replace('resource', 'APL_compare_03'))
 from acl_check import *
+from compare import *
 from pytesseract import Output
 from PIL import Image
 
@@ -295,7 +296,7 @@ def distributed_test():
                     distributed_result = f.read()
                 f.close()
             except Exception as reason:
-                print_to_log("SmokeTest:: distributed_report.txt is not exist!")
+                print_to_log("SmokeTest:: distributed_report.txt do not exist!")
             if "distributedcalc" in distributed_result:
                 print_to_log("SmokeTest:: testcase 0, distributed is ok!")
             else:
@@ -391,10 +392,23 @@ if __name__ == "__main__":
                 lose_process.append(pname)
 
     if lose_process:
-        print_to_log("SmokeTest:: error: %s, These processes are not exist!!!" % lose_process)
+        print_to_log("SmokeTest:: error: %s, These processes do not exist!!!" % lose_process)
         sys_exit()
     else:
         print_to_log("SmokeTest:: first processes check is ok")
+
+    apl_check_main(args.device_num)
+    apl_compare = os.path.normpath(os.path.join(args.tools_path, "APL_compare_03", "apl_compare.log"))
+    try:
+        with open(apl_compare, mode='r', encoding='utf-8', errors='ignore') as compare_file:
+            compare_file.seek(0)
+            apl_result = compare_file.read()
+        compare_file.close()
+    except Exception as reason:
+        print_to_log("SmokeTest:: error: apl_compare.log do not exist!")
+    if "APL Check failed" in apl_result:
+        print_to_log("SmokeTest:: error: apl check failed")
+        sys_exit()
 
     main(args.device_num)
     native_sa = os.path.normpath(os.path.join(args.tools_path, "acls_check", "native_sa.log"))
@@ -404,7 +418,7 @@ if __name__ == "__main__":
             acl_result = native_file.read()
         native_file.close()
     except Exception as reason:
-        print_to_log("SmokeTest:: error: native_sa.log are not exist!")
+        print_to_log("SmokeTest:: error: native_sa.log do not exist!")
     if "ACL check failed" in acl_result:
         print_to_log("SmokeTest:: error: acl check failed")
         sys_exit()
@@ -620,7 +634,7 @@ if __name__ == "__main__":
             reboot_result = f.read()
         f.close()
         if len(reboot_result) < 1 and reboot_cnt >= 1:
-            print_to_log("SmokeTest:: \"reboot\" is not found in the reboot.txt")
+            print_to_log("SmokeTest:: no \"reboot\" found in the reboot.txt")
             print_to_log("SmokeTest:: the device will reboot and try the failed testcase")
             print_to_log("SmokeTest:: mkdir {}\\reboot".format(args.save_path))
             os.system("mkdir {}\\reboot".format(args.save_path))
