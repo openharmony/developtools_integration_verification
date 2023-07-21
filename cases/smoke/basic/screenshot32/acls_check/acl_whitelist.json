@@ -114,5 +114,11 @@
     "acls": [
       "ohos.permission.GET_SENSITIVE_PERMISSIONS"
     ]
+  },
+  {
+    "processName": "backup_sa",
+    "acls": [
+      "ohos.permission.INSTALL_BUNDLE"
+    ]
   }
 ]
