@@ -86,5 +86,8 @@
 	"librtg_interface.z.so",
 	"libconcurrent_task_client.z.so",
 	"libffrt.z.so",
-	"libbtcommon.z.so"
+	"libbtcommon.z.so",
+
+	//by aplay,amixer,alsactl,aconnect,speaker-test for ohos_emu_arm64
+	"libasound.so"
 ]
