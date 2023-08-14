@@ -120,5 +120,11 @@
     "acls": [
       "ohos.permission.INSTALL_BUNDLE"
     ]
+  },
+  {
+    "processName": "media_service",
+    "acls": [
+      "ohos.permission.CAPTURE_SCREEN"
+    ]
   }
 ]
