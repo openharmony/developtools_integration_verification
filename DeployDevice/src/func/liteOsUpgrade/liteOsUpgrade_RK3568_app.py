@@ -492,8 +492,8 @@ def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
         logger.error(l)
     try:
         for i in l:
-            result = os.path.join(resource_path, "%s.png" % i)
-            base = os.path.join(base_screenshot_path, "%s.png" % i)
+            result = os.path.join(resource_path, "%s.jpeg" % i)
+            base = os.path.join(base_screenshot_path, "%s.jpeg" % i)
             shutil.copy(result, base)
     except Exception as t:
         logger.info(t)
