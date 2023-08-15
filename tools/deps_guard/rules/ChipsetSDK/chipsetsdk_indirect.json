@@ -1,0 +1,12 @@
+[
+	"libclang_rt.ubsan_minimal.so",
+	"libdisplay_buffer_proxy_1.0.z.so",
+	"libeventhandler.z.so",
+	"libselinux.z.so",
+	"libpcre2.z.so",
+	"libhitracechain.so",
+	"libdisplay_buffer_hdi_impl.z.so",
+	"libipc_common.z.so",
+	"libnghttp2_shared.z.so",
+	"libssl_openssl.z.so"
+]
