@@ -290,7 +290,7 @@ def open_wlan():
     enter_shell_cmd("aa start -a com.ohos.settings.MainAbility -b com.ohos.settings", WAIT_TIME_FOUR)
     enter_shell_cmd("uinput -M -m 300 300 -c 0", WAIT_TIME_TWO)
     enter_shell_cmd("uinput -M -m 640 200 -c 0", WAIT_TIME_FOUR)
-    time.sleep(WAIT_TIME_TWO)
+    time.sleep(WAIT_TIME_FOUR)
     enter_shell_cmd("killall com.ohos.settings", WAIT_TIME_TWO)
 
 
