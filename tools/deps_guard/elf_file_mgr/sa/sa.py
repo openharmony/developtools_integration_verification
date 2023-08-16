@@ -30,17 +30,15 @@ def xml_node_find_by_name(node, name):
 
 class SAParser(object):
 	@staticmethod
-	def __parse_sa_profile(all_sa, f):
-		root = ET.parse(f).getroot()
-		process = xml_node_find_by_name(root, "process")
-		for sa in root.findall("systemability"):
-			libpath = xml_node_find_by_name(sa, "libpath")
+	def __parse_sa_profile(all_sa, full_name):
+		with open(full_name, "r") as f:
+			profile = json.load(f)
+		process = profile["process"]
+		for sa in profile["systemability"]:
+			libpath = sa["libpath"]
 			sa_key = os.path.basename(libpath)
-			sa_item = {}
-			for item in sa:
-				sa_item[item.tag] = item.text
-				sa_item["process"] = process
-			all_sa[sa_key] = sa_item
+			sa["process"] = process
+			all_sa[sa_key] = sa
 
 	@staticmethod
 	def __add_sa_info(all_sa, mgr):
@@ -61,10 +59,14 @@ class SAParser(object):
 
 		for f in os.listdir(path):
 			full_name = os.path.join(path, f)
-			if os.path.isfile(full_name) and f.endswith(".xml"):
+			if os.path.isfile(full_name) and f.endswith(".json"):
 				try:
 					SAParser.__parse_sa_profile(all_sa, full_name)
 				except:
 					pass
 
 		SAParser.__add_sa_info(all_sa, mgr)
+
+if __name__ == '__main__':
+	parser = SAParser()
+	parser.load(None, "/home/handy/qemu/out/rk3568")

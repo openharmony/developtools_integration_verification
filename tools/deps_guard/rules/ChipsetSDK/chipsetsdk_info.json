@@ -1,0 +1,350 @@
+[
+    {
+        "name": "hdf_core:libhdf_utils",
+        "so_file_name": "libhdf_utils.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/utils:libhdf_utils",
+        "headers": [
+            "//drivers/hdf_core/interfaces/inner_api/osal/shared/osal_mem.h",
+            "//drivers/hdf_core/interfaces/inner_api/osal/shared/osal_time.h",
+            "//drivers/hdf_core/interfaces/inner_api/osal/uhdf/hdf_log_adapter.h",
+            "//drivers/hdf_core/interfaces/inner_api/osal/uhdf/hdf_types.h",
+            "//drivers/hdf_core/interfaces/inner_api/utils/hdf_base.h",
+            "//drivers/hdf_core/interfaces/inner_api/utils/hdf_log.h",
+            "//drivers/hdf_core/interfaces/inner_api/utils/hdf_sbuf.h",
+            "//drivers/hdf_core/interfaces/inner_api/utils/hdf_dlist.h",
+            "//drivers/hdf_core/interfaces/inner_api/core/hdf_device_class.h",
+            "//drivers/hdf_core/interfaces/inner_api/core/hdf_object.h",
+            "//drivers/hdf_core/interfaces/inner_api/core/hdf_service_status.h"
+        ]
+    },
+    {
+        "name": "hilog:libhilog",
+        "so_file_name": "libhilog.so",
+        "path": "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog",
+        "headers": [
+            "//base/hiviewdfx/hilog/interfaces/native/innerkits/include/hilog/log.h",
+            "//base/hiviewdfx/hilog/interfaces/native/innerkits/include/hilog/log_c.h",
+            "//base/hiviewdfx/hilog/interfaces/native/innerkits/include/hilog/log_cpp.h",
+            "//base/hiviewdfx/hilog/interfaces/native/innerkits/include/hilog_trace.h"
+        ]
+    },
+    {
+        "name": "bounds_checking_function:libsec_shared",
+        "so_file_name": "libsec_shared.z.so",
+        "path": "//third_party/bounds_checking_function:libsec_shared",
+        "headers": [
+            "//third_party/bounds_checking_function/include/securec.h",
+            "//third_party/bounds_checking_function/include/securectype.h"
+        ]
+    },
+    {
+        "name": "common:musl-libc.so",
+        "so_file_name": "libc.so",
+        "path": "//build/common/musl:musl-libc.so",
+        "headers": []
+    },
+    {
+        "name": "c_utils:utils",
+        "so_file_name": "libutils.z.so",
+        "path": "//commonlibrary/c_utils/base:utils",
+        "headers": [
+            "//commonlibrary/c_utils/base/include/ashmem.h",
+            "//commonlibrary/c_utils/base/include/common_errors.h",
+            "//commonlibrary/c_utils/base/include/common_timer_errors.h",
+            "//commonlibrary/c_utils/base/include/datetime_ex.h",
+            "//commonlibrary/c_utils/base/include/directory_ex.h",
+            "//commonlibrary/c_utils/base/include/errors.h",
+            "//commonlibrary/c_utils/base/include/file_ex.h",
+            "//commonlibrary/c_utils/base/include/flat_obj.h",
+            "//commonlibrary/c_utils/base/include/nocopyable.h",
+            "//commonlibrary/c_utils/base/include/observer.h",
+            "//commonlibrary/c_utils/base/include/parcel.h",
+            "//commonlibrary/c_utils/base/include/pubdef.h",
+            "//commonlibrary/c_utils/base/include/refbase.h",
+            "//commonlibrary/c_utils/base/include/rwlock.h",
+            "//commonlibrary/c_utils/base/include/safe_block_queue.h",
+            "//commonlibrary/c_utils/base/include/safe_map.h",
+            "//commonlibrary/c_utils/base/include/safe_queue.h",
+            "//commonlibrary/c_utils/base/include/semaphore_ex.h",
+            "//commonlibrary/c_utils/base/include/singleton.h",
+            "//commonlibrary/c_utils/base/include/sorted_vector.h",
+            "//commonlibrary/c_utils/base/include/string_ex.h",
+            "//commonlibrary/c_utils/base/include/thread_ex.h",
+            "//commonlibrary/c_utils/base/include/thread_pool.h",
+            "//commonlibrary/c_utils/base/include/timer.h",
+            "//commonlibrary/c_utils/base/include/unique_fd.h"
+        ]
+    },
+    {
+        "name": "hdf_core:libhdi",
+        "so_file_name": "libhdi.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/hdi:libhdi",
+        "headers": [
+            "//drivers/hdf_core/interfaces/inner_api/hdi/hdi_base.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/hdi_support.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/stub_collector.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/object_collector.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/devmgr_hdi.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/idevmgr_hdi.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/servmgr_hdi.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/iservmgr_hdi.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/servstat_listener_hdi.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/iservstat_listener_hdi.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/base/buffer_handle.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/base/buffer_util.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/base/hdi_smq.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/base/hdi_smq_meta.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/base/hdi_smq_syncer.h",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/base/native_buffer.h",
+            "//drivers/hdf_core/interfaces/inner_api/core/hdf_device_class.h",
+            "//drivers/hdf_core/interfaces/inner_api/core/hdf_object.h",
+            "//drivers/hdf_core/interfaces/inner_api/core/hdf_service_status.h"
+        ]
+    },
+    {
+        "name": "ipc:ipc_single",
+        "so_file_name": "libipc_single.z.so",
+        "path": "//foundation/communication/ipc/interfaces/innerkits/ipc_single:ipc_single",
+        "headers": [
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/ipc_types.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/ipc_skeleton.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/iremote_object.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/iremote_proxy.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/iremote_stub.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/message_parcel.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/message_option.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/iremote_broker.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/ipc_object_proxy.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/ipc_object_stub.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/peer_holder.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/ipc_file_descriptor.h",
+            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/jni_help.h"
+        ]
+    },
+    {
+        "name": "common:musl-libcxx.so",
+        "so_file_name": "libc++.so",
+        "path": "//build/common/musl:musl-libcxx.so",
+        "headers": []
+    },
+    {
+        "name": "hitrace:hitrace_meter",
+        "so_file_name": "libhitrace_meter.so",
+        "path": "//base/hiviewdfx/hitrace/interfaces/native/innerkits:hitrace_meter",
+        "headers": [
+            "//base/hiviewdfx/hitrace/interfaces/native/innerkits/include/hitrace_meter/hitrace_meter.h"
+        ]
+    },
+    {
+        "name": "hdf_core:libhdf_ipc_adapter",
+        "so_file_name": "libhdf_ipc_adapter.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/ipc:libhdf_ipc_adapter",
+        "headers": [
+            "//drivers/hdf_core/interfaces/inner_api/ipc/hdf_dump_reg.h",
+            "//drivers/hdf_core/interfaces/inner_api/ipc/hdf_remote_service.h",
+            "//drivers/hdf_core/interfaces/inner_api/ipc/hdf_sbuf_ipc.h",
+            "//drivers/hdf_core/interfaces/inner_api/core/hdf_object.h"
+        ]
+    },
+    {
+        "name": "drivers_interface_camera:metadata",
+        "so_file_name": "libmetadata.z.so",
+        "path": "//drivers/interface/camera/metadata:metadata",
+        "headers": [
+            "//drivers/interface/camera/metadata/include/camera_device_ability_items.h",
+            "//drivers/interface/camera/metadata/include/camera_metadata_info.h",
+            "//drivers/interface/camera/metadata/include/camera_metadata_item_info.h",
+            "//drivers/interface/camera/metadata/include/camera_metadata_operator.h",
+            "//drivers/interface/camera/metadata/include/metadata_log.h",
+            "//drivers/interface/camera/metadata/include/metadata_utils.h"
+        ]
+    },
+    {
+        "name": "openssl:libcrypto_shared",
+        "so_file_name": "libcrypto_openssl.z.so",
+        "path": "//third_party/openssl:libcrypto_shared",
+        "headers": []
+    },
+    {
+        "name": "init:libbegetutil",
+        "so_file_name": "libbegetutil.z.so",
+        "path": "//base/startup/init/interfaces/innerkits:libbegetutil",
+        "headers": [
+            "//base/startup/init/interfaces/innerkits/include/init_socket.h",
+            "//base/startup/init/interfaces/innerkits/include/init_file.h",
+            "//base/startup/init/interfaces/innerkits/include/init_reboot.h",
+            "//base/startup/init/interfaces/innerkits/include/service_control.h",
+            "//base/startup/init/interfaces/innerkits/include/beget_ext.h",
+            "//base/startup/init/interfaces/innerkits/include/systemcapability.h",
+            "//base/startup/init/interfaces/innerkits/include/syspara/parameter.h",
+            "//base/startup/init/interfaces/innerkits/include/syspara/parameters.h",
+            "//base/startup/init/interfaces/innerkits/include/syspara/param_wrapper.h",
+            "//base/startup/init/interfaces/innerkits/include/syspara/sysparam_errno.h",
+            "//base/startup/init/interfaces/innerkits/include/syspara/sysversion.h"
+        ]
+    },
+    {
+        "name": "libdrm:libdrm",
+        "so_file_name": "libdrm.so",
+        "path": "//third_party/libdrm:libdrm",
+        "headers": []
+    },
+    {
+        "name": "libxml2:xml2",
+        "so_file_name": "libxml2.z.so",
+        "path": "//third_party/libxml2:xml2",
+        "headers": []
+    },
+    {
+        "name": "drivers_interface_display:libhdifd_parcelable",
+        "so_file_name": "libhdifd_parcelable.z.so",
+        "path": "//drivers/interface/display/composer/hdifd_parcelable:libhdifd_parcelable",
+        "headers": []
+    },
+    {
+        "name": "hdf_core:libpub_utils",
+        "so_file_name": "libpub_utils.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/pub_utils:libpub_utils",
+        "headers": [
+            "//drivers/hdf_core/interfaces/inner_api/osal/shared/osal_mem.h",
+            "//drivers/hdf_core/interfaces/inner_api/osal/shared/osal_time.h",
+            "//drivers/hdf_core/interfaces/inner_api/osal/uhdf/hdf_log_adapter.h",
+            "//drivers/hdf_core/interfaces/inner_api/osal/uhdf/hdf_types.h",
+            "//drivers/hdf_core/interfaces/inner_api/utils/hdf_base.h",
+            "//drivers/hdf_core/interfaces/inner_api/utils/hdf_log.h",
+            "//drivers/hdf_core/interfaces/inner_api/utils/hdf_sbuf.h",
+            "//drivers/hdf_core/interfaces/inner_api/utils/hdf_dlist.h",
+            "//drivers/hdf_core/interfaces/inner_api/core/hdf_device_class.h",
+            "//drivers/hdf_core/interfaces/inner_api/core/hdf_object.h",
+            "//drivers/hdf_core/interfaces/inner_api/core/hdf_service_status.h"
+        ]
+    },
+    {
+        "name": "drivers_interface_camera:libbuffer_producer_sequenceable_1.0",
+        "so_file_name": "libbuffer_producer_sequenceable_1.0.z.so",
+        "path": "//drivers/interface/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
+        "headers": [
+            "//drivers/interface/camera/sequenceable/buffer_producer/buffer_producer_sequenceable.h"
+        ]
+    },
+    {
+        "name": "hisysevent:libhisysevent",
+        "so_file_name": "libhisysevent.z.so",
+        "path": "//base/hiviewdfx/hisysevent/interfaces/native/innerkits/hisysevent:libhisysevent",
+        "headers": [
+            "//base/hiviewdfx/hisysevent/interfaces/native/innerkits/hisysevent/include/hisysevent_c.h",
+            "//base/hiviewdfx/hisysevent/interfaces/native/innerkits/hisysevent/include/hisysevent.h"
+        ]
+    },
+    {
+        "name": "ffmpeg:libohosffmpeg",
+        "so_file_name": "libohosffmpeg.z.so",
+        "path": "//third_party/ffmpeg:libohosffmpeg",
+        "headers": []
+    },
+    {
+        "name": "samgr:samgr_proxy",
+        "so_file_name": "libsamgr_proxy.z.so",
+        "path": "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy:samgr_proxy",
+        "headers": [
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/if_system_ability_manager.h",
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/iservice_registry.h",
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/isystem_ability_load_callback.h",
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/isystem_ability_status_change.h",
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/isystem_process_status_change.h",
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/system_ability_definition.h",
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/system_ability_manager_proxy.h",
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/system_ability_load_callback_stub.h",
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/system_ability_status_change_stub.h",
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/system_process_status_change_stub.h",
+            "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy/include/sam_log.h"
+        ]
+    },
+    {
+        "name": "bluetooth:btcommon",
+        "so_file_name": "libbtcommon.z.so",
+        "path": "//foundation/communication/bluetooth/frameworks/inner:btcommon",
+        "headers": []
+    },
+    {
+        "name": "cJSON:cjson",
+        "so_file_name": "libcjson.z.so",
+        "path": "//third_party/cJSON:cjson",
+        "headers": []
+    },
+    {
+        "name": "jsoncpp:jsoncpp",
+        "so_file_name": "libjsoncpp.z.so",
+        "path": "//third_party/jsoncpp:jsoncpp",
+        "headers": []
+    },
+    {
+        "name": "graphic_2d:surface",
+        "so_file_name": "libsurface.z.so",
+        "path": "//foundation/graphic/graphic_2d/frameworks/surface:surface",
+        "headers": [
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/buffer_extra_data.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/egl_data.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/egl_surface.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/external_window.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/native_buffer.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/native_buffer_inner.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/native_image.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/ibuffer_consumer_listener.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/ibuffer_producer.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/iconsumer_surface.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/surface.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/surface_buffer.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/surface_type.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/surface_utils.h",
+            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/window.h"
+        ]
+    },
+    {
+        "name": "graphic_2d:sync_fence",
+        "so_file_name": "libsync_fence.z.so",
+        "path": "//foundation/graphic/graphic_2d/utils/sync_fence:sync_fence",
+        "headers": [
+            "//foundation/graphic/graphic_2d/utils/sync_fence/export/sync_fence.h"
+        ]
+    },
+    {
+        "name": "eudev:libudev",
+        "so_file_name": "libudev.z.so",
+        "path": "//third_party/eudev:libudev",
+        "headers": []
+    },
+    {
+        "name": "config_policy:configpolicy_util",
+        "so_file_name": "libconfigpolicy_util.z.so",
+        "path": "//base/customization/config_policy/frameworks/config_policy:configpolicy_util",
+        "headers": [
+            "//base/customization/config_policy/interfaces/inner_api/include/config_policy_utils.h"
+        ]
+    },
+    {
+        "name": "init:libbeget_proxy",
+        "so_file_name": "libbeget_proxy.z.so",
+        "path": "//base/startup/init/interfaces/innerkits:libbeget_proxy",
+        "headers": [
+            "//base/startup/init/interfaces/innerkits/include/service_watcher.h",
+            "//base/startup/init/interfaces/innerkits/include/syspara/parameter.h",
+            "//base/startup/init/interfaces/innerkits/include/syspara/sysparam_errno.h"
+        ]
+    },
+    {
+        "name": "libexif:libexif",
+        "so_file_name": "libexif.z.so",
+        "path": "//third_party/libexif:libexif",
+        "headers": []
+    },
+    {
+        "name": "selinux_adapter:libservice_checker",
+        "so_file_name": "libservice_checker.z.so",
+        "path": "//base/security/selinux_adapter:libservice_checker",
+        "headers": [
+            "//base/security/selinux_adapter/interfaces/policycoreutils/include/service_checker.h",
+            "//base/security/selinux_adapter/interfaces/policycoreutils/include/hdf_service_checker.h"
+        ]
+    }
+]
