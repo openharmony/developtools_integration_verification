@@ -88,5 +88,6 @@
 	"libconcurrent_task_client.z.so",
 	"libffrt.z.so",
 	"libbtcommon.z.so",
-	"libclang_rt.ubsan_minimal.so"
+	"libclang_rt.ubsan_minimal.so",
+	"libclang_rt.asan.so"
 ]
