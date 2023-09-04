@@ -29,7 +29,7 @@
         "kill_settings": ["killall com.ohos.settings"],
         "all_actions": [
             [1, "shot_cmd", "settings"], [1, "cmp_cmd-level", "settings"], [8, "wlan-x-y"], [2, "shot_cmd", "wlan_list"], [25, "connect_wifi", "wlan_list"], [1, "shot_cmd", "wifi"],
-            [1, "shot_cmd", "wifi_connection_status"], [1, "cmp_twice", "wifi", 90, "crop_range"], [1, "kill_settings"]
+            [1, "shot_cmd", "wifi_connection_status"], [1, "cmp_twice", "wifi", 20, "crop_range"], [1, "kill_settings"]
         ]
     },
     {
