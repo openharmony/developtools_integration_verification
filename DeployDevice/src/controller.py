@@ -26,6 +26,6 @@ if __name__ == "__main__":
     errcode = start(cust_steps)
     if errcode != 0:
        logger.printLog("执行失败：错误信息：" + CONSTANT.ENVERRMESSAGE)
-    logger.printLog(errcode)
+    logger.printLog("UPGRADE_STATUS_%s" % errcode)
     os._exit(errcode)
         
