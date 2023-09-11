@@ -70,6 +70,10 @@
     {
         "bundle&processName":"com.ohos.notificationdialog",
         "apl":"2"
+    },
+    {
+        "bundle&processName":"com.ohos.calendardata",
+        "apl":"3"
     }
     
 ]
