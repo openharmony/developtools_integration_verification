@@ -126,5 +126,12 @@
     "acls": [
       "ohos.permission.CAPTURE_SCREEN"
     ]
+  },
+  {
+    "processName": "security_component_service",
+    "acls": [
+      "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
+      "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS"
+    ]
   }
 ]
