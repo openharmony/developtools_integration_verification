@@ -76,6 +76,7 @@
 	"libmapper_service_1.0.z.so",
 	"libinput_interfaces_service_1.0.z.so",
 	"libhdf_utils.z.so",
+	"libdisplay_buffer_vdi_impl_default.z.so",
 	"libdisplay_buffer_vdi_impl.z.so",
 	"libdisplay_buffer_vendor.z.so",
 	"libcodec_hdi_omx_callback_type_service_impl.z.so",
