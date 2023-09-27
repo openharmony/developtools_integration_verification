@@ -74,6 +74,17 @@
     {
         "bundle&processName":"com.ohos.calendardata",
         "apl":"3"
+    },
+    {
+        "bundle&processName":"ohos.samples.distributedcalc",
+        "apl":"3"
+    },
+    {
+        "bundle&processName":"ohos.samples.distributedmusicplayer",
+        "apl":"3"
+    },
+    {
+        "bundle&processName":"com.ohos.note",
+        "apl":"3"
     }
-    
 ]

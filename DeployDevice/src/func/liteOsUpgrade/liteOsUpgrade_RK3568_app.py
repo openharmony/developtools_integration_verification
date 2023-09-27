@@ -196,6 +196,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                                 if exec_cmd(mini_path, sn, save_path, archive_path) == 98:
                                     return 98
                                 return True
+
                             if not upgrade_test_type or upgrade_test_type == "smoke_test":
                                 test_return = cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_num, pr_url)
                                 if test_return == 1:
