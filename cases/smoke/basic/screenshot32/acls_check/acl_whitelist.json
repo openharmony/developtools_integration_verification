@@ -80,7 +80,7 @@
     "processName": "msdp_sa",
     "acls": [
       "ohos.permission.INPUT_MONITORING",
-	  "ohos.permission.ACCESS_DISTRIBUTED_HARDWARE"
+      "ohos.permission.ACCESS_DISTRIBUTED_HARDWARE"
     ]
   },
   {
