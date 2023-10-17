@@ -1,5 +1,4 @@
 [
-	"libclang_rt.ubsan_minimal.so",
 	"libdisplay_buffer_proxy_1.0.z.so",
 	"libeventhandler.z.so",
 	"libselinux.z.so",
@@ -8,5 +7,23 @@
 	"libdisplay_buffer_hdi_impl.z.so",
 	"libipc_common.z.so",
 	"libnghttp2_shared.z.so",
-	"libssl_openssl.z.so"
+	"libssl_openssl.z.so",
+	//add by analyser noh_926_1914 system.img and vendor.img
+	"libtokenid_sdk.z.so",
+	"libaccesstoken_communication_adapter_cxx.z.so",
+	"libaccesstoken_common_cxx.z.so",
+	"libsoftbus_client.z.so",
+	"libsamgr_common.z.so",
+	"libmbedtls.z.so",
+	"libFillpSo.z.so",
+	"libnstackx_dfile",
+	"libsoftbus_adapter.z.so",
+	"libsoftbus_utils.z.so",
+	"libnstackx_congestion.z.so",
+	"libmsdp_ble_range.z.so",
+	"lisqlite.z.so",
+	"libnstackx_util.z.so",
+	//add by analyser aln
+	"libbacktrace_local.so",
+	"libdfx_procinfo.z.so"
 ]
