@@ -59,6 +59,8 @@
 
 	// by libwpa.z.so for hispark taurus platform
 	"libipc_core.z.so",
+	"libffrt.z.so",
+	"libffrt.so",
 	"libbtcommon.z.so",
 	"libclang_rt.ubsan_minimal.so",
 	
@@ -68,6 +70,5 @@
 	"libcurl_shared.z.so",
 	"libsystem_ability_fwk.z.so",
 	//add by analyser aln
-	"libc++_shared.so",
-	"libffrt.so"
+	"libc++_shared.so"
 ]
