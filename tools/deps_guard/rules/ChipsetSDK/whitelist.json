@@ -36,6 +36,9 @@
 
 	"libbuffer_producer_sequenceable_1.0.z.so",
 
+	"libmap_data_sequenceable_1.0.z.so",
+	"libbuffer_handle_sequenceable_1.0.z.so",
+
 	"libohosffmpeg.z.so",
 
 	// To be optimized
