@@ -81,7 +81,7 @@ class ChipsetSDKRule(BaseRule):
                     continue
 
                 # chipsetsdk_indirect module is OK
-                if self.__is_chipsetsdk_indirect(callee):
+                if self.__is_chipsetsdk_indirect(callee) or callee["name"] in self.__indirects:
                     continue
 
                 # Not correct
@@ -168,7 +168,7 @@ class ChipsetSDKRule(BaseRule):
         return passed
 
     def __load_chipsetsdk_indirects(self):
-        self.__indirects = self.load_files("chipsetsdk_indirect")
+        self.__indirects = self.load_files("chipsetsdk_indirect.json")
 
     def check(self):
         self.__load_chipsetsdk_indirects()
