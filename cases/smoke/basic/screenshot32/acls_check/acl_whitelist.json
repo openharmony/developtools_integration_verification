@@ -49,6 +49,7 @@
       "ohos.permission.PERMISSION_START_ABILITIES_FROM_BACKGROUND",
       "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
       "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS",
+      "ohos.permission.MANAGE_HAP_TOKENID",
       "ohos.permission.INPUT_MONITORING"
     ]
   },
