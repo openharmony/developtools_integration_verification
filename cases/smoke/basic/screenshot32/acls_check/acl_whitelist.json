@@ -50,6 +50,7 @@
       "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
       "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS",
       "ohos.permission.MANAGE_HAP_TOKENID",
+      "ohos.permission.START_INVISIBLE_ABILITY",
       "ohos.permission.INPUT_MONITORING"
     ]
   },
