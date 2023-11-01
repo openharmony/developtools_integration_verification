@@ -53,7 +53,9 @@ class ChipsetSDKRule(BaseRule):
                     contents = f.read()
                 json_data = json.loads(contents)
                 for so in json_data:
-                    res.append(so.get("so_file_name"))
+                    so_file_name = so.get("so_file_name")
+                    if so_file_name not in res:
+                        res.append(so_file_name)
             except:
                 pass
 
@@ -205,6 +207,14 @@ class ChipsetSDKRule(BaseRule):
 
     def __load_chipsetsdk_indirects(self):
         self.__indirects = self.load_files("chipsetsdk_indirect.json")
+        if self._args is None:
+            print("**args = None: loading so file in chipsetsdk_indirect.json!!")
+        else:
+            if self._args.rules is not None:
+                print("**loading so file in chipsetsdk_info_new.json!!")
+                self.__indirects = self.load_chipsetsdk_json("chipsetsdk_indirect_new.json")
+            else:
+                print("**args.rules = None: loading so file in chipsetsdk_indirect.json!!")
 
     def check(self):
         self.__load_chipsetsdk_indirects()
