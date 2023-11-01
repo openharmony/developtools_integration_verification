@@ -135,5 +135,11 @@
       "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
       "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS"
     ]
+  },
+  {
+    "processName": "distributedsched",
+    "acls": [
+      "ohos.permission.MANAGE_MISSIONS"
+    ]
   }
 ]
