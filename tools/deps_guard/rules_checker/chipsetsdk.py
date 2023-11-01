@@ -24,6 +24,41 @@ from .base_rule import BaseRule
 class ChipsetSDKRule(BaseRule):
     RULE_NAME = "ChipsetSDK"
 
+    def __init__(self, mgr, args):
+        super().__init__(mgr, args)
+        self.__white_lists = super().get_white_lists()
+        if self._args is None:
+            print("**args = None ,loading so file in whitelist.json!!**")
+        else:
+            if self._args.rules is not None:
+                print("**loading so file in chipsetsdk_info_new.json!!**")
+                self.__white_lists = self.load_chipsetsdk_json("chipsetsdk_info_new.json")
+            else:
+                print("**args.rules = None ,loading so file in whitelist.json!!**")
+
+    def get_white_lists(self):
+        return self.__white_lists
+
+    def load_chipsetsdk_json(self, name):
+        rules_dir = []
+        rules_dir.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules"))
+        if self._args and self._args.rules:
+            rules_dir = rules_dir + self._args.rules
+
+        res = []
+        for d in rules_dir:
+            rules_file = os.path.join(d, self.__class__.RULE_NAME, name)
+            try:
+                with open(rules_file, "r") as f:
+                    contents = f.read()
+                json_data = json.loads(contents)
+                for so in json_data:
+                    res.append(so.get("so_file_name"))
+            except:
+                pass
+
+        return res
+
     def __is_chipsetsdk_tagged(self, mod):
         if not "innerapi_tags" in mod:
             return False
@@ -39,7 +74,8 @@ class ChipsetSDKRule(BaseRule):
         return False
 
     def __write_innerkits_header_files(self):
-        inner_kits_info = os.path.join(self.get_mgr().get_product_out_path(), "build_configs/parts_info/inner_kits_info.json")
+        inner_kits_info = os.path.join(self.get_mgr().get_product_out_path(), 
+                                       "build_configs/parts_info/inner_kits_info.json")
         with open(inner_kits_info, "r") as f:
             info = json.load(f)
 
