@@ -48,6 +48,11 @@ class ChipsetSDKRule(BaseRule):
         res = []
         for d in rules_dir:
             rules_file = os.path.join(d, self.__class__.RULE_NAME, name)
+            res = self.__parser_rules_file(rules_file,res)
+
+        return res
+
+    def __parser_rules_file(self,rules_file, res):
             try:
                 with open(rules_file, "r") as f:
                     contents = f.read()
@@ -56,10 +61,10 @@ class ChipsetSDKRule(BaseRule):
                     so_file_name = so.get("so_file_name")
                     if so_file_name not in res:
                         res.append(so_file_name)
-            except:
-                pass
+            except(FileNotFoundError, IOError, UnicodeDecodeError) as file_open_or_decode_err:
+                self.error(file_open_or_decode_err)
 
-        return res
+            return res
 
     def __is_chipsetsdk_tagged(self, mod):
         if not "innerapi_tags" in mod:
