@@ -73,5 +73,7 @@
 	"libcurl_shared.z.so",
 	"libsystem_ability_fwk.z.so",
 	//add by analyser aln
-	"libc++_shared.so"
+	"libc++_shared.so",
+
+	"libuds_channel.z.so"
 ]
