@@ -65,11 +65,7 @@ class CompileInfoLoader(object):
 				info["moduleName"] = ""
 			if "version_script" in item:
 				info["version_script"] = item["version_script"]
-			info["third_party"] = False
-			info["chipset"] = False
-			info["napi"] = False
-			info["innerapi"] = False
-			info["innerapi_declared"] = False
+			CompileInfoLoader.__fill_default_module_info(info)
 			if "shlib_type" in item:
 				info["shlib_type"] = item["shlib_type"]
 			if "innerapi_tags" in item:
@@ -79,24 +75,18 @@ class CompileInfoLoader(object):
 		return res
 
 	@staticmethod
+	def __fill_default_module_info(info):
+		info["third_party"] = False
+		info["chipset"] = False
+		info["napi"] = False
+		info["innerapi"] = False
+		info["innerapi_declared"] = False
+
+	@staticmethod
 	def load(mgr, product_out_path):
 		info = CompileInfoLoader.__load_output_module_info(product_out_path)
 
-		defaultInfo = {
-			"subsystem": "unknown",
-			"componentName": "unknown",
-			"moduleName": "unknown",
-			"third_party": False,
-			"chipset": False,
-			"napi": False,
-			"sa_id": 0,
-			"labelPath": "",
-			"version_script": "",
-			"shlib_type": "",
-			"innerapi": False,
-			"innerapi_tags": [],
-			"innerapi_declared": False
-		}
+		defaultInfo = CompileInfoLoader.__get_defaul_info()
 
 		if info:
 			for item in info:
@@ -147,6 +137,30 @@ class CompileInfoLoader(object):
 				f.write(res)
 
 		# init platformsdk, chipsetsdk, innerapi flags
+		CompileInfoLoader.__update_elf(mgr)
+
+		# for component dependedBy_internal and dependedBy_external
+		CompileInfoLoader.__update_deps(mgr)
+
+	@staticmethod
+	def __get_defaul_info():
+		return {
+			"subsystem": "unknown",
+			"componentName": "unknown",
+			"moduleName": "unknown",
+			"third_party": False,
+			"chipset": False,
+			"napi": False,
+			"sa_id": 0,
+			"labelPath": "",
+			"version_script": "",
+			"shlib_type": "",
+			"innerapi": False,
+			"innerapi_tags": [],
+			"innerapi_declared": False
+		}
+	@staticmethod
+	def __update_elf(mgr):
 		for elf in mgr.get_all():
 			elf["deps_internal"] = []
 			elf["deps_external"] = []
@@ -173,8 +187,8 @@ class CompileInfoLoader(object):
 			if elf["sa_id"] > 0 or elf["type"] == "bin":
 				elf["modGroup"] = "pentry"
 
-		# for component dependedBy_internal and dependedBy_external
-
+	@staticmethod
+	def __update_deps(mgr):
 		platformsdks = []
 		chipsetsdks = []
 		innerapi_ccs = []
