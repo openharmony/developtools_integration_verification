@@ -7,7 +7,6 @@
 	"libdisplay_buffer_hdi_impl.z.so",
 	"libipc_common.z.so",
 	"libnghttp2_shared.z.so",
-	"libssl_openssl.z.so",
 	//add by analyser noh_926_1914 system.img and vendor.img
 	"libtokenid_sdk.z.so",
 	"libaccesstoken_communication_adapter_cxx.z.so",
