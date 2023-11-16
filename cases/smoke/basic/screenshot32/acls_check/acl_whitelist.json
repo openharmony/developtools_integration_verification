@@ -140,6 +140,7 @@
   {
     "processName": "distributedsched",
     "acls": [
+      "ohos.permission.INPUT_MONITORING",
       "ohos.permission.MANAGE_MISSIONS"
     ]
   }
