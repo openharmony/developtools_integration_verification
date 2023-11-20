@@ -26,15 +26,7 @@ class ChipsetSDKRule(BaseRule):
 
     def __init__(self, mgr, args):
         super().__init__(mgr, args)
-        self.__white_lists = super().get_white_lists()
-        if self._args is None:
-            print("**args = None ,loading so file in whitelist.json!!**")
-        else:
-            if self._args.rules is not None:
-                print("**loading so file in chipsetsdk_info_new.json!!**")
-                self.__white_lists = self.load_chipsetsdk_json("chipsetsdk_info_new.json")
-            else:
-                print("**args.rules = None ,loading so file in whitelist.json!!**")
+        self.__white_lists = self.load_chipsetsdk_json("chipsetsdk_info.json")
 
     def get_white_lists(self):
         return self.__white_lists
@@ -43,17 +35,22 @@ class ChipsetSDKRule(BaseRule):
         rules_dir = []
         rules_dir.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules"))
         if self._args and self._args.rules:
+            self.log("****add more ChipsetSDK info in:{}****".format(self._args.rules))
             rules_dir = rules_dir + self._args.rules
 
         res = []
         for d in rules_dir:
             rules_file = os.path.join(d, self.__class__.RULE_NAME, name)
-            res = self.__parser_rules_file(rules_file, res)
+            if os.path.isfile(rules_file):
+                res = self.__parser_rules_file(rules_file, res)
+            else:
+                self.warn("****rules path not exist: {}****".format(rules_file))
 
         return res
 
     def __parser_rules_file(self, rules_file, res):
             try:
+                self.log("****Parsing rules file in {}****".format(rules_file))
                 with open(rules_file, "r") as f:
                     contents = f.read()
                 json_data = json.loads(contents)
@@ -211,15 +208,7 @@ class ChipsetSDKRule(BaseRule):
         return passed
 
     def __load_chipsetsdk_indirects(self):
-        self.__indirects = self.load_files("chipsetsdk_indirect.json")
-        if self._args is None:
-            print("**args = None: loading so file in chipsetsdk_indirect.json!!")
-        else:
-            if self._args.rules is not None:
-                print("**loading so file in chipsetsdk_info_new.json!!")
-                self.__indirects = self.load_chipsetsdk_json("chipsetsdk_indirect_new.json")
-            else:
-                print("**args.rules = None: loading so file in chipsetsdk_indirect.json!!")
+        self.__indirects = self.load_chipsetsdk_json("chipsetsdk_indirect.json")
 
     def check(self):
         self.__load_chipsetsdk_indirects()
