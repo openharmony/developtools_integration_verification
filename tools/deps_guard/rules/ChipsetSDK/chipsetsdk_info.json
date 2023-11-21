@@ -501,5 +501,13 @@
         "headers": [
             "//third_party/openssl/include/"
         ]
+    },
+    {
+        "name": "certificate_manager:cert_manager_sdk",
+        "so_file_name": "libcert_manager_sdk.z.so",
+        "path": "//base/security/certificate_manager/interfaces/innerkits/cert_manager_standard/main:cert_manager_sdk",
+        "headers": [
+            "//base/security/certificate_manager/interfaces/innerkits/cert_manager_standard/main/include/"
+        ]
     }
 ]
