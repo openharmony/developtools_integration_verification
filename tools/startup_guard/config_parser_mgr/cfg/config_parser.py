@@ -58,7 +58,7 @@ class ItemParser(dict):
 
         string = jsonStrArray[0]
         for i in range(1, len(jsonStrArray)):
-            string = string + "@" + jsonStrArray[i]
+            string = "{}@{}".format(string, jsonStrArray[i])
         return string
 
 class CmdParser(ItemParser):
@@ -77,7 +77,6 @@ class CmdParser(ItemParser):
             self["fileId"] = fileId
         if len(info) > 2:
             self["content"] = info[2]
-        #print("Create cmd %s %d" % (self["name"], self["fileId"]))
         return
 
     def __str__(self):
@@ -101,7 +100,6 @@ class JobParser(ItemParser):
         assert(isinstance(json_node, dict))
         self["name"] = json_node["name"]
         self["jobId"] = self._config_parser.get_job_id()
-        #print("JobParser %s %d" % (json_node["name"], fileId))
         self["jobPriority"] = self._config_parser.get_job_priority(json_node["name"])
 
         if fileId and self["fileId"] is None:
@@ -345,7 +343,6 @@ class ConfigParser():
             try:
                 root = json.load(content)
                 fileId = self.add_File(file_name)
-                # print("loadConfig %d file_name = %s" % (fileId, file_name))
                 assert(isinstance(root, dict))
                 if (root.__contains__("services")):
                     self._load_services(root["services"], fileId)
@@ -407,7 +404,6 @@ class ConfigParser():
         return self._serviceId
 
     def dump_config(self):
-        # print("Dump jobs: \n")
         pp = pprint.PrettyPrinter(indent = 0, compact=True)
         pp.pprint(self._jobs)
         pass
@@ -422,7 +418,7 @@ class ConfigParser():
         return False
 
     def _scan_config_file(self, file_name):
-        dir = self._path + file_name
+        dir = os.path.join(self._path, file_name)
         if not os.path.exists(dir):
             return
         try:
@@ -460,7 +456,6 @@ class ConfigParser():
         }
 
         if (job_priority.__contains__(job_name)):
-            # print("get_job_priority %s %d" % (job_name, job_priority.get(job_name)))
             return job_priority.get(job_name)
         return 100
 
@@ -473,7 +468,6 @@ class ConfigParser():
         if not os.path.exists(boot_event_file):
             print("Error, invalid config file %s" % boot_event_file)
             return
-        #print("loadConfig file_name = %s" % file_name)
         with open(boot_event_file, encoding='utf-8') as content:
             try:
                 root = json.load(content)
@@ -484,7 +478,7 @@ class ConfigParser():
         pass
 
     def load_selinux_config(self, file_name):
-        path = self._path + file_name
+        path = os.path.join(self._path, file_name)
         if not os.path.exists(path):
             print("Error, invalid selinux config file %s" % path)
             return
@@ -507,7 +501,7 @@ class ConfigParser():
             pass
 
 def startup_config_collect(base_path):
-    parser = ConfigParser(base_path + "/packages/phone")
+    parser = ConfigParser(os.path.join(base_path, "packages/phone"))
     parser.load_config("/system/etc/init.cfg")
     parser.scan_config()
     parser.load_selinux_config("/system/etc/selinux/config")

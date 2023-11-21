@@ -212,9 +212,9 @@
         "so_file_name": "libsqlite.z.so",
         "path": "//third_party/sqlite:sqlite",
         "headers": [
-			"//third_party/sqlite/include/",
-			"//commonlibrary/c_utils/base/include/"
-		]
+            "//third_party/sqlite/include/",
+            "//commonlibrary/c_utils/base/include/"
+        ]
     },
     {
         "name": "dsoftbus:nstackx_util",
@@ -233,8 +233,8 @@
         "so_file_name": "libdfx_dumpcatcher.z.so",
         "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/dump_catcher:libdfx_dumpcatcher",
         "headers": [
-			"//base/hiviewdfx/faultloggerd/interfaces/innerkits/dump_catcher/include/"
-		]
+            "//base/hiviewdfx/faultloggerd/interfaces/innerkits/dump_catcher/include/"
+        ]
     },
     {
         "name": "faultloggerd:libdfx_procinfo",
