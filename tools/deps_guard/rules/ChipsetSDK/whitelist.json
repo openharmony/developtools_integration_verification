@@ -66,6 +66,7 @@
 	"libffrt.so",
 	"libbtcommon.z.so",
 	"libclang_rt.ubsan_minimal.so",
+	"libssl_openssl.z.so",
 	
 	//add by analyser noh_926_1914 system.img and vendor.img
 	"libopencv_core.z.so",
