@@ -493,5 +493,13 @@
         "so_file_name": "libuds_channel.z.so",
         "path": "//vendor/huawei/virt_service/container_comm/uds_channel/interfaces/inner_api:uds_channel",
         "headers": []
+    },
+    {
+        "name": "openssl:libssl_shared",
+        "so_file_name": "libssl_openssl.z.so",
+        "path": "//third_party/openssl:libssl_shared",
+        "headers": [
+            "//third_party/openssl/include/"
+        ]
     }
 ]

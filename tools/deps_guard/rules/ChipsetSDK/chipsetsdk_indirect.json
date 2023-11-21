@@ -70,14 +70,6 @@
         "headers": []
     },
     {
-        "name": "openssl:libssl_shared",
-        "so_file_name": "libssl_openssl.z.so",
-        "path": "//third_party/openssl:libssl_shared",
-        "headers": [
-            "//third_party/openssl/include/"
-        ]
-    },
-    {
         "name": "access_token:libtokenid_sdk",
         "so_file_name": "libtokenid_sdk.z.so",
         "path": "//base/security/access_token/interfaces/innerkits/accesstoken:libtokenid_sdk",
