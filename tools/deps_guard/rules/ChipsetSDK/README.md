@@ -123,4 +123,36 @@ Chipset SDK模块提供了跨组件的接口，需要维护稳定的对外API。
 
 chipsetsdk_indirect类型的Chipset SDK模块需加入到[chipsetsdk_indirect.json](chipsetsdk_indirect.json)文件中
 
-chipsetsdk类型的Chipset SDK模块需加入到[whitelist.json](whitelist.json)文件中，同时需要更新模块描述信息文件[chipsetsdk_info.json](chipsetsdk_info.json)。
+~~chipsetsdk类型的Chipset SDK模块需加入到[whitelist.json](whitelist.json)文件中，同时需要更新模块描述信息文件[chipsetsdk_info.json](chipsetsdk_info.json)。~~
+
+**chipsetsdk类型的Chipset SDK模块需加入到[chipsetsdk_info.json](chipsetsdk_info.json)文件中(原whistlist.json文件中原so信息已变更格式后迁移到  chipsetsdk_info.json文件中 ，后续请更新chipsetsdk_info.json文件，不再使用whitelist.json文件)**
+
+**白名单json格式变更如下**
+
+变更前：
+```
+[
+  "libc.so",
+  "so名称"
+]
+```
+变更后：
+```
+[
+  {
+        "name": "hilog:libhilog",
+        "so_file_name": "libhilog.so",
+        "path": "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog",
+        "headers": [
+            "//base/hiviewdfx/hilog/interfaces/native/innerkits/include/"
+        ]
+    },
+  {
+        "name": "归属部件:模块名",
+        "so_file_name": "so名称",
+        "path": "编译路径",
+        "headers": []
+    }
+]
+```
+----
