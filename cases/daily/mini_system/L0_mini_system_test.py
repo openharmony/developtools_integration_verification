@@ -25,8 +25,9 @@ import datetime
 import serial
 import threading
 
+
 def GetDirSize(dir_path):
-    if  not os.path.exists(dir_path):
+    if not os.path.exists(dir_path):
         PrintToLog("\n\nERROR: %s, dir are not exist!!!\n" % dir_path)
         PrintToLog("End of check, test failed!")
         sys.exit(99)
@@ -39,21 +40,26 @@ def GetDirSize(dir_path):
     PrintToLog('total size: {:.2f}M'.format(size/1024/1024))
     return size
 
+
 def PrintToLog(str):
     time = datetime.datetime.now()
     str = "[{}] {}".format(time, str)
     print(str)
-    with open(os.path.join(args.save_path, 'L0_mini_test.log'), mode='a', encoding='utf-8') as log_file:
+    with open(os.path.join(args.save_path, 'L0_mini_test.log'),
+              mode='a',
+              encoding='utf-8') as log_file:
         console = sys.stdout
         sys.stdout = log_file
         print(str)
         sys.stdout = console
     log_file.close()
 
+
 def WriteToComPort(com_port, cmd):
     len = com_port.write(cmd.encode('utf-8'))
     print('{}'.format(len))
     return
+
 
 def ReadFromComPort(com_port, timeout):
     time_start = datetime.datetime.now()
@@ -70,12 +76,17 @@ def ReadFromComPort(com_port, timeout):
         time_end = datetime.datetime.now()
     return com_output
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='manual to this script')
-    parser.add_argument('--com_port', type=str, default = 'COM5')
-    parser.add_argument('--com_baudrate', type=int, default = 115200)
-    parser.add_argument('--save_path', type=str, default = 'D:\\DeviceTestTools\\screenshot')
-    parser.add_argument('--archive_path', type=str, default = 'Z:\workspace\ohos_L2\ohos\out\hispark_pegasus\hispark_pegasus_mini_system')
+    parser.add_argument('--com_port', type=str, default='COM5')
+    parser.add_argument('--com_baudrate', type=int, default=115200)
+    parser.add_argument('--save_path', type=str,
+                        default='D:\\DeviceTestTools\\screenshot')
+    parser.add_argument(
+        '--archive_path',
+        type=str,
+        default=r'Z:\workspace\ohos_L2\ohos\out\hispark_pegasus\hispark_pegasus_mini_system')
     args = parser.parse_args()
 
     com_port = serial.Serial(args.com_port, args.com_baudrate)
@@ -86,7 +97,8 @@ if __name__ == "__main__":
         PrintToLog("End of check, test failed!")
         sys.exit(99)
 
-    read_com_thread = threading.Thread(target=ReadFromComPort, args=(com_port, 10))
+    read_com_thread = threading.Thread(target=ReadFromComPort,
+                                       args=(com_port, 10))
     read_com_thread.setDaemon(True)
     print('read wait:')
     read_com_thread.start()
@@ -95,7 +107,8 @@ if __name__ == "__main__":
     WriteToComPort(com_port, 'AT+SYSINFO\r\n')
     print('enter AT+SYSINFO')
     time.sleep(3)
-    hivew_proc_find = re.findall('hiview,id=\d{1,3},status=\d{1,10},pri=\d{1,3},size=', com_output)
+    hivew_proc_find = re.findall(
+        'hiview,id=\d{1,3},status=\d{1,10},pri=\d{1,3},size=', com_output)
     print(hivew_proc_find)
     if type(hivew_proc_find) == list and len(hivew_proc_find) > 0:
         PrintToLog('hivew_proc found')
@@ -104,7 +117,8 @@ if __name__ == "__main__":
         PrintToLog("End of check, test failed!")
         sys.exit(99)
 
-    target_file = os.path.normpath(os.path.join(args.archive_path, "OHOS_image.bin"))
+    target_file = os.path.normpath(os.path.join(args.archive_path,
+                                                "OHOS_image.bin"))
     ret_size = os.path.getsize(target_file)/1024/1024
     PrintToLog('Size of OHOS_image.bin : {:.2f}M'.format(ret_size))
     if ret_size > 1:
@@ -116,4 +130,3 @@ if __name__ == "__main__":
 
     PrintToLog("End of check, test succeeded!")
     sys.exit(0)
-
