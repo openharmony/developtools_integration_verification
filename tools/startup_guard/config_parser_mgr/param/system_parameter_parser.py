@@ -38,7 +38,6 @@ class ParameterParser(dict):
 
     def decode(self, info):
         self["value"] = info.strip("\"").strip("\'")
-        #print("value '%s'" % self["value"])
         return True
 
     def __repr__(self):
@@ -70,7 +69,6 @@ class ParameterSelinuxParser(ParameterParser):
 
     def decode(self, info):
         self["selinuxLabel"] = info
-        #print("name %s selinux %s" % (self["prefix"], info))
         return True
 
 class ParameterFileParser():
@@ -94,12 +92,10 @@ class ParameterFileParser():
                 self._parameters[param_name] = param
 
     def load_parameter_file(self, file_name, str = "="):
-        # print(" loadParameterFile %s" % fileName)
         try:
             with open(file_name, encoding='utf-8') as fp:
                 line = fp.readline()
                 while line :
-                    #print("line %s" % (line))
                     if line.startswith("#") or len(line) < 3:
                         line = fp.readline()
                         continue
@@ -143,7 +139,7 @@ class ParameterFileParser():
             "/system/etc/param",
         ]
         for path in parameter_paths:
-            self._scan_parameter_file(dir + "/packages/phone" + path)
+            self._scan_parameter_file("{}/packages/phone{}".format(dir, path))
 
 def __create_arg_parser():
     import argparse
@@ -155,8 +151,7 @@ def __create_arg_parser():
 def parameters_collect(base_path):
     parser = ParameterFileParser()
     parser.scan_parameter_file(base_path)
-    parser.load_parameter_file(base_path + "/packages/phone/system/etc/selinux/targeted/contexts/parameter_contexts", " ")
-    # parser.dumpParameter()
+    parser.load_parameter_file("{}/packages/phone/system/etc/selinux/targeted/contexts/parameter_contexts".format(base_path), " ")
     return parser
 
 if __name__ == '__main__':

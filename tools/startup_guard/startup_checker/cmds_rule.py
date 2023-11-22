@@ -80,7 +80,6 @@ class cmdRule(BaseRule):
 
     def _check_file_id_in_cmds(self, cmdlist, cmdline):
         file_id_list = set()
-        # print(cmdlist)
         for i in range(len(cmdlist)):
             if cmdline == cmdlist[i]["name"]:
                 file_id_list.add(cmdlist[i]["fileId"])
@@ -99,7 +98,7 @@ class cmdRule(BaseRule):
             file_lists = cmd["location"]
             for key, item in parser._files.items():
                 if item["fileId"] in file_id_list and key not in file_lists:
-                    output = "\'" + cmd["cmd"] + "\' is timeout command, in "+  key
+                    output = "\'{}\' is timeout command, in {}".format(cmd["cmd"], key)
                     self.error("%s" % str(output))
                     passed = False
             file_id_list.clear()
@@ -127,7 +126,7 @@ class cmdRule(BaseRule):
             else:
                 for key, item in parser._files.items():
                     if item["fileId"] == file_id:
-                        log_str = cmd + " is not in start cmd list. " + " path:" + item["file_name"]
+                        log_str = "{} is not in start cmd list. path:{}".format(cmd, item["file_name"])
                         self.warn("%s" % log_str)
                         passed = False
                     pass
