@@ -22,7 +22,7 @@
     {
         "name": "hilog_override:libhilog_ndk",
         "so_file_name": "libhilog_ndk.z.so",
-        "path": "//vendor/huawei/base/hiviewdfx/hilog/frameworks/hilog_ndk:hilog_ndk",
+        "path": "",
         "headers": []
     },
     {
@@ -444,7 +444,7 @@
     {
         "name": "caas_service:libcpp_shared",
         "so_file_name": "libc++_shared.so",
-        "path": "//vendor/huawei/foundation/communication/caas_service/platform:libcpp_shared",
+        "path": "",
         "headers": []
     },
     {
@@ -491,7 +491,7 @@
     {
         "name": "container_comm:uds_channel",
         "so_file_name": "libuds_channel.z.so",
-        "path": "//vendor/huawei/virt_service/container_comm/uds_channel/interfaces/inner_api:uds_channel",
+        "path": "",
         "headers": []
     },
     {
