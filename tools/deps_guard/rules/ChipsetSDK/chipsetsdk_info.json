@@ -509,5 +509,11 @@
         "headers": [
             "//base/security/certificate_manager/interfaces/innerkits/cert_manager_standard/main/include/"
         ]
+    },
+    {
+        "name": "build_framework:libclang_rt.asan.so",
+        "so_file_name": "libclang_rt.asan.so",
+        "path": "//build/common/asan:libclang_rt.asan.so",
+        "headers": []
     }
 ]
