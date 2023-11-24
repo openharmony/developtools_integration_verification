@@ -437,7 +437,7 @@ def start_cmd(sn):
         return False
 
 
-@timeout(3600)
+@timeout(1200)
 def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_num, pr_url):
     save_screenshot_path = os.path.join(new_report_path, "screenshot_result")
     logger.info(save_screenshot_path)
@@ -468,8 +468,9 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
         return False
 
 
-@timeout(3600)
+@timeout(1000)
 def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
+    logger.info("SMOKE_TEST_START")
     logger.info("cmd is: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="gbk")
     curline = p.stdout.readline()
@@ -500,6 +501,7 @@ def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
         logger.info(t)
     p.wait()
     logger.info("p.returncode %s" % p.returncode)
+    logger.info("SMOKE_TEST_END")
     if p.returncode == 0:
         logger.info("screenshot check is ok!")
         return True
@@ -512,6 +514,7 @@ def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
 
 @timeout(1000)
 def exec_cmd(mini_path, sn, save_path, archive_path):
+logger.info("SMOKE_TEST_START")
     cmd = "python %s --device_num %s --save_path %s --archive_path %s" % (mini_path, sn, save_path, archive_path)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="gbk")
     curline = p.stdout.readline()
@@ -523,6 +526,7 @@ def exec_cmd(mini_path, sn, save_path, archive_path):
         logger.error(e)
     p.wait()
     logger.info("p.returncode %s" % p.returncode)
+    logger.info("SMOKE_TEST_END")
     if p.returncode == 0:
         logger.info("mini_system_test is ok!")
         return True
