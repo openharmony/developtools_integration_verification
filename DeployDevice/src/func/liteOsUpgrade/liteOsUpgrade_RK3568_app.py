@@ -437,7 +437,7 @@ def start_cmd(sn):
         return False
 
 
-@timeout(3600)
+@timeout(900)
 def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_num, pr_url):
     save_screenshot_path = os.path.join(new_report_path, "screenshot_result")
     logger.info(save_screenshot_path)
@@ -468,7 +468,7 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
         return False
 
 
-@timeout(3600)
+@timeout(900)
 def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
     logger.info("cmd is: %s" % cmd)
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="gbk")
