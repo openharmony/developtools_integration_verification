@@ -72,10 +72,6 @@
         "apl":"2"
     },
     {
-        "bundle&processName":"com.ohos.calendardata",
-        "apl":"1"
-    },
-    {
         "bundle&processName":"ohos.samples.distributedcalc",
         "apl":"3"
     },

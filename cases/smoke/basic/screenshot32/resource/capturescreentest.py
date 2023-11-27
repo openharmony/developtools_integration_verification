@@ -207,11 +207,14 @@ def classify_hist_with_split(image1, image2, size=(256, 256)):
 
 
 def crop_picture(prefix, pic, crop_range):
-    pic_path = "{}\\{}_{}".format(args.save_path, prefix, pic)
-    save_path = "{}\\{}_{}".format(args.save_path, prefix, pic)
-    im = cv2.imread(pic_path)
-    im = im[crop_range[0]:crop_range[1], crop_range[2]:crop_range[3]]
-    cv2.imwrite(save_path, im)
+    try:
+        pic_path = "{}\\{}_{}".format(args.save_path, prefix, pic)
+        save_path = "{}\\{}_{}".format(args.save_path, prefix, pic)
+        im = cv2.imread(pic_path)
+        im = im[crop_range[0]:crop_range[1], crop_range[2]:crop_range[3]]
+        cv2.imwrite(save_path, im)
+    except Exception as e:
+        pass
 
 
 def cmp_picture(prefix, pic, num=1):
