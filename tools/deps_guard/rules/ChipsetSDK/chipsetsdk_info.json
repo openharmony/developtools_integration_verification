@@ -515,5 +515,11 @@
         "so_file_name": "libclang_rt.asan.so",
         "path": "//build/common/asan:libclang_rt.asan.so",
         "headers": []
+    },
+    {
+        "name": "build_framework:libclang_rt.hwasan.so",
+        "so_file_name": "libclang_rt.hwasan.so",
+        "path": "//build/common/asan:libclang_rt.hwasan.so",
+        "headers": []
     }
 ]
