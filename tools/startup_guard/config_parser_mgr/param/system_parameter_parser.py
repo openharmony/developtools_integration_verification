@@ -44,7 +44,9 @@ class ParameterParser(dict):
         return self.__str__()
 
     def __str__(self):
-        return "%s= DAC[%s:%s:%s] selinux[%s] value=%s" % (self["prefix"], self["dacUser"], self["dacGroup"], self["dacMode"], self["selinuxLabel"], self["value"])
+        return "%s= DAC[%s:%s:%s] selinux[%s] value=%s" % (
+            self["prefix"], self["dacUser"], self["dacGroup"], self["dacMode"], 
+            self["selinuxLabel"], self["value"])
 
 class ParameterDacParser(ParameterParser):
     def __init__(self, prefix, parameter=None):
@@ -145,13 +147,16 @@ def __create_arg_parser():
     import argparse
     parser = argparse.ArgumentParser(description='Collect parameter information from xxxx/etc/param dir.')
     parser.add_argument('-i', '--input',
-                        help='input parameter files base directory example "out/rk3568/packages/phone/" ', required=True)
+                        help='input parameter files base directory example "out/rk3568/packages/phone/" ', 
+                        required=True)
     return parser
 
 def parameters_collect(base_path):
     parser = ParameterFileParser()
     parser.scan_parameter_file(base_path)
-    parser.load_parameter_file("{}/packages/phone/system/etc/selinux/targeted/contexts/parameter_contexts".format(base_path), " ")
+    parser.load_parameter_file(
+        "{}/packages/phone/system/etc/selinux/targeted/contexts/parameter_contexts".format(base_path), 
+        " ")
     return parser
 
 if __name__ == '__main__':
