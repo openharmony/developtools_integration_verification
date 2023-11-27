@@ -418,11 +418,11 @@ class ConfigParser():
         return False
 
     def _scan_config_file(self, file_name):
-        dir = os.path.join(self._path, file_name)
-        if not os.path.exists(dir):
+        dir_config_file = os.path.join(self._path, file_name)
+        if not os.path.exists(dir_config_file):
             return
         try:
-            with os.scandir(dir) as files:
+            with os.scandir(dir_config_file) as files:
                 for file in files:
                     if self._is_valid_file(file):
                         name = file.path[len(self._path) :]
