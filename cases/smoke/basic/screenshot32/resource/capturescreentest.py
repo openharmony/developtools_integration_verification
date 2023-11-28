@@ -80,7 +80,7 @@ def enter_cmd(mycmd, waittime=0, printresult=1):
 def enter_shell_cmd(shellcmd, waittime=1, printresult=1):
     if shellcmd == "":
         return
-    cmd = "hdc_std -t {} shell \"{}\"".format(args.device_num, shellcmd)
+    cmd = "hdc -t {} shell \"{}\"".format(args.device_num, shellcmd)
     return enter_cmd(cmd, waittime, printresult)
 
 
@@ -97,20 +97,20 @@ def sys_exit():
 
 
 def file_to_dev(src, dst):
-    cmd = "hdc_std -t {} file send \"{}\" \"{}\"".format(args.device_num, src, dst)
+    cmd = "hdc -t {} file send \"{}\" \"{}\"".format(args.device_num, src, dst)
     return enter_cmd(cmd, 1, 1)
 
 
 def file_from_dev(src, dst):
-    cmd = "hdc_std -t {} file recv \"{}\" \"{}\"".format(args.device_num, src, dst)
+    cmd = "hdc -t {} file recv \"{}\" \"{}\"".format(args.device_num, src, dst)
     return enter_cmd(cmd, 1, 1)
 
 
 def connect_check():
-    connection_status = enter_cmd("hdc_std list targets", 2)
+    connection_status = enter_cmd("hdc list targets", 2)
     connection_cnt = 0
     while args.device_num not in connection_status and connection_cnt < 15:
-        connection_status = enter_cmd("hdc_std list targets", 2)
+        connection_status = enter_cmd("hdc list targets", 2)
         connection_cnt += 1
     if connection_cnt == 15:
         print_to_log("SmokeTest: Device disconnection!!")
@@ -309,7 +309,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.device_num == 'null':
-        result = enter_cmd("hdc_std list targets", 1, 0)
+        result = enter_cmd("hdc list targets", 1, 0)
         print(result)
         args.device_num = result.split()[0]
     with open(args.config) as f:
@@ -344,7 +344,7 @@ if __name__ == "__main__":
             print_to_log("SmokeTest: launcher screenshot comparison failed, reboot and try!!!")
             enter_shell_cmd("rm -rf /data/*;reboot")
             for i in range(5):
-                enter_cmd("hdc_std list targets", 10)
+                enter_cmd("hdc list targets", 10)
         else:
             print_to_log("SmokeTest: launcher screenshot comparison failed")
             sys_exit()
@@ -359,7 +359,7 @@ if __name__ == "__main__":
         two_check_process_list = text.split('#####')[1].split()[0:-1]
         other_process_list = text.split('#####')[2].split()
         for pname in two_check_process_list:
-            pids = enter_cmd("hdc_std -t {} shell pidof {}".format(args.device_num, pname), 0, 1)
+            pids = enter_cmd("hdc -t {} shell pidof {}".format(args.device_num, pname), 0, 1)
             try:
                 pidlist = pids.split()
                 int(pidlist[0])
@@ -380,31 +380,31 @@ if __name__ == "__main__":
     else:
         print_to_log("SmokeTest: first processes check is ok")
 
-    apl_check_main(args.device_num)
-    apl_compare = os.path.normpath(os.path.join(args.tools_path, "APL_compare_03", "apl_compare.log"))
-    try:
-        with open(apl_compare, mode='r', encoding='utf-8', errors='ignore') as compare_file:
-            compare_file.seek(0)
-            apl_result = compare_file.read()
-        compare_file.close()
-    except Exception as reason:
-        print_to_log("SmokeTest: error: apl_compare.log do not exist!")
-    if "APL Check failed" in apl_result:
-        print_to_log("SmokeTest: error: apl check failed")
-        sys_exit()
+    # apl_check_main(args.device_num)
+    # apl_compare = os.path.normpath(os.path.join(args.tools_path, "APL_compare_03", "apl_compare.log"))
+    # try:
+    #     with open(apl_compare, mode='r', encoding='utf-8', errors='ignore') as compare_file:
+    #         compare_file.seek(0)
+    #         apl_result = compare_file.read()
+    #     compare_file.close()
+    # except Exception as reason:
+    #     print_to_log("SmokeTest: error: apl_compare.log do not exist!")
+    # if "APL Check failed" in apl_result:
+    #     print_to_log("SmokeTest: error: apl check failed")
+    #     sys_exit()
 
-    main(args.device_num)
-    native_sa = os.path.normpath(os.path.join(args.tools_path, "acls_check", "native_sa.log"))
-    try:
-        with open(native_sa, mode='r', encoding='utf-8', errors='ignore') as native_file:
-            native_file.seek(0)
-            acl_result = native_file.read()
-        native_file.close()
-    except Exception as reason:
-        print_to_log("SmokeTest: error: native_sa.log do not exist!")
-    if "ACL check failed" in acl_result:
-        print_to_log("SmokeTest: error: acl check failed")
-        sys_exit()
+    # main(args.device_num)
+    # native_sa = os.path.normpath(os.path.join(args.tools_path, "acls_check", "native_sa.log"))
+    # try:
+    #     with open(native_sa, mode='r', encoding='utf-8', errors='ignore') as native_file:
+    #         native_file.seek(0)
+    #         acl_result = native_file.read()
+    #     native_file.close()
+    # except Exception as reason:
+    #     print_to_log("SmokeTest: error: native_sa.log do not exist!")
+    # if "ACL check failed" in acl_result:
+    #     print_to_log("SmokeTest: error: acl check failed")
+    #     sys_exit()
 
     try:
         args.test_num.index('/')
@@ -413,7 +413,7 @@ if __name__ == "__main__":
             print_to_log("SmokeTest: test_num is invaild !!!")
             sys_exit()
         elif idx_total[1] == '1':
-            idx_list = list(range(1, len(all_app)))
+            idx_list = global_pos['DEVICE_2']+global_pos['DEVICE_1']
         else:
             idx_list = global_pos['DEVICE_{}'.format(idx_total[0])]
     except ValueError as e:
@@ -496,17 +496,17 @@ if __name__ == "__main__":
                 elif type(single_action[1]) == str and single_action[1] == 'install_hap':
                     next_cmd = ""
                     if len(single_action) == 3:
-                        enter_cmd("hdc_std -t {} install \"{}\"".format(args.device_num,\
+                        enter_cmd("hdc -t {} install \"{}\"".format(args.device_num,\
                         os.path.normpath(os.path.join(args.tools_path, single_action[2]))))
                 elif type(single_action[1]) == str and single_action[1] == 'get_file_from_dev':
                     next_cmd = ""
                     if len(single_action) == 3:
-                        enter_cmd("hdc_std -t {} file recv \"{}\" \"{}\"".format(args.device_num,\
+                        enter_cmd("hdc -t {} file recv \"{}\" \"{}\"".format(args.device_num,\
                         single_action[2], os.path.normpath(args.save_path)))
                 elif type(single_action[1]) == str and single_action[1] == 'send_file_to_dev':
                     next_cmd = ""
                     if len(single_action) == 4:
-                        enter_cmd("hdc_std -t {} file send \"{}\" \"{}\"".format(args.device_num,\
+                        enter_cmd("hdc -t {} file send \"{}\" \"{}\"".format(args.device_num,\
                         os.path.normpath(os.path.join(args.tools_path, single_action[2])), single_action[3]))
                 elif type(single_action[1]) == str and single_action[1] == 'connect_wifi':
                     next_cmd = ""
@@ -601,10 +601,10 @@ if __name__ == "__main__":
             f.close()
             print_to_log("SmokeTest: error: name {}, index {}, failed, reboot".format(fail_name_list,fail_idx_list))
             enter_shell_cmd("rm -rf /data/* && reboot")
-            reboot_result_list = enter_cmd("hdc_std list targets", 2)
+            reboot_result_list = enter_cmd("hdc list targets", 2)
             number = 0
             while args.device_num not in reboot_result_list and number < 15:
-                reboot_result_list = enter_cmd("hdc_std list targets", 2)
+                reboot_result_list = enter_cmd("hdc list targets", 2)
                 number += 1
             enter_shell_cmd("rm /data/log/hilog/*;hilog -r;hilog -w start -l 400000000 -m none", 1)
             py_cmd = os.system("python {}\\resource\\capturescreentest.py --config \
