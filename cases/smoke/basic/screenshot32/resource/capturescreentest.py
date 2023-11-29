@@ -377,18 +377,18 @@ if __name__ == "__main__":
     else:
         print_to_log("SmokeTest: first processes check is ok")
 
-    # apl_check_main(args.device_num)
-    # apl_compare = os.path.normpath(os.path.join(args.tools_path, "APL_compare_03", "apl_compare.log"))
-    # try:
-    #     with open(apl_compare, mode='r', encoding='utf-8', errors='ignore') as compare_file:
-    #         compare_file.seek(0)
-    #         apl_result = compare_file.read()
-    #     compare_file.close()
-    # except Exception as reason:
-    #     print_to_log("SmokeTest: error: apl_compare.log do not exist!")
-    # if "APL Check failed" in apl_result:
-    #     print_to_log("SmokeTest: error: apl check failed")
-    #     sys_exit()
+    apl_check_main(args.device_num)
+    apl_compare = os.path.normpath(os.path.join(args.tools_path, "APL_compare_03", "apl_compare.log"))
+    try:
+        with open(apl_compare, mode='r', encoding='utf-8', errors='ignore') as compare_file:
+            compare_file.seek(0)
+            apl_result = compare_file.read()
+        compare_file.close()
+    except Exception as reason:
+        print_to_log("SmokeTest: error: apl_compare.log do not exist!")
+    if "APL Check failed" in apl_result:
+        print_to_log("SmokeTest: error: apl check failed")
+        sys_exit()
 
     # main(args.device_num)
     # native_sa = os.path.normpath(os.path.join(args.tools_path, "acls_check", "native_sa.log"))
