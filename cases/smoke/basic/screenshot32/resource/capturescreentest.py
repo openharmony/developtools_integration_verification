@@ -393,18 +393,18 @@ if __name__ == "__main__":
         print_to_log("SmokeTest: error: apl check failed")
         sys_exit()
 
-    # main(args.device_num)
-    # native_sa = os.path.normpath(os.path.join(args.tools_path, "acls_check", "native_sa.log"))
-    # try:
-    #     with open(native_sa, mode='r', encoding='utf-8', errors='ignore') as native_file:
-    #         native_file.seek(0)
-    #         acl_result = native_file.read()
-    #     native_file.close()
-    # except Exception as reason:
-    #     print_to_log("SmokeTest: error: native_sa.log do not exist!")
-    # if "ACL check failed" in acl_result:
-    #     print_to_log("SmokeTest: error: acl check failed")
-    #     sys_exit()
+    main(args.device_num)
+    native_sa = os.path.normpath(os.path.join(args.tools_path, "acls_check", "native_sa.log"))
+    try:
+        with open(native_sa, mode='r', encoding='utf-8', errors='ignore') as native_file:
+            native_file.seek(0)
+            acl_result = native_file.read()
+        native_file.close()
+    except Exception as reason:
+        print_to_log("SmokeTest: error: native_sa.log do not exist!")
+    if "ACL check failed" in acl_result:
+        print_to_log("SmokeTest: error: acl check failed")
+        sys_exit()
 
     try:
         args.test_num.index('/')
