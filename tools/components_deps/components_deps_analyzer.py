@@ -92,7 +92,7 @@ class Analyzer:
         return all_deps
 
     @classmethod
-    def analysis(cls, config_path: str, parts_deps_path: str, output_file: str):
+    def analysis(cls, config_path: str, parts_deps_path: str, output_file: str, single_component: str):
         if not os.path.exists(config_path):
             print("error: {} is inaccessible or not found".format(config_path))
             return
@@ -102,8 +102,11 @@ class Analyzer:
         mandatory_components, optional_components = cls.__get_components(config_path)
         mandatory_components_gn_path = cls.__get_gn_path(parts_deps_path, mandatory_components)
         deps = cls.__get_deps(mandatory_components_gn_path, optional_components)
-        with open(output_file + ".json", 'w', encoding='utf-8') as w:
-            json.dump(deps, w, indent=4)
+        with os.fdopen(os.open(output_file + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), "w") as fd:
+            json.dump(deps, fd, indent=4)
+        if single_component != 'false' and single_component in deps.keys():
+            with os.fdopen(os.open(single_component + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), "w") as fd:
+                json.dump(deps[single_component], fd, indent=4)
 
 
 def get_args():
@@ -113,6 +116,8 @@ def get_args():
                         help="path of root path of openharmony/vendor/hihope/{product_name}/config.json")
     parser.add_argument("-d", "--parts_deps_json", required=True, type=str,
                         help="path of out/{product_name}/build_configs/parts_info/parts_deps.json")
+    parser.add_argument("-s", "--single_component_name", type=str, default="false",
+                        help="single component name")
     parser.add_argument("-o", "--output_file", type=str, default="components_deps",
                         help="eg: demo/components_deps")
     args = parser.parse_args()
@@ -124,4 +129,5 @@ if __name__ == '__main__':
     config_json_path = args.config_json
     parts_deps_json_path = args.parts_deps_json
     output_file_name = args.output_file
-    Analyzer.analysis(config_json_path, parts_deps_json_path, output_file_name)
+    single_component = args.single_component_name
+    Analyzer.analysis(config_json_path, parts_deps_json_path, output_file_name, single_component)
