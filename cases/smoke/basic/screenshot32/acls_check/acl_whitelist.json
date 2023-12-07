@@ -144,5 +144,11 @@
       "ohos.permission.INPUT_MONITORING",
       "ohos.permission.MANAGE_MISSIONS"
     ]
+  },
+  {
+    "processName": "accessibility",
+    "acls": [
+      "ohos.permission.INTERCEPT_INPUT_EVENT"
+    ]
   }
 ]
