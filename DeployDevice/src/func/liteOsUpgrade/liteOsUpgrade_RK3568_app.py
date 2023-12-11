@@ -8,7 +8,6 @@ import re
 import shutil
 import random
 
-
 from core.base import BaseApp, dec_stepmsg
 from util.file_locker import FileLock
 from util.log_info import logger
@@ -18,11 +17,12 @@ from aw.Common.Constant import CONSTANT
 from aw.Common.Common import getFileName
 from aw.ExtractFile.ExtractFile import *
 from aw.Common.Common import getHostIp, copyFile, copyDirectory
-
+total_time = ""
 lock_suffix = CONSTANT.File.LOCK_SUFFIX
 suc_file = CONSTANT.File.SUC_FILE
 failed_file = CONSTANT.File.FAILED_FILE
 REBOOT_TIMEOUT = 20000000
+
 
 
 class liteOsUpgrade_RK3568(BaseApp):
@@ -439,6 +439,7 @@ def start_cmd(sn):
 
 @timeout(900)
 def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_num, pr_url):
+    global total_time
     save_screenshot_path = os.path.join(new_report_path, "screenshot_result")
     logger.info(save_screenshot_path)
     time_sleep = random.randint(1, 5)
@@ -457,7 +458,11 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
     config_path = os.path.join(screenshot_path, "resource", "app_capture_screen_test_config.json")
     py_cmd = "python %s --config %s --anwser_path %s --save_path %s --device_num %s --test_num %s --tools_path %s --pr_url %s" \
              % (py_path, config_path, resource_path, save_screenshot_path, sn, test_num, screenshot_path, pr_url)
+    time1 = time.time()
     result = outCmd(py_cmd, save_screenshot_path, base_screenshot_path, resource_path)
+    time2 = time.time()
+    total_time = int(time2 - time1)
+    logger.info("total_time: %s" % total_time)
     if result == 1:
         return True
     if result == 98:
