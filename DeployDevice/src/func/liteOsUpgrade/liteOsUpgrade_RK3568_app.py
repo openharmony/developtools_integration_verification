@@ -439,6 +439,7 @@ def start_cmd(sn):
 
 @timeout(900)
 def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_num, pr_url):
+    global total_time
     save_screenshot_path = os.path.join(new_report_path, "screenshot_result")
     logger.info(save_screenshot_path)
     time_sleep = random.randint(1, 5)
