@@ -167,8 +167,8 @@ def connect_wifi(prefix, pic):
         enter_shell_cmd("uinput -M -m 500 1020 -c 0")
         enter_shell_cmd("uinput -M -m 50 1140 -c 0")
         enter_shell_cmd("uinput -K -d 2054 -u 2054")
-        enter_shell_cmd("snapshot_display -f /data/screen_test/{}".format("testapold.jpeg"))
-        file_from_dev("/data/screen_test/{}".format("testapold.jpeg"), args.save_path)
+        enter_shell_cmd("snapshot_display -f /data/local/tmp/screen_test/{}".format("testapold.jpeg"))
+        file_from_dev("/data/local/tmp/screen_test/{}".format("testapold.jpeg"), args.save_path)
         enter_shell_cmd("uinput -M -m 550 680 -c 0", single_action[0])
     except Exception as e:
         print(e)
@@ -235,8 +235,8 @@ def cmp_picture(prefix, pic, num=1):
 
 def shot_and_cmp(image):
     prefix = args.device_num
-    enter_shell_cmd("snapshot_display -f /data/screen_test/{}_{}".format(prefix, image))
-    file_from_dev("/data/screen_test/{}_{}".format(prefix, image), args.save_path)
+    enter_shell_cmd("snapshot_display -f /data/local/tmp/screen_test/{}_{}".format(prefix, image))
+    file_from_dev("/data/local/tmp/screen_test/{}_{}".format(prefix, image), args.save_path)
     similarity = cmp_picture(prefix, image)
     print_to_log("SmokeTest: launcher similarity is {}%".format(similarity))
     return similarity
@@ -323,7 +323,7 @@ if __name__ == "__main__":
     reboot_cnt = 2
     while reboot_cnt:
         reboot_cnt -= 1
-        enter_shell_cmd("mkdir -p /data/screen_test/train_set")
+        enter_shell_cmd("mkdir -p /data/local/tmp/screen_test/train_set")
         enter_shell_cmd("power-shell wakeup;power-shell setmode 602")
         rmlock_cnt = 3
         while rmlock_cnt:
@@ -430,7 +430,7 @@ if __name__ == "__main__":
         single_app = all_app[idx]
         sys.stdout.flush()
         call_app_cmd = single_app['entry']
-        capture_screen_cmd = "snapshot_display -f /data/screen_test/{}_{}"
+        capture_screen_cmd = "snapshot_display -f /data/local/tmp/screen_test/{}_{}"
         print_to_log("\nSmokeTest: ##### case {} : {} test start #####".format(idx, single_app['app_name']))
         testcnt = 3
         while testcnt:
@@ -449,9 +449,9 @@ if __name__ == "__main__":
                         pic_name = "{}{}".format(single_action[2], ".jpeg")
                     else:
                         pic_name = "{}{}".format(single_app['app_name'], ".jpeg")
-                    enter_shell_cmd("rm /data/screen_test/*{}".format(pic_name))
+                    enter_shell_cmd("rm /data/local/tmp/screen_test/*{}".format(pic_name))
                     enter_shell_cmd(capture_screen_cmd.format(prefix, pic_name))
-                    file_from_dev("/data/screen_test/{}_{}".format(prefix, pic_name), args.save_path)
+                    file_from_dev("/data/local/tmp/screen_test/{}_{}".format(prefix, pic_name), args.save_path)
                     next_cmd = ""
                 elif type(single_action[1]) == str and single_action[1] == 'cmp_twice':
                     next_cmd = ""
