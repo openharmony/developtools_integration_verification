@@ -175,6 +175,8 @@ class liteOsUpgrade_RK3568(BaseApp):
                         else:
                             logger.info("Reboot successfully!")
                             logger.printLog("******下载完成，升级成功，开始进行冒烟测试******")
+                            os.system("hdc_std -t %s shell hilog -w start" % sn)
+                            os.system("hdc_std -t %s shell hilog -w start -t kmsg" % sn)
                             if upgrade_test_type == "null":
                                 return True
                             screenshot_path = os.path.join(local_image_path, "screenshot")
