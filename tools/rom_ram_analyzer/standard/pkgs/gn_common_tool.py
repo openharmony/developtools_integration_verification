@@ -105,7 +105,8 @@ class GnCommonTool:
         return part_name, subsystem_name
 
     @classmethod
-    def _parse_part_subsystem(cls, part_var_flag: bool, subsystem_var_flag: bool, var_list: List[str], part_cmd: str, subsystem_cmd: str, gn_file: str, project_path: str) -> Tuple[str, str]:
+    def _parse_part_subsystem(cls, part_var_flag: bool, subsystem_var_flag: bool, var_list: List[str], part_cmd: str,
+                              subsystem_cmd: str, gn_file: str, project_path: str) -> Tuple[str, str]:
         part_name = subsystem_name = None
         part = os.popen(part_cmd).read().strip()
         if len(part) != 0:
@@ -168,6 +169,7 @@ class GnCommonTool:
         if t_subsystem_name:
             subsystem_name = t_subsystem_name
         return part_name, subsystem_name
+
 
 class GnVariableParser:
     @classmethod

@@ -99,7 +99,7 @@ class RamAnalyzer:
 
     @classmethod
     def __parse_hidumper_mem(cls, content: typing.Text, device_num: str, ss: str = "Pss") -> typing.Dict[
-            typing.Text, int]:
+        typing.Text, int]:
         """
         解析：hidumper --meme的结果
         返回{process_name: pss}形式的字典
@@ -141,7 +141,7 @@ class RamAnalyzer:
                 continue
             name = processed[1]  # 否则的话就取名字，和对应的size
             size = int(processed[cls.__ss_dict.get(ss)]) * \
-                1024  # kilo byte to byte
+                   1024  # kilo byte to byte
             full_process_name = find_full_process_name(name)
             if not full_process_name:
                 print(
@@ -213,7 +213,7 @@ class RamAnalyzer:
                 component_val_dict: typing.Dict[str, str] = sub_val_dict.get(
                     component_name)
                 delete_values_from_dict(component_val_dict, [
-                                        "size", "file_count"])
+                    "size", "file_count"])
                 for file_name, size in component_val_dict.items():
                     file_basename: str = os.path.split(file_name)[-1]
                     elf_info_dict[file_basename] = {
@@ -251,12 +251,11 @@ class RamAnalyzer:
 
     @classmethod
     def get_process_so_relationship(cls, cfg_path: str, profile_path: str) -> typing.Dict[
-            str, typing.List[str]]:
+        str, typing.List[str]]:
         """
         parse the relationship between process and elf file
         """
         # 从merged_sa里面收集
-        # json_list = glob.glob(json_path + os.sep + "*[.]json", recursive=True)
         process_elf_dict: typing.Dict[str, typing.List[str]] = dict()
         cfg_list = glob.glob(cfg_path + os.sep + "*.cfg", recursive=True)
         for cfg in cfg_list:
@@ -289,16 +288,17 @@ class RamAnalyzer:
             }
         }
         """
-        #print('data_dict',data_dict)
         tmp_dict = copy.deepcopy(data_dict)
         writer = SimpleExcelWriter("ram_info")
         header_unit = "" if unit_adapt else ", Byte"
-        header = header = [
-            "subsystem_name", "component_name", f"component_size(ram{header_unit})", "process_name", f"process_size({ss}{header_unit})", "elf", f"elf_size{'' if unit_adapt else '(Byte)'}"
+        header = [
+            "subsystem_name", "component_name", f"component_size(ram{header_unit})", "process_name",
+            f"process_size({ss}{header_unit})", "elf", f"elf_size{'' if unit_adapt else '(Byte)'}"
         ]
         if baseline_file:
             header = [
-                "subsystem_name", "component_name", f"component_size(ram{header_unit})", "baseline", "process_name", f"process_size({ss}{header_unit})", "elf", f"elf_size{'' if unit_adapt else '(Byte)'}"
+                "subsystem_name", "component_name", f"component_size(ram{header_unit})", "baseline", "process_name",
+                f"process_size({ss}{header_unit})", "elf", f"elf_size{'' if unit_adapt else '(Byte)'}"
             ]
         writer.set_sheet_header(header)
         subsystem_c = 0
@@ -347,7 +347,7 @@ class RamAnalyzer:
                         process_start_r, process_c, process_end_r, process_c, process_name)
                     writer.write_merge(
                         process_start_r, process_size_c, process_end_r, process_size_c, process_size)
-                    process_start_r = process_end_r+1
+                    process_start_r = process_end_r + 1
                 writer.write_merge(component_start_r, component_c,
                                    component_end_r, component_c, component_name)
                 writer.write_merge(component_start_r, component_size_c,
@@ -358,7 +358,7 @@ class RamAnalyzer:
                 component_start_r = component_end_r + 1
             writer.write_merge(subsystem_start_r, subsystem_c,
                                subsystem_end_r, subsystem_c, subsystem_name)
-            subsystem_start_r = subsystem_end_r+1
+            subsystem_start_r = subsystem_end_r + 1
         writer.save(filename)
 
     @classmethod
@@ -382,7 +382,7 @@ class RamAnalyzer:
                 if cn == "size" or cn == "file_count":
                     continue
                 component_val_dict: typing.Dict[str,
-                                                int] = sub_val_dict.get(cn)
+                int] = sub_val_dict.get(cn)
                 for k, v in component_val_dict.items():
                     if k == "size" or k == "file_count":
                         continue
@@ -407,6 +407,12 @@ class RamAnalyzer:
                     "ram")
 
     @classmethod
+    def inside_refactored_result_unit_adaptive(cls, process_info):
+        for elf_name, elf_size in process_info["elf"].items():
+            process_info["elf"][elf_name] = unit_adaptive(elf_size)
+        return process_info
+
+    @classmethod
     def refactored_result_unit_adaptive(cls, result_dict: Dict[str, Dict]) -> None:
         for subsystem_name, subsystem_info in result_dict.items():
             sub_size = unit_adaptive(subsystem_info["size"])
@@ -417,14 +423,13 @@ class RamAnalyzer:
                 for process_name, process_info in component_info.items():
                     pro_size = unit_adaptive(process_info["size"])
                     del process_info["size"]
-                    for elf_name, elf_size in process_info["elf"].items():
-                        process_info["elf"][elf_name] = unit_adaptive(elf_size)
+                    process_info = cls.inside_refactored_result_unit_adaptive(process_info)
                     process_info["size"] = pro_size
                 component_info["size"] = com_size
             subsystem_info["size"] = sub_size
 
     @classmethod
-    def result_process1(cls,result_dict,process_name,process_size,elf,size):
+    def result_process1(cls, result_dict, process_name, process_size, elf, size):
         result_dict[process_name] = dict()
         result_dict[process_name]["size"] = process_size
         result_dict[process_name]["startup"] = dict()
@@ -434,7 +439,7 @@ class RamAnalyzer:
         return result_dict
 
     @classmethod
-    def result_process2(cls, result_dict, process_name, subsystem_name, process_size,component_name,hap_name, size):
+    def result_process2(cls, result_dict, process_name, subsystem_name, process_size, component_name, hap_name, size):
         result_dict[process_name] = dict()
         result_dict[process_name]["size"] = process_size
         result_dict[process_name][subsystem_name] = dict()
@@ -453,7 +458,7 @@ class RamAnalyzer:
         return result_dict
 
     @classmethod
-    def result_process4(cls, result_dict, process_size_dict, rom_result_dict, process_elf_dict,so_info_dict):
+    def result_process4(cls, result_dict, process_size_dict, rom_result_dict, process_elf_dict, so_info_dict):
         def get(key: typing.Any, dt: typing.Dict[str, typing.Any]):
             for k, v in dt.items():
                 if k.startswith(key) or (len(v) > 0 and key == v[0]):
@@ -468,26 +473,29 @@ class RamAnalyzer:
             if process_name == "init":
                 _, elf, _, _, size = cls.find_elf_size_from_rom_result(process_name, "startup", "init",
                                                                        lambda x, y: os.path.split(y)[
-                                                                           -1].lower() == x.lower(),
+                                                                                        -1].lower() == x.lower(),
                                                                        rom_result_dict)
-                result_dict=cls.result_process1(result_dict,process_name,process_size,elf,size)
+                result_dict = cls.result_process1(result_dict, process_name, process_size, elf, size)
                 continue
             # 如果是hap，特殊处理
             if (process_name.startswith("com.") or process_name.startswith("ohos.")):
-                _, hap_name, subsystem_name, component_name, size = cls.find_elf_size_from_rom_result(process_name, "*", "*",
+                _, hap_name, subsystem_name, component_name, size = cls.find_elf_size_from_rom_result(process_name, "*",
+                                                                                                      "*",
                                                                                                       lambda x, y: len(
                                                                                                           y.split(
                                                                                                               '/')) >= 3 and x.lower().startswith(
-                                                                                                          y.split('/')[2].lower()),
+                                                                                                          y.split('/')[
+                                                                                                              2].lower()),
                                                                                                       rom_result_dict)
-                result_dict=cls.result_process2(result_dict, process_name, subsystem_name, process_size,component_name,hap_name, size)
+                result_dict = cls.result_process2(result_dict, process_name, subsystem_name, process_size,
+                                                  component_name, hap_name, size)
                 continue
             # 得到进程相关的elf文件list
             so_list: list = get(process_name, process_elf_dict)
             if so_list is None:
                 print("warning: process '{}' not found in .json or .cfg".format(
                     process_name))
-                result_dict=cls.result_process3(result_dict, process_name, process_size)
+                result_dict = cls.result_process3(result_dict, process_name, process_size)
                 continue
             result_dict[process_name] = dict()
             result_dict[process_name]["size"] = process_size
@@ -509,6 +517,7 @@ class RamAnalyzer:
                     result_dict[process_name][subsystem_name][component_name] = dict()
                 result_dict[process_name][subsystem_name][component_name][so] = so_size
         return result_dict
+
     @classmethod
     def analysis(cls, cfg_path: str, json_path: str, rom_result_json: str, device_num: str,
                  output_file: str, ss: str, output_excel: bool, baseline_file: str, unit_adapt: bool):
@@ -532,7 +541,8 @@ class RamAnalyzer:
         process_size_dict: typing.Dict[str, int] = cls.process_hidumper_info(
             device_num, ss)
         result_dict: typing.Dict[str, typing.Dict[str, typing.Any]] = dict()
-        result_dict = cls.result_process4(result_dict, process_size_dict, rom_result_dict, process_elf_dict,so_info_dict)
+        result_dict = cls.result_process4(result_dict, process_size_dict, rom_result_dict, process_elf_dict,
+                                          so_info_dict)
         base_dir, _ = os.path.split(output_file)
         if len(base_dir) != 0 and not os.path.isdir(base_dir):
             os.makedirs(base_dir, exist_ok=True)
@@ -550,6 +560,27 @@ class RamAnalyzer:
                 refactored_result, output_file + ".xls", ss, baseline_file, unit_adapt)
 
 
+def inside_refacotr_result(component_info, refactored_ram_dict, subsystem_name, component_name, process_name,
+                           process_size):
+    for elf_name, elf_size in component_info.items():
+        if not refactored_ram_dict.get(subsystem_name):
+            refactored_ram_dict[subsystem_name] = dict()
+            refactored_ram_dict[subsystem_name]["size"] = 0
+        if not refactored_ram_dict[subsystem_name].get(component_name):
+            refactored_ram_dict[subsystem_name][component_name] = dict(
+            )
+            refactored_ram_dict[subsystem_name][component_name]["size"] = 0
+        refactored_ram_dict[subsystem_name][component_name][process_name] = dict(
+        )
+        refactored_ram_dict[subsystem_name][component_name][process_name]["size"] = process_size
+        refactored_ram_dict[subsystem_name][component_name][process_name]["elf"] = dict(
+        )
+        refactored_ram_dict[subsystem_name][component_name][process_name]["elf"][elf_name] = elf_size
+        refactored_ram_dict[subsystem_name]["size"] += process_size
+        refactored_ram_dict[subsystem_name][component_name]["size"] += process_size
+    return refactored_ram_dict
+
+
 def refacotr_result(ram_result: Dict[str, Dict]) -> Dict[str, Dict]:
     refactored_ram_dict: Dict[str, Dict] = dict()
     for process_name, process_info in ram_result.items():
@@ -557,22 +588,8 @@ def refacotr_result(ram_result: Dict[str, Dict]) -> Dict[str, Dict]:
         del process_info["size"]
         for subsystem_name, subsystem_info in process_info.items():
             for component_name, component_info in subsystem_info.items():
-                for elf_name, elf_size in component_info.items():
-                    if not refactored_ram_dict.get(subsystem_name):
-                        refactored_ram_dict[subsystem_name] = dict()
-                        refactored_ram_dict[subsystem_name]["size"] = 0
-                    if not refactored_ram_dict[subsystem_name].get(component_name):
-                        refactored_ram_dict[subsystem_name][component_name] = dict(
-                        )
-                        refactored_ram_dict[subsystem_name][component_name]["size"] = 0
-                    refactored_ram_dict[subsystem_name][component_name][process_name] = dict(
-                    )
-                    refactored_ram_dict[subsystem_name][component_name][process_name]["size"] = process_size
-                    refactored_ram_dict[subsystem_name][component_name][process_name]["elf"] = dict(
-                    )
-                    refactored_ram_dict[subsystem_name][component_name][process_name]["elf"][elf_name] = elf_size
-                    refactored_ram_dict[subsystem_name]["size"] += process_size
-                    refactored_ram_dict[subsystem_name][component_name]["size"] += process_size
+                refactored_ram_dict = inside_refacotr_result(component_info, refactored_ram_dict, subsystem_name,
+                                                             component_name, process_name, process_size)
     return refactored_ram_dict
 
 
@@ -615,8 +632,9 @@ if __name__ == '__main__':
     rom_result = args.rom_result
     device_num = args.device_num
     output_filename = args.output_filename
-    baseline_file = args.baseline_file
-    output_excel = args.excel
-    unit_adapt = args.unit_adaptive
+    baseline = args.baseline_file
+    output_excel_path = args.excel
+    unit_adaptiv = args.unit_adaptive
     RamAnalyzer.analysis(cfg_path, profile_path, rom_result,
-                         device_num=device_num, output_file=output_filename, ss="Pss", output_excel=output_excel, baseline_file=baseline_file, unit_adapt=unit_adapt)
+                         device_num=device_num, output_file=output_filename, ss="Pss", output_excel=output_excel_path,
+                         baseline_file=baseline, unit_adapt=unit_adaptiv)

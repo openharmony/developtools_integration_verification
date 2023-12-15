@@ -28,8 +28,10 @@ import logging
 class RomRamBaselineCollector:
     """collect baseline of rom and ram from bundle.json
     """
+
     @classmethod
-    def _put(cls, result_dict: Dict, subsystem_name: str, component_name: str, rom_size: str, ram_size: str, bundle_path: str) -> None:
+    def _put(cls, result_dict: Dict, subsystem_name: str, component_name: str, rom_size: str, ram_size: str,
+             bundle_path: str) -> None:
         if not result_dict.get(subsystem_name):
             result_dict[subsystem_name] = dict()
         result_dict[subsystem_name][component_name] = dict()
@@ -43,6 +45,7 @@ class RomRamBaselineCollector:
             x = x.split("\n")
             y = [item for item in x if item]
             return y
+
         bundle_list = BasicTool.execute(
             cmd=f"find {oh_path} -name bundle.json", post_processor=post_handler)
         rom_ram_baseline_dict: Dict[str, Dict] = dict()
