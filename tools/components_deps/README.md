@@ -10,10 +10,6 @@
 
 config.json文件主要是关于rk3568系列,已测试产品包括rk3568、rk3568_mini_system、pc_mini_system、tablet_mini_system、phone_mini_system的config.json文件
 
-## 实现思路
-
-根据必选部件和开源部件，最后结合gn文件中的信息判断是否存在某种依赖关系。
-
 ## 使用说明
 
 前置条件：
