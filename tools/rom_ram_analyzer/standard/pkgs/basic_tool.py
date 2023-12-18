@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 from typing import *
 
+
 def unit_adaptive(size: int) -> str:
     unit_list = ["Byte", "KB", "MB", "GB"]
     index = 0
@@ -13,9 +14,10 @@ def unit_adaptive(size: int) -> str:
         size /= 1024
         index += 1
     if index == len(unit_list):
-        index = len(unit_list)-1
+        index = len(unit_list) - 1
         size *= 1024
-    return str(round(size,2))+unit_list[index]
+    return str(round(size, 2)) + unit_list[index]
+
 
 class BasicTool:
     @classmethod
@@ -34,7 +36,7 @@ class BasicTool:
         ptrn = re.compile(ptrn, re.M | re.S)
         result = re.finditer(ptrn, content)
         return result
-    
+
     @classmethod
     def find_all_files(cls, folder: str, real_path: bool = True, apply_abs: bool = True, de_duplicate: bool = True,
                        p_filter: typing.Callable = lambda x: True) -> list:
@@ -53,7 +55,7 @@ class BasicTool:
     @classmethod
     def get_abs_path(cls, path: str) -> str:
         return os.path.abspath(os.path.expanduser(path))
-    
+
     @classmethod
     def re_group_1(cls, content: str, pattern: str, **kwargs) -> str:
         """
@@ -69,9 +71,9 @@ class BasicTool:
         if result:
             return result.group(1)
         return str()
-    
+
     @classmethod
-    def execute(cls, cmd: str, post_processor: Callable[[Text], Text] = lambda x:x) -> Any:
+    def execute(cls, cmd: str, post_processor: Callable[[Text], Text] = lambda x: x) -> Any:
         """
         封装popen，返回标准输出的列表
         :param post_processor: 对执行结果进行处理

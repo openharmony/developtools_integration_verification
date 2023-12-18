@@ -109,14 +109,17 @@ class RomAnalyzer:
             if label:
                 cs_flag = True
                 gn_path = os.path.join(project_path, label.split(':')[
-                                       0].lstrip('/'), "BUILD.gn")
+                    0].lstrip('/'), "BUILD.gn")
                 component_name = unit.get("part_name")
                 subsystem_name = unit.get("subsystem_name")
-                if (not component_name) or (not subsystem_name):
+                if not component_name:
                     cn, sn = GnCommonTool.find_part_subsystem(
                         gn_path, project_path)
-                    component_name = cn if not component_name else component_name
-                    subsystem_name = sn if not subsystem_name else subsystem_name
+                    component_name = cn
+                if not subsystem_name:
+                    cn, sn = GnCommonTool.find_part_subsystem(
+                        gn_path, project_path)
+                    subsystem_name = sn
             else:
                 print("warning: keyword 'label' not found in {}".format(unit))
             for target in dest:
@@ -126,13 +129,23 @@ class RomAnalyzer:
                         "subsystem_name": subsystem_name,
                         "gn_path": gn_path,
                     }
+                    continue
+                tmp = target.split('/')[-1]
+                pre_info = extra_info.get(tmp)
+                if not pre_info:
+                    continue
                 else:
-                    tmp = target.split('/')[-1]
-                    pre_info = extra_info.get(tmp)
-                    if not pre_info:
-                        continue
                     product_info_dict[target] = pre_info
         return product_info_dict
+
+    @classmethod
+    def __inside_save_result_as_excel(cls, add_baseline, subsystem_name, component_name,
+                                      baseline, file_name, size):
+        if add_baseline:
+            return [subsystem_name, component_name,
+                    baseline, file_name, size]
+        else:
+            return [subsystem_name, component_name, file_name, size]
 
     @classmethod
     def __save_result_as_excel(cls, result_dict: dict, output_name: str, add_baseline: bool):
@@ -173,10 +186,8 @@ class RomAnalyzer:
                 component_end_row += component_file_count
 
                 for file_name, size in component_dict.items():
-                    line = [subsystem_name, component_name, file_name, size]
-                    if add_baseline:
-                        line = [subsystem_name, component_name,
-                                baseline, file_name, size]
+                    line = cls.__inside_save_result_as_excel(add_baseline, subsystem_name, component_name,
+                                                             baseline, file_name, size)
                     excel_writer.append_line(line)
                 excel_writer.write_merge(component_start_row, component_col, component_end_row, component_col,
                                          component_name)
@@ -190,7 +201,8 @@ class RomAnalyzer:
         excel_writer.save(output_name + ".xls")
 
     @classmethod
-    def __put(cls, unit: typing.Dict[Text, Any], result_dict: typing.Dict[Text, Dict], baseline_dict: Dict[str, Any], add_baseline: bool):
+    def __put(cls, unit: typing.Dict[Text, Any], result_dict: typing.Dict[Text, Dict], baseline_dict: Dict[str, Any],
+              baseline: bool):
 
         component_name = NOTFOUND if unit.get(
             "component_name") is None else unit.get("component_name")
@@ -201,6 +213,7 @@ class RomAnalyzer:
             if (not baseline_dict.get(subsystem_name)) or (not baseline_dict.get(subsystem_name).get(component_name)):
                 return str()
             return baseline_dict.get(subsystem_name).get(component_name).get("rom")
+
         size = unit.get("size")
         relative_filepath = unit.get("relative_filepath")
         if result_dict.get(subsystem_name) is None:  # 子系统
@@ -212,7 +225,7 @@ class RomAnalyzer:
             result_dict[subsystem_name][component_name] = dict()
             result_dict[subsystem_name][component_name]["size"] = 0
             result_dict[subsystem_name][component_name]["file_count"] = 0
-            if add_baseline:
+            if baseline:
                 result_dict[subsystem_name][component_name]["baseline"] = get_rom_baseline(
                 )
 
@@ -238,7 +251,8 @@ class RomAnalyzer:
 
     @classmethod
     def analysis(cls, system_module_info_json: Text, product_dirs: List[str],
-                 project_path: Text, product_name: Text, output_file: Text, output_execel: bool, add_baseline: bool, unit_adapt: bool):
+                 project_path: Text, product_name: Text, output_file: Text, output_execel: bool, add_baseline: bool,
+                 unit_adapt: bool):
         """
         system_module_info_json: json文件
         product_dirs：要处理的产物的路径列表如["vendor", "system/"]
@@ -258,7 +272,8 @@ class RomAnalyzer:
         pre_collector.collect_sa_profile()
         extra_product_info_dict: Dict[str, Dict] = pre_collector.result_dict
         product_info_dict = cls.__collect_product_info(
-            system_module_info_json, project_path, extra_info=extra_product_info_dict)  # collect product info from json file
+            system_module_info_json, project_path,
+            extra_info=extra_product_info_dict)  # collect product info from json file
         result_dict: Dict[Text:Dict] = dict()
         for d in product_dirs:
             file_list: List[Text] = BasicTool.find_all_files(d)
@@ -316,12 +331,12 @@ def get_args():
 if __name__ == '__main__':
     args = get_args()
     module_info_json = args.module_info_json
-    project_path = args.project_path
+    project_origin_path = args.project_path
     product_name = args.product_name
     product_dirs = args.product_dir
     output_file = args.output_file
     output_excel = args.excel
-    add_baseline = args.baseline
-    unit_adapt = args.unit_adaptive
+    baseline_path = args.baseline
+    unit_adaptiv = args.unit_adaptive
     RomAnalyzer.analysis(module_info_json, product_dirs,
-                         project_path, product_name, output_file, output_excel, add_baseline, unit_adapt)
+                         project_origin_path, product_name, output_file, output_excel, baseline_path, unit_adaptiv)
