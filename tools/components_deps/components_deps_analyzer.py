@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This file contains the comparison between mandatory components and the actual compiled components.
+# This file provide the detection tool for unconditional dependence of required components on optional components.
 
 import argparse
 import json
@@ -23,111 +23,131 @@ import re
 
 class Analyzer:
     @classmethod
-    def __get_components(cls, config: str):
-        mandatory_components = list()
-        optional_components = list()
-        with open(config, 'r', encoding='utf-8') as r:
-            config_json = json.load(r)
-        inherit = config_json['inherit']
-        for json_name in inherit:
-            with open(json_name, 'r', encoding='utf-8') as r:
-                inherit_file = json.load(r)
-            for subsystem in inherit_file['subsystems']:
-                for component in subsystem['components']:
-                    mandatory_components.append(component['component'])
+    def __get_open_components(cls, xml_path):
+        open_components = list()
+        with open(xml_path, 'r', encoding='utf-8') as r:
+            xml_info = r.readlines()
+        for line in xml_info:
+            if "path=" in line:
+                tmp = re.findall('path="(.*?)"', line)[0]
+                open_components.append(tmp.split('/')[-1])
+        return open_components
+
+    @classmethod
+    def __deal_config_json(cls, config_json):
+        components = list()
         for subsystem in config_json['subsystems']:
             for component in subsystem['components']:
-                if component not in mandatory_components:
-                    optional_components.append(component['component'])
-        return mandatory_components, optional_components
+                if component not in components:
+                    components.append(component['component'])
+        return components
 
     @classmethod
-    def __get_gn_path(cls, parts_deps: str, mandatory: list):
-        mandatory_gn_path = dict()
-        with open(parts_deps, 'r', encoding='utf-8') as r:
-            parts_deps_json = json.load(r)
-        for component in parts_deps_json:
-            if component in mandatory and parts_deps_json[component]:
-                mandatory_gn_path[component] = '/'.join(
-                    parts_deps_json[component]['build_config_file'].split('/')[:-1])
-        return mandatory_gn_path
+    def __get_required_components(cls, config_path: str):
+        required_components = list()
+        files = os.listdir(config_path)
+        for file in files:
+            if file.endswith(".json"):
+                with open(os.path.join(config_path, file), 'r', encoding='utf-8') as r:
+                    config_json = json.load(r)
+                required_components += cls.__deal_config_json(config_json)
+        return required_components
 
     @classmethod
-    def __judge_deps(cls, gn_path: str, optional_components):
+    def __get_line(cls, txt_list, key_words: str):
+        for i in range(len(txt_list)):
+            if key_words in txt_list[i]:
+                return i + 1
+        return 0
+
+    @classmethod
+    def __judge_deps(cls, gn_path: str, open_components_list, optional_components):
+        error = list()
         deps = list()
+        dependent_close = True
         with open(gn_path, 'r', encoding='utf-8') as r:
             gn = r.readlines()
         txt = ''
         for line in gn:
-            txt += line.strip()
-        for optional_component in optional_components:
-            dep_txt = re.findall('deps = \[(.*?)\]', txt) + re.findall('deps += \[(.*?)\]', txt)
+            txt += line
+        key_txt = ' '.join(re.findall('if \(.+?\{(.*?)\}', txt))
+        for component in open_components_list:
+            if dependent_close == True:
+                if component in txt:
+                    dependent_close = False
+        for i in range(len(gn)):
+            dep_txt = re.findall('deps = \[(.*?)\]', gn[i]) + re.findall('deps += \[(.*?)\]', gn[i])
             dep_info = list()
             for info in dep_txt:
                 if '/' in info:
                     dep_info += re.findall('/(.*?):', info)
                 else:
                     dep_info += re.findall('"(.*?):', info)
-            if optional_component in dep_info:
-                key_txt = ' '.join(re.findall('if \(.+?\{(.*?)\}', txt))
-                if optional_component not in key_txt:
-                    deps.append({'component': optional_component, 'gn_path': gn_path})
-        return deps
+            for component in optional_components:
+                if component in dep_info and component not in key_txt:
+                    deps.append((component, i + 1))
+        if dependent_close == True and re.findall('deps =', txt):
+            line = cls.__get_line(gn, 'deps =')
+            error.append(
+                {"line": line, "rule": "depend close component", "detail": "可能依赖闭源部件，请检查deps中的内容"})
+        for one_dep in deps:
+            error.append({"line": one_dep[1], "rule": "depend optional component",
+                          "detail": "依赖开源部件中的非必选部件{}，请检查deps中的内容".format(one_dep[0])})
+        return gn_path, error
 
     @classmethod
-    def __get_deps(cls, mandatory_gn: dict, optional_components_list: list):
-        all_deps = dict()
-        for component in mandatory_gn.keys():
-            component_deps = list()
-            total_deps = dict()
-            for root, _, files in os.walk(mandatory_gn[component]):
-                if 'BUILD.gn' in files:
-                    component_deps += cls.__judge_deps(os.path.join(root, 'BUILD.gn'), optional_components_list)
-            for one_dep in component_deps:
-                if one_dep['component'] not in total_deps.keys():
-                    total_deps[one_dep['component']] = [one_dep['gn_path']]
-                else:
-                    total_deps[one_dep['component']].append(one_dep['gn_path'])
-            all_deps[component] = total_deps
-        return all_deps
-
-    @classmethod
-    def analysis(cls, config_path: str, parts_deps_path: str, output_file: str, single_component: str):
+    def analysis(cls, gn_path_list, gn_component, config_path: str, open_components_path, result_json_name: str):
         if not os.path.exists(config_path):
             print("error: {} is inaccessible or not found".format(config_path))
             return
-        if not os.path.exists(parts_deps_path):
-            print("error: {} is inaccessible or not found".format(parts_deps_path))
+        if not os.path.exists(open_components_path):
+            print("error: {} is inaccessible or not found".format(open_components_path))
             return
-        mandatory_components, optional_components = cls.__get_components(config_path)
-        mandatory_components_gn_path = cls.__get_gn_path(parts_deps_path, mandatory_components)
-        deps = cls.__get_deps(mandatory_components_gn_path, optional_components)
-        with os.fdopen(os.open(output_file + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), "w") as fd:
-            json.dump(deps, fd, indent=4)
-        if single_component != 'false' and single_component in deps.keys():
-            with os.fdopen(os.open(single_component + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), "w") as fd:
-                json.dump(deps[single_component], fd, indent=4)
+        if len(gn_path_list) != len(gn_component):
+            print(
+                "error: The component corresponding to the gn file and the gn file path are not in one-to-one correspondence.")
+            return
+        required_components = cls.__get_required_components(config_path)
+        open_components = cls.__get_open_components(open_components_path)
+        optional_components = list()
+        for components in open_components:
+            if components not in required_components:
+                optional_components.append(components)
+        result = list()
+        for i in range(len(gn_path_list)):
+            one_result = dict()
+            if gn_component[i] in required_components:
+                one_result["file_path"], one_result["error"] = cls.__judge_deps(gn_path_list[i], open_components,
+                                                                                optional_components)
+            else:
+                one_result["file_path"], one_result["error"] = gn_path_list[i], []
+            result.append(one_result)
+        with os.fdopen(os.open(result_json_name + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), "w",
+                       encoding='utf-8') as fd:
+            json.dump(result, fd, indent=4, ensure_ascii=False)
 
 
 def get_args():
     parser = argparse.ArgumentParser(
         description=f"analyze components deps.\n")
-    parser.add_argument("-c", "--config_json", required=True, type=str,
-                        help="path of root path of openharmony/vendor/hihope/{product_name}/config.json")
-    parser.add_argument("-d", "--parts_deps_json", required=True, type=str,
-                        help="path of out/{product_name}/build_configs/parts_info/parts_deps.json")
-    parser.add_argument("-s", "--single_component_name", type=str, default="false",
-                        help="single component name")
-    parser.add_argument("-o", "--output_file", type=str, default="components_deps",
-                        help="eg: demo/components_deps")
-    args = parser.parse_args()
-    return args
+    parser.add_argument("-p", "--components_gn_path_list", required=True, type=str,
+                        help="path of pr BUILD.gn")
+    parser.add_argument("-g", "--gn_component", required=True, type=str,
+                        help="gn file corresponding component")
+    parser.add_argument("-c", "--config_path", required=True, type=str,
+                        help="path of config_file")
+    parser.add_argument("-o", "--open_component_xml_path", required=True, type=str,
+                        help="open component name set")
+    parser.add_argument("-r", "--result_json_name", type=str, default="result",
+                        help="name of output_json")
+    return parser.parse_args()
 
 
 if __name__ == '__main__':
     args = get_args()
-    config_json_path = args.config_json
-    parts_deps_json_path = args.parts_deps_json
-    output_file_name = args.output_file
-    single_component = args.single_component_name
-    Analyzer.analysis(config_json_path, parts_deps_json_path, output_file_name, single_component)
+    gn_path_list = args.components_gn_path_list.split(',')
+    gn_component = args.gn_component.split(',')
+    config_path = args.config_path
+    open_components_xml_path = args.open_component_xml_path
+    result_json_name = args.result_json_name
+    Analyzer.analysis(gn_path_list, gn_component, config_path, open_components_xml_path, result_json_name)
