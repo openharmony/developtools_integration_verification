@@ -20,62 +20,73 @@ import json
 
 from .base_rule import BaseRule
 
+
 class HdiRule(BaseRule):
-	RULE_NAME = "NO-Depends-On-HDI"
+    RULE_NAME = "NO-Depends-On-HDI"
 
-	def __check_depends_on_hdi(self):
-		lists = self.get_white_lists()
+    def __check_depends_on_hdi(self):
+        lists = self.get_white_lists()
 
-		passed = True
+        passed = True
 
-		hdi_without_shlib_type = []
-		non_hdi_with_hdi_shlib_type = []
+        hdi_without_shlib_type = []
+        non_hdi_with_hdi_shlib_type = []
 
-		# Check if any napi modules has dependedBy
-		for mod in self.get_mgr().get_all():
-			is_hdi = False
-			if "hdiType" in mod and mod["hdiType"] == "hdi_service":
-				is_hdi = True
-			# Collect non HDI modules with shlib_type of value "hdi"
-			if not is_hdi and ("shlib_type" in mod and mod["shlib_type"] == "hdi"):
-				non_hdi_with_hdi_shlib_type.append(mod)
+        # Check if any napi modules has dependedBy
+        for mod in self.get_mgr().get_all():
+            is_hdi = False
+            if "hdiType" in mod and mod["hdiType"] == "hdi_service":
+                is_hdi = True
+            # Collect non HDI modules with shlib_type of value "hdi"
+            if not is_hdi and ("shlib_type" in mod and mod["shlib_type"] == "hdi"):
+                non_hdi_with_hdi_shlib_type.append(mod)
 
-			# Collect HDI modules without shlib_type with value of "hdi"
-			if is_hdi and ("shlib_type" not in mod or mod["shlib_type"] != "hdi"):
-				if mod["name"] not in lists:
-					hdi_without_shlib_type.append(mod)
+            # Collect HDI modules without shlib_type with value of "hdi"
+            if is_hdi and ("shlib_type" not in mod or mod["shlib_type"] != "hdi"):
+                if mod["name"] not in lists:
+                    hdi_without_shlib_type.append(mod)
 
-			if not is_hdi:
-				continue
+            if self.__ignore_mod(mod, is_hdi, lists):
+                continue
 
-			if len(mod["dependedBy"]) == 0:
-				continue
+            # Check if HDI modules is depended by other modules
+            self.error("hdi module %s depended by:" % mod["name"])
+            for dep in mod["dependedBy"]:
+                caller = dep["caller"]
+                self.log("   module [%s] defined in [%s]" % (caller["name"], caller["labelPath"]))
+            passed = False
 
-			if mod["name"] in lists:
-				continue
+        if len(hdi_without_shlib_type) > 0:
+            for mod in hdi_without_shlib_type:
+                if mod["name"] not in lists:
+                    passed = False
+                    self.error('hdi module %s has no shlib_type="hdi", add it in %s' % (mod["name"], mod["labelPath"]))
 
-			# If hdi module has version_script to specify exported symbols, it can be depended by others
-			if "version_script" in mod:
-				continue
+        if len(non_hdi_with_hdi_shlib_type) > 0:
+            for mod in non_hdi_with_hdi_shlib_type:
+                self.warn('non hdi module %s with shlib_type="hdi", %s' % (mod["name"], mod["labelPath"]))
 
-			# Check if HDI modules is depended by other modules
-			self.error("hdi module %s depended by:" % mod["name"])
-			for dep in mod["dependedBy"]:
-				caller = dep["caller"]
-				self.log("   module [%s] defined in [%s]" % (caller["name"], caller["labelPath"]))
-			passed = False
+        return passed
 
-		if len(hdi_without_shlib_type) > 0:
-			for mod in hdi_without_shlib_type:
-				if mod["name"] not in lists:
-					passed = False
-					self.error('hdi module %s has no shlib_type="hdi", add it in %s' % (mod["name"], mod["labelPath"]))
+    def check(self):
+        return self.__check_depends_on_hdi()
+    
+    def __ignore_mod(self, mod, is_hdi, lists):
+        ignore_flag = False
+        if not is_hdi:
+            ignore_flag = True
+            return ignore_flag
 
-		if len(non_hdi_with_hdi_shlib_type) > 0:
-			for mod in non_hdi_with_hdi_shlib_type:
-				self.warn('non hdi module %s with shlib_type="hdi", %s' % (mod["name"], mod["labelPath"]))
+        if len(mod["dependedBy"]) == 0:
+            ignore_flag = True
+            return ignore_flag
 
-		return passed
+        if mod["name"] in lists:
+            ignore_flag = True
+            return ignore_flag
 
-	def check(self):
-		return self.__check_depends_on_hdi()
+        # If hdi module has version_script to specify exported symbols, it can be depended by others
+        if "version_script" in mod:
+            ignore_flag = True
+        
+        return ignore_flag
