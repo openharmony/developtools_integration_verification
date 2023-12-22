@@ -332,11 +332,11 @@ if __name__ == '__main__':
     args = get_args()
     module_info_json = args.module_info_json
     project_origin_path = args.project_path
-    product_name = args.product_name
+    product = args.product_name
     product_dirs = args.product_dir
-    output_file = args.output_file
+    output_file_name = args.output_file
     output_excel = args.excel
     baseline_path = args.baseline
     unit_adaptiv = args.unit_adaptive
     RomAnalyzer.analysis(module_info_json, product_dirs,
-                         project_origin_path, product_name, output_file, output_excel, baseline_path, unit_adaptiv)
+                         project_origin_path, product, output_file_name, output_excel, baseline_path, unit_adaptiv)
