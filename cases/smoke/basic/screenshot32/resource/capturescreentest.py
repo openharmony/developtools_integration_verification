@@ -39,7 +39,10 @@ def print_to_log(str):
     time = datetime.datetime.now()
     str = "[{}] {}".format(time, str)
     print(str)
-    with open(os.path.join(args.save_path, 'test_{}.log'.format(args.device_num)),mode='a', encoding='utf-8') as file:
+    with open(os.path.join(args.save_path,
+                           'test_{}.log'.format(args.device_num)),
+              mode='a',
+              encoding='utf-8') as file:
         console = sys.stdout
         sys.stdout = file
         print(str)
@@ -56,12 +59,14 @@ def enter_cmd(mycmd, waittime=0, printresult=1):
     while enter_cmdRetry:
         enter_cmdRetry -= 1
         try:
-            p = subprocess.Popen(mycmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(mycmd,
+                                 stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE)
             result, unused_err = p.communicate(timeout=25)
             try:
-                result=result.decode(encoding="utf-8")
+                result = result.decode(encoding="utf-8")
             except UnicodeDecodeError:
-                result=result.decode('gbk', errors='ignore')
+                result = result.decode('gbk', errors='ignore')
             break
         except Exception as e:
             result = 'retry failed again'
@@ -143,7 +148,10 @@ def get_coordinate(path, target):
         wifi_range[1] += height
         print_to_log(wifi_range)
         data_img = img[wifi_range[0]:wifi_range[1], wifi_range[2]:wifi_range[3]]
-        data = pytesseract.image_to_data(data_img, output_type=Output.DICT, config=tessdata_dir_config, lang='eng')
+        data = pytesseract.image_to_data(data_img,
+                                         output_type=Output.DICT,
+                                         config=tessdata_dir_config,
+                                         lang='eng')
         for i in range(len(data['text'])):
             if data['text'][i] == target:
                 dx = int((wifi_range[2] + wifi_range[3]) / 2)
@@ -158,10 +166,14 @@ def get_coordinate(path, target):
 
 def connect_wifi(prefix, pic):
     try:
-        data = get_coordinate("{}\\{}_{}".format(args.save_path, prefix, pic), "testapold")
-        enter_shell_cmd("uinput -M -m {} {} -c 0".format(data[0], data[1]), WAIT_TIME_TWO)
+        data = get_coordinate("{}\\{}_{}".format(args.save_path, prefix, pic),
+                              "testapold")
+        enter_shell_cmd("uinput -M -m {} {} -c 0".format(data[0], data[1]),
+                        WAIT_TIME_TWO)
         enter_shell_cmd("uinput -M -m 360 200 -c 0")
-        enter_shell_cmd("uinput -K -d 2032 -u 2032 -d 2017 -u 2017 -d 2035 -u 2035 -d 2035 -u 2035 -d 2039 -u 2039 -d 2000 -u 2000 -d 2034 -u 2034 -d 2020 -u 2020 -d 2001 -u 2001")
+        enter_shell_cmd("uinput -K -d 2032 -u 2032 -d 2017 -u 2017 -d 2035"
+                        " -u 2035 -d 2035 -u 2035 -d 2039 -u 2039 -d 2000"
+                        " -u 2000 -d 2034 -u 2034 -d 2020 -u 2020 -d 2001 -u 2001")
         enter_shell_cmd("uinput -M -m 360 200 -c 0")
         enter_shell_cmd("uinput -M -m 50 1140 -c 0")
         enter_shell_cmd("uinput -M -m 500 1020 -c 0")
