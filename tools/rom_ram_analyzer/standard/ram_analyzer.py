@@ -145,7 +145,7 @@ class RamAnalyzer:
             full_process_name = find_full_process_name(name)
             if not full_process_name:
                 print(
-                    f"warning: process \"{full_process_name}\" not found in not found int the result of command \"ps -ef\"")
+                    f"warning: process \"{full_process_name}\" not found in the result of command \"ps -ef\"")
                 continue
             process_pss_dict[full_process_name] = size
         return process_pss_dict
@@ -270,6 +270,16 @@ class RamAnalyzer:
         return process_elf_dict
 
     @classmethod
+    def __inside_save_result_as_excel(cls, baseline_file, subsystem_name, component_name, component_size,
+                                      component_baseline, process_name, process_size, elf_name, elf_size):
+        if baseline_file:
+            return [subsystem_name, component_name, component_size,
+                    component_baseline, process_name, process_size, elf_name, elf_size]
+        else:
+            return [subsystem_name, component_name, component_size,
+                    process_name, process_size, elf_name, elf_size]
+
+    @classmethod
     def __save_result_as_excel(cls, data_dict: dict, filename: str, ss: str, baseline_file: str, unit_adapt: bool):
         """
         保存结果到excel中
@@ -333,11 +343,10 @@ class RamAnalyzer:
                     process_size = process_info.get("size")
                     elf_info = process_info.get("elf")
                     for elf_name, elf_size in elf_info.items():
-                        line = [subsystem_name, component_name, component_size,
-                                process_name, process_size, elf_name, elf_size]
-                        if baseline_file:
-                            line = [subsystem_name, component_name, component_size,
-                                    component_baseline, process_name, process_size, elf_name, elf_size]
+                        line = cls.__inside_save_result_as_excel(baseline_file, subsystem_name, component_name,
+                                                                 component_size,
+                                                                 component_baseline, process_name, process_size,
+                                                                 elf_name, elf_size)
                         writer.append_line(line)
                     elf_count = len(elf_info)
                     process_end_r += elf_count
@@ -483,9 +492,9 @@ class RamAnalyzer:
                                                                                                       "*",
                                                                                                       lambda x, y: len(
                                                                                                           y.split(
-                                                                                                              '/')) >= 3 and x.lower().startswith(
-                                                                                                          y.split('/')[
-                                                                                                              2].lower()),
+                                                                                '/')) >= 3 and x.lower().startswith(
+                                                                                                    y.split('/')[
+                                                                                                        2].lower()),
                                                                                                       rom_result_dict)
                 result_dict = cls.result_process2(result_dict, process_name, subsystem_name, process_size,
                                                   component_name, hap_name, size)
@@ -627,14 +636,14 @@ def abspath(path: str) -> str:
 
 if __name__ == '__main__':
     args = get_args()
-    cfg_path = abspath(args.cfg_path)
-    profile_path = abspath(args.json_path)
+    cfg_path_name = abspath(args.cfg_path)
+    profile_path_name = abspath(args.json_path)
     rom_result = args.rom_result
-    device_num = args.device_num
+    device = args.device_num
     output_filename = args.output_filename
     baseline = args.baseline_file
     output_excel_path = args.excel
     unit_adaptiv = args.unit_adaptive
-    RamAnalyzer.analysis(cfg_path, profile_path, rom_result,
-                         device_num=device_num, output_file=output_filename, ss="Pss", output_excel=output_excel_path,
+    RamAnalyzer.analysis(cfg_path_name, profile_path_name, rom_result,
+                         device_num=device, output_file=output_filename, ss="Pss", output_excel=output_excel_path,
                          baseline_file=baseline, unit_adapt=unit_adaptiv)
