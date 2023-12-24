@@ -29,7 +29,7 @@ from threading import RLock
 import collections
 
 from config import result_dict, collector_config, configs, \
-    project_path, sub_com_dict, product_name, recollect_gn, baseline, unit_adapt
+    project_path, sub_com_dict, product_name, recollect_gn, baseline, unit_adapt, output_file
 from pkgs.basic_tool import BasicTool, unit_adaptive
 from pkgs.gn_common_tool import GnCommonTool
 from pkgs.simple_excel_writer import SimpleExcelWriter
@@ -393,7 +393,7 @@ class RomAnalysisTool:
                     type_list, gn_info, gn_info_file, base_name, rom_ram_baseline, rom_size_dict, f, size)
 
     @classmethod
-    def analysis(cls, product_name: str, product_dict: Dict[str, List[str]]):
+    def analysis(cls, product_name: str, product_dict: Dict[str, List[str]], output_file_name: str):
         """analysis the rom of lite/small product
 
         Args:
@@ -423,7 +423,7 @@ class RomAnalysisTool:
             product_dict, query_order, gn_info, gn_info_file, rom_ram_baseline, rom_size_dict)
         if unit_adapt:
             cls._result_unit_adaptive(rom_size_dict)
-        with open(configs[product_name]["output_name"], 'w', encoding='utf-8') as f:
+        with open(output_file_name + ".json", 'w', encoding='utf-8') as f:
             json.dump(rom_size_dict, f, indent=4)
         cls._save_as_xls(rom_size_dict, product_name, baseline)
         logging.info("success")
@@ -434,7 +434,7 @@ def main():
         RomAnalysisTool.collect_gn_info()
     product_dict: Dict[str, List[str]
                        ] = RomAnalysisTool.collect_product_info(product_name)
-    RomAnalysisTool.analysis(product_name, product_dict)
+    RomAnalysisTool.analysis(product_name, product_dict, output_file)
 
 
 if __name__ == "__main__":
