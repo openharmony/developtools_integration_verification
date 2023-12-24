@@ -251,7 +251,8 @@ class RomAnalysisTool:
         component_end_row = 0
         component_col = 1
         baseline_col = 2
-        del tmp_dict["size"]
+        if "size" in tmp_dict.keys():
+            del tmp_dict["size"]
         for subsystem_name in tmp_dict.keys():
             subsystem_dict = tmp_dict.get(subsystem_name)
             subsystem_size = subsystem_dict.get("size")
