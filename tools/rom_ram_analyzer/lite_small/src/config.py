@@ -50,6 +50,8 @@ def parse_args():
                         help="add baseline of component to the result(-b) or not.")
     parser.add_argument("-u", "--unit_adaptive",
                         action="store_true", help="unit adaptive")
+    parser.add_argument("-f", "--output_file", type=str, default="rom_analysis_result",
+                        help="basename of output file, default: rom_analysis_result. eg: rom_analysis_result")
     args = parser.parse_args()
     return args
 
@@ -68,6 +70,7 @@ project_path = BasicTool.abspath(_args.oh_path)
 recollect_gn = _args.recollect_gn
 baseline = _args.baseline
 unit_adapt = _args.unit_adaptive
+output_file = _args.output_file
 _recollect_sc = _args.recollect_sc
 _sc_json: Dict[Text, Text] = configs.get("subsystem_component")
 _sc_save = _sc_json.get("save")
