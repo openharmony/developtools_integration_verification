@@ -26,12 +26,16 @@ class Analyzer:
     def __get_open_components(cls, xml_path):
         open_components = list()
         gn_name = list()
+        not_component = ["common"]
         with open(xml_path, 'r', encoding='utf-8') as r:
             xml_info = r.readlines()
         for line in xml_info:
             if "path=" in line:
                 open_components.append(re.findall('path="(.*?)"', line)[0].split('/')[-1])
                 gn_name.append(re.findall('name="(.*?)"', line)[0].split('/')[-1])
+        for obj in not_component:
+            if obj in open_components:
+                open_components.remove(obj)
         return open_components, gn_name
 
     @classmethod
