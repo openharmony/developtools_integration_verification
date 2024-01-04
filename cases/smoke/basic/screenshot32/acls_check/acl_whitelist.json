@@ -166,5 +166,11 @@
       "ohos.permission.INSTALL_QUICK_FIX_BUNDLE",
       "ohos.permission.UNINSTALL_QUICK_FIX_BUNDLE"
     ]
+  },
+  {
+    "processName": "sharing_service",
+    "acls": [
+      "ohos.permission.CAPTURE_SCREEN"
+    ]
   }
 ]
