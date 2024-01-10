@@ -65,6 +65,8 @@ Note:If the text contains special characters, please escape them according to th
             <filefilter name="defaultFilter" desc="Files not to check">
                 <filteritem type="filename" name="*.png|*.jpeg|*.json" desc="Test files"/>
                 <filteritem type="filename" name="*.bin|*.exe|ReadMe|oeminfo_nvm_test" desc="There are the upgrade tool files"/>
+                <filteritem type="filepath" name="DeployDevice/.*" desc="There are the smoketest tool files"/>
+                <filteritem type="filepath" name="tools/.*" desc="There are tools files"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility, license header policies">
                 <filteritem type="filename" name="*.png|*.jpeg|*.json|*.hap|*.csv|dhcpc.sh" desc="NoLicenseHeader"/>
