@@ -26,10 +26,14 @@ class ChipsetSDKRule(BaseRule):
 
     def __init__(self, mgr, args):
         super().__init__(mgr, args)
+        self.__out_path = mgr.get_product_out_path()
         self.__white_lists = self.load_chipsetsdk_json("chipsetsdk_info.json")
 
     def get_white_lists(self):
         return self.__white_lists
+
+    def get_out_path(self):
+        return self.__out_path
 
     def load_chipsetsdk_json(self, name):
         rules_dir = []
@@ -38,6 +42,10 @@ class ChipsetSDKRule(BaseRule):
             self.log("****add more ChipsetSDK info in:{}****".format(self._args.rules))
             rules_dir = rules_dir + self._args.rules
 
+        chipsetSDK_rules_path = self.get_out_path()
+        if os.path.exists(chipsetSDK_rules_path):
+            self.log("****add more ChipsetSDK info in dir:{}****".format(chipsetSDK_rules_path))
+            rules_dir.append(chipsetSDK_rules_path)
         res = []
         for d in rules_dir:
             rules_file = os.path.join(d, self.__class__.RULE_NAME, name)
@@ -53,10 +61,13 @@ class ChipsetSDKRule(BaseRule):
                 self.log("****Parsing rules file in {}****".format(rules_file))
                 with open(rules_file, "r") as f:
                     contents = f.read()
+                if not contents:
+                    self.log("****rules file {} is null****".format(rules_file))
+                    return res
                 json_data = json.loads(contents)
                 for so in json_data:
                     so_file_name = so.get("so_file_name")
-                    if so_file_name not in res:
+                    if so_file_name and so_file_name not in res:
                         res.append(so_file_name)
             except(FileNotFoundError, IOError, UnicodeDecodeError) as file_open_or_decode_err:
                 self.error(file_open_or_decode_err)
