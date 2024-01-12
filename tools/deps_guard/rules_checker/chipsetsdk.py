@@ -42,10 +42,12 @@ class ChipsetSDKRule(BaseRule):
             self.log("****add more ChipsetSDK info in:{}****".format(self._args.rules))
             rules_dir = rules_dir + self._args.rules
 
-        chipsetSDK_rules_path = self.get_out_path()
-        if os.path.exists(chipsetSDK_rules_path):
-            self.log("****add more ChipsetSDK info in dir:{}****".format(chipsetSDK_rules_path))
-            rules_dir.append(chipsetSDK_rules_path)
+        chipsetsdk_rules_path = self.get_out_path().replace("out", "out/products_ext")
+        if os.path.exists(chipsetsdk_rules_path):
+            self.log("****add more ChipsetSDK info in dir:{}****".format(chipsetsdk_rules_path))
+            rules_dir.append(chipsetsdk_rules_path)
+        else:
+            self.warn("****add chipsetsdk_rules_path path not exist: {}****".format(chipsetsdk_rules_path))
         res = []
         for d in rules_dir:
             rules_file = os.path.join(d, self.__class__.RULE_NAME, name)
