@@ -96,7 +96,8 @@
   {
     "processName": "accountmgr",
     "acls": [
-      "ohos.permission.ENFORCE_USER_IDM"
+      "ohos.permission.ENFORCE_USER_IDM",
+      "ohos.permission.STORAGE_MANAGER_CRYPT"
     ]
   },
   {
