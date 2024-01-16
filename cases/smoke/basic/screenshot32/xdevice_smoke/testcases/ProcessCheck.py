@@ -2,6 +2,8 @@
 import os
 import sys
 
+from devicetest.api import Asserts
+
 from test_case import ITestCase
 
 
@@ -15,7 +17,7 @@ class ProcessCheck(ITestCase):
         self.step('SmokeTest: ########## First check key processes start ##############')
 
     def process(self):
-        assert os.path.exists(os.path.join(self.local_resource_path, 'process.txt')), AssertionError('lack of process.txt file')
+        Asserts.assert_true(os.path.exists(os.path.join(self.local_resource_path, 'process.txt')))
         self.step('get process.txt content')
         with open(os.path.join(self.local_resource_path, 'process.txt'), 'r+') as f:
             text = f.read()
@@ -48,7 +50,7 @@ class ProcessCheck(ITestCase):
             self.common_oh.pullFile(self.Phone1, '/data/log/faultlog/faultlogger/after_test_jscrash{}.tar'.format(device_num), os.path.normpath(self.local_save_path))
             self.step('SmokeTest: SmokeTest find some key problems!')
             self.step('SmokeTest: End of check, test failed!')
-            raise AssertionError('process lost:{}'.format(lose_process))
+            Asserts.assert_true(len(lose_process) == 0)
         self.step('process check pass')
 
     def teardown(self):
