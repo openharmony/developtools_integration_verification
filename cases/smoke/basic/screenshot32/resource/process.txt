@@ -15,10 +15,9 @@ multimodalinput
 huks_service
 memmgrservice
 bluetooth_servi
-pulseaudio
 resource_schedu
 bgtaskmgr_servi
-audio_policy
+audio_server
 deviceauth_service
 softbus_server
 wifi_hal_service

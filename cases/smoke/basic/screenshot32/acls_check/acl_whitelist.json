@@ -74,7 +74,7 @@
     ]
   },
   {
-    "processName": "audio_policy",
+    "processName": "audio_server",
     "acls": [
       "ohos.permission.GET_SENSITIVE_PERMISSIONS"
     ]
@@ -96,7 +96,8 @@
   {
     "processName": "accountmgr",
     "acls": [
-      "ohos.permission.ENFORCE_USER_IDM"
+      "ohos.permission.ENFORCE_USER_IDM",
+      "ohos.permission.STORAGE_MANAGER_CRYPT"
     ]
   },
   {
