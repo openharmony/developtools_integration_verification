@@ -26,7 +26,7 @@ class Analyzer:
     def __get_open_components(cls, xml_path):
         open_components = list()
         gn_name = list()
-        white_components_list = ["common"]
+        white_components_list = ["common", "hilog", "ylong_runtime"]
         with open(xml_path, 'r', encoding='utf-8') as r:
             xml_info = r.readlines()
         for line in xml_info:
