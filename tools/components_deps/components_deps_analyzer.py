@@ -67,31 +67,29 @@ class Analyzer:
 
     @classmethod
     def __judge_deps(cls, gn_path: str, new_line_num: str, open_components_list, optional_components, white_names):
-        error = list()
         deps = list()
-        dependent_close = True
         new_line_num = [int(i) for i in new_line_num.split('_')]
         with open(gn_path, 'r', encoding='utf-8') as r:
             gn_lines = [line.strip("\n") for line in r.readlines()]
+        dependent_close = True
         txt = ''
         for line in gn_lines:
             txt += line
-        in_if_txt = ' '.join(re.findall('if \(.+?\{(.*?)\}', txt))
         for component in open_components_list:
             if dependent_close == True:
                 if component in txt:
                     dependent_close = False
-        for i in new_line_num:
-            dep_txt = re.findall('deps = \[(.*?)\]', gn_lines[i - 1]) + re.findall('deps += \[(.*?)\]', gn_lines[i - 1])
-            dep_info = list()
-            for info in dep_txt:
-                if '/' in info:
-                    dep_info += re.findall('/(.*?):', info)
-                else:
-                    dep_info += re.findall('"(.*?):', info)
+        scan_line_num = cls.__get_scan_line_num(gn_lines, new_line_num)
+        for i in scan_line_num:
+            dep_info = ""
+            if '/' in gn_lines[i - 1]:
+                dep_info += re.findall('/(.*?):', gn_lines[i - 1])[0]
+            else:
+                dep_info += re.findall('"(.*?):', gn_lines[i - 1])[0]
             for component in optional_components:
-                if component not in white_names and component in dep_info and component not in in_if_txt:
+                if component not in white_names and component in dep_info:
                     deps.append((component, i))
+        error = list()
         if dependent_close == True and re.findall('deps =', txt):
             line = cls.__get_line(gn_lines, 'deps =')
             error.append(
@@ -104,6 +102,36 @@ class Analyzer:
         return error
 
     @classmethod
+    def __get_scan_line_num(cls, gn_lines, new_line_num):
+        add_line_txt = ''
+        line_num = 0
+        for line in gn_lines:
+            line_num += 1
+            add_line_txt += '#' + str(line_num) + '#' + line
+        in_if_txt = re.findall('if \(.+?\{(.*?)\}', add_line_txt)
+        in_if_line_num = cls.__get_line_num(in_if_txt)
+        in_dep_txt = re.findall('deps = \[(.*?)\]', add_line_txt) + re.findall('deps += \[(.*?)\]', add_line_txt)
+        in_dep_line_num = cls.__get_line_num(in_dep_txt)
+        for line_num, line in enumerate(gn_lines):
+            if ('deps = ' in line or 'deps += ' in line) and ']' in line and (line_num + 1) not in in_dep_line_num:
+                in_dep_line_num.append(line_num + 1)
+        scan_line = list()
+        for num in new_line_num:
+            if num not in in_if_line_num and num in in_dep_line_num:
+                scan_line.append(num)
+        return scan_line
+
+    @classmethod
+    def __get_line_num(cls, txt_line_list):
+        line_num = list()
+        for one_txt in txt_line_list:
+            one_line_list = re.findall('#(.*?)#', one_txt)
+            if one_line_list != ['']:
+                line_num += one_line_list
+        line_num = [int(i) for i in line_num]
+        return line_num
+
+    @classmethod
     def analysis(cls, gn_path_list, new_line_nums, gn_name, config_path: str, open_components_path,
                  result_json_name: str):
         if not os.path.exists(config_path):
@@ -113,12 +141,10 @@ class Analyzer:
             print("error: {} is inaccessible or not found".format(open_components_path))
             return
         if len(gn_path_list) != len(new_line_nums):
-            print(
-                "error: The new_line_nums and the gn_path are not in one-to-one correspondence.")
+            print("error: The new_line_nums and the gn_path are not in one-to-one correspondence.")
             return
         if len(gn_path_list) != len(gn_name):
-            print(
-                "error: The gn_path and gn_name are not in one-to-one correspondence.")
+            print("error: The gn_path and gn_name are not in one-to-one correspondence.")
             return
         required_components = cls.__get_required_components(config_path)
         open_components, gn_name_list, white_list = cls.__get_open_components(open_components_path)
