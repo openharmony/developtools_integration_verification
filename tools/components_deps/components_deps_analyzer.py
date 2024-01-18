@@ -33,9 +33,8 @@ class Analyzer:
             if "path=" in line:
                 one_component = re.findall('path="(.*?)"', line)[0].split('/')[-1]
                 open_components.append(one_component)
-                gn_name.append(re.findall('name="(.*?)"', line)[0])
-                if "third_party" in gn_name:
-                    white_components_list.append(one_component)
+                one_name = re.findall('name="(.*?)"', line)[0]
+                gn_name.append(one_name)
         return open_components, gn_name, white_components_list
 
     @classmethod
@@ -107,7 +106,7 @@ class Analyzer:
         line_num = 0
         for line in gn_lines:
             line_num += 1
-            add_line_txt += '#' + str(line_num) + '#' + line
+            add_line_txt += '@' + str(line_num) + '@' + line
         in_if_txt = re.findall('if \(.+?\{(.*?)\}', add_line_txt)
         in_if_line_num = cls.__get_line_num(in_if_txt)
         in_dep_txt = re.findall('deps = \[(.*?)\]', add_line_txt) + re.findall('deps += \[(.*?)\]', add_line_txt)
@@ -125,7 +124,7 @@ class Analyzer:
     def __get_line_num(cls, txt_line_list):
         line_num = list()
         for one_txt in txt_line_list:
-            one_line_list = re.findall('#(.*?)#', one_txt)
+            one_line_list = re.findall('@(.*?)@', one_txt)
             if one_line_list != ['']:
                 line_num += one_line_list
         line_num = [int(i) for i in line_num]
@@ -161,7 +160,7 @@ class Analyzer:
                 one_result["error"] = cls.__judge_deps(gn_path_list[i], new_line_nums[i], open_components,
                                                        optional_components, white_list)
             else:
-                one_result["file_path"], one_result["error"] = gn_name_list[i], []
+                one_result["error"] = []
             result.append(one_result)
         with os.fdopen(os.open(result_json_name + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), "w",
                        encoding='utf-8') as fd:
