@@ -1,0 +1,177 @@
+[
+  {
+    "processName": "hiview",
+    "acls": [
+      "ohos.permission.DUMP"
+    ]
+  },
+  {
+    "processName": "privacy_service",
+    "acls": [
+      "ohos.permission.MANAGE_DISPOSED_APP_STATUS"
+    ]
+  },
+  {
+    "processName": "inputmethod_service",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING"
+    ]
+  },
+  {
+    "processName": "memmgrservice",
+    "acls": [
+      "ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION"
+    ]
+  },
+  {
+    "processName": "locationhub",
+    "acls": [
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+    ]
+  },
+  {
+    "processName": "useriam",
+    "acls": [
+      "ohos.permission.ACCESS_AUTH_RESPOOL",
+      "ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION"
+    ]
+  },
+  {
+    "processName": "pinauth",
+    "acls": [
+      "ohos.permission.ACCESS_AUTH_RESPOOL"
+    ]
+  },
+  {
+    "processName": "foundation",
+    "acls": [
+      "ohos.permission.PUBLISH_SYSTEM_COMMON_EVENT",
+      "ohos.permission.PERMISSION_START_ABILITIES_FROM_BACKGROUND",
+      "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
+      "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS",
+      "ohos.permission.MANAGE_HAP_TOKENID",
+      "ohos.permission.START_INVISIBLE_ABILITY",
+      "ohos.permission.INPUT_MONITORING",
+      "ohos.permission.INSTALL_SANDBOX_BUNDLE"
+    ]
+  },
+  {
+    "processName": "dscreen",
+    "acls": [
+      "ohos.permission.CAPTURE_SCREEN"
+    ]
+  },
+  {
+    "processName": "sensors",
+    "acls": [
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+    ]
+  },
+  {
+    "processName": "camera_service",
+    "acls": [
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+    ]
+  },
+  {
+    "processName": "audio_server",
+    "acls": [
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+    ]
+  },
+  {
+    "processName": "msdp_sa",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING",
+      "ohos.permission.ACCESS_DISTRIBUTED_HARDWARE",
+      "ohos.permission.INTERCEPT_INPUT_EVENT"
+    ]
+  },
+  {
+    "processName": "dslm_service",
+    "acls": [
+      "ohos.permission.ACCESS_IDS"
+    ]
+  },
+  {
+    "processName": "accountmgr",
+    "acls": [
+      "ohos.permission.ENFORCE_USER_IDM",
+      "ohos.permission.STORAGE_MANAGER_CRYPT"
+    ]
+  },
+  {
+    "processName": "hdcd",
+    "acls": [
+      "ohos.permission.GET_BUNDLE_INFO_PRIVILEGED",
+      "ohos.permission.INSTALL_BUNDLE",
+      "ohos.permission.LISTEN_BUNDLE_CHANGE",
+      "ohos.permission.CHANGE_ABILITY_ENABLED_STATE",
+      "ohos.permission.REMOVE_CACHE_FILES",
+      "ohos.permission.START_ABILITIES_FROM_BACKGROUND",
+      "ohos.permission.PERMISSION_USED_STATS",
+      "ohos.permission.DUMP",
+      "ohos.permission.NOTIFICATION_CONTROLLER",
+      "ohos.permission.PUBLISH_SYSTEM_COMMON_EVENT",
+      "ohos.permission.CLEAN_APPLICATION_DATA"
+    ]
+  },
+  {
+    "processName": "softbus_server",
+    "acls": [
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+    ]
+  },
+  {
+    "processName": "backup_sa",
+    "acls": [
+      "ohos.permission.INSTALL_BUNDLE"
+    ]
+  },
+  {
+    "processName": "media_service",
+    "acls": [
+      "ohos.permission.CAPTURE_SCREEN"
+    ]
+  },
+  {
+    "processName": "security_component_service",
+    "acls": [
+      "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
+      "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS"
+    ]
+  },
+  {
+    "processName": "distributedsched",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING",
+      "ohos.permission.MANAGE_MISSIONS"
+    ]
+  },
+  {
+    "processName": "accessibility",
+    "acls": [
+      "ohos.permission.INTERCEPT_INPUT_EVENT"
+    ]
+  },
+  {
+    "processName": "dlp_permission_service",
+    "acls": [
+      "ohos.permission.INSTALL_SANDBOX_BUNDLE",
+      "ohos.permission.UNINSTALL_SANDBOX_BUNDLE"
+    ]
+  },
+  {
+    "processName": "quick_fix",
+    "acls": [
+      "ohos.permission.INSTALL_QUICK_FIX_BUNDLE",
+      "ohos.permission.UNINSTALL_QUICK_FIX_BUNDLE"
+    ]
+  },
+  {
+    "processName": "sharing_service",
+    "acls": [
+      "ohos.permission.CAPTURE_SCREEN"
+    ]
+  }
+]
