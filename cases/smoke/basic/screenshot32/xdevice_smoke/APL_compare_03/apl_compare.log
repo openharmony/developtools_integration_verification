@@ -1,0 +1,22 @@
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [Main] --------APL Check Begin!--------
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [read_device] database start downloading!
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [read_device] D:\gitee\lyl\xdevice\developtools_integration_verification\cases\smoke\basic\screenshot32\xdevice_smoke\APL_compare_03\access_token.db download successful!
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [read_device] "select process_name,apl from native_token_info_table" query successful!
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [read_device] "select bundle_name,apl from hap_token_info_table" query successful!
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.useriam.authwidget apl = 2
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = ohos.samples.distributedmusicplayer apl = 3
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.note apl = 3
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.launcher apl = 2
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = ohos.telephony.resources apl = 3
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.systemui apl = 2
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.notificationdialog apl = 2
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.smartperf apl = 2
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.camera apl = 3
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.settings apl = 2
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.filepicker apl = 2
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = ohos.samples.distributedcalc apl = 3
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.devicetest apl = 2
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.settings.faceauth apl = 2
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_hap_apl] bundleName = com.ohos.adminprovisioning apl = 2
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [compare_native_apl] processName = edm apl = 3
+2024-01-05 16:44:25 Fri 2024-01-05 16:44:25 Info [Main] --------APL Check End! --------
