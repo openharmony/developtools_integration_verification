@@ -110,7 +110,7 @@ class liteOsUpgrade_RK3568(BaseApp):
         mini_path = os.path.join(local_image_path, "mini_system_test", "L2_mini_system_test.py")
         archive_path = os.path.join(version_savepath)
         if not self.check_devices_mode():
-            check_devices_cmd = "hdc list targets"
+            check_devices_cmd = "hdc_std list targets"
             f = send_times(check_devices_cmd)
             logger.info(f)
             if not f or "Empty" in f:
@@ -180,11 +180,9 @@ class liteOsUpgrade_RK3568(BaseApp):
                             if upgrade_test_type == "null":
                                 return True
                             screenshot_path = os.path.join(local_image_path, "screenshot")
-
-                            resource_path = os.path.join(screenshot_path, 'xdevice_smoke')
+                            resource_path = os.path.join(screenshot_path, "resource")
                             logger.info(resource_path)
-                            # py_path = os.path.join(screenshot_path, "main.py")
-                            py_path = "main.py"
+                            py_path = os.path.join(resource_path, "capturescreentest.py")
                             new_report_path = os.path.join(report_path, "result")
                             logger.info(new_report_path)
                             time_sleep = random.randint(1, 5)
@@ -202,12 +200,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                                 return True
 
                             if not upgrade_test_type or upgrade_test_type == "smoke_test":
-                                # 进到工程目录
-                                cur_path = os.getcwd()
-                                os.chdir(resource_path)
-                                test_return = cmd_test(resource_path, py_path, new_report_path, resource_path, sn, test_num, pr_url)
-                                # 执行完回到原来的目录
-                                os.chdir(cur_path)
+                                test_return = cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_num, pr_url)
                                 if test_return == 1:
                                     return True
                                 if test_return == 98:
@@ -259,7 +252,7 @@ class liteOsUpgrade_RK3568(BaseApp):
             else:
                 #if test_num != "2/2":
                 #    hdc_kill()
-                os.system("hdc -t %s shell reboot loader" % sn)
+                os.system("hdc_std -t %s shell reboot loader" % sn)
                 time.sleep(5)
                 check_times += 1
         logger.error("Failed to enter the loader mode!")
@@ -392,10 +385,10 @@ class liteOsUpgrade_RK3568(BaseApp):
 @timeout(30)
 def hdc_kill():
     logger.info("kill the process")
-    os.system("hdc kill")
+    os.system("hdc_std kill")
     time.sleep(2)
     logger.info("start the process")
-    os.system("hdc -l5 start")
+    os.system("hdc_std -l5 start")
     # time.sleep(10)
 
 
@@ -420,9 +413,9 @@ def send_times(mycmd):
 @timeout(180)
 def start_cmd(sn):
     try:
-        os.system("hdc -l5 start")
-        power_cmd = "hdc -t %s shell \"power-shell setmode 602\"" % sn
-        hilog_cmd = "hdc -t %s shell \"hilog -w start -l 400000000 -m none\"" % sn
+        os.system("hdc_std -l5 start")
+        power_cmd = "hdc_std -t %s shell \"power-shell setmode 602\"" % sn
+        hilog_cmd = "hdc_std -t %s shell \"hilog -w start -l 400000000 -m none\"" % sn
         logger.info(power_cmd)
         logger.info(hilog_cmd)
         power_result = sendCmd(power_cmd)
