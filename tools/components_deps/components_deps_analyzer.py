@@ -79,7 +79,7 @@ class Analyzer:
                 if component in txt:
                     dependent_close = False
         scan_line_num = cls.__get_scan_line_num(gn_lines, new_line_num)
-                for i in scan_line_num:
+        for i in scan_line_num:
             if '/' in gn_lines[i - 1]:
                 dep_info = re.findall('(.*?):', gn_lines[i - 1].split("/")[-1])[0]
             else:
