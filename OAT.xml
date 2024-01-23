@@ -67,6 +67,7 @@ Note:If the text contains special characters, please escape them according to th
                 <filteritem type="filename" name="*.bin|*.exe|ReadMe|oeminfo_nvm_test" desc="There are the upgrade tool files"/>
                 <filteritem type="filepath" name="DeployDevice/.*" desc="There are the smoketest tool files"/>
                 <filteritem type="filepath" name="tools/.*" desc="There are tools files"/>
+                <filteritem type="filepath" name="cases/.*" desc="There are smoketest case"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility, license header policies">
                 <filteritem type="filename" name="*.png|*.jpeg|*.json|*.hap|*.csv|dhcpc.sh" desc="NoLicenseHeader"/>
