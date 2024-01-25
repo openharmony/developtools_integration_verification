@@ -80,13 +80,12 @@ class Analyzer:
                     dependent_close = False
         scan_line_num = cls.__get_scan_line_num(gn_lines, new_line_num)
         for i in scan_line_num:
-            dep_info = ""
             if '/' in gn_lines[i - 1]:
-                dep_info += re.findall('/(.*?):', gn_lines[i - 1])[0]
+                dep_info = re.findall('(.*?):', gn_lines[i - 1].split("/")[-1])[0]
             else:
-                dep_info += re.findall('"(.*?):', gn_lines[i - 1])[0]
+                dep_info = re.findall('"(.*?):', gn_lines[i - 1])[0]
             for component in optional_components:
-                if component not in white_names and component in dep_info:
+                if component not in white_names and component == dep_info:
                     deps.append((component, i))
         error = list()
         if dependent_close == True and re.findall('deps =', txt):
