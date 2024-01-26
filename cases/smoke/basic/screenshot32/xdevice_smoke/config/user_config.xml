@@ -65,5 +65,5 @@
         <dir></dir>
     </resource>
     <devicelog>ON</devicelog>
-    <loglevel>INFO</loglevel>
+    <loglevel>DEBUG</loglevel>
 </user_config>
