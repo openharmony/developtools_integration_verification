@@ -412,6 +412,12 @@
         "headers": []
     },
     {
+        "name": "build_framework:libclang_rt.ubsan_standalone.so",
+        "so_file_name": "libclang_rt.ubsan_standalone.so",
+        "path": "//build/common/ubsan:libclang_rt.ubsan_standalone.so",
+        "headers": []
+    },
+    {
         "name": "unknow",
         "so_file_name": "libopencv_core.z.so",
         "path": "",
