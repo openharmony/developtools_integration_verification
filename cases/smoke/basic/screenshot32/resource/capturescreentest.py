@@ -247,8 +247,10 @@ def cmp_picture(prefix, pic, num=1):
 
 def shot_and_cmp(image):
     prefix = args.device_num
-    enter_shell_cmd("snapshot_display -f /data/local/tmp/screen_test/{}_{}".format(prefix, image))
-    file_from_dev("/data/local/tmp/screen_test/{}_{}".format(prefix, image), args.save_path)
+    enter_shell_cmd(
+        "snapshot_display -f /data/local/tmp/screen_test/{}_{}".format(prefix, image))
+    file_from_dev("/data/local/tmp/screen_test/{}_{}".format(prefix, image),
+                  args.save_path)
     similarity = cmp_picture(prefix, image)
     print_to_log("SmokeTest: launcher similarity is {}%".format(similarity))
     return similarity
@@ -256,35 +258,43 @@ def shot_and_cmp(image):
 
 def distributed_test():
     if "1/2" in args.test_num or "2/2" in args.test_num:
-        report_path = os.path.normpath(os.path.join(args.save_path, "distributed_report.txt"))
+        report_path = os.path.normpath(
+            os.path.join(args.save_path, "distributed_report.txt"))
         if args.test_num == "2/2":
             enter_shell_cmd("ifconfig eth0 192.168.0.1")
             ping_result = enter_shell_cmd("ping 192.168.0.2 -i 1 -c 2", 3)
-            file_is_exist = enter_shell_cmd("cd /data; find . -name distributed_report.txt")
+            file_is_exist = enter_shell_cmd(
+                "cd /data; find . -name distributed_report.txt")
             ping_cnt = 0
             wait_cnt = 0
             while "2 packets transmitted, 2 received" not in ping_result and ping_cnt < 20:
-                ping_result = enter_shell_cmd("ping 192.168.0.2 -i 1 -c 2", WAIT_TIME_FOUR)
+                ping_result = enter_shell_cmd("ping 192.168.0.2 -i 1 -c 2",
+                                              WAIT_TIME_FOUR)
                 ping_cnt += 1
             if ping_cnt == 30:
                 print_to_log("SmokeTest: Ping failed, timeout of 80s")
                 sys_exit()
             while "distributed_report.txt" not in file_is_exist and wait_cnt < 30:
                 print_to_log("SmokeTest: waiting for the distributed test to end ")
-                file_is_exist = enter_shell_cmd("cd /data; find . -name distributed_report.txt", WAIT_TIME_FOUR)
+                file_is_exist = enter_shell_cmd(
+                    "cd /data; find . -name distributed_report.txt", WAIT_TIME_FOUR)
                 wait_cnt += 1
         elif args.test_num == "1/2":
             enter_shell_cmd("ifconfig eth0 192.168.0.2")
-            ping_result = enter_shell_cmd("ping 192.168.0.1 -i 1 -c 2", WAIT_TIME_FOUR)
+            ping_result = enter_shell_cmd(
+                "ping 192.168.0.1 -i 1 -c 2", WAIT_TIME_FOUR)
             ping_cnt = 0
             while "2 packets transmitted, 2 received" not in ping_result and ping_cnt < 20:
-                ping_result = enter_shell_cmd("ping 192.168.0.1 -i 1 -c 2", WAIT_TIME_FOUR)
+                ping_result = enter_shell_cmd("ping 192.168.0.1 -i 1 -c 2",
+                                              WAIT_TIME_FOUR)
                 ping_cnt += 1
             if ping_cnt == 30:
                 print_to_log("SmokeTest: Ping failed, timeout of 80s")
             print_to_log("SmokeTest: ##### case 0 : distributed test start #####")
             execute_path = os.path.normpath(os.path.join(args.tools_path, "resource"))
-            os.system("cd {} && python distributedtest.py --path {}".format(execute_path, args.save_path))
+            os.system(
+                "cd {} && python distributedtest.py --path {}".format(execute_path,
+                                                                      args.save_path))
             distributed_result = ""
             try:
                 with open(report_path, mode='r', encoding='utf-8', errors='ignore') as f:
@@ -302,7 +312,9 @@ def distributed_test():
 
 
 def open_wlan():
-    enter_shell_cmd("aa start -a com.ohos.settings.MainAbility -b com.ohos.settings", WAIT_TIME_FOUR)
+    enter_shell_cmd(
+        "aa start -a com.ohos.settings.MainAbility -b com.ohos.settings",
+        WAIT_TIME_FOUR)
     enter_shell_cmd("uinput -M -m 300 300 -c 0", WAIT_TIME_TWO)
     enter_shell_cmd("uinput -M -m 640 200 -c 0", WAIT_TIME_FOUR)
     time.sleep(WAIT_TIME_FOUR)
@@ -311,13 +323,18 @@ def open_wlan():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='manual to this script')
-    parser.add_argument('--config', type=str, default = '.\\app_capture_screen_test_config.json')
-    parser.add_argument('--test_num', type=str, default = '1/1')
-    parser.add_argument('--tools_path', type=str, default = 'D:\\DeviceTestTools\\screenshot\\')
-    parser.add_argument('--anwser_path', type=str, default = 'D:\\DeviceTestTools\\screenshot\\resource')
-    parser.add_argument('--save_path', type=str, default = 'D:\\DeviceTestTools\\screenshot')
-    parser.add_argument('--device_num', type=str, default = 'null')
-    parser.add_argument('--pr_url', type=str, default = 'developtools_integration_verification')
+    parser.add_argument('--config', type=str,
+                        default='.\\app_capture_screen_test_config.json')
+    parser.add_argument('--test_num', type=str, default='1/1')
+    parser.add_argument('--tools_path', type=str,
+                        default='D:\\DeviceTestTools\\screenshot\\')
+    parser.add_argument('--anwser_path', type=str,
+                        default='D:\\DeviceTestTools\\screenshot\\resource')
+    parser.add_argument('--save_path', type=str,
+                        default='D:\\DeviceTestTools\\screenshot')
+    parser.add_argument('--device_num', type=str, default='null')
+    parser.add_argument('--pr_url', type=str,
+                        default='developtools_integration_verification')
     args = parser.parse_args()
 
     if args.device_num == 'null':
@@ -342,8 +359,10 @@ if __name__ == "__main__":
             enter_shell_cmd("uinput -T -m 425 400 425 1000;uinput -T -m 425 1000 425 400")
             rmlock_cnt -= 1
         enter_shell_cmd("hilog -w stop")
-        enter_shell_cmd("cd /data/log/hilog && tar -cf system_start_log_{}.tar *".format(args.device_num))
-        file_from_dev("/data/log/hilog/system_start_log_{}.tar".format(args.device_num), args.save_path)
+        enter_shell_cmd(
+            "cd /data/log/hilog && tar -cf system_start_log_{}.tar *".format(args.device_num))
+        file_from_dev("/data/log/hilog/system_start_log_{}.tar".format(args.device_num),
+                      args.save_path)
         connect_check()
         launcher_similarity = shot_and_cmp("launcher.jpeg")
         power_state = enter_shell_cmd("hidumper -s 3308")
