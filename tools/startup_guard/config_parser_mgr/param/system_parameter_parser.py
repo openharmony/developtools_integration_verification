@@ -78,7 +78,6 @@ class ParameterFileParser():
         self._parameters = {}
 
     def _handle_param_info(self, file_name, param_info):
-        print(param_info)
         param_name = param_info[0].strip()
         old_param = self._parameters.get(param_name)
         if file_name.endswith(".para.dac"):
@@ -95,14 +94,10 @@ class ParameterFileParser():
                 self._parameters[param_name] = param
 
     def load_parameter_file(self, file_name, str = "="):
-        print("** ", file_name)
         try:
             with open(file_name, encoding='utf-8') as fp:
                 line = fp.readline()
                 while line :
-                    if line.startswith("/*"):
-                        print("fileName = ", file_name)
-                        continue
                     if line.startswith("#") or len(line) < 3:
                         line = fp.readline()
                         continue
