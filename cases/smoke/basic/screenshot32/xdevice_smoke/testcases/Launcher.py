@@ -53,7 +53,7 @@ class Launcher(ITestCase):
                     self.step('步骤8：启动失败，重启设备，第{}次重试'.format(retry+1))
                     self.common_oh.shell(self.Phone1, 'rm -rf /data/*')
                     self.common_oh.safeReboot(self.Phone1)
-                    self.common_oh.wait(self.Phone1, 2)
+                    self.common_oh.wait(self.Phone1, 10)
                 else:
                     self.step('步骤8：重试了3次，启动失败，收集crash')
                     self.common_oh.shell(self.Phone1, 'cd /data/log/faultlog/temp && tar -cf after_test_cppcrash{}.tar cppcrash*'.format(self.device_name))
