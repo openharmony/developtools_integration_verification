@@ -64,7 +64,7 @@ class Launcher(ITestCase):
                             self.common_oh.getScreenStatus(self.Phone1)
                             break
                         except:
-                            self.common_oh.wait(self.Phone1, 10)
+                            self.common_oh.wait(self.Phone1, 14)
                 else:
                     self.step('步骤8.{}：重试了3次，启动失败，收集crash'.format(retry))
                     self.common_oh.shell(self.Phone1, 'cd /data/log/faultlog/temp && tar -cf after_test_cppcrash{}.tar cppcrash*'.format(self.device_name))
