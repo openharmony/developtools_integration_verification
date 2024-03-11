@@ -135,7 +135,7 @@ class cmdRule(BaseRule):
     def check_config_cmd(self):
         passed = True
         self._parse_while_list()
-        cfg_parser = self.get_mgr().get_parser_by_name('cmd_whitelist')
+        cfg_parser = self.get_mgr().get_parser_by_name('config_parser')
         self._get_json_service()
 
         start_passed = self._check_start_cmd(cfg_parser)
