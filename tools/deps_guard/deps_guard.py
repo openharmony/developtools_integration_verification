@@ -62,7 +62,7 @@ def _startup_guard_module(out_path, args):
 
 def deps_guard(out_path, args=None):
     _deps_guard_module(out_path, args)
-    #_startup_guard_module(out_path, args)
+    _startup_guard_module(out_path, args)
 
 if __name__ == '__main__':
 

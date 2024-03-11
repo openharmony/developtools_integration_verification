@@ -432,10 +432,10 @@ class ConfigParser():
 
     def scan_config(self):
         config_paths = [
-            "/system/etc/init",
-            "/chip_prod/etc/init",
-            "/sys_prod/etc/init",
-            "/vendor/etc/init",
+            "system/etc/init",
+            "chip_prod/etc/init",
+            "sys_prod/etc/init",
+            "vendor/etc/init",
         ]
         for file_name in config_paths:
             self._scan_config_file(file_name)
@@ -504,7 +504,7 @@ def startup_config_collect(base_path):
     parser = ConfigParser(os.path.join(base_path, "packages/phone"))
     parser.load_config("/system/etc/init.cfg")
     parser.scan_config()
-    parser.load_selinux_config("/system/etc/selinux/config")
+    parser.load_selinux_config("system/etc/selinux/config")
     return parser
 
 if __name__ == '__main__':
