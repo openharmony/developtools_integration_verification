@@ -47,7 +47,7 @@ def _deps_guard_module(out_path, args=None):
 
     raise Exception("ERROR: deps_guard failed.")
 
-def _startup_guard_module(out_path, args):
+def _startup_guard_module(out_path, target_cpu, args):
     import sys
     import os
     for path in sys.path:
@@ -58,15 +58,15 @@ def _startup_guard_module(out_path, args):
 
     from startup_guard import startup_guard
 
-    startup_guard(out_path, args)
+    startup_guard(out_path, target_cpu, args)
 
-def deps_guard(out_path, args=None):
+def deps_guard(out_path, target_cpu, args=None):
     _deps_guard_module(out_path, args)
-    _startup_guard_module(out_path, args)
+    _startup_guard_module(out_path, target_cpu, args)
 
 if __name__ == '__main__':
 
     parser = __createArgParser()
     args = parser.parse_args()
 
-    deps_guard(args.input, args)
+    _deps_guard_module(args.input, args)

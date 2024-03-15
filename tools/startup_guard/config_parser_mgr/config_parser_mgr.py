@@ -27,6 +27,8 @@ def __create_arg_parser():
     parser = argparse.ArgumentParser(description='Check startup architecture information from compiled output files.')
     parser.add_argument('-i', '--input',
                         help='input config files base directory example "out/rk3568/packages/phone/" ', required=True)
+    parser.add_argument('-c', '--target_cpu',
+                    help='target_cpu cpu type" ', required=True)
     return parser
 
 class ConfigParserMgr(object):
@@ -34,10 +36,10 @@ class ConfigParserMgr(object):
         self._path = path
         self._parser_list = {}
 
-    def load_all_parser(self, options):
-        cfg_parser = startup_config_collect(options)
-        param_parser = parameters_collect(options)
-        self._parser_list = {'cmd_whitelist':cfg_parser, 'system_parameter_whitelist':param_parser}
+    def load_all_parser(self, out_path, target_cpu):
+        cfg_parser = startup_config_collect(out_path, target_cpu)
+        param_parser = parameters_collect(out_path)
+        self._parser_list = {'config_parser':cfg_parser, 'system_parameter_parser':param_parser}
 
     def get_parser_by_name(self, key):
         if key:
@@ -47,4 +49,4 @@ if __name__ == '__main__':
     args_parser = __create_arg_parser()
     options = args_parser.parse_args()
     mgr = ConfigParserMgr()
-    mgr.load_all_parser(options)
+    mgr.load_all_parser(options.input, options.target_cpu)

@@ -23,15 +23,17 @@ def __create_arg_parser():
     parser = argparse.ArgumentParser(description='Check startup architecture information from compiled output files.')
     parser.add_argument('-i', '--input',
                         help='input config files base directory example "out/rk3568" ', required=True)
+    parser.add_argument('-c', '--target_cpu',
+                    help='target_cpu cpu type" ', required=True)
     parser.add_argument('-r', '--rules', action='append',
                         help='rules directory', required=False)
     parser.add_argument('-n', '--no_fail',
                         help='force to pass all rules', required=False)
     return parser
 
-def startup_guard(out_path, args=None):
+def startup_guard(out_path, target_cpu ,args=None):
     mgr = ConfigParserMgr()
-    mgr.load_all_parser(out_path)
+    mgr.load_all_parser(out_path, target_cpu)
 
     from startup_checker import check_all_rules
     passed = check_all_rules(mgr, args)
@@ -43,4 +45,4 @@ def startup_guard(out_path, args=None):
 if __name__ == '__main__':
     parser = __create_arg_parser()
     args = parser.parse_args()
-    startup_guard(args.input, args)
+    startup_guard(args.input, args.target_cpu, args)

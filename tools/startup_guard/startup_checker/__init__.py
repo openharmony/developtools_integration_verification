@@ -18,11 +18,13 @@
 
 from .cmds_rule import cmdRule
 from .system_parameter_rules import SystemParameterRule
+from .plug_in_rule import PlugInModuleRule
 
 def check_all_rules(mgr, args):
     rules = [
         cmdRule,
         SystemParameterRule,
+        PlugInModuleRule,
     ]
 
     passed = True
