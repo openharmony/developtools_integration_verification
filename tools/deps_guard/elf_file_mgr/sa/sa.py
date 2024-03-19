@@ -22,13 +22,32 @@ import sys
 import os
 import xml.etree.ElementTree as ET
 
+
 def xml_node_find_by_name(node, name):
     for item in node:
         if item.tag == name:
             return item.text
     return None
 
+
 class SAParser(object):
+    @staticmethod
+    def load(mgr, out_root_path):
+        all_sa = {}
+        path = os.path.join(out_root_path, "packages/phone/system/profile")
+        if not os.path.exists(path):
+            return
+
+        for f in os.listdir(path):
+            full_name = os.path.join(path, f)
+            if os.path.isfile(full_name) and f.endswith(".json"):
+                try:
+                    SAParser.__parse_sa_profile(all_sa, full_name)
+                except:
+                    pass
+
+        SAParser.__add_sa_info(all_sa, mgr)
+
     @staticmethod
     def __parse_sa_profile(all_sa, full_name):
         with open(full_name, "r") as f:
@@ -50,22 +69,6 @@ class SAParser(object):
                 continue
             mod["sa_id"] = int(all_sa[mod["name"]]["name"])
 
-    @staticmethod
-    def load(mgr, out_root_path):
-        all_sa = {}
-        path = os.path.join(out_root_path, "packages/phone/system/profile")
-        if not os.path.exists(path):
-            return
-
-        for f in os.listdir(path):
-            full_name = os.path.join(path, f)
-            if os.path.isfile(full_name) and f.endswith(".json"):
-                try:
-                    SAParser.__parse_sa_profile(all_sa, full_name)
-                except:
-                    pass
-
-        SAParser.__add_sa_info(all_sa, mgr)
 
 if __name__ == '__main__':
     parser = SAParser()
