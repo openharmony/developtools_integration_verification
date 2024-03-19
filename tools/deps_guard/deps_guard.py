@@ -18,6 +18,7 @@
 
 from elf_file_mgr import ElfFileMgr
 
+
 def __createArgParser():
     import argparse
 
@@ -34,6 +35,7 @@ def __createArgParser():
 
     return parser
 
+
 def _deps_guard_module(out_path, args=None):
     mgr = ElfFileMgr(out_path)
     mgr.scan_all_files()
@@ -46,6 +48,7 @@ def _deps_guard_module(out_path, args=None):
         return
 
     raise Exception("ERROR: deps_guard failed.")
+
 
 def _startup_guard_module(out_path, args):
     import sys
@@ -60,9 +63,11 @@ def _startup_guard_module(out_path, args):
 
     startup_guard(out_path, args)
 
+
 def deps_guard(out_path, args=None):
     _deps_guard_module(out_path, args)
     _startup_guard_module(out_path, args)
+
 
 if __name__ == '__main__':
 

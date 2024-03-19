@@ -24,6 +24,9 @@ from .base_rule import BaseRule
 class HdiRule(BaseRule):
     RULE_NAME = "NO-Depends-On-HDI"
 
+    def check(self):
+        return self.__check_depends_on_hdi()
+
     def __check_depends_on_hdi(self):
         lists = self.get_white_lists()
 
@@ -68,9 +71,6 @@ class HdiRule(BaseRule):
 
         return passed
 
-    def check(self):
-        return self.__check_depends_on_hdi()
-    
     def __ignore_mod(self, mod, is_hdi, lists):
         ignore_flag = False
         if not is_hdi:
