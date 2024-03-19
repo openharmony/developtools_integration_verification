@@ -23,6 +23,66 @@ import json
 class CompileInfoLoader(object):
 
     @staticmethod
+    def load(load_mgr, product_out_path):
+        info = CompileInfoLoader.__load_output_module_info(product_out_path)
+
+        default_info = CompileInfoLoader.__get_default_info()
+
+        if info:
+            for item in info:
+                elf = load_mgr.get_elf_by_path(item["name"])
+                if not elf:
+                    continue
+                for k in default_info.keys():
+                    if k in item:
+                        elf[k] = item[k]
+
+        unknown_items = []
+        for elf in load_mgr.get_all():
+            if "componentName" not in elf:
+                print("%s does not match in module info file" % (elf["path"]))
+                unknown = default_info.copy()
+                unknown["name"] = elf["path"]
+                unknown["fileName"] = elf["name"]
+                for k in default_info.keys():
+                    elf[k] = default_info[k]
+                unknown_items.append(unknown)
+            elif elf["componentName"] == "unknown":
+                print("%s has no componentName info" % (elf["path"]))
+                unknown = default_info.copy()
+                unknown["name"] = elf["path"]
+                for k in default_info.keys():
+                    if k in elf:
+                        default_info[k] = elf[k]
+                unknown_items.append(unknown)
+
+            if elf["path"].startswith("system/lib64/module/") or elf["path"].startswith("system/lib/module/"):
+                elf["napi"] = True
+
+            if not elf["path"].startswith("system/"):
+                elf["chipset"] = True
+
+            # Add if not exists
+            if "shlib_type" not in elf:
+                elf["shlib_type"] = ""
+            if "innerapi_tags" not in elf:
+                elf["innerapi_tags"] = []
+            if elf["labelPath"].startswith("//third_party/"):
+                elf["third_party"] = True
+
+        if len(unknown_items) > 0:
+            print("%d modules has no component info" % len(unknown_items))
+            with open(os.path.join(product_out_path, "unknown.json"), "w") as f:
+                res = json.dumps(unknown_items, indent=4)
+                f.write(res)
+
+        # init platformsdk, chipsetsdk, innerapi flags
+        CompileInfoLoader.__set_elf_default_value(load_mgr)
+
+        # for component dependedBy_internal and dependedBy_external
+        CompileInfoLoader.__update_deps(load_mgr)
+
+    @staticmethod
     def __get_modules_from_file(product_out_path_):
         try:
             with open(os.path.join(product_out_path_, "packages/phone/system_module_info.json")) as f:
@@ -92,66 +152,6 @@ class CompileInfoLoader(object):
         info_["napi"] = False
         info_["innerapi"] = False
         info_["innerapi_declared"] = False
-
-    @staticmethod
-    def load(load_mgr, product_out_path):
-        info = CompileInfoLoader.__load_output_module_info(product_out_path)
-
-        default_info = CompileInfoLoader.__get_default_info()
-
-        if info:
-            for item in info:
-                elf = load_mgr.get_elf_by_path(item["name"])
-                if not elf:
-                    continue
-                for k in default_info.keys():
-                    if k in item:
-                        elf[k] = item[k]
-
-        unknown_items = []
-        for elf in load_mgr.get_all():
-            if "componentName" not in elf:
-                print("%s does not match in module info file" % (elf["path"]))
-                unknown = default_info.copy()
-                unknown["name"] = elf["path"]
-                unknown["fileName"] = elf["name"]
-                for k in default_info.keys():
-                    elf[k] = default_info[k]
-                unknown_items.append(unknown)
-            elif elf["componentName"] == "unknown":
-                print("%s has no componentName info" % (elf["path"]))
-                unknown = default_info.copy()
-                unknown["name"] = elf["path"]
-                for k in default_info.keys():
-                    if k in elf:
-                        default_info[k] = elf[k]
-                unknown_items.append(unknown)
-
-            if elf["path"].startswith("system/lib64/module/") or elf["path"].startswith("system/lib/module/"):
-                elf["napi"] = True
-
-            if not elf["path"].startswith("system/"):
-                elf["chipset"] = True
-
-            # Add if not exists
-            if "shlib_type" not in elf:
-                elf["shlib_type"] = ""
-            if "innerapi_tags" not in elf:
-                elf["innerapi_tags"] = []
-            if elf["labelPath"].startswith("//third_party/"):
-                elf["third_party"] = True
-
-        if len(unknown_items) > 0:
-            print("%d modules has no component info" % len(unknown_items))
-            with open(os.path.join(product_out_path, "unknown.json"), "w") as f:
-                res = json.dumps(unknown_items, indent=4)
-                f.write(res)
-
-        # init platformsdk, chipsetsdk, innerapi flags
-        CompileInfoLoader.__set_elf_default_value(load_mgr)
-
-        # for component dependedBy_internal and dependedBy_external
-        CompileInfoLoader.__update_deps(load_mgr)
 
     @staticmethod
     def __get_default_info():

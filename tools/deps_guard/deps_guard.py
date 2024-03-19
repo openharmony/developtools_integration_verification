@@ -18,6 +18,7 @@
 
 from elf_file_mgr import ElfFileMgr
 
+
 def __createArgParser():
     import argparse
 
@@ -33,6 +34,7 @@ def __createArgParser():
                         help='force to pass all rules', required=False)
 
     return parser
+
 
 def _deps_guard_module(out_path, args=None):
     mgr = ElfFileMgr(out_path)
@@ -63,6 +65,7 @@ def _startup_guard_module(out_path, target_cpu, args):
 def deps_guard(out_path, target_cpu, args=None):
     _deps_guard_module(out_path, args)
     _startup_guard_module(out_path, target_cpu, args)
+
 
 if __name__ == '__main__':
 

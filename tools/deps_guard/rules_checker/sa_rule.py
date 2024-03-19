@@ -20,60 +20,61 @@ import json
 
 from .base_rule import BaseRule
 
+
 class SaRule(BaseRule):
-	RULE_NAME = "NO-Depends-On-SA"
+    RULE_NAME = "NO-Depends-On-SA"
 
-	def __check_depends_on_sa(self):
-		lists = self.get_white_lists()
+    def check(self):
+        return self.__check_depends_on_sa()
 
-		passed = True
+    def __check_depends_on_sa(self):
+        lists = self.get_white_lists()
 
-		sa_without_shlib_type = []
-		non_sa_with_sa_shlib_type = []
+        passed = True
 
-		# Check if any napi modules has dependedBy
-		for mod in self.get_mgr().get_all():
-			is_sa = False
-			if "sa_id" in mod and mod["sa_id"] > 0:
-				is_sa = True
-			# Collect non SA modules with shlib_type of value "sa"
-			if not is_sa and ("shlib_type" in mod and mod["shlib_type"] == "sa"):
-				non_sa_with_sa_shlib_type.append(mod)
+        sa_without_shlib_type = []
+        non_sa_with_sa_shlib_type = []
 
-			# Collect SA modules without shlib_type with value of "sa"
-			if is_sa and ("shlib_type" not in mod or mod["shlib_type"] != "sa"):
-				if mod["name"] not in lists:
-					sa_without_shlib_type.append(mod)
+        # Check if any napi modules has dependedBy
+        for mod in self.get_mgr().get_all():
+            is_sa = False
+            if "sa_id" in mod and mod["sa_id"] > 0:
+                is_sa = True
+            # Collect non SA modules with shlib_type of value "sa"
+            if not is_sa and ("shlib_type" in mod and mod["shlib_type"] == "sa"):
+                non_sa_with_sa_shlib_type.append(mod)
 
-			if not is_sa:
-				continue
+            # Collect SA modules without shlib_type with value of "sa"
+            if is_sa and ("shlib_type" not in mod or mod["shlib_type"] != "sa"):
+                if mod["name"] not in lists:
+                    sa_without_shlib_type.append(mod)
 
-			if len(mod["dependedBy"]) == 0:
-				continue
+            if not is_sa:
+                continue
 
-			if mod["name"] in lists:
-				continue
+            if len(mod["dependedBy"]) == 0:
+                continue
 
-			# If sa module has version_script to specify exported symbols, it can be depended by others
-			if "version_script" in mod:
-				continue
+            if mod["name"] in lists:
+                continue
 
-			# Check if SA modules is depended by other modules
-			self.error("sa module %s depended by:" % mod["name"])
-			for dep in mod["dependedBy"]:
-				caller = dep["caller"]
-				self.log("   module [%s] defined in [%s]" % (caller["name"], caller["labelPath"]))
-			passed = False
+            # If sa module has version_script to specify exported symbols, it can be depended by others
+            if "version_script" in mod:
+                continue
 
-		if len(sa_without_shlib_type) > 0:
-			for mod in sa_without_shlib_type:
-				self.warn('sa module %s has no shlib_type="sa", add it in %s' % (mod["name"], mod["labelPath"]))
+            # Check if SA modules is depended by other modules
+            self.error("sa module %s depended by:" % mod["name"])
+            for dep in mod["dependedBy"]:
+                caller = dep["caller"]
+                self.log("   module [%s] defined in [%s]" % (caller["name"], caller["labelPath"]))
+            passed = False
 
-		if len(non_sa_with_sa_shlib_type) > 0:
-			for mod in non_sa_with_sa_shlib_type:
-				self.warn('non sa module %s with shlib_type="sa", %s' % (mod["name"], mod["labelPath"]))
+        if len(sa_without_shlib_type) > 0:
+            for mod in sa_without_shlib_type:
+                self.warn('sa module %s has no shlib_type="sa", add it in %s' % (mod["name"], mod["labelPath"]))
 
-		return passed
+        if len(non_sa_with_sa_shlib_type) > 0:
+            for mod in non_sa_with_sa_shlib_type:
+                self.warn('non sa module %s with shlib_type="sa", %s' % (mod["name"], mod["labelPath"]))
 
-	def check(self):
-		return self.__check_depends_on_sa()
+        return passed
