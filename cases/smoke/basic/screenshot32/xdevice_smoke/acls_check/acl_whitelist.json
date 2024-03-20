@@ -172,6 +172,12 @@
     ]
   },
   {
+    "processName": "hidumper_service",
+    "acls": [
+      "ohos.permission.DUMP"
+    ]
+  },
+  {
     "processName": "sharing_service",
     "acls": [
       "ohos.permission.CAPTURE_SCREEN"
