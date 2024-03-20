@@ -53,7 +53,7 @@ class Launcher(ITestCase):
             except:
                 if retry < 2:
                     self.step('步骤7.{}：启动失败，重启设备，重试'.format(retry))
-                    self.common_oh.shell(self.Phone1, 'rm -rf /data/*')
+                    # self.common_oh.shell(self.Phone1, 'rm -rf /data/*')
                     self.common_oh.safeReboot(self.Phone1)
                     # for i in range(5):
                     #     try:
