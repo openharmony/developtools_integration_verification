@@ -182,5 +182,11 @@
     "acls": [
       "ohos.permission.CAPTURE_SCREEN"
     ]
+  },
+  {
+    "processName": "pasteboard_service",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING"
+    ]
   }
 ]
