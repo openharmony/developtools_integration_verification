@@ -306,6 +306,7 @@ class ConfigParser():
         self._file_id = 0
         self._serviceId = 0
         self._selinux = ""
+        self._plug_in = []
 
     def _load_services(self, json_node, file_id):
         assert(isinstance(json_node, list))
@@ -408,8 +409,7 @@ class ConfigParser():
         pp.pprint(self._jobs)
         pass
 
-    def _is_valid_file(self, file):
-        valid_file_ext = [".cfg"]
+    def _is_valid_file(self, file, valid_file_ext):
         if not file.is_file():
             return False
         for ext in valid_file_ext:
@@ -424,11 +424,46 @@ class ConfigParser():
         try:
             with os.scandir(dir_config_file) as files:
                 for file in files:
-                    if self._is_valid_file(file):
+                    if self._is_valid_file(file, ".cfg"):
                         name = file.path[len(self._path) :]
                         self.load_config(name)
         except:
             pass
+
+    def _scan_share_library_file(self, file_name):
+        if not os.path.exists(file_name):
+            return
+        try:
+            for item in os.scandir(file_name):
+                file_path = os.path.join(file_name, item.name)
+                if item.is_file():
+                    if self._is_valid_file(item, ".so"):
+                        self._plug_in.append(file_path)
+                        continue
+                else:
+                    dir_config_file = os.path.join(file_name, item.name)
+                    self._scan_share_library_file(item)
+        except:
+            pass
+
+    def scan_library(self, target_cpu):
+        if target_cpu == "arm64":
+            config_paths = [
+                "system/lib64/init",
+                "chip_prod/lib64/init",
+                "sys_prod/lib64/init",
+                "vendor/lib64/init",
+            ]
+        else:
+            config_paths = [
+                "system/lib/init",
+                "chip_prod/lib/init",
+                "sys_prod/lib/init",
+                "vendor/lib/init",
+            ]
+        for file_name in config_paths:
+            dir_config_file = os.path.join(self._path, file_name)
+            self._scan_share_library_file(dir_config_file)
 
     def scan_config(self):
         config_paths = [
@@ -480,7 +515,7 @@ class ConfigParser():
     def load_selinux_config(self, file_name):
         path = os.path.join(self._path, file_name)
         if not os.path.exists(path):
-            print("Error, invalid selinux config file %s" % path)
+            print("Error, invalid selinux config path %s" % path)
             return
         try:
             with open(path, encoding='utf-8') as fp:
@@ -500,9 +535,10 @@ class ConfigParser():
             print("Error, invalid parameter file ", file_name)
             pass
 
-def startup_config_collect(base_path):
+def startup_config_collect(base_path, target_cpu):
     parser = ConfigParser(os.path.join(base_path, "packages/phone"))
     parser.load_config("/system/etc/init.cfg")
+    parser.scan_library(target_cpu)
     parser.scan_config()
     parser.load_selinux_config("system/etc/selinux/config")
     return parser

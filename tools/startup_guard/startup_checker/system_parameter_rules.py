@@ -49,7 +49,7 @@ class SystemParameterRule(BaseRule):
         passed = True
         value_empty_flag = True
         white_list =self.get_white_lists()
-        parser = self.get_mgr().get_parser_by_name('system_parameter_whitelist')
+        parser = self.get_mgr().get_parser_by_name('system_parameter_parser')
         counts = 0
         for key, item in parser._parameters.items():
             if (item.get("dacMode") != 0):
