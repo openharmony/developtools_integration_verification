@@ -26,6 +26,7 @@ class Photos(ITestCase):
         self.step('步骤1：启动相册app')
         self.common_oh.startAbility(self.Phone1, self.photo_ability_name, self.photo_bundle_name)
         # 控件检查
+        self.common_oh.wait(self.Phone1, 2)
         self.step('步骤2：控件检查')
         self.common_oh.checkIfTextExist(self.Phone1, '照片')
         self.common_oh.checkIfTextExist(self.Phone1, '相册')
