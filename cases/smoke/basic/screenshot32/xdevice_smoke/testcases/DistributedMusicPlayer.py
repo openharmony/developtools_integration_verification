@@ -24,7 +24,7 @@ class DistributedMusicPlayer(ITestCase):
     def process(self):
         self.step('步骤1：启动音乐应用')
         self.common_oh.startAbility(self.Phone1, self.ability_name, self.bundle_name)
-        # self.common_oh.wait(self.Phone1, 5)
+        self.common_oh.wait(self.Phone1, 5)
         self.step('步骤2：点击弹窗的"允许"')
         try:
             self.common_oh.touchByText(self.Phone1, '允许')

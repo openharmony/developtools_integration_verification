@@ -1,0 +1,65 @@
+[
+    {
+        "base_library":[
+            "libc.so",
+            "libc++.so",
+            "libinit_module_engine.so"
+        ],
+        "private_library": {
+            "libudidmodule.z.so": {
+                "library_name" : "libudidmodule.z.so",
+                "deps" : [
+                    "libsec_shared.z.so",
+                    "libmbedtls.z.so"
+                ]
+            },
+            "libinit_eng.z.so": {
+                "library_name" : "libinit_eng.z.so",
+                "deps" : [
+                    "libsec_shared.z.so"
+                ]
+            },
+            "libbootchart.z.so": {
+                "library_name" : "libbootchart.z.so",
+                "deps" : [
+                    "libsec_shared.z.so"
+                ]
+            },
+            "libeventmodule.z.so": {
+                "library_name" : "libeventmodule.z.so",
+                "deps" : [
+                    "libsec_shared.z.so",
+                    "libhisysevent.z.so"
+                ]
+            },
+            "libinit_context.z.so": {
+                "library_name" : "libinit_context.z.so",
+                "deps" : [
+                    "libsec_shared.z.so",
+                    "libselinux.z.so"
+                ]
+            },
+            "libinittrace.z.so": {
+                "library_name" : "libinittrace.z.so",
+                "deps" : [
+                    "libcjson.z.so",
+                    "libsec_shared.z.so"
+                ]
+            },
+            "librebootmodule.z.so": {
+                "library_name" : "librebootmodule.z.so",
+                "deps" : [
+                ]
+            },
+            "libselinuxadp.z.so": {
+                "library_name" : "libselinuxadp.z.so",
+                "deps" : [
+                    "libsec_shared.z.so",
+                    "libselinux.z.so",
+                    "libload_policy.z.so",
+                    "librestorecon.z.so"
+                ]
+            }
+        }
+    }
+]

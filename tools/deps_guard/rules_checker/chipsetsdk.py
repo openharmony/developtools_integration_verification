@@ -58,23 +58,45 @@ class ChipsetSDKRule(BaseRule):
 
         return res
 
+    def check(self):
+        self.__load_chipsetsdk_indirects()
+
+        # Check if all chipset modules depends on chipsetsdk modules only
+        passed = self.__check_depends_on_chipsetsdk()
+        if not passed:
+            return passed
+
+        # Check if all chipsetsdk module depends on chipsetsdk or chipsetsdk_indirect modules only
+        passed = self.__check_chipsetsdk_indirect()
+        if not passed:
+            return passed
+
+        # Check if all ChipsetSDK modules are correctly tagged by innerapi_tags
+        passed = self.__check_if_tagged_correctly()
+        if not passed:
+            return passed
+
+        self.__write_innerkits_header_files()
+
+        return True
+
     def __parser_rules_file(self, rules_file, res):
-            try:
-                self.log("****Parsing rules file in {}****".format(rules_file))
-                with open(rules_file, "r") as f:
-                    contents = f.read()
-                if not contents:
-                    self.log("****rules file {} is null****".format(rules_file))
-                    return res
-                json_data = json.loads(contents)
-                for so in json_data:
-                    so_file_name = so.get("so_file_name")
-                    if so_file_name and so_file_name not in res:
-                        res.append(so_file_name)
-            except(FileNotFoundError, IOError, UnicodeDecodeError) as file_open_or_decode_err:
-                self.error(file_open_or_decode_err)
-            
-            return res
+        try:
+            self.log("****Parsing rules file in {}****".format(rules_file))
+            with open(rules_file, "r") as f:
+                contents = f.read()
+            if not contents:
+                self.log("****rules file {} is null****".format(rules_file))
+                return res
+            json_data = json.loads(contents)
+            for so in json_data:
+                so_file_name = so.get("so_file_name")
+                if so_file_name and so_file_name not in res:
+                    res.append(so_file_name)
+        except(FileNotFoundError, IOError, UnicodeDecodeError) as file_open_or_decode_err:
+            self.error(file_open_or_decode_err)
+        
+        return res
 
     def __is_chipsetsdk_tagged(self, mod):
         if not "innerapi_tags" in mod:
@@ -117,7 +139,7 @@ class ChipsetSDKRule(BaseRule):
 
         try:
             with open(os.path.join(self.get_mgr().get_product_images_path(), "chipsetsdk_info.json"), "w") as f:
-                json.dump(headers, f, indent = 4)
+                json.dump(headers, f, indent=4)
         except:
             pass
 
@@ -199,7 +221,6 @@ class ChipsetSDKRule(BaseRule):
 
         return passed
 
-
     def __check_if_tagged_correctly(self):
         passed = True
         for mod in self.__chipsetsdks:
@@ -222,25 +243,3 @@ class ChipsetSDKRule(BaseRule):
 
     def __load_chipsetsdk_indirects(self):
         self.__indirects = self.load_chipsetsdk_json("chipsetsdk_indirect.json")
-
-    def check(self):
-        self.__load_chipsetsdk_indirects()
-
-        # Check if all chipset modules depends on chipsetsdk modules only
-        passed = self.__check_depends_on_chipsetsdk()
-        if not passed:
-            return passed
-
-        # Check if all chipsetsdk module depends on chipsetsdk or chipsetsdk_indirect modules only
-        passed = self.__check_chipsetsdk_indirect()
-        if not passed:
-            return passed
-
-        # Check if all ChipsetSDK modules are correctly tagged by innerapi_tags
-        passed = self.__check_if_tagged_correctly()
-        if not passed:
-            return passed
-
-        self.__write_innerkits_header_files()
-
-        return True

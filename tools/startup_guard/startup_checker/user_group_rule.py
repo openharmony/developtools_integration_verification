@@ -42,7 +42,6 @@ class UserGroupModuleRule(BaseRule):
         group_id = passwd_parser[0]
         passwd_id = passwd_parser[1]
         
-        cfg_parser = self.get_mgr().get_parser_by_name('config_parser')
         repeat_name = []
         repeat_uid = []
         for uid in passwd_id._uid_list:
