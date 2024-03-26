@@ -188,5 +188,11 @@
     "acls": [
       "ohos.permission.INPUT_MONITORING"
     ]
+  },
+  {
+    "processName": "token_sync_service",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
   }
 ]
