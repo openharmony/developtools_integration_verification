@@ -9,6 +9,7 @@
             "libudidmodule.z.so": {
                 "library_name" : "libudidmodule.z.so",
                 "deps" : [
+                    "libsec_shared.z.so",
                     "libmbedtls.z.so"
                 ]
             },

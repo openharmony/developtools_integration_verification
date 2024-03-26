@@ -21,6 +21,7 @@ sys.path.append('.')
 
 from .param.system_parameter_parser import parameters_collect
 from .cfg.config_parser import startup_config_collect
+from .user_group.user_group_parser import create_user_group_parser
 
 def __create_arg_parser():
     import argparse
@@ -39,7 +40,8 @@ class ConfigParserMgr(object):
     def load_all_parser(self, out_path, target_cpu):
         cfg_parser = startup_config_collect(out_path, target_cpu)
         param_parser = parameters_collect(out_path)
-        self._parser_list = {'config_parser':cfg_parser, 'system_parameter_parser':param_parser}
+        user_group = create_user_group_parser(out_path)
+        self._parser_list = {'config_parser':cfg_parser, 'system_parameter_parser':param_parser, "user_group":user_group}
 
     def get_parser_by_name(self, key):
         if key:
