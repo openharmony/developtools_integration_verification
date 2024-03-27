@@ -86,7 +86,8 @@
     "acls": [
       "ohos.permission.INPUT_MONITORING",
       "ohos.permission.ACCESS_DISTRIBUTED_HARDWARE",
-      "ohos.permission.INTERCEPT_INPUT_EVENT"
+      "ohos.permission.INTERCEPT_INPUT_EVENT",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
     ]
   },
   {
