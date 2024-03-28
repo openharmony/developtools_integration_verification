@@ -149,7 +149,8 @@
     "processName": "distributedsched",
     "acls": [
       "ohos.permission.INPUT_MONITORING",
-      "ohos.permission.MANAGE_MISSIONS"
+      "ohos.permission.MANAGE_MISSIONS",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
     ]
   },
   {
