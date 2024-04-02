@@ -212,5 +212,11 @@
     "acls": [
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
     ]
+  },
+  {
+    "processName": "dhardware",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
   }
 ]
