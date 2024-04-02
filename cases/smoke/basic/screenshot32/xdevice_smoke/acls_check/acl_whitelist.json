@@ -207,7 +207,7 @@
     ]
   },
   {
-    "processName": "distributedfile_daemon",
+    "processName": "distributedfiledaemon",
     "acls": [
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
     ]
