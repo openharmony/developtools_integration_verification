@@ -191,7 +191,8 @@
   {
     "processName": "pasteboard_service",
     "acls": [
-      "ohos.permission.INPUT_MONITORING"
+      "ohos.permission.INPUT_MONITORING",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
     ]
   },
   {
