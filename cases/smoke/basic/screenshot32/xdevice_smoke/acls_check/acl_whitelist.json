@@ -218,5 +218,11 @@
     "acls": [
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
     ]
+  },
+  {
+    "processName": "samgr",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
   }
 ]
