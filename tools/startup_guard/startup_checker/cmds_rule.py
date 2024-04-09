@@ -32,6 +32,22 @@ class cmdRule(BaseRule):
         self._condition_list = {}
         self._start_cmd_list = {}
 
+    def __check__(self):
+        return self.check_config_cmd()
+
+    def check_config_cmd(self):
+        passed = True
+        self._parse_while_list()
+        cfg_parser = self.get_mgr().get_parser_by_name('config_parser')
+        self._get_json_service()
+
+        start_passed = self._check_start_cmd(cfg_parser)
+        secon_passed = self._check_selinux(cfg_parser)
+        cmd_passed = self._check_cmdline_in_parser(cfg_parser)
+        start_mode_passed = self._check_service(cfg_parser)
+        passed = start_passed and secon_passed and cmd_passed and start_mode_passed
+        return passed
+
     def _get_json_service(self):
         for i in range(len(self._start_modes)):
             if self._start_modes[i]["start-mode"] == "boot":
@@ -131,19 +147,3 @@ class cmdRule(BaseRule):
                         passed = False
                     pass
         return passed
-
-    def check_config_cmd(self):
-        passed = True
-        self._parse_while_list()
-        cfg_parser = self.get_mgr().get_parser_by_name('config_parser')
-        self._get_json_service()
-
-        start_passed = self._check_start_cmd(cfg_parser)
-        secon_passed = self._check_selinux(cfg_parser)
-        cmd_passed = self._check_cmdline_in_parser(cfg_parser)
-        start_mode_passed = self._check_service(cfg_parser)
-        passed = start_passed and secon_passed and cmd_passed and start_mode_passed
-        return passed
-
-    def __check__(self):
-        return self.check_config_cmd()

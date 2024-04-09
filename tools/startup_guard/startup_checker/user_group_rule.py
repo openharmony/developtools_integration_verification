@@ -26,15 +26,8 @@ class UserGroupModuleRule(BaseRule):
     def __init__(self, mgr, args):
         super().__init__(mgr, args)
 
-    def _check_gid_in_passwd(self, passwd):
-        isPassed = True
-        for key, value in passwd.items():    
-            if value["passwdId"] == value["groupId"]:
-                pass
-            else:
-                isPassed = False
-                self.error("%s has different passwd and group values" % value["name"])
-        return isPassed
+    def __check__(self):
+        return self.check_user_group()
 
     def check_user_group(self):
         passed = True
@@ -63,5 +56,12 @@ class UserGroupModuleRule(BaseRule):
             passed = False
             self.error("%s has different passwd and group values" % value["uid"])
 
-    def __check__(self):
-        return self.check_user_group()
+    def _check_gid_in_passwd(self, passwd):
+        isPassed = True
+        for key, value in passwd.items():    
+            if value["passwdId"] == value["groupId"]:
+                pass
+            else:
+                isPassed = False
+                self.error("%s has different passwd and group values" % value["name"])
+        return isPassed

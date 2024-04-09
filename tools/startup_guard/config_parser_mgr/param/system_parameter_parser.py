@@ -36,10 +36,6 @@ class ParameterParser(dict):
             self["selinuxLabel"] = parameter.get("selinuxLabel")
             self["value"] = parameter.get("value")
 
-    def decode(self, info):
-        self["value"] = info.strip("\"").strip("\'")
-        return True
-
     def __repr__(self):
         return self.__str__()
 
@@ -47,6 +43,10 @@ class ParameterParser(dict):
         return "%s= DAC[%s:%s:%s] selinux[%s] value=%s" % (
             self["prefix"], self["dacUser"], self["dacGroup"], self["dacMode"], 
             self["selinuxLabel"], self["value"])
+
+    def decode(self, info):
+        self["value"] = info.strip("\"").strip("\'")
+        return True
 
 class ParameterDacParser(ParameterParser):
     def __init__(self, prefix, parameter=None):
@@ -77,22 +77,6 @@ class ParameterFileParser():
     def __init__(self):
         self._parameters = {}
 
-    def _handle_param_info(self, file_name, param_info):
-        param_name = param_info[0].strip()
-        old_param = self._parameters.get(param_name)
-        if file_name.endswith(".para.dac"):
-            param = ParameterDacParser(param_name, old_param)
-            if (param.decode(param_info[2].strip())):
-                self._parameters[param_name] = param
-        elif file_name.endswith(".para"):
-            param = ParameterParser(param_name, old_param)
-            if (param.decode(param_info[2].strip())):
-                self._parameters[param_name] = param
-        else:
-            param = ParameterSelinuxParser(param_name, old_param)
-            if (param.decode(param_info[2].strip())):
-                self._parameters[param_name] = param
-
     def load_parameter_file(self, file_name, str = "="):
         try:
             with open(file_name, encoding='utf-8') as fp:
@@ -115,6 +99,33 @@ class ParameterFileParser():
         for param in self._parameters.values():
             print(str(param))
 
+    def scan_parameter_file(self, dir):
+        parameter_paths = [
+            "/system/etc/param/ohos_const",
+            "/vendor/etc/param",
+            "/chip_prod/etc/param",
+            "/sys_prod/etc/param",
+            "/system/etc/param",
+        ]
+        for path in parameter_paths:
+            self._scan_parameter_file("{}/packages/phone{}".format(dir, path))
+
+    def _handle_param_info(self, file_name, param_info):
+        param_name = param_info[0].strip()
+        old_param = self._parameters.get(param_name)
+        if file_name.endswith(".para.dac"):
+            param = ParameterDacParser(param_name, old_param)
+            if (param.decode(param_info[2].strip())):
+                self._parameters[param_name] = param
+        elif file_name.endswith(".para"):
+            param = ParameterParser(param_name, old_param)
+            if (param.decode(param_info[2].strip())):
+                self._parameters[param_name] = param
+        else:
+            param = ParameterSelinuxParser(param_name, old_param)
+            if (param.decode(param_info[2].strip())):
+                self._parameters[param_name] = param
+
     def _check_file(self, file):
         valid_file_ext = [".para", ".para.dac"]
         if not file.is_file():
@@ -131,17 +142,6 @@ class ParameterFileParser():
             for file in files:
                 if self._check_file(file):
                     self.load_parameter_file(file.path)
-
-    def scan_parameter_file(self, dir):
-        parameter_paths = [
-            "/system/etc/param/ohos_const",
-            "/vendor/etc/param",
-            "/chip_prod/etc/param",
-            "/sys_prod/etc/param",
-            "/system/etc/param",
-        ]
-        for path in parameter_paths:
-            self._scan_parameter_file("{}/packages/phone{}".format(dir, path))
 
 def __create_arg_parser():
     import argparse
