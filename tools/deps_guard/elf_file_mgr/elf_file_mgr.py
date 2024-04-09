@@ -221,15 +221,15 @@ class ElfFileMgr(object):
         if not path.startswith("/"):
             path = "/" + path
         if path.find("/lib64/") > 0:
-            pathOrder = "/system/lib64:/vendor/lib64:/vendor/lib64/chipsetsdk:/system/lib64/ndk:/system/lib64/chipset-pub-sdk:/system/lib64/chipset-sdk:/system/lib64/platformsdk:/system/lib64/priv-platformsdk:/system/lib64/priv-module:/system/lib64/module:/system/lib64/module/data:/system/lib64/module/multimedia:/system/lib:/vendor/lib:/system/lib/ndk:/system/lib/chipset-pub-sdk:/system/lib/chipset-sdk:/system/lib/platformsdk:/system/lib/priv-platformsdk:/system/lib/priv-module:/system/lib/module:/system/lib/module/data:/system/lib/module/multimedia:/lib64:/lib:/usr/local/lib:/usr/lib"
+            path_order = "/system/lib64:/vendor/lib64:/vendor/lib64/chipsetsdk:/system/lib64/ndk:/system/lib64/chipset-pub-sdk:/system/lib64/chipset-sdk:/system/lib64/platformsdk:/system/lib64/priv-platformsdk:/system/lib64/priv-module:/system/lib64/module:/system/lib64/module/data:/system/lib64/module/multimedia:/system/lib:/vendor/lib:/system/lib/ndk:/system/lib/chipset-pub-sdk:/system/lib/chipset-sdk:/system/lib/platformsdk:/system/lib/priv-platformsdk:/system/lib/priv-module:/system/lib/module:/system/lib/module/data:/system/lib/module/multimedia:/lib64:/lib:/usr/local/lib:/usr/lib"
         else:
-            pathOrder = "/system/lib:/vendor/lib:/vendor/lib/chipsetsdk:/system/lib/ndk:/system/lib/chipset-pub-sdk:/system/lib/chipset-sdk:/system/lib/platformsdk:/system/lib/priv-platformsdk:/system/lib/priv-module:/system/lib/module:/system/lib/module/data:/system/lib/module/multimedia:/lib:/usr/local/lib:/usr/lib"
+            path_order = "/system/lib:/vendor/lib:/vendor/lib/chipsetsdk:/system/lib/ndk:/system/lib/chipset-pub-sdk:/system/lib/chipset-sdk:/system/lib/platformsdk:/system/lib/priv-platformsdk:/system/lib/priv-module:/system/lib/module:/system/lib/module/data:/system/lib/module/multimedia:/lib:/usr/local/lib:/usr/lib"
 
         if path.rfind("/") < 0:
             return 1000
 
         path = path[:path.rfind("/")]
-        paths = pathOrder.split(':')
+        paths = path_order.split(':')
         idx = 0
         for p in paths:
             if p == path:

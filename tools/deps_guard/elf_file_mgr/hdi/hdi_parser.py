@@ -27,7 +27,7 @@ class HdiParser(object):
         hdi_tool = os.path.join(product_out_path, "obj/drivers/hdf_core/framework/tools/hc-gen/hc-gen")
         hcs_file = os.path.join(product_out_path, "packages/phone/vendor/etc/hdfconfig/hdf_default.hcb")
         out_file = os.path.join(product_out_path, "device_info.hcs")
-        subprocess.Popen('%s -d "%s" -o "%s"' % (hdi_tool, hcs_file, out_file), shell=True).wait()
+        subprocess.Popen([hdi_tool, "-d", hcs_file, "-o", out_file]).wait()
         try:
             with open(out_file) as f:
                 lines = f.readlines()
