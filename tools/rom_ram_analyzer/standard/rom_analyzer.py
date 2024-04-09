@@ -43,6 +43,16 @@ class PreCollector:
         self.info_dict: Dict[str, Any] = dict()
         self.project_path = BasicTool.get_abs_path(project_path)
         self.result_dict = dict()
+    
+    def collect_sa_profile(self):
+        grep_kw = r"ohos_sa_profile"
+        grep_cmd = f"grep -rn '{grep_kw}' --include=BUILD.gn {self.project_path}"
+        content = BasicTool.execute(
+            grep_cmd, post_processor=lambda x: x.split('\n'))
+        for item in content:
+            if not item:
+                continue
+            self._process_single_sa(item, start_pattern=grep_kw)
 
     def _process_single_sa(self, item: str, start_pattern: str):
         gn, _, _ = item.split(':')
@@ -64,18 +74,58 @@ class PreCollector:
                     "gn_path": gn
                 }
 
-    def collect_sa_profile(self):
-        grep_kw = r"ohos_sa_profile"
-        grep_cmd = f"grep -rn '{grep_kw}' --include=BUILD.gn {self.project_path}"
-        content = BasicTool.execute(
-            grep_cmd, post_processor=lambda x: x.split('\n'))
-        for item in content:
-            if not item:
-                continue
-            self._process_single_sa(item, start_pattern=grep_kw)
-
 
 class RomAnalyzer:
+    @classmethod
+    def analysis(cls, system_module_info_json: Text, product_dirs: List[str],
+                 project_path: Text, product_name: Text, output_file: Text, output_execel: bool, add_baseline: bool,
+                 unit_adapt: bool):
+        """
+        system_module_info_json: json文件
+        product_dirs：要处理的产物的路径列表如["vendor", "system/"]
+        project_path: 项目根路径
+        product_name: eg，rk3568
+        output_file: basename of output file
+        """
+        project_path = BasicTool.get_abs_path(project_path)
+        rom_baseline_dict: Dict[str, Any] = RomRamBaselineCollector.collect(
+            project_path)
+        with os.fdopen(os.open("rom_ram_baseline.json", os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
+            json.dump(rom_baseline_dict, f, indent=4)
+        phone_dir = os.path.join(
+            project_path, "out", product_name, "packages", "phone")
+        product_dirs = [os.path.join(phone_dir, d) for d in product_dirs]
+        pre_collector = PreCollector(project_path)
+        pre_collector.collect_sa_profile()
+        extra_product_info_dict: Dict[str, Dict] = pre_collector.result_dict
+        product_info_dict = cls.__collect_product_info(
+            system_module_info_json, project_path,
+            extra_info=extra_product_info_dict)  # collect product info from json file
+        result_dict: Dict[Text:Dict] = dict()
+        for d in product_dirs:
+            file_list: List[Text] = BasicTool.find_all_files(d)
+            for f in file_list:
+                size = os.path.getsize(f)
+                relative_filepath = f.replace(phone_dir, "").lstrip(os.sep)
+                unit: Dict[Text, Any] = product_info_dict.get(
+                    relative_filepath)
+                if not unit:
+                    bf = f.split('/')[-1]
+                    unit: Dict[Text, Any] = product_info_dict.get(bf)
+                if not unit:
+                    unit = dict()
+                unit["size"] = size
+                unit["relative_filepath"] = relative_filepath
+                cls.__put(unit, result_dict, rom_baseline_dict, add_baseline)
+        output_dir, _ = os.path.split(output_file)
+        if len(output_dir) != 0:
+            os.makedirs(output_dir, exist_ok=True)
+        if unit_adapt:
+            cls.result_unit_adaptive(result_dict)
+        with os.fdopen(os.open(output_file + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
+            f.write(json.dumps(result_dict, indent=4))
+        if output_execel:
+            cls.__save_result_as_excel(result_dict, output_file, add_baseline)
 
     @classmethod
     def __collect_product_info(cls, system_module_info_json: Text,
@@ -248,57 +298,6 @@ class RomAnalyzer:
                 component_info["size"] = unit_adaptive(component_info["size"])
             subsystem_info["size"] = size
             subsystem_info["file_count"] = count
-
-    @classmethod
-    def analysis(cls, system_module_info_json: Text, product_dirs: List[str],
-                 project_path: Text, product_name: Text, output_file: Text, output_execel: bool, add_baseline: bool,
-                 unit_adapt: bool):
-        """
-        system_module_info_json: json文件
-        product_dirs：要处理的产物的路径列表如["vendor", "system/"]
-        project_path: 项目根路径
-        product_name: eg，rk3568
-        output_file: basename of output file
-        """
-        project_path = BasicTool.get_abs_path(project_path)
-        rom_baseline_dict: Dict[str, Any] = RomRamBaselineCollector.collect(
-            project_path)
-        with open("rom_ram_baseline.json", 'w', encoding='utf-8') as f:
-            json.dump(rom_baseline_dict, f, indent=4)
-        phone_dir = os.path.join(
-            project_path, "out", product_name, "packages", "phone")
-        product_dirs = [os.path.join(phone_dir, d) for d in product_dirs]
-        pre_collector = PreCollector(project_path)
-        pre_collector.collect_sa_profile()
-        extra_product_info_dict: Dict[str, Dict] = pre_collector.result_dict
-        product_info_dict = cls.__collect_product_info(
-            system_module_info_json, project_path,
-            extra_info=extra_product_info_dict)  # collect product info from json file
-        result_dict: Dict[Text:Dict] = dict()
-        for d in product_dirs:
-            file_list: List[Text] = BasicTool.find_all_files(d)
-            for f in file_list:
-                size = os.path.getsize(f)
-                relative_filepath = f.replace(phone_dir, "").lstrip(os.sep)
-                unit: Dict[Text, Any] = product_info_dict.get(
-                    relative_filepath)
-                if not unit:
-                    bf = f.split('/')[-1]
-                    unit: Dict[Text, Any] = product_info_dict.get(bf)
-                if not unit:
-                    unit = dict()
-                unit["size"] = size
-                unit["relative_filepath"] = relative_filepath
-                cls.__put(unit, result_dict, rom_baseline_dict, add_baseline)
-        output_dir, _ = os.path.split(output_file)
-        if len(output_dir) != 0:
-            os.makedirs(output_dir, exist_ok=True)
-        if unit_adapt:
-            cls.result_unit_adaptive(result_dict)
-        with open(output_file + ".json", 'w', encoding='utf-8') as f:
-            f.write(json.dumps(result_dict, indent=4))
-        if output_execel:
-            cls.__save_result_as_excel(result_dict, output_file, add_baseline)
 
 
 def get_args():

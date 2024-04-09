@@ -23,6 +23,42 @@ import re
 
 class Analyzer:
     @classmethod
+    def analysis(cls, gn_path_list, new_line_nums, gn_name, config_path: str, open_components_path,
+                 result_json_name: str):
+        if not os.path.exists(config_path):
+            print("error: {} is inaccessible or not found".format(config_path))
+            return
+        if not os.path.exists(open_components_path):
+            print("error: {} is inaccessible or not found".format(open_components_path))
+            return
+        if len(gn_path_list) != len(new_line_nums):
+            print("error: The new_line_nums and the gn_path are not in one-to-one correspondence.")
+            return
+        if len(gn_path_list) != len(gn_name):
+            print("error: The gn_path and gn_name are not in one-to-one correspondence.")
+            return
+        required_components = cls.__get_required_components(config_path)
+        open_components, gn_name_list, white_list = cls.__get_open_components(open_components_path)
+        gn_name2component = dict(zip(gn_name_list, open_components))
+        optional_components = list()
+        for components in open_components:
+            if components not in required_components:
+                optional_components.append(components)
+        result = list()
+        for i, _ in enumerate(gn_path_list):
+            one_result = dict()
+            one_result["file_path"] = gn_path_list[i]
+            if gn_name[i] in gn_name_list and gn_name2component[gn_name[i]] in required_components:
+                one_result["error"] = cls.__judge_deps(gn_path_list[i], new_line_nums[i], open_components,
+                                                       optional_components, white_list)
+            else:
+                one_result["error"] = []
+            result.append(one_result)
+        with os.fdopen(os.open(result_json_name + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), "w",
+                       encoding='utf-8') as fd:
+            json.dump(result, fd, indent=4, ensure_ascii=False)
+
+    @classmethod
     def __get_open_components(cls, xml_path):
         open_components = list()
         gn_name = list()
@@ -128,42 +164,6 @@ class Analyzer:
                 line_num += one_line_list
         line_num = [int(i) for i in line_num]
         return line_num
-
-    @classmethod
-    def analysis(cls, gn_path_list, new_line_nums, gn_name, config_path: str, open_components_path,
-                 result_json_name: str):
-        if not os.path.exists(config_path):
-            print("error: {} is inaccessible or not found".format(config_path))
-            return
-        if not os.path.exists(open_components_path):
-            print("error: {} is inaccessible or not found".format(open_components_path))
-            return
-        if len(gn_path_list) != len(new_line_nums):
-            print("error: The new_line_nums and the gn_path are not in one-to-one correspondence.")
-            return
-        if len(gn_path_list) != len(gn_name):
-            print("error: The gn_path and gn_name are not in one-to-one correspondence.")
-            return
-        required_components = cls.__get_required_components(config_path)
-        open_components, gn_name_list, white_list = cls.__get_open_components(open_components_path)
-        gn_name2component = dict(zip(gn_name_list, open_components))
-        optional_components = list()
-        for components in open_components:
-            if components not in required_components:
-                optional_components.append(components)
-        result = list()
-        for i, _ in enumerate(gn_path_list):
-            one_result = dict()
-            one_result["file_path"] = gn_path_list[i]
-            if gn_name[i] in gn_name_list and gn_name2component[gn_name[i]] in required_components:
-                one_result["error"] = cls.__judge_deps(gn_path_list[i], new_line_nums[i], open_components,
-                                                       optional_components, white_list)
-            else:
-                one_result["error"] = []
-            result.append(one_result)
-        with os.fdopen(os.open(result_json_name + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), "w",
-                       encoding='utf-8') as fd:
-            json.dump(result, fd, indent=4, ensure_ascii=False)
 
 
 def get_args():

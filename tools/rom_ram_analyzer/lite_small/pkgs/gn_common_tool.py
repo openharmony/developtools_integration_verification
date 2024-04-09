@@ -34,26 +34,6 @@ class GnCommonTool:
     """
 
     @classmethod
-    def _find_gn_variable_list(cls, content: str) -> List:
-        """
-        获取s中${xxx}或$xxx形式的gn变量
-        :param content: 待查找的字符串
-        :param sep: 分隔符，使用本分隔符将内容进行分隔然后逐一查找
-        :return: 变量名及其符号，eg：${abc}、$abc
-        :FIXME 没有对a = 'a' b = a中的b这种形式进行处理
-        """
-        result = list()
-        splited = content.split(os.sep)
-        patern = re.compile(r"\${.*?}")
-        for item in splited:
-            m = re.findall(patern, item)
-            result.extend(m)
-            if len(m) == 0 and "$" in item:
-                item = item.strip('"')
-                result.append(item[item.index("$"):])
-        return result
-
-    @classmethod
     def is_gn_variable(cls, target: str, quote_processed: bool = False):
         """
         判断target是否是gn中的变量:
@@ -177,6 +157,26 @@ class GnCommonTool:
                     continue
                 result.append(line)
             break
+        return result
+
+    @classmethod
+    def _find_gn_variable_list(cls, content: str) -> List:
+        """
+        获取s中${xxx}或$xxx形式的gn变量
+        :param content: 待查找的字符串
+        :param sep: 分隔符，使用本分隔符将内容进行分隔然后逐一查找
+        :return: 变量名及其符号，eg：${abc}、$abc
+        :FIXME 没有对a = 'a' b = a中的b这种形式进行处理
+        """
+        result = list()
+        splited = content.split(os.sep)
+        patern = re.compile(r"\${.*?}")
+        for item in splited:
+            m = re.findall(patern, item)
+            result.extend(m)
+            if len(m) == 0 and "$" in item:
+                item = item.strip('"')
+                result.append(item[item.index("$"):])
         return result
 
 

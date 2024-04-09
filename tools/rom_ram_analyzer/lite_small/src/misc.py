@@ -31,10 +31,6 @@ from pkgs.basic_tool import BasicTool
 
 
 _config = SimpleYamlTool.read_yaml("config.yaml")
-"""
-===============info handlers===============
-"""
-
 
 def extension_handler(paragraph: Text):
     return GnVariableParser.string_parser("output_extension", paragraph).strip('"')
@@ -51,11 +47,6 @@ def target_type_handler(paragraph: Text):
 
 def mod_handler(paragraph: Text):
     return GnVariableParser.string_parser("mode", paragraph).strip('"')
-
-
-"""
-===============gn lineno collector===============
-"""
 
 
 def gn_lineno_collect(match_pattern: str, project_path: str) -> DefaultDict[str, List[int]]:
@@ -85,11 +76,6 @@ def gn_lineno_collect(match_pattern: str, project_path: str) -> DefaultDict[str,
     return gn_line_dict
 
 
-"""
-===============target name parser===============
-"""
-
-
 class TargetNameParser:
     @classmethod
     def single_parser(cls, paragraph: Text) -> str:
@@ -110,18 +96,14 @@ class TargetNameParser:
         return BasicTool.re_group_1(paragraph, r"\w+\(.*?, *(.*?)\)")
 
 
-"""
-===============post handlers===============
-"""
-
 
 class BasePostHandler(ABC):
+    def __call__(self, unit: Dict[str, AnyStr]) -> str:
+        return self.run(unit)
+    
     @abstractmethod
     def run(self, unit: Dict[str, AnyStr]) -> str:
         ...
-
-    def __call__(self, unit: Dict[str, AnyStr]) -> str:
-        return self.run(unit)
 
 
 def add_prefix(content: str, prefix: str) -> str:

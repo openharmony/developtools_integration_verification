@@ -78,6 +78,10 @@ class BaseProcessor(ABC):
         self.unit_post_handler = unit_post_handler
         self.resource_field = resource_field
         self.ud_post_handler = ud_post_handler
+    
+    
+    def __call__(self, *args, **kwargs):
+        self.run()
 
     def _append(self, key: str, unit: Dict) -> None:
         """
@@ -107,9 +111,6 @@ class BaseProcessor(ABC):
     @abstractmethod
     def run(self):
         ...
-
-    def __call__(self, *args, **kwargs):
-        self.run()
 
 
 def _gn_var_process(project_path: str, gn_v: str, alt_v: str, gn_path: str, ifrom: str, efrom: str, strip_quote: bool = False) -> Tuple[str, str]:

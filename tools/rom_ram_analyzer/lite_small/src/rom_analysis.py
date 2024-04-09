@@ -15,6 +15,16 @@
 
 # This file is for rom analyzation of lite/small devices.
 
+"""
+1. 先收集BUILD.gn中的target信息
+2. 然后根据编译产物到1中进行搜索,匹配其所属的部件
+
+对于ohos开头的template,主要根据其component字段和subsystem_name字段来归数其部件；同时也要考虑install_dir字段
+对于gn原生的template,主要根据bundle.json中的字段来归属其部件
+
+对于找不到的,可以模糊匹配,如,有产物libxxx,则可以在所有的BUILD.gn中搜索xxx,并设置一个阀值予以过滤
+"""
+
 import sys
 import argparse
 import json
@@ -37,18 +47,43 @@ from pkgs.rom_ram_baseline_collector import RomRamBaselineCollector
 from misc import gn_lineno_collect
 
 
-"""
-1. 先收集BUILD.gn中的target信息
-2. 然后根据编译产物到1中进行搜索,匹配其所属的部件
-
-对于ohos开头的template,主要根据其component字段和subsystem_name字段来归数其部件；同时也要考虑install_dir字段
-对于gn原生的template,主要根据bundle.json中的字段来归属其部件
-
-对于找不到的,可以模糊匹配,如,有产物libxxx,则可以在所有的BUILD.gn中搜索xxx,并设置一个阀值予以过滤
-"""
-
-
 class RomAnalysisTool:
+    @classmethod
+    def analysis(cls, product_name: str, product_dict: Dict[str, List[str]], output_file_name: str):
+        """analysis the rom of lite/small product
+
+        Args:
+            product_name (str): product name configured in the yaml
+            product_dict (Dict[str, List[str]]): result dict of compiled product file
+                format:
+                    "bin":[...],
+                    "so":[...]
+                    ...
+        """
+        logging.info("start analyzing...")
+        rom_ram_baseline: Dict[str, Dict] = RomRamBaselineCollector.collect(
+            project_path)
+        with os.fdopen(os.open("rom_ram_baseline.json", os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
+            json.dump(rom_ram_baseline, f, indent=4)
+        gn_info_file = configs["gn_info_file"]  # filename to save gn_info
+        with open(gn_info_file, 'r', encoding='utf-8') as f:
+            gn_info = json.load(f)
+        query_order: Dict[str, List[str]
+                          ] = configs[product_name]["query_order"]  # query order of the gn template to be matched
+        query_order["etc"] = configs["target_type"]  # etc会查找所有的template
+        rom_size_dict: Dict = dict()
+        if "manual_config" in configs[product_name].keys():
+            cls._match_manual_configured(
+                configs[product_name]["manual_config"], product_dict, configs[product_name]["product_dir"]["root"], rom_size_dict)
+        cls._subsystem_component_for_all_product_file(
+            product_dict, query_order, gn_info, gn_info_file, rom_ram_baseline, rom_size_dict)
+        if unit_adapt:
+            cls._result_unit_adaptive(rom_size_dict)
+        with os.fdopen(os.open(output_file_name + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
+            json.dump(rom_size_dict, f, indent=4)
+        cls._save_as_xls(rom_size_dict, product_name, baseline)
+        logging.info("success")
+    
     @classmethod
     def collect_gn_info(cls):
         logging.info("start scanning BUILD.gn")
@@ -59,7 +94,7 @@ class RomAnalysisTool:
             for f in future_list:
                 f.result()
         gn_info_file = configs["gn_info_file"]
-        with open(gn_info_file, 'w', encoding='utf-8') as f:
+        with os.fdopen(os.open(gn_info_file, os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
             json.dump(result_dict, f, indent=4)
 
     @classmethod
@@ -145,7 +180,7 @@ class RomAnalysisTool:
     def collect_product_info(cls, product_name: str):
         logging.info("start scanning compile products")
         product_dict: Dict[str, List[str]] = cls._find_files(product_name)
-        with open(configs[product_name]["product_infofile"], 'w', encoding='utf-8') as f:
+        with os.fdopen(os.open(configs[product_name]["product_infofile"], os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
             json.dump(product_dict, f, indent=4)
         return product_dict
 
@@ -392,42 +427,6 @@ class RomAnalysisTool:
                     break
                 cls._iterate_all_template_type(
                     type_list, gn_info, gn_info_file, base_name, rom_ram_baseline, rom_size_dict, f, size)
-
-    @classmethod
-    def analysis(cls, product_name: str, product_dict: Dict[str, List[str]], output_file_name: str):
-        """analysis the rom of lite/small product
-
-        Args:
-            product_name (str): product name configured in the yaml
-            product_dict (Dict[str, List[str]]): result dict of compiled product file
-                format:
-                    "bin":[...],
-                    "so":[...]
-                    ...
-        """
-        logging.info("start analyzing...")
-        rom_ram_baseline: Dict[str, Dict] = RomRamBaselineCollector.collect(
-            project_path)
-        with open("rom_ram_baseline.json", 'w', encoding='utf-8') as f:
-            json.dump(rom_ram_baseline, f, indent=4)
-        gn_info_file = configs["gn_info_file"]  # filename to save gn_info
-        with open(gn_info_file, 'r', encoding='utf-8') as f:
-            gn_info = json.load(f)
-        query_order: Dict[str, List[str]
-                          ] = configs[product_name]["query_order"]  # query order of the gn template to be matched
-        query_order["etc"] = configs["target_type"]  # etc会查找所有的template
-        rom_size_dict: Dict = dict()
-        if "manual_config" in configs[product_name].keys():
-            cls._match_manual_configured(
-                configs[product_name]["manual_config"], product_dict, configs[product_name]["product_dir"]["root"], rom_size_dict)
-        cls._subsystem_component_for_all_product_file(
-            product_dict, query_order, gn_info, gn_info_file, rom_ram_baseline, rom_size_dict)
-        if unit_adapt:
-            cls._result_unit_adaptive(rom_size_dict)
-        with open(output_file_name + ".json", 'w', encoding='utf-8') as f:
-            json.dump(rom_size_dict, f, indent=4)
-        cls._save_as_xls(rom_size_dict, product_name, baseline)
-        logging.info("success")
 
 
 def main():

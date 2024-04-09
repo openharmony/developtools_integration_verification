@@ -57,20 +57,6 @@ class SimpleExcelWriter:
         self.__head_style.pattern = ptrn
         self.__content_style.alignment = algmt
 
-    def __increment_y(self, sheet_name: str, value: int = 1) -> int:
-        if sheet_name in self.__sheet_pos.keys():
-            x, y = self.__sheet_pos.get(sheet_name)
-            y = y + value
-            self.__sheet_pos[sheet_name] = (x, y)
-            return y
-
-    def __increment_x(self, sheet_name: str, value: int = 1) -> int:
-        if sheet_name in self.__sheet_pos.keys():
-            x, y = self.__sheet_pos.get(sheet_name)
-            x = x + value
-            self.__sheet_pos[sheet_name] = (x, 0)
-            return x
-
     def append_line(self, content: list, sheet_name: str = None):
         sheet_name = self.__default_sheet_name if sheet_name is None else sheet_name
         if sheet_name not in self.__sheet_dict.keys():
@@ -122,3 +108,17 @@ class SimpleExcelWriter:
 
     def save(self, file_name: str):
         self.__book.save(file_name)
+    
+    def __increment_y(self, sheet_name: str, value: int = 1) -> int:
+        if sheet_name in self.__sheet_pos.keys():
+            x, y = self.__sheet_pos.get(sheet_name)
+            y = y + value
+            self.__sheet_pos[sheet_name] = (x, y)
+            return y
+
+    def __increment_x(self, sheet_name: str, value: int = 1) -> int:
+        if sheet_name in self.__sheet_pos.keys():
+            x, y = self.__sheet_pos.get(sheet_name)
+            x = x + value
+            self.__sheet_pos[sheet_name] = (x, 0)
+            return x

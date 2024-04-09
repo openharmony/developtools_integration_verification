@@ -80,6 +80,47 @@ def delete_values_from_dict(target_dict: typing.Dict, key_list: typing.Iterable)
 
 class RamAnalyzer:
     @classmethod
+    def analysis(cls, cfg_path: str, json_path: str, rom_result_json: str, device_num: str,
+                 output_file: str, ss: str, output_excel: bool, baseline_file: str, unit_adapt: bool):
+        """
+        process size subsystem/component so so_size
+        """
+        if not HDCTool.verify_hdc():
+            print("error: Command 'hdc' not found")
+            return
+        if not HDCTool.verify_device(device_num):
+            print("error: {} is inaccessible or not found".format(device_num))
+            return
+        with open(rom_result_json, 'r', encoding='utf-8') as f:
+            rom_result_dict: typing.Dict = json.loads(f.read())
+        # 从rom的分析结果中将需要的elf信息重组
+        so_info_dict: typing.Dict[
+            str, typing.Dict[str["component_name|subsystem_name|size"], str]] = cls.get_elf_info_from_rom_result(
+            rom_result_json)
+        process_elf_dict: typing.Dict[str, typing.List[str]] = cls.get_process_so_relationship(cfg_path,
+                                                                                               json_path)
+        process_size_dict: typing.Dict[str, int] = cls.process_hidumper_info(
+            device_num, ss)
+        result_dict: typing.Dict[str, typing.Dict[str, typing.Any]] = dict()
+        result_dict = cls.result_process4(result_dict, process_size_dict, rom_result_dict, process_elf_dict,
+                                          so_info_dict)
+        base_dir, _ = os.path.split(output_file)
+        if len(base_dir) != 0 and not os.path.isdir(base_dir):
+            os.makedirs(base_dir, exist_ok=True)
+        with os.fdopen(os.open(output_file + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
+            json.dump(result_dict, f, indent=4)
+        refactored_result: Dict[str, Dict] = refacotr_result(result_dict)
+        if unit_adapt:
+            cls.refactored_result_unit_adaptive(refactored_result)
+        if baseline_file:
+            cls.add_baseline(refactored_result, baseline_file)
+        with os.fdopen(os.open(f"refactored_{output_file}.json", os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
+            json.dump(refactored_result, f, indent=4)
+        if output_excel:
+            cls.__save_result_as_excel(
+                refactored_result, output_file + ".xls", ss, baseline_file, unit_adapt)
+    
+    @classmethod
     def __hidumper_mem_line_process(cls, content: typing.Text) -> typing.List[typing.Text]:
         """
         将hidumper的拥有的数据行进行分割，得到
@@ -526,47 +567,6 @@ class RamAnalyzer:
                     result_dict[process_name][subsystem_name][component_name] = dict()
                 result_dict[process_name][subsystem_name][component_name][so] = so_size
         return result_dict
-
-    @classmethod
-    def analysis(cls, cfg_path: str, json_path: str, rom_result_json: str, device_num: str,
-                 output_file: str, ss: str, output_excel: bool, baseline_file: str, unit_adapt: bool):
-        """
-        process size subsystem/component so so_size
-        """
-        if not HDCTool.verify_hdc():
-            print("error: Command 'hdc' not found")
-            return
-        if not HDCTool.verify_device(device_num):
-            print("error: {} is inaccessible or not found".format(device_num))
-            return
-        with open(rom_result_json, 'r', encoding='utf-8') as f:
-            rom_result_dict: typing.Dict = json.loads(f.read())
-        # 从rom的分析结果中将需要的elf信息重组
-        so_info_dict: typing.Dict[
-            str, typing.Dict[str["component_name|subsystem_name|size"], str]] = cls.get_elf_info_from_rom_result(
-            rom_result_json)
-        process_elf_dict: typing.Dict[str, typing.List[str]] = cls.get_process_so_relationship(cfg_path,
-                                                                                               json_path)
-        process_size_dict: typing.Dict[str, int] = cls.process_hidumper_info(
-            device_num, ss)
-        result_dict: typing.Dict[str, typing.Dict[str, typing.Any]] = dict()
-        result_dict = cls.result_process4(result_dict, process_size_dict, rom_result_dict, process_elf_dict,
-                                          so_info_dict)
-        base_dir, _ = os.path.split(output_file)
-        if len(base_dir) != 0 and not os.path.isdir(base_dir):
-            os.makedirs(base_dir, exist_ok=True)
-        with open(output_file + ".json", 'w', encoding='utf-8') as f:
-            json.dump(result_dict, f, indent=4)
-        refactored_result: Dict[str, Dict] = refacotr_result(result_dict)
-        if unit_adapt:
-            cls.refactored_result_unit_adaptive(refactored_result)
-        if baseline_file:
-            cls.add_baseline(refactored_result, baseline_file)
-        with open(f"refactored_{output_file}.json", 'w', encoding='utf-8') as f:
-            json.dump(refactored_result, f, indent=4)
-        if output_excel:
-            cls.__save_result_as_excel(
-                refactored_result, output_file + ".xls", ss, baseline_file, unit_adapt)
 
 
 def inside_refacotr_result(component_info, refactored_ram_dict, subsystem_name, component_name, process_name,

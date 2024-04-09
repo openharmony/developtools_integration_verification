@@ -85,6 +85,34 @@ class GnCommonTool:
                     GnCommonTool.__var_val_mem_dict[v] = output
             path = os.path.split(path)[0]
         return tuple(var_val_dict.values())
+    
+    @classmethod
+    def find_part_subsystem(cls, gn_file: str, project_path: str) -> tuple:
+        """
+        查找gn_file对应的part_name和subsystem
+        如果在gn中找不到，就到bundle.json中去找
+        """
+        part_var_flag = False  # 标识这个变量从gn中取出的原始值是不是变量
+        subsystem_var_flag = False
+        var_list = list()
+        part_name_pattern = r"part_name *=\s*\S*"
+        subsystem_pattern = r"subsystem_name *=\s*\S*"
+        meta_grep_pattern = "grep -E '{}' {} | head -n 1"
+        part_cmd = meta_grep_pattern.format(part_name_pattern, gn_file)
+        subsystem_cmd = meta_grep_pattern.format(subsystem_pattern, gn_file)
+
+        part_name, subsystem_name = cls._parse_part_subsystem(part_var_flag, subsystem_var_flag,
+                                                              var_list, part_cmd, subsystem_cmd, gn_file, project_path)
+        if part_name and subsystem_name:
+            return part_name, subsystem_name
+        # 如果有一个没有找到，就要一层层去找bundle.json文件
+        t_part_name, t_subsystem_name = cls.__find_part_subsystem_from_bundle(
+            gn_file, stop_tail=project_path)
+        if t_part_name:
+            part_name = t_part_name
+        if t_subsystem_name:
+            subsystem_name = t_subsystem_name
+        return part_name, subsystem_name
 
     @classmethod
     def __find_part_subsystem_from_bundle(cls, gnpath: str, stop_tail: str = "home") -> tuple:
@@ -155,34 +183,6 @@ class GnCommonTool:
                 tuple(var_list), gn_file, project_path)[0]
             subsystem_name = t if t is not None and len(
                 t) != 0 else subsystem_name
-        return part_name, subsystem_name
-
-    @classmethod
-    def find_part_subsystem(cls, gn_file: str, project_path: str) -> tuple:
-        """
-        查找gn_file对应的part_name和subsystem
-        如果在gn中找不到，就到bundle.json中去找
-        """
-        part_var_flag = False  # 标识这个变量从gn中取出的原始值是不是变量
-        subsystem_var_flag = False
-        var_list = list()
-        part_name_pattern = r"part_name *=\s*\S*"
-        subsystem_pattern = r"subsystem_name *=\s*\S*"
-        meta_grep_pattern = "grep -E '{}' {} | head -n 1"
-        part_cmd = meta_grep_pattern.format(part_name_pattern, gn_file)
-        subsystem_cmd = meta_grep_pattern.format(subsystem_pattern, gn_file)
-
-        part_name, subsystem_name = cls._parse_part_subsystem(part_var_flag, subsystem_var_flag,
-                                                              var_list, part_cmd, subsystem_cmd, gn_file, project_path)
-        if part_name and subsystem_name:
-            return part_name, subsystem_name
-        # 如果有一个没有找到，就要一层层去找bundle.json文件
-        t_part_name, t_subsystem_name = cls.__find_part_subsystem_from_bundle(
-            gn_file, stop_tail=project_path)
-        if t_part_name:
-            part_name = t_part_name
-        if t_subsystem_name:
-            subsystem_name = t_subsystem_name
         return part_name, subsystem_name
 
 
