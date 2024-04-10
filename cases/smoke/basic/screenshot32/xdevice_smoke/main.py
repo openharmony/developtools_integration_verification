@@ -6,7 +6,7 @@ import sys
 from xdevice.__main__ import main_process
 from xdevice._core.report.result_reporter import ResultReporter
 from xml.dom.minidom import parse
-import pandas as pd
+# import pandas as pd
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(__file__)
@@ -49,48 +49,48 @@ def get_test_result(report_path):
         return False
 
 
-def collect_test_result(report_path):
-    xml_report = os.path.join(report_path, 'summary_report.xml')
-    if not os.path.exists(xml_report):
-        return
-    timestamp = datetime.fromtimestamp(os.path.getmtime(xml_report))
-    test_date = timestamp.strftime('%Y-%m-%d')
-
-    try:
-        dom = parse(xml_report)
-        data = dom.documentElement
-        test_result = {
-            '用例名': [],
-            '测试结果': [],
-            '耗时': [],
-            '报错信息': [],
-            '报告路径': [],
-        }
-        testcases = data.getElementsByTagName('testsuite')
-        testcase_result = []
-        for t in testcases:
-            module_name = t.getAttribute('modulename')
-            result_kind = t.getAttribute('result_kind')
-            time = t.getAttribute('time')
-            testcase = t.getElementsByTagName('testcase')
-            message = testcase[0].getAttribute('message')
-            line = (module_name, result_kind, time, message, xml_report, test_date)
-            if line not in testcase_result:
-                testcase_result.append(line)
-                # csv
-                test_result['用例名'].append(module_name)
-                test_result['测试结果'].append(result_kind)
-                test_result['耗时'].append(time)
-                test_result['报错信息'].append(message)
-                test_result['报告路径'].append(xml_report)
-
-        df = pd.DataFrame(test_result)
-
-        with open('D:\\smoke_result_{}.csv'.format(test_date), 'a', newline='') as f:
-            df.to_csv(f, header=f.tell() == 0, index=False, mode='a')
-    except:
-        pass
-
+# def collect_test_result(report_path):
+#     xml_report = os.path.join(report_path, 'summary_report.xml')
+#     if not os.path.exists(xml_report):
+#         return
+#     timestamp = datetime.fromtimestamp(os.path.getmtime(xml_report))
+#     test_date = timestamp.strftime('%Y-%m-%d')
+#
+#     try:
+#         dom = parse(xml_report)
+#         data = dom.documentElement
+#         test_result = {
+#             '用例名': [],
+#             '测试结果': [],
+#             '耗时': [],
+#             '报错信息': [],
+#             '报告路径': [],
+#         }
+#         testcases = data.getElementsByTagName('testsuite')
+#         testcase_result = []
+#         for t in testcases:
+#             module_name = t.getAttribute('modulename')
+#             result_kind = t.getAttribute('result_kind')
+#             time = t.getAttribute('time')
+#             testcase = t.getElementsByTagName('testcase')
+#             message = testcase[0].getAttribute('message')
+#             line = (module_name, result_kind, time, message, xml_report, test_date)
+#             if line not in testcase_result:
+#                 testcase_result.append(line)
+#                 # csv
+#                 test_result['用例名'].append(module_name)
+#                 test_result['测试结果'].append(result_kind)
+#                 test_result['耗时'].append(time)
+#                 test_result['报错信息'].append(message)
+#                 test_result['报告路径'].append(xml_report)
+#
+#         df = pd.DataFrame(test_result)
+#
+#         with open('D:\\smoke_result_{}.csv'.format(test_date), 'a', newline='') as f:
+#             df.to_csv(f, header=f.tell() == 0, index=False, mode='a')
+#     except:
+#         pass
+#
 
 if __name__ == '__main__':
     argv = sys.argv[1:]
