@@ -67,9 +67,14 @@ class CmdParser(ItemParser):
         self["content"] = ""
         self["fileId"] = -1
 
+    def __str__(self):
+        return "cmd \"%s\"  content \"%s\" " % (self["name"], self["content"])
+
     def create(self, json_node, parent = None, fileId = None):
-        assert(isinstance(json_node, str))
-        assert(parent != None)
+        if not isinstance(json_node, str):
+            raise Exception("json_node type error")
+        if parent == None:
+            raise Exception("parent ")
         info = json_node.partition(" ") # 取第一个空格分割
         self["name"] = info[0]
         self["jobId"] = parent.get("jobId")
@@ -78,9 +83,6 @@ class CmdParser(ItemParser):
         if len(info) > 2:
             self["content"] = info[2]
         return
-
-    def __str__(self):
-        return "cmd \"%s\"  content \"%s\" " % (self["name"], self["content"])
 
 class JobParser(ItemParser):
     def __init__(self, config):
@@ -92,12 +94,12 @@ class JobParser(ItemParser):
         self["jobPriority"] = -1
         self["executionTime"] = 0
 
-    def _add_cmds(self, cmdList, fileId):
-        for cmd in cmdList:
-            self._config_parser.add_cmd(cmd, self, fileId)
+    def __str__(self):
+        return "jobs '%s'  condition '%s' " % (self["name"], self["condition"])
 
     def create(self, json_node, parent = None, fileId = None):
-        assert(isinstance(json_node, dict))
+        if not isinstance(json_node, dict):
+            raise Exception("json_node type error")
         self["name"] = json_node["name"]
         self["jobId"] = self._config_parser.get_job_id()
         self["jobPriority"] = self._config_parser.get_job_priority(json_node["name"])
@@ -115,7 +117,8 @@ class JobParser(ItemParser):
         return
 
     def update(self, json_node, parent = None, fileId = None):
-        assert(isinstance(json_node, dict))
+        if not isinstance(json_node, dict):
+            raise Exception("json_node type error")
         if parent != None:
             self["serviceId"] = parent.get("serviceId")
         if fileId and self["fileId"] is None:
@@ -124,8 +127,9 @@ class JobParser(ItemParser):
             self._add_cmds(json_node.get("cmds"), fileId)
         return
 
-    def __str__(self):
-        return "jobs '%s'  condition '%s' " % (self["name"], self["condition"])
+    def _add_cmds(self, cmdList, fileId):
+        for cmd in cmdList:
+            self._config_parser.add_cmd(cmd, self, fileId)
 
 class ServiceParser(ItemParser):
     def __init__(self, config):
@@ -152,6 +156,47 @@ class ServiceParser(ItemParser):
         self["permission"] = ""
         self["permission_acls"] = ""
         self["fileId"] = -1
+
+    def create(self, json_node, parent = None, fileId = None):
+        if not isinstance(json_node, dict):
+            raise Exception("json_node type error")
+        self["name"] = json_node["name"]
+        if not self.get("serviceId") :
+            self["serviceId"] = self._config_parser.get_service_id()
+        if fileId :
+            self["fileId"] = fileId
+        self._handle_string_filed(json_node)
+        self._handle_Bool_filed(json_node)
+        self._handle_array_filed(json_node)
+        self._handle_integer_filed(json_node)
+
+        #for file
+        if json_node.__contains__("file"):
+            for item in json_node.get("file"):
+                self._config_parser.add_service_file(item, self)
+
+        #for socket
+        if json_node.__contains__("socket"):
+            for item in json_node.get("socket"):
+                self._config_parser.add_service_socket(item, self)
+        #for jobs
+        if json_node.__contains__("jobs"):
+            self._handle_scope_jobs(json_node.get("jobs"))
+
+        #for critical
+        if json_node.__contains__("critical"):
+            critical = json_node.get("critical")
+            if isinstance(critical, list):
+                self["critical_enable"] = int(critical[0]) != 0
+                self["limit_time"] = int(critical[0])
+                self["limit_count"] = int(critical[0])
+            else:
+                self["critical_enable"] = int(critical) != 0
+        return
+
+    def update(self, json_node, parent = None, fileId = None):
+        self.create(json_node, parent, fileId)
+        return
 
     def _handle_string_filed(self, json_node):
         str_field_map = {
@@ -201,46 +246,6 @@ class ServiceParser(ItemParser):
                 self[key] = json_node.get(name)
                 self._config_parser.add_job({"name" : json_node.get(name)}, self, self["fileId"])
 
-    def create(self, json_node, parent = None, fileId = None):
-        assert(isinstance(json_node, dict))
-        self["name"] = json_node["name"]
-        if not self.get("serviceId") :
-            self["serviceId"] = self._config_parser.get_service_id()
-        if fileId :
-            self["fileId"] = fileId
-        self._handle_string_filed(json_node)
-        self._handle_Bool_filed(json_node)
-        self._handle_array_filed(json_node)
-        self._handle_integer_filed(json_node)
-
-        #for file
-        if json_node.__contains__("file"):
-            for item in json_node.get("file"):
-                self._config_parser.add_service_file(item, self)
-
-        #for socket
-        if json_node.__contains__("socket"):
-            for item in json_node.get("socket"):
-                self._config_parser.add_service_socket(item, self)
-        #for jobs
-        if json_node.__contains__("jobs"):
-            self._handle_scope_jobs(json_node.get("jobs"))
-
-        #for critical
-        if json_node.__contains__("critical"):
-            critical = json_node.get("critical")
-            if isinstance(critical, list):
-                self["critical_enable"] = int(critical[0]) != 0
-                self["limit_time"] = int(critical[0])
-                self["limit_count"] = int(critical[0])
-            else:
-                self["critical_enable"] = int(critical) != 0
-        return
-
-    def update(self, json_node, parent = None, fileId = None):
-        self.create(json_node, parent, fileId)
-        return
-
 class ServiceSocketParser(ItemParser):
     def __init__(self, config):
         ItemParser.__init__(self, config)
@@ -252,8 +257,15 @@ class ServiceSocketParser(ItemParser):
         self["gid"] = ""
         self["serviceId"] = -1
 
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "socket '%s' serviceid = %d family %s" % (self["name"], self["serviceId"], self["family"])
+
     def create(self, json_node, parent = None, file_id = None):
-        assert(isinstance(json_node, dict))
+        if not isinstance(json_node, dict):
+            raise Exception("json_node type error")
         self["name"] = json_node["name"]
         if parent != None:
             self["serviceId"] = parent.get("serviceId")
@@ -264,12 +276,6 @@ class ServiceSocketParser(ItemParser):
         if json_node.get("option") :
             self["option"] = self.get_strings_value(json_node.get("option"))
 
-    def __repr__(self):
-        return self.__str__()
-
-    def __str__(self):
-        return "socket '%s' serviceid = %d family %s" % (self["name"], self["serviceId"], self["family"])
-
 class ServiceFileParser(ItemParser):
     def __init__(self, config):
         ItemParser.__init__(self, config)
@@ -277,8 +283,15 @@ class ServiceFileParser(ItemParser):
         self["content"] = ""
         self["serviceId"] = -1
 
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "file '%s' serviceid = %d content '%s'" % (self["name"], self["serviceId"], self["content"])
+
     def create(self, json_node, parent = None, file_id = None):
-        assert(isinstance(json_node, str))
+        if not isinstance(json_node, str):
+            raise Exception("json_node type error")
         if parent != None:
             self["serviceId"] = parent.get("serviceId")
         info = json_node.partition(" ")
@@ -286,12 +299,6 @@ class ServiceFileParser(ItemParser):
         if len(info) > 2:
             self["content"] = info[2]
         return
-
-    def __repr__(self):
-        return self.__str__()
-
-    def __str__(self):
-        return "file '%s' serviceid = %d content '%s'" % (self["name"], self["serviceId"], self["content"])
 
 class ConfigParser():
     def __init__(self, path):
@@ -308,33 +315,6 @@ class ConfigParser():
         self._selinux = ""
         self._plug_in = []
 
-    def _load_services(self, json_node, file_id):
-        assert(isinstance(json_node, list))
-        for item in json_node:
-            self.add_service(item, file_id)
-        return
-
-    def _load_jobs(self, json_node, file_id):
-        assert(isinstance(json_node, list))
-        for item in json_node:
-            self.add_job(item, None, file_id)
-        return
-
-    def _load_import(self, import_node):
-        assert(isinstance(import_node, list))
-        start_with = [ "/system", "/chip_prod", "/sys_prod", "/vendor" ]
-        for file in import_node:
-            found = False
-            for start in start_with:
-                if file.startswith(start):
-                    found = True
-                    break
-            if found :
-                self.load_config(self._path + file)
-            else:
-                for start in start_with:
-                    self.load_config(self._path + start + file, file)
-
     def load_config(self, file_name):
         path = self._path + file_name
         if not os.path.exists(path):
@@ -344,7 +324,8 @@ class ConfigParser():
             try:
                 root = json.load(content)
                 fileId = self.add_File(file_name)
-                assert(isinstance(root, dict))
+                if not isinstance(root, dict):
+                    raise Exception("root type error")
                 if (root.__contains__("services")):
                     self._load_services(root["services"], fileId)
                 if (root.__contains__("jobs")):
@@ -409,43 +390,6 @@ class ConfigParser():
         pp.pprint(self._jobs)
         pass
 
-    def _is_valid_file(self, file, valid_file_ext):
-        if not file.is_file():
-            return False
-        for ext in valid_file_ext:
-            if file.name.endswith(ext):
-                return True
-        return False
-
-    def _scan_config_file(self, file_name):
-        dir_config_file = os.path.join(self._path, file_name)
-        if not os.path.exists(dir_config_file):
-            return
-        try:
-            with os.scandir(dir_config_file) as files:
-                for file in files:
-                    if self._is_valid_file(file, ".cfg"):
-                        name = file.path[len(self._path) :]
-                        self.load_config(name)
-        except:
-            pass
-
-    def _scan_share_library_file(self, file_name):
-        if not os.path.exists(file_name):
-            return
-        try:
-            for item in os.scandir(file_name):
-                file_path = os.path.join(file_name, item.name)
-                if item.is_file():
-                    if self._is_valid_file(item, ".so"):
-                        self._plug_in.append(file_path)
-                        continue
-                else:
-                    dir_config_file = os.path.join(file_name, item.name)
-                    self._scan_share_library_file(item)
-        except:
-            pass
-
     def scan_library(self, target_cpu):
         if target_cpu == "arm64":
             config_paths = [
@@ -494,11 +438,6 @@ class ConfigParser():
             return job_priority.get(job_name)
         return 100
 
-    def _load_boot_event(self, event):
-        if self._jobs.__contains__(event.get("name")):
-            print("loadBootEvent_ %s %f" % (event.get("name"), event.get("dur")))
-            self._jobs.get(event.get("name"))["executionTime"] = event.get("dur")
-
     def load_boot_event_file(self, boot_event_file):
         if not os.path.exists(boot_event_file):
             print("Error, invalid config file %s" % boot_event_file)
@@ -534,6 +473,78 @@ class ConfigParser():
         except:
             print("Error, invalid parameter file ", file_name)
             pass
+
+    def _load_services(self, json_node, file_id):
+        if not isinstance(json_node, list):
+            raise Exception("json_node type error")
+        for item in json_node:
+            self.add_service(item, file_id)
+        return
+
+    def _load_jobs(self, json_node, file_id):
+        if not isinstance(json_node, list):
+            raise Exception("json_node type error")
+        for item in json_node:
+            self.add_job(item, None, file_id)
+        return
+
+    def _load_import(self, import_node):
+        if not isinstance(import_node, list):
+            raise Exception("import_node type error")
+        start_with = [ "/system", "/chip_prod", "/sys_prod", "/vendor" ]
+        for file in import_node:
+            found = False
+            for start in start_with:
+                if file.startswith(start):
+                    found = True
+                    break
+            if found :
+                self.load_config(self._path + file)
+            else:
+                for start in start_with:
+                    self.load_config(self._path + start + file, file)
+
+    def _is_valid_file(self, file, valid_file_ext):
+        if not file.is_file():
+            return False
+        for ext in valid_file_ext:
+            if file.name.endswith(ext):
+                return True
+        return False
+
+    def _scan_config_file(self, file_name):
+        dir_config_file = os.path.join(self._path, file_name)
+        if not os.path.exists(dir_config_file):
+            return
+        try:
+            with os.scandir(dir_config_file) as files:
+                for file in files:
+                    if self._is_valid_file(file, ".cfg"):
+                        name = file.path[len(self._path) :]
+                        self.load_config(name)
+        except:
+            pass
+
+    def _scan_share_library_file(self, file_name):
+        if not os.path.exists(file_name):
+            return
+        try:
+            for item in os.scandir(file_name):
+                file_path = os.path.join(file_name, item.name)
+                if item.is_file():
+                    if self._is_valid_file(item, ".so"):
+                        self._plug_in.append(file_path)
+                        continue
+                else:
+                    dir_config_file = os.path.join(file_name, item.name)
+                    self._scan_share_library_file(item)
+        except:
+            pass
+
+    def _load_boot_event(self, event):
+        if self._jobs.__contains__(event.get("name")):
+            print("loadBootEvent_ %s %f" % (event.get("name"), event.get("dur")))
+            self._jobs.get(event.get("name"))["executionTime"] = event.get("dur")
 
 def startup_config_collect(base_path, target_cpu):
     parser = ConfigParser(os.path.join(base_path, "packages/phone"))

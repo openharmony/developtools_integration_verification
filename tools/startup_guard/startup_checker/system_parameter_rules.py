@@ -21,6 +21,8 @@ from .base_rule import BaseRule
 class SystemParameterRule(BaseRule):
     RULE_NAME = "NO-Config-SystemParameter-In-INIT"
     CONFIG_DAC_MAX_NUM = 200
+    def __check__(self):
+        return self._check_Param_in_init()
 
     def _check_param_name(self, param_name, empty_flag):
         # len: (0, 96]
@@ -68,6 +70,3 @@ class SystemParameterRule(BaseRule):
             self.error("DAC overallocated memory")
             passed = False
         return passed
-        
-    def __check__(self):
-        return self._check_Param_in_init()

@@ -24,21 +24,6 @@ class GroupFileParser():
     def __init__(self):
         self._group = {}
 
-    def _handleGroupInfo(self, groupInfo):
-        name = groupInfo[0].strip()
-        userNames = name
-        if len(groupInfo) > 3 and len(groupInfo[3]) > 0:
-            userNames = groupInfo[3]
-        oldGroup = self._group.get(name)
-        if oldGroup:
-            return
-        group = {
-            "name" : name,
-            "groupId" : int(groupInfo[2], 10),
-            "userNames" : userNames
-        }
-        self._group[name] = group
-
     def loadFile(self, fileName):
         #print(" loadFile %s" % fileName)
         if not os.path.exists(fileName):
@@ -63,30 +48,27 @@ class GroupFileParser():
         for group in self._group.values() :
             print(str(group))
 
+    def _handleGroupInfo(self, groupInfo):
+        name = groupInfo[0].strip()
+        userNames = name
+        if len(groupInfo) > 3 and len(groupInfo[3]) > 0:
+            userNames = groupInfo[3]
+        oldGroup = self._group.get(name)
+        if oldGroup:
+            return
+        group = {
+            "name" : name,
+            "groupId" : int(groupInfo[2], 10),
+            "userNames" : userNames
+        }
+        self._group[name] = group
+
 class PasswdFileParser():
     def __init__(self):
         self._passwd = {}
         self._passwd_yellow = {}
         self._name_list = []
         self._uid_list = []
-
-    def _handlePasswdInfo(self, passwdInfo):
-        name = passwdInfo[0].strip()
-        self._uid_list.append(int(passwdInfo[2], 10))
-        self._name_list.append(name)
-        oldPasswd = self._passwd.get(name)
-        if oldPasswd:
-            return
-        
-        gid = int(passwdInfo[3], 10)
-        uid = int(passwdInfo[2], 10)
-
-        passwd = {
-            "name" : name,
-            "groupId" : gid,
-            "passwdId" : uid
-        }
-        self._passwd[name] = passwd
 
     def loadFile(self, fileName):
         # print(" loadFile %s" % fileName)
@@ -111,6 +93,24 @@ class PasswdFileParser():
     def dump(self):
         for group in self._passwd.values() :
             print(str(group))
+
+    def _handlePasswdInfo(self, passwdInfo):
+        name = passwdInfo[0].strip()
+        self._uid_list.append(int(passwdInfo[2], 10))
+        self._name_list.append(name)
+        oldPasswd = self._passwd.get(name)
+        if oldPasswd:
+            return
+        
+        gid = int(passwdInfo[3], 10)
+        uid = int(passwdInfo[2], 10)
+
+        passwd = {
+            "name" : name,
+            "groupId" : gid,
+            "passwdId" : uid
+        }
+        self._passwd[name] = passwd
 
 def _create_arg_parser():
     import argparse

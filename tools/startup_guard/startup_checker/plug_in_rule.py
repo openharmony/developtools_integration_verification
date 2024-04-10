@@ -30,6 +30,26 @@ class PlugInModuleRule(BaseRule):
         self._private_so = {}
         self._passwd = True
 
+    def __check__(self):
+        return self.check_plug_in_library()
+
+    def check_plug_in_library(self):
+        cfg_parser = self.get_mgr().get_parser_by_name('config_parser')
+        white_lists =self.get_white_lists()
+        for key, item in white_lists[0].items():
+            if key == "base_library":
+                self._base_so = item
+            if key == "private_library":
+                self._private_so = item 
+        keys = list(self._private_so.keys())
+        for name in cfg_parser._plug_in:
+            if os.path.basename(name) not in keys:
+                self.error("%s is not in whitelists" % os.path.basename(name))
+                self._passwd = False
+                continue
+            self._read_elf_dt_needed(name)
+        return self._passwd
+
     def _read_elf_dt_needed(self, file):
         # print(file)
         paser = self._private_so
@@ -52,24 +72,3 @@ class PlugInModuleRule(BaseRule):
                             self.error("%s" % error_log)
                             continue
                         pass
-
-
-    def check_plug_in_library(self):
-        cfg_parser = self.get_mgr().get_parser_by_name('config_parser')
-        white_lists =self.get_white_lists()
-        for key, item in white_lists[0].items():
-            if key == "base_library":
-                self._base_so = item
-            if key == "private_library":
-                self._private_so = item 
-        keys = list(self._private_so.keys())
-        for name in cfg_parser._plug_in:
-            if os.path.basename(name) not in keys:
-                self.error("%s is not in whitelists" % os.path.basename(name))
-                self._passwd = False
-                continue
-            self._read_elf_dt_needed(name)
-        return self._passwd
-        
-    def __check__(self):
-        return self.check_plug_in_library()
