@@ -76,5 +76,6 @@
 	//add by analyser aln
 	"libc++_shared.so",
 
-	"libuds_channel.z.so"
+	"libuds_channel.z.so",
+	"libsocperf_client.z.so"
 ]

@@ -527,5 +527,13 @@
         "so_file_name": "libclang_rt.hwasan.so",
         "path": "//build/common/asan:libclang_rt.hwasan.so",
         "headers": []
+    },
+    {
+        "name": "soc_perf:socperf_client",
+        "so_file_name": "libsocperf_client.z.so",
+        "path": "//foundation/resourceschedule/soc_perf/interfaces/inner_api/socperf_client:socperf_client",
+        "headers": [
+            "//foundation/resourceschedule/soc_perf/interfaces/inner_api/socperf_client/include"
+        ]
     }
 ]
