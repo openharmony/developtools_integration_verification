@@ -125,7 +125,8 @@
   {
     "processName": "softbus_server",
     "acls": [
-      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+      "ohos.permission.ACCESS_IDS"
     ]
   },
   {
