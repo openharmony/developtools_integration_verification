@@ -16,6 +16,8 @@
 # This file is for get the mapping relationship of subsystem_name/component_name
 # and their directory. The code is from Yude Chen.
 
+__all__ = ["SC"]
+
 import argparse
 import os
 import json
@@ -79,7 +81,7 @@ def get_subsystem_components_modified(ohos_root) -> dict:
 def export_to_json(subsystem_item: dict, output_filename: str):
     subsystem_item_json = json.dumps(
         subsystem_item, indent=4, separators=(', ', ': '))
-    with open(output_filename, 'w') as f:
+    with os.fdopen(os.open(output_filename, os.O_WRONLY | os.O_CREAT, mode=0o640), 'w') as f:
         f.write(subsystem_item_json)
     logging.info("output path: {}".format(output_filename))
 
@@ -136,6 +138,3 @@ class SC:
             export_to_json(info, output_path)
         print_warning_info()
         return info
-
-
-__all__ = ["SC"]

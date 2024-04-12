@@ -15,14 +15,14 @@
 #
 
 
+__all__ = ["translate_str_unit", "BasicTool", "do_nothing", "get_unit", "unit_adaptive"]
+
 import itertools
 import os
 import re
 import glob
 from typing import *
 import unittest
-
-__all__ = ["translate_str_unit", "BasicTool", "do_nothing", "get_unit", "unit_adaptive"]
 
 
 def unit_adaptive(size: int) -> str:

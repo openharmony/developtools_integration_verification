@@ -15,26 +15,17 @@
 
 # This file is to collect baseline information (according to bundle.json)
 
+from typing import Dict, Any
+import json
+import logging
 if __name__ == '__main__':
     from basic_tool import BasicTool
 else:
     from pkgs.basic_tool import BasicTool
-from typing import Dict, Any
-import json
-import logging
 
 class RomRamBaselineCollector:
     """collect baseline of rom and ram from bundle.json
     """
-    @classmethod
-    def _put(cls, result_dict: Dict, subsystem_name: str, component_name: str, rom_size: str, ram_size: str, bundle_path:str) -> None:
-        if not result_dict.get(subsystem_name):
-            result_dict[subsystem_name] = dict()
-        result_dict[subsystem_name][component_name] = dict()
-        result_dict[subsystem_name][component_name]["rom"] = rom_size
-        result_dict[subsystem_name][component_name]["ram"] = ram_size
-        result_dict[subsystem_name][component_name]["bundle.json"] = bundle_path
-
     @classmethod
     def collect(cls, oh_path: str) -> Dict[str, Dict]:
         """
@@ -68,3 +59,12 @@ class RomRamBaselineCollector:
                     logging.warning(f"subsystem=\"{subsystem_name}\", rom=\"{rom_baseline}\", ram=\"{ram_baseline}\" in {bundle}")
                 cls._put(rom_ram_baseline_dict, subsystem_name, component_name, rom_baseline, ram_baseline, bundle)
         return rom_ram_baseline_dict
+    
+    @classmethod
+    def _put(cls, result_dict: Dict, subsystem_name: str, component_name: str, rom_size: str, ram_size: str, bundle_path:str) -> None:
+        if not result_dict.get(subsystem_name):
+            result_dict[subsystem_name] = dict()
+        result_dict[subsystem_name][component_name] = dict()
+        result_dict[subsystem_name][component_name]["rom"] = rom_size
+        result_dict[subsystem_name][component_name]["ram"] = ram_size
+        result_dict[subsystem_name][component_name]["bundle.json"] = bundle_path

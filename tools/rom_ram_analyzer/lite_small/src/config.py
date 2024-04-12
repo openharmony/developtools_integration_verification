@@ -17,6 +17,8 @@
 # products.
 
 
+__all__ = ["configs", "result_dict", "collector_config", "sub_com_dict"]
+
 import os
 import sys
 import argparse
@@ -30,9 +32,6 @@ from pkgs.basic_tool import do_nothing, BasicTool
 from get_subsystem_component import SC
 from misc import *
 from template_processor import *
-"""
-只给rom_analysis.py使用
-"""
 
 
 def parse_args():
@@ -284,5 +283,3 @@ collector_config: Tuple[BaseProcessor] = (
                           resource_field="sources"
                           ),
 )
-
-__all__ = ["configs", "result_dict", "collector_config", "sub_com_dict"]
