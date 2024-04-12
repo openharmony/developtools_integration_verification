@@ -138,9 +138,7 @@ class ChipsetSDKRule(BaseRule):
             headers.append(item)
 
         try:
-            with os.fdopen(os.open(os.path.join(self.get_mgr().get_product_images_path(),
-                                                "chipsetsdk_info.json"),
-                                    os.O_WRONLY | os.O_CREAT, 0o644), "w") as f:
+            with open(os.path.join(self.get_mgr().get_product_images_path(), "chipsetsdk_info.json"), "w") as f:
                 json.dump(headers, f, indent=4)
         except:
             pass
