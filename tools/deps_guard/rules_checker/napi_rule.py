@@ -40,8 +40,8 @@ class NapiRule(BaseRule):
             if len(mod["dependedBy"]) == 0:
                 continue
 
-            targetName = mod["labelPath"][mod["labelPath"].find(":")+1:]
-            if targetName in lists:
+            target_name = mod["labelPath"][mod["labelPath"].find(":")+1:]
+            if target_name in lists:
                 continue
 
             self.error("napi module %s depended by:" % mod["name"])

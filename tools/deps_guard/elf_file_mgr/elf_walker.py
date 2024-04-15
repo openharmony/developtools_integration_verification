@@ -53,20 +53,20 @@ class ELFWalker():
     def __walk_path(self, subdir):
         for root, subdirs, files in os.walk(os.path.join(self._product_out_path, subdir)):
             for _filename in files:
-                _assetFile = os.path.join(root, _filename)
-                if os.path.islink(_assetFile):
-                    if _assetFile.find(".so") > 0:
-                        target = os.readlink(_assetFile)
-                        self._links[_assetFile] = target
+                _asset_file = os.path.join(root, _filename)
+                if os.path.islink(_asset_file):
+                    if _asset_file.find(".so") > 0:
+                        target = os.readlink(_asset_file)
+                        self._links[_asset_file] = target
                     continue
-                if not os.path.isfile(_assetFile):
+                if not os.path.isfile(_asset_file):
                     continue
-                with open(_assetFile, "rb") as f:
+                with open(_asset_file, "rb") as f:
                     data = f.read(4)
                     try:
                         magic = struct.unpack("Bccc", data)
                         if magic[0] == 0x7F and magic[1] == b'E' and magic[2] == b'L' and magic[3] == b'F':
-                            self._files.append(_assetFile)
+                            self._files.append(_asset_file)
                     except:
                         pass
 

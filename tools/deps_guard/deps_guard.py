@@ -19,7 +19,7 @@
 from elf_file_mgr import ElfFileMgr
 
 
-def __createArgParser():
+def __create_arg_parser():
     import argparse
 
     parser = argparse.ArgumentParser(description='Check architecture information from compiled output files.')
@@ -49,6 +49,7 @@ def _deps_guard_module(out_path, args=None):
 
     raise Exception("ERROR: deps_guard failed.")
 
+
 def _startup_guard_module(out_path, target_cpu, args):
     import sys
     import os
@@ -62,6 +63,7 @@ def _startup_guard_module(out_path, target_cpu, args):
 
     startup_guard(out_path, target_cpu, args)
 
+
 def deps_guard(out_path, target_cpu, args=None):
     _deps_guard_module(out_path, args)
     _startup_guard_module(out_path, target_cpu, args)
@@ -69,7 +71,7 @@ def deps_guard(out_path, target_cpu, args=None):
 
 if __name__ == '__main__':
 
-    parser = __createArgParser()
+    parser = __create_arg_parser()
     args = parser.parse_args()
 
     _deps_guard_module(args.input, args)
