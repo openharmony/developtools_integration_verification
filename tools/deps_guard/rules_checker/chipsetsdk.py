@@ -21,6 +21,7 @@ import json
 
 from .base_rule import BaseRule
 
+
 class ChipsetSDKRule(BaseRule):
     RULE_NAME = "ChipsetSDK"
 
@@ -131,14 +132,16 @@ class ChipsetSDKRule(BaseRule):
             for name, innerapi in info[sdk["componentName"]].items():
                 if innerapi["label"] != sdk["labelPath"]:
                     continue
-                gotHeaders = True
+                got_headers = True
                 base = innerapi["header_base"]
                 for f in innerapi["header_files"]:
                     item["headers"].append(os.path.join(base, f))
             headers.append(item)
 
         try:
-            with open(os.path.join(self.get_mgr().get_product_images_path(), "chipsetsdk_info.json"), "w") as f:
+            with os.fdopen(os.open(os.path.join(self.get_mgr().get_product_images_path(),
+                                                "chipsetsdk_info.json"),
+                                    os.O_WRONLY | os.O_CREAT, 0o644), "w") as f:
                 json.dump(headers, f, indent=4)
         except:
             pass
