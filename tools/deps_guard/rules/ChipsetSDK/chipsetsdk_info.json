@@ -529,6 +529,12 @@
         "headers": []
     },
     {
+        "name": "build_framework:libclang_rt.tsan.so",
+        "so_file_name": "libclang_rt.tsan.so",
+        "path": "//build/common/asan:libclang_rt.tsan.so",
+        "headers": []
+    },
+    {
         "name": "soc_perf:socperf_client",
         "so_file_name": "libsocperf_client.z.so",
         "path": "//foundation/resourceschedule/soc_perf/interfaces/inner_api/socperf_client:socperf_client",
