@@ -2,7 +2,7 @@
 #coding=utf-8
 
 #
-# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -23,6 +23,7 @@ from .param.system_parameter_parser import parameters_collect
 from .cfg.config_parser import startup_config_collect
 from .user_group.user_group_parser import create_user_group_parser
 
+
 def __create_arg_parser():
     import argparse
     parser = argparse.ArgumentParser(description='Check startup architecture information from compiled output files.')
@@ -32,8 +33,9 @@ def __create_arg_parser():
                     help='target_cpu cpu type" ', required=True)
     return parser
 
+
 class ConfigParserMgr(object):
-    def __init__(self, path = None):
+    def __init__(self, path=None):
         self._path = path
         self._parser_list = {}
 
@@ -45,7 +47,7 @@ class ConfigParserMgr(object):
 
     def get_parser_by_name(self, key):
         if key:
-            return self._parser_list[key]
+            return self._parser_list.get(key)
 
 if __name__ == '__main__':
     args_parser = __create_arg_parser()

@@ -2,7 +2,7 @@
 #coding=utf-8
 
 #
-# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -19,6 +19,7 @@
 import os
 import json
 
+
 class BaseRule(object):
     RULE_NAME = ""
 
@@ -26,6 +27,11 @@ class BaseRule(object):
         self._args = args
         self._mgr = mgr
         self._white_lists = self.__load_files__("whitelist.json")
+
+    # To be override
+    def __check__(self):
+        # Default pass
+        return True
 
     def __load_files__(self, name):
         rules_dir = []
@@ -38,7 +44,7 @@ class BaseRule(object):
             rules_file = os.path.join(d, self.__class__.RULE_NAME, name)
             try:
                 with open(rules_file, "r") as f:
-                    jsonstr = "".join([ line.strip() for line in f if not line.strip().startswith("//") ])
+                    jsonstr = "".join([line.strip() for line in f if not line.strip().startswith("//")])
                     res = res + json.loads(jsonstr)
             except:
                 pass
@@ -62,8 +68,3 @@ class BaseRule(object):
 
     def get_help_url(self):
         return "https://gitee.com/openharmony/developtools_integration_verification/tree/master/tools/startup_guard/rules/%s/README.md" % self.__class__.RULE_NAME
-
-    # To be override
-    def __check__(self):
-        # Default pass
-        return True
