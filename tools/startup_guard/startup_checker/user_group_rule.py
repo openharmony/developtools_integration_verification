@@ -57,11 +57,11 @@ class UserGroupModuleRule(BaseRule):
             self.error("%s has different passwd and group values" % value["uid"])
 
     def _check_gid_in_passwd(self, passwd):
-        isPassed = True
+        is_passed = True
         for key, value in passwd.items():    
             if value["passwdId"] == value["groupId"]:
                 pass
             else:
-                isPassed = False
+                is_passed = False
                 self.error("%s has different passwd and group values" % value["name"])
-        return isPassed
+        return is_passed

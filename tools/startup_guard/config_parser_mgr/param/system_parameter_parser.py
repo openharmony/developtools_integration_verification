@@ -2,7 +2,7 @@
 #coding=utf-8
 
 #
-# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -18,8 +18,9 @@
 
 import os
 
+
 class ParameterParser(dict):
-    def __init__(self, prefix, parameter = None):
+    def __init__(self, prefix, parameter=None):
         self["prefix"] = prefix
         if parameter == None:
             self["type"] = "string"
@@ -48,22 +49,24 @@ class ParameterParser(dict):
         self["value"] = info.strip("\"").strip("\'")
         return True
 
+
 class ParameterDacParser(ParameterParser):
     def __init__(self, prefix, parameter=None):
         ParameterParser.__init__(self, prefix, parameter)
 
     def decode(self, info):
-        dacInfo = info.strip("\"").strip("\'").split(":")
-        if len(dacInfo) < 3:
+        dac_info = info.strip("\"").strip("\'").split(":")
+        if len(dac_info) < 3:
             print("Invalid dac %s" % info)
             return False
 
-        self["dacUser"] = dacInfo[0]
-        self["dacGroup"] = dacInfo[1]
-        self["dacMode"] = dacInfo[2]
-        if len(dacInfo) > 3:
-            self["type"] = dacInfo[3]
+        self["dacUser"] = dac_info[0]
+        self["dacGroup"] = dac_info[1]
+        self["dacMode"] = dac_info[2]
+        if len(dac_info) > 3:
+            self["type"] = dac_info[3]
         return True
+
 
 class ParameterSelinuxParser(ParameterParser):
     def __init__(self, prefix, parameter=None):
@@ -73,11 +76,12 @@ class ParameterSelinuxParser(ParameterParser):
         self["selinuxLabel"] = info
         return True
 
+
 class ParameterFileParser():
     def __init__(self):
         self._parameters = {}
 
-    def load_parameter_file(self, file_name, str = "="):
+    def load_parameter_file(self, file_name, delimiter="="):
         try:
             with open(file_name, encoding='utf-8') as fp:
                 line = fp.readline()
@@ -85,11 +89,11 @@ class ParameterFileParser():
                     if line.startswith("#") or len(line) < 3:
                         line = fp.readline()
                         continue
-                    paramInfo = line.partition(str)
-                    if len (paramInfo) != 3:
+                    param_info = line.partition(delimiter)
+                    if len(param_info) != 3:
                         line = fp.readline()
                         continue
-                    self._handle_param_info(file_name, paramInfo)
+                    self._handle_param_info(file_name, param_info)
                     line = fp.readline()
         except:
             print("Error, invalid parameter file ", file_name)
@@ -99,7 +103,7 @@ class ParameterFileParser():
         for param in self._parameters.values():
             print(str(param))
 
-    def scan_parameter_file(self, dir):
+    def scan_parameter_file(self, directory):
         parameter_paths = [
             "/system/etc/param/ohos_const",
             "/vendor/etc/param",
@@ -108,7 +112,7 @@ class ParameterFileParser():
             "/system/etc/param",
         ]
         for path in parameter_paths:
-            self._scan_parameter_file("{}/packages/phone{}".format(dir, path))
+            self._scan_parameter_file("{}/packages/phone{}".format(directory, path))
 
     def _handle_param_info(self, file_name, param_info):
         param_name = param_info[0].strip()
@@ -135,13 +139,14 @@ class ParameterFileParser():
                 return True
         return False
 
-    def _scan_parameter_file(self, dir):
-        if not os.path.exists(dir):
+    def _scan_parameter_file(self, directory):
+        if not os.path.exists(directory):
             return
-        with os.scandir(dir) as files:
+        with os.scandir(directory) as files:
             for file in files:
                 if self._check_file(file):
                     self.load_parameter_file(file.path)
+
 
 def __create_arg_parser():
     import argparse
@@ -150,6 +155,7 @@ def __create_arg_parser():
                         help='input parameter files base directory example "out/rk3568/packages/phone/" ', 
                         required=True)
     return parser
+
 
 def parameters_collect(base_path):
     parser = ParameterFileParser()

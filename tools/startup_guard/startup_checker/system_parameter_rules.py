@@ -2,7 +2,7 @@
 #coding=utf-8
 
 #
-# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -18,11 +18,12 @@
 
 from .base_rule import BaseRule
 
+
 class SystemParameterRule(BaseRule):
     RULE_NAME = "NO-Config-SystemParameter-In-INIT"
     CONFIG_DAC_MAX_NUM = 200
     def __check__(self):
-        return self._check_Param_in_init()
+        return self._check_param_in_init()
 
     def _check_param_name(self, param_name, empty_flag):
         # len: (0, 96]
@@ -47,7 +48,7 @@ class SystemParameterRule(BaseRule):
             return False
         return True
 
-    def _check_Param_in_init(self):
+    def _check_param_in_init(self):
         passed = True
         value_empty_flag = True
         white_list =self.get_white_lists()

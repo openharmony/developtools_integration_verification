@@ -24,22 +24,21 @@ class GroupFileParser():
     def __init__(self):
         self._group = {}
 
-    def loadFile(self, fileName):
-        #print(" loadFile %s" % fileName)
-        if not os.path.exists(fileName):
+    def load_file(self, file_name):
+        if not os.path.exists(file_name):
             return
         try:
-            with open(fileName, encoding='utf-8') as fp:
+            with open(file_name, encoding='utf-8') as fp:
                 line = fp.readline()
                 while line :
                     if line.startswith("#") or len(line) < 3:
                         line = fp.readline()
                         continue
-                    groupInfo = line.strip("\n").split(":")
-                    if len (groupInfo) < 3:
+                    group_info = line.strip("\n").split(":")
+                    if len (group_info) < 3:
                         line = fp.readline()
                         continue
-                    self._handleGroupInfo(groupInfo)
+                    self._handle_group_info(group_info)
                     line = fp.readline()
         except:
             pass
@@ -48,18 +47,18 @@ class GroupFileParser():
         for group in self._group.values() :
             print(str(group))
 
-    def _handleGroupInfo(self, groupInfo):
-        name = groupInfo[0].strip()
-        userNames = name
-        if len(groupInfo) > 3 and len(groupInfo[3]) > 0:
-            userNames = groupInfo[3]
-        oldGroup = self._group.get(name)
-        if oldGroup:
+    def _handle_group_info(self, group_info):
+        name = group_info[0].strip()
+        user_names = name
+        if len(group_info) > 3 and len(group_info[3]) > 0:
+            user_names = group_info[3]
+        old_group = self._group.get(name)
+        if old_group:
             return
         group = {
             "name" : name,
-            "groupId" : int(groupInfo[2], 10),
-            "userNames" : userNames
+            "groupId" : int(group_info[2], 10),
+            "user_names" : user_names
         }
         self._group[name] = group
 
@@ -70,22 +69,21 @@ class PasswdFileParser():
         self._name_list = []
         self._uid_list = []
 
-    def loadFile(self, fileName):
-        # print(" loadFile %s" % fileName)
-        if not os.path.exists(fileName):
+    def load_file(self, file_name):
+        if not os.path.exists(file_name):
             return
         try:
-            with open(fileName, encoding='utf-8') as fp:
+            with open(file_name, encoding='utf-8') as fp:
                 line = fp.readline()
                 while line :
                     if line.startswith("#") or len(line) < 3:
                         line = fp.readline()
                         continue
-                    passwdInfo = line.strip("\n").split(":")
-                    if len (passwdInfo) < 4:
+                    passwd_info = line.strip("\n").split(":")
+                    if len (passwd_info) < 4:
                         line = fp.readline()
                         continue
-                    self._handlePasswdInfo(passwdInfo)
+                    self._handle_passwd_info(passwd_info)
                     line = fp.readline()
         except:
             pass
@@ -94,16 +92,16 @@ class PasswdFileParser():
         for group in self._passwd.values() :
             print(str(group))
 
-    def _handlePasswdInfo(self, passwdInfo):
-        name = passwdInfo[0].strip()
-        self._uid_list.append(int(passwdInfo[2], 10))
+    def _handle_passwd_info(self, passwd_info):
+        name = passwd_info[0].strip()
+        self._uid_list.append(int(passwd_info[2], 10))
         self._name_list.append(name)
-        oldPasswd = self._passwd.get(name)
-        if oldPasswd:
+        old_passwd = self._passwd.get(name)
+        if old_passwd:
             return
         
-        gid = int(passwdInfo[3], 10)
-        uid = int(passwdInfo[2], 10)
+        gid = int(passwd_info[3], 10)
+        uid = int(passwd_info[2], 10)
 
         passwd = {
             "name" : name,
@@ -125,12 +123,10 @@ def _create_arg_parser():
 def create_user_group_parser(base_path):
     path = os.path.join(base_path, "packages/phone")
     parser = GroupFileParser()
-    parser.loadFile(os.path.join(path, "system/etc/group"))
-    #parser.dump()
+    parser.load_file(os.path.join(path, "system/etc/group"))
 
     passwd = PasswdFileParser()
-    passwd.loadFile(os.path.join(path, "system/etc/passwd"))
-    # passwd.dump()
+    passwd.load_file(os.path.join(path, "system/etc/passwd"))
     return parser, passwd
 
 if __name__ == '__main__':

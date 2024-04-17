@@ -2,7 +2,7 @@
 #coding=utf-8
 
 #
-# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -21,7 +21,8 @@ import json
 
 from .base_rule import BaseRule
 
-class cmdRule(BaseRule):
+
+class CmdRule(BaseRule):
     RULE_NAME = "NO-Config-Cmds-In-Init"
 
     def __init__(self, mgr, args):
@@ -49,23 +50,23 @@ class cmdRule(BaseRule):
         return passed
 
     def _get_json_service(self):
-        for i in range(len(self._start_modes)):
-            if self._start_modes[i]["start-mode"] == "boot":
-                self._boot_list = self._start_modes[i]["service"]
-            elif self._start_modes[i]["start-mode"] == "condition":
-                self._condition_list = self._start_modes[i]["service"]  
+        for _, start_mode in enumerate(self._start_modes):
+            if start_mode.get("start-mode") == "boot":
+                self._boot_list = start_mode.get("service")
+            elif start_mode.get("start-mode") == "condition":
+                self._condition_list = start_mode.get("service")  
         pass
 
     def _get_start_cmds(self, parser):
-        list = {}
+        lists = {}
         for cmd in parser._cmds:
             if cmd["name"] == "start":
-                list[cmd["content"]] = cmd["fileId"]
+                lists[cmd["content"]] = cmd["fileId"]
                 pass
-        return list  
+        return lists
 
     def _parse_while_list(self):
-        white_lists =self.get_white_lists()[0]
+        white_lists = self.get_white_lists()[0]
         for key, item in white_lists.items():
             if key == "cmds":
                 self._cmds = item
@@ -96,10 +97,9 @@ class cmdRule(BaseRule):
 
     def _check_file_id_in_cmds(self, cmdlist, cmdline):
         file_id_list = set()
-        for i in range(len(cmdlist)):
-            if cmdline == cmdlist[i]["name"]:
-                file_id_list.add(cmdlist[i]["fileId"])
-                pass
+        for _, cmd in enumerate(cmdlist):
+            if cmdline == cmd["name"]:
+                file_id_list.add(cmd["fileId"])
         return file_id_list
 
     def _check_cmdline_in_parser(self, parser):
@@ -122,7 +122,7 @@ class cmdRule(BaseRule):
 
     def _check_selinux(self, parser):
         if parser._selinux != 'enforcing':
-            self.warn("selinux status is %s" %parser._selinux)
+            self.warn("selinux status is %s" % parser._selinux)
             return True
 
         passed = True
