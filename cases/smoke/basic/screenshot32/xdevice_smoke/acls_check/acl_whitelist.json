@@ -79,7 +79,8 @@
   {
     "processName": "audio_server",
     "acls": [
-      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
     ]
   },
   {
