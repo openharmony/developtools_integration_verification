@@ -541,5 +541,13 @@
         "headers": [
             "//foundation/resourceschedule/soc_perf/interfaces/inner_api/socperf_client/include/"
         ]
+    },
+    {
+        "name": "hiprofiler:libffrt_profiler",
+        "so_file_name": "libffrt_profiler.z.so",
+        "path": "//developtools/profiler/device/plugins/ffrt_profiler/client:libffrt_profiler",
+        "headers": [
+            "//developtools/profiler/device/plugins/ffrt_profiler/client/include/"
+        ]
     }
 ]
