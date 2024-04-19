@@ -421,23 +421,23 @@ def send_times(mycmd):
 def start_cmd(sn):
     try:
         os.system("hdc -l5 start")
-        power_cmd = "hdc -t %s shell \"power-shell setmode 602\"" % sn
+        # power_cmd = "hdc -t %s shell \"power-shell setmode 602\"" % sn
         hilog_cmd = "hdc -t %s shell \"hilog -w start -l 400000000 -m none\"" % sn
-        logger.info(power_cmd)
+        # logger.info(power_cmd)
         logger.info(hilog_cmd)
-        power_result = sendCmd(power_cmd)
-        logger.info(power_result)
-        if not power_result:
-            return False
-        number = 0
-        while "Set Mode Success" not in power_result and number < 30:
-            time.sleep(4)
-            power_result = sendCmd(power_cmd)
-            logger.info(power_result)
-            number += 1
-            if number >= 20:
-                logger.error("Set mode failed")
-                return False
+        # power_result = sendCmd(power_cmd)
+        # logger.info(power_result)
+        # if not power_result:
+        #     return False
+        # number = 0
+        # while "Set Mode Success" not in power_result and number < 30:
+        #     time.sleep(4)
+        #     power_result = sendCmd(power_cmd)
+        #     logger.info(power_result)
+        #     number += 1
+        #     if number >= 20:
+        #         logger.error("Set mode failed")
+        #         return False
         hilog_result = sendCmd(hilog_cmd)
         logger.info(hilog_result)
         return True
