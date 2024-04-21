@@ -46,7 +46,7 @@ class ElfFileWithDepsInfo(ElfFile):
     def __str__(self):
         return "%s:%d deps(%d) dependedBy(%d)" % (self["name"], self["id"], len(self["deps"]), len(self["dependedBy"]))
 
-    def dependsOn(self, mod):
+    def depends_on(self, mod):
         for dep in self["deps"]:
             if dep["callee"] == mod:
                 return True
@@ -77,22 +77,22 @@ class Dependency(dict):
 
 
 class ElfFileMgr(object):
-    def __init__(self, product_out_path=None, elfFileClass=None, dependenceClass=None):
-        self._elfFiles = []
+    def __init__(self, product_out_path=None, elfFile_class=None, dependence_class=None):
+        self._elf_files = []
         self._path_dict = {}
         self._basename_dict = {}
-        if elfFileClass:
-            self._elfFileClass = elfFileClass
+        if elfFile_class:
+            self._elfFile_class = elfFile_class
         else:
-            self._elfFileClass = ElfFileWithDepsInfo
+            self._elfFile_class = ElfFileWithDepsInfo
 
         self._deps = []
-        if dependenceClass:
-            self._dependenceClass = dependenceClass
+        if dependence_class:
+            self._dependence_class = dependence_class
         else:
-            self._dependenceClass = Dependency
-        self._depIdx = 1
-        self._elfIdx = 1
+            self._dependence_class = Dependency
+        self._dep_idx = 1
+        self._elf_idx = 1
 
         self._not_found_depened_files = []
 
@@ -107,8 +107,8 @@ class ElfFileMgr(object):
         self._scan_all_elf_files(walker)
         self._build_deps_tree()
 
-        self._maxDepth = 0
-        self._maxTotalDepends = 0
+        self._max_depth = 0
+        self._max_total_depends = 0
 
         print("Load compile information now ...")
         CompileInfoLoader.load(self, self._product_out_path)
@@ -123,9 +123,9 @@ class ElfFileMgr(object):
 
     def add_elf_file(self, elf):
         # Append to array in order
-        elf["id"] = self._elfIdx
-        self._elfIdx = self._elfIdx + 1
-        self._elfFiles.append(elf)
+        elf["id"] = self._elf_idx
+        self._elf_idx = self._elf_idx + 1
+        self._elf_files.append(elf)
 
         # Add to dictionary with path as key
         self._path_dict[elf["path"]] = elf
@@ -137,12 +137,12 @@ class ElfFileMgr(object):
             self._basename_dict[elf["name"]] = [elf]
 
     def add_dependence(self, caller, callee):
-        dep = self._dependenceClass(self._depIdx, caller, callee)
+        dep = self._dependence_class(self._dep_idx, caller, callee)
         caller["deps"].append(dep)
         callee["dependedBy"].append(dep)
 
         self._deps.append(dep)
-        self._depIdx = self._depIdx + 1
+        self._dep_idx = self._dep_idx + 1
         return dep
 
     def get_elf_by_path(self, path):
@@ -167,9 +167,9 @@ class ElfFileMgr(object):
         return None
 
     def get_elf_by_idx(self, idx):
-        if idx < 1 or idx > len(self._elfFiles):
+        if idx < 1 or idx > len(self._elf_files):
             return None
-        return self._elfFiles[idx - 1]
+        return self._elf_files[idx - 1]
 
     def get_elf_by_name(self, name):
         if name in self._basename_dict:
@@ -178,7 +178,7 @@ class ElfFileMgr(object):
         return self.__get_link_file(name)
 
     def get_all(self):
-        return self._elfFiles
+        return self._elf_files
 
     def get_all_deps(self):
         return self._deps
@@ -186,7 +186,7 @@ class ElfFileMgr(object):
     def _scan_all_elf_files(self, walker):
         print("Scanning %d ELF files now ..." % len(walker.get_elf_files()))
         for f in walker.get_elf_files():
-            elf = self._elfFileClass(f, self._prefix)
+            elf = self._elfFile_class(f, self._prefix)
             if elf["path"] in self._path_dict:
                 print("Warning: duplicate " + elf.get_file() + ' skipped.')
                 continue
@@ -221,15 +221,15 @@ class ElfFileMgr(object):
         if not path.startswith("/"):
             path = "/" + path
         if path.find("/lib64/") > 0:
-            pathOrder = "/system/lib64:/vendor/lib64:/vendor/lib64/chipsetsdk:/system/lib64/ndk:/system/lib64/chipset-pub-sdk:/system/lib64/chipset-sdk:/system/lib64/platformsdk:/system/lib64/priv-platformsdk:/system/lib64/priv-module:/system/lib64/module:/system/lib64/module/data:/system/lib64/module/multimedia:/system/lib:/vendor/lib:/system/lib/ndk:/system/lib/chipset-pub-sdk:/system/lib/chipset-sdk:/system/lib/platformsdk:/system/lib/priv-platformsdk:/system/lib/priv-module:/system/lib/module:/system/lib/module/data:/system/lib/module/multimedia:/lib64:/lib:/usr/local/lib:/usr/lib"
+            path_order = "/system/lib64:/vendor/lib64:/vendor/lib64/chipsetsdk:/system/lib64/ndk:/system/lib64/chipset-pub-sdk:/system/lib64/chipset-sdk:/system/lib64/platformsdk:/system/lib64/priv-platformsdk:/system/lib64/priv-module:/system/lib64/module:/system/lib64/module/data:/system/lib64/module/multimedia:/system/lib:/vendor/lib:/system/lib/ndk:/system/lib/chipset-pub-sdk:/system/lib/chipset-sdk:/system/lib/platformsdk:/system/lib/priv-platformsdk:/system/lib/priv-module:/system/lib/module:/system/lib/module/data:/system/lib/module/multimedia:/lib64:/lib:/usr/local/lib:/usr/lib"
         else:
-            pathOrder = "/system/lib:/vendor/lib:/vendor/lib/chipsetsdk:/system/lib/ndk:/system/lib/chipset-pub-sdk:/system/lib/chipset-sdk:/system/lib/platformsdk:/system/lib/priv-platformsdk:/system/lib/priv-module:/system/lib/module:/system/lib/module/data:/system/lib/module/multimedia:/lib:/usr/local/lib:/usr/lib"
+            path_order = "/system/lib:/vendor/lib:/vendor/lib/chipsetsdk:/system/lib/ndk:/system/lib/chipset-pub-sdk:/system/lib/chipset-sdk:/system/lib/platformsdk:/system/lib/priv-platformsdk:/system/lib/priv-module:/system/lib/module:/system/lib/module/data:/system/lib/module/multimedia:/lib:/usr/local/lib:/usr/lib"
 
         if path.rfind("/") < 0:
             return 1000
 
         path = path[:path.rfind("/")]
-        paths = pathOrder.split(':')
+        paths = path_order.split(':')
         idx = 0
         for p in paths:
             if p == path:
@@ -238,10 +238,10 @@ class ElfFileMgr(object):
         return 1000
 
     def _build_deps_tree(self):
-        print("Build dependence tree for %d ELF files now ..." % len(self._elfFiles))
-        for elf in self._elfFiles:
+        print("Build dependence tree for %d ELF files now ..." % len(self._elf_files))
+        for elf in self._elf_files:
             self.__build_deps_tree_for_one_elf(elf)
-        print("    Got %d dependencies" % self._depIdx)
+        print("    Got %d dependencies" % self._dep_idx)
 
     def __build_deps_tree_for_one_elf(self, elf):
         for lib in elf.library_depends():
