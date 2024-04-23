@@ -21,7 +21,7 @@ import itertools
 import os
 import re
 import glob
-from typing import *
+from typing import Dict, Any, List, Callable, Text, Iterator
 import unittest
 
 

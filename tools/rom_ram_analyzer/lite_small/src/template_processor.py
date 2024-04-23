@@ -82,6 +82,10 @@ class BaseProcessor(ABC):
     
     def __call__(self, *args, **kwargs):
         self.run()
+    
+    @abstractmethod
+    def run(self):
+        ...
 
     def _append(self, key: str, unit: Dict) -> None:
         """
@@ -107,10 +111,6 @@ class BaseProcessor(ABC):
             return str(), str()
         alter_list.sort(key=lambda x: len(x), reverse=True)
         return self.sc_dict[alter_list[0]].get("subsystem"),  self.sc_dict[alter_list[0]].get("component")
-
-    @abstractmethod
-    def run(self):
-        ...
 
 
 def _gn_var_process(project_path: str, gn_v: str, alt_v: str, gn_path: str, ifrom: str, efrom: str, strip_quote: bool = False) -> Tuple[str, str]:

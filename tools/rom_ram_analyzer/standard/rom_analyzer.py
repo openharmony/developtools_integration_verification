@@ -126,6 +126,20 @@ class RomAnalyzer:
             f.write(json.dumps(result_dict, indent=4))
         if output_execel:
             cls.__save_result_as_excel(result_dict, output_file, add_baseline)
+    
+    @classmethod
+    def result_unit_adaptive(self, result_dict: Dict[str, Dict]) -> None:
+        for subsystem_name, subsystem_info in result_dict.items():
+            size = unit_adaptive(subsystem_info["size"])
+            count = subsystem_info["file_count"]
+            if "size" in subsystem_info.keys():
+                del subsystem_info["size"]
+            if "file_count" in subsystem_info.keys():
+                del subsystem_info["file_count"]
+            for component_name, component_info in subsystem_info.items():
+                component_info["size"] = unit_adaptive(component_info["size"])
+            subsystem_info["size"] = size
+            subsystem_info["file_count"] = count
 
     @classmethod
     def __collect_product_info(cls, system_module_info_json: Text,
@@ -284,20 +298,6 @@ class RomAnalyzer:
         result_dict[subsystem_name][component_name]["size"] += size
         result_dict[subsystem_name][component_name]["file_count"] += 1
         result_dict[subsystem_name][component_name][relative_filepath] = size
-
-    @classmethod
-    def result_unit_adaptive(self, result_dict: Dict[str, Dict]) -> None:
-        for subsystem_name, subsystem_info in result_dict.items():
-            size = unit_adaptive(subsystem_info["size"])
-            count = subsystem_info["file_count"]
-            if "size" in subsystem_info.keys():
-                del subsystem_info["size"]
-            if "file_count" in subsystem_info.keys():
-                del subsystem_info["file_count"]
-            for component_name, component_info in subsystem_info.items():
-                component_info["size"] = unit_adaptive(component_info["size"])
-            subsystem_info["size"] = size
-            subsystem_info["file_count"] = count
 
 
 def get_args():
