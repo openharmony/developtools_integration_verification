@@ -21,7 +21,7 @@ import re
 import ast
 import json
 import collections
-from typing import *
+from typing import List
 if __name__ == '__main__':
     from basic_tool import BasicTool
 else:

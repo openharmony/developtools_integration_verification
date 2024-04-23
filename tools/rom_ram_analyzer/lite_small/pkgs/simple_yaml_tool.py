@@ -16,7 +16,7 @@
 # This file contains a SimpleYamlTool, which is a implemented based on the package named yaml for easy use.
 
 import yaml
-from typing import *
+from typing import Dict
 from yaml.loader import SafeLoader
 
 
