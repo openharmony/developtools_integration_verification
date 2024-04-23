@@ -14,6 +14,20 @@
         ]
     },
     {
+        "name": "drivers_interface_display:libdisplay_buffer_proxy_1.2",
+        "so_file_name": "libdisplay_buffer_proxy_1.2.z.so",
+        "path": "//drivers/interface/display/buffer/v1_2:libdisplay_buffer_proxy_1.2",
+        "headers": [
+            "//drivers/hdf_core/adapter/uhdf2/include/hdi/",
+            "//drivers/hdf_core/adapter/uhdf2/osal/include/",
+            "//drivers/hdf_core/adapter/uhdf2/ipc/include/",
+            "//drivers/hdf_core/framework/include/utils/",
+            "//drivers/hdf_core/interfaces/inner_api/utils/",
+            "//drivers/hdf_core/interfaces/inner_api/osal/uhdf/",
+            "//drivers/hdf_core/interfaces/inner_api/hdi/"
+        ]
+    },
+    {
         "name": "eventhandler:libeventhandler",
         "so_file_name": "libeventhandler.z.so",
         "path": "//base/notification/eventhandler/frameworks/eventhandler:libeventhandler",
@@ -50,6 +64,14 @@
         "name": "drivers_interface_display:libdisplay_buffer_hdi_impl",
         "so_file_name": "libdisplay_buffer_hdi_impl.z.so",
         "path": "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_hdi_impl",
+        "headers": [
+            "//drivers/interface/display/buffer/"
+        ]
+    },
+    {
+        "name": "drivers_interface_display:libdisplay_buffer_hdi_impl_v1_2",
+        "so_file_name": "libdisplay_buffer_hdi_impl_v1_2.z.so",
+        "path": "//drivers/interface/display/buffer/v1_2:libdisplay_buffer_hdi_impl_v1_2",
         "headers": [
             "//drivers/interface/display/buffer/"
         ]
