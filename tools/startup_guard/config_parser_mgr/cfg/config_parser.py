@@ -473,12 +473,12 @@ class ConfigParser():
                     if line.startswith("#") or len(line) < 3:
                         line = fp.readline()
                         continue
-                    param_Info = line.partition("=")
-                    if len(param_Info) != 3:
+                    param_info = line.partition("=")
+                    if len(param_info) != 3:
                         line = fp.readline()
                         continue
-                    if param_Info[0].strip() == "SELINUX":
-                        self._selinux = param_Info[2].strip()
+                    if param_info[0].strip() == "SELINUX":
+                        self._selinux = param_info[2].strip()
                     line = fp.readline()
         except:
             print("Error, invalid parameter file ", file_name)

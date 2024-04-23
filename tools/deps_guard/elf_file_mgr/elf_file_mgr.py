@@ -77,14 +77,14 @@ class Dependency(dict):
 
 
 class ElfFileMgr(object):
-    def __init__(self, product_out_path=None, elfFile_class=None, dependence_class=None):
+    def __init__(self, product_out_path=None, elf_file_class=None, dependence_class=None):
         self._elf_files = []
         self._path_dict = {}
         self._basename_dict = {}
-        if elfFile_class:
-            self._elfFile_class = elfFile_class
+        if elf_file_class:
+            self._elf_file_class = elf_file_class
         else:
-            self._elfFile_class = ElfFileWithDepsInfo
+            self._elf_file_class = ElfFileWithDepsInfo
 
         self._deps = []
         if dependence_class:
@@ -186,7 +186,7 @@ class ElfFileMgr(object):
     def _scan_all_elf_files(self, walker):
         print("Scanning %d ELF files now ..." % len(walker.get_elf_files()))
         for f in walker.get_elf_files():
-            elf = self._elfFile_class(f, self._prefix)
+            elf = self._elf_file_class(f, self._prefix)
             if elf["path"] in self._path_dict:
                 print("Warning: duplicate " + elf.get_file() + ' skipped.')
                 continue
