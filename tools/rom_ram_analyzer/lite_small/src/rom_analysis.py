@@ -96,6 +96,14 @@ class RomAnalysisTool:
         gn_info_file = configs["gn_info_file"]
         with os.fdopen(os.open(gn_info_file, os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
             json.dump(result_dict, f, indent=4)
+    
+    @classmethod
+    def collect_product_info(cls, product_name: str):
+        logging.info("start scanning compile products")
+        product_dict: Dict[str, List[str]] = cls._find_files(product_name)
+        with os.fdopen(os.open(configs[product_name]["product_infofile"], os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
+            json.dump(product_dict, f, indent=4)
+        return product_dict
 
     @classmethod
     def _add_rest_dir(cls, top_dir: str, rela_path: str, sub_path: str, dir_list: List[str]) -> None:
@@ -174,14 +182,6 @@ class RomAnalysisTool:
             for r in rest_dir_list:
                 product_dict["etc"].extend(
                     BasicTool.find_files_with_pattern(os.path.join(root_dir, r)))
-        return product_dict
-
-    @classmethod
-    def collect_product_info(cls, product_name: str):
-        logging.info("start scanning compile products")
-        product_dict: Dict[str, List[str]] = cls._find_files(product_name)
-        with os.fdopen(os.open(configs[product_name]["product_infofile"], os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
-            json.dump(product_dict, f, indent=4)
         return product_dict
 
     @classmethod
