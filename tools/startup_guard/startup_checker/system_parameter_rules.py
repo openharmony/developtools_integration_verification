@@ -22,6 +22,7 @@ from .base_rule import BaseRule
 class SystemParameterRule(BaseRule):
     RULE_NAME = "NO-Config-SystemParameter-In-INIT"
     CONFIG_DAC_MAX_NUM = 200
+
     def __check__(self):
         return self._check_param_in_init()
 
@@ -51,7 +52,7 @@ class SystemParameterRule(BaseRule):
     def _check_param_in_init(self):
         passed = True
         value_empty_flag = True
-        white_list =self.get_white_lists()
+        white_list = self.get_white_lists()
         parser = self.get_mgr().get_parser_by_name('system_parameter_parser')
         counts = 0
         for key, item in parser._parameters.items():
