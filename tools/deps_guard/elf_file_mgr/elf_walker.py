@@ -57,6 +57,9 @@ class ELFWalker():
                 if os.path.islink(_asset_file):
                     if _asset_file.find(".so") > 0:
                         target = os.readlink(_asset_file)
+                        if target.startswith("./"):
+                            print("***link_file {} >> {}".format(_asset_file, target))
+                            target = target[2:]
                         self._links[_asset_file] = target
                     continue
                 if not os.path.isfile(_asset_file):
