@@ -192,7 +192,7 @@ class ElfFileMgr(object):
                 continue
 
             # Ignore these files
-            if elf["name"] in ["ld-musl-aarch64.so.1", "ld-musl-arm.so.1", "hdc_std"]:
+            if elf["name"] in ["hdc_std"]:
                 continue
 
             self.add_elf_file(elf)
