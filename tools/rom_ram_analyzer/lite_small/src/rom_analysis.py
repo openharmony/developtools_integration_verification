@@ -30,7 +30,7 @@ import argparse
 import json
 import logging
 import os
-from typing import *
+from typing import Dict, List, Tuple, Text
 import copy
 import preprocess
 from time import time

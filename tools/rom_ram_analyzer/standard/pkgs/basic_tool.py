@@ -19,7 +19,7 @@ import os
 import glob
 import re
 from pathlib import Path
-from typing import *
+from typing import Text, Callable, Any, Iterator
 
 
 def unit_adaptive(size: int) -> str:

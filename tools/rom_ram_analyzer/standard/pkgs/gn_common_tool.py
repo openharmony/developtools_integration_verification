@@ -16,7 +16,7 @@
 import os
 import json
 import re
-from typing import *
+from typing import List, Tuple
 
 if __name__ == '__main__':
     from basic_tool import BasicTool
