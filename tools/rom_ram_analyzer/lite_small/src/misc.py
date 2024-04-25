@@ -22,7 +22,7 @@ import os
 import logging
 from abc import ABC, abstractmethod
 from collections import defaultdict
-from typing import *
+from typing import Text, List, Dict, AnyStr, DefaultDict
 from pprint import pprint
 import preprocess
 from pkgs.gn_common_tool import GnVariableParser
@@ -145,7 +145,8 @@ class HapPackPostHandler(BasePostHandler):
 
 class HAPPostHandler(BasePostHandler):
     """
-    for ohos_hap"""
+    for ohos_hap
+    """
 
     def run(self, unit: Dict[str, AnyStr]):
         extension = _config.get("default_extension").get("app")
@@ -157,7 +158,8 @@ class HAPPostHandler(BasePostHandler):
 
 class SOPostHandler(BasePostHandler):
     """
-    for shared_library"""
+    for shared_library
+    """
 
     def run(self, unit: Dict[str, AnyStr]):
         output_name = unit["output_name"]
@@ -174,7 +176,8 @@ class SOPostHandler(BasePostHandler):
 
 class APostHandler(BasePostHandler):
     """
-    for static library"""
+    for static library
+    """
 
     def run(self, unit: Dict[str, AnyStr]):
         output_name = unit["output_name"]
@@ -188,7 +191,8 @@ class APostHandler(BasePostHandler):
 
 class LiteLibPostHandler(BasePostHandler):
     """
-    for lite_library"""
+    for lite_library
+    """
 
     def run(self, unit: Dict[str, AnyStr]):
         tp = unit["real_target_type"]
@@ -210,7 +214,8 @@ class LiteLibPostHandler(BasePostHandler):
 
 class LiteComponentPostHandler(BasePostHandler):
     """
-    for lite_component"""
+    for lite_component
+    """
 
     def run(self, unit: Dict[str, AnyStr]):
         tp = unit["real_target_type"]
@@ -232,7 +237,8 @@ class LiteComponentPostHandler(BasePostHandler):
 
 class TargetPostHandler(BasePostHandler):
     """
-    for target(a,b){}"""
+    for target(a,b){}
+    """
 
     def run(self, unit: Dict[str, AnyStr]):
         ...

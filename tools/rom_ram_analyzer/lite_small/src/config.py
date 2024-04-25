@@ -24,7 +24,7 @@ import sys
 import argparse
 import json
 import logging
-from typing import *
+from typing import Any
 
 import preprocess
 from pkgs.simple_yaml_tool import SimpleYamlTool

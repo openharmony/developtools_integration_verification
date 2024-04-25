@@ -21,7 +21,7 @@ import os
 import sys
 import typing
 from copy import deepcopy
-from typing import *
+from typing import Dict, Any, Iterator, List, Text
 import re
 import subprocess
 from pkgs.rom_ram_baseline_collector import RomRamBaselineCollector
@@ -301,11 +301,11 @@ class RomAnalyzer:
 
 
 def get_args():
-    VERSION = 2.0
+    version_num = 2.0
     parser = argparse.ArgumentParser(
         description=f"analyze rom size of component.\n")
     parser.add_argument("-v", "-version", action="version",
-                        version=f"version {VERSION}")
+                        version=f"version {version_num}")
     parser.add_argument("-p", "--project_path", type=str, required=True,
                         help="root path of openharmony. eg: -p ~/openharmony")
     parser.add_argument("-j", "--module_info_json", required=True, type=str,

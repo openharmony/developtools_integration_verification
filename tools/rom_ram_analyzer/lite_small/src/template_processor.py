@@ -16,7 +16,7 @@
 # This file contains some template processor to collection information 
 # from some gn's template in BUILD.gn
 
-from typing import *
+from typing import Tuple, Union, Callable, Literal
 from abc import ABC, abstractmethod
 import os
 import logging
