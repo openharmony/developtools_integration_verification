@@ -157,26 +157,26 @@ class liteOsUpgrade_RK3568(BaseApp):
                         reboot_result = sendCmd(reboot_devices_cmd)
                         logger.info(reboot_result)
                         time.sleep(30)
-                        try:
-                            if upgrade_test_type != "mini_system_test":
-                                if not start_cmd(sn):
-                                    if self.check_devices_mode():
-                                        return 98
-                                    return False
-                        except Exception as t:
-                            logger.info(t)
-                            if self.check_devices_mode():
-                                return 98
-                            return False
-                        time.sleep(10)
+                        # try:
+                        #     if upgrade_test_type != "mini_system_test":
+                        #         if not start_cmd(sn):
+                        #             if self.check_devices_mode():
+                        #                 return 98
+                        #             return False
+                        # except Exception as t:
+                        #     logger.info(t)
+                        #     if self.check_devices_mode():
+                        #         return 98
+                        #     return False
+                        # time.sleep(10)
                         if "Reset Device OK" not in reboot_result:
                             logger.error("Failed to reboot the board!")
                             return False
                         else:
                             logger.info("Reboot successfully!")
                             logger.printLog("******下载完成，升级成功，开始进行冒烟测试******")
-                            os.system("hdc_std -t %s shell hilog -w start" % sn)
-                            os.system("hdc_std -t %s shell hilog -w start -t kmsg" % sn)
+                            # os.system("hdc_std -t %s shell hilog -w start" % sn)
+                            # os.system("hdc_std -t %s shell hilog -w start -t kmsg" % sn)
                             if upgrade_test_type == "null":
                                 return True
                             screenshot_path = os.path.join(local_image_path, "screenshot")
@@ -219,7 +219,7 @@ class liteOsUpgrade_RK3568(BaseApp):
 
     @timeout(1000)
     def flash_version(self):
-        partList = ["boot_linux", "system", "vendor", "userdata", "resource", "ramdisk", "chipset", "sys-prod", "chip-prod"]
+        partList = ["boot_linux", "system", "vendor", "userdata", "resource", "ramdisk", "chip_skm", "sys_prod", "chip_prod"]
         for i in partList:
             if not os.path.exists("%s/%s.img" % (local_image_path, i)):
                 logger.printLog("%s.img is not exist, ignore" % i)
