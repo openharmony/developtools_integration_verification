@@ -219,7 +219,7 @@ class liteOsUpgrade_RK3568(BaseApp):
 
     @timeout(1000)
     def flash_version(self):
-        partList = ["boot_linux", "system", "vendor", "userdata", "resource", "ramdisk", "chip_skm", "sys_prod", "chip_prod"]
+        partList = ["boot_linux", "system", "vendor", "userdata", "resource", "ramdisk", "chipset", "sys-prod", "chip-prod"]
         for i in partList:
             if not os.path.exists("%s/%s.img" % (local_image_path, i)):
                 logger.printLog("%s.img is not exist, ignore" % i)
