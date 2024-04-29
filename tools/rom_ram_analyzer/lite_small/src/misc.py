@@ -244,7 +244,7 @@ class TargetPostHandler(BasePostHandler):
         ...
 
 
-def LiteLibS2MPostHandler(unit: Dict, result_dict: Dict) -> None:
+def lite_lib_s2m_post_handler(unit: Dict, result_dict: Dict) -> None:
     rt = unit.get("real_target_type")
     new_unit = copy.deepcopy(unit)
     if rt == "shared_library":
@@ -270,7 +270,7 @@ def LiteLibS2MPostHandler(unit: Dict, result_dict: Dict) -> None:
         result_dict["lite_library"][k] = new_new_unit
 
 
-def TargetS2MPostHandler(unit: Dict, result_dict: Dict) -> None:
+def target_s2m_post_handler(unit: Dict, result_dict: Dict) -> None:
     unit["description"] = "may not exist"
     tmp_a = copy.deepcopy(unit)
     tmp_a["real_target_type"] = "static_library"
