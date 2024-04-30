@@ -165,7 +165,7 @@ collector_config: Tuple[BaseProcessor] = (
                          "extension": extension_handler,
                      },
                      unit_post_handler=LiteLibPostHandler(),
-                     ud_post_handler=LiteLibS2MPostHandler,
+                     ud_post_handler=lite_lib_s2m_post_handler,
                      ),
     DefaultProcessor(project_path=project_path,    # hap有个hap_name
                      result_dict=result_dict,
@@ -248,7 +248,7 @@ collector_config: Tuple[BaseProcessor] = (
                      other_info_handlers={
                      },
                      unit_post_handler=DefaultPostHandler(),
-                     ud_post_handler=TargetS2MPostHandler
+                     ud_post_handler=target_s2m_post_handler
                      ),
     DefaultProcessor(project_path=project_path,
                      result_dict=result_dict,
