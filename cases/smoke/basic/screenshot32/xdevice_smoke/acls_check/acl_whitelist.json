@@ -134,7 +134,8 @@
   {
     "processName": "backup_sa",
     "acls": [
-      "ohos.permission.INSTALL_BUNDLE"
+      "ohos.permission.INSTALL_BUNDLE",
+      "ohos.permission.ACCESS_EXT_SYSTEM_ABILITY"
     ]
   },
   {
