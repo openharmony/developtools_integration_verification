@@ -80,6 +80,6 @@
 	"libsocperf_client.z.so",
 
 	"libffrt_profiler.z.so",
-    "libpulsecore.z.so",
-    "libpulsecommon.z.so"
+        "libpulsecore.z.so",
+        "libpulsecommon.z.so"
 ]
