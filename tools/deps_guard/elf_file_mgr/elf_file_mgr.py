@@ -265,7 +265,11 @@ class ElfFileMgr(object):
                 print("before abspath {}".format(tmp_name))
                 tmp_name = os.path.abspath(tmp_name)
                 print("libc.so link to {}".format(tmp_name))
-                tmp_name = re.sub(r"\*", "", tmp_name)
+                print(type(tmp_name))
+                print("re.match * in tmp_name :".format(re.match(r"\*", tmp_name).group()))
+                tmp_name_n = re.sub(r"\*", "", tmp_name)
+                print("re.sub * tmp_name:".format(tmp_name_n))
+                tmp_name = tmp_name_n
                 print("after remove * in tmp_name {}".format(tmp_name))
             link_elf = ElfFile(tmp_name, self._prefix)
             if name in ["libc.so"]:
