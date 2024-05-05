@@ -79,5 +79,7 @@
 	"libuds_channel.z.so",
 	"libsocperf_client.z.so",
 
-	"libffrt_profiler.z.so"
+	"libffrt_profiler.z.so",
+    "libpulsecore.z.so",
+    "libpulsecommon.z.so"
 ]
