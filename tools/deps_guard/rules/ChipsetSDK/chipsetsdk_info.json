@@ -305,6 +305,18 @@
         "headers": []
     },
     {
+        "name": "pulsecore:pulsecore",
+        "so_file_name": "libpulsecore.z.so",
+        "path": "//third_party/pulseaudio/ohosbuild/src/pulsecore:pulsecore",
+        "headers": []
+    },
+    {
+        "name": "src:pulsecommon",
+        "so_file_name": "libpulsecommon.z.so",
+        "path": "//third_party/pulseaudio/ohosbuild/src:pulsecommon",
+        "headers": []
+    },
+    {
         "name": "protobuf:protobuf_lite",
         "so_file_name": "libprotobuf_lite.z.so",
         "path": "//third_party/protobuf:protobuf_lite",
