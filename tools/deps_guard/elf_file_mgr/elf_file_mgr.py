@@ -19,6 +19,7 @@
 import string
 import sys
 import os
+import re
 
 from .elf_file import ElfFile
 from .elf_walker import ELFWalker
@@ -264,6 +265,8 @@ class ElfFileMgr(object):
                 print("before abspath {}".format(tmp_name))
                 tmp_name = os.path.abspath(tmp_name)
                 print("libc.so link to {}".format(tmp_name))
+                tmp_name = re.sub(r"\*", "", tmp_name)
+                print("after remove * in tmp_name {}".format(tmp_name))
             link_elf = ElfFile(tmp_name, self._prefix)
             if name in ["libc.so"]:
                 print("link_elf['path'] {}".format(link_elf["path"]))
