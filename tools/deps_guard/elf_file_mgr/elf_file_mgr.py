@@ -261,22 +261,11 @@ class ElfFileMgr(object):
             tmp_name = os.path.dirname(src)
             tmp_name = os.path.join(tmp_name, target)
             if name in ["libc.so"]:
-                print("before abspath {}".format(tmp_name))
                 tmp_name = os.path.normpath(tmp_name)
-                print("libc.so link to {}".format(tmp_name))
-                abs_prefix = os.path.normpath(self._prefix) + "/"
-                print("self._prefix :{} len: {}".format(self._prefix, len(self._prefix)))
-                print("abs_prefix :{} len: {}".format(abs_prefix, len(abs_prefix)))
-                prefix_len = len(self._prefix)
-                abs_prefix_len = len(abs_prefix)
-                print("tmp_name[prefix_len:] {}".format(tmp_name[prefix_len:]))
-                print("tmp_name[abs_prefix:] {}".format(tmp_name[abs_prefix_len:]))
-                link_elf = ElfFile(tmp_name, abs_prefix)
+                norm_prefix = os.path.normpath(self._prefix) + "/"
+                link_elf = ElfFile(tmp_name, norm_prefix)
             else:
                 link_elf = ElfFile(tmp_name, self._prefix)
-            if name in ["libc.so"]:
-                print("link_elf['path'] {}".format(link_elf["path"]))
-                print("get_elf_by_path {}".format(self.get_elf_by_path(link_elf["path"])))
             return self.get_elf_by_path(link_elf["path"])
 
 
