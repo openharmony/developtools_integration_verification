@@ -24,14 +24,16 @@ import sys
 import argparse
 import json
 import logging
-from typing import Any
+from typing import Any, Tuple, Dict, Text
 
 import preprocess
 from pkgs.simple_yaml_tool import SimpleYamlTool
 from pkgs.basic_tool import do_nothing, BasicTool
 from get_subsystem_component import SC
-from misc import *
-from template_processor import *
+from misc import TargetNameParser, SOPostHandler, APostHandler, DefaultPostHandler, LiteLibPostHandler, \
+    LiteComponentPostHandler, UnittestPostHandler, HAPPostHandler, HapPackPostHandler, lite_lib_s2m_post_handler, \
+    target_s2m_post_handler, extension_handler, target_type_handler, hap_name_handler, mod_handler
+from template_processor import BaseProcessor, DefaultProcessor, StrResourceProcessor, ListResourceProcessor
 
 
 def parse_args():
@@ -163,7 +165,7 @@ collector_config: Tuple[BaseProcessor] = (
                          "extension": extension_handler,
                      },
                      unit_post_handler=LiteLibPostHandler(),
-                     ud_post_handler=LiteLibS2MPostHandler,
+                     ud_post_handler=lite_lib_s2m_post_handler,
                      ),
     DefaultProcessor(project_path=project_path,    # hap有个hap_name
                      result_dict=result_dict,
@@ -246,7 +248,7 @@ collector_config: Tuple[BaseProcessor] = (
                      other_info_handlers={
                      },
                      unit_post_handler=DefaultPostHandler(),
-                     ud_post_handler=TargetS2MPostHandler
+                     ud_post_handler=target_s2m_post_handler
                      ),
     DefaultProcessor(project_path=project_path,
                      result_dict=result_dict,

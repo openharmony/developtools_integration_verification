@@ -16,7 +16,7 @@
 # This file contains some template processor to collection information 
 # from some gn's template in BUILD.gn
 
-from typing import Tuple, Union, Callable, Literal
+from typing import Tuple, Union, Callable, Literal, Dict, Text
 from abc import ABC, abstractmethod
 import os
 import logging
@@ -24,7 +24,7 @@ from pprint import pprint
 
 from pkgs.basic_tool import do_nothing, BasicTool
 from pkgs.gn_common_tool import GnCommonTool, GnVariableParser
-from misc import *
+from misc import BasePostHandler, gn_lineno_collect
 
 TYPE = Literal["str", "list"]
 
@@ -140,7 +140,7 @@ def _gn_var_process(project_path: str, gn_v: str, alt_v: str, gn_path: str, ifro
 class DefaultProcessor(BaseProcessor):
     
     @property
-    def UNDEFINED(self):
+    def undefined(self):
         return "UNDEFINED"
 
     def helper(self, target_name: str, paragraph: str, gn_path: str, line_no: int, _sub: str, _com: str) -> Tuple[str]:
@@ -154,9 +154,9 @@ class DefaultProcessor(BaseProcessor):
         com, com_from = _gn_var_process(
             self.project_path, com, _com, gn_path, "gn", "json", True)
         if not sub:
-            sub = self.UNDEFINED
+            sub = self.undefined
         if not com:
-            com = self.UNDEFINED
+            com = self.undefined
         result = {
             "gn_path": gn_path,
             "target_type": self.target_type,
@@ -218,9 +218,9 @@ class StrResourceProcessor(DefaultProcessor):
         com, com_from = _gn_var_process(
             self.project_path, com, _com, gn_path, "gn", "json")
         if not sub:
-            sub = self.UNDEFINED
+            sub = self.undefined
         if not com:
-            com = self.UNDEFINED
+            com = self.undefined
         _, file_name = os.path.split(resources)
         result = {
             "gn_path": gn_path,
@@ -254,9 +254,9 @@ class ListResourceProcessor(DefaultProcessor):
         com, com_from = _gn_var_process(
             self.project_path, com, _com, gn_path, "gn", "json")
         if not sub:
-            sub = self.UNDEFINED
+            sub = self.undefined
         if not com:
-            com = self.UNDEFINED
+            com = self.undefined
         for ff in resources:
             _, file_name = os.path.split(ff)
             result = {
