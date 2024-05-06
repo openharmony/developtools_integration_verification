@@ -32,6 +32,7 @@ class Launcher(ITestCase):
                 # 屏幕常亮
                 self.step('步骤4{}：设置屏幕常亮'.format(retry))
                 DeviceInfoHelper.setSleep(self.Phone1, time_sleep=600)
+                self.common_oh.click(self.Phone1, x=360, y=720)
                 # self.common_oh.shell(self.Phone1, 'power-shell setmode 602')
                 # # 检查屏幕点亮状态
                 # power_state = self.common_oh.shell(self.Phone1, 'hidumper -s 3308')
