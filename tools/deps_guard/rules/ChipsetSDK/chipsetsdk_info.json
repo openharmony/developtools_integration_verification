@@ -317,6 +317,12 @@
         "headers": []
     },
     {
+        "name": "libsnd:sndfile",
+        "so_file_name": "libsndfile.z.so",
+        "path": "//third_party/libsnd:sndfile",
+        "headers": []
+    },
+    {
         "name": "protobuf:protobuf_lite",
         "so_file_name": "libprotobuf_lite.z.so",
         "path": "//third_party/protobuf:protobuf_lite",
