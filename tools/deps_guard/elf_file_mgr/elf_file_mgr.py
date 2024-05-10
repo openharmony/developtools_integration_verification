@@ -260,7 +260,12 @@ class ElfFileMgr(object):
                 continue
             tmp_name = os.path.dirname(src)
             tmp_name = os.path.join(tmp_name, target)
-            link_elf = ElfFile(tmp_name, self._prefix)
+            if name in ["libc.so"]:
+                tmp_name = os.path.normpath(tmp_name)
+                norm_prefix = os.path.normpath(self._prefix) + "/"
+                link_elf = ElfFile(tmp_name, norm_prefix)
+            else:
+                link_elf = ElfFile(tmp_name, self._prefix)
             return self.get_elf_by_path(link_elf["path"])
 
 
