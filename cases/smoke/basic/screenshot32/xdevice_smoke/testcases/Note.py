@@ -36,6 +36,7 @@ class Note(ITestCase):
         self.step('步骤4：点击屏幕弹出输入法')
         self.common_oh.click(self.Phone1, 360, 280, mode='NORMAL')
         self.common_oh.click(self.Phone1, 360, 280, mode='NORMAL')
+        self.common_oh.click(self.Phone1, 360, 280, mode='NORMAL')
         self.common_oh.wait(self.Phone1, 5)
         # 控件检查
         self.step('步骤5：控件检查')
