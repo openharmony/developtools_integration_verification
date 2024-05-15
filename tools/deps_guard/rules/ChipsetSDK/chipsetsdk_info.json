@@ -157,12 +157,7 @@
         "name": "config_policy:configpolicy_util",
         "so_file_name": "libconfigpolicy_util.z.so",
         "path": "//base/customization/config_policy/frameworks/config_policy:configpolicy_util",
-        "headers": [
-            "//base/customization/config_policy/interfaces/inner_api/include/",
-            "//third_party/bounds_checking_function/include/",
-            "//base/startup/init/services/include/param/",
-            "//base/telephony/core_service/utils/common/include/"
-        ]
+        "headers": [ "//base/customization/config_policy/interfaces/inner_api/include/" ]
     },
     {
         "name": "build_framework:libstd.dylib",
