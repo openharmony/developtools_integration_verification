@@ -31,7 +31,7 @@ TEST_CASE_DEVICE1 = [
 TEST_CASE_DEVICE2 = [
     'Camera',
     'NotificationBar',
-    #'Note',
+    'Note',
 ]
 
 
