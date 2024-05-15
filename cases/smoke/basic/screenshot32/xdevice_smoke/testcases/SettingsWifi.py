@@ -18,7 +18,11 @@ class SettingsWifi(ITestCase):
         super().__init__(controllers)
 
     def setup(self):
-        self.step('前置条件1：回到桌面')
+        self.step('前置条件1：关闭wifi，回到桌面')
+        try:
+            WifiHelper.closeWifi(self.Phone1)
+        except:
+            pass
         self.common_oh.goHome(self.Phone1)
         self.step('前置条件2：检查当前界面是否在桌面')
         self.common_oh.checkIfTextExist(self.Phone1, '相机')
@@ -39,7 +43,7 @@ class SettingsWifi(ITestCase):
         self.step('步骤4：点击"WLAN"进入WLAN页面')
         # 点击wlan
         self.common_oh.touchByText(self.Phone1, 'WLAN', mode='NORMAL')
-        # self.common_oh.wait(self.Phone1, 3)
+        self.common_oh.wait(self.Phone1, 3)
         # 打开wlan
         self.step('步骤5：打开wifi开关')
         self.common_oh.touchByType(self.Phone1, 'Toggle')
