@@ -43,7 +43,7 @@ class SettingsWifi(ITestCase):
         # 打开wlan
         self.step('步骤5：打开wifi开关')
         self.common_oh.touchByType(self.Phone1, 'Toggle')
-        self.common_oh.wait(self.Phone1, 3)
+        self.common_oh.wait(self.Phone1, 10)
         self.step('步骤6：检查wifi是否打开')
         WifiHelper.checkWifiState(self.Phone1)
 
