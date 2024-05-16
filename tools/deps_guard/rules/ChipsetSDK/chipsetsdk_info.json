@@ -18,6 +18,18 @@
         "headers": []
     },
     {
+        "name": "build_framework:musl-libc.so",
+        "so_file_name": "ld-musl-arm-asan.so.1",
+        "path": "//build/common/musl:musl-libc.so",
+        "headers": []
+    },
+    {
+        "name": "build_framework:musl-libc.so",
+        "so_file_name": "ld-musl-aarch64-asan.so.1",
+        "path": "//build/common/musl:musl-libc.so",
+        "headers": []
+    },
+    {
         "name": "build_framework:musl-libcxx.so",
         "so_file_name": "libc++.so",
         "path": "//build/common/musl:musl-libcxx.so",
