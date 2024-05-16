@@ -2,7 +2,8 @@
   {
     "processName": "hiview",
     "acls": [
-      "ohos.permission.DUMP"
+      "ohos.permission.DUMP",
+      "ohos.permission.GET_WIFI_PEERS_MAC"
     ]
   },
   {
