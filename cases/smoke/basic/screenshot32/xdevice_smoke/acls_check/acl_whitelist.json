@@ -230,6 +230,12 @@
     ]
   },
   {
+    "processName": "netmanager",
+    "acls": [
+      "ohos.permission.MANAGE_WIFI_HOTSPOT"
+    ]
+  },
+  {
     "processName": "samgr",
     "acls": [
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
