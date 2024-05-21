@@ -110,13 +110,11 @@
         ]
     },
     {
-        "name": "access_token:accesstoken_communication_adapter_cxx",
+        "name": "access_token:accesstoken_common_cxx",
         "so_file_name": "libaccesstoken_common_cxx.z.so",
-        "path": "//base/security/access_token/frameworks/accesstoken:accesstoken_communication_adapter_cxx",
+        "path": "//base/security/access_token/frameworks/common:accesstoken_common_cxx",
         "headers": [
-            "//base/security/access_token/frameworks/accesstoken/include/",
-            "//base/security/access_token/frameworks/common/include/",
-            "//base/security/access_token/interfaces/innerkits/accesstoken/include/"
+            "//base/security/access_token/frameworks/common/include/"
         ]
     },
     {
