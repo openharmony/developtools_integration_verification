@@ -7,6 +7,7 @@ import time
 import re
 import shutil
 import random
+import platform
 
 from core.base import BaseApp, dec_stepmsg
 from util.file_locker import FileLock
@@ -89,7 +90,9 @@ class liteOsUpgrade_RK3568(BaseApp):
         #   @return:        True or Flase
         #===================================================================================
         '''
-        global local_image_path, loader_tool_path, sn, LocationID ,test_num
+        global local_image_path, loader_tool_path, sn, LocationID ,test_num, system_type
+        system_type = platform.system()
+        logger.printLog("******系统为：%s ******" % system_type)
         version_savepath = self.params_dict.get("img_path")
         upgrade_test_type = self.params_dict.get("UpgradeTestType")
         sn = self.params_dict.get("sn")
@@ -98,14 +101,20 @@ class liteOsUpgrade_RK3568(BaseApp):
         pr_url = self.params_dict.get("pr_url")
         logFilePath = self.logFilePath
         logger.info(logFilePath)
-        r = logFilePath.rfind("\\")
+        if system_type == "Windows":
+            r = logFilePath.rfind("\\")
+        else:
+            r = logFilePath.rfind("/")
         report_path = logFilePath[:r]
         logger.info(report_path)
         scriptpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(os.path.dirname(__file__)))))
         logger.info(scriptpath)
         local_image_path = os.path.join(version_savepath)
         logger.info(local_image_path)
-        loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool.exe")
+        if system_type == "Windows":
+            loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool.exe")
+        else:
+            loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool")
         logger.info(loader_tool_path)
         mini_path = os.path.join(local_image_path, "mini_system_test", "L2_mini_system_test.py")
         archive_path = os.path.join(version_savepath)
