@@ -102,7 +102,7 @@ def timeout(seconds = 300):
             if system_type == "Windows":
                 alive = thd.isAlive()
             else:
-                alive = thd.is_Alive()
+                alive = thd.is_alive()
             thd.kill()
             if alive:
                 raise Timeout(u"function run too long, timeout %d seconds." % seconds)
