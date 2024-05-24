@@ -92,6 +92,12 @@
         "headers": []
     },
     {
+        "name": "brotli:brotli_shared",
+        "so_file_name": "libbrotli_shared.z.so",
+        "path": "//third_party/brotli:brotli_shared",
+        "headers": []
+    },
+    {
         "name": "access_token:libtokenid_sdk",
         "so_file_name": "libtokenid_sdk.z.so",
         "path": "//base/security/access_token/interfaces/innerkits/accesstoken:libtokenid_sdk",
