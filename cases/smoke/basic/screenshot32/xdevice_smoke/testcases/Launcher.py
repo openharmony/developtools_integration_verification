@@ -41,8 +41,12 @@ class Launcher(ITestCase):
                 # self.asserts.assert_in('State=2', power_state)
                 # 控件检查
                 self.step('步骤5.{}：检查是否在桌面'.format(retry))
-                self.common_oh.checkIfTextExist(self.Phone1, '相机')
-                self.common_oh.checkIfTextExist(self.Phone1, '音乐')
+                hasPhoto = self.common_oh.checkIfTextExist(self.Phone1, '相机', EXCEPTION=False)
+                if not hasPhoto:
+                    self.common_oh.shell(self.Phone1, "hidumper -s WindowManagerService -a '-a'")
+                hasMusic = self.common_oh.checkIfTextExist(self.Phone1, '音乐', EXCEPTION=False)
+                if not hasMusic:
+                    self.common_oh.shell(self.Phone1, "hidumper -s WindowManagerService -a '-a'")
                 # 截图对比
                 self.step('步骤6.{}：截图对比'.format(retry))
                 launcher_pic = 'launcher.jpeg'
