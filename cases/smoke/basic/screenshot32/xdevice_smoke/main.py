@@ -12,7 +12,7 @@ from datetime import datetime
 BASE_DIR = os.path.dirname(__file__)
 
 TEST_CASE_MUST = [
-    #'Launcher',
+    'Launcher',
     'ProcessCheck',
     #'APLCheck',
     #'ACLCheck',
@@ -30,7 +30,7 @@ TEST_CASE_DEVICE1 = [
 
 TEST_CASE_DEVICE2 = [
     'Camera',
-    #'NotificationBar',
+    'NotificationBar',
     'Note',
 ]
 
