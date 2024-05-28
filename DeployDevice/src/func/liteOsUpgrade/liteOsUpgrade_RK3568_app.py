@@ -494,7 +494,11 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
 @timeout(900)
 def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
     logger.info("cmd is: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="gbk")
+    if system_type == "Windows":
+        shell = False
+    else:
+        shell = True
+    p = subprocess.Popen(cmd, shell=shell, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="gbk")
     curline = p.stdout.readline()
     list_png_name = []
     try:
