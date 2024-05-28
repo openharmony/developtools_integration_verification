@@ -496,9 +496,11 @@ def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
     logger.info("cmd is: %s" % cmd)
     if system_type == "Windows":
         shell = False
+        encoding = "gbk"
     else:
         shell = True
-    p = subprocess.Popen(cmd, shell=shell, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="gbk")
+        encoding = "utf-8"
+    p = subprocess.Popen(cmd, shell=shell, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding=encoding)
     curline = p.stdout.readline()
     list_png_name = []
     try:
