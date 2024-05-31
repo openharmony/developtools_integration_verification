@@ -29,7 +29,7 @@ TEST_CASE_DEVICE1 = [
 ]
 
 TEST_CASE_DEVICE2 = [
-    #'Camera',
+    'Camera',
     'NotificationBar',
     'Note',
 ]
@@ -127,7 +127,8 @@ if __name__ == '__main__':
     # respath = args.anwser_path
     # new_cmd += ' -respath {}'.format(respath)
     # shutil.rmtree(os.path.join(BASE_DIR, 'reports'), ignore_errors=True)
-
+    import time
+    time.sleep(60)
     print('SmokeTest Begin >>>>>>>>>>>>')
     main_process(new_cmd)
 
