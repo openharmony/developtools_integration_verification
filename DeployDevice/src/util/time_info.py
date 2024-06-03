@@ -14,7 +14,6 @@ import datetime
 import sys
 import threading
 import time
-import platform
 from util.log_info import logger
 thead = []
 
@@ -98,11 +97,7 @@ def timeout(seconds = 300):
             thd.setDaemon(True)
             thd.start()
             thd.join(seconds)
-            system_type = platform.system()
-            if system_type == "Windows":
-                alive = thd.isAlive()
-            else:
-                alive = thd.is_alive()
+            alive = thd.isAlive()
             thd.kill()
             if alive:
                 raise Timeout(u"function run too long, timeout %d seconds." % seconds)
