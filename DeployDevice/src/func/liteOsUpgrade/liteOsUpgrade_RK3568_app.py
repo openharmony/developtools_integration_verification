@@ -7,7 +7,6 @@ import time
 import re
 import shutil
 import random
-import platform
 
 from core.base import BaseApp, dec_stepmsg
 from util.file_locker import FileLock
@@ -90,9 +89,7 @@ class liteOsUpgrade_RK3568(BaseApp):
         #   @return:        True or Flase
         #===================================================================================
         '''
-        global local_image_path, loader_tool_path, sn, LocationID ,test_num, system_type
-        system_type = platform.system()
-        logger.printLog("******系统为：%s ******" % system_type)
+        global local_image_path, loader_tool_path, sn, LocationID ,test_num
         version_savepath = self.params_dict.get("img_path")
         upgrade_test_type = self.params_dict.get("UpgradeTestType")
         sn = self.params_dict.get("sn")
@@ -101,20 +98,14 @@ class liteOsUpgrade_RK3568(BaseApp):
         pr_url = self.params_dict.get("pr_url")
         logFilePath = self.logFilePath
         logger.info(logFilePath)
-        if system_type == "Windows":
-            r = logFilePath.rfind("\\")
-        else:
-            r = logFilePath.rfind("/")
+        r = logFilePath.rfind("\\")
         report_path = logFilePath[:r]
         logger.info(report_path)
         scriptpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(os.path.dirname(__file__)))))
         logger.info(scriptpath)
         local_image_path = os.path.join(version_savepath)
         logger.info(local_image_path)
-        if system_type == "Windows":
-            loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool.exe")
-        else:
-            loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool")
+        loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool.exe")
         logger.info(loader_tool_path)
         mini_path = os.path.join(local_image_path, "mini_system_test", "L2_mini_system_test.py")
         archive_path = os.path.join(version_savepath)
@@ -494,13 +485,7 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
 @timeout(900)
 def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
     logger.info("cmd is: %s" % cmd)
-    if system_type == "Windows":
-        shell = False
-        encoding = "gbk"
-    else:
-        shell = True
-        encoding = "utf-8"
-    p = subprocess.Popen(cmd, shell=shell, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding=encoding)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="gbk")
     curline = p.stdout.readline()
     list_png_name = []
     try:
