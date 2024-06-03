@@ -128,6 +128,8 @@ if __name__ == '__main__':
     # new_cmd += ' -respath {}'.format(respath)
     # shutil.rmtree(os.path.join(BASE_DIR, 'reports'), ignore_errors=True)
     
+    import time
+    time.sleep(60)
     print('SmokeTest Begin >>>>>>>>>>>>')
     main_process(new_cmd)
 
