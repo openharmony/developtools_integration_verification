@@ -1,5 +1,5 @@
 {
-    "description": "Config for OpenHarmony devicetest test cases",
+    "description": "设置：检查设置里面的wlan开关能否正常开启",
     "environment": [
         {
             "type": "device",
