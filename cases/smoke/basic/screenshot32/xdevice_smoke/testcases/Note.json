@@ -1,5 +1,5 @@
 {
-    "description": "备忘录：检查是否能正常进入备忘录，点击笔记内容后能否弹出输入法",
+    "description": "Config for OpenHarmony devicetest test cases",
     "environment": [
         {
             "type": "device",

@@ -1,5 +1,5 @@
 {
-    "description": "外部用例：APL 白名单检查",
+    "description": "Config for OpenHarmony devicetest test cases",
     "environment": [
         {
             "type": "device",
