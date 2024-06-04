@@ -1,5 +1,5 @@
 {
-    "description": "图库：检查是否能正常启动图库应用以及sandbox测试",
+    "description": "Config for OpenHarmony devicetest test cases",
     "environment": [
         {
             "type": "device",

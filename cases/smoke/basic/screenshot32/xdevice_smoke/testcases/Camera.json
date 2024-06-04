@@ -1,5 +1,5 @@
 {
-    "description": "相机：检查拍照和录制以及点击左下角缩略图是否能正常跳转图库",
+    "description": "Config for OpenHarmony devicetest test cases",
     "environment": [
         {
             "type": "device",

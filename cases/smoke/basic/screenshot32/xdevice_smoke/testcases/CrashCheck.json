@@ -1,5 +1,5 @@
 {
-    "description": "Crash检查：检查是否有[foundation、render_service、appspawn] Crash",
+    "description": "Config for OpenHarmony devicetest test cases",
     "environment": [
         {
             "type": "device",

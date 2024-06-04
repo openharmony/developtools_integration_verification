@@ -1,5 +1,5 @@
 {
-    "description": "音乐：检查是否能正常进入音乐应用",
+    "description": "Config for OpenHarmony devicetest test cases",
     "environment": [
         {
             "type": "device",
