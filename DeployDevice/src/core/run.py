@@ -12,6 +12,7 @@ import sys
 import threading
 import time
 import os
+import platform
 
 from util.time_info import get_now_time_str_info, get_now_time_info, Timeout, timeout
 from aw.Param.UpgradeParam import getAllParam
@@ -39,7 +40,8 @@ def start(param):
             CONSTANT.ENVERRMESSAGE = "no runstage"
             return -1
         step_list = runstage.split(",")
-        param["step_list"] = step_list   
+        param["step_list"] = step_list
+        system_type = platform.system()
         for step in step_list:
             app_name = step
             app_pyFile = 'func.' + app_name[0: app_name.find('_')] + '.' + app_name
@@ -56,7 +58,10 @@ def start(param):
             errorcode = app._excuteApp('upgrade')
             time.sleep(5)
             scriptpath =os.path.dirname(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-            loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool.exe")
+            if system_type == "Windows":
+                loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool.exe")
+            else:
+                loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool")
             logger.info(loader_tool_path)
 #           mycmd = "%s LD" % loader_tool_path
 #            try:
