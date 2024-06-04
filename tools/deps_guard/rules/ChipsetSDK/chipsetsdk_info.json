@@ -471,7 +471,7 @@
         "so_file_name": "libcurl_shared.z.so",
         "path": "//third_party/curl:curl_shared",
         "headers": [
-            "//third_party/curl/curl-7.79.1/include/",
+            "//third_party/curl/include/",
             "//third_party/curl/customized/include/"
         ]
     },
