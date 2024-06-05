@@ -497,14 +497,14 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
 
 @timeout(900)
 def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
-    logger.info("cmd is: %s" % cmd)
-    if system_type == "Windows":
-        shell = False
-        encoding = "gbk"
-    else:
-        shell = True
-        encoding = "utf-8"
-    p = subprocess.Popen(cmd, shell=shell, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding=encoding)
+    # logger.info("cmd is: %s" % cmd)
+    # if system_type == "Windows":
+    #     shell = False
+    #     encoding = "gbk"
+    # else:
+    #     shell = True
+    #     encoding = "utf-8"
+    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf-8', errors='ignore', universal_newlines=True)
     curline = p.stdout.readline()
     list_png_name = []
     try:
