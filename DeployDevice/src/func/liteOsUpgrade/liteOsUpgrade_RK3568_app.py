@@ -8,6 +8,7 @@ import re
 import shutil
 import random
 import platform
+import socket
 
 from core.base import BaseApp, dec_stepmsg
 from util.file_locker import FileLock
@@ -92,6 +93,9 @@ class liteOsUpgrade_RK3568(BaseApp):
         '''
         global local_image_path, loader_tool_path, sn, LocationID ,test_num, system_type
         system_type = platform.system()
+        hostname = socket.gethostname()
+        ipaddress = socket.gethostbyname(hostname)
+        logger.printLog("******系统ip为：%s ******" % ipaddress)
         logger.printLog("******系统为：%s ******" % system_type)
         version_savepath = self.params_dict.get("img_path")
         upgrade_test_type = self.params_dict.get("UpgradeTestType")
