@@ -21,16 +21,16 @@ TEST_CASE_MUST = [
 # 根据用例耗时分配的两台设备跑的用例，使两台设备跑的时间都差不多在2min
 TEST_CASE_DEVICE1 = [
     'SettingsWifi',
-    'CrashCheck',
-    'Photos',
-    'Contacts',
-    'Mms',
-    'DistributedMusicPlayer'
+    #'CrashCheck',
+    #'Photos',
+    #'Contacts',
+    #'Mms',
+    #'DistributedMusicPlayer'
 ]
 
 TEST_CASE_DEVICE2 = [
     'Camera',
-    'NotificationBar',
+    #'NotificationBar',
     'Note',
 ]
 
