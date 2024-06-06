@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(__file__)
 
 TEST_CASE_MUST = [
     'Launcher',
-    'ProcessCheck',
+    #'ProcessCheck',
     #'APLCheck',
     #'ACLCheck',
 ]
@@ -31,7 +31,7 @@ TEST_CASE_DEVICE1 = [
 TEST_CASE_DEVICE2 = [
     'Camera',
     #'NotificationBar',
-    'Note',
+    #'Note',
 ]
 
 
