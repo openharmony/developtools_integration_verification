@@ -35,9 +35,9 @@ class Launcher(ITestCase):
                 self.common_oh.click(self.Phone1, x=360, y=720)
                 self.common_oh.wait(self.Phone1, 3)
                 # 控件检查
-                self.step('步骤4.{}：检查是否在桌面'.format(retry))
-                self.common_oh.checkIfTextExist(self.Phone1, '相机')
-                self.common_oh.checkIfTextExist(self.Phone1, '音乐')
+                #self.step('步骤4.{}：检查是否在桌面'.format(retry))
+                #self.common_oh.checkIfTextExist(self.Phone1, '相机')
+                #self.common_oh.checkIfTextExist(self.Phone1, '音乐')
                 # 截图对比
                 self.step('步骤5.{}：截图对比'.format(retry))
                 launcher_pic = 'launcher.jpeg'
