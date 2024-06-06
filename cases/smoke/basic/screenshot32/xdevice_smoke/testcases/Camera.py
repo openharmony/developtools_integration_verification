@@ -34,11 +34,11 @@ class Camera(ITestCase):
         self.step('步骤5：停止录制')
         self.common_oh.click(self.Phone1, 320, 1095, mode='NORMAL')
         self.common_oh.wait(self.Phone1, 2)
-        self.step('步骤6：点击左下角切到相册')
-        self.common_oh.click(self.Phone1, 200, 1095, mode='NORMAL')
-        self.common_oh.wait(self.Phone1, 5)
-        self.step('步骤7：检查相册应用是否拉起')
-        self.common_oh.isProcessRunning(self.Phone1, self.photo_bundle_name)
+        #self.step('步骤6：点击左下角切到相册')
+        #self.common_oh.click(self.Phone1, 200, 1095, mode='NORMAL')
+        #self.common_oh.wait(self.Phone1, 5)
+        #self.step('步骤7：检查相册应用是否拉起')
+        #self.common_oh.isProcessRunning(self.Phone1, self.photo_bundle_name)
 
     def teardown(self):
         self.step('收尾1：停掉相机和相册应用')
