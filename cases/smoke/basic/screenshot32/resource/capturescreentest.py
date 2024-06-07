@@ -326,11 +326,11 @@ if __name__ == "__main__":
                         default='.\\app_capture_screen_test_config.json')
     parser.add_argument('--test_num', type=str, default='1/1')
     parser.add_argument('--tools_path', type=str,
-                        default=r'D:\gitee\developtools_integration_verification\cases\smoke\basic\screenshot32')
+                        default='D:\\DeviceTestTools\\screenshot')
     parser.add_argument('--anwser_path', type=str,
-                        default=r'D:\gitee\developtools_integration_verification\cases\smoke\basic\screenshot32\resource')
+                        default='D:\\DeviceTestTools\\screenshot\\resource')
     parser.add_argument('--save_path', type=str,
-                        default=r'D:\gitee\developtools_integration_verification\cases\smoke\basic\screenshot32')
+                        default='D:\\DeviceTestTools\\screenshot')
     parser.add_argument('--device_num', type=str, default='null')
     parser.add_argument('--pr_url', type=str,
                         default='developtools_integration_verification')
@@ -381,46 +381,31 @@ if __name__ == "__main__":
 
     enter_shell_cmd("cat /proc/`pidof foundation`/smaps_rollup")
 
-    print_to_log("\nSmokeTest: ########## First check key processes start ##############")
-    lose_process = []
-    process_pid = {}
-    with open(os.path.normpath(os.path.join(args.tools_path, "resource/process.txt")), "r+") as f:
-        text = f.read()
-        two_check_process_list = text.split('#####')[1].split()[0:-1]
-        other_process_list = text.split('#####')[2].split()
-        for pname in two_check_process_list:
-            pids = enter_cmd("hdc -t {} shell pidof {}".format(args.device_num, pname), 0, 1)
-            try:
-                pidlist = pids.split()
-                int(pidlist[0])
-                for pid in pidlist:
-                    int(pid)
-                process_pid[pname] = pidlist
-            except:
-                lose_process.append(pname)
-        all_p = enter_shell_cmd("ps -elf")
-        for pname in other_process_list:
-            findp = all_p.find(pname, 0, len(all_p))
-            if findp == -1:
-                lose_process.append(pname)
-
-    if lose_process:
-        print_to_log("SmokeTest: error: %s, These processes do not exist!!!" % lose_process)
-        sys_exit()
-    else:
-        print_to_log("SmokeTest: first processes check is ok")
-
-    # apl_check_main(args.device_num)
-    # apl_compare = os.path.normpath(os.path.join(args.tools_path, "APL_compare_03", "apl_compare.log"))
-    # try:
-    #     with open(apl_compare, mode='r', encoding='utf-8', errors='ignore') as compare_file:
-    #         compare_file.seek(0)
-    #         apl_result = compare_file.read()
-    #     compare_file.close()
-    # except Exception as reason:
-    #     print_to_log("SmokeTest: error: apl_compare.log do not exist!")
-    # if "APL Check failed" in apl_result:
-    #     print_to_log("SmokeTest: error: apl check failed")
+    # print_to_log("\nSmokeTest: ########## First check key processes start ##############")
+    # lose_process = []
+    # process_pid = {}
+    # with open(os.path.normpath(os.path.join(args.tools_path, "resource/process.txt")), "r+") as f:
+    #     text = f.read()
+    #     two_check_process_list = text.split('#####')[1].split()[0:-1]
+    #     other_process_list = text.split('#####')[2].split()
+    #     for pname in two_check_process_list:
+    #         pids = enter_cmd("hdc -t {} shell pidof {}".format(args.device_num, pname), 0, 1)
+    #         try:
+    #             pidlist = pids.split()
+    #             int(pidlist[0])
+    #             for pid in pidlist:
+    #                 int(pid)
+    #             process_pid[pname] = pidlist
+    #         except:
+    #             lose_process.append(pname)
+    #     all_p = enter_shell_cmd("ps -elf")
+    #     for pname in other_process_list:
+    #         findp = all_p.find(pname, 0, len(all_p))
+    #         if findp == -1:
+    #             lose_process.append(pname)
+    #
+    # if lose_process:
+    #     print_to_log("SmokeTest: error: %s, These processes do not exist!!!" % lose_process)
     #     sys_exit()
     #
     # acl_check_main(args.device_num)

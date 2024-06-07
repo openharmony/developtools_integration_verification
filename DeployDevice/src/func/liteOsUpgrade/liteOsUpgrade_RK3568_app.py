@@ -477,7 +477,7 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
     except Exception as e:
         logger.error(e)
         return 98
-    config_path = os.path.join(screenshot_path, "resource", "app_capture_screen_test_config.json")
+    config_path = os.path.join(screenshot_path, "app_capture_screen_test_config.json")
     py_cmd = "python %s --config %s --anwser_path %s --save_path %s --device_num %s --test_num %s --tools_path %s --pr_url %s" \
              % (py_path, config_path, resource_path, save_screenshot_path, sn, test_num, screenshot_path, pr_url)
     time1 = time.time()
