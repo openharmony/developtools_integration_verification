@@ -1,0 +1,47 @@
+[
+    {
+        "bundle&processName": "com.ohos.launcher",
+        "apl": "2"
+    },
+    {
+        "bundle&processName": "com.ohos.settings",
+        "apl": "2"
+    },
+    {
+        "bundle&processName": "com.ohos.systemui",
+        "apl": "2"
+    },
+    {
+        "bundle&processName": "com.ohos.screenlock",
+        "apl": "2"
+    },
+    {
+        "bundle&processName": "com.ohos.adminprovisioning",
+        "apl": "2"
+    },
+    {
+        "bundle&processName": "edm",
+        "apl": "3"
+    },
+    {
+        "bundle&processName": "com.ohos.settings.faceauth",
+        "apl": "2"
+    },
+    {
+        "bundle&processName": "cn.openharmony.inputmethodchoosedialog",
+        "apl":"3"
+    },
+    {
+        "bundle&processName":"media_service",
+        "apl":"3"
+    },
+    {
+        "bundle&processName":"com.ohos.amsdialog",
+        "apl":"3"
+    },
+    {
+        "bundle&processName":"com.ohos.useriam.authwidget",
+        "apl":"2"
+    }
+    
+]

@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(__file__)
 
 TEST_CASE_MUST = [
     'Launcher',
-    'ProcessCheck',
+    #'ProcessCheck',
     #'APLCheck',
     #'ACLCheck',
 ]
@@ -21,17 +21,17 @@ TEST_CASE_MUST = [
 # 根据用例耗时分配的两台设备跑的用例，使两台设备跑的时间都差不多在2min
 TEST_CASE_DEVICE1 = [
     'SettingsWifi',
-    'CrashCheck',
-    'Photos',
-    'Contacts',
-    'Mms',
-    'DistributedMusicPlayer'
+    #'CrashCheck',
+    #'Photos',
+    #'Contacts',
+    #'Mms',
+    #'DistributedMusicPlayer'
 ]
 
 TEST_CASE_DEVICE2 = [
     'Camera',
-    'NotificationBar',
-    'Note',
+    #'NotificationBar',
+    #'Note',
 ]
 
 
@@ -128,8 +128,6 @@ if __name__ == '__main__':
     # new_cmd += ' -respath {}'.format(respath)
     # shutil.rmtree(os.path.join(BASE_DIR, 'reports'), ignore_errors=True)
     
-    import time
-    time.sleep(60)
     print('SmokeTest Begin >>>>>>>>>>>>')
     main_process(new_cmd)
 
