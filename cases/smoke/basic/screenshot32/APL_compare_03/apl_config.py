@@ -28,14 +28,14 @@ USER：svn的用户名
 PWD：svn的密码
 FILE_PATH：本地下载文件的路径
 '''
-SHEET_NAME="Sheet1"
-COLS=[1,3]
+SHEET_NAME = "Sheet1"
+COLS = [1, 3]
 
-SVN='D:/TortoiseSVN/bin'
-SVN_URL='https://PMAIL_2140981.china.huawei.com/svn/test测试/01 目录/01_1 目录/APL基线标准v1.0.xlsx'
-USER='hhhhs'
-PWD='123456'
-FILE_PATH=PATH+SVN_URL.split('/')[-1]
+SVN = 'D:/TortoiseSVN/bin'
+SVN_URL = 'https://PMAIL_2140981.china.huawei.com/svn/test测试/01 目录/01_1 目录/APL基线标准v1.0.xlsx'
+USER = 'hhhhs'
+PWD = '123456'
+FILE_PATH = PATH + SVN_URL.split('/')[-1]
 
 # read_device.py
 '''
@@ -45,17 +45,17 @@ DOWNLOAD_DB：从设备下载的hdc命令
 QUERY_HAP_APL：查询HAP APL的sql语句（查询多列可以依次添加字段，添加字段的顺序为比较时的字段优先级）
 QUERY_NATIVE_APL：查Native APL的sql语句
 '''
-SQL_SRC=" /data/service/el1/public/access_token/access_token.db"
-SQL_DES=PATH
-DOWNLOAD_DB="hdc -t {} file recv"
-QUERY_HAP_APL="select bundle_name,apl from hap_token_info_table"
-QUERY_NATIVE_APL="select process_name,apl from native_token_info_table"
+SQL_SRC = " /data/service/el1/public/access_token/access_token.db"
+SQL_DES = PATH
+DOWNLOAD_DB = "hdc -t {} file recv"
+QUERY_HAP_APL = "select bundle_name,apl from hap_token_info_table"
+QUERY_NATIVE_APL = "select process_name,apl from native_token_info_table"
 
 '''
 APL_LOG_FILE：执行脚本的日志信息
 APL_RECORD_PATH：APL对比记录的日志信息
 IS_OVERWRITE：是否覆盖之前的APL日志，w表示覆盖，a表示追加
 '''
-APL_LOG_FILE=PATH+'apl_compare.log'
-APL_RECORD_PATH=PATH+'apl_record.txt'
-IS_OVERWRITE='w'
+APL_LOG_FILE = PATH + 'apl_compare.log'
+APL_RECORD_PATH = PATH + 'apl_record.txt'
+IS_OVERWRITE = 'w'

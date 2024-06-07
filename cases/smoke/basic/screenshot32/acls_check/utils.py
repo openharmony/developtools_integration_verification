@@ -17,7 +17,7 @@ import os
 import sys
 from subprocess import Popen, PIPE, STDOUT
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep)
+# sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep)
 from config import *
 
 log_tag = 'utils'

@@ -82,5 +82,9 @@
     {
         "bundle&processName":"com.ohos.note",
         "apl":"3"
+    },
+    {
+        "bundle&processName":"com.ohos.devicetest",
+        "apl":"2"
     }
 ]

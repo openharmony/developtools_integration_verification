@@ -49,5 +49,4 @@ usb_host
 blue_host
 wifi_hal_service
 com.ohos.systemui
-device_usage_st
 power_host

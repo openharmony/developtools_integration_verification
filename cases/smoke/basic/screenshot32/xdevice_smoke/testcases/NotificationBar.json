@@ -1,5 +1,5 @@
 {
-    "description": "Config for OpenHarmony devicetest test cases",
+    "description": "检查右上角下滑是否能进入控制中心",
     "environment": [
         {
             "type": "device",

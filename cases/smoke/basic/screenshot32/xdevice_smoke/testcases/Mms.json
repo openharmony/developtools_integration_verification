@@ -1,5 +1,5 @@
 {
-    "description": "Config for OpenHarmony devicetest test cases",
+    "description": "检查短信应用是否能正常启动",
     "environment": [
         {
             "type": "device",

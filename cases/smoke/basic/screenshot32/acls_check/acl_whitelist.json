@@ -2,7 +2,8 @@
   {
     "processName": "hiview",
     "acls": [
-      "ohos.permission.DUMP"
+      "ohos.permission.DUMP",
+      "ohos.permission.GET_WIFI_PEERS_MAC"
     ]
   },
   {
@@ -54,7 +55,9 @@
       "ohos.permission.INPUT_MONITORING",
       "ohos.permission.INSTALL_SANDBOX_BUNDLE",
       "ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION",
-      "ohos.permission.MANAGE_USER_ACCOUNT_INFO"
+      "ohos.permission.MANAGE_USER_ACCOUNT_INFO",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.CAPTURE_SCREEN"
     ]
   },
   {
@@ -78,7 +81,8 @@
   {
     "processName": "audio_server",
     "acls": [
-      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
     ]
   },
   {
@@ -86,7 +90,8 @@
     "acls": [
       "ohos.permission.INPUT_MONITORING",
       "ohos.permission.ACCESS_DISTRIBUTED_HARDWARE",
-      "ohos.permission.INTERCEPT_INPUT_EVENT"
+      "ohos.permission.INTERCEPT_INPUT_EVENT",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
     ]
   },
   {
@@ -116,19 +121,22 @@
       "ohos.permission.NOTIFICATION_CONTROLLER",
       "ohos.permission.PUBLISH_SYSTEM_COMMON_EVENT",
       "ohos.permission.CLEAN_APPLICATION_DATA",
-      "ohos.permission.START_SYSTEM_DIALOG"
+      "ohos.permission.START_SYSTEM_DIALOG",
+      "ohos.permission.GET_RUNNING_INFO"
     ]
   },
   {
     "processName": "softbus_server",
     "acls": [
-      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+      "ohos.permission.ACCESS_IDS"
     ]
   },
   {
     "processName": "backup_sa",
     "acls": [
-      "ohos.permission.INSTALL_BUNDLE"
+      "ohos.permission.INSTALL_BUNDLE",
+      "ohos.permission.ACCESS_EXT_SYSTEM_ABILITY"
     ]
   },
   {
@@ -148,7 +156,9 @@
     "processName": "distributedsched",
     "acls": [
       "ohos.permission.INPUT_MONITORING",
-      "ohos.permission.MANAGE_MISSIONS"
+      "ohos.permission.MANAGE_MISSIONS",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.START_INVISIBLE_ABILITY"
     ]
   },
   {
@@ -172,9 +182,65 @@
     ]
   },
   {
+    "processName": "hidumper_service",
+    "acls": [
+      "ohos.permission.DUMP"
+    ]
+  },
+  {
     "processName": "sharing_service",
     "acls": [
       "ohos.permission.CAPTURE_SCREEN"
+    ]
+  },
+  {
+    "processName": "pasteboard_service",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
+  },
+  {
+    "processName": "token_sync_service",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
+  },
+  {
+    "processName": "deviceprofile",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
+  },
+  {
+    "processName": "distributedfiledaemon",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
+  },
+  {
+    "processName": "distributeddata",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
+  },
+  {
+    "processName": "dhardware",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
+  },
+  {
+    "processName": "netmanager",
+    "acls": [
+      "ohos.permission.MANAGE_WIFI_HOTSPOT"
+    ]
+  },
+  {
+    "processName": "samgr",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.MANAGE_SYSTEM_ABILITY"
     ]
   }
 ]
