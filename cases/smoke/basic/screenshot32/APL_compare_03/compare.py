@@ -97,7 +97,7 @@ def write_record(name,error):
         file.write(err_record)
         file.close()
     except Exception as e:
-        log_content=apl_set_log_content(str(s)) 
+        log_content=apl_set_log_content(str(e))
         apl_log(log_content)
 
 def write_record_once(err_records,is_overwrite):
@@ -134,10 +134,10 @@ def excel_thread():
         return None
 
 def sql_thread(sn, sn2):
+    log_tag = 'sql_thread'
     try:
         print(DOWNLOAD_DB.format(sn)+' ' + SQL_SRC + ' ' + SQL_DES)
         print()
-        log_tag = 'sql_thread'
         sql_file = download_from_device(DOWNLOAD_DB.format(sn), SQL_SRC, SQL_DES)
         if sql_file == None:
             raise
@@ -147,7 +147,7 @@ def sql_thread(sn, sn2):
         query_hap_apl_thread.start()
         query_native_apl_thread.start()
         
-        query_native_apl_thread.join()
+        query_hap_apl_thread.join()
         query_native_apl_thread.join()
         
         hap_apl_map = query_hap_apl_thread.get_result()
@@ -186,6 +186,7 @@ def apl_check_main(sn):
     except Exception as e:
         apl_set_log_content(LogLevel(1).name, log_tag, '--------APL Check failed![hap = False, native = False] --------')
         apl_set_log_content(LogLevel(1).name, log_tag, "{}".format(e.args[0]))
+
 
 if __name__ == '__main__':
     try:

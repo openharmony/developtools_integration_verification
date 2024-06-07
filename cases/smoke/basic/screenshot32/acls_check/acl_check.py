@@ -15,8 +15,9 @@ import os
 import sys
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + os.sep)
-from resolve_token_info import *
 from read_acl_whitelist import *
+from resolve_token_info import *
+from utils import *
 
 log_tag = 'acl_check'
 
@@ -42,13 +43,13 @@ def whitelist_check(whitelist, acls):
                 '-------------------------- Trustlist Verification failed --------------------------')
         else:
             set_log_content(LogLevel(2).name, log_tag + '->whitelist_check',
-                        '-------------------------- Trustlist Verification successful --------------------------')
+                            '-------------------------- Trustlist Verification successful --------------------------')
     except Exception as e:
-        set_log_content(LogLevel(1).name, log_tag + '->whitelist_check', e.msg)
+        set_log_content(LogLevel(1).name, log_tag + '->whitelist_check', e.args)
         raise
 
 
-def main(sn):
+def acl_check_main(sn):
     set_log_content(LogLevel(2).name, log_tag,
                     '-------------------------- ACL check begin --------------------------')
     try:
@@ -62,7 +63,7 @@ def main(sn):
         whitelist = get_acl_dict(acl_whitelist)
         whitelist_check(whitelist, acls_dict)
     except Exception as e:
-        set_log_content(LogLevel(1).name, log_tag, e.msg)
+        set_log_content(LogLevel(1).name, log_tag, e.args)
         set_log_content(LogLevel(1).name, log_tag,
                         '-------------------------- ACL check failed --------------------------')
     finally:
@@ -71,5 +72,5 @@ def main(sn):
 
 
 if __name__ == '__main__':
-    sn = sys.argv[1]
-    main(sn)
+    sn = ''
+    acl_check_main(sn)

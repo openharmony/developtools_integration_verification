@@ -194,13 +194,13 @@ class liteOsUpgrade_RK3568(BaseApp):
                                 return True
                             screenshot_path = os.path.join(local_image_path, "screenshot")
 
-                            resource_path = os.path.join(screenshot_path, 'xdevice_smoke')
+                            resource_path = os.path.join(screenshot_path, 'resource')
                             logger.info(resource_path)
-                            # py_path = os.path.join(screenshot_path, "main.py")
-                            py_path = "main.py"
+                            py_path = os.path.join(resource_path, "capturescreentest.py")
+                            # py_path = "main.py"
                             new_report_path = os.path.join(report_path, "result")
                             logger.info(new_report_path)
-                            time_sleep = random.randint(1, 5)
+                            time_sleep = random.randint(3, 7)
                             time.sleep(time_sleep)
                             try:
                                 if not os.path.exists(new_report_path):
@@ -216,11 +216,11 @@ class liteOsUpgrade_RK3568(BaseApp):
 
                             if not upgrade_test_type or upgrade_test_type == "smoke_test":
                                 # 进到工程目录
-                                cur_path = os.getcwd()
-                                os.chdir(resource_path)
+                                # cur_path = os.getcwd()
+                                # os.chdir(resource_path)
                                 test_return = cmd_test(resource_path, py_path, new_report_path, resource_path, sn, test_num, pr_url)
                                 # 执行完回到原来的目录
-                                os.chdir(cur_path)
+                                # os.chdir(cur_path)
                                 if test_return == 1:
                                     return True
                                 if test_return == 98:
