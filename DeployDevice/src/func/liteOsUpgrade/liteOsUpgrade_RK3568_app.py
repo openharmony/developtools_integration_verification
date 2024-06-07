@@ -7,6 +7,8 @@ import time
 import re
 import shutil
 import random
+import platform
+import socket
 
 from core.base import BaseApp, dec_stepmsg
 from util.file_locker import FileLock
@@ -89,7 +91,12 @@ class liteOsUpgrade_RK3568(BaseApp):
         #   @return:        True or Flase
         #===================================================================================
         '''
-        global local_image_path, loader_tool_path, sn, LocationID ,test_num
+        global local_image_path, loader_tool_path, sn, LocationID ,test_num, system_type
+        system_type = platform.system()
+        hostname = socket.gethostname()
+        ipaddress = socket.gethostbyname(hostname)
+        logger.printLog("******系统ip为：%s ******" % ipaddress)
+        logger.printLog("******系统为：%s ******" % system_type)
         version_savepath = self.params_dict.get("img_path")
         upgrade_test_type = self.params_dict.get("UpgradeTestType")
         sn = self.params_dict.get("sn")
@@ -98,14 +105,20 @@ class liteOsUpgrade_RK3568(BaseApp):
         pr_url = self.params_dict.get("pr_url")
         logFilePath = self.logFilePath
         logger.info(logFilePath)
-        r = logFilePath.rfind("\\")
+        if system_type == "Windows":
+            r = logFilePath.rfind("\\")
+        else:
+            r = logFilePath.rfind("/")
         report_path = logFilePath[:r]
         logger.info(report_path)
         scriptpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(os.path.dirname(__file__)))))
         logger.info(scriptpath)
         local_image_path = os.path.join(version_savepath)
         logger.info(local_image_path)
-        loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool.exe")
+        if system_type == "Windows":
+            loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool.exe")
+        else:
+            loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool")
         logger.info(loader_tool_path)
         mini_path = os.path.join(local_image_path, "mini_system_test", "L2_mini_system_test.py")
         archive_path = os.path.join(version_savepath)
@@ -181,13 +194,13 @@ class liteOsUpgrade_RK3568(BaseApp):
                                 return True
                             screenshot_path = os.path.join(local_image_path, "screenshot")
 
-                            resource_path = os.path.join(screenshot_path, 'xdevice_smoke')
+                            resource_path = os.path.join(screenshot_path, 'resource')
                             logger.info(resource_path)
-                            # py_path = os.path.join(screenshot_path, "main.py")
-                            py_path = "main.py"
+                            py_path = os.path.join(resource_path, "capturescreentest.py")
+                            # py_path = "main.py"
                             new_report_path = os.path.join(report_path, "result")
                             logger.info(new_report_path)
-                            time_sleep = random.randint(1, 5)
+                            time_sleep = random.randint(3, 7)
                             time.sleep(time_sleep)
                             try:
                                 if not os.path.exists(new_report_path):
@@ -203,11 +216,11 @@ class liteOsUpgrade_RK3568(BaseApp):
 
                             if not upgrade_test_type or upgrade_test_type == "smoke_test":
                                 # 进到工程目录
-                                cur_path = os.getcwd()
-                                os.chdir(resource_path)
+                                # cur_path = os.getcwd()
+                                # os.chdir(resource_path)
                                 test_return = cmd_test(resource_path, py_path, new_report_path, resource_path, sn, test_num, pr_url)
                                 # 执行完回到原来的目录
-                                os.chdir(cur_path)
+                                # os.chdir(cur_path)
                                 if test_return == 1:
                                     return True
                                 if test_return == 98:
@@ -464,7 +477,7 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
     except Exception as e:
         logger.error(e)
         return 98
-    config_path = os.path.join(screenshot_path, "resource", "app_capture_screen_test_config.json")
+    config_path = os.path.join(screenshot_path, "app_capture_screen_test_config.json")
     py_cmd = "python %s --config %s --anwser_path %s --save_path %s --device_num %s --test_num %s --tools_path %s --pr_url %s" \
              % (py_path, config_path, resource_path, save_screenshot_path, sn, test_num, screenshot_path, pr_url)
     time1 = time.time()
@@ -484,8 +497,14 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
 
 @timeout(900)
 def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
-    logger.info("cmd is: %s" % cmd)
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding="gbk")
+    # logger.info("cmd is: %s" % cmd)
+    # if system_type == "Windows":
+    #     shell = False
+    #     encoding = "gbk"
+    # else:
+    #     shell = True
+    #     encoding = "utf-8"
+    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf-8', errors='ignore', universal_newlines=True)
     curline = p.stdout.readline()
     list_png_name = []
     try:
