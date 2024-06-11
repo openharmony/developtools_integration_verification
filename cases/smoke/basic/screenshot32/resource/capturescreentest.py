@@ -622,8 +622,8 @@ if __name__ == "__main__":
                 reboot_result_list = enter_cmd("hdc list targets", 2)
                 number += 1
             enter_shell_cmd("rm /data/log/hilog/*;hilog -r;hilog -w start -l 400000000 -m none", 1)
-            py_cmd = os.system("python {}\\resource\\capturescreentest.py --config \
-            {}\\resource\\app_capture_screen_test_config.json --anwser_path {} \
+            py_cmd = os.system("python {}\\capturescreentest.py --config \
+            {}\\app_capture_screen_test_config.json --anwser_path {} \
             --save_path {}\\reboot --tools_path {} --device_num {} --test_num \"{}\"".format(args.tools_path, \
                                                                                              args.tools_path, args.anwser_path, args.save_path, args.tools_path, args.device_num,
                                                                                              reboot_test_num))
