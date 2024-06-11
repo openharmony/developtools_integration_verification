@@ -1,0 +1,13 @@
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Info [acl_check] -------------------------- ACL check begin --------------------------
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Info [utils] ['hdc', '-t', '7001005458323933328a5a60fe3a3900', 'shell', 'atm', 'dump', '-t', '>', '/data/token_info_1717730191843813600_7001005458323933328a5a60fe3a3900.txt'] operation fuccessful!
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Info [utils] ['hdc', '-t', '7001005458323933328a5a60fe3a3900', 'file', 'recv', '/data/token_info_1717730191843813600_7001005458323933328a5a60fe3a3900.txt', 'D:\\gitee\\developtools_integration_verification\\cases\\smoke\\basic\\screenshot32\\acls_check\\token_info_1717730191843813600_7001005458323933328a5a60fe3a3900.txt'] operation fuccessful!
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Info [utils] ['hdc', '-t', '7001005458323933328a5a60fe3a3900', 'shell', 'rm', '-rf', '/data/token_info_1717730191843813600_7001005458323933328a5a60fe3a3900.txt'] operation fuccessful!
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Info [resolve_token_info] read D:\gitee\developtools_integration_verification\cases\smoke\basic\screenshot32\acls_check\token_info_1717730191843813600_7001005458323933328a5a60fe3a3900.txt
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Info [resolve_token_info] -------------------------- invalidPermList check begin --------------------------
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Info [resolve_token_info] invalidPermList information is detected in processName = resource_schedule_service
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Info [resolve_token_info] invalidPermList information is detected in processName = security_collector
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Info [resolve_token_info] invalidPermList information is detected in processName = security_guard
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Error [resolve_token_info] -------------------------- The invalidPermList check failed --------------------------
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Error [acl_check] ('-------------------------- The invalidPermList check failed --------------------------',)
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Error [acl_check] -------------------------- ACL check failed --------------------------
+2024-06-07 11:16:56 Fri 2024-06-07 11:16:56 Info [acl_check] -------------------------- ACL check end --------------------------

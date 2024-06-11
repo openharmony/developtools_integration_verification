@@ -1,0 +1,42 @@
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [Main] --------APL Check Begin!--------
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [read_device] database start downloading!
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [read_device] D:\gitee\developtools_integration_verification\cases\smoke\basic\screenshot32\APL_compare_03\access_token.db download successful!
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [read_device] "select bundle_name,apl from hap_token_info_table" query successful!
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [read_device] "select process_name,apl from native_token_info_table" query successful!
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = com.ohos.launcher apl = 2
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = com.ohos.camera apl = 3
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = com.ohos.settings apl = 2
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = com.ohos.systemui apl = 2
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = com.ohos.filepicker apl = 2
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = ohos.telephony.resources apl = 3
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = ohos.samples.distributedmusicplayer apl = 3
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Error [compare_hap_apl] bundleName = com.ohos.ringtonelibrary.ringtonelibrarydata apl = 2
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = com.ohos.settings.faceauth apl = 2
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = com.ohos.smartperf apl = 2
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = com.ohos.useriam.authwidget apl = 2
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_hap_apl] bundleName = com.ohos.note apl = 3
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [compare_native_apl] processName = edm apl = 3
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Error [compare_native_apl] processName = powermgr apl = 3
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Error [Main] --------APL Check failed![hap = False, native = False] --------
+2024-06-07 11:02:41 Fri 2024-06-07 11:02:41 Info [Main] --------APL Check End! --------
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [Main] --------APL Check Begin!--------
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [read_device] database start downloading!
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [read_device] D:\gitee\developtools_integration_verification\cases\smoke\basic\screenshot32\APL_compare_03\access_token.db download successful!
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [read_device] "select bundle_name,apl from hap_token_info_table" query successful!
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [read_device] "select process_name,apl from native_token_info_table" query successful!
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = com.ohos.launcher apl = 2
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Error [compare_hap_apl] bundleName = com.ohos.ringtonelibrary.ringtonelibrarydata apl = 2
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = ohos.telephony.resources apl = 3
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = com.ohos.useriam.authwidget apl = 2
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = com.ohos.filepicker apl = 2
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = com.ohos.camera apl = 3
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = com.ohos.systemui apl = 2
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = com.ohos.settings.faceauth apl = 2
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = com.ohos.settings apl = 2
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = com.ohos.note apl = 3
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = ohos.samples.distributedmusicplayer apl = 3
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_hap_apl] bundleName = com.ohos.smartperf apl = 2
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Error [compare_native_apl] processName = powermgr apl = 3
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [compare_native_apl] processName = edm apl = 3
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Error [Main] --------APL Check failed![hap = False, native = False] --------
+2024-06-07 11:31:42 Fri 2024-06-07 11:31:42 Info [Main] --------APL Check End! --------
