@@ -164,7 +164,8 @@
   {
     "processName": "accessibility",
     "acls": [
-      "ohos.permission.INTERCEPT_INPUT_EVENT"
+      "ohos.permission.INTERCEPT_INPUT_EVENT",
+      "ohos.permission.INJECT_INPUT_EVENT"
     ]
   },
   {
