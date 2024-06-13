@@ -9,7 +9,8 @@
   {
     "processName": "privacy_service",
     "acls": [
-      "ohos.permission.MANAGE_DISPOSED_APP_STATUS"
+      "ohos.permission.MANAGE_DISPOSED_APP_STATUS",
+      "ohos.permission.MICROPHONE_CONTROL"
     ]
   },
   {
