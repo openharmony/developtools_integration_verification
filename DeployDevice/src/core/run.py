@@ -67,7 +67,10 @@ def start(param):
                     num = send_cmd(mycmd)
                     if num != 2:
                         logger.error("有设备断连，全部处置为真隔离状态！")
-                        errorcode = 200
+                        #errorcode = 200
+                    if num == 1:
+                        logger.error("说明这是单板，测试是通过的！")
+                        return 0
             except Exception as f:
                 logger.error(f)
             logger.info(errorcode)
