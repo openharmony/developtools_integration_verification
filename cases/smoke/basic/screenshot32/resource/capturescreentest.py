@@ -83,7 +83,7 @@ def enter_cmd(mycmd, waittime=0, printresult=1):
 def enter_shell_cmd(shellcmd, waittime=1, printresult=1):
     if shellcmd == "":
         return
-    cmd = 'hdc -t {} shell "{}"'.format(args.device_num, shellcmd)
+    cmd = 'hdc -l0 -t {} shell "{}"'.format(args.device_num, shellcmd)
     return enter_cmd(cmd, waittime, printresult)
 
 
@@ -98,12 +98,12 @@ def sys_exit():
 
 
 def file_to_dev(src, dst):
-    cmd = 'hdc -t {} file send "{}" "{}"'.format(args.device_num, src, dst)
+    cmd = 'hdc -l0 -t {} file send "{}" "{}"'.format(args.device_num, src, dst)
     return enter_cmd(cmd, 1, 1)
 
 
 def file_from_dev(src, dst):
-    cmd = 'hdc -t {} file recv "{}" "{}"'.format(args.device_num, src, dst)
+    cmd = 'hdc -l0 -t {} file recv "{}" "{}"'.format(args.device_num, src, dst)
     return enter_cmd(cmd, 1, 1)
 
 
@@ -344,6 +344,10 @@ if __name__ == "__main__":
         WAIT_TIME_TWO = 2
         WAIT_TIME_FOUR = 4
 
+        # 保存hilog
+        enter_shell_cmd("hilog -w stop")
+        enter_shell_cmd('rm -rf /data/log/hilog/*')
+        enter_shell_cmd('hilog -w start -l 1M -n 1000 -m zlib -j 11')
         reboot_cnt = 2
         while reboot_cnt:
             reboot_cnt -= 1
@@ -353,11 +357,11 @@ if __name__ == "__main__":
             while rmlock_cnt:
                 enter_shell_cmd("uinput -T -m 425 400 425 1000;uinput -T -m 425 1000 425 400")
                 rmlock_cnt -= 1
-            enter_shell_cmd("hilog -w stop")
-            enter_shell_cmd(
-                "cd /data/log/hilog && tar -cf system_start_log_{}.tar *".format(args.device_num))
-            file_from_dev("/data/log/hilog/system_start_log_{}.tar".format(args.device_num),
-                          args.save_path)
+            # enter_shell_cmd("hilog -w stop")
+            # enter_shell_cmd(
+            #     "cd /data/log/hilog && tar -cf system_start_log_{}.tar *".format(args.device_num))
+            # file_from_dev("/data/log/hilog/system_start_log_{}.tar".format(args.device_num),
+            #               args.save_path)
             connect_check()
             launcher_similarity = shot_and_cmp("launcher.jpeg")
             power_state = enter_shell_cmd("hidumper -s 3308")
@@ -400,6 +404,9 @@ if __name__ == "__main__":
                 if findp == -1:
                     lose_process.append(pname)
 
+        enter_shell_cmd("hilog -w stop")
+        enter_shell_cmd("cd /data/log/hilog && tar -cf system_start_log_{}.tar *".format(args.device_num))
+        file_from_dev("/data/log/hilog/system_start_log_{}.tar".format(args.device_num),args.save_path)
         if lose_process:
             print_to_log("SmokeTest: error: %s, These processes do not exist!!!" % lose_process)
             sys_exit()
