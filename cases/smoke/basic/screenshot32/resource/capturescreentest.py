@@ -389,7 +389,7 @@ if __name__ == "__main__":
             two_check_process_list = text.split('#####')[1].split()[0:-1]
             other_process_list = text.split('#####')[2].split()
             for pname in two_check_process_list:
-                pids = enter_cmd("hdc -t {} shell pidof {}".format(args.device_num, pname), 0, 1)
+                pids = enter_cmd("hdc -l0 -t {} shell pidof {}".format(args.device_num, pname), 0, 1)
                 try:
                     pidlist = pids.split()
                     int(pidlist[0])
@@ -514,17 +514,17 @@ if __name__ == "__main__":
                     elif type(single_action[1]) == str and single_action[1] == 'install_hap':
                         next_cmd = ""
                         if len(single_action) == 3:
-                            enter_cmd("hdc -t {} install \"{}\"".format(args.device_num,
+                            enter_cmd("hdc -l0 -t {} install \"{}\"".format(args.device_num,
                                                                         os.path.normpath(os.path.join(args.tools_path, single_action[2]))))
                     elif type(single_action[1]) == str and single_action[1] == 'get_file_from_dev':
                         next_cmd = ""
                         if len(single_action) == 3:
-                            enter_cmd("hdc -t {} file recv \"{}\" \"{}\"".format(args.device_num,
+                            enter_cmd("hdc -l0 -t {} file recv \"{}\" \"{}\"".format(args.device_num,
                                                                                  single_action[2], os.path.normpath(args.save_path)))
                     elif type(single_action[1]) == str and single_action[1] == 'send_file_to_dev':
                         next_cmd = ""
                         if len(single_action) == 4:
-                            enter_cmd("hdc -t {} file send \"{}\" \"{}\"".format(args.device_num,
+                            enter_cmd("hdc -l0 -t {} file send \"{}\" \"{}\"".format(args.device_num,
                                                                                  os.path.normpath(os.path.join(args.tools_path, single_action[2])), single_action[3]))
                     elif type(single_action[1]) == str and single_action[1] == 'connect_wifi':
                         next_cmd = ""
