@@ -497,7 +497,7 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
 
 @timeout(900)
 def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
-    # logger.info("cmd is: %s" % cmd)
+    logger.info("cmd is: %s" % cmd)
     # if system_type == "Windows":
     #     shell = False
     #     encoding = "gbk"
@@ -511,6 +511,8 @@ def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
         while "End of check" not in curline:
             curline = p.stdout.readline()
             logger.info(curline)
+            if 'SmokeTest: End of check, test succeeded!' in curline:
+                return True
             if "abnarmal" in curline:
                 png_name = curline.split(" ")[3].split(".")[0]
                 list_png_name.append(png_name)
