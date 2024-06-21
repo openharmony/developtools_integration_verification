@@ -1,0 +1,25 @@
+import logging
+import os
+
+import pytest
+
+from utils.images import compare_image_similarity
+
+
+class TestLauncher:
+
+    @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
+    def test(self, setup_teardown, device):
+        logging.info('桌面截图对比')
+        # usb弹窗
+        device.click(360, 715)
+        device.dirc_fling(1)
+        device.dirc_fling(1)
+        standard_pic = os.path.join(device.resource_path, 'launcher.jpeg')
+        launcher_pic = device.save_snapshot_to_local('launcher.jpeg')
+        similarity = compare_image_similarity(launcher_pic, standard_pic)
+        assert similarity > 0.5, '截图对比失败'
+
+        logging.info('检查桌面图标控件是否存在')
+        current_layout = device.generate_layout_object('desktop.json')
+        current_layout.assert_type_exist('Badge')

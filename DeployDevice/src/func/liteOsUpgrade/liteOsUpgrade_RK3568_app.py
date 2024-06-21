@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+import traceback
 import uuid
 import sys
 import subprocess
@@ -19,12 +20,12 @@ from aw.Common.Constant import CONSTANT
 from aw.Common.Common import getFileName
 from aw.ExtractFile.ExtractFile import *
 from aw.Common.Common import getHostIp, copyFile, copyDirectory
+
 total_time = ""
 lock_suffix = CONSTANT.File.LOCK_SUFFIX
 suc_file = CONSTANT.File.SUC_FILE
 failed_file = CONSTANT.File.FAILED_FILE
 REBOOT_TIMEOUT = 20000000
-
 
 
 class liteOsUpgrade_RK3568(BaseApp):
@@ -76,7 +77,6 @@ class liteOsUpgrade_RK3568(BaseApp):
         except Exception as e:
             logger.error(e)
             raise e
-            
 
     @dec_stepmsg("upgrade")
     @timeout(3600)
@@ -91,7 +91,7 @@ class liteOsUpgrade_RK3568(BaseApp):
         #   @return:        True or Flase
         #===================================================================================
         '''
-        global local_image_path, loader_tool_path, sn, LocationID ,test_num, system_type
+        global local_image_path, loader_tool_path, sn, LocationID, test_num, system_type
         system_type = platform.system()
         hostname = socket.gethostname()
         ipaddress = socket.gethostbyname(hostname)
@@ -192,12 +192,14 @@ class liteOsUpgrade_RK3568(BaseApp):
                             # os.system("hdc_std -t %s shell hilog -w start -t kmsg" % sn)
                             if upgrade_test_type == "null":
                                 return True
-                            screenshot_path = os.path.join(local_image_path, "screenshot")
+                            # 临时安装
+                            self.install_third_packages()
 
-                            resource_path = os.path.join(screenshot_path, 'resource')
-                            logger.info(resource_path)
-                            py_path = os.path.join(resource_path, "capturescreentest.py")
-                            # py_path = "main.py"
+                            screenshot_path = os.path.join(local_image_path, "screenshot")
+                            script_path = os.path.join(screenshot_path, 'new_script')
+                            logger.info(script_path)
+                            # py_path = os.path.join(script_path, "main.py")
+                            py_file = "main.py"
                             new_report_path = os.path.join(report_path, "result")
                             logger.info(new_report_path)
                             time_sleep = random.randint(3, 7)
@@ -216,11 +218,11 @@ class liteOsUpgrade_RK3568(BaseApp):
 
                             if not upgrade_test_type or upgrade_test_type == "smoke_test":
                                 # 进到工程目录
-                                # cur_path = os.getcwd()
-                                # os.chdir(resource_path)
-                                test_return = cmd_test(resource_path, py_path, new_report_path, resource_path, sn, test_num, pr_url)
+                                cur_path = os.getcwd()
+                                os.chdir(script_path)
+                                test_return = cmd_test(script_path, py_file, sn, test_num, new_report_path)
                                 # 执行完回到原来的目录
-                                # os.chdir(cur_path)
+                                os.chdir(cur_path)
                                 if test_return == 1:
                                     return True
                                 if test_return == 98:
@@ -229,6 +231,20 @@ class liteOsUpgrade_RK3568(BaseApp):
                                     return 99
                                 else:
                                     return False
+
+    def install_third_packages(self):
+        try:
+            pip_list = os.system('python -m pip list')
+            if 'pytest ' not in pip_list:
+                os.system('python -m pip install pytest==8.2.2')
+            if 'pytest-html' not in pip_list:
+                os.system('python -m pip install pytest-html==4.1.1')
+            if 'pytest-metadata' not in pip_list:
+                os.system('python -m pip install pytest-metadata==3.1.1')
+            if 'iniconfig' not in pip_list:
+                os.system('python -m pip install iniconfig==2.0.0')
+        except:
+            logger.error(traceback.format_exc())
 
     @timeout(1000)
     def flash_version(self):
@@ -265,12 +281,12 @@ class liteOsUpgrade_RK3568(BaseApp):
             check_mode_cmd = "%s LD" % loader_tool_path
             g = sendCmd(check_mode_cmd)
             logger.info(g)
-            #time.sleep(40)
+            # time.sleep(40)
             if "LocationID=%s	Mode=Loader" % LocationID in g:
                 logger.info("3568 board has entered the Loader mode successfully!")
                 return True
             else:
-                #if test_num != "2/2":
+                # if test_num != "2/2":
                 #    hdc_kill()
                 os.system("hdc -t %s shell reboot loader" % sn)
                 time.sleep(5)
@@ -460,7 +476,7 @@ def start_cmd(sn):
 
 
 @timeout(900)
-def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_num, pr_url):
+def cmd_test(screenshot_path, py_file, device_num, test_num, new_report_path):
     global total_time
     save_screenshot_path = os.path.join(new_report_path, "screenshot_result")
     logger.info(save_screenshot_path)
@@ -477,11 +493,10 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
     except Exception as e:
         logger.error(e)
         return 98
-    config_path = os.path.join(screenshot_path, "app_capture_screen_test_config.json")
-    py_cmd = "python %s --config %s --anwser_path %s --save_path %s --device_num %s --test_num %s --tools_path %s --pr_url %s" \
-             % (py_path, config_path, resource_path, save_screenshot_path, sn, test_num, screenshot_path, pr_url)
+    # config_path = os.path.join(screenshot_path, "app_capture_screen_test_config.json")
+    py_cmd = "python {} --device_num {} --test_num {} --save_path {}".format(py_file, device_num, test_num, save_screenshot_path)
     time1 = time.time()
-    result = outCmd(py_cmd, save_screenshot_path, base_screenshot_path, resource_path)
+    result = outCmd(py_cmd, save_screenshot_path, base_screenshot_path, screenshot_path)
     time2 = time.time()
     total_time = int(time2 - time1)
     logger.info("total_time: %s" % total_time)
@@ -496,7 +511,7 @@ def cmd_test(screenshot_path, py_path, new_report_path, resource_path, sn, test_
 
 
 @timeout(900)
-def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
+def outCmd(cmd, save_screenshot_path, base_screenshot_path, script_path):
     logger.info("cmd is: %s" % cmd)
     # if system_type == "Windows":
     #     shell = False
@@ -506,16 +521,16 @@ def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
     #     encoding = "utf-8"
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf-8', errors='ignore', universal_newlines=True)
     curline = p.stdout.readline()
-    list_png_name = []
+    # list_png_name = []
     try:
         while "End of check" not in curline:
             curline = p.stdout.readline()
             logger.info(curline)
             if 'SmokeTest: End of check, test succeeded!' in curline:
                 return True
-            if "abnarmal" in curline:
-                png_name = curline.split(" ")[3].split(".")[0]
-                list_png_name.append(png_name)
+            # if "abnarmal" in curline:
+            #     png_name = curline.split(" ")[3].split(".")[0]
+            #     list_png_name.append(png_name)
             if "SmokeTest find some fatal problems" in curline:
                 logger.error("SmokeTest find some fatal problems!")
                 return 99
@@ -523,14 +538,16 @@ def outCmd(cmd, save_screenshot_path, base_screenshot_path, resource_path):
         logger.error(e)
         logger.error("execute smoke_test.py failed!")
         return 99
-    l = list(set(list_png_name))
-    if l:
-        logger.error(l)
+    # l = list(set(list_png_name))
+    # if l:
+    #     logger.error(l)
     try:
-        for i in l:
-            result = os.path.join(resource_path, "%s.jpeg" % i)
-            base = os.path.join(base_screenshot_path, "%s.jpeg" % i)
-            shutil.copy(result, base)
+        resource_path = os.path.join(script_path, 'resource')
+        for jpeg_file in os.listdir(resource_path):
+            if jpeg_file.endswith('jpeg'):
+                result = os.path.join(resource_path, jpeg_file)
+                base = os.path.join(base_screenshot_path, jpeg_file)
+                shutil.copy(result, base)
     except Exception as t:
         logger.info(t)
     p.wait()
