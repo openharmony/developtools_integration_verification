@@ -234,7 +234,8 @@ class liteOsUpgrade_RK3568(BaseApp):
 
     def install_third_packages(self):
         try:
-            pip_list = os.system('python -m pip list')
+            rst = subprocess.run('python -m pip list', capture_output=True, shell=True, encoding='utf-8', timeout=30)
+            pip_list = rst.stdout
             if 'pytest ' not in pip_list:
                 os.system('python -m pip install pytest==8.2.2')
             if 'pytest-html' not in pip_list:

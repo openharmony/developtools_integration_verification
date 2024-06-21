@@ -14,6 +14,7 @@ parser.add_argument('--test_num', type=str, default='1/1')
 parser.add_argument('--save_path', type=str, default='./report')
 parser.add_argument('--device_num', type=str, default='')
 args = parser.parse_args()
+print('[current dir]{}'.format(os.getcwd()))
 
 run_params = ['-vs']
 
