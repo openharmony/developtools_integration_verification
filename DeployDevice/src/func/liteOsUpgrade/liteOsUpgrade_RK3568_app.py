@@ -234,16 +234,18 @@ class liteOsUpgrade_RK3568(BaseApp):
 
     def install_third_packages(self):
         try:
+            logger.debug('python -m pip list')
             rst = subprocess.run('python -m pip list', capture_output=True, shell=True, encoding='utf-8', timeout=30)
-            pip_list = rst.stdout
-            if 'pytest ' not in pip_list:
-                os.system('python -m pip install pytest==8.2.2')
-            if 'pytest-html' not in pip_list:
-                os.system('python -m pip install pytest-html==4.1.1')
-            if 'pytest-metadata' not in pip_list:
-                os.system('python -m pip install pytest-metadata==3.1.1')
-            if 'iniconfig' not in pip_list:
-                os.system('python -m pip install iniconfig==2.0.0')
+            logger.debug(rst)
+            logger.debug('python -m pip install pytest -U')
+            rst = subprocess.run('python -m pip install pytest -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
+            logger.debug(rst)
+            logger.debug('python -m pip install pytest-html -U')
+            rst = subprocess.run('python -m pip install pytest-html -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
+            logger.debug(rst)
+            logger.debug('python -m pip list')
+            rst = subprocess.run('python -m pip list', capture_output=True, shell=True, encoding='utf-8', timeout=30)
+            logger.debug(rst)
         except:
             logger.error(traceback.format_exc())
 
