@@ -4,7 +4,7 @@ import re
 import pytest
 
 
-class TestProcess:
+class Test:
     pid_list = [
         'com.ohos.launcher',
         'render_service',

@@ -3,11 +3,10 @@ import os.path
 import time
 
 import pytest
-
 from utils.images import compare_image_similarity, crop_picture
 
 
-class TestPhotos:
+class Test:
     ability_name = 'com.ohos.photos.MainAbility'
     bundle_name = 'com.ohos.photos'
 

@@ -220,7 +220,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                                 # 进到工程目录
                                 cur_path = os.getcwd()
                                 os.chdir(script_path)
-                                test_return = cmd_test(script_path, py_file, sn, test_num, new_report_path)
+                                test_return = cmd_test(script_path, py_file, sn, test_num, new_report_path, pr_url)
                                 # 执行完回到原来的目录
                                 os.chdir(cur_path)
                                 if test_return == 1:
@@ -240,8 +240,11 @@ class liteOsUpgrade_RK3568(BaseApp):
             logger.debug('python -m pip install pytest -U')
             rst = subprocess.run('python -m pip install pytest -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
             logger.debug(rst)
-            logger.debug('python -m pip install pytest-html -U')
+            logger.debug('python -m pip uninstall pytest-html -y')
             rst = subprocess.run('python -m pip install pytest-html -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
+            logger.debug(rst)
+            logger.debug('python -m pip install pytest-testreport -U')
+            rst = subprocess.run('python -m pip install pytest-testreport -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
             logger.debug(rst)
             logger.debug('python -m pip list')
             rst = subprocess.run('python -m pip list', capture_output=True, shell=True, encoding='utf-8', timeout=30)
@@ -479,7 +482,7 @@ def start_cmd(sn):
 
 
 @timeout(900)
-def cmd_test(screenshot_path, py_file, device_num, test_num, new_report_path):
+def cmd_test(screenshot_path, py_file, device_num, test_num, new_report_path, pr):
     global total_time
     save_screenshot_path = os.path.join(new_report_path, "screenshot_result")
     logger.info(save_screenshot_path)
@@ -497,7 +500,7 @@ def cmd_test(screenshot_path, py_file, device_num, test_num, new_report_path):
         logger.error(e)
         return 98
     # config_path = os.path.join(screenshot_path, "app_capture_screen_test_config.json")
-    py_cmd = "python {} --device_num {} --test_num {} --save_path {}".format(py_file, device_num, test_num, save_screenshot_path)
+    py_cmd = "python {} --device_num {} --test_num {} --save_path {} --pr {}".format(py_file, device_num, test_num, save_screenshot_path, pr)
     time1 = time.time()
     result = outCmd(py_cmd, save_screenshot_path, base_screenshot_path, screenshot_path)
     time2 = time.time()
@@ -516,19 +519,14 @@ def cmd_test(screenshot_path, py_file, device_num, test_num, new_report_path):
 @timeout(900)
 def outCmd(cmd, save_screenshot_path, base_screenshot_path, script_path):
     logger.info("cmd is: %s" % cmd)
-    # if system_type == "Windows":
-    #     shell = False
-    #     encoding = "gbk"
-    # else:
-    #     shell = True
-    #     encoding = "utf-8"
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf-8', errors='ignore', universal_newlines=True)
+    # p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, errors='ignore', universal_newlines=True)
     curline = p.stdout.readline()
     # list_png_name = []
     try:
         while "End of check" not in curline:
             curline = p.stdout.readline()
-            logger.info(curline)
+            logger.printLog(curline)
             if 'SmokeTest: End of check, test succeeded!' in curline:
                 return True
             # if "abnarmal" in curline:

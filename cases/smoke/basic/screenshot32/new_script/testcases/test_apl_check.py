@@ -1,13 +1,13 @@
 import json
-import logging
 import math
 import os.path
 import sqlite3
+import logging
 
 import pytest
 
 
-class TestAPLCheck:
+class Test:
 
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):
@@ -73,7 +73,7 @@ class TestAPLCheck:
                 continue
             is_pass = whitelist_dict[key] == apl
             if not is_pass:
-                logging.error('bundleName/processName = {} apl = {} | 校验未通过'.format(key, apl))
+                logging.info('bundleName/processName = {} apl = {} | 校验未通过'.format(key, apl))
                 check_rst = False
             else:
                 logging.info('bundleName/processName = {} apl = {} | 校验通过'.format(key, apl))

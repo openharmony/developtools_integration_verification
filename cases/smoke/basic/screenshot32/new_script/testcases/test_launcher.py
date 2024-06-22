@@ -6,7 +6,7 @@ import pytest
 from utils.images import compare_image_similarity
 
 
-class TestLauncher:
+class Test:
 
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):

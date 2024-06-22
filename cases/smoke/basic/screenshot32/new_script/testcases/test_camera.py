@@ -1,11 +1,10 @@
 import logging
-import os.path
 import time
 
 import pytest
 
 
-class TestCamera:
+class Test:
     camera_ability_name = 'com.ohos.camera.MainAbility'
     camera_bundle_name = 'com.ohos.camera'
     photo_ability_name = 'com.ohos.photos.MainAbility'

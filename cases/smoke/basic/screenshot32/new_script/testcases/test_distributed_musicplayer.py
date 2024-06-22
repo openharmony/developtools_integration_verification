@@ -3,11 +3,10 @@ import os.path
 import time
 
 import pytest
-
 from utils.images import compare_image_similarity, crop_picture
 
 
-class TestDistributedMusicplayer:
+class Test:
     ability_name = 'ohos.samples.distributedmusicplayer.MainAbility'
     bundle_name = 'ohos.samples.distributedmusicplayer'
 

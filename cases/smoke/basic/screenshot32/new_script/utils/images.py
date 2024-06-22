@@ -14,7 +14,7 @@ def compare_image_similarity(image1, image2):
     logging.info('{}是否存在？[{}]'.format(image1, os.path.exists(image1)))
     logging.info('{}是否存在？[{}]'.format(image2, os.path.exists(image2)))
     if not os.path.exists(image1) or not os.path.exists(image2):
-        logging.warning('文件缺失，相似度为0%')
+        logging.info('文件缺失，相似度为0%')
         return 0
     image1 = cv2.imread(image1, 0)
     image2 = cv2.imread(image2, 0)
@@ -30,13 +30,13 @@ def compare_image_similarity(image1, image2):
     # 匹配特征点
     matches = bf.match(descriptors1, descriptors2)
     if not matches:
-        logging.warning('没有匹配到特征点，相似度为0%')
+        logging.info('没有匹配到特征点，相似度为0%')
         return 0
     if not keypoints1:
         if not keypoints2:
-            logging.warning('相似度为100%')
+            logging.info('相似度为100%')
             return 1
-        logging.warning('相似度为0%')
+        logging.info('相似度为0%')
         return 0
     # 计算相似度
     similarity = len(matches) / len(keypoints1)

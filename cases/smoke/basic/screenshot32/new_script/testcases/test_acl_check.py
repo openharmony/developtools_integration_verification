@@ -1,12 +1,11 @@
 import json
-import logging
 import os
 import time
-
+import logging
 import pytest
 
 
-class TestACLCheck:
+class Test:
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):
         return
@@ -31,14 +30,14 @@ class TestACLCheck:
         for process, permission_list in acls_in_device.items():
             if process not in whitelist_dict.keys():
                 check_rst = False
-                logging.error('processName={}未配置白名单权限：{}'.format(process, permission_list))
+                logging.info('processName={}未配置白名单权限：{}'.format(process, permission_list))
             else:
                 whitelist_set = set(whitelist_dict[process])
                 permission_set = set(permission_list)
                 not_applied = permission_set.difference(whitelist_set)
                 if not_applied:
                     check_rst = False
-                    logging.error('processName={}未配置白名单权限：{}'.format(process, not_applied))
+                    logging.info('processName={}未配置白名单权限：{}'.format(process, not_applied))
         assert check_rst, 'ACL检查失败'
 
     @staticmethod
@@ -53,7 +52,7 @@ class TestACLCheck:
                 process = line.split(':')[1].strip().strip('",')
             elif 'invalidPermList' in line:
                 check_pass = False
-                logging.error('invalidPermList is detected in processName = {}'.format(process))
+                logging.info('invalidPermList is detected in processName = {}'.format(process))
             elif 'nativeAcls' in line:
                 permissions = line.split(':')[1].strip().strip('",')
                 if not permissions:

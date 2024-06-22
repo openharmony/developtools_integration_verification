@@ -3,11 +3,10 @@ import os.path
 import time
 
 import pytest
-
 from utils.images import compare_image_similarity, crop_picture
 
 
-class TestControllerCenter:
+class Test:
 
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):
@@ -21,4 +20,5 @@ class TestControllerCenter:
 
         crop_picture(controller_page_pic)
         similarity = compare_image_similarity(controller_page_pic, standard_pic)
+        device.dirc_fling(3)
         assert similarity > 0.5, '截图对比失败'

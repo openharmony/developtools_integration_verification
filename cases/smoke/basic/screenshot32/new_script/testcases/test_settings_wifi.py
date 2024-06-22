@@ -7,7 +7,7 @@ import pytest
 from utils.images import compare_image_similarity, crop_picture
 
 
-class TestSettingsWifi:
+class Test:
     ability_name = 'com.ohos.settings.MainAbility'
     bundle_name = 'com.ohos.settings'
 
