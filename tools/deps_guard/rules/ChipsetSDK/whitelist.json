@@ -44,6 +44,7 @@
 	// To be optimized
 	"libprotobuf_lite.z.so",
 	"libdmabufheap.z.so",
+	"libsync.z.so",
 	"libsync_fence.z.so",
 
 	// chipset modules can be depended by system directly

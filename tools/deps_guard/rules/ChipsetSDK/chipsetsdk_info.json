@@ -352,6 +352,14 @@
         ]
     },
     {
+        "name": "memory_utils:libsync",
+        "so_file_name": "libsync.z.so",
+        "path": "//commonlibrary/memory_utils/libsync:libsync",
+        "headers": [
+            "//commonlibrary/memory_utils/libsync/include/"
+        ]
+    },
+    {
         "name": "graphic_2d:sync_fence",
         "so_file_name": "libsync_fence.z.so",
         "path": "//foundation/graphic/graphic_2d/utils/sync_fence:sync_fence",
