@@ -241,7 +241,7 @@ class liteOsUpgrade_RK3568(BaseApp):
             rst = subprocess.run('python -m pip install pytest -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
             logger.debug(rst)
             logger.debug('python -m pip uninstall pytest-html -y')
-            rst = subprocess.run('python -m pip install pytest-html -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
+            rst = subprocess.run('python -m pip uninstall pytest-html -y', capture_output=True, shell=True, encoding='utf-8', timeout=600)
             logger.debug(rst)
             logger.debug('python -m pip install pytest-testreport -U')
             rst = subprocess.run('python -m pip install pytest-testreport -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
@@ -526,7 +526,7 @@ def outCmd(cmd, save_screenshot_path, base_screenshot_path, script_path):
     try:
         while "End of check" not in curline:
             curline = p.stdout.readline()
-            logger.printLog(curline)
+            logger.info(curline)
             if 'SmokeTest: End of check, test succeeded!' in curline:
                 return True
             # if "abnarmal" in curline:
