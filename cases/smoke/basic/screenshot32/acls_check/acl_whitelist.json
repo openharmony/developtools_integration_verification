@@ -59,7 +59,8 @@
       "ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION",
       "ohos.permission.MANAGE_USER_ACCOUNT_INFO",
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
-      "ohos.permission.CAPTURE_SCREEN"
+      "ohos.permission.CAPTURE_SCREEN",
+      "ohos.permission.MANAGE_MISSIONS"
     ]
   },
   {
