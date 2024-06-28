@@ -243,5 +243,11 @@
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
       "ohos.permission.MANAGE_SYSTEM_ABILITY"
     ]
+  },
+  {
+    "processName": "resource_schedule_service",
+    "acls": [
+      "ohos.permission.MANAGE_WIFI_CONNECTION"
+    ]
   }
 ]
