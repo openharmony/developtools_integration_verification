@@ -277,12 +277,6 @@
         ]
     },
     {
-        "name": "ril_adapter:hril_innerkits",
-        "so_file_name": "libhril_innerkits.z.so",
-        "path": "//base/telephoney/ril_adapter/interfaces/innerkits:hril_innerkits",
-        "headers": []
-    },
-    {
         "name": "drivers_interface_power:libpower_proxy_1.0",
         "so_file_name": "libpower_proxy_1.0.z.so",
         "path": "//drivers/interface/power/v1_0:libpower_proxy_1.0",

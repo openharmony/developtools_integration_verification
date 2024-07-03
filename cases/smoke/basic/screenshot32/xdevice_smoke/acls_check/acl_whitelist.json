@@ -157,6 +157,7 @@
     "acls": [
       "ohos.permission.INPUT_MONITORING",
       "ohos.permission.MANAGE_MISSIONS",
+      "ohos.permission.MANAGE_WIFI_CONNECTION",
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
       "ohos.permission.START_INVISIBLE_ABILITY"
     ]
@@ -242,6 +243,12 @@
     "acls": [
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
       "ohos.permission.MANAGE_SYSTEM_ABILITY"
+    ]
+  },
+  {
+    "processName": "resource_schedule_service",
+    "acls": [
+      "ohos.permission.MANAGE_WIFI_CONNECTION"
     ]
   }
 ]
