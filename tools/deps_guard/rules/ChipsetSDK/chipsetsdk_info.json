@@ -178,6 +178,12 @@
         "headers": []
     },
     {
+        "name": "faultloggerd:libbacktrace_local",
+        "so_file_name": "libbacktrace_local.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/backtrace:libbacktrace_local",
+        "headers": [ "//base/hiviewdfx/faultloggerd/interfaces/innerkits/backtrace/include/" ]
+    },
+    {
         "name": "libdrm:libdrm",
         "so_file_name": "libdrm.so",
         "path": "//third_party/libdrm:libdrm",

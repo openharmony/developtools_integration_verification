@@ -17,6 +17,7 @@
 	"libhdifd_parcelable.z.so",
 	"libconfigpolicy_util.z.so",
 	"libstd.dylib.so",
+	"libbacktrace_local.so",
 
 	// Third party libraries
 	"libdrm.so",
