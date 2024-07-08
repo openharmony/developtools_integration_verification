@@ -14,7 +14,6 @@ class Test:
     def test(self, setup_teardown, device):
         logging.info('启动音乐应用')
         device.start_ability(self.bundle_name, self.ability_name)
-        time.sleep(2)
         # 弹窗
         device.stop_permission()
         logging.info('音乐界面截图对比')
@@ -25,8 +24,8 @@ class Test:
         assert similarity > 0.5, '截图对比失败'
 
         logging.info('音乐界面控件检查')
-        current_layout = device.generate_layout_object('music.json')
-        current_layout.assert_key_exist('image1')
-        current_layout.assert_key_exist('image2')
-        current_layout.assert_key_exist('image3')
-        current_layout.assert_key_exist('image4')
+        device.refresh_layout()
+        device.assert_key_exist('image1')
+        device.assert_key_exist('image2')
+        device.assert_key_exist('image3')
+        device.assert_key_exist('image4')

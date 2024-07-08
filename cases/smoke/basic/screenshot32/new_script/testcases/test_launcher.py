@@ -21,5 +21,5 @@ class Test:
         assert similarity > 0.5, '截图对比失败'
 
         logging.info('检查桌面图标控件是否存在')
-        current_layout = device.generate_layout_object('desktop.json')
-        current_layout.assert_type_exist('Badge')
+        device.refresh_layout()
+        device.assert_type_exist('Badge')

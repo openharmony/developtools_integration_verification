@@ -53,34 +53,27 @@ if __name__ == '__main__':
     run_params = ['-vs', '--sn={}'.format(sn)]
 
     try:
-        # 用例选择
-        cases = distribute_testcase(test_num)
-        run_params.extend(cases)
-        # 报告保存路径
-        report = report_content(sn, pr)
-        run_params.extend(report)
 
-        report_dir = os.path.join(BASE_DIR, 'reports')
-        try:
-            shutil.rmtree(report_dir)
-        except:
-            pass
+        # 报告保存路径
+        report = os.path.join(args.save_path, '{}_report.html'.format(sn))
+        run_params.extend(['--html={}'.format(report), '--self-contained-html', '--capture=sys'])
+
+        # 用例选择
+        selected_cases = distribute_testcase(test_num)
+        run_params.extend(selected_cases)
 
         print(run_params)
         pytest.main(run_params)
-        try:
-            shutil.copytree(report_dir, save_path)
-        except:
-            pass
-        html_file = [f for f in os.listdir(report_dir) if f.endswith('{}_reports.html')][0]
 
-        with open(os.path.join(report_dir, html_file), 'r', encoding='utf-8') as f:
+        with open(report, 'r+', encoding='gbk') as f:
             text = f.read()
-
-            passed = int(re.findall(r'<span class="text-success">\s*(\d+)\s*</span>', text)[0])
-        if passed == len(cases):
+            passed = int(re.findall(r'<span class="passed">(\d+)\s*passed', text, re.I)[0])
+            text = text.replace('<meta charset="utf-8"/>', '<meta charset="gbk"/>')
+            f.seek(0)
+            f.write(text)
+        if passed == len(selected_cases):
             print('SmokeTest: End of check, test succeeded!')
         else:
-            print('SmokeTest: End of check, SmokeTest find some fatal problems! passed {}/{}'.format(passed, len(cases)))
+            print('SmokeTest: End of check, SmokeTest find some fatal problems! passed {}/{}'.format(passed, len(selected_cases)))
     except:
         print('SmokeTest: End of check, SmokeTest find some fatal problems! {}'.format(traceback.format_exc()))

@@ -14,7 +14,6 @@ class Test:
     def test(self, setup_teardown, device):
         logging.info('启动联系人应用')
         device.start_ability(self.bundle_name, self.ability_name)
-        time.sleep(2)
 
         logging.info('联系人界面截图对比')
         standard_pic = os.path.join(device.resource_path, 'contacts.jpeg')
@@ -24,12 +23,12 @@ class Test:
         assert similarity > 0.5, '截图对比失败'
 
         logging.info('联系人界面控件检查')
-        current_layout = device.generate_layout_object('contacts.json')
-        current_layout.assert_text_exist('电话')
-        current_layout.assert_text_exist('联系人')
-        current_layout.assert_text_exist('收藏')
-        current_layout.assert_text_exist('1')
-        current_layout.assert_text_exist('3')
-        current_layout.assert_text_exist('5')
-        current_layout.assert_text_exist('7')
-        current_layout.assert_text_exist('9')
+        device.refresh_layout()
+        device.assert_text_exist('电话')
+        device.assert_text_exist('联系人')
+        device.assert_text_exist('收藏')
+        device.assert_text_exist('1')
+        device.assert_text_exist('3')
+        device.assert_text_exist('5')
+        device.assert_text_exist('7')
+        device.assert_text_exist('9')

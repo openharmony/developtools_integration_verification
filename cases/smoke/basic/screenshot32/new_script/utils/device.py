@@ -4,20 +4,24 @@ import os.path
 import re
 import subprocess
 import time
-
-from utils.layout import Layout
+import threading
 
 
 class Device:
 
+    lock = threading.Lock()
+
     @classmethod
     def _execute_cmd(cls, cmd):
-        logging.info(f'[In]{cmd}')
-        rst = subprocess.run(cmd, capture_output=True, shell=True, encoding='utf-8', timeout=30)
-        out_put = rst.stdout or rst.stderr
-        time.sleep(0.5)
-        logging.info(f'[Out]{out_put}')
-        return out_put
+        with cls.lock:
+            logging.info(f'[In]{cmd}')
+            rst = subprocess.run(cmd, capture_output=True, shell=True, timeout=30, encoding='utf-8')
+            out_put = rst.stdout or rst.stderr
+            time.sleep(0.5)
+            # 布局的回显太多了，不打印
+            if not re.search(r'cat /data/local/tmp/\S+json', cmd):
+                logging.info(f'[Out]{out_put}')
+            return out_put
 
     def __init__(self, sn):
         self.sn = sn
@@ -26,11 +30,20 @@ class Device:
         self.width = 720
         self.height = 1280
         self.velocity_range = (200, 40000)
-
+        self._element_list = []
         # self.get_render_size()
 
     def hdc_shell(self, cmd):
-        return self._execute_cmd(f'hdc -t {self.sn} shell "{cmd}"')
+        out = ''
+        for i in range(3):
+            shell_cmd = f'hdc -t {self.sn} shell "{cmd}"'
+            out = self._execute_cmd(shell_cmd)
+            if '[Fail]Device not founded or connected' in out:
+                self.restart_hdc_process()
+                time.sleep(5)
+            else:
+                break
+        return out
 
     def hdc(self, cmd):
         return self._execute_cmd(f'hdc -t {self.sn} {cmd}')
@@ -107,11 +120,11 @@ class Device:
         logging.info('获取udid')
         return self.hdc('bm get --udid')
 
-    def kill(self):
+    def kill_hdc_process(self):
         logging.info('杀掉hdc进程')
         return self._execute_cmd('hdc kill')
 
-    def restart(self):
+    def restart_hdc_process(self):
         logging.info('重启hdc进程')
         return self._execute_cmd('hdc start -r')
 
@@ -121,7 +134,9 @@ class Device:
 
     def start_ability(self, bundle_name, ability_name):
         logging.info(f'打开{bundle_name}应用')
-        return self.hdc_shell(f'aa start -b {bundle_name} -a {ability_name}')
+        rst = self.hdc_shell(f'aa start -b {bundle_name} -a {ability_name}')
+        time.sleep(2)
+        return rst
 
     def force_stop(self, bundle_name):
         logging.info(f'停掉{bundle_name}应用')
@@ -165,6 +180,11 @@ class Device:
         logging.info(f'查看{bundle_name}应用配置信息')
         return self.hdc_shell(f'bm dump -n {bundle_name}')
 
+    def stop_permission(self):
+        logging.info(f'消掉权限请求的弹窗')
+        return self.click(516, 688)
+        # return self.force_stop('com.ohos.permissionmanager')
+
     def click(self, x: int, y: int):
         """
         模拟触摸按下
@@ -172,27 +192,28 @@ class Device:
         :param y:
         :return:
         """
-        x = self._auto_fix(x, 1, self.width)
-        y = self._auto_fix(y, 1, self.height)
         logging.info(f'点击({x},{y})坐标')
         return self.hdc_shell(f'uitest uiInput click {x} {y}')
 
-    def stop_permission(self):
-        logging.info(f'消掉权限请求的弹窗')
-        return self.click(516, 688)
-        # return self.force_stop('com.ohos.permissionmanager')
+    def click_element(self, e):
+        x, y = self.center_of_element(e)
+        return self.click(x, y)
 
     def double_click(self, x, y):
-        x = self._auto_fix(x, 1, self.width)
-        y = self._auto_fix(y, 1, self.height)
         logging.info(f'双击({x},{y})坐标')
         return self.hdc_shell(f'uitest uiInput doubleClick {x} {y}')
 
+    def double_click_element(self, e):
+        x, y = self.center_of_element(e)
+        return self.double_click(x, y)
+
     def long_click(self, x, y):
-        x = self._auto_fix(x, 1, self.width)
-        y = self._auto_fix(y, 1, self.height)
         logging.info(f'长按({x},{y})坐标')
         return self.hdc_shell(f'uitest uiInput longClick {x} {y}')
+
+    def long_click_element(self, e):
+        x, y = self.center_of_element(e)
+        return self.long_click(x, y)
 
     def dirc_fling(self, direct=0):
         """
@@ -224,11 +245,6 @@ class Device:
         :return:
         """
         # 保证数据取值范围合理
-        from_x = self._auto_fix(from_x, 1, self.width)
-        from_y = self._auto_fix(from_y, 1, self.height)
-        to_x = self._auto_fix(to_x, 1, self.width)
-        to_y = self._auto_fix(to_y, 1, self.height)
-        velocity = self._auto_fix(velocity, *self.velocity_range)
         logging.info(f'从({from_x},{from_y})滑动到({to_x},{to_y})，滑动速度：{velocity}px/s')
         return self.hdc_shell(f'uitest uiInput swipe {from_x} {from_y} {to_x} {to_y} {velocity}')
 
@@ -244,11 +260,6 @@ class Device:
         """
         # 保证数据取值范围合理
         # 保证数据取值范围合理
-        from_x = self._auto_fix(from_x, 1, self.width)
-        from_y = self._auto_fix(from_y, 1, self.height)
-        to_x = self._auto_fix(to_x, 1, self.width)
-        to_y = self._auto_fix(to_y, 1, self.height)
-        # velocity = self._auto_fix(velocity, *self.velocity_range)
         logging.info(f'从({from_x},{from_y})快速滑动到({to_x},{to_y})')
         return self.hdc_shell(f'uitest uiInput fling {from_x} {from_y} {to_x} {to_y}')
 
@@ -261,11 +272,6 @@ class Device:
         :param to_y:(必选参数,滑动终点y坐标)
         :param velocity: (可选参数,滑动速度,取值范围: 200-40000, 默认值: 600, 单位: px/s)
         """
-        from_x = self._auto_fix(from_x, 1, self.width)
-        from_y = self._auto_fix(from_y, 1, self.height)
-        to_x = self._auto_fix(to_x, 1, self.width)
-        to_y = self._auto_fix(to_y, 1, self.height)
-        velocity = self._auto_fix(velocity, *self.velocity_range)
         logging.info(f'从({from_x},{from_y})拖到({to_x},{to_y})，拖动速度：{velocity}px/s')
         return self.hdc_shell(f'uitest uiInput drag {from_x} {from_y} {to_x} {to_y} {velocity}')
 
@@ -282,17 +288,19 @@ class Device:
     def press_power_key(self):
         return self.key_event('Power')
 
-    def press_recent_task(self):
+    def press_recent_key(self):
         return self.key_event('2078')
 
     def clear_recent_task(self):
         logging.info('清理最近的任务')
-        self.press_recent_task()
+        self.press_recent_key()
+        time.sleep(0.5)
+        self.press_clear_btn()
+
+    def press_clear_btn(self):
         self.click(360, 1170)
 
     def input_text(self, x, y, text=''):
-        x = self._auto_fix(x, 1, self.width)
-        y = self._auto_fix(y, 1, self.height)
         logging.info(f'向({x, y})坐标处输入“{text}”')
         return self.hdc_shell(f'uitest uiInput inputText {x} {y} {text}')
 
@@ -324,7 +332,7 @@ class Device:
         logging.info(f'设置电源为{power_map.get(mode)}')
         return self.hdc_shell(f'power-shell setmode {mode}')
 
-    def display_power_state(self):
+    def display_screen_state(self):
         logging.info('获取屏幕点亮状态')
         return self.hdc_shell('hidumper -s 3308')
 
@@ -336,7 +344,6 @@ class Device:
 
     def dump_layout(self, file_name=''):
         logging.info('获取当前页面布局')
-        self.hdc_shell('rm -rf /data/local/tmp/*.json')
         if file_name:
             file_path = '/data/local/tmp/' + file_name
             dump_rst = self.hdc_shell(f'uitest dumpLayout -p {file_path}')
@@ -345,24 +352,25 @@ class Device:
         layout_file = dump_rst.split(':')[1].strip()
         return layout_file
 
-    def generate_layout_object(self, file_name=''):
+    def save_layout_to_local(self, file_name=''):
+        layout_file = self.dump_layout(file_name)
+        self.hdc_file_recv(layout_file)
+
+    def refresh_layout(self, file_name=''):
         """
         :param file_name: 文件名不包含路径
         :return:
         """
+        file_name = file_name or 'tmp_layout.json'
         tmp_file = self.dump_layout(file_name)
-        self.hdc_file_recv(tmp_file, self.report_path)
-        local_file = os.path.join(self.report_path, tmp_file.split('/')[-1])
-        if not os.path.exists(local_file):
-            logging.info(f'没有找到{local_file}文件')
-            return
-        json_data = json.load(open(local_file, 'r', encoding='utf-8'))
-        return Layout(json_data)
+        json_data = json.loads(self.hdc_shell(f'cat {tmp_file}'))
+        self._element_list = self._parse_attribute_nodes(json_data)
+        # 将控件按从上到下，从左到右的顺序排列
+        self._element_list.sort(key=lambda e: [self.center_of_element(e)[1], self.center_of_element(e)[0]])
 
     def snapshot_display(self, jpeg=''):
         """jpeg必须在/data/local/tmp目录"""
         logging.info('获取当前页面截图')
-        self.hdc_shell('rm -rf /data/local/tmp/*.jpeg')
         if jpeg:
             jpeg = '/data/local/tmp/' + jpeg
             shot_rst = self.hdc_shell(f'snapshot_display -f {jpeg}')
@@ -377,6 +385,9 @@ class Device:
         save_file = os.path.join(self.report_path, tmp_file.split('/')[-1])
         self.hdc_file_recv(tmp_file, self.report_path)
         return save_file
+
+    def clear_local_tmp(self):
+        self.hdc_shell('rm -rf /data/local/tmp/*')
 
     def set_screen_timeout(self, timeout=600):
         """
@@ -412,7 +423,7 @@ class Device:
         :return:
         """
         logging.info('解锁屏幕')
-        return self.dirc_fling(3)
+        return self.dirc_fling(2)
 
     def assert_process_running(self, process):
         logging.info(f'检查{process}进程是否存在')
@@ -438,13 +449,145 @@ class Device:
             'scanning': is_scan_running
         }
 
+    def dump_windows_manager_service(self):
+        rst = self.hdc_shell("hidumper -s WindowManagerService -a '-a'")
+        return rst
+
+    def get_focus_window(self):
+        text = self.dump_windows_manager_service()
+        focus_win = re.findall(r'Focus window: (\d+)', text)[0].strip()
+        win_id_index = 3
+        focus_window_name = ''
+        for line in text.splitlines():
+            if line.startswith('Focus window'):
+                break
+            wms = re.match(r'\S*\s*(\d+\s+){' + str(win_id_index) + '}', line)
+            if wms:
+                data = wms.group().strip().split()
+                if data[win_id_index] == focus_win:
+                    focus_window_name = data[0]
+                    break
+        logging.info('当前聚焦的窗口为：{}'.format(focus_window_name))
+        return focus_window_name
+
+    def get_win_id(self, window_name):
+        text = self.dump_windows_manager_service()
+        win = re.search(window_name + r'\s*(\d+\s+){3}', text)
+        if not win:
+            return
+        win_id = win.group().split()[-1]
+        return win_id
+
+    def get_navigationb_winid(self):
+        return self.get_win_id('SystemUi_NavigationB')
+
+    def is_soft_keyboard_on(self):
+        if self.soft_keyboard():
+            return True
+        return False
+
+    def soft_keyboard(self):
+        text = self.dump_windows_manager_service()
+        keyboard = re.search(r'softKeyboard1\s*(\d+\s+){8}\[\s+(\d+\s+){4}]', text)
+        if not keyboard:
+            return ''
+        return keyboard.group()
+
+    def get_elements_by_text(self, text):
+        ems = []
+        for e in self._element_list:
+            if e.get('text') == text:
+                ems.append(e)
+        return ems
+
+    def get_element_by_text(self, text, index=0):
+        ems = self.get_elements_by_text(text)
+        if not ems:
+            return
+        return ems[index]
+
+    def assert_text_exist(self, text):
+        element = self.get_elements_by_text(text)
+        rst = '是' if element else '否'
+        logging.info('检查[文本]="{}"是否存在？[{}]'.format(text, rst))
+        assert element
+
+    def get_elements_by_type(self, _type):
+        ems = []
+        for e in self._element_list:
+            if e.get('type') == _type:
+                ems.append(e)
+        return ems
+
+    def get_element_by_type(self, _type, index=0):
+        ems = self.get_elements_by_type(_type)
+        if not ems:
+            return
+        return ems[index]
+
+    def assert_type_exist(self, _type):
+        element = self.get_elements_by_type(_type)
+        rst = '是' if element else '否'
+        logging.info('检查[type]="{}"是否存在？[{}]'.format(_type, rst))
+        assert element
+
+    def get_elements_by_key(self, key):
+        ems = []
+        for e in self._element_list:
+            if e.get('key') == key:
+                ems.append(e)
+        return ems
+
+    def get_element_by_key(self, key, index=0):
+        ems = self.get_elements_by_key(key)
+        if not ems:
+            return
+        return ems[index]
+
+    def assert_key_exist(self, key):
+        element = self.get_elements_by_key(key)
+        rst = '是' if element else '否'
+        logging.info('检查[key]="{}"是否存在？[{}]'.format(key, rst))
+        assert element
+
+    def get_elements_by_condition(self, condition: dict):
+        ems = []
+        for e in self._element_list:
+            cs = set(condition.items())
+            if cs.issubset(set(e.items())):
+                ems.append(e)
+        return ems
+
+    def get_element_by_condition(self, condition, index=0):
+        ems = self.get_elements_by_condition(condition)
+        if not ems:
+            return
+        return ems[index]
+
+    def set_brightness(self, value=102):
+        return self.hdc_shell(f'power-shell display -s {value}')
+
     @staticmethod
-    def _auto_fix(p: int, min_num: int, max_num: int):
-        """
-        自动修正数据以保证数据的准确性
-        :param p:
-        :param min_num:
-        :param max_num:
-        :return:
-        """
-        return min_num if p < min_num else max_num if p > max_num else p
+    def center_of_element(e):
+        assert e, '控件不存在'
+        bounds = e.get('bounds')
+        x1, y1, x2, y2 = [int(i) for i in re.findall(r'\d+', bounds)]
+        x = (x1 + x2) // 2
+        y = (y1 + y2) // 2
+        return x, y
+
+    def _parse_attribute_nodes(self, json_obj, attr_list=None):
+        if attr_list is None:
+            attr_list = []
+
+        if isinstance(json_obj, dict):
+            for key, value in json_obj.items():
+                if key == 'attributes' and isinstance(value, dict):
+                    attr_list.append(value)
+                elif isinstance(value, (dict, list)):
+                    self._parse_attribute_nodes(value, attr_list)
+        elif isinstance(json_obj, list):
+            for item in json_obj:
+                self._parse_attribute_nodes(item, attr_list)
+        return attr_list
+
