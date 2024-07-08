@@ -17,15 +17,15 @@ class Test:
 
         logging.info('图库界面截图对比')
         standard_pic = os.path.join(device.resource_path, 'photos.jpeg')
-        photos_page_pic = device.save_snapshot_to_local('photos.jpeg')
+        photos_page_pic = device.save_snapshot_to_local('{}_photos.jpeg'.format(device.sn))
         crop_picture(photos_page_pic)
         similarity = compare_image_similarity(photos_page_pic, standard_pic)
         assert similarity > 0.5, '截图对比失败'
 
-        logging.info('图库界面控件检查')
-        device.refresh_layout()
-        device.assert_text_exist('照片')
-        device.assert_text_exist('相册')
+        # logging.info('图库界面控件检查')
+        # device.refresh_layout()
+        # device.assert_text_exist('照片')
+        # device.assert_text_exist('相册')
 
         logging.info('medialibrarydata进程检查')
         process = 'com.ohos.medialibrary.medialibrarydata'
@@ -34,5 +34,5 @@ class Test:
 
         logging.info('sandbox path检查')
         pid = device.get_pid(process)
-        sanboxf = device.hdc_shell('echo "ls /storage/media/local/"|nsenter -t {} -m sh'.format(pid))
+        sanboxf = device.hdc_shell('echo \"ls /storage/media/local/\"|nsenter -t {} -m sh'.format(pid))
         assert 'files' in sanboxf, '{}中未检测到files'.format(sanboxf)

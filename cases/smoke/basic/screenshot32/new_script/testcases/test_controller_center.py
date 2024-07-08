@@ -16,7 +16,7 @@ class Test:
 
         logging.info('控制中心界面截图对比')
         standard_pic = os.path.join(device.resource_path, 'controller_center.jpeg')
-        controller_page_pic = device.save_snapshot_to_local('controller_center.jpeg')
+        controller_page_pic = device.save_snapshot_to_local('{}_controller_center.jpeg'.format(device.sn))
 
         crop_picture(controller_page_pic)
         similarity = compare_image_similarity(controller_page_pic, standard_pic)

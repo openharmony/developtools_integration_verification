@@ -2,25 +2,11 @@ import argparse
 import json
 import os.path
 import re
-import shutil
-import socket
 import traceback
 
 import pytest
 
 BASE_DIR = os.path.dirname(__file__)
-
-
-def report_content(sn, pr):
-    hostname = socket.gethostname()
-    ipaddress = socket.gethostbyname(hostname)
-    return [
-        '--report=_{}_reports.html'.format(sn),
-        '--title=门禁冒烟测试报告',
-        '--tester={}'.format(ipaddress),
-        '--desc={}'.format(pr),
-        '--template=1'
-    ]
 
 
 def distribute_testcase(test_num):

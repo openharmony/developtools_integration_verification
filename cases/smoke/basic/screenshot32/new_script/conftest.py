@@ -23,7 +23,7 @@ def setup_teardown(request, device):
     logging.info('前置操作')
     current_case = os.path.basename(request.path)[:-3]
     # 日志截图等保存路径
-    device.report_path = os.path.realpath(os.path.join(os.path.dirname(request.config.option.htmlpath), current_case))
+    device.report_path = os.path.realpath(os.path.dirname(request.config.option.htmlpath))
     logging.info('设置当前用例的报告路径为{}'.format(device.report_path))
     device.resource_path = os.path.join(os.path.dirname(__file__), 'resource')
     os.makedirs(device.report_path, exist_ok=True)

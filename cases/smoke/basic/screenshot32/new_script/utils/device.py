@@ -36,7 +36,7 @@ class Device:
     def hdc_shell(self, cmd):
         out = ''
         for i in range(3):
-            shell_cmd = f'hdc -t {self.sn} shell "{cmd}"'
+            shell_cmd = f'hdc -l0 -t {self.sn} shell "{cmd}"'
             out = self._execute_cmd(shell_cmd)
             if '[Fail]Device not founded or connected' in out:
                 self.restart_hdc_process()
@@ -46,7 +46,7 @@ class Device:
         return out
 
     def hdc(self, cmd):
-        return self._execute_cmd(f'hdc -t {self.sn} {cmd}')
+        return self._execute_cmd(f'hdc -l0 -t {self.sn} {cmd}')
 
     def hdc_version(self):
         return self._execute_cmd('hdc -v')
