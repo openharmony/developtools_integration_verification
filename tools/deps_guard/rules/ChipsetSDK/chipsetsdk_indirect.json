@@ -267,5 +267,21 @@
         "so_file_name": "libdfx_procinfo.z.so",
         "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/procinfo:libdfx_proinfo",
         "headers": []
+    },
+    {
+        "name": "hiview:libucollection_client",
+        "so_file_name": "libucollection_client.z.so",
+        "path": "//base/hiviewdfx/hiview/interfaces/inner_api/unified_collection/client:libucollection_client",
+        "headers": [
+            "//base/hiviewdfx/hiview/interfaces/inner_api/unified_collection/"
+        ]
+    },
+    {
+        "name": "storage_service:storage_manager_acl",
+        "so_file_name": "libstorage_manager_acl.z.so",
+        "path": "//foundation/filemanagement/storage_service/interfaces/innerkits/acl/native:storage_manager_acl",
+        "headers": [
+            "//foundation/filemanagement/storage_service/interfaces/innerkits/acl/native/"
+        ]
     }
 ]
