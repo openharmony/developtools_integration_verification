@@ -10,19 +10,19 @@ class Test:
     def test(self, setup_teardown, device):
         return
         check_list_file = os.path.join(device.resource_path, 'acl_whitelist.json')
-        assert os.path.exists(check_list_file), '基线文件{}不存在'.format(check_list_file)
-        logging.info('读取{}文件内容'.format(check_list_file))
+        assert os.path.exists(check_list_file), '{} not exist'.format(check_list_file)
+        logging.info('reading {} content'.format(check_list_file))
         whitelist_dict = {}
         json_data = json.load(open(check_list_file, 'r'))
         for item in json_data:
             whitelist_dict.update({item.get('processName'): item.get('acls')})
 
-        logging.info('导出token_info')
+        logging.info('exporting token_info')
         token_file = 'token_info_{}.txt'.format(time.time_ns())
         device.hdc_shell('atm dump -t > /data/{}'.format(token_file))
         device.hdc_file_recv('/data/{}'.format(token_file))
         local_file = os.path.join(device.report_path, token_file)
-        assert os.path.exists(local_file), 'token_info导出失败'
+        assert os.path.exists(local_file), 'token_info export failed'
         device.hdc_shell('rm -rf /data/{}'.format(token_file))
         acls_in_device = self.check_and_get_native_acls(local_file)
 
@@ -30,15 +30,15 @@ class Test:
         for process, permission_list in acls_in_device.items():
             if process not in whitelist_dict.keys():
                 check_rst = False
-                logging.info('processName={}未配置白名单权限：{}'.format(process, permission_list))
+                logging.info('processName={} not configured while list permission: {}'.format(process, permission_list))
             else:
                 whitelist_set = set(whitelist_dict[process])
                 permission_set = set(permission_list)
                 not_applied = permission_set.difference(whitelist_set)
                 if not_applied:
                     check_rst = False
-                    logging.info('processName={}未配置白名单权限：{}'.format(process, not_applied))
-        assert check_rst, 'ACL检查失败'
+                    logging.info('processName={}not configured while list permission: {}'.format(process, not_applied))
+        assert check_rst, 'ACL check failed'
 
     @staticmethod
     def check_and_get_native_acls(token_file):
@@ -62,5 +62,5 @@ class Test:
                         process: permissions.split(',')
                     }
                 )
-        assert check_pass, 'ACL检查失败'
+        assert check_pass, 'ACL check failed'
         return native_acls_dict

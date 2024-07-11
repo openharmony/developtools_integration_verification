@@ -61,10 +61,10 @@ if __name__ == '__main__':
         with open(report, 'r+', encoding=encoding) as f:
             text = f.read()
             passed = int(re.findall(r'<span class="passed">(\d+)\s*passed', text, re.I)[0])
-            if encoding == 'gbk':
-                text = text.replace('<meta charset="utf-8"/>', '<meta charset="gbk"/>')
-                f.seek(0)
-                f.write(text)
+            # if encoding == 'gbk':
+            #     text = text.replace('<meta charset="utf-8"/>', '<meta charset="gbk"/>')
+            #     f.seek(0)
+            #     f.write(text)
         if passed == len(selected_cases):
             print('SmokeTest: End of check, test succeeded!')
         else:

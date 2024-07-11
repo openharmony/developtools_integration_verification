@@ -12,16 +12,16 @@ class Test:
 
     @pytest.mark.parametrize('setup_teardown', [bundle_name], indirect=True)
     def test(self, setup_teardown, device):
-        logging.info('启动音乐应用')
+        logging.info('start music app')
         device.start_ability(self.bundle_name, self.ability_name)
         # 弹窗
         device.stop_permission()
-        logging.info('音乐界面截图对比')
+        logging.info('compare image similarity')
         standard_pic = os.path.join(device.resource_path, 'distributedmusicplayer.jpeg')
         music_page_pic = device.save_snapshot_to_local('{}_distributedmusicplayer.jpeg'.format(device.sn))
         crop_picture(music_page_pic)
         similarity = compare_image_similarity(music_page_pic, standard_pic)
-        assert similarity > 0.5, '截图对比失败'
+        assert similarity > 0.5, 'compare similarity failed'
 
         # logging.info('音乐界面控件检查')
         # device.refresh_layout()

@@ -11,10 +11,10 @@ def crop_picture(picture, x1=0, y1=72, x2=720, y2=1208):
 
 
 def compare_image_similarity(image1, image2):
-    logging.info('{}是否存在？[{}]'.format(image1, os.path.exists(image1)))
-    logging.info('{}是否存在？[{}]'.format(image2, os.path.exists(image2)))
+    logging.info('{} is exist? [{}]'.format(image1, os.path.exists(image1)))
+    logging.info('{} is exist? [{}]'.format(image2, os.path.exists(image2)))
     if not os.path.exists(image1) or not os.path.exists(image2):
-        logging.info('文件缺失，相似度为0%')
+        logging.info('file not found, set similarity as 0%')
         return 0
     image1 = cv2.imread(image1, 0)
     image2 = cv2.imread(image2, 0)
@@ -30,15 +30,15 @@ def compare_image_similarity(image1, image2):
     # 匹配特征点
     matches = bf.match(descriptors1, descriptors2)
     if not matches:
-        logging.info('没有匹配到特征点，相似度为0%')
+        logging.info('no fixture point found, set similarity as 0%')
         return 0
     if not keypoints1:
         if not keypoints2:
-            logging.info('相似度为100%')
+            logging.info('similarity is 100%')
             return 1
-        logging.info('相似度为0%')
+        logging.info('similarity is 0%')
         return 0
     # 计算相似度
     similarity = len(matches) / len(keypoints1)
-    logging.info('相似度为：{}%'.format(similarity * 100))
+    logging.info('similarity is {}%'.format(similarity * 100))
     return similarity

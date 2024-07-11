@@ -63,7 +63,7 @@ class Test:
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):
         lost_process = []
-        logging.info('检查进程号是否存在')
+        logging.info('check pid is exist or not')
         for process in self.pid_list:
             pid = device.get_pid(process)
             if not re.search(r'\d+', pid):
@@ -74,5 +74,5 @@ class Test:
             if pname not in ps_elf_rst:
                 lost_process.append(pname)
 
-        logging.info('丢失的进程有{}'.format(lost_process))
+        logging.info('lost process are {}'.format(lost_process))
         assert not lost_process
