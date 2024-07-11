@@ -30,6 +30,7 @@ def setup_teardown(request, device):
     # device.rm_faultlog()
     # device.start_hilog()
     device.wakeup()
+    device.set_power_mode()
     device.set_screen_timeout()
     device.unlock()
     device.go_home()
