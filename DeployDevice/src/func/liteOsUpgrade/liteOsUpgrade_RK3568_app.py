@@ -194,7 +194,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                             if upgrade_test_type == "null":
                                 return True
                             # 临时安装
-                            self.install_third_packages()
+                            # self.install_third_packages()
 
                             screenshot_path = os.path.join(local_image_path, "screenshot")
                             script_path = os.path.join(screenshot_path, 'new_script')
@@ -233,25 +233,25 @@ class liteOsUpgrade_RK3568(BaseApp):
                                 else:
                                     return False
 
-    def install_third_packages(self):
-        try:
-            logger.debug('python -m pip list')
-            rst = subprocess.run('python -m pip list', capture_output=True, shell=True, encoding='utf-8', timeout=30)
-            logger.debug(rst)
-            logger.debug('python -m pip install pytest -U')
-            rst = subprocess.run('python -m pip install pytest -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
-            logger.debug(rst)
-            logger.debug('python -m pip uninstall pytest-testreport -y')
-            rst = subprocess.run('python -m pip uninstall pytest-testreport -y', capture_output=True, shell=True, encoding='utf-8', timeout=600)
-            logger.debug(rst)
-            logger.debug('python -m pip install pytest-html -U')
-            rst = subprocess.run('python -m pip install pytest-html -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
-            logger.debug(rst)
-            logger.debug('python -m pip list')
-            rst = subprocess.run('python -m pip list', capture_output=True, shell=True, encoding='utf-8', timeout=30)
-            logger.debug(rst)
-        except:
-            logger.error(traceback.format_exc())
+    # def install_third_packages(self):
+    #     try:
+    #         logger.debug('python -m pip list')
+    #         rst = subprocess.run('python -m pip list', capture_output=True, shell=True, encoding='utf-8', timeout=30)
+    #         logger.debug(rst)
+    #         logger.debug('python -m pip install pytest -U')
+    #         rst = subprocess.run('python -m pip install pytest -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
+    #         logger.debug(rst)
+    #         logger.debug('python -m pip uninstall pytest-testreport -y')
+    #         rst = subprocess.run('python -m pip uninstall pytest-testreport -y', capture_output=True, shell=True, encoding='utf-8', timeout=600)
+    #         logger.debug(rst)
+    #         logger.debug('python -m pip install pytest-html -U')
+    #         rst = subprocess.run('python -m pip install pytest-html -U', capture_output=True, shell=True, encoding='utf-8', timeout=600)
+    #         logger.debug(rst)
+    #         logger.debug('python -m pip list')
+    #         rst = subprocess.run('python -m pip list', capture_output=True, shell=True, encoding='utf-8', timeout=30)
+    #         logger.debug(rst)
+    #     except:
+    #         logger.error(traceback.format_exc())
 
     @timeout(1000)
     def flash_version(self):

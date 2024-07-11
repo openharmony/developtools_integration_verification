@@ -1,6 +1,7 @@
 import argparse
 import json
 import os.path
+import platform
 import re
 import traceback
 
@@ -51,12 +52,19 @@ if __name__ == '__main__':
         print(run_params)
         pytest.main(run_params)
 
-        with open(report, 'r+', encoding='gbk') as f:
+        system = platform.system().lower()
+        if system.startswith('win'):
+            encoding = 'gbk'
+        else:
+            encoding = 'utf-8'
+
+        with open(report, 'r+', encoding=encoding) as f:
             text = f.read()
             passed = int(re.findall(r'<span class="passed">(\d+)\s*passed', text, re.I)[0])
-            text = text.replace('<meta charset="utf-8"/>', '<meta charset="gbk"/>')
-            f.seek(0)
-            f.write(text)
+            if encoding == 'gbk':
+                text = text.replace('<meta charset="utf-8"/>', '<meta charset="gbk"/>')
+                f.seek(0)
+                f.write(text)
         if passed == len(selected_cases):
             print('SmokeTest: End of check, test succeeded!')
         else:
