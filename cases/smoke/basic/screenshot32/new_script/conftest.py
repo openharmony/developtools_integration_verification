@@ -1,5 +1,6 @@
 import logging
 import os.path
+import time
 
 import pytest
 
@@ -20,11 +21,11 @@ def device(request):
 
 @pytest.fixture(scope='module')
 def setup_teardown(request, device):
-    logging.info('前置操作')
+    # logging.info('setup--------')
     current_case = os.path.basename(request.path)[:-3]
     # 日志截图等保存路径
     device.report_path = os.path.realpath(os.path.dirname(request.config.option.htmlpath))
-    logging.info('设置当前用例的报告路径为{}'.format(device.report_path))
+    logging.info('set current report path as {}'.format(device.report_path))
     device.resource_path = os.path.join(os.path.dirname(__file__), 'resource')
     os.makedirs(device.report_path, exist_ok=True)
     # device.rm_faultlog()
@@ -34,14 +35,15 @@ def setup_teardown(request, device):
     device.set_screen_timeout()
     device.unlock()
     device.go_home()
+    time.sleep(1)
     if device.get_focus_window() == 'SystemDialog1':
         device.click(360, 715)
 
     yield
 
-    logging.info('后置操作')
+    # logging.info('后置操作')
     device.go_home()
-    logging.info('点击右下角多任务键清理所有任务')
+    logging.info('clear recent task')
     device.clear_recent_task()
     device.clean_app_data(request.param)
     # device.stop_and_collect_hilog()
