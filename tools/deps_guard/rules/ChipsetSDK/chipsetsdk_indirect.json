@@ -249,12 +249,6 @@
         "headers": []
     },
     {
-        "name": "faultloggerd:libbacktrace_local",
-        "so_file_name": "libbacktrace_local.so",
-        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/backtrace_loacal",
-        "headers": []
-    },
-    {
         "name": "faultloggerd:libdfx_dumpcatcher",
         "so_file_name": "libdfx_dumpcatcher.z.so",
         "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/dump_catcher:libdfx_dumpcatcher",
