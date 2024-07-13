@@ -72,9 +72,10 @@ class CompileInfoLoader(object):
 
         if len(unknown_items) > 0:
             print("%d modules has no component info" % len(unknown_items))
-            with open(os.path.join(product_out_path, "unknown.json"), "w") as f:
-                res = json.dumps(unknown_items, indent=4)
-                f.write(res)
+            with os.fdopen(
+                    os.open(os.path.join(product_out_path, "unknown.json"), os.O_WRONLY | os.O_CREAT, mode=0o640),
+                    "w") as f:
+                json.dump(unknown_items, f, indent=4)
 
         # init platformsdk, chipsetsdk, innerapi flags
         CompileInfoLoader.__set_elf_default_value(load_mgr)
@@ -94,7 +95,7 @@ class CompileInfoLoader(object):
 
 
     @staticmethod
-    def __update_info_with_item(info_,item_):
+    def __update_info_with_item(info_, item_):
         if "version_script" in item_:
             info_["version_script"] = item_["version_script"]
         CompileInfoLoader.__fill_default_module_info(info_)
@@ -141,7 +142,7 @@ class CompileInfoLoader(object):
                 info["moduleName"] = item["label_name"]
             else:
                 info["moduleName"] = ""
-            CompileInfoLoader.__update_info_with_item(info_=info,item_=item)
+            CompileInfoLoader.__update_info_with_item(info_=info, item_=item)
             res.append(info)
         return res
 
