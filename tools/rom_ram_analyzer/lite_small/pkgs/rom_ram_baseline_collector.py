@@ -18,31 +18,26 @@
 from typing import Dict, Any
 import json
 import logging
+
 if __name__ == '__main__':
     from basic_tool import BasicTool
 else:
     from pkgs.basic_tool import BasicTool
 
+
 class RomRamBaselineCollector:
     """collect baseline of rom and ram from bundle.json
     """
+
     @classmethod
     def collect(cls, oh_path: str) -> Dict[str, Dict]:
-        """
-        从bundle.json文件中收集rom、ram的baseline信息
-        返回结果：
-        "subsystem_name":{
-            "component_name":{
-                "rom":"123KB,   # the value may be "" or null
-                "ram":"234KB"
-            }
-        }
-        """
         def post_handler(x:str)->list:
             x = x.split("\n")
             y = [item for item in x if item]
             return y
-        bundle_list = BasicTool.execute(cmd=f"find {oh_path} -name bundle.json", post_processor=post_handler)
+
+        bundle_list = BasicTool.execute(
+            cmd=f"find {oh_path} -name bundle.json", post_processor=post_handler)
         rom_ram_baseline_dict: Dict[str, Dict] = dict()
         for bundle in bundle_list:
             with open(bundle, 'r', encoding='utf-8') as f:
@@ -56,12 +51,15 @@ class RomRamBaselineCollector:
                 rom_baseline = component_info.get("rom")
                 ram_baseline = component_info.get("ram")
                 if not (subsystem_name or rom_baseline or ram_baseline):
-                    logging.warning(f"subsystem=\"{subsystem_name}\", rom=\"{rom_baseline}\", ram=\"{ram_baseline}\" in {bundle}")
-                cls._put(rom_ram_baseline_dict, subsystem_name, component_name, rom_baseline, ram_baseline, bundle)
+                    logging.warning(
+                        f"subsystem=\"{subsystem_name}\", rom=\"{rom_baseline}\", ram=\"{ram_baseline}\" in {bundle}")
+                cls._put(rom_ram_baseline_dict, subsystem_name,
+                         component_name, rom_baseline, ram_baseline, bundle)
         return rom_ram_baseline_dict
     
     @classmethod
-    def _put(cls, result_dict: Dict, subsystem_name: str, component_name: str, rom_size: str, ram_size: str, bundle_path:str) -> None:
+    def _put(cls, result_dict: Dict, subsystem_name: str, component_name: str, rom_size: str, ram_size: str,
+             bundle_path:str) -> None:
         if not result_dict.get(subsystem_name):
             result_dict[subsystem_name] = dict()
         result_dict[subsystem_name][component_name] = dict()

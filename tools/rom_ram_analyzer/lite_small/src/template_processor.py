@@ -110,10 +110,11 @@ class BaseProcessor(ABC):
         if not alter_list:
             return str(), str()
         alter_list.sort(key=lambda x: len(x), reverse=True)
-        return self.sc_dict[alter_list[0]].get("subsystem"),  self.sc_dict[alter_list[0]].get("component")
+        return self.sc_dict[alter_list[0]].get("subsystem"), self.sc_dict[alter_list[0]].get("component")
 
 
-def _gn_var_process(project_path: str, gn_v: str, alt_v: str, gn_path: str, ifrom: str, efrom: str, strip_quote: bool = False) -> Tuple[str, str]:
+def _gn_var_process(project_path: str, gn_v: str, alt_v: str, gn_path: str, ifrom: str, efrom: str,
+                    strip_quote: bool = False) -> Tuple[str, str]:
     """
     :param project_path:项目根路径
     :gn_v:gn中的值(可能为变量或空)
@@ -138,7 +139,7 @@ def _gn_var_process(project_path: str, gn_v: str, alt_v: str, gn_path: str, ifro
 
 
 class DefaultProcessor(BaseProcessor):
-    
+
     @property
     def undefined(self):
         return "UNDEFINED"

@@ -49,11 +49,11 @@ from misc import gn_lineno_collect
 
 class RomAnalysisTool:
     @classmethod
-    def analysis(cls, product_name: str, product_dict: Dict[str, List[str]], output_file_name: str):
+    def analysis(cls, product_info: str, product_dict: Dict[str, List[str]], output_file_name: str):
         """analysis the rom of lite/small product
 
         Args:
-            product_name (str): product name configured in the yaml
+            product_info (str): product name configured in the yaml
             product_dict (Dict[str, List[str]]): result dict of compiled product file
                 format:
                     "bin":[...],
@@ -63,27 +63,30 @@ class RomAnalysisTool:
         logging.info("start analyzing...")
         rom_ram_baseline: Dict[str, Dict] = RomRamBaselineCollector.collect(
             project_path)
-        with os.fdopen(os.open("rom_ram_baseline.json", os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
+        with os.fdopen(os.open("rom_ram_baseline.json", os.O_WRONLY | os.O_CREAT, mode=0o640), 'w',
+                       encoding='utf-8') as f:
             json.dump(rom_ram_baseline, f, indent=4)
         gn_info_file = configs["gn_info_file"]  # filename to save gn_info
         with open(gn_info_file, 'r', encoding='utf-8') as f:
             gn_info = json.load(f)
         query_order: Dict[str, List[str]
-                          ] = configs[product_name]["query_order"]  # query order of the gn template to be matched
+                          ] = configs[product_info]["query_order"]  # query order of the gn template to be matched
         query_order["etc"] = configs["target_type"]  # etc会查找所有的template
         rom_size_dict: Dict = dict()
-        if "manual_config" in configs[product_name].keys():
+        if "manual_config" in configs[product_info].keys():
             cls._match_manual_configured(
-                configs[product_name]["manual_config"], product_dict, configs[product_name]["product_dir"]["root"], rom_size_dict)
+                configs[product_info]["manual_config"], product_dict, configs[product_info]["product_dir"]["root"],
+                rom_size_dict)
         cls._subsystem_component_for_all_product_file(
             product_dict, query_order, gn_info, gn_info_file, rom_ram_baseline, rom_size_dict)
         if unit_adapt:
             cls._result_unit_adaptive(rom_size_dict)
-        with os.fdopen(os.open(output_file_name + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), 'w', encoding='utf-8') as f:
+        with os.fdopen(os.open(output_file_name + ".json", os.O_WRONLY | os.O_CREAT, mode=0o640), 'w',
+                       encoding='utf-8') as f:
             json.dump(rom_size_dict, f, indent=4)
-        cls._save_as_xls(rom_size_dict, product_name, baseline)
+        cls._save_as_xls(rom_size_dict, product_info, baseline)
         logging.info("success")
-    
+
     @classmethod
     def collect_gn_info(cls):
         logging.info("start scanning BUILD.gn")
@@ -236,6 +239,7 @@ class RomAnalysisTool:
                 p = os.path.join(project_path, item)
                 t = list(filter(lambda x: p not in x, t))
             return t
+
         grep_result: List[str] = BasicTool.grep_ern(
             base_name,
             project_path,
@@ -269,23 +273,27 @@ class RomAnalysisTool:
         return str(), str(), str()
 
     @classmethod
-    def _save_as_xls(cls, result_dict: Dict, product_name: str, baseline: bool) -> None:
+    def _get_one_line(cls, baseline_info, subsystem_name, component_name, component_baseline, file_name, file_size):
+        if baseline_info:
+            return [subsystem_name, component_name,
+                    component_baseline, file_name, file_size]
+        else:
+            return [subsystem_name, component_name,
+                    file_name, file_size]
+
+    @classmethod
+    def _save_as_xls(cls, result_dict_info: Dict, product_name_info: str, baseline_info: bool) -> None:
         logging.info("saving as xls...")
-        header = ["subsystem_name", "component_name",
-                  "output_file", "size(Byte)"]
-        if baseline:
-            header = ["subsystem_name", "component_name", "baseline",
-                      "output_file", "size(Byte)"]
-        tmp_dict = copy.deepcopy(result_dict)
+        header = ["subsystem_name", "component_name", "output_file", "size(Byte)"]
+        if baseline_info:
+            header = ["subsystem_name", "component_name", "baseline", "output_file", "size(Byte)"]
+        tmp_dict = dict()
+        for key in result_dict_info.keys():
+            tmp_dict[key] = result_dict_info[key]
         excel_writer = SimpleExcelWriter("rom")
         excel_writer.set_sheet_header(headers=header)
-        subsystem_start_row = 1
-        subsystem_end_row = 0
-        subsystem_col = 0
-        component_start_row = 1
-        component_end_row = 0
-        component_col = 1
-        baseline_col = 2
+        (subsystem_start_row, subsystem_end_row, subsystem_col, component_start_row, component_end_row,
+         component_col, baseline_col) = (1, 0, 0, 1, 0, 1, 2)
         if "size" in tmp_dict.keys():
             del tmp_dict["size"]
         for subsystem_name in tmp_dict.keys():
@@ -311,31 +319,28 @@ class RomAnalysisTool:
                 for fileinfo in component_dict.get("filelist"):
                     file_name = fileinfo.get("file_name")
                     file_size = fileinfo.get("size")
-                    line = [subsystem_name, component_name,
-                            file_name, file_size]
-                    if baseline:
-                        line = [subsystem_name, component_name,
-                                component_baseline, file_name, file_size]
+                    line = cls._get_one_line(baseline_info, subsystem_name, component_name, component_baseline,
+                                             file_name, file_size)
                     excel_writer.append_line(line)
                 excel_writer.write_merge(component_start_row, component_col, component_end_row, component_col,
                                          component_name)
-                if baseline:
+                if baseline_info:
                     excel_writer.write_merge(component_start_row, baseline_col, component_end_row, baseline_col,
                                              component_baseline)
                 component_start_row = component_end_row + 1
             excel_writer.write_merge(subsystem_start_row, subsystem_col, subsystem_end_row, subsystem_col,
                                      subsystem_name)
             subsystem_start_row = subsystem_end_row + 1
-        output_name: str = configs[product_name]["output_name"]
+        output_name: str = configs[product_name_info]["output_name"]
         output_name = output_name.replace(".json", ".xls")
         excel_writer.save(output_name)
         logging.info("save as xls success.")
 
     @classmethod
-    def _result_unit_adaptive(cls, result_dict: Dict[str, Dict]) -> None:
-        total_size = unit_adaptive(result_dict["size"])
-        del result_dict["size"]
-        for subsystem_name, subsystem_info in result_dict.items():
+    def _result_unit_adaptive(cls, output_result_dict: Dict[str, Dict]) -> None:
+        total_size = unit_adaptive(output_result_dict["size"])
+        del output_result_dict["size"]
+        for subsystem_name, subsystem_info in output_result_dict.items():
             sub_size = unit_adaptive(subsystem_info["size"])
             count = subsystem_info["count"]
             del subsystem_info["size"]
@@ -344,10 +349,11 @@ class RomAnalysisTool:
                 component_info["size"] = unit_adaptive(component_info["size"])
             subsystem_info["size"] = sub_size
             subsystem_info["count"] = count
-        result_dict["size"] = total_size
+        output_result_dict["size"] = total_size
 
     @classmethod
-    def _match_manual_configured(cls, manual_config_info: Dict[str, Dict], compiled_files: Dict[str, List], compiled_root_path: str, result_dict: Dict[str, Dict]) -> None:
+    def _match_manual_configured(cls, manual_config_info: Dict[str, Dict], compiled_files: Dict[str, List],
+                                 compiled_root_path: str, output_result_dict: Dict[str, Dict]) -> None:
         for file_path, file_info in manual_config_info.items():
             full_path = os.path.join(
                 project_path, compiled_root_path, file_path)
@@ -357,7 +363,7 @@ class RomAnalysisTool:
             file_info["size"] = os.path.getsize(full_path)
             file_info["file_name"] = full_path
             cls._put(file_info["subsystem"],
-                     file_info["component"], file_info, result_dict)
+                     file_info["component"], file_info, output_result_dict)
             for _, v in compiled_files.items():
                 if full_path not in v:
                     continue
@@ -366,7 +372,8 @@ class RomAnalysisTool:
                 break
 
     @classmethod
-    def _iterate_all_template_type(cls, type_list: List[str], gn_info: Dict, gn_info_file: str, base_name: str, rom_ram_baseline: Dict, rom_size_dict: Dict, f: str, size: int):
+    def _iterate_all_template_type(cls, type_list: List[str], gn_info: Dict, gn_info_file: str, base_name: str,
+                                   rom_ram_baseline: Dict, rom_size_dict: Dict, f: str, size: int):
         find_flag = False
         component_rom_baseline = None
         for tn in type_list:  # tn example: ohos_shared_library
@@ -383,7 +390,8 @@ class RomAnalysisTool:
                 continue
             d["size"] = size
             d["file_name"] = f.replace(project_path, "")
-            if rom_ram_baseline.get(d["subsystem_name"]) and rom_ram_baseline.get(d["subsystem_name"]).get(d["component_name"]):
+            if rom_ram_baseline.get(d["subsystem_name"]) and rom_ram_baseline.get(d["subsystem_name"]).get(
+                    d["component_name"]):
                 component_rom_baseline = rom_ram_baseline.get(
                     d["subsystem_name"]).get(d["component_name"]).get("rom")
             cls._put(d["subsystem_name"],
@@ -412,8 +420,10 @@ class RomAnalysisTool:
             }, rom_size_dict)
 
     @classmethod
-    def _subsystem_component_for_all_product_file(cls, product_dict: Dict[str, List[str]], query_order: Dict[str, List[str]],
-                                                  gn_info: Dict, gn_info_file: str, rom_ram_baseline: Dict, rom_size_dict: Dict):
+    def _subsystem_component_for_all_product_file(cls, product_dict: Dict[str, List[str]],
+                                                  query_order: Dict[str, List[str]],
+                                                  gn_info: Dict, gn_info_file: str, rom_ram_baseline: Dict,
+                                                  rom_size_dict: Dict):
         for t, l in product_dict.items():
             for f in l:  # 遍历所有文件
                 if os.path.isdir(f):
@@ -433,7 +443,7 @@ def main():
     if recollect_gn:
         RomAnalysisTool.collect_gn_info()
     product_dict: Dict[str, List[str]
-                       ] = RomAnalysisTool.collect_product_info(product_name)
+    ] = RomAnalysisTool.collect_product_info(product_name)
     RomAnalysisTool.analysis(product_name, product_dict, output_file)
 
 
