@@ -51,6 +51,8 @@
       "ohos.permission.PUBLISH_SYSTEM_COMMON_EVENT",
       "ohos.permission.PERMISSION_START_ABILITIES_FROM_BACKGROUND",
       "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
+      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED",
+      "ohos.permission.SET_SANDBOX_POLICY",
       "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS",
       "ohos.permission.MANAGE_HAP_TOKENID",
       "ohos.permission.START_INVISIBLE_ABILITY",
