@@ -170,6 +170,8 @@
     "processName": "accessibility",
     "acls": [
       "ohos.permission.INTERCEPT_INPUT_EVENT"
+      "ohos.permission.MANAGE_MOUSE_CURSOR"
+      "ohos.permission.FILTER_INPUT_EVENT"
     ]
   },
   {
