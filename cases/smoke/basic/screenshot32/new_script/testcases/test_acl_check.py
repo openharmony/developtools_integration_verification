@@ -8,7 +8,7 @@ import pytest
 class Test:
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):
-        #return
+        return
         check_list_file = os.path.join(device.resource_path, 'acl_whitelist.json')
         assert os.path.exists(check_list_file), '{} not exist'.format(check_list_file)
         logging.info('reading {} content'.format(check_list_file))
