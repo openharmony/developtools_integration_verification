@@ -187,7 +187,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                             return False
                         else:
                             logger.info("Reboot successfully!")
-                            os.system("hdc_std -t %s shell reboot" % sn)
+                            os.system("hdc -t %s shell reboot" % sn)
                             time.sleep(60)
                             logger.printLog("******下载完成，升级成功，开始进行冒烟测试******")
                             hdc_kill()
