@@ -420,11 +420,10 @@ class Device:
         self.hdc_shell('hilog -w stop;hilog -w clear')
         self.hdc_shell('hilog -r;hilog -b INFO;hilog -w start -l 10M -n 1000')
 
-    def stop_and_collect_hilog(self, local_file=''):
+    def stop_and_collect_hilog(self, local_dir=''):
         # logging.info('停止并收集hilog')
         self.hdc_shell('hilog -w stop')
-        self.hdc_shell(f'cd /data/log/hilog && tar -cf {local_file} *')
-        self.hdc_file_recv(f'/data/log/hilog/{local_file}')
+        self.hdc_file_recv('/data/log/hilog/', local_dir)
 
     def unlock(self):
         """
