@@ -21,6 +21,7 @@ import subprocess
 
 from .base_rule import BaseRule
 
+
 class PlugInModuleRule(BaseRule):
     RULE_NAME = "NO-Plug-In_Module-Init"
 
@@ -35,7 +36,7 @@ class PlugInModuleRule(BaseRule):
 
     def check_plug_in_library(self):
         cfg_parser = self.get_mgr().get_parser_by_name('config_parser')
-        white_lists =self.get_white_lists()
+        white_lists = self.get_white_lists()
         for key, item in white_lists[0].items():
             if key == "base_library":
                 self._base_so = item
@@ -51,7 +52,6 @@ class PlugInModuleRule(BaseRule):
         return self._passwd
 
     def _read_elf_dt_needed(self, file):
-        # print(file)
         paser = self._private_so
         file_name = os.path.basename(file)
         proc = subprocess.Popen(["readelf", "-d", file],
