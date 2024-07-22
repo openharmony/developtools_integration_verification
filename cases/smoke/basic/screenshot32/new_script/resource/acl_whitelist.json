@@ -63,6 +63,8 @@
       "ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION",
       "ohos.permission.MANAGE_USER_ACCOUNT_INFO",
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.SET_SUPER_PRIVACY",
+      "ohos.permission.MANAGE_MISSIONS",
       "ohos.permission.CAPTURE_SCREEN"
     ]
   },
@@ -259,6 +261,26 @@
     "acls": [
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
       "ohos.permission.MANAGE_SYSTEM_ABILITY"
+    ]
+  },
+  {
+    "processName": "resource_schedule_service",
+    "acls": [
+      "ohos.permission.MANAGE_WIFI_CONNECTION",
+      "ohos.permission.MANAGE_RGM"
+    ]
+  },
+  {
+    "processName": "el5_filekey_manager",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
+  }
+  ,
+  {
+    "processName": "security_guard",
+    "acls": [
+      "ohos.permission.COLLECT_SECURITY_EVENT"
     ]
   }
 ]
