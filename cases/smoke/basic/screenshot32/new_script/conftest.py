@@ -21,7 +21,7 @@ def device(request):
 
 @pytest.fixture(scope='module')
 def setup_teardown(request, device):
-    logging.info('--------------setup--------------')
+    # logging.info('setup--------')
     current_case = os.path.basename(request.path)[:-3]
     # 日志截图等保存路径
     device.report_path = os.path.realpath(os.path.dirname(request.config.option.htmlpath))
@@ -29,7 +29,7 @@ def setup_teardown(request, device):
     device.resource_path = os.path.join(os.path.dirname(__file__), 'resource')
     os.makedirs(device.report_path, exist_ok=True)
     # device.rm_faultlog()
-    device.start_hilog()
+    # device.start_hilog()
     device.wakeup()
     device.set_power_mode()
     device.set_screen_timeout()
@@ -41,9 +41,9 @@ def setup_teardown(request, device):
 
     yield
 
-    logging.info('--------------teardown--------------')
+    # logging.info('后置操作')
     device.go_home()
     logging.info('clear recent task')
     device.clear_recent_task()
     device.clean_app_data(request.param)
-    device.stop_and_collect_hilog('{}.tar'.format(current_case))
+    # device.stop_and_collect_hilog()
