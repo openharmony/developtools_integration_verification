@@ -3,13 +3,17 @@
     "processName": "hiview",
     "acls": [
       "ohos.permission.DUMP",
-      "ohos.permission.GET_WIFI_PEERS_MAC"
+      "ohos.permission.GET_WIFI_PEERS_MAC",
+      "ohos.permission.MANAGE_WIFI_CONNECTION"
     ]
   },
   {
     "processName": "privacy_service",
     "acls": [
-      "ohos.permission.MANAGE_DISPOSED_APP_STATUS"
+      "ohos.permission.CAMERA_CONTROL",
+      "ohos.permission.MANAGE_DISPOSED_APP_STATUS",
+      "ohos.permission.MICROPHONE_CONTROL",
+      "ohos.permission.SET_SUPER_PRIVACY"
     ]
   },
   {
@@ -49,6 +53,8 @@
       "ohos.permission.PUBLISH_SYSTEM_COMMON_EVENT",
       "ohos.permission.PERMISSION_START_ABILITIES_FROM_BACKGROUND",
       "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
+      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED",
+      "ohos.permission.SET_SANDBOX_POLICY",
       "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS",
       "ohos.permission.MANAGE_HAP_TOKENID",
       "ohos.permission.START_INVISIBLE_ABILITY",
@@ -132,7 +138,10 @@
     "processName": "softbus_server",
     "acls": [
       "ohos.permission.GET_SENSITIVE_PERMISSIONS",
-      "ohos.permission.ACCESS_IDS"
+      "ohos.permission.ACCESS_IDS",
+      "ohos.permission.MANAGE_WIFI_CONNECTION",
+      "ohos.permission.GET_WIFI_PEERS_MAC",
+      "ohos.permission.GET_WIFI_INFO_INTERNAL"
     ]
   },
   {
@@ -169,6 +178,8 @@
     "processName": "accessibility",
     "acls": [
       "ohos.permission.INTERCEPT_INPUT_EVENT",
+      "ohos.permission.MANAGE_MOUSE_CURSOR",
+      "ohos.permission.FILTER_INPUT_EVENT",
       "ohos.permission.INJECT_INPUT_EVENT"
     ]
   },
@@ -227,7 +238,8 @@
   {
     "processName": "distributeddata",
     "acls": [
-      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED"
     ]
   },
   {
@@ -249,7 +261,7 @@
       "ohos.permission.MANAGE_SYSTEM_ABILITY"
     ]
   },
-  {
+   {
     "processName": "resource_schedule_service",
     "acls": [
       "ohos.permission.MANAGE_WIFI_CONNECTION",
