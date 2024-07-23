@@ -8,7 +8,6 @@ import threading
 
 
 class Device:
-
     lock = threading.Lock()
 
     @classmethod
@@ -181,6 +180,7 @@ class Device:
         return self.hdc_shell(f'bm dump -n {bundle_name}')
 
     def stop_permission(self):
+        self.click(504, 708)
         # logging.info(f'消掉权限请求的弹窗')
         focus_win = self.get_focus_window()
         if 'permissionDialog1' in focus_win:
@@ -201,7 +201,9 @@ class Device:
         :return:
         """
         # logging.info(f'点击({x},{y})坐标')
-        return self.hdc_shell(f'uitest uiInput click {x} {y}')
+        # return self.hdc_shell(f'uinput -T -c {x} {y}')
+        return self.hdc_shell(f'uinput -M -m {x} {y} -c 0')
+        # return self.hdc_shell(f'uitest uiInput click {x} {y}')
 
     def click_element(self, e):
         x, y = self.center_of_element(e)
@@ -599,4 +601,3 @@ class Device:
             for item in json_obj:
                 self._parse_attribute_nodes(item, attr_list)
         return attr_list
-

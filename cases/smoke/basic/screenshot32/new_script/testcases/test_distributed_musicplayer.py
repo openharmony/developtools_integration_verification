@@ -14,6 +14,7 @@ class Test:
     def test(self, setup_teardown, device):
         logging.info('start music app')
         device.start_ability(self.bundle_name, self.ability_name)
+        device.save_snapshot_to_local('{}_music_step1.jpeg'.format(device.sn))
         # 弹窗
         device.stop_permission()
         logging.info('compare image similarity')

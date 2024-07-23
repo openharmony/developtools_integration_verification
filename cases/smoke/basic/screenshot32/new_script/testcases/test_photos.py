@@ -22,11 +22,6 @@ class Test:
         similarity = compare_image_similarity(photos_page_pic, standard_pic)
         assert similarity > 0.5, 'compare similarity failed'
 
-        # logging.info('图库界面控件检查')
-        # device.refresh_layout()
-        # device.assert_text_exist('照片')
-        # device.assert_text_exist('相册')
-
         logging.info('medialibrarydata process check')
         process = 'com.ohos.medialibrary.medialibrarydata'
         device.assert_process_running(process)
