@@ -21,11 +21,11 @@ class Test:
         # article = device.get_element_by_text('数学公式')
         # device.click_element(article)
         device.click(464, 313)
-        time.sleep(1)
+        time.sleep(2)
         logging.info('click note content area')
         for i in range(5):
             device.click(360, 325)
-            time.sleep(1)
+            time.sleep(2)
             if device.is_soft_keyboard_on():
                 break
         time.sleep(2)
