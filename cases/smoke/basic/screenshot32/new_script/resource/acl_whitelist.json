@@ -273,7 +273,8 @@
   {
     "processName": "el5_filekey_manager",
     "acls": [
-      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.STORAGE_MANAGER_CRYPT"
     ]
   }
   ,
