@@ -180,17 +180,17 @@ class Device:
         return self.hdc_shell(f'bm dump -n {bundle_name}')
 
     def stop_permission(self):
-        self.click(504, 708)
+        # self.click(504, 708)
         # logging.info(f'消掉权限请求的弹窗')
-        # focus_win = self.get_focus_window()
-        # if 'permissionDialog1' in focus_win:
-        #     # logging.info(f'消掉权限请求的弹窗')
-        #     self.refresh_layout()
-        #     allow = self.get_element_by_condition(condition={'text': '允许', 'type': 'Button'})
-        #     self.click_element(allow)
-        #     time.sleep(2)
-        # else:
-        #     logging.info(f'current window: {focus_win}')
+        focus_win = self.get_focus_window()
+        if 'permissionDialog1' in focus_win:
+            # logging.info(f'消掉权限请求的弹窗')
+            self.refresh_layout()
+            allow = self.get_element_by_condition(condition={'text': '允许', 'type': 'Button'})
+            self.click_element(allow)
+            time.sleep(2)
+        else:
+            logging.info(f'current window: {focus_win}')
         # return self.force_stop('com.ohos.permissionmanager')
 
     def click(self, x: int, y: int):
