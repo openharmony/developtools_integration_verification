@@ -182,15 +182,15 @@ class Device:
     def stop_permission(self):
         self.click(504, 708)
         # logging.info(f'消掉权限请求的弹窗')
-        focus_win = self.get_focus_window()
-        if 'permissionDialog1' in focus_win:
-            # logging.info(f'消掉权限请求的弹窗')
-            self.refresh_layout()
-            allow = self.get_element_by_condition(condition={'text': '允许', 'type': 'Button'})
-            self.click_element(allow)
-            time.sleep(2)
-        else:
-            logging.info(f'current window: {focus_win}')
+        # focus_win = self.get_focus_window()
+        # if 'permissionDialog1' in focus_win:
+        #     # logging.info(f'消掉权限请求的弹窗')
+        #     self.refresh_layout()
+        #     allow = self.get_element_by_condition(condition={'text': '允许', 'type': 'Button'})
+        #     self.click_element(allow)
+        #     time.sleep(2)
+        # else:
+        #     logging.info(f'current window: {focus_win}')
         # return self.force_stop('com.ohos.permissionmanager')
 
     def click(self, x: int, y: int):
@@ -201,8 +201,8 @@ class Device:
         :return:
         """
         # logging.info(f'点击({x},{y})坐标')
-        # return self.hdc_shell(f'uinput -T -c {x} {y}')
         return self.hdc_shell(f'uinput -M -m {x} {y} -c 0')
+        # return self.hdc_shell(f'uinput -T -c {x} {y}')
         # return self.hdc_shell(f'uitest uiInput click {x} {y}')
 
     def click_element(self, e):
