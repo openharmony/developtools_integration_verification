@@ -21,14 +21,3 @@ class Test:
         crop_picture(contacts_page_pic)
         similarity = compare_image_similarity(contacts_page_pic, standard_pic)
         assert similarity > 0.5, 'compare similarity failed'
-
-        # logging.info('联系人界面控件检查')
-        # device.refresh_layout()
-        # device.assert_text_exist('电话')
-        # device.assert_text_exist('联系人')
-        # device.assert_text_exist('收藏')
-        # device.assert_text_exist('1')
-        # device.assert_text_exist('3')
-        # device.assert_text_exist('5')
-        # device.assert_text_exist('7')
-        # device.assert_text_exist('9')

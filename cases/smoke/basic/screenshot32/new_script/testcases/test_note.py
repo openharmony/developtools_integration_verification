@@ -14,12 +14,8 @@ class Test:
     def test(self, setup_teardown, device):
         logging.info('start note app')
         device.start_ability(self.bundle_name, self.ability_name)
-
         device.save_snapshot_to_local('{}_note_mainpage.jpeg'.format(device.sn))
         logging.info('click shuxue gongshi')
-        # device.refresh_layout()
-        # article = device.get_element_by_text('数学公式')
-        # device.click_element(article)
         device.click(464, 313)
         time.sleep(2)
         logging.info('click note content area')
@@ -35,9 +31,3 @@ class Test:
         logging.info('compare image similarity')
         similarity = compare_image_similarity(note_pic, standard_pic)
         assert similarity > 0.5, 'compare similarity failed'
-
-        # logging.info('导出笔记界面布局')
-        # device.refresh_layout()
-        # logging.info('控件检查')
-        # device.assert_text_exist('好好学习，天天向上')
-        # device.assert_text_exist('space')
