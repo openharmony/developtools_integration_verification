@@ -17,14 +17,14 @@ class Test:
         device.save_snapshot_to_local('{}_note_mainpage.jpeg'.format(device.sn))
         logging.info('click shuxue gongshi')
         device.click(464, 313)
-        time.sleep(2)
+        time.sleep(5)
         logging.info('click note content area')
         for i in range(5):
             device.click(360, 325)
-            time.sleep(2)
+            time.sleep(4)
             if device.is_soft_keyboard_on():
                 break
-        time.sleep(2)
+        time.sleep(3)
         standard_pic = os.path.join(device.resource_path, 'note.jpeg')
         note_pic = device.save_snapshot_to_local('{}_note.jpeg'.format(device.sn))
         crop_picture(note_pic)
