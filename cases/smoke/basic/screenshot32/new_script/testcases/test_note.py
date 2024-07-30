@@ -17,11 +17,13 @@ class Test:
         device.save_snapshot_to_local('{}_note_mainpage.jpeg'.format(device.sn))
         logging.info('click shuxue gongshi')
         device.click(464, 313)
-        time.sleep(5)
+        time.sleep(4)
         logging.info('click note content area')
         for i in range(5):
             device.click(360, 325)
-            time.sleep(4)
+            time.sleep(2)
+            device.click(360, 324)
+            time.sleep(3)
             if device.is_soft_keyboard_on():
                 break
         time.sleep(3)
