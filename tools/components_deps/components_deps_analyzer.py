@@ -189,8 +189,8 @@ if __name__ == '__main__':
     gn_path_list_name = args.components_gn_path_list.split(',')
     new_line_nums_list = args.new_line_nums_list.split(',')
     gn_component_name = args.gn_name.split(',')
-    config_path = args.config_path
+    args_config_path = args.config_path
     open_components_xml_path = args.open_component_xml_path
     result_json = args.result_json_name
-    Analyzer.analysis(gn_path_list_name, new_line_nums_list, gn_component_name, config_path, open_components_xml_path,
+    Analyzer.analysis(gn_path_list_name, new_line_nums_list, gn_component_name, args_config_path, open_components_xml_path,
                       result_json)
