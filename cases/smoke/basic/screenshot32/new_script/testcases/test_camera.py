@@ -32,12 +32,8 @@ class Test:
         device.save_snapshot_to_local('{}_camera_step4.jpeg'.format(device.sn))
 
         logging.info('stop recoding')
-        device.click(320, 1095)
-        time.sleep(2)
-        device.click(320, 1095)
-        time.sleep(2)
-        device.click(320, 1095)
-        time.sleep(4)
+        device.hdc_shell(f'uitest uiInput click 320 1095')
+        time.sleep(3)
         device.save_snapshot_to_local('{}_camera_step5.jpeg'.format(device.sn))
 
         logging.info('click left behind button in order to switch to gallery app')
