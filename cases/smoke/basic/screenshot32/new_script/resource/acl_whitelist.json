@@ -65,7 +65,10 @@
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
       "ohos.permission.SET_SUPER_PRIVACY",
       "ohos.permission.MANAGE_MISSIONS",
-      "ohos.permission.CAPTURE_SCREEN"
+      "ohos.permission.CAPTURE_SCREEN",
+      "ohos.permission.PUBLISH_DISPLAY_ROTATION_EVENT",
+      "ohos.permission.PUBLISH_CAST_PLUGGED_EVENT"
+
     ]
   },
   {
