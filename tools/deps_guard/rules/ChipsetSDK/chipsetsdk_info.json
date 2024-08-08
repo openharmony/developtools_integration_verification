@@ -315,7 +315,9 @@
         "name": "ffmpeg:libohosffmpeg",
         "so_file_name": "libohosffmpeg.z.so",
         "path": "//third_party/ffmpeg:libohosffmpeg",
-        "headers": []
+        "headers": [
+            "//third_party/ffmpeg"
+        ]
     },
     {
         "name": "pulsecore:pulsecore",
