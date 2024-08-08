@@ -60,7 +60,9 @@
       "ohos.permission.MANAGE_USER_ACCOUNT_INFO",
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
       "ohos.permission.CAPTURE_SCREEN",
-      "ohos.permission.MANAGE_MISSIONS"
+      "ohos.permission.MANAGE_MISSIONS",
+      "ohos.permission.PUBLISH_DISPLAY_ROTATION_EVENT",
+      "ohos.permission.PUBLISH_CAST_PLUGGED_EVENT"
     ]
   },
   {
