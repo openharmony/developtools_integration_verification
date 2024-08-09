@@ -54,8 +54,7 @@
         "so_file_name": "libhisysevent.z.so",
         "path": "//base/hiviewdfx/hisysevent/interfaces/native/innerkits/hisysevent:libhisysevent",
         "headers": [
-            "//base/hiviewdfx/hisysevent/interfaces/native/innerkits/hisysevent/include/",
-            "//base/hiviewdfx/hisysevent/interfaces/native/innerkits/hisysevent/encode/include/"
+            "//base/hiviewdfx/hisysevent/interfaces/native/innerkits/hisysevent/include/"
         ]
     },
     {
