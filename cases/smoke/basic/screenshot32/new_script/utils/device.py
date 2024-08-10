@@ -299,7 +299,8 @@ class Device:
         return self.key_event('Power')
 
     def press_recent_key(self):
-        return self.key_event('2078')
+        return self.click(514, 1243)
+        # return self.key_event('2078')
 
     def clear_recent_task(self):
         # logging.info('清理最近的任务')
