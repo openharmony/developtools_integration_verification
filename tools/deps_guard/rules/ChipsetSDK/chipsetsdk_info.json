@@ -210,7 +210,7 @@
         "name": "libexif:libexif",
         "so_file_name": "libexif.z.so",
         "path": "//third_party/libexif:libexif",
-        "headers": []
+        "headers": [ "//third_party/libexif/" ]
     },
     {
         "name": "cJSON:cjson",
