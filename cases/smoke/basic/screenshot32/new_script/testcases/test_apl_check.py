@@ -11,7 +11,7 @@ class Test:
 
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):
-        return
+        #return
         check_list_file = os.path.join(device.resource_path, 'apl_check_list.json')
         logging.info('reading {}'.format(check_list_file))
         json_data = json.load(open(check_list_file, 'r'))
