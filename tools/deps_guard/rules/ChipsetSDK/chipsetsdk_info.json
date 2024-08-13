@@ -44,12 +44,6 @@
         ]
     },
     {
-        "name": "hilog_override:libhilog_ndk",
-        "so_file_name": "libhilog_ndk.z.so",
-        "path": "",
-        "headers": []
-    },
-    {
         "name": "hisysevent:libhisysevent",
         "so_file_name": "libhisysevent.z.so",
         "path": "//base/hiviewdfx/hisysevent/interfaces/native/innerkits/hisysevent:libhisysevent",
