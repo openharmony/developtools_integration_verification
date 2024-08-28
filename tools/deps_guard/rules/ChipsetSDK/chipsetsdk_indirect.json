@@ -53,14 +53,6 @@
         "headers": []
     },
     {
-        "name": "hitrace:libhitracechain",
-        "so_file_name": "libhitracechain.so",
-        "path": "//base/hiviewdfx/hitrace/interfaces/native/innerkits:libhitracechain",
-        "headers": [
-            "//base/hiviewdfx/hitrace/interfaces/native/innerkits/include/"
-        ]
-    },
-    {
         "name": "drivers_interface_display:libdisplay_buffer_hdi_impl",
         "so_file_name": "libdisplay_buffer_hdi_impl.z.so",
         "path": "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_hdi_impl",
