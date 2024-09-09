@@ -22,6 +22,8 @@ class Test:
 
         logging.info('exporting access_token.db')
         device.hdc_file_recv('/data/service/el1/public/access_token/access_token.db')
+        device.hdc_file_recv('/data/service/el1/public/access_token/access_token.db-wal')
+        device.hdc_file_recv('/data/service/el1/public/access_token/access_token.db-shm')
         db_file = os.path.join(device.report_path, 'access_token.db')
         assert os.path.exists(db_file), '{} not exist'.format(db_file)
 
