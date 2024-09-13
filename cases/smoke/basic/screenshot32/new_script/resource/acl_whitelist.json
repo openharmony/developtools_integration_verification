@@ -285,11 +285,5 @@
     "acls": [
       "ohos.permission.COLLECT_SECURITY_EVENT"
     ]
-  },
-  {
-    "processName": "telephony_sa",
-    "acls": [
-      "ohos.permission.MANAGE_WIFI_CONNECTION"
-    ]
   }
 ]
