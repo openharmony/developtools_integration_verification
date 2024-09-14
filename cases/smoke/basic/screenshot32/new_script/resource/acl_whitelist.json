@@ -284,6 +284,12 @@
     "processName": "security_guard",
     "acls": [
       "ohos.permission.COLLECT_SECURITY_EVENT"
+    ]  
+  },
+  {
+    "processName": "telephony",
+    "acls": [
+      "ohos.permission.MANAGE_WIFI_CONNECTION"
     ]
   }
 ]
