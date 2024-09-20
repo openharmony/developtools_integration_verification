@@ -211,7 +211,9 @@
   {
     "processName": "sharing_service",
     "acls": [
-      "ohos.permission.CAPTURE_SCREEN"
+      "ohos.permission.CAPTURE_SCREEN",
+      "ohos.permission.GET_WIFI_PEERS_MAC",
+      "ohos.permission.MANAGE_WIFI_CONNECTION"
     ]
   },
   {
