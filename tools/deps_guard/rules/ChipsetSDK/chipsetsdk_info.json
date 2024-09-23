@@ -529,12 +529,6 @@
         ]
     },
     {
-        "name": "container_comm:uds_channel",
-        "so_file_name": "libuds_channel.z.so",
-        "path": "",
-        "headers": []
-    },
-    {
         "name": "openssl:libssl_shared",
         "so_file_name": "libssl_openssl.z.so",
         "path": "//third_party/openssl:libssl_shared",
