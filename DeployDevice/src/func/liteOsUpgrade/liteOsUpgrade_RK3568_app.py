@@ -169,7 +169,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                         reboot_devices_cmd = "%s -s %s RD" % (loader_tool_path, LocationID)
                         reboot_result = sendCmd(reboot_devices_cmd)
                         logger.info(reboot_result)
-                        time.sleep(30)
+                        time.sleep(60)
                         # try:
                         #     if upgrade_test_type != "mini_system_test":
                         #         if not start_cmd(sn):
