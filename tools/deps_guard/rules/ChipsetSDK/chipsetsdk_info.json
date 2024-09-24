@@ -256,18 +256,6 @@
         ]
     },
     {
-        "name": "graphic_2d:surface",
-        "so_file_name": "libsurface.z.so",
-        "path": "//foundation/graphic/graphic_2d/frameworks/surface:surface",
-        "headers": [
-            "//foundation/communication/ipc/interfaces/innerkits/ipc_core/include/",
-            "//foundation/graphic/graphic_2d/interfaces/inner_api/surface/",
-            "//foundation/graphic/graphic_2d/interfaces/inner_api/common/",
-            "//foundation/graphic/graphic_2d/utils/sandbox/",
-            "//commonlibrary/c_utils/base/include/"
-        ]
-    },
-    {
         "name": "samgr:samgr_proxy",
         "so_file_name": "libsamgr_proxy.z.so",
         "path": "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy:samgr_proxy",
@@ -355,15 +343,27 @@
         ]
     },
     {
-        "name": "graphic_2d:sync_fence",
+        "name": "graphic_surface:sync_fence",
         "so_file_name": "libsync_fence.z.so",
-        "path": "//foundation/graphic/graphic_2d/utils/sync_fence:sync_fence",
+        "path": "//foundation/graphic/graphic_surface/sync_fence:sync_fence",
         "headers": [
-            "//foundation/graphic/graphic_2d/utils/sync_fence/export/",
-            "//commonlibrary/c_utils/base/include/",
-            "//base/hiviewdfx/hilog/interfaces/native/innerkits/",
-            "//base/notification/eventhandler/interfaces/inner_api/",
-            "//foundation/graphic/graphic_2d/utils/log/"
+            "//foundation/graphic/graphic_surface/interfaces/inner_api/sync_fence"
+        ]
+    },
+    {
+        "name": "graphic_surface:surface",
+        "so_file_name": "libsurface.z.so",
+        "path": "//foundation/graphic/graphic_surface/surface:surface",
+        "headers": [
+            "//foundation/graphic/graphic_surface/interfaces/inner_api/surface"
+        ]
+    },
+    {
+        "name": "graphic_surface:buffer_handle",
+        "so_file_name": "libbuffer_handle.z.so",
+        "path": "//foundation/graphic/graphic_surface/buffer_handle:buffer_handle",
+        "headers": [
+            "//foundation/graphic/graphic_surface/interfaces/inner_api/buffer_handle"
         ]
     },
     {
