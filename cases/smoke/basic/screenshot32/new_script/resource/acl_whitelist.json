@@ -293,5 +293,12 @@
     "acls": [
       "ohos.permission.MANAGE_WIFI_CONNECTION"
     ]
+  },
+  {
+    "processName": "netsysnative",
+    "acls": [
+        "ohos.permission.ACCESS_USER_TRUSTED_CERT",
+        "ohos.permission.ACCESS_SYSTEM_APP_CERT"
+    ]
   }
 ]
