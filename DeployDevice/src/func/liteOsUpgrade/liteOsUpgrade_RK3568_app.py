@@ -300,7 +300,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                 # if test_num != "2/2":
                 #    hdc_kill()
                 os.system("hdc -t %s shell reboot loader" % sn)
-                time.sleep(5)
+                time.sleep(8)
                 check_times += 1
         logger.error("Failed to enter the loader mode!")
         return False
