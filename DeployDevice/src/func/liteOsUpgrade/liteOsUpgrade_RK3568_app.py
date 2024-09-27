@@ -97,6 +97,13 @@ class liteOsUpgrade_RK3568(BaseApp):
         ipaddress = socket.gethostbyname(hostname)
         logger.printLog("******系统ip为：%s ******" % ipaddress)
         logger.printLog("******系统为：%s ******" % system_type)
+        if system_type == "Windows":
+            lock_file = r'C:/deviceupgrade/task.lock'
+        else:
+            lock_file = '/home/openharmony/deviceupgrade/task.lock'
+        # 如果上一个任务没执行完成，不往下继续执行
+        if not is_can_exec(lock_file):
+            return False
         version_savepath = self.params_dict.get("img_path")
         upgrade_test_type = self.params_dict.get("UpgradeTestType")
         sn = self.params_dict.get("sn")
@@ -126,6 +133,7 @@ class liteOsUpgrade_RK3568(BaseApp):
             check_devices_cmd = "hdc list targets"
             f = send_times(check_devices_cmd)
             logger.info(f)
+            delete_file_lock(lock_file)
             if not f or "Empty" in f:
                 logger.error("No devices found,please check the device.")
                 return False
@@ -139,6 +147,7 @@ class liteOsUpgrade_RK3568(BaseApp):
             logger.info(h)
             if "Upgrade loader ok" not in h:
                 logger.error("Download MiniLoaderAll.bin Fail!")
+                delete_file_lock(lock_file)
                 return False
             else:
                 logger.printLog("Download MiniLoaderAll.bin Success!")
@@ -148,6 +157,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                 logger.info(j)
                 if "Write gpt ok" not in j:
                     logger.error("Failed to execute the parameter.txt")
+                    delete_file_lock(lock_file)
                     return False
                 else:
                     logger.printLog("Successfully executed parameter.txt.")
@@ -158,6 +168,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                     logger.info(k)
                     if "Download image ok" not in k:
                         logger.error("Failed to download the uboot.image!")
+                        delete_file_lock(lock_file)
                         if self.check_devices_mode():
                             return 98
                         return False
@@ -165,6 +176,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                         logger.printLog("The uboot.image downloaded successfully!")
                         # time.sleep(5)
                         if not self.flash_version():
+                            delete_file_lock(lock_file)
                             return False
                         reboot_devices_cmd = "%s -s %s RD" % (loader_tool_path, LocationID)
                         reboot_result = sendCmd(reboot_devices_cmd)
@@ -184,11 +196,12 @@ class liteOsUpgrade_RK3568(BaseApp):
                         # time.sleep(10)
                         if "Reset Device OK" not in reboot_result:
                             logger.error("Failed to reboot the board!")
+                            delete_file_lock(lock_file)
                             return False
                         else:
                             logger.info("Reboot successfully!")
                             #os.system("hdc -t %s shell set persist.usb.setting.gadget_conn_prompt false" % sn)
-                        
+                            delete_file_lock(lock_file)
                             logger.printLog("******下载完成，升级成功，开始进行冒烟测试******")
                             hdc_kill()
                             # os.system("hdc_std -t %s shell hilog -w start" % sn)
@@ -298,7 +311,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                 # if test_num != "2/2":
                 #    hdc_kill()
                 os.system("hdc -t %s shell reboot loader" % sn)
-                time.sleep(5)
+                time.sleep(8)
                 check_times += 1
         logger.error("Failed to enter the loader mode!")
         return False
@@ -584,3 +597,51 @@ def exec_cmd(mini_path, sn, save_path, archive_path):
         return True
     logger.error("mini_system_test failed!")
     return 98
+
+@timeout(1000)
+def is_can_exec(lock_file):
+    """
+    判断升级是否可以执行
+    @param lock_file: 文件路径
+    """
+    lock_duration = 10 * 60  # 10分钟（以秒为单位）
+    if os.getenv('wait_time') is not None:
+        lock_duration = int(os.getenv('wait_time'))
+    # 检查锁文件
+    if os.path.exists(lock_file):
+        # 获取锁文件的创建时间
+        lock_time = os.path.getmtime(lock_file)
+        current_time = time.time()
+        # 判断锁是否超时
+        if (current_time - lock_time) < lock_duration:
+            logger.error("ask is already running. Exiting.")
+            return False
+        else:
+            logger.warning("ask running time is more than %s second, can exec" % lock_duration)
+            delete_file_lock(lock_file)
+            create_file_lock(lock_file)
+            return True
+    else:
+        logger.info("no tasks are being executed")
+        create_file_lock(lock_file)
+    return True
+
+def create_file_lock(lock_file):
+    """
+    创建文件锁
+    @param lock_file: 文件路径
+    """
+    directory = os.path.dirname(lock_file)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    logger.info("create_file_lock")
+    with open(lock_file, 'w') as f:
+        f.write('locked, please can not delete')
+def delete_file_lock(lock_file):
+    """
+    删除文件
+    @param lock_file: 文件路径
+    """
+    logger.info("delete_file_lock")
+    if os.path.exists(lock_file):
+        os.remove(lock_file)
