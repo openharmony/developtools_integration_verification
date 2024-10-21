@@ -53,7 +53,9 @@ example: ```fotff flash -p pkgDir -d 7001005458323933328a01fce1dc3800```
 
 ###### tips
 
-1. 刷机、测试具体实现可能涉及到[hdc_std](https://gitee.com/openharmony/developtools_hdc)、[xdevice](https://gitee.com/openharmony/testfwk_xdevice)，安装和配置请参考对应工具的相关页面。
+1.
+刷机、测试具体实现可能涉及到[hdc_std](https://gitee.com/openharmony/developtools_hdc)、[xdevice](https://gitee.com/openharmony/testfwk_xdevice)
+，安装和配置请参考对应工具的相关页面。
 2. xdevice运行需要Python运行环境，请提前安装。
 3. 刷机、测试过程需要对应开发板的驱动程序，请提前安装。
 
