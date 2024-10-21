@@ -328,7 +328,7 @@ class ConfigParser():
     def load_config(self, file_name):
         path = self._path + file_name
         if not os.path.exists(path):
-            print("Error, invalid config file %s" % path)
+            print("Warning, invalid config file %s" % path)
             return
         with open(path, encoding='utf-8') as content:
             try:
@@ -450,7 +450,7 @@ class ConfigParser():
 
     def load_boot_event_file(self, boot_event_file):
         if not os.path.exists(boot_event_file):
-            print("Error, invalid config file %s" % boot_event_file)
+            print("Warning, invalid config file %s" % boot_event_file)
             return
         with open(boot_event_file, encoding='utf-8') as content:
             try:
