@@ -50,7 +50,7 @@ class PreCollector:
         content = BasicTool.execute(
             grep_cmd, post_processor=lambda x: x.split('\n'))
         for item in content:
-            if not item:
+            if not item or not item.split(':')[2].startswith("ohos_sa_profile"):
                 continue
             self._process_single_sa(item, start_pattern=grep_kw)
 
