@@ -481,7 +481,7 @@ class ConfigParser():
                         self._selinux = param_info[2].strip()
                     line = fp.readline()
         except:
-            print("Error, invalid parameter file ", file_name)
+            print("Warning, invalid parameter file ", file_name)
             pass
 
     def _load_services(self, json_node, file_id):
