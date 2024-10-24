@@ -96,7 +96,7 @@ class ParameterFileParser():
                     self._handle_param_info(file_name, param_info)
                     line = fp.readline()
         except:
-            print("Error, invalid parameter file ", file_name)
+            print("Warning, invalid parameter file ", file_name)
             pass
 
     def dump_parameter(self):
