@@ -55,7 +55,6 @@ class PreCollector:
             self._process_single_sa(item, start_pattern=grep_kw)
 
     def _process_single_sa(self, item: str, start_pattern: str):
-        print(f"item:{item.split(':')}")
         gn, _, _ = item.split(':')
         with open(gn, 'r', encoding='utf-8') as f:
             content = f.read()
