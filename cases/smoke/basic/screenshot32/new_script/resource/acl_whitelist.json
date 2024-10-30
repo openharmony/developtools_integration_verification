@@ -13,7 +13,8 @@
       "ohos.permission.CAMERA_CONTROL",
       "ohos.permission.MANAGE_DISPOSED_APP_STATUS",
       "ohos.permission.MICROPHONE_CONTROL",
-      "ohos.permission.SET_SUPER_PRIVACY"
+      "ohos.permission.SET_SUPER_PRIVACY",
+      "ohos.permission.USE_SECURITY_PRIVACY_MESSAGER"
     ]
   },
   {
