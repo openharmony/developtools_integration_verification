@@ -118,7 +118,8 @@
     "processName": "accountmgr",
     "acls": [
       "ohos.permission.ENFORCE_USER_IDM",
-      "ohos.permission.STORAGE_MANAGER_CRYPT"
+      "ohos.permission.STORAGE_MANAGER_CRYPT",
+      "ohos.permission.CAPTURE_SCREEN"
     ]
   },
   {
