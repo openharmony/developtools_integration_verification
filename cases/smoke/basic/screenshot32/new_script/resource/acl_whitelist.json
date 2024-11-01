@@ -253,7 +253,8 @@
   {
     "processName": "dhardware",
     "acls": [
-      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.SYNC_PROFILE_DP"
     ]
   },
   {
