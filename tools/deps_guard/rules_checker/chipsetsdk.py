@@ -94,7 +94,7 @@ class ChipsetSDKRule(BaseRule):
                 so_file_name = so.get("so_file_name")
                 if so_file_name and so_file_name not in res:
                     res.append(so_file_name)
-        except(FileNotFoundError, IOError, UnicodeDecodeError) as file_open_or_decode_err:
+        except (FileNotFoundError, IOError, UnicodeDecodeError) as file_open_or_decode_err:
             self.error(file_open_or_decode_err)
         
         return res
