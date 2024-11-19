@@ -302,5 +302,17 @@
         "ohos.permission.ACCESS_USER_TRUSTED_CERT",
         "ohos.permission.ACCESS_SYSTEM_APP_CERT"
     ]
+  },
+  {
+    "processName": "storage_daemon",
+    "acls": [
+      "ohos.permission.ACCESS_SCREEN_LOCK_INNER"
+    ]
+  },
+  {
+    "processName": "storage_manager",
+    "acls": [
+        "ohos.permission.ACCESS_SCREEN_LOCK_INNER"
+    ]
   }
 ]
