@@ -1,3 +1,18 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Copyright (c) 2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import json
 import argparse
@@ -14,12 +29,13 @@ REQUIRED_FIELDS = [
     "Description"
 ]
 
+
 class OpenSourceValidator:
     def __init__(
-        self,
-        project_root: str,
-        log_file: Optional[str] = None,
-        reference_data: Optional[List[Dict[str, str]]] = None
+            self,
+            project_root: str,
+            log_file: Optional[str] = None,
+            reference_data: Optional[List[Dict[str, str]]] = None
     ):
         self.project_root = project_root
         self.reference_data = reference_data or []
@@ -59,6 +75,16 @@ class OpenSourceValidator:
                 for field in REQUIRED_FIELDS:
                     if field not in component:
                         errors.append(f"Component {idx + 1} is missing required field: {field}")
+
+                # 校验 Dependencies 字段是否存在并且是一个数组
+                if "Dependencies" in component:
+                    if not isinstance(component["Dependencies"], list):
+                        errors.append(f"Component {idx + 1} 'Dependencies' field must be an array.")
+                    else:
+                        for dep in component["Dependencies"]:
+                            if not isinstance(dep, str):
+                                errors.append(f"Component {idx + 1} 'Dependencies' contains a non-string value: {dep}")
+
         except json.JSONDecodeError as e:
             errors.append(f"JSON decode error: {e}")
             return False
@@ -81,7 +107,7 @@ class OpenSourceValidator:
                 self.reference_data = json.load(f)
         except Exception as e:
             raise ValueError(
-                f"Failed to load reference data from {reference_data_path}: {e}"
+                f"Failed to load reference data from '{reference_data_path}': {e}"
             )
 
     def find_reference_data(self, name: str) -> Optional[Dict[str, str]]:
@@ -136,6 +162,10 @@ class OpenSourceValidator:
             if not self.validate_license_file(readme_path, software_data.get("License File")):
                 all_valid = False
 
+            # 校验依赖项（Dependencies）是否正确
+            if not self.validate_dependencies(software_data.get("Dependencies"), readme_path):
+                all_valid = False
+
         if all_valid:
             logging.info(f"{readme_path}: Content validation passed.")
         else:
@@ -148,17 +178,39 @@ class OpenSourceValidator:
             logging.error(f"{readme_path}: 'License File' field is missing.")
             return False
 
+        # 支持多个许可证文件路径，以分号分隔
+        license_files = license_file.split(';')
         readme_dir = os.path.dirname(readme_path)
-        license_file_path = os.path.join(readme_dir, license_file)
+        all_valid = True
 
-        if not os.path.exists(license_file_path):
-            logging.error(
-                f"{readme_path}: License file '{license_file}' not found at: {license_file_path}"
-            )
+        for file in license_files:
+            license_file_path = os.path.join(readme_dir, file.strip())
+            if not os.path.exists(license_file_path):
+                logging.error(
+                    f"{readme_path}: License file '{file.strip()}' not found at: {license_file_path}"
+                )
+                all_valid = False
+            else:
+                logging.info(f"{readme_path}: License file '{file.strip()}' exists.")
+
+        return all_valid
+
+    def validate_dependencies(self, dependencies: Optional[List[str]], readme_path: str) -> bool:
+        """校验 Dependencies 字段是否符合预期"""
+        if dependencies is None:
+            return True  # 没有依赖项是合法的
+
+        if not isinstance(dependencies, list):
+            logging.error(f"{readme_path}: 'Dependencies' should be an array.")
             return False
-        else:
-            logging.info(f"{readme_path}: License file '{license_file}' exists.")
-            return True
+
+        for dep in dependencies:
+            if not isinstance(dep, str):
+                logging.error(f"{readme_path}: 'Dependencies' contains non-string value: {dep}")
+                return False
+
+        logging.info(f"{readme_path}: 'Dependencies' field is valid.")
+        return True
 
     def run_validation(self, validate_format: bool = True, validate_content: bool = False):
         """运行完整的校验流程，递归处理所有 README.OpenSource 文件"""
@@ -217,11 +269,10 @@ def main():
 
     # 执行校验流程
     validator.run_validation(
-        validate_format=args.validate_format or not (args.validate_format or args.validate_content),
+        validate_format=args.validate_format,
         validate_content=args.validate_content
     )
 
 
 if __name__ == "__main__":
     main()
-
