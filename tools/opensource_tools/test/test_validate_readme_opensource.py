@@ -1,168 +1,235 @@
-import unittest
-from unittest.mock import patch, mock_open, MagicMock
-import json
-import os
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Copyright (c) 2024 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# 确保导入 OpenSourceValidator 类
-from src.validate_readme_opensource import OpenSourceValidator
+import unittest
+from unittest.mock import patch, MagicMock
+import os
+import json
+from src.validate_readme_opensource import OpenSourceValidator, REQUIRED_FIELDS
 
 
 class TestOpenSourceValidator(unittest.TestCase):
-    def setUp(self):
-        self.project_root = "/fake/project/root"
-        self.validator = OpenSourceValidator(self.project_root)
-        self.readme_content_valid = json.dumps(
-            [
-                {
-                    "Name": "TestLibrary",
-                    "License": "MIT",
-                    "License File": "LICENSE",
-                    "Version Number": "1.0.0",
-                    "Owner": "TestOwner",
-                    "Upstream URL": "http://example.com",
-                    "Description": "A test library.",
-                }
-            ]
-        )
-        self.readme_content_missing_fields = json.dumps(
-            [
-                {
-                    "Name": "TestLibrary",
-                    # Missing 'License'
-                    "License File": "LICENSE",
-                    "Version Number": "1.0.0",
-                    "Owner": "TestOwner",
-                    "Upstream URL": "http://example.com",
-                    "Description": "A test library.",
-                }
-            ]
-        )
-        self.invalid_json_content = "{ invalid json }"
-        self.reference_data = [
+
+    @patch("os.walk")
+    def test_find_all_readmes(self, mock_os_walk):
+        # 模拟 os.walk 返回值
+        mock_os_walk.return_value = [
+            ("/project", ["subdir1", "subdir2"], ["README.OpenSource"]),
+            ("/project/subdir1", [], ["README.OpenSource"]),
+            ("/project/subdir2", [], ["README.OpenSource"]),
+        ]
+
+        validator = OpenSourceValidator(project_root="/project")
+        readme_paths = validator.find_all_readmes()
+
+        # 断言所有的 README.OpenSource 文件都被正确地找到
+        self.assertEqual(readme_paths, [
+            "/project/README.OpenSource",
+            "/project/subdir1/README.OpenSource",
+            "/project/subdir2/README.OpenSource"
+        ])
+
+    @patch("builtins.open", new_callable=MagicMock)
+    def test_validate_format_valid(self, mock_open):
+        # 模拟文件内容是一个包含正确格式的 JSON 数据
+        mock_open.return_value.__enter__.return_value.read.return_value = json.dumps([
             {
-                "Name": "TestLibrary",
+                "Name": "Software A",
                 "License": "MIT",
+                "License File": "LICENSE",
                 "Version Number": "1.0.0",
-                "Upstream URL": "http://example.com",
+                "Owner": "Owner A",
+                "Upstream URL": "https://example.com",
+                "Description": "A software project",
+                "Dependencies": []
+            }
+        ])
+
+        validator = OpenSourceValidator(project_root="/project")
+        valid = validator.validate_format("/project/README.OpenSource")
+
+        # 断言格式验证通过
+        self.assertTrue(valid)
+
+    @patch("builtins.open", new_callable=MagicMock)
+    def test_validate_format_invalid_missing_field(self, mock_open):
+        # 模拟文件内容是一个包含缺失字段的 JSON 数据
+        mock_open.return_value.__enter__.return_value.read.return_value = json.dumps([
+            {
+                "Name": "Software A",
+                "License": "MIT",
+                "License File": "LICENSE",
+                "Version Number": "1.0.0",
+                "Owner": "Owner A",
+                "Upstream URL": "https://example.com",
+                # "Description" 字段缺失
+                "Dependencies": []
+            }
+        ])
+
+        validator = OpenSourceValidator(project_root="/project")
+        valid = validator.validate_format("/project/README.OpenSource")
+
+        # 断言格式验证失败
+        self.assertFalse(valid)
+
+    @patch("builtins.open", new_callable=MagicMock)
+    def test_validate_content_valid(self, mock_open):
+        # 模拟读取到的 README 文件数据
+        mock_open.return_value.__enter__.return_value.read.return_value = json.dumps([
+            {
+                "Name": "Software A",
+                "License": "MIT",
+                "License File": "LICENSE",
+                "Version Number": "1.0.0",
+                "Owner": "Owner A",
+                "Upstream URL": "https://example.com",
+                "Description": "A software project",
+                "Dependencies": []
+            }
+        ])
+
+        # 模拟参考数据
+        reference_data = [
+            {
+                "Name": "Software A",
+                "License": "MIT",
+                "License File": "LICENSE",
+                "Version Number": "1.0.0",
+                "Owner": "Owner A",
+                "Upstream URL": "https://example.com",
+                "Description": "A software project"
             }
         ]
 
-    @patch("os.walk")
-    @patch("builtins.open", new_callable=mock_open, read_data="")
-    def test_validate_format_valid(self, mock_file, mock_os_walk):
-        # 模拟 os.walk 返回一个 README.OpenSource 文件
-        mock_os_walk.return_value = [(self.project_root, [], ["README.OpenSource"])]
-        # 模拟打开文件并返回有效内容
-        mock_file.return_value.read.return_value = self.readme_content_valid
+        validator = OpenSourceValidator(project_root="/project")
+        validator.reference_data = reference_data  # 设置参考数据
 
-        self.validator.run_validation(validate_format=True, validate_content=False)
-        # 如果没有异常，则测试通过
+        valid = validator.validate_content("/project/README.OpenSource")
 
-    @patch("os.walk")
-    @patch("builtins.open", new_callable=mock_open, read_data="")
-    def test_validate_format_missing_fields(self, mock_file, mock_os_walk):
-        mock_os_walk.return_value = [(self.project_root, [], ["README.OpenSource"])]
-        mock_file.return_value.read.return_value = self.readme_content_missing_fields
+        # 断言内容验证通过
+        self.assertTrue(valid)
 
-        self.validator.run_validation(validate_format=True, validate_content=False)
-        # 检查日志或假设如果出现异常，测试将失败
+    @patch("builtins.open", new_callable=MagicMock)
+    @patch("os.path.exists", return_value=True)  # 模拟许可证文件存在
+    def test_validate_content_valid(self, mock_exists, mock_open):
+        # 模拟读取到的 README 文件数据
+        mock_open.return_value.__enter__.return_value.read.return_value = json.dumps([
+            {
+                "Name": "Software A",
+                "License": "MIT",
+                "License File": "LICENSE",  # 许可证文件
+                "Version Number": "1.0.0",
+                "Owner": "Owner A",
+                "Upstream URL": "https://example.com",
+                "Description": "A software project",
+                "Dependencies": []
+            }
+        ])
 
-    @patch("os.walk")
-    @patch("builtins.open", new_callable=mock_open, read_data="")
-    def test_validate_format_invalid_json(self, mock_file, mock_os_walk):
-        mock_os_walk.return_value = [(self.project_root, [], ["README.OpenSource"])]
-        mock_file.return_value.read.return_value = self.invalid_json_content
+        # 模拟参考数据
+        reference_data = [
+            {
+                "Name": "Software A",
+                "License": "MIT",
+                "License File": "LICENSE",
+                "Version Number": "1.0.0",
+                "Owner": "Owner A",
+                "Upstream URL": "https://example.com",
+                "Description": "A software project"
+            }
+        ]
 
-        self.validator.run_validation(validate_format=True, validate_content=False)
-        # 检查是否正确处理 JSON 解码错误
+        validator = OpenSourceValidator(project_root="/project")
+        validator.reference_data = reference_data  # 设置参考数据
 
-    @patch("os.walk")
-    @patch("builtins.open", new_callable=mock_open)
-    def test_validate_content_valid(self, mock_open_builtin, mock_os_walk):
-        # 模拟 os.walk 返回一个 README.OpenSource 文件
-        mock_os_walk.return_value = [(self.project_root, [], ["README.OpenSource"])]
+        valid = validator.validate_content("/project/README.OpenSource")
 
-        # 模拟打开文件并返回有效内容
-        def side_effect_open(file, mode="r", encoding=None):
-            if "README.OpenSource" in file:
-                return mock_open(read_data=self.readme_content_valid)()
-            elif "reference_data.json" in file:
-                return mock_open(read_data=json.dumps(self.reference_data))()
-            else:
-                raise FileNotFoundError
+        # 断言内容验证通过
+        self.assertTrue(valid)
 
-        mock_open_builtin.side_effect = side_effect_open
+    @patch("os.path.exists")
+    def test_validate_license_file_valid(self, mock_exists):
+        # 模拟文件存在
+        mock_exists.return_value = True
 
-        # 初始化验证器并加载参考数据
-        self.validator.reference_data = self.reference_data
+        validator = OpenSourceValidator(project_root="/project")
+        valid = validator.validate_license_file("/project/README.OpenSource", "LICENSE")
 
-        # 模拟 os.path.exists 返回 True（表示许可证文件存在）
-        with patch("os.path.exists", return_value=True):
-            self.validator.run_validation(validate_format=False, validate_content=True)
-            # 如果没有异常，则测试通过
+        # 断言许可证文件存在并且校验通过
+        self.assertTrue(valid)
 
-    @patch("os.walk")
-    @patch("builtins.open", new_callable=mock_open)
-    def test_validate_content_license_file_missing(
-        self, mock_open_builtin, mock_os_walk
-    ):
-        # 与上一个测试类似
-        mock_os_walk.return_value = [(self.project_root, [], ["README.OpenSource"])]
+    @patch("os.path.exists")
+    def test_validate_license_file_invalid(self, mock_exists):
+        # 模拟文件不存在
+        mock_exists.return_value = False
 
-        def side_effect_open(file, mode="r", encoding=None):
-            if "README.OpenSource" in file:
-                return mock_open(read_data=self.readme_content_valid)()
-            elif "reference_data.json" in file:
-                return mock_open(read_data=json.dumps(self.reference_data))()
-            else:
-                raise FileNotFoundError
+        validator = OpenSourceValidator(project_root="/project")
+        valid = validator.validate_license_file("/project/README.OpenSource", "LICENSE")
 
-        mock_open_builtin.side_effect = side_effect_open
+        # 断言许可证文件不存在并且校验失败
+        self.assertFalse(valid)
 
-        self.validator.reference_data = self.reference_data
+    @patch("builtins.open", new_callable=MagicMock)
+    @patch("os.path.exists")
+    def test_validate_dependencies_valid(self, mock_exists, mock_open):
+        # 模拟文件内容是有效的 JSON 数据
+        mock_open.return_value.__enter__.return_value.read.return_value = json.dumps([
+            {
+                "Name": "Software A",
+                "License": "MIT",
+                "License File": "LICENSE",
+                "Version Number": "1.0.0",
+                "Owner": "Owner A",
+                "Upstream URL": "https://example.com",
+                "Description": "A software project",
+                "Dependencies": ["dep1", "dep2"]
+            }
+        ])
+        # 模拟依赖文件存在
+        mock_exists.return_value = True
 
-        # 模拟 os.path.exists 返回 False（表示许可证文件不存在）
-        with patch("os.path.exists", return_value=False):
-            self.validator.run_validation(validate_format=False, validate_content=True)
-            # 检查是否正确处理许可证文件缺失
+        validator = OpenSourceValidator(project_root="/project")
+        valid = validator.validate_dependencies(["dep1", "dep2"], "/project/README.OpenSource")
 
-    @patch("os.walk")
-    @patch("builtins.open", new_callable=mock_open)
-    def test_validate_content_field_mismatch(self, mock_open_builtin, mock_os_walk):
-        # 修改 README 内容以包含不匹配的字段
-        readme_content_mismatch = json.dumps(
-            [
-                {
-                    "Name": "TestLibrary",
-                    "License": "Apache-2.0",  # 应为 'MIT'
-                    "License File": "LICENSE",
-                    "Version Number": "1.0.0",
-                    "Owner": "TestOwner",
-                    "Upstream URL": "http://example.com",
-                    "Description": "A test library.",
-                }
-            ]
-        )
+        # 断言依赖项验证通过
+        self.assertTrue(valid)
 
-        mock_os_walk.return_value = [(self.project_root, [], ["README.OpenSource"])]
+    @patch("builtins.open", new_callable=MagicMock)
+    def test_validate_dependencies_invalid(self, mock_open):
+        # 模拟文件内容是包含非法依赖项格式的 JSON 数据
+        mock_open.return_value.__enter__.return_value.read.return_value = json.dumps([
+            {
+                "Name": "Software A",
+                "License": "MIT",
+                "License File": "LICENSE",
+                "Version Number": "1.0.0",
+                "Owner": "Owner A",
+                "Upstream URL": "https://example.com",
+                "Description": "A software project",
+                "Dependencies": ["dep1", 123]  # 非字符串依赖项
+            }
+        ])
 
-        def side_effect_open(file, mode="r", encoding=None):
-            if "README.OpenSource" in file:
-                return mock_open(read_data=readme_content_mismatch)()
-            elif "reference_data.json" in file:
-                return mock_open(read_data=json.dumps(self.reference_data))()
-            else:
-                raise FileNotFoundError
+        validator = OpenSourceValidator(project_root="/project")
+        valid = validator.validate_dependencies(["dep1", 123], "/project/README.OpenSource")
 
-        mock_open_builtin.side_effect = side_effect_open
-
-        self.validator.reference_data = self.reference_data
-
-        # 模拟 os.path.exists 返回 True
-        with patch("os.path.exists", return_value=True):
-            self.validator.run_validation(validate_format=False, validate_content=True)
-            # 检查是否正确处理字段不匹配
+        # 断言依赖项验证失败
+        self.assertFalse(valid)
 
 
 if __name__ == "__main__":
     unittest.main()
+
