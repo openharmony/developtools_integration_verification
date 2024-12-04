@@ -105,7 +105,8 @@
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
       "ohos.permission.MANAGE_MOUSE_CURSOR",
       "ohos.permission.INJECT_INPUT_EVENT",
-      "ohos.permission.FILTER_INPUT_EVENT"
+      "ohos.permission.FILTER_INPUT_EVENT",
+      "ohos.permission.CAPTURE_SCREEN"
     ]
   },
   {
