@@ -619,6 +619,8 @@ def is_can_exec(lock_file):
         lock_time = os.path.getmtime(lock_file)
         current_time = time.time()
         # 判断锁是否超时
+        if  (current_time - lock_time) < 10:
+            return True  
         if (current_time - lock_time) < lock_duration:
             logger.error("ask is already running. Exiting.")
             return False
