@@ -32,7 +32,8 @@
   {
     "processName": "locationhub",
     "acls": [
-      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+      "ohos.permission.GET_WIFI_PEERS_MAC"
     ]
   },
   {
