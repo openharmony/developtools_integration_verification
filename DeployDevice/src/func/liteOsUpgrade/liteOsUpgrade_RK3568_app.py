@@ -122,6 +122,12 @@ class liteOsUpgrade_RK3568(BaseApp):
         logger.info(scriptpath)
         local_image_path = os.path.join(version_savepath)
         logger.info(local_image_path)
+        # 判断是否存在smoke_check.json文件
+        smoke_check_file = os.path.join(local_image_path, 'smoke_check.json')
+        if os.path.exists(smoke_check_file):
+            logger.info("smoke_check.json file exist, return True directly, file path is %s" % smoke_check_file)
+            delete_file_lock(lock_file)
+            return True
         if system_type == "Windows":
             loader_tool_path = os.path.join(scriptpath, "resource", "RK3568_tool", "upgrade_tool.exe")
         else:
