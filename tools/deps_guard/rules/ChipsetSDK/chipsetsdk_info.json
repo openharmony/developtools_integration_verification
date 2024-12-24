@@ -583,7 +583,7 @@
         "so_file_name": "libusb_shared.z.so",
         "path": "//third_party/libusb:libusb",
         "headers": [
-            "//third_party/libusb/libusb-1.0.26/libusb/"
+            "//third_party/libusb/libusb/libusb/"
         ]
     }
 ]
