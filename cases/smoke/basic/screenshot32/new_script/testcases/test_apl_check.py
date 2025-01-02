@@ -27,11 +27,17 @@ class Test:
         db_file = os.path.join(device.report_path, 'access_token.db')
         assert os.path.exists(db_file), '{} not exist'.format(db_file)
 
+        logging.info('exporting nativetoken.json')
+        SA_INFO_FILE = "/data/service/el0/access_token/nativetoken.json"
+        device.hdc_file_recv(SA_INFO_FILE)
+        sa_info_file = os.path.join(device.report_path, 'nativetoken.json')
+        assert os.path.exists(sa_info_file), '{} not exist'.format(sa_info_file)
+
         logging.info('querying from hap_token_info_table')
         hap_apl_result = self.query_records(db_file, 'select bundle_name,apl from hap_token_info_table')
         assert hap_apl_result, 'hap_token_info_table is empty'
         logging.info('querying native_token_info_table')
-        native_apl_result = self.query_records(db_file, 'select process_name,apl from native_token_info_table')
+        native_apl_result = self.get_sa_info(sa_info_file)
         assert native_apl_result, 'native_token_info_table is empty'
 
         logging.info('hap apl checking')
@@ -40,6 +46,17 @@ class Test:
         native_check_rst = self.compare_db_with_whitelist(native_apl_result, whitelist_dict, 2)
         assert hap_check_rst, 'hap apl check failed'
         assert native_check_rst, 'native apl check failed'
+
+    @staticmethod
+    def get_sa_info(sa_info_file):
+        result_dict = {}
+        with open(sa_info_file, 'r') as file:
+            data = json.load(file)
+            for item in data:
+                processName = item.get('processName')
+                APL = item.get('APL')
+                result_dict.update({processName: APL})
+        return result_dict
 
     @staticmethod
     def query_records(db_file, sql):
