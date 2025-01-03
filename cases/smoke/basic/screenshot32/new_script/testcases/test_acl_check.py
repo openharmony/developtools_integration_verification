@@ -32,12 +32,18 @@ class Test:
         perm_def_file = os.path.join(device.report_path, 'permission_definitions.json')
         assert os.path.exists(perm_def_file), '{} not exist'.format(perm_def_file)
 
+        logging.info('exporting nativetoken.json')
+        SA_INFO_FILE = "/data/service/el0/access_token/nativetoken.json"
+        device.hdc_file_recv(SA_INFO_FILE)
+        sa_info_file = os.path.join(device.report_path, 'nativetoken.json')
+        assert os.path.exists(sa_info_file), '{} not exist'.format(sa_info_file)
+
         logging.info('insert permission_definition_table')
         self.insert_perm(perm_def_file, db_file)
 
         logging.info('querying native_token_info_table')
 
-        sa_result = self.query_sa_info(db_file)
+        sa_result = self.query_sa_info(db_file, sa_info_file)
         assert sa_result, 'native_token_info_table is empty'
         
         logging.info('querying from native_token_info_table end')
@@ -59,29 +65,8 @@ class Test:
         assert check_rst, 'ACL check failed'
 
     @staticmethod
-    def query_sa_info(db_file):
-        sql = """
-        SELECT t3.token_id token_id,
-            t3.process_name process_name,
-            t3.apl SAPL,
-            t3.native_acls native_acls,
-            tp.PAPL PAPL,
-            tp.permission_name permission_name
-        FROM native_token_info_table t3
-            LEFT JOIN ( 
-            SELECT t1.token_id token_id,
-                t1.permission_name permission_name,
-                t2.available_level PAPL
-            FROM permission_state_table AS t1
-                LEFT JOIN permission_definition_table AS t2
-                        ON t1.permission_name = t2.permission_name 
-        ) 
-        AS tp
-                    ON t3.token_id = tp.token_id
-        WHERE permission_name IS NOT NULL 
-            AND
-            t3.apl < tp.PAPL;
-        """
+    def query_sa_info(db_file, sa_info_file):
+        sql = 'SELECT permission_name, available_level FROM permission_definition_table;'
         conn = sqlite3.connect(db_file)
         assert conn, 'sqlit database connect failed'
         cursor = conn.cursor()
@@ -89,35 +74,46 @@ class Test:
         results = cursor.fetchall()
         conn.close()
         
-        result_map ={}
-        if not results:
-            return result_map
+        perm_map ={}
+        for item in results:
+            permission_name = item[0]
+            apl = item[1]
+            perm_map[permission_name] = apl
 
         check_pass = True
+        result_map ={}
 
-        for item in results:
-            process_name = item[1]
-            SAPL = item[2]
-            
-            permission_name = item[5]
-            
-            native_acls = item[3]
-            if native_acls.strip() == "":
-                logging.error('{} invalid is detected in {}'.format(permission_name, process_name))
-                check_pass = False
-                continue
-            else:
-                native_acl_list = native_acls.split(',')
-                if permission_name not in native_acl_list:
-                    logging.error('{} invalid is detected in {}'.format(permission_name, process_name))
-                    check_pass = False
+        with open(sa_info_file, 'r') as file:
+            data = json.load(file)
+            for item in data:
+                processName = item.get('processName')
+                APL = item.get('APL')
+                if APL == 3:
+                    logging.info('{} APL = 3, PASS.'.format(processName))
                     continue
-                        
-            if process_name in result_map:
-                result_map.get(process_name).append(permission_name)
-            else:
-                result_map[process_name] = [permission_name]
 
+                permissions = item.get('permissions')
+
+                if not permissions:
+                    logging.info('Process {} does not apply for permission, PASS.'.format(processName))
+                    continue
+
+                nativeAcls = item.get('nativeAcls')
+                for perm in permissions:
+                    if perm in nativeAcls:
+                        continue
+                    
+                    PAPL = perm_map.get(perm)
+                    if not PAPL:
+                        logging.warning('{} no definition'.format(perm))
+                        continue
+                    if PAPL > APL:
+                        logging.error('{} invalid is detected in {}'.format(perm, processName))
+                        check_pass = False
+                
+                if nativeAcls:
+                    result_map[processName] = nativeAcls
+        
         assert check_pass, 'ACL check failed'
         return result_map
 
