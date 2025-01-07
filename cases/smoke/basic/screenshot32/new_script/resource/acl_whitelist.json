@@ -90,14 +90,16 @@
   {
     "processName": "camera_service",
     "acls": [
-      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+      "ohos.permission.SET_MUTE_POLICY"
     ]
   },
   {
     "processName": "audio_server",
     "acls": [
       "ohos.permission.GET_SENSITIVE_PERMISSIONS",
-      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.SET_MUTE_POLICY"
     ]
   },
   {
