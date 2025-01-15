@@ -281,7 +281,8 @@
     "processName": "resource_schedule_service",
     "acls": [
       "ohos.permission.MANAGE_WIFI_CONNECTION",
-      "ohos.permission.MANAGE_RGM"
+      "ohos.permission.MANAGE_RGM",
+      "ohos.permission.CONTROL_LOCATION_SWITCH"
     ]
   },
   {
