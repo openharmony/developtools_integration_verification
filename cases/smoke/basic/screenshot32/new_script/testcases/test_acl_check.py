@@ -119,6 +119,17 @@ class Test:
 
     @staticmethod
     def insert_perm(perm_def_file, db_file):
+        query_perm_sql = "select permission_name from permission_definition_table;"
+        conn = sqlite3.connect(db_file)
+        assert conn, 'sqlit database connect failed'
+        cursor = conn.cursor()
+        cursor.execute(query_perm_sql)
+        perms_list = cursor.fetchall()
+        conn.close()
+        perms_set = set()
+        for perms in perms_list:
+            perms_set.add(perms[0])
+
         sql = 'insert into permission_definition_table(token_id, permission_name, bundle_name, grant_mode, available_level, provision_enable, distributed_scene_enable, label, label_id, description, description_id, available_type) values(560, ?, "xxxx", 1, ?, 1, 1, "xxxx", 1, "xxxx", 1, 1)'
         sql_data = []
         with open(perm_def_file, 'r') as file:
@@ -126,10 +137,8 @@ class Test:
             system_grant_list = data.get('systemGrantPermissions')
             user_grant_list = data.get('userGrantPermissions')
             for item in user_grant_list:
-                availableType = item.get('availableType')
-                
-                if availableType == "SERVICE":
-                    key = item.get('name')
+                key = item.get('name')
+                if key not in perms_set:
                     value_str = item.get('availableLevel')
                     value = 1
                     if value_str == "system_core":
@@ -138,10 +147,8 @@ class Test:
                         value = 2
                     sql_data.append([key, value])
             for item in system_grant_list:
-                availableType = item.get('availableType')
-                
-                if availableType == "SERVICE":
-                    key = item.get('name')
+                key = item.get('name')
+                if key not in perms_set:
                     value_str = item.get('availableLevel')
                     value = 1
                     if value_str == "system_core":
