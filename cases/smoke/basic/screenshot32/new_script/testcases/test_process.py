@@ -55,7 +55,6 @@ class Test:
         'wifi_host',
         'usb_host',
         'blue_host',
-        'wifi_hal_service',
         'com.ohos.systemui',
         'power_host',
     ]
