@@ -34,7 +34,6 @@ def setup_teardown(request, device):
     device.set_power_mode()
     device.set_screen_timeout()
     device.unlock()
-    time.sleep(8)
     device.go_home()
     time.sleep(1)
     if device.get_focus_window() == 'SystemDialog1':
