@@ -585,5 +585,13 @@
         "headers": [
             "//third_party/libusb/libusb/libusb/"
         ]
+    },
+    {
+        "name": "huks:libhukssdk",
+        "so_file_name": "libhukssdk.z.so",
+        "path": "//base/security/huks/interfaces/inner_api/huks_standard/main:libhukssdk",
+        "headers": [
+            "//base/security/huks/interfaces/inner_api/huks_standard/main/include"
+        ]
     }
 ]
