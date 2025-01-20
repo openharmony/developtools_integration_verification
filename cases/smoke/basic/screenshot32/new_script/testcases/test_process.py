@@ -25,6 +25,7 @@ class Test:
         'bluetooth_servi',
         'resource_schedu',
         'bgtaskmgr_servi',
+        'audio_server',
         'deviceauth_service',
         'softbus_server',
         'wifi_hal_service',
