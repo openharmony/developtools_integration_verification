@@ -16,40 +16,30 @@
 import os
 import json
 
+
 def ask_question(prompt, default_value=None):
-    """ 提示用户输入，若没有输入则使用默认值 """
+    """提示用户输入，若没有输入则使用默认值"""
     value = input(f"{prompt} [{default_value}]: ").strip()
     return value or default_value
 
-def ask_for_list(prompt):
-    """ 提示用户输入一个列表，以逗号分隔 """
-    value = input(f"{prompt} (多个项请用逗号分隔): ").strip()
-    return [item.strip() for item in value.split(',')] if value else []
 
-# def process_license_info():
-#     """ 处理许可证信息和对应的文件路径 """
-#     licenses = ask_question("请输入许可证名称（如有多个，用分号分隔）")
-#     license_files = ask_question("请输入许可证文件路径（如果有多个，请使用分号分隔）")
-#
-#     license_list = [license.strip() for license in licenses.split(';')]
-#     license_file_list = [file.strip() for file in license_files.split(';')]
-#
-#     if len(license_list) == len(license_file_list):
-#         return license_list, license_file_list
-#     elif len(license_list) == 1 and len(license_file_list) > 1:
-#         return license_list, license_file_list
-#     elif len(license_list) > 1 and len(license_file_list) == 1:
-#         return license_list, license_file_list
-#     else:
-#         raise ValueError("许可证和许可证文件的数量不匹配，或者格式错误。")
+def ask_for_list(prompt):
+    """提示用户输入一个列表，以逗号分隔"""
+    value = input(f"{prompt} (多个项请用逗号分隔): ").strip()
+    return [item.strip() for item in value.split(",")] if value else []
+
 
 def process_license_info():
-    """ 处理许可证信息和对应的文件路径 """
+    """处理许可证信息和对应的文件路径"""
     licenses = ask_question("请输入许可证名称（如有多个，用分号分隔）")
     license_files = ask_question("请输入许可证文件路径（如果有多个，请使用分号分隔）")
 
-    license_list = [license.strip() for license in licenses.split(';')] if licenses else []
-    license_file_list = [file.strip() for file in license_files.split(';')] if license_files else []
+    license_list = (
+        [license.strip() for license in licenses.split(";")] if licenses else []
+    )
+    license_file_list = (
+        [file.strip() for file in license_files.split(";")] if license_files else []
+    )
 
     # 检查输入是否为空
     if not license_list or not license_file_list:
@@ -60,11 +50,16 @@ def process_license_info():
         # 只有在以下两种特殊情况下允许不相等：
         # 1. 一个许可证对应多个文件
         # 2. 多个许可证对应一个文件
-        if not ((len(license_list) == 1 and len(license_file_list) > 1) or
-                (len(license_list) > 1 and len(license_file_list) == 1)):
-            raise ValueError("许可证和许可证文件的数量不匹配，必须是一对一、一对多或多对一的关系。")
+        if not (
+            (len(license_list) == 1 and len(license_file_list) > 1)
+            or (len(license_list) > 1 and len(license_file_list) == 1)
+        ):
+            raise ValueError(
+                "许可证和许可证文件的数量不匹配，必须是一对一、一对多或多对一的关系。"
+            )
 
     return license_list, license_file_list
+
 
 def generate_readme_opensource(output_dir):
     """
@@ -73,24 +68,30 @@ def generate_readme_opensource(output_dir):
     components = []
     fields = [
         "Name",
+        "License",
+        "License File",
         "Version Number",
         "Owner",
         "Upstream URL",
-        "Description"
+        "Description",
+        "Dependencies",
     ]
 
     print("请输入开源组件的信息（输入完成后，可选择继续添加另一个组件）：")
     while True:
         component = {}
         # 获取组件的基本信息
-        for field in fields:
-            value = ask_question(f"{field}: ")
-            component[field] = value
+        component["Name"] = ask_question("Name: ")
 
         # 获取许可证信息
         license_list, license_file_list = process_license_info()
         component["License"] = "; ".join(license_list)
         component["License File"] = "; ".join(license_file_list)
+
+        component["Version Number"] = ask_question("Version Number: ")
+        component["Owner"] = ask_question("Owner: ")
+        component["Upstream URL"] = ask_question("Upstream URL: ")
+        component["Description"] = ask_question("Description: ")
 
         # 获取依赖信息（可选）
         dependencies = ask_for_list("请输入该软件的依赖项（如果有多个，请用逗号分隔）")
@@ -102,7 +103,7 @@ def generate_readme_opensource(output_dir):
 
         # 是否继续添加组件
         add_more = ask_question("是否添加另一个组件？(y/n): ").lower()
-        if add_more != 'y':
+        if add_more != "y":
             break
 
     # 确保输出目录存在
@@ -110,15 +111,16 @@ def generate_readme_opensource(output_dir):
         os.makedirs(output_dir)
 
     # 输出 README.OpenSource 文件
-    readme_path = os.path.join(output_dir, 'README.OpenSource')
-    with open(readme_path, 'w', encoding='utf-8') as f:
+    readme_path = os.path.join(output_dir, "README.OpenSource")
+    with open(readme_path, "w", encoding="utf-8") as f:
         json.dump(components, f, indent=2, ensure_ascii=False)
     print(f"已生成 {readme_path}")
 
+
 def main():
-    output_dir = ask_question("请输入输出目录（默认当前目录）：") or '.'
+    output_dir = ask_question("请输入输出目录（默认当前目录）：") or "."
     generate_readme_opensource(output_dir)
 
-if __name__ == '__main__':
-    main()
 
+if __name__ == "__main__":
+    main()
