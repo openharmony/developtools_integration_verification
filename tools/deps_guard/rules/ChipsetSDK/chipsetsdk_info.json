@@ -242,7 +242,7 @@
         "path": "//third_party/openssl:libcrypto_shared",
         "headers": [
             "//third_party/openssl/include/",
-            "//out/rk3568/obj/third_party/openssl/build_all_generated/linux-armv4/include/"
+            "//out/rk3568/obj/third_party/openssl/build_all_generated/include/"
         ]
     },
     {
