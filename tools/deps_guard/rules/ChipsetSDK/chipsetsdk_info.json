@@ -386,7 +386,7 @@
             "//foundation/systemabilitymgr/samgr/services/lsamgr/include/",
             "//base/notification/eventhandler/interfaces/inner_api/",
             "//base/notification/eventhandler/frameworks/eventhandler/include/"
-            
+
         ]
     },
     {
@@ -397,6 +397,14 @@
             "//base/hiviewdfx/hitrace/interfaces/native/innerkits/include/hitrace_meter/",
             "//base/hiviewdfx/hitrace/interfaces/native/innerkits/include/",
             "//base/hiviewdfx/hitrace/frameworks/include/"
+        ]
+    },
+    {
+        "name": "hitrace:libhitracechain",
+        "so_file_name": "libhitracechain.so",
+        "path": "//base/hiviewdfx/hitrace/interfaces/native/innerkits:libhitracechain",
+        "headers": [
+            "//base/hiviewdfx/hitrace/interfaces/native/innerkits/include/"
         ]
     },
     {
