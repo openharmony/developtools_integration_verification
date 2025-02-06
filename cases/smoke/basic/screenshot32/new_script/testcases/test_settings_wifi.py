@@ -30,7 +30,7 @@ class Test:
         before_click = device.get_wifi_status().get('active')
 
         logging.info('turn on/off wlan swith')
-        device.click(646, 210)
+        device.hdc_shell(f'uitest uiInput click 646 210')
         time.sleep(5)
         device.save_snapshot_to_local('{}_after_click.jpeg'.format(device.sn))
         after_click = device.get_wifi_status().get('active')
