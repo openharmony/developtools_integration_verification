@@ -32,7 +32,7 @@ class Test:
         logging.info('turn on/off wlan swith')
         device.click(646, 210)
         #device.hdc_shell(f'uitest uiInput click 646 210')
-        time.sleep(10)
+        time.sleep(15)
         device.save_snapshot_to_local('{}_after_click.jpeg'.format(device.sn))
         after_click = device.get_wifi_status().get('active')
         logging.info('wlan switch changes from [{}] to [{}]'.format(before_click, after_click))
