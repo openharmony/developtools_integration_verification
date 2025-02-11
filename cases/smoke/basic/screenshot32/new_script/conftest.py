@@ -40,8 +40,9 @@ def setup_teardown(request, device):
     time.sleep(1)
     if device.get_focus_window() == 'SystemDialog1':
         device.click(360, 715)
-        time.sleep(1)
+    if device.get_focus_window() == 'SystemDialog1':
         device.click(360, 715)
+
 
     yield
 
