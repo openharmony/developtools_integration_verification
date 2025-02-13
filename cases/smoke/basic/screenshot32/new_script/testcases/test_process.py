@@ -28,7 +28,6 @@ class Test:
         'audio_server',
         'deviceauth_service',
         'softbus_server',
-        'wifi_hal_service',
         'faultloggerd',
         'accountmgr',
         'time_service',
