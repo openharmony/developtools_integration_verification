@@ -187,7 +187,7 @@ class liteOsUpgrade_RK3568(BaseApp):
                         reboot_devices_cmd = "%s -s %s RD" % (loader_tool_path, LocationID)
                         reboot_result = sendCmd(reboot_devices_cmd)
                         logger.info(reboot_result)
-                        time.sleep(40)
+                        time.sleep(50)
                         # try:
                         #     if upgrade_test_type != "mini_system_test":
                         #         if not start_cmd(sn):
@@ -208,8 +208,6 @@ class liteOsUpgrade_RK3568(BaseApp):
                             logger.info("Reboot successfully!")
                             # os.system("hdc -t %s shell reboot" % sn)
                             # time.sleep(40)
-                            os.system("hdc -t %s shell write_updater user_factory_reset;reboot updater " % sn)
-                            time.sleep(40)
                             # os.system("hdc -t %s shell set persist.usb.setting.gadget_conn_prompt false" % sn)
                             delete_file_lock(lock_file)
                             logger.printLog("******下载完成，升级成功，开始进行冒烟测试******")
