@@ -12,7 +12,7 @@ class Test:
     def test(self, setup_teardown, device):
         logging.info('compare image similarity')
         # usb弹窗
-        device.click(360, 800)
+        device.click(595, 555)
         standard_pic = os.path.join(device.resource_path, 'launcher.jpeg')
         launcher_pic = device.save_snapshot_to_local('{}_launcher.jpeg'.format(device.sn))
         similarity = compare_image_similarity(launcher_pic, standard_pic)
