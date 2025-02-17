@@ -205,8 +205,8 @@ class liteOsUpgrade_RK3568(BaseApp):
                             delete_file_lock(lock_file)
                             return False
                         else:
-                            logger.info("Reboot successfully!")
-                            os.system("hdc -t %s shell reboot" % sn)
+                            # logger.info("Reboot successfully!")
+                            # os.system("hdc -t %s shell reboot" % sn)
                             time.sleep(40)
                             # os.system("hdc -t %s shell set persist.usb.setting.gadget_conn_prompt false" % sn)
                             delete_file_lock(lock_file)
