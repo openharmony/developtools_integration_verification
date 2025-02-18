@@ -1,5 +1,6 @@
 import logging
 import os
+import time
 
 import pytest
 
@@ -12,7 +13,11 @@ class Test:
     def test(self, setup_teardown, device):
         logging.info('compare image similarity')
         # usb弹窗
-        device.click(595, 555)
+        device.unlock()
+        time.sleep(2)
+        if device.get_focus_window() == 'SystemDialog1':
+            device.click(595, 555)
+            time.sleep(10)
         standard_pic = os.path.join(device.resource_path, 'launcher.jpeg')
         launcher_pic = device.save_snapshot_to_local('{}_launcher.jpeg'.format(device.sn))
         similarity = compare_image_similarity(launcher_pic, standard_pic)
