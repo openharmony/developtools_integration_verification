@@ -9,16 +9,24 @@ from utils.images import compare_image_similarity
 
 class Test:
 
+    ability_name = 'com.ohos.settings.MainAbility'
+    bundle_name = 'com.ohos.settings'
+
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):
         logging.info('compare image similarity')
         # usb弹窗
         device.unlock()
         time.sleep(2)
-        device.unlock()
+        device.start_ability(self.bundle_name, self.ability_name)
         time.sleep(2)
+        device.click(360, 1245)
+        device.click(360, 1245)
+        #device.unlock()
+        #time.sleep(2)
         # device.click(595, 555)
         # time.sleep(10)
+
         if device.get_focus_window() == 'SystemDialog1':
             device.click(595, 555)
             time.sleep(10)
