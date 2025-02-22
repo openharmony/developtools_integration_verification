@@ -322,5 +322,11 @@
     "acls": [
         "ohos.permission.ACCESS_SCREEN_LOCK_INNER"
     ]
+  },
+  {
+    "processName": "device_manager",
+    "acls": [
+        "ohos.permission.MANAGE_SOFTBUS_NETWORK"
+    ]
   }
 ]
