@@ -24,7 +24,7 @@ class Test:
         device.click(360, 1245)
         #device.unlock()
         time.sleep(2)
-        device.click(595, 555)
+        device.click(360, 800)
         time.sleep(10)
 
         #if device.get_focus_window() == 'SystemDialog1':
