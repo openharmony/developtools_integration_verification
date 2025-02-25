@@ -36,4 +36,4 @@ class Test:
         device.save_snapshot_to_local('{}_after_click.jpeg'.format(device.sn))
         after_click = device.get_wifi_status().get('active')
         logging.info('wlan switch changes from [{}] to [{}]'.format(before_click, after_click))
-        # assert before_click != after_click, 'wlan switch turn on/off failed'
+        assert before_click != after_click, 'wlan switch turn on/off failed'
