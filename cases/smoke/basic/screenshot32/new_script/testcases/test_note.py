@@ -32,4 +32,4 @@ class Test:
         crop_picture(note_pic)
         logging.info('compare image similarity')
         similarity = compare_image_similarity(note_pic, standard_pic)
-        #assert similarity > 0.5, 'compare similarity failed'
+        assert similarity > 0.5, 'compare similarity failed'
