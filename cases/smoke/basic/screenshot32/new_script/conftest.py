@@ -48,7 +48,7 @@ def setup_teardown(request, device):
     #device.click(360, 800)
     device.click(360, 1245)
     time.sleep(1)
-    device.click(360, 1245)
+    #device.click(360, 1245)
 
 
     yield
