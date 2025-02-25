@@ -206,8 +206,8 @@ class liteOsUpgrade_RK3568(BaseApp):
                             return False
                         else:
                             logger.info("Reboot successfully!")
-                            # os.system("hdc -t %s shell reboot" % sn)
-                            # time.sleep(30)
+                            os.system("hdc -t %s shell reboot" % sn)
+                            time.sleep(40)
                             # os.system("hdc -t %s shell write_updater user_factory_reset;reboot updater " % sn)
                             # time.sleep(40)
                             # os.system("hdc -t %s shell set persist.usb.setting.gadget_conn_prompt false" % sn)
