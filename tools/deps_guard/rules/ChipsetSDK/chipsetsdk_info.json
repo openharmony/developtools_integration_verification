@@ -404,7 +404,7 @@
         "so_file_name": "libhitracechain.so",
         "path": "//base/hiviewdfx/hitrace/interfaces/native/innerkits:libhitracechain",
         "headers": [
-            "//base/hiviewdfx/hitrace/interfaces/native/innerkits/include/"
+            "//base/hiviewdfx/hitrace/interfaces/native/innerkits/include/hitrace/"
         ]
     },
     {
