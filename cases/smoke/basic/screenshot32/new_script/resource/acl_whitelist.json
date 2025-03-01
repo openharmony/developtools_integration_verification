@@ -144,7 +144,8 @@
       "ohos.permission.PUBLISH_SYSTEM_COMMON_EVENT",
       "ohos.permission.CLEAN_APPLICATION_DATA",
       "ohos.permission.START_SYSTEM_DIALOG",
-      "ohos.permission.GET_RUNNING_INFO"
+      "ohos.permission.GET_RUNNING_INFO",
+      "ohos.permission.CONTROL_SVC_CMD"
     ]
   },
   {
