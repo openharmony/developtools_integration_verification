@@ -325,6 +325,12 @@
     ]
   },
   {
+    "processName": "testserver",
+    "acls": [
+        "ohos.permission.DUMP"
+    ]
+  },
+  {
     "processName": "device_manager",
     "acls": [
         "ohos.permission.MANAGE_SOFTBUS_NETWORK"
