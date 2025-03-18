@@ -110,7 +110,7 @@ class BuildProcessor:
             json.dump(self.group_json, f, indent=2)
 
     def analyze_impact(self, change_files):
-        tdd_data = self._read_json("developtools/integration_verification/scripts/ace_engine.json") or {}
+        tdd_data = self._read_json("developtools/integration_verification/tools/gated_check_in/ace_engine.json") or {}
         adapted_targets = set(tdd_data.get("adapted_test_targets", []))
         adapting_targets = set(tdd_data.get("adapting_test_targets", []))
         
