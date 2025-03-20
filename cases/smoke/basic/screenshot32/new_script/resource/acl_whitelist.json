@@ -146,7 +146,9 @@
       "ohos.permission.START_SYSTEM_DIALOG",
       "ohos.permission.GET_RUNNING_INFO",
       "ohos.permission.CONTROL_SVC_CMD",
-      "ohos.permission.MANAGE_WIFI_CONNECTION"
+      "ohos.permission.MANAGE_WIFI_CONNECTION",
+      "ohos.permission.INSTALL_PLUGIN_BUNDLE",
+      "ohos.permission.UNINSTALL_PLUGIN_BUNDLE"
     ]
   },
   {
