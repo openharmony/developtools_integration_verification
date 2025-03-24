@@ -230,7 +230,27 @@
         "foundation/arkui/ace_engine/test/unittest/base:geometry_test",
         "foundation/arkui/ace_engine/test/unittest/base:util_test",
         "foundation/arkui/ace_engine/test/unittest/bridge/common/utils:bridge_utils_test",
-        "foundation/arkui/ace_engine/test/unittest/bridge/common/sourcemap:bridge_source_map_test"
+        "foundation/arkui/ace_engine/test/unittest/bridge/common/sourcemap:bridge_source_map_test",
+        "foundation/arkui/ace_engine/test/unittest/interfaces:node_component_snapshot_test",
+        "foundation/arkui/ace_engine/test/unittest/interfaces:ui_input_event_first_test",
+        "foundation/arkui/ace_engine/test/unittest/interfaces/ace_kit:ace_kit_test",
+        "foundation/arkui/ace_engine/test/unittest/core/common/key_event_manager:key_event_manager_test",
+        "foundation/arkui/ace_engine/test/unittest/core/manager:avoid_info_manager_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/manager:drag_drop_controller_func_wrapper_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/manager:drag_drop_initiating_state_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/syntax:repeat_node_cache_2_syntax_test",
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/container_modal:container_modal_pattern_enhance_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/navrouter:navdestination_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/lazy_layout:lazy_grid_layout_test",
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/web:web_pattern_unit_test_ohos",
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/arc_list:arc_list_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/ui_extension:dynamic_pattern_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/ui_extension:session_wrapper_impl_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/ui_extension:session_wrapper_impl_test_new_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/ui_extension:security_session_wrapper_impl_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/event:drag_drop_event_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/property:accessibility_property_testtwo_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/property:accessibility_property_test_three_ng"
     ],
     "adapting_test_targets": [
         "foundation/arkui/ace_engine/frameworks/core/animation/test/unittest/svg_animate:SvgAnimateTest",
@@ -245,10 +265,6 @@
         "foundation/arkui/ace_engine/test/unittest/core/image:image_cache_test",
         "foundation/arkui/ace_engine/test/unittest/core/image:ImageProviderTest",
         "foundation/arkui/ace_engine/test/unittest/core/image:ImageCompressorTest",
-        "foundation/arkui/ace_engine/test/unittest/core/pattern/web:web_pattern_unit_test_ohos",
-        "foundation/arkui/ace_engine/test/unittest/core/pattern/plugin:plugin_pattern_test_ng",
-	"foundation/arkui/ace_engine/test/unittest/core/event:resample_and_velocity_test_ng"
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/plugin:plugin_pattern_test_ng"
     ]
-
 }
-

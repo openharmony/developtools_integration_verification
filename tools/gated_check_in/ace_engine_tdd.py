@@ -50,12 +50,16 @@ class BuildProcessor:
                 self.parse_build_gn(path)
                 self.parse_groups(path)
         
+        for target in self.data_json:
+            target["deps_list"] = self._get_deps_list(target)
+            target["dep_h"] = [h for d in target["deps_list"] for h in self.process_file(d)]
+
         change_files, oh_fields = self.process_changes()
         
         if len(oh_fields) == 1 and oh_fields[0] == "arkui_ace_engine":
             print(" ".join(self.analyze_impact(change_files)))
         else:
-            print(f"TDDarkuarkui_ace_engine")
+            print(f"TDDarkui_ace_engine")
         self.generate_output()
 
     def parse_build_gn(self, file_path):
@@ -129,9 +133,8 @@ class BuildProcessor:
                 "configs_h": set(target["configs_h"])
             }
             if any(change_set & s for s in target_sets.values()):
-                impacted.append(target["test_target"])
-                if target["test_target"] in adapting_targets:
-                    return ["TDDarkui_ace_engine"]
+                if target["test_target"] in adapted_targets:
+                    impacted.append(target["test_target"])
         
         return ["TDDarkui_ace_engine"] if not impacted else impacted
 
@@ -142,6 +145,18 @@ class BuildProcessor:
                 return f.read()
         except Exception as e:
             return ""
+
+    def _get_deps_list(self, target):
+        ret = []
+        for dep in target["deps_list"]:
+            ret = list(set(ret + self._get_source_list(dep)))
+        return ret
+
+    def _get_source_list(self, dep):
+        for target in self.data_json:
+            if dep == target["test_target"]:
+                return target["source_list"]
+        return []
 
     def _process_includes(self, line):
         for pattern in [r'#include\s*"(.*?)"', r'#include\s*<(.*?)>']:
@@ -157,7 +172,7 @@ class BuildProcessor:
         
         sources = self._get_gn_content(self.sources_pattern, target_content, base_path)
         deps = self._get_gn_content(self.deps_pattern, target_content, base_path)
-        includes = self._get_gn_content(self.includes_pattern, target_content, base_path)
+        includes = self._get_include_files(self._get_gn_content(self.includes_pattern, target_content, base_path))
         configs = self._get_gn_content(self.configs_pattern, target_content, base_path)
         
         source_h = {h for s in sources for h in self.process_file(s)}
@@ -177,6 +192,14 @@ class BuildProcessor:
             "includes_h": list(include_h),
             "configs_h": list(config_h)
         })
+
+    def _get_include_files(self, includes_list):
+        all_files = []
+        for path in includes_list:
+            for root, dirs, files in os.walk(path):
+                for file in files:
+                    all_files.append(os.path.join(root, file))
+        return all_files
 
     def _process_group(self, match, file_path):
         group_name = match.group(1)
@@ -218,4 +241,5 @@ if __name__ == "__main__":
         ace_root="foundation/arkui/ace_engine"
     )
     processor.execute()
+
 
