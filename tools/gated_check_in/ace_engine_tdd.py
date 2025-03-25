@@ -38,7 +38,7 @@ class BuildProcessor:
             r'group\("([^"]*)"\)\s*\{(.*?)(?=\})',
             re.DOTALL | re.MULTILINE
         )
-        self.sources_pattern = re.compile(r'sources\s*=\s*\[(.*?)\]', re.DOTALL)
+        self.sources_pattern = re.compile(r'sources\s*[+]?=\s*\[(.*?)\]', re.DOTALL)
         self.deps_pattern = re.compile(r'deps\s*[+]?=\s*\[(.*?)\]', re.DOTALL)
         self.includes_pattern = re.compile(r'include_dirs\s*[+]?=\s*\[(.*?)\]', re.DOTALL)
         self.configs_pattern = re.compile(r'configs\s*[+]?=\s*\[(.*?)\]', re.DOTALL)
