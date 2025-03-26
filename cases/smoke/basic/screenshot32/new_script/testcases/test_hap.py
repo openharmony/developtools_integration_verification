@@ -12,7 +12,7 @@ def uninstall_hap(device):
     yield
     try:
         device.uninstall_hap('com.example.helloworld')
-        device.uninstall_hap('com.example.curodemo.helloworld')
+        device.uninstall_hap('com.example.corodemo.helloworld')
     except:
         pass
 
@@ -21,7 +21,7 @@ class Test:
     ability_name = 'EntryAbility'
     bundle_name = 'com.example.helloworld'
     ability_name1= 'EntryAbility'
-    bundle_name1 = 'com.example.curodemo.helloworld'
+    bundle_name1 = 'com.example.corodemo.helloworld'
 
     @pytest.mark.parametrize('setup_teardown', [bundle_name,bundle_name1], indirect=True)
     def test(self, setup_teardown, device):
