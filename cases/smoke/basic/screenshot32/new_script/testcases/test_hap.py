@@ -12,6 +12,7 @@ def uninstall_hap(device):
     yield
     try:
         device.uninstall_hap('com.example.helloworld')
+        device.uninstall_hap('com.example.curodemo.helloworld')
     except:
         pass
 
@@ -41,7 +42,7 @@ class Test:
         logging.info('install hap1')
         hap_path = os.path.join(device.resource_path, 'entry-default-signed1.hap')
         device.install_hap(hap_path)
-        time.sleep(1)
+        time.sleep(2)
         logging.info('start app')
         device.start_ability(self.bundle_name1, self.ability_name1)
         time.sleep(4)
