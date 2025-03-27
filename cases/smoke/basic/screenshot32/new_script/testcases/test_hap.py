@@ -23,7 +23,7 @@ class Test:
     ability_name1= 'EntryAbility'
     bundle_name1 = 'com.example.corodemo.helloworld'
 
-    @pytest.mark.parametrize('setup_teardown', [bundle_name,bundle_name1], indirect=True)
+    @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):
         logging.info('install hap')
         hap_path = os.path.join(device.resource_path, 'entry-default-signed.hap')
