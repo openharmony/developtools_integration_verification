@@ -12,6 +12,7 @@ def uninstall_hap(device):
     yield
     try:
         device.uninstall_hap('com.example.helloworld')
+        device.uninstall_hap('com.example.corodemo.helloworld')
     except:
         pass
 
@@ -19,8 +20,10 @@ def uninstall_hap(device):
 class Test:
     ability_name = 'EntryAbility'
     bundle_name = 'com.example.helloworld'
+    ability_name1= 'EntryAbility'
+    bundle_name1 = 'com.example.corodemo.helloworld'
 
-    @pytest.mark.parametrize('setup_teardown', [bundle_name], indirect=True)
+    @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):
         logging.info('install hap')
         hap_path = os.path.join(device.resource_path, 'entry-default-signed.hap')
@@ -30,6 +33,20 @@ class Test:
         device.start_ability(self.bundle_name, self.ability_name)
         time.sleep(2)
         main_page = device.save_snapshot_to_local('{}_hap.jpeg'.format(device.sn))
+        crop_picture(picture=main_page, x1=0, y1=72, x2=160, y2=162)
+        stand_pic = os.path.join(device.resource_path, 'hap.jpeg')
+
+        similarity = compare_image_similarity(main_page, stand_pic)
+        assert similarity > 0.8, '截图对比失败'
+
+        logging.info('install hap1')
+        hap_path = os.path.join(device.resource_path, 'entry-default-signed1.hap')
+        device.install_hap(hap_path)
+        time.sleep(2)
+        logging.info('start app')
+        device.start_ability(self.bundle_name1, self.ability_name1)
+        time.sleep(4)
+        main_page = device.save_snapshot_to_local('{}_hap1.jpeg'.format(device.sn))
         crop_picture(picture=main_page, x1=0, y1=72, x2=160, y2=162)
         stand_pic = os.path.join(device.resource_path, 'hap.jpeg')
 
