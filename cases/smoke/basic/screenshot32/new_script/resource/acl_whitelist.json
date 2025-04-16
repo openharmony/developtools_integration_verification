@@ -148,8 +148,7 @@
       "ohos.permission.CONTROL_SVC_CMD",
       "ohos.permission.MANAGE_WIFI_CONNECTION",
       "ohos.permission.INSTALL_PLUGIN_BUNDLE",
-      "ohos.permission.UNINSTALL_PLUGIN_BUNDLE",
-      "ohos.permission.HIVIEW_TRACE_MANAGE"
+      "ohos.permission.UNINSTALL_PLUGIN_BUNDLE"
     ]
   },
   {
@@ -339,12 +338,6 @@
     "processName": "device_manager",
     "acls": [
         "ohos.permission.MANAGE_SOFTBUS_NETWORK"
-    ]
-  },
-  {
-    "processName": "hiprofiler_plugins",
-    "acls": [
-        "ohos.permission.HIVIEW_TRACE_MANAGE"
     ]
   }
 ]
