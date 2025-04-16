@@ -50,5 +50,9 @@
   {
     "case_file": "testcases/test_note.py",
     "description": "备忘录应用测试"
+  },
+  {
+    "case_file": "testcases/test_hap.py",
+    "description": "hap包测试"
   }
 ]
