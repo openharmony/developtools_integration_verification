@@ -510,7 +510,7 @@ def start_cmd(sn):
 @timeout(900)
 def cmd_test(screenshot_path, py_file, device_num, test_num, new_report_path, pr):
     global total_time
-    save_screenshot_path = os.path.join(new_report_path, "screenshot_result")
+    save_screenshot_path = os.path.join(new_report_path, f"screenshot_result{LocationID}")
     logger.info(save_screenshot_path)
     time_sleep = random.randint(1, 5)
     time.sleep(time_sleep)
@@ -518,7 +518,7 @@ def cmd_test(screenshot_path, py_file, device_num, test_num, new_report_path, pr
         if not os.path.exists(save_screenshot_path):
             os.mkdir(save_screenshot_path)
         logger.info(save_screenshot_path)
-        base_screenshot_path = os.path.join(new_report_path, "screenshot_base")
+        base_screenshot_path = os.path.join(new_report_path, f"screenshot_base{LocationID}")
         if not os.path.exists(base_screenshot_path):
             os.mkdir(base_screenshot_path)
         logger.info(base_screenshot_path)
