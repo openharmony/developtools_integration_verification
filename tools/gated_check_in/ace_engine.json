@@ -265,6 +265,9 @@
         "foundation/arkui/ace_engine/test/unittest/core/image:image_cache_test",
         "foundation/arkui/ace_engine/test/unittest/core/image:ImageProviderTest",
         "foundation/arkui/ace_engine/test/unittest/core/image:ImageCompressorTest",
-        "foundation/arkui/ace_engine/test/unittest/core/pattern/plugin:plugin_pattern_test_ng"
+        "foundation/arkui/ace_engine/test/unittest/core/pattern/plugin:plugin_pattern_test_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/base:view_abstract_test_resetposition_ng",
+        "foundation/arkui/ace_engine/test/unittest/core/event:resample_and_velocity_test_ng"
     ]
+
 }

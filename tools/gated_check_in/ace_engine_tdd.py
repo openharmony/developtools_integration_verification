@@ -16,10 +16,8 @@
 import os
 import re
 import json
-import mmap
 from functools import lru_cache
 from collections import defaultdict
-
 
 class BuildProcessor:
     
@@ -29,6 +27,8 @@ class BuildProcessor:
         self.build_info = defaultdict(lambda: {"name": "", "source_list": [], "deps_list": [], "include_list": [], "config_list": []})
         self.data_json = []
         self.group_json = []
+        self.type_deps = {}
+        self.heads = {}
         
         self.unittest_pattern = re.compile(
             r'(ace|ohos)_unittest\("([^"]*)"\)\s*\{(.*?)(?=\})',
@@ -38,18 +38,37 @@ class BuildProcessor:
             r'group\("([^"]*)"\)\s*\{(.*?)(?=\})',
             re.DOTALL | re.MULTILINE
         )
+        self.source_set_pattern = re.compile(
+            r'ohos_source_set\("([^"]*)"\)\s*\{(.*?)(?=\})',
+            re.DOTALL | re.MULTILINE
+        )
+        self.type_get_pattern = r'''
+            if\s*\(type\s*==\s*"([^"]+)"\)
+            \s*(\{
+                (?:
+                    [^{}]*
+                    | (?R)
+                )*
+            \})
+        '''
+
         self.sources_pattern = re.compile(r'sources\s*[+]?=\s*\[(.*?)\]', re.DOTALL)
         self.deps_pattern = re.compile(r'deps\s*[+]?=\s*\[(.*?)\]', re.DOTALL)
         self.includes_pattern = re.compile(r'include_dirs\s*[+]?=\s*\[(.*?)\]', re.DOTALL)
         self.configs_pattern = re.compile(r'configs\s*[+]?=\s*\[(.*?)\]', re.DOTALL)
+        self.type_pattern = re.compile(r'type\s*=\s*"([^"]+)"')
     
     def execute(self):
+        self.parse_build_gn("foundation/arkui/ace_engine/test/unittest/ace_unittest.gni", self.type_get_pattern)
+
         for root, _, files in os.walk(self.root_dir):
             if "BUILD.gn" in files:
                 path = os.path.join(root, "BUILD.gn")
-                self.parse_build_gn(path)
+                self.parse_build_gn(path, self.unittest_pattern)
                 self.parse_groups(path)
         
+        self.parse_build_gn("foundation/arkui/ace_engine/test/unittest/BUILD.gn", self.source_set_pattern)
+
         for target in self.data_json:
             target["deps_list"] = self._get_deps_list(target)
             target["dep_h"] = [h for d in target["deps_list"] for h in self.process_file(d)]
@@ -62,18 +81,83 @@ class BuildProcessor:
             print(f"TDDarkui_ace_engine")
         self.generate_output()
 
-    def parse_build_gn(self, file_path):
+
+    def parse_build_gn(self, file_path, pattern):
         content = self._read_file(file_path)
-        processed_content = "\n".join(line.split("#")[0].rstrip() 
+        processed_content = "\n".join(line.split("#")[0].rstrip()
                                     for line in content.splitlines())
-        
-        for match in self.unittest_pattern.finditer(processed_content):
-            self._process_unittest(match, file_path)
+        if pattern == self.type_get_pattern:
+            block_content = self.extract_gn_block(content, 'if (type == "components")')
+            self.set_type("components", block_content, file_path)
+            block_content = self.extract_gn_block(content, 'if (type == "new")')
+            self.set_type("new", block_content, file_path)
+            block_content = self.extract_gn_block(content, 'if (type == "pipeline")')
+            self.set_type("pipeline", block_content, file_path)
+        else:
+            for match in pattern.finditer(processed_content):
+                self._process_unittest(match, file_path)
+
+
+    def extract_gn_block(self, content, start_condition):
+        pattern = re.compile(
+            r'{}\s*{{'.format(re.escape(start_condition)), 
+            re.DOTALL
+        )
+        match = pattern.search(content)
+        if not match:
+            return ""
+
+        start_pos = match.end()
+        brace_count = 1
+        index = start_pos
+        in_string = False
+        in_comment = False
+        quote_char = None
+        escape = False
+
+        while index < len(content) and brace_count > 0:
+            char = content[index]
+
+            if in_comment:
+                if char == '\n':
+                    in_comment = False
+                index += 1
+                continue
+            if in_string:
+                if escape:
+                    escape = False
+                elif char == '\\':
+                    escape = True
+                elif char == quote_char:
+                    in_string = False
+            else:
+                if char == '#':
+                    in_comment = True
+                elif char in ('"', "'"):
+                    in_string = True
+                    quote_char = char
+                elif char == '{':
+                    brace_count += 1
+                elif char == '}':
+                    brace_count -= 1
+
+            index += 1
+        if brace_count != 0:
+            return "" 
+        return content[start_pos:index-1].strip()
+
+    def set_type(self, type, content, file_path):
+        base_path = os.path.dirname(file_path)
+        deps = self._get_gn_content(self.deps_pattern, content, base_path)
+        self.type_deps[type] = deps
 
     def process_file(self, file_path):
+        if self.heads.get(file_path):
+            return self.heads.get(file_path)
         content = self._read_file(file_path)
-        return {header for line in content.split('\n') 
+        self.heads[file_path] = {header for line in content.split('\n') 
                 if (header := self._process_includes(line))}
+        return self.heads[file_path]
 
     def parse_groups(self, file_path):
         content = self._read_file(file_path)
@@ -117,7 +201,7 @@ class BuildProcessor:
         tdd_data = self._read_json("developtools/integration_verification/tools/gated_check_in/ace_engine.json") or {}
         adapted_targets = set(tdd_data.get("adapted_test_targets", []))
         adapting_targets = set(tdd_data.get("adapting_test_targets", []))
-        
+
         change_set = set(change_files)
         impacted = []
         
@@ -133,10 +217,10 @@ class BuildProcessor:
                 "configs_h": set(target["configs_h"])
             }
             if any(change_set & s for s in target_sets.values()):
-                if target["test_target"] in adapted_targets:
+                if target["test_target"] not in adapting_targets:
                     impacted.append(target["test_target"])
         
-        return ["TDDarkui_ace_engine"] if not impacted else impacted
+        return self.ret_build_target(impacted, change_files)
 
     @lru_cache(maxsize=128)
     def _read_file(self, file_path):
@@ -146,10 +230,19 @@ class BuildProcessor:
         except Exception as e:
             return ""
 
+    def ret_build_target(self, impacted, change_files):
+        if not impacted:
+            for file in change_files:
+                if file.endswith(".h"):
+                    return ["TDDarkui_ace_engine"]
+            return ["foundation/arkui/ace_engine/test/unittest/adapter/ohos/entrance:container_test"]
+        return impacted
+
     def _get_deps_list(self, target):
         ret = []
         for dep in target["deps_list"]:
             ret = list(set(ret + self._get_source_list(dep)))
+            ret.append(os.path.join(dep.split(":", 1)[0], "BUILD.gn"))
         return ret
 
     def _get_source_list(self, dep):
@@ -166,11 +259,17 @@ class BuildProcessor:
         return None
 
     def _process_unittest(self, match, file_path):
-        target_name = match.group(2)
-        target_content = match.group(3)
         base_path = os.path.dirname(file_path)
+        if base_path == "foundation/arkui/ace_engine/test/unittest":
+            target_name = match.group(1)
+            target_content = match.group(2)
+        else:
+            target_name = match.group(2)
+            target_content = match.group(3)
+        
         
         sources = self._get_gn_content(self.sources_pattern, target_content, base_path)
+        sources.append(file_path)
         deps = self._get_gn_content(self.deps_pattern, target_content, base_path)
         includes = self._get_include_files(self._get_gn_content(self.includes_pattern, target_content, base_path))
         configs = self._get_gn_content(self.configs_pattern, target_content, base_path)
@@ -179,7 +278,9 @@ class BuildProcessor:
         dep_h = {h for d in deps for h in self.process_file(d)}
         include_h = {h for s in includes for h in self.process_file(s)}
         config_h = {h for d in configs for h in self.process_file(d)}
-        
+        if match.group(1) == "ace":
+            for match_ in self.type_pattern.finditer(target_content):
+                deps += self.type_deps[match_.group(1)]
         build_target = f"{os.path.dirname(file_path)}:{target_name}"
         self.data_json.append({
             "test_target": build_target,
@@ -215,10 +316,15 @@ class BuildProcessor:
         })
 
     def _get_gn_content(self, pattern, content, base_path):
-        if not (match := pattern.search(content)):
-            return []
-        return [self._normalize_path(s, base_path) 
-                for s in match.group(1).split(',') if s.strip()]
+        all_matches = pattern.finditer(content)
+        sources = []
+        for match in all_matches:
+            matched_content = match.group(1)
+            sources.extend([
+                self._normalize_path(s, base_path)
+                for s in matched_content.split(',') if s.strip()
+            ])
+        return sources
 
     def _normalize_path(self, s, base_path):
         s = s.strip().strip('"')
@@ -233,7 +339,6 @@ class BuildProcessor:
         except Exception as e:
             return {}
 
-    
 
 if __name__ == "__main__":
     processor = BuildProcessor(
@@ -241,5 +346,3 @@ if __name__ == "__main__":
         ace_root="foundation/arkui/ace_engine"
     )
     processor.execute()
-
-
