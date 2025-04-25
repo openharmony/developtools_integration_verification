@@ -134,19 +134,8 @@ class Test:
         sql_data = []
         with open(perm_def_file, 'r') as file:
             data = json.load(file)
-            system_grant_list = data.get('systemGrantPermissions')
-            user_grant_list = data.get('userGrantPermissions')
-            for item in user_grant_list:
-                key = item.get('name')
-                if key not in perms_set:
-                    value_str = item.get('availableLevel')
-                    value = 1
-                    if value_str == "system_core":
-                        value = 3
-                    elif value_str == "system_basic":
-                        value = 2
-                    sql_data.append([key, value])
-            for item in system_grant_list:
+            perm_def_list = data.get('definePermissions')
+            for item in perm_def_list:
                 key = item.get('name')
                 if key not in perms_set:
                     value_str = item.get('availableLevel')
