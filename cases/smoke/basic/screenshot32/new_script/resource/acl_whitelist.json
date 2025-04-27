@@ -159,7 +159,8 @@
       "ohos.permission.ACCESS_IDS",
       "ohos.permission.MANAGE_WIFI_CONNECTION",
       "ohos.permission.GET_WIFI_PEERS_MAC",
-      "ohos.permission.GET_WIFI_INFO_INTERNAL"
+      "ohos.permission.GET_WIFI_INFO_INTERNAL",
+      "ohos.permission.ACCESS_DEVAUTH_CRED_PRIVILEGE"
     ]
   },
   {
