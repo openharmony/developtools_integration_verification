@@ -339,7 +339,8 @@
   {
     "processName": "device_manager",
     "acls": [
-        "ohos.permission.MANAGE_SOFTBUS_NETWORK"
+        "ohos.permission.MANAGE_SOFTBUS_NETWORK",
+        "ohos.permission.ACCESS_DEVAUTH_CRED_PRIVILEGE"
     ]
   },
   {
