@@ -22,7 +22,7 @@ import json
 from .base_rule import BaseRule
 
 
-class ChipsetsdkSPRule(BaseRule):
+class LLndkRule(BaseRule):
     RULE_NAME = "LLndk"
 
     def __init__(self, mgr, args):
