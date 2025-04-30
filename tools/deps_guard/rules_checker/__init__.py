@@ -20,6 +20,7 @@ from .napi_rule import NapiRule
 from .sa_rule import SaRule
 from .hdi_rule import HdiRule
 from .chipsetsdk import ChipsetSDKRule
+from .base_innerapi_rule import BaseInnerapiRule
 
 
 def check_all_rules(mgr, args):
@@ -27,7 +28,8 @@ def check_all_rules(mgr, args):
         NapiRule,
         SaRule,
         HdiRule,
-        ChipsetSDKRule
+        ChipsetSDKRule,
+        BaseInnerapiRule
     ]
 
     passed = True

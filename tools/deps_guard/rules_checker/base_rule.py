@@ -68,3 +68,30 @@ class BaseRule(object):
     def check(self):
         # Default pass
         return True
+
+    def check_if_deps_correctly(self, check_modules, valid_mod_tags, valid_dep_tags):
+        # check if mod and callee have wrong innerapi tags 
+        passed = True
+        for mod in check_modules:
+            innerapi_tags = mod["innerapi_tags"]
+            if innerapi_tags and all(item in valid_mod_tags for item in innerapi_tags):
+                for dep in mod["deps"]:
+                    callee = dep["callee"]
+
+                    dep_innerapi_tags = callee["innerapi_tags"]
+                    if dep_innerapi_tags and all(item in valid_dep_tags for item in dep_innerapi_tags):
+                        continue
+                    elif not dep_innerapi_tags:
+                        continue
+
+                    passed = False
+                    wrong_tags = [item for item in dep_innerapi_tags if item not in valid_dep_tags]
+                    self.error("module %s with %s contains wrong dep innerapi_tags [%s] in innerapi_tags [%s]" 
+                        %(callee["name"], callee["labelPath"], ",".join(wrong_tags), ",".join(dep_innerapi_tags)))
+            else:
+                wrong_tags = [item for item in innerapi_tags if item not in valid_mod_tags]
+                self.error("module %s with %s contains wrong mod innerapi_tags [%s] in innerapi_tags [%s]" 
+                           %(mod["name"], mod["labelPath"], ",".join(wrong_tags), ",".join(innerapi_tags)))
+                return False
+
+        return passed

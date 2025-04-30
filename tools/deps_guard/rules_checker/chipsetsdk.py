@@ -29,6 +29,9 @@ class ChipsetSDKRule(BaseRule):
         super().__init__(mgr, args)
         self.__out_path = mgr.get_product_out_path()
         self.__white_lists = self.load_chipsetsdk_json("chipsetsdk_info.json")
+        self.__ignored_tags = ["platformsdk", "sasdk", "platformsdk_indirect", "ndk"]
+        self.__valid_mod_tags = ["llndk", "chipsetsdk", "chipsetsdk_indirect", "chipsetsdk_sp", 
+                                 "chipsetsdk_sp_indirect"] + self.__ignored_tags
 
     def get_white_lists(self):
         return self.__white_lists
@@ -64,16 +67,31 @@ class ChipsetSDKRule(BaseRule):
 
         # Check if all chipset modules depends on chipsetsdk modules only
         passed = self.__check_depends_on_chipsetsdk()
+        self.log(f"****check_depends_on_chipsetsdk result:{passed}****")
         if not passed:
             return passed
 
         # Check if all chipsetsdk module depends on chipsetsdk or chipsetsdk_indirect modules only
         passed = self.__check_chipsetsdk_indirect()
+        self.log(f"****check_chipsetsdk_indirect result:{passed}****")
         if not passed:
             return passed
 
         # Check if all ChipsetSDK modules are correctly tagged by innerapi_tags
         passed = self.__check_if_tagged_correctly()
+        self.log(f"****check_if_tagged_correctly result:{passed}****")
+        if not passed:
+            return passed
+        
+        passed = self.check_if_deps_correctly(
+            self.__modules_with_chipsetsdk_tag, self.__valid_mod_tags, self.__valid_mod_tags)
+        self.log(f"****check_if_deps_correctly result:{passed}****")
+        if not passed:
+            return passed
+        
+        passed = self.check_if_deps_correctly(
+            self.__modules_with_chipsetsdk_tag, self.__valid_mod_tags, self.__valid_mod_tags)
+        self.log(f"****check_if_deps_correctly indirect result:{passed}****")
         if not passed:
             return passed
 
