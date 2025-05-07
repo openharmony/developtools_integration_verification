@@ -110,10 +110,10 @@ class LLndkRule(BaseRule):
     def __check_if_tagged_correctly(self):
         passed = True
 
-        for mod in self.__modules_with_chipsetsdk_sp_tag:
+        for mod in self.__modules_with_llndk_tag:
             if mod["name"] not in self.get_white_lists():
                 passed = False
-                self.error('non chipsetsdk_sp module %s with innerapi_tags="chipsetsdk_sp", %s'
+                self.error('non llndk module %s with innerapi_tags="llndk", %s'
                            % (mod["name"], mod["labelPath"]))
 
         return passed
