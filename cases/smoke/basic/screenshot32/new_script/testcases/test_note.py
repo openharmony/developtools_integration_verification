@@ -27,6 +27,9 @@ class Test:
             if device.is_soft_keyboard_on():
                 break
         time.sleep(3)
+        device.wakeup()
+        device.unlock()
+        time.sleep(2)
         standard_pic = os.path.join(device.resource_path, 'note.jpeg')
         note_pic = device.save_snapshot_to_local('{}_note.jpeg'.format(device.sn))
         crop_picture(note_pic)
