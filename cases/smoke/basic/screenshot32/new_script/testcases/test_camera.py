@@ -25,7 +25,9 @@ class Test:
         device.click(430, 980)
         time.sleep(2)
         device.save_snapshot_to_local('{}_camera_step3.jpeg'.format(device.sn))
-
+        device.wakeup()
+        device.unlock()
+        time.sleep(2)
         logging.info('click shot button')
         device.click(360, 1095)
         time.sleep(5)
