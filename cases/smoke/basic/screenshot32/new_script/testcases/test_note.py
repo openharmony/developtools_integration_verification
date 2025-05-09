@@ -18,6 +18,8 @@ class Test:
         logging.info('click shuxue gongshi')
         device.click(464, 313)
         time.sleep(4)
+        device.click(464, 313)
+        time.sleep(4)
         logging.info('click note content area')
         for i in range(5):
             device.click(360, 325)
