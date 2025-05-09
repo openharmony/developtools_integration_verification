@@ -35,7 +35,7 @@ def setup_teardown(request, device):
     time.sleep(2)
     device.set_power_mode()
     device.set_screen_timeout()
-    device.unlock()
+    #device.unlock()
     time.sleep(2)
     #device.go_home()
     time.sleep(1)
