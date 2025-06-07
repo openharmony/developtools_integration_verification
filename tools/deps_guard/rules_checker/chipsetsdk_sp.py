@@ -149,15 +149,6 @@ class ChipsetsdkSPRule(BaseRule):
                 for f in innerapi["header_files"]:
                     item["headers"].append(os.path.join(base, f))
             headers.append(item)
-
-        try:
-            with os.fdopen(os.open(os.path.join(self.get_mgr().get_product_images_path(),
-                                                "chipsetsdk_sp_info.json"),
-                                    os.O_WRONLY | os.O_CREAT, 0o644), "w") as f:
-                json.dump(headers, f, indent=4)
-        except FileExistsError as e:
-            pass
-
         return headers
 
     def __check_depends_on_chipsetsdk_sp(self):
@@ -210,7 +201,7 @@ class ChipsetsdkSPRule(BaseRule):
 
                 # Not allowed
                 passed = True
-                self.error("NEED MODIFY: chipset_sp module %s in %s depends on non ChipsetSDKSP module %s in %s"
+                self.warn("NEED MODIFY: chipset_sp module %s in %s depends on non ChipsetSDKSP module %s in %s"
                            % (mod["name"], mod["labelPath"], callee["name"], mod["labelPath"]))
 
         return passed
@@ -225,7 +216,7 @@ class ChipsetsdkSPRule(BaseRule):
         for mod in self.__modules_with_chipsetsdk_sp_tag:
             if mod["name"] not in self.get_white_lists():
                 passed = True
-                self.error('NEED MODIFY: non chipsetsdk_sp module %s with innerapi_tags="chipsetsdk_sp", %s'
+                self.warn('NEED MODIFY: non chipsetsdk_sp module %s with innerapi_tags="chipsetsdk_sp", %s'
                            % (mod["name"], mod["labelPath"]))
 
         for mod in self.__modules_with_chipsetsdk_sp_indirect_tag:
