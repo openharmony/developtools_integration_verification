@@ -150,14 +150,6 @@ class PassthroughRule(BaseRule):
                     item["headers"].append(os.path.join(base, f))
             headers.append(item)
 
-        try:
-            with os.fdopen(os.open(os.path.join(self.get_mgr().get_product_images_path(),
-                                                "passthrough_info.json"),
-                                    os.O_WRONLY | os.O_CREAT, 0o644), "w") as f:
-                json.dump(headers, f, indent=4)
-        except FileExistsError as e:
-            pass
-
         return headers
 
     def __check_depends_on_passthrough(self):
