@@ -21,6 +21,9 @@ from .sa_rule import SaRule
 from .hdi_rule import HdiRule
 from .chipsetsdk import ChipsetSDKRule
 from .base_innerapi_rule import BaseInnerapiRule
+from .chipsetsdk_sp import ChipsetsdkSPRule
+from .llndk import LLndkRule
+from .passthrough import PassthroughRule
 
 
 def check_all_rules(mgr, args):
@@ -29,7 +32,10 @@ def check_all_rules(mgr, args):
         SaRule,
         HdiRule,
         ChipsetSDKRule,
-        BaseInnerapiRule
+        BaseInnerapiRule,
+        ChipsetsdkSPRule,
+        LLndkRule,
+        PassthroughRule
     ]
 
     passed = True

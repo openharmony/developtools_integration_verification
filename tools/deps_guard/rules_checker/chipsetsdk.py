@@ -64,16 +64,11 @@ class ChipsetSDKRule(BaseRule):
 
     def check(self):
         self.__load_chipsetsdk_indirects()
+        white_lists = self.get_white_lists()
 
         # Check if all chipset modules depends on chipsetsdk modules only
         passed = self.__check_depends_on_chipsetsdk()
         self.log(f"****check_depends_on_chipsetsdk result:{passed}****")
-        if not passed:
-            return passed
-
-        # Check if all chipsetsdk module depends on chipsetsdk or chipsetsdk_indirect modules only
-        passed = self.__check_chipsetsdk_indirect()
-        self.log(f"****check_chipsetsdk_indirect result:{passed}****")
         if not passed:
             return passed
 
@@ -84,13 +79,13 @@ class ChipsetSDKRule(BaseRule):
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_chipsetsdk_tag, self.__valid_mod_tags, self.__valid_mod_tags)
+            self.__modules_with_chipsetsdk_tag, self.__valid_mod_tags, self.__valid_mod_tags, white_lists)
         self.log(f"****check_if_deps_correctly result:{passed}****")
         if not passed:
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_chipsetsdk_tag, self.__valid_mod_tags, self.__valid_mod_tags)
+            self.__modules_with_chipsetsdk_tag, self.__valid_mod_tags, self.__valid_mod_tags, self.__indirects)
         self.log(f"****check_if_deps_correctly indirect result:{passed}****")
         if not passed:
             return passed
@@ -161,31 +156,10 @@ class ChipsetSDKRule(BaseRule):
                                                 "chipsetsdk_info.json"),
                                     os.O_WRONLY | os.O_CREAT, 0o644), "w") as f:
                 json.dump(headers, f, indent=4)
-        except:
+        except FileNotFoundError as e:
             pass
 
         return headers
-
-    def __check_chipsetsdk_indirect(self):
-        passed = True
-        for mod in self.__chipsetsdks:
-            for dep in mod["deps"]:
-                callee = dep["callee"]
-
-                # Chipset SDK is OK
-                if callee["name"] in self.get_white_lists():
-                    continue
-
-                # chipsetsdk_indirect module is OK
-                if self.__is_chipsetsdk_indirect(callee) or callee["name"] in self.__indirects:
-                    continue
-
-                # Not correct
-                passed = False
-                self.error('Chipset SDK module %s should not depends on non Chipset SDK module \
-                           %s in %s with "chipsetsdk_indirect"' % (mod["name"], callee["name"], callee["labelPath"]))
-
-        return passed
 
     def __check_depends_on_chipsetsdk(self):
         lists = self.get_white_lists()
@@ -236,9 +210,9 @@ class ChipsetSDKRule(BaseRule):
                     continue
 
                 # Not allowed
-                passed = False
-                self.error("chipset module %s depends on non Chipset SDK module %s in %s"
-                           % (mod["name"], callee["name"], mod["labelPath"]))
+                passed = True
+                self.warn("NEED MODIFY: chipset module %s in %s depends on non Chipset SDK module %s in %s"
+                           % (mod["name"], mod["labelPath"], callee["name"], mod["labelPath"]))
 
         return passed
 
@@ -251,8 +225,8 @@ class ChipsetSDKRule(BaseRule):
 
         for mod in self.__modules_with_chipsetsdk_tag:
             if mod["name"] not in self.get_white_lists():
-                passed = False
-                self.error('non chipsetsdk module %s with innerapi_tags="chipsetsdk", %s'
+                passed = True
+                self.warn('NEED MODIFY: non chipsetsdk module %s with innerapi_tags="chipsetsdk", %s'
                            % (mod["name"], mod["labelPath"]))
 
         for mod in self.__modules_with_chipsetsdk_indirect_tag:

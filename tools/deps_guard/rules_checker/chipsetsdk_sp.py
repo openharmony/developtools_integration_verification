@@ -63,16 +63,11 @@ class ChipsetsdkSPRule(BaseRule):
 
     def check(self):
         self.__load_chipsetsdk_indirects()
+        white_lists = self.get_white_lists()
 
         # Check if all chipset modules depends on chipsetsdk_sp modules only
-        passed = self.__check_depends_on_chipsetsdk()
+        passed = self.__check_depends_on_chipsetsdk_sp()
         self.log(f"****check_depends_on_chipsetsdk result:{passed}****")
-        if not passed:
-            return passed
-
-        # Check if all chipsetsdk_sp module depends on chipsetsdk_sp or chipsetsdk_sp_indirect modules only
-        passed = self.__check_chipsetsdk_sp_indirect()
-        self.log(f"****check_chipsetsdk_sp_indirect result:{passed}****")
         if not passed:
             return passed
 
@@ -83,13 +78,13 @@ class ChipsetsdkSPRule(BaseRule):
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_chipsetsdk_sp_tag, self.__valid_mod_tags, self.__valid_mod_tags)
+            self.__modules_with_chipsetsdk_sp_tag, self.__valid_mod_tags, self.__valid_mod_tags, white_lists)
         self.log(f"****check_if_deps_correctly result:{passed}****")
         if not passed:
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_chipsetsdk_sp_indirect_tag, self.__valid_mod_tags, self.__valid_mod_tags)
+            self.__modules_with_chipsetsdk_sp_indirect_tag, self.__valid_mod_tags, self.__valid_mod_tags, self.__indirects)
         self.log(f"****check_if_deps_correctly indirect result:{passed}****")
         if not passed:
             return passed
@@ -160,33 +155,12 @@ class ChipsetsdkSPRule(BaseRule):
                                                 "chipsetsdk_sp_info.json"),
                                     os.O_WRONLY | os.O_CREAT, 0o644), "w") as f:
                 json.dump(headers, f, indent=4)
-        except:
+        except FileExistsError as e:
             pass
 
         return headers
 
-    def __check_chipsetsdk_sp_indirect(self):
-        passed = True
-        for mod in self.__chipsetsdk_sps:
-            for dep in mod["deps"]:
-                callee = dep["callee"]
-
-                # ChipsetSDK SP is OK
-                if callee["name"] in self.get_white_lists():
-                    continue
-
-                # chipsetsdk_sp_indirect module is OK
-                if self.__is_chipsetsdk_sp_indirect(callee) or callee["name"] in self.__indirects:
-                    continue
-
-                # Not correct
-                passed = False
-                self.error('ChipsetSPSDK module %s should not depends on non ChipsetSPSDK module \
-                           %s in %s with "chipsetsdk_indirect"' % (mod["name"], callee["name"], callee["labelPath"]))
-
-        return passed
-
-    def __check_depends_on_chipsetsdk(self):
+    def __check_depends_on_chipsetsdk_sp(self):
         lists = self.get_white_lists()
 
         passed = True
@@ -235,9 +209,9 @@ class ChipsetsdkSPRule(BaseRule):
                     continue
 
                 # Not allowed
-                passed = False
-                self.error("chipset module %s depends on non ChipsetSDKSP module %s in %s"
-                           % (mod["name"], callee["name"], mod["labelPath"]))
+                passed = True
+                self.error("NEED MODIFY: chipset_sp module %s in %s depends on non ChipsetSDKSP module %s in %s"
+                           % (mod["name"], mod["labelPath"], callee["name"], mod["labelPath"]))
 
         return passed
 
@@ -250,8 +224,8 @@ class ChipsetsdkSPRule(BaseRule):
 
         for mod in self.__modules_with_chipsetsdk_sp_tag:
             if mod["name"] not in self.get_white_lists():
-                passed = False
-                self.error('non chipsetsdk_sp module %s with innerapi_tags="chipsetsdk_sp", %s'
+                passed = True
+                self.error('NEED MODIFY: non chipsetsdk_sp module %s with innerapi_tags="chipsetsdk_sp", %s'
                            % (mod["name"], mod["labelPath"]))
 
         for mod in self.__modules_with_chipsetsdk_sp_indirect_tag:

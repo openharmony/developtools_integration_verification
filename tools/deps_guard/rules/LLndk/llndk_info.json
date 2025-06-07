@@ -1,0 +1,14 @@
+[
+    {
+        "name": "build_framework:ld-musl-arm.so.1",
+        "so_file_name": "ld-musl-aarch64.so.1",
+        "path": "//build/common/musl:ld-musl-arm.so.1",
+        "headers": []
+    },
+    {
+        "name": "build_framework:musl-libcxx.so",
+        "so_file_name": "libcxx.so",
+        "path": "//build/common/musl:musl-libcxx.so",
+        "headers": []
+    }
+]

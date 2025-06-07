@@ -63,6 +63,7 @@ class LLndkRule(BaseRule):
 
     def check(self):
         self.__modules_with_llndk_tag = []
+        white_lists = self.get_white_lists()
 
         for mod in self.get_mgr().get_all():
             if self.__is_llndk_tagged(mod):
@@ -75,7 +76,7 @@ class LLndkRule(BaseRule):
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_llndk_tag, self.__valid_mod_tags, self.__valid_mod_tags)
+            self.__modules_with_llndk_tag, self.__valid_mod_tags, self.__valid_mod_tags, white_lists)
         self.log(f"****check_if_deps_correctly result:{passed}****")
         if not passed:
             return passed

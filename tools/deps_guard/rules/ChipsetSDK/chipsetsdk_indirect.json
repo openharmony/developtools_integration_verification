@@ -269,5 +269,95 @@
         "headers": [
             "//foundation/filemanagement/storage_service/interfaces/innerkits/acl/native/"
         ]
+    },
+    {
+        "name": "faultloggerd:libasync_stack",
+        "so_file_name": "libasync_stack.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/async_stack:libasync_stack",
+        "headers": []
+    },
+    {
+        "name": "faultloggerd:crash_exception",
+        "so_file_name": "libcrash_exception.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/crash_exception:crash_exception",
+        "headers": []
+    },
+    {
+        "name": "faultloggerd:dfx_signalhandler",
+        "so_file_name": "libdfx_signalhandler.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/signal_handler:dfx_signalhandler",
+        "headers": []
+    },
+    {
+        "name": "hicollie:libfaultlogger",
+        "so_file_name": "libfaultlogger.z.so",
+        "path": "//base/hiviewdfx/hiview/plugins/faultloggerd:libfaultlogger",
+        "headers": []
+    },
+    {
+        "name": "drivers_interface_display:libdisplay_buffer_hdi_impl_v1_1",
+        "so_file_name": "libdisplay_buffer_hdi_impl_v1_1.z.so",
+        "path": "//drivers/interface/display/buffer/v1_1:libdisplay_buffer_hdi_impl_v1_1",
+        "headers": []
+    },
+    {
+        "name": "drivers_interface_display:libdisplay_buffer_proxy_1.1",
+        "so_file_name": "libdisplay_buffer_proxy_1.1.z.so",
+        "path": "//drivers/interface/display/buffer/v1_1:libdisplay_buffer_proxy_1.1",
+        "headers": []
+    },
+    {
+        "name": "ability_base:extractortool",
+        "so_file_name": "libextractortool.z.so",
+        "path": "//foundation/ability/ability_base:extractortool",
+        "headers": []
+    },
+    {
+        "name": "ability_base:string_utils",
+        "so_file_name": "libstring_utils.z.so",
+        "path": "//foundation/ability/ability_base:string_utils",
+        "headers": []
+    },
+    {
+        "name": "libjpeg-turbo:turbojpeg",
+        "so_file_name": "libturbojpeg.z.so",
+        "path": "//third_party/libjpeg-turbo:turbojpeg",
+        "headers": []
+    },
+    {
+        "name": "libsnd:sndfile",
+        "so_file_name": "libsndfile.z.so",
+        "path": "//third_party/libsnd:sndfile",
+        "headers": []
+    },
+    {
+        "name": "pcre2:libpcre2",
+        "so_file_name": "libsndfile.z.so",
+        "path": "//third_party/libsnd:sndfile",
+        "headers": []
+    },
+    {
+        "name": "pulseaudio:pulsecore",
+        "so_file_name": "libpulsecore.z.so",
+        "path": "//third_party/pulseaudio/ohosbuild/src/pulsecore:pulsecore",
+        "headers": []
+    },
+    {
+        "name": "pulseaudio:pulsecommon",
+        "so_file_name": "libpulsecommon.z.so",
+        "path": "//third_party/pulseaudio/ohosbuild/src:pulsecommon",
+        "headers": []
+    },
+    {
+        "name": "pulseaudio:speexresampler",
+        "so_file_name": "libspeexresampler.z.so",
+        "path": "//third_party/pulseaudio/speex:speexresampler",
+        "headers": []
+    },
+    {
+        "name": "selinux:libselinux",
+        "so_file_name": "libselinux.z.so",
+        "path": "//third_party/selinux:libselinux",
+        "headers": []
     }
 ]

@@ -601,5 +601,75 @@
         "headers": [
             "//base/security/huks/interfaces/inner_api/huks_standard/main/include"
         ]
+    },
+    {
+        "name": "tee_client:libteec_vendor",
+        "so_file_name": "libteec_vendor.so",
+        "path": "//base/tee/tee_client/frameworks/build/standard:libteec_vendor",
+        "headers": [
+            "//base/tee/tee_client/interfaces/inner_api"
+        ]
+    },
+    {
+        "name": "drivers_interface_display:display_buffer",
+        "so_file_name": "libdisplay_buffer_proxy_1.0.z.so",
+        "path": "//drivers/interface/display/buffer/v1.0:libdisplay_buffer_proxy_1.0",
+        "headers": [
+            "//drivers/interface/display/buffer/v1.0"
+        ]
+    },
+    {
+        "name": "drivers_interface_camera:libcamera_secure_proxy_1.1",
+        "so_file_name": "libcamera_secure_proxy_1.1.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "bounds_checking_function:libsec_shared",
+        "so_file_name": "libsec_shared.so",
+        "path": "//third_party/bounds_checking_function:libsec_shared",
+        "headers": []
+    },
+    {
+        "name": "protobuf:protobuf_lite",
+        "so_file_name": "libprotobuf_lite.so",
+        "path": "//third_party/protobuf:protobuf_lite",
+        "headers": []
+    },
+    {
+        "name": "zlib:shared_libz",
+        "so_file_name": "libshared_libz.so",
+        "path": "//third_party/zlib:shared_libz",
+        "headers": []
+    },
+    {
+        "name": "hilog:hilog_ndk",
+        "so_file_name": "libhilog_ndk.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "face_auth:faceauth_framework",
+        "so_file_name": "libfaceauth_framework.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "hianalytics_service:ha_client_lite",
+        "so_file_name": "libha_client_lite.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "container_comm:uds_channel",
+        "so_file_name": "libuds_channel.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "libyuv:yuv",
+        "so_file_name": "libyuv.z.so",
+        "path": "",
+        "headers": []
     }
 ]

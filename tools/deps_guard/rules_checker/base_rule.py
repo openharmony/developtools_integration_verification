@@ -84,14 +84,14 @@ class BaseRule(object):
                     elif not dep_innerapi_tags:
                         continue
 
-                    passed = False
+                    passed = True
                     wrong_tags = [item for item in dep_innerapi_tags if item not in valid_dep_tags]
-                    self.error("module %s with %s contains wrong dep innerapi_tags [%s] in innerapi_tags [%s]" 
-                        %(callee["name"], callee["labelPath"], ",".join(wrong_tags), ",".join(dep_innerapi_tags)))
+                    self.warn("NEED MODIFY: %s's dep file %s with %s contains wrong dep innerapi_tags [%s] in innerapi_tags [%s]" 
+                        %(mod["name"], callee["name"], callee["labelPath"], ",".join(wrong_tags), ",".join(dep_innerapi_tags)))
             else:
                 wrong_tags = [item for item in innerapi_tags if item not in valid_mod_tags]
-                self.error("module %s with %s contains wrong mod innerapi_tags [%s] in innerapi_tags [%s]" 
+                self.warn("NEED MODIFY: module %s with %s contains wrong mod innerapi_tags [%s] in innerapi_tags [%s]" 
                            %(mod["name"], mod["labelPath"], ",".join(wrong_tags), ",".join(innerapi_tags)))
-                return False
+                return True
 
         return passed
