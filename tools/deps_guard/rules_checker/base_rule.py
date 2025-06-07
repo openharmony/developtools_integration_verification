@@ -69,7 +69,7 @@ class BaseRule(object):
         # Default pass
         return True
 
-    def check_if_deps_correctly(self, check_modules, valid_mod_tags, valid_dep_tags):
+    def check_if_deps_correctly(self, check_modules, valid_mod_tags, valid_dep_tags, white_lists):
         # check if mod and callee have wrong innerapi tags 
         passed = True
         for mod in check_modules:
@@ -82,6 +82,9 @@ class BaseRule(object):
                     if dep_innerapi_tags and all(item in valid_dep_tags for item in dep_innerapi_tags):
                         continue
                     elif not dep_innerapi_tags:
+                        continue
+
+                    if callee["name"] in white_lists:
                         continue
 
                     passed = True
