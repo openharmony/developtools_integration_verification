@@ -1,0 +1,8 @@
+[
+    {
+        "name": "hdf:drivers_peripheral_input",
+        "so_file_name": "libhdi_input.z.so",
+        "path": "//drivers/peripheral/input/hal:hdi_input",
+        "headers": []
+    }
+]

@@ -1,0 +1,62 @@
+[
+    {
+        "name": "faultloggerd:libdfx_dumpcatcher",
+        "so_file_name": "libdfx_dumpcatcher.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/dump_catcher:libdfx_dumpcatcher",
+        "headers": []
+    },
+    {
+        "name": "faultloggerd:libfaultloggerd",
+        "so_file_name": "libfaultloggerd.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/faultloggerd_client:libfaultloggerd",
+        "headers": []
+    },
+    {
+        "name": "faultloggerd:libdfx_procinfo",
+        "so_file_name": "libdfx_procinfo.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/procinfo:libdfx_procinfo",
+        "headers": []
+    },
+    {
+        "name": "faultloggerd:libunwinder",
+        "so_file_name": "libunwinder.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/unwinder:libunwinder",
+        "headers": []
+    },
+    {
+        "name": "hitrace:libhitracechain",
+        "so_file_name": "libhitracechain.so",
+        "path": "//base/hiviewdfx/hitrace/interfaces/innerkits/native/innerkits:libhitracechain",
+        "headers": []
+    },
+    {
+        "name": "hiview:libucollection_client",
+        "so_file_name": "libucollection_client.z.so",
+        "path": "//base/hiviewdfx/hiview/interfaces/inner_api/unified_collection/client:libcollection_client",
+        "headers": []
+    },
+    {
+        "name": "eventhandler:libeventhandler",
+        "so_file_name": "libeventhandler.z.so",
+        "path": "//base/notification/eventhandler/frameworks/eventhandler:libeventhandler",
+        "headers": []
+    },
+    {
+        "name": "storage_service:storage_manager_acl",
+        "so_file_name": "libstorage_manager_acl.z.so",
+        "path": "//foundation/filemanagement/storage_service/interfaces/innerkits/acl/native:storage_manager_acl",
+        "headers": []
+    },
+    {
+        "name": "resource_schedule_service:ressched_client",
+        "so_file_name": "libressched_client.z.so",
+        "path": "//foundation/resourceschedule/resource_schedule_service/ressched/interfaces/innerkits/ressched_client:ressched_client",
+        "headers": []
+    },
+    {
+        "name": "lzma:lzma_shared",
+        "so_file_name": "lzma_shared.z.so",
+        "path": "//third_party/lzma:lzma_shared",
+        "headers": []
+    }
+]

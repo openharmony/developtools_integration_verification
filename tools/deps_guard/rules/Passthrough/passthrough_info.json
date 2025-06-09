@@ -1,0 +1,122 @@
+[
+    {
+        "name": "drivers_peripheral_bluetooth:audio_bluetooth_hdi_proxy_server",
+        "so_file_name": "libaudio_bluetooth_hdi_proxy_server.z.so",
+        "path": "//drivers/peripheral/bluetooth/audio/hal/hdi_binder/proxy:audio_bluetooth_hdi_proxy_server",
+        "headers": []
+    },
+    {
+        "name": "drivers_peripheral_bluetooth:audio_bluetooth_hdi_proxy_server",
+        "so_file_name": "libaudio_bluetooth_hdi_proxy_server.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "drivers_peripheral_huks_override:libhuks_ca_hdi",
+        "so_file_name": "libhuks_ca_hdi.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "drivers_peripheral_huks_override:libhuks_ext_hdi_service_1.0",
+        "so_file_name": "libhuks_ext_hdi_service_1.0.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "drivers_peripheral_huks_override:libhuks_hdi_service_1.1",
+        "so_file_name": "libhuks_ext_hdi_service_1.1.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "hiai:libai_client",
+        "so_file_name": "libai_client.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "higpu:vulkan.hvgr",
+        "so_file_name": "libmaleoon_v200.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "hiai:libai_fmk_hcl_model_runtime",
+        "so_file_name": "libai_fmk_hcl_model_runtime.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "hiai:libai_infra_client",
+        "so_file_name": "libai_infra_client.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "hiai:libai_mnt_client",
+        "so_file_name": "libai_mnt_client.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "ffrt_key:libffrt_acc",
+        "so_file_name": "libffrt_acc.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "gnss_driver_ext:liblbsservice_tagloc",
+        "so_file_name": "liblbsservice_tagloc.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "higpu:vulkan.hvgr",
+        "so_file_name": "libmaleoon_v200.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "connectivity_config:package_cal_dis",
+        "so_file_name": "libmeasure_alg_hisi.z.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "video:libvpp.core",
+        "so_file_name": "libvpp.core.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "algorithm_camera:libimage_process_client",
+        "so_file_name": "libimage_process_client.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "drivers_peripheral_codec:libcodec_component_manager_service_3.0",
+        "so_file_name": "libcodec_component_manager_service_3.0.z.so",
+        "path": "//drivers/peripheral/codec/hal/idl_service:libcodec_component_manager_service_3.0",
+        "headers": []
+    },
+    {
+        "name": "drivers_peripheral_display:libmapper_service_1.0",
+        "so_file_name": "libmapper_service_1.0.z.so",
+        "path": "//drivers/peripheral/display/buffer/hdi_service:libmapper_service_1.0",
+        "headers": []
+    },
+    {
+        "name": "drivers_peripheral_display:libmapper_service_1.2",
+        "so_file_name": "libmapper_service_1.2.z.so",
+        "path": "//drivers/peripheral/display/buffer/hdi_service:libmapper_service_1.2",
+        "headers": []
+    },
+    {
+        "name": "drivers_peripheral_display:libmetadata_service_1.1",
+        "so_file_name": "libmetadata_service_1.1.z.so",
+        "path": "//drivers/peripheral/display/buffer/hdi_service:libmetadata_service_1.1",
+        "headers": []
+    }
+]

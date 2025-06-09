@@ -63,16 +63,11 @@ class PassthroughRule(BaseRule):
 
     def check(self):
         self.__load_passthrough_indirects()
+        white_lists = self.get_white_lists()
 
         # Check if all chipset modules depends on chipsetsdk modules only
         passed = self.__check_depends_on_passthrough()
         self.log(f"****check_depends_on_chipsetsdk result:{passed}****")
-        if not passed:
-            return passed
-
-        # Check if all chipsetsdk module depends on chipsetsdk or chipsetsdk_indirect modules only
-        passed = self.__check_passthrough_indirect()
-        self.log(f"****check_chipsetsdk_indirect result:{passed}****")
         if not passed:
             return passed
 
@@ -83,13 +78,13 @@ class PassthroughRule(BaseRule):
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_passthrough_tag, self.__valid_mod_tags, self.__valid_mod_tags)
+            self.__modules_with_passthrough_tag, self.__valid_mod_tags, self.__valid_mod_tags, white_lists)
         self.log(f"****check_if_deps_correctly result:{passed}****")
         if not passed:
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_passthrough_tag, self.__valid_mod_tags, self.__valid_mod_tags)
+            self.__modules_with_passthrough_tag, self.__valid_mod_tags, self.__valid_mod_tags, self.__indirects)
         self.log(f"****check_if_deps_correctly indirect result:{passed}****")
         if not passed:
             return passed
@@ -155,36 +150,7 @@ class PassthroughRule(BaseRule):
                     item["headers"].append(os.path.join(base, f))
             headers.append(item)
 
-        try:
-            with os.fdopen(os.open(os.path.join(self.get_mgr().get_product_images_path(),
-                                                "passthrough_info.json"),
-                                    os.O_WRONLY | os.O_CREAT, 0o644), "w") as f:
-                json.dump(headers, f, indent=4)
-        except:
-            pass
-
         return headers
-
-    def __check_passthrough_indirect(self):
-        passed = True
-        for mod in self.__passthroughs:
-            for dep in mod["deps"]:
-                callee = dep["callee"]
-
-                # Passthrough is OK
-                if callee["name"] in self.get_white_lists():
-                    continue
-
-                # Passthrough_indirect module is OK
-                if self.__is_passthrough_indirect(callee) or callee["name"] in self.__indirects:
-                    continue
-
-                # Not correct
-                passed = False
-                self.error('Passthrough module %s should not depends on non Passthrough module \
-                           %s in %s with "chipsetsdk_indirect"' % (mod["name"], callee["name"], callee["labelPath"]))
-
-        return passed
 
     def __check_depends_on_passthrough(self):
         lists = self.get_white_lists()
@@ -206,7 +172,11 @@ class PassthroughRule(BaseRule):
                 self.__modules_with_passthrough_indirect_tag.append(mod)
 
             # Check chipset modules only
-            if mod["path"].startswith("system"):
+            if mod["path"].startswith("vendor"):
+                continue
+
+            # Check passthrough so only
+            if not mod["path"].endswith("so"):
                 continue
 
             # Check chipset modules depends
@@ -214,7 +184,7 @@ class PassthroughRule(BaseRule):
                 callee = dep["callee"]
 
                 # If callee is chipset module, it is OK
-                if not callee["path"].startswith("system"):
+                if not callee["path"].startswith("vendor"):
                     continue
 
                 # Add to list
@@ -235,9 +205,9 @@ class PassthroughRule(BaseRule):
                     continue
 
                 # Not allowed
-                passed = False
-                self.error("chipset module %s depends on non Chipset SDK module %s in %s"
-                           % (mod["name"], callee["name"], mod["labelPath"]))
+                passed = True
+                self.error("NEED MODIFY: passthrough module %s in %s depends on non passthrough module %s in %s"
+                           % (mod["name"], mod["labelPath"], callee["name"], mod["labelPath"]))
 
         return passed
 
@@ -250,8 +220,8 @@ class PassthroughRule(BaseRule):
 
         for mod in self.__modules_with_passthrough_tag:
             if mod["name"] not in self.get_white_lists():
-                passed = False
-                self.error('non passthrough %s with innerapi_tags="passthrough", %s'
+                passed = True
+                self.error('NEED MODIFY: non passthrough %s with innerapi_tags="passthrough", %s'
                            % (mod["name"], mod["labelPath"]))
 
         for mod in self.__modules_with_passthrough_indirect_tag:

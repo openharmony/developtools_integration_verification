@@ -1,0 +1,134 @@
+[
+    {
+        "name": "faultloggerd:libbacktrace_local",
+        "so_file_name": "libbacktrace_local.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/backtrace:libbacktrace_local",
+        "headers": []
+    },
+    {
+        "name": "hisysevent:libhisysevent",
+        "so_file_name": "libhisysevent.so",
+        "path": "//base/hiviewdfx/hisysevent/interfaces/native/innerkits/hisysevent:libhisysevent",
+        "headers": []
+    },
+    {
+        "name": "cJSON:cjson",
+        "so_file_name": "libcjson.z.so",
+        "path": "//third_party/cJSON:cjson",
+        "headers": []
+    },
+    {
+        "name": "hicollie:libhicollie",
+        "so_file_name": "libhicollie.z.so",
+        "path": "//third_party/cJSON:cjson",
+        "headers": []
+    },
+    {
+        "name": "hitrace:hitrace_meter",
+        "so_file_name": "libhitrace_meter.so",
+        "path": "//base/hiviewdfx/hitrace/interfaces/native/innerkits:hitrace_meter",
+        "headers": []
+    },
+    {
+        "name": "init:libbeget_proxy",
+        "so_file_name": "libbeget_proxy.so",
+        "path": "//base/startup/init/interfaces/innerkits:libbeget_proxy",
+        "headers": []
+    },
+    {
+        "name": "init:libbegetutil",
+        "so_file_name": "libbegetutil.z.so",
+        "path": "//base/startup/init/interfaces/innerkits:libbegetutil",
+        "headers": []
+    },
+    {
+        "name": "c_utils:utils",
+        "so_file_name": "libutils.z.so",
+        "path": "//commonlibrary/c_utils/base:utils",
+        "headers": []
+    },
+    {
+        "name": "ets_utils:utils",
+        "so_file_name": "libutils.z.so",
+        "path": "//commonlibrary/ets_utils/js_concurrent_module/utils:utils",
+        "headers": []
+    },
+    {
+        "name": "hdf_core:libhdi",
+        "so_file_name": "libhdi.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/hdi:libhdi",
+        "headers": []
+    },
+    {
+        "name": "hdf_core:libhdf_ipc_adatper",
+        "so_file_name": "libhdf_ipc_adatper.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/ipc:libhdf_ipc_adatper",
+        "headers": []
+    },
+    {
+        "name": "hdf_core:libpub_utils",
+        "so_file_name": "libpub_utils.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/pub_utils:libpub_utils",
+        "headers": []
+    },
+    {
+        "name": "hdf_core:libhdf_utils",
+        "so_file_name": "libhdf_utils.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/utils:libhdf_utils",
+        "headers": []
+    },
+    {
+        "name": "drivers_interface_codec:libcodec_proxy_3.0",
+        "so_file_name": "libcodec_proxy_3.0.z.so",
+        "path": "//drivers/interface/codec/v3.0:libcodec_proxy_3.0",
+        "headers": []
+    },
+    {
+        "name": "drivers_interface_display:libhdifd_parcelable",
+        "so_file_name": "libhdifd_parcelable.z.so",
+        "path": "//drivers/interface/display/composer/hdifd_parcelable:libhdifd_parcelable",
+        "headers": []
+    },
+    {
+        "name": "graphic_surface:buffer_handle",
+        "so_file_name": "libbuffer_handle.z.so",
+        "path": "//foundation/graphic/graphic_surface/buffer_handle:buffer_handle",
+        "headers": []
+    },
+    {
+        "name": "ffrt:libffrt",
+        "so_file_name": "libffrt.so",
+        "path": "//foundation/resourceschedule/ffrt:libffrt",
+        "headers": []
+    },
+    {
+        "name": "bounds_checking_function:libsec_shared",
+        "so_file_name": "libsec_shared.z.so",
+        "path": "//third_party/bounds_checking_function:libsec_shared",
+        "headers": []
+    },
+    {
+        "name": "hilog:libhilog",
+        "so_file_name": "libhilog.so",
+        "path": "",
+        "headers": []
+    },
+    {
+        "name": "graphic_surface:surface",
+        "so_file_name": "libsurface.z.so",
+        "path": "//foundation/graphic/graphic_surface/surface:surface",
+        "headers": []
+    },
+    {
+        "name": "graphic_surface:sync_fence",
+        "so_file_name": "libsync_fence.z.so",
+        "path": "//foundation/graphic/graphic_surface/surface_fence:sync_fence",
+        "headers": []
+    },
+    {
+        "name": "build_framework:musl-libcxx.so",
+        "so_file_name": "libc++.so",
+        "path": "//build/common/musl:musl-libcxx.so",
+        "headers": []
+    }
+]
