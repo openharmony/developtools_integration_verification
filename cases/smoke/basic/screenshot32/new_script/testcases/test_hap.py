@@ -23,7 +23,7 @@ class Test:
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
     def test(self, setup_teardown, device):
         logging.info('install hap')
-        hap_path = os.path.join(device.resource_path, 'entry-default-signed.hap')
+        hap_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(device.resource_path))), 'entry-default-signed.hap')
         device.install_hap(hap_path)
         time.sleep(1)
         logging.info('start app')
