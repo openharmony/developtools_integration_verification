@@ -86,7 +86,11 @@ class CompileInfoLoader(object):
     @staticmethod
     def __get_modules_from_file(product_out_path_):
         try:
-            with open(os.path.join(product_out_path_, "packages/phone/system_module_info.json")) as f:
+            system_module_info_file = os.path.join(product_out_path_, "packages/phone/system_module_info.json")
+            if not os.path.exists(system_module_info_file):
+                system_module_info_file = os.path.join(product_out_path_, 
+                    "packages/phone/single/phone_install_module/system_module_info.json")
+            with open(system_module_info_file) as f:
                 modules = json.load(f)
                 return modules
         except FileNotFoundError:
