@@ -333,7 +333,8 @@
   {
     "processName": "testserver",
     "acls": [
-        "ohos.permission.DUMP"
+        "ohos.permission.DUMP",
+        "ohos.permission.MANAGE_MISSIONS"
     ]
   },
   {
