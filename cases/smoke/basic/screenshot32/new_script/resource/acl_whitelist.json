@@ -116,7 +116,8 @@
       "ohos.permission.INJECT_INPUT_EVENT",
       "ohos.permission.FILTER_INPUT_EVENT",
       "ohos.permission.CAPTURE_SCREEN",
-      "ohos.permission.QUERY_ACCESSIBILITY_ELEMENT"
+      "ohos.permission.QUERY_ACCESSIBILITY_ELEMENT",
+      "ohos.permission.ACCESS_EXT_SYSTEM_ABILITY"
     ]
   },
   {
