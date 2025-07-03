@@ -33,9 +33,9 @@ class Test:
 
         logging.info('stop recoding')
         #device.click(320, 1095)
-        device.click(320, 1245)
-        device.start_ability(self.camera_bundle_name, self.camera_ability_name)
-        #device.hdc_shell(f'uitest uiInput click 320 1095')
+        #device.click(320, 1245)
+        #device.start_ability(self.camera_bundle_name, self.camera_ability_name)
+        device.hdc_shell(f'uitest uiInput click 320 1095')
         time.sleep(3)
         device.save_snapshot_to_local('{}_camera_step5.jpeg'.format(device.sn))
 
