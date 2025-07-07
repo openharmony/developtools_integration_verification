@@ -359,5 +359,13 @@
         "so_file_name": "libselinux.z.so",
         "path": "//third_party/selinux:libselinux",
         "headers": []
+    },
+    {
+        "name": "drivers_interface_perfgenius:perfgenius_client",
+        "so_file_name": "libperfgenius_client.z.so",
+        "path": "//vendor/huawei/drivers/interface/perfgenius/perfgenius_client:perfgenius_client",
+        "headers": [
+			"//vendor/huawei/drivers/interface/perfgenius/perfgenius_client/include"
+		]
     }
 ]
