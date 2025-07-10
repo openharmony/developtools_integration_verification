@@ -24,7 +24,7 @@ class Test:
         # assert similarity > 0.5, 'compare similarity failed'
 
         logging.info('enter wlan page')
-        device.click(160, 306)
+        device.click(160, 206)
         time.sleep(2)
         device.save_snapshot_to_local('{}_before_click.jpeg'.format(device.sn))
         before_click = device.get_wifi_status().get('active')
