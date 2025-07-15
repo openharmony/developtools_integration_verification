@@ -2,5 +2,6 @@
    "accessibility",
    "remote_file_share_native",
    "medialibrary",
-   "utils"
+   "utils",
+   "usbmanager"
 ]

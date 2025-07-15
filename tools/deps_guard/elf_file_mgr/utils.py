@@ -44,3 +44,11 @@ def command(command, *args):
         print("With output:", output)
         sys.exit(1)
     return [i for i in output.split('\n') if i]
+
+# return a list of lines of output of the command without reminding errors
+def command_without_error(command, *args):
+    debug(DEBUG_SPAM, "calling", command, ' '.join(args))
+    pipe = os.popen(command + ' ' + ' '.join(args), 'r')
+    output = pipe.read().strip()
+    status = pipe.close() 
+    return [i for i in output.split('\n') if i]

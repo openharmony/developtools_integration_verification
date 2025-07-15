@@ -19,7 +19,7 @@
 import os
 from stat import ST_SIZE
 
-from .utils import command
+from .utils import command, command_without_error
 
 
 class ElfFile(dict):
@@ -53,24 +53,14 @@ class ElfFile(dict):
     def library_depends(self):
         if not os.access(self._f, os.F_OK):
             raise Exception("Cannot find lib: " + self._f)
-        dynamics = command("readelf", "--dynamic", self._f_safe)
+        file_name = self._f_safe.split("/")[-1].strip("'")
+        dynamics = command_without_error("strings", self._f_safe, f"|grep -E lib_.so|grep -v {file_name}")
         res = []
-        for line in dynamics:
-            pos = line.find("(NEEDED)")
-            if pos <= 0:
-                continue
-            line = line[pos + 8:]
-            line = line.strip()
-            if not line.startswith("Shared library:"):
-                continue
-            line = line[15:]
-            line = line.strip()
-            if line.startswith("["):
-                line = line[1:]
-            if line.endswith("]"):
-                line = line[:-1]
-            line = line.strip()
-            res.append(line)
+        if dynamics:
+            for line in dynamics:
+                if line.startswith("lib") and line.endswith(".so"):
+                    res.append(line)
+
         return res
 
     def __extract_soname(self):
