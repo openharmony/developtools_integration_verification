@@ -16,10 +16,10 @@ class Test:
         # usb弹窗
         device.unlock()
         time.sleep(2)
-        device.click(595, 555)
-        time.sleep(10)
+        #device.click(595, 555)
+        #time.sleep(10)
         device.click(360, 1245)
-        device.unlock()
+        #device.unlock()
         time.sleep(2)
 
         #if device.get_focus_window() == 'SystemDialog1':
