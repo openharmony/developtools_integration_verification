@@ -533,7 +533,8 @@
         "path": "//foundation/resourceschedule/ffrt:libffrt",
         "headers": [
             "//foundation/resourceschedule/ffrt/interfaces/kits/",
-            "//foundation/resourceschedule/ffrt/interfaces/inner_api/"
+            "//foundation/resourceschedule/ffrt/interfaces/inner_api/",
+            "//foundation/resourceschedule/ffrt/include/"
         ]
     },
     {
