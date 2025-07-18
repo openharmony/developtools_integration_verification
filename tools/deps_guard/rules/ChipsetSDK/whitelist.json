@@ -81,6 +81,5 @@
 	"libuds_channel.z.so",
 	"libsocperf_client.z.so",
 
-	"libffrt_profiler.z.so",
-	"libperfgenius_client.z.so"
+	"libffrt_profiler.z.so"
 ]
