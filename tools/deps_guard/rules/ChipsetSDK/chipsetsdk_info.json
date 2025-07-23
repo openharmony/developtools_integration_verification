@@ -676,17 +676,13 @@
     {
         "name": "drivers_interface_perfgenius:perfgenius_client",
         "so_file_name": "libperfgenius_client.z.so",
-        "path": "//vendor/huawei/drivers/interface/perfgenius/perfgenius_client:perfgenius_client",
-        "headers": [
-			"//vendor/huawei/drivers/interface/perfgenius/perfgenius_client/include"
-		]
+        "path": "",
+        "headers": []
     },
     {
         "name": "drivers_interface_perfgenius:perfgenius",
         "so_file_name": "libperfgenius_proxy_1.0.z.so",
-        "path": "//vendor/huawei/drivers/interface/perfgenius/perfgenius/v1_0:perfgenius",
-        "headers": [
-			"//vendor/huawei/drivers/interface/perfgenius/perfgenius"
-		]
+        "path": "",
+        "headers": []
     }
 ]
