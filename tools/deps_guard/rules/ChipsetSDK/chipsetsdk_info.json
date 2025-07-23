@@ -688,5 +688,11 @@
         "headers": [
 			"//vendor/huawei/drivers/interface/perfgenius/perfgenius"
 		]
+    },
+    {
+        "name": "commonlibrary:ylong_runtime",
+        "so_file_name": "libylong_runtime.dylib.so",
+        "path": "//commonlibrary/rust/ylong_runtime/ylong_runtime:ylong_runtime",
+        "headers": []
     }
 ]
