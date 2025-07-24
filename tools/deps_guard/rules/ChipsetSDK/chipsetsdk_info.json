@@ -534,7 +534,8 @@
         "headers": [
             "//foundation/resourceschedule/ffrt/interfaces/kits/",
             "//foundation/resourceschedule/ffrt/interfaces/inner_api/",
-            "//foundation/resourceschedule/ffrt/include/"
+            "//foundation/resourceschedule/ffrt/include/",
+            "//foundation/resourceschedule/ffrt/src_ext/"
         ]
     },
     {
