@@ -25,7 +25,7 @@ class Test:
         logging.info('install hap')
         hap_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(device.resource_path))), 'entry-default-signed.hap')
         device.install_hap(hap_path)
-        time.sleep(1)
+        time.sleep(15)
         logging.info('start app')
         device.start_ability(self.bundle_name, self.ability_name)
         time.sleep(2)
