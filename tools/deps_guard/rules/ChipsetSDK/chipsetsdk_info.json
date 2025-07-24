@@ -684,5 +684,11 @@
         "so_file_name": "libperfgenius_proxy_1.0.z.so",
         "path": "",
         "headers": []
+    },
+    {
+        "name": "commonlibrary:ylong_runtime",
+        "so_file_name": "libylong_runtime.dylib.so",
+        "path": "//commonlibrary/rust/ylong_runtime/ylong_runtime:ylong_runtime",
+        "headers": []
     }
 ]
