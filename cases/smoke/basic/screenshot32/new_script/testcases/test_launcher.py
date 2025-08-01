@@ -14,17 +14,19 @@ class Test:
     def test(self, setup_teardown, device):
         logging.info('compare image similarity')
         # usb弹窗
-        device.unlock()
-        time.sleep(2)
-        #device.click(595, 555)
-        #time.sleep(10)
-        device.click(360, 1245)
-        #device.unlock()
-        time.sleep(2)
 
-        #if device.get_focus_window() == 'SystemDialog1':
-        #    device.click(595, 555)
-        #    time.sleep(10)
+
+        if device.get_focus_window() == 'SystemDialog1':
+            rst = self.hdc_shell(f'ps -ef | grep -w com.ohos.systemui | grep -v grep')
+            rst_list = rst.split()
+            logging.info(f'Process ID: {rst_list[1]}')
+            device.hdc_shell(f'kill -9 {rst_list[1]}')
+            # device.click(595, 555)
+            time.sleep(5)
+            device.unlock()
+
+        device.click(360, 1245)
+        time.sleep(1)
         #if device.get_focus_window() == 'SystemDialog1':
         #    device.click(360, 800)
         #    time.sleep(10)
