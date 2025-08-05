@@ -14,7 +14,7 @@ class Test:
     def test(self, setup_teardown, device):
         logging.info('compare image similarity')
         # usb弹窗
-        #device.unlock()
+        device.unlock()
         time.sleep(2)
         device.click(360, 800)
         #time.sleep(10)
