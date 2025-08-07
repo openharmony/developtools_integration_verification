@@ -43,7 +43,7 @@ def setup_teardown(request, device):
         device.click(360, 800)
         time.sleep(2)
     if device.get_focus_window() == 'SystemDialog1':
-        rst = self.hdc_shell(f'ps -ef | grep -w com.ohos.systemui | grep -v grep')
+        rst = device.hdc_shell(f'ps -ef | grep -w com.ohos.systemui | grep -v grep')
         rst_list = rst.split()
         logging.info(f'Process ID: {rst_list[1]}')
         device.hdc_shell(f'kill -9 {rst_list[1]}')
