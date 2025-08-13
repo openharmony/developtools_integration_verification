@@ -5,7 +5,8 @@
       "ohos.permission.DUMP",
       "ohos.permission.GET_WIFI_PEERS_MAC",
       "ohos.permission.MANAGE_RGM",
-      "ohos.permission.MANAGE_WIFI_CONNECTION"
+      "ohos.permission.MANAGE_WIFI_CONNECTION",
+      "ohos.permission.CAPTURE_SCREEN"
     ]
   },
   {
