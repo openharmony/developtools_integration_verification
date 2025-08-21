@@ -1,0 +1,14 @@
+{
+    "h_file_depth": 3,
+    "c_file_depth": 10,
+    "gn_file_depth": 10,
+    "gn_module_depth": 10,
+    "test_only":true,
+    "target_type_list":["executable"],
+    "ignore_list":[],
+    "max_range_list":[],
+    "modify_files_path": "modify_files.json",
+    "precise_result_path":"precise_build_result.txt",
+    "precise_log_path":"out/rk3568/precise_build_log.txt"
+}
+
