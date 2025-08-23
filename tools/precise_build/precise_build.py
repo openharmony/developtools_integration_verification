@@ -29,7 +29,6 @@ import shutil
 import json
 
 def find_python_child_processes(parent_pid):
-    """查找指定父进程下的所有 Python 子进程"""
     python_processes = []
     try:
         parent = psutil.Process(parent_pid)
@@ -45,11 +44,9 @@ def find_python_child_processes(parent_pid):
     return python_processes
 
 def kill_python_child_processes(parent_pid):
-    """终止指定父进程下的所有 Python 子进程"""
     python_processes = find_python_child_processes(parent_pid)
     for proc in python_processes:
         try:
-            print(f"终止 Python 子进程: PID={proc.pid}, 命令={' '.join(proc.cmdline()[:2])}...")
             proc.terminate()
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             pass
@@ -64,32 +61,27 @@ def kill_python_child_processes(parent_pid):
             pass
 
 def kill_process_tree(pid):
-    """终止整个进程树（包括父进程和所有子进程）"""
     try:
         parent = psutil.Process(pid)
         children = parent.children(recursive=True)
         
-        # 先终止子进程
         for child in children:
             try:
                 child.terminate()
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 pass
         
-        # 等待子进程退出
         gone, alive = psutil.wait_procs(children, timeout=5)
         
-        # 强制杀死仍在运行的子进程
         for child in alive:
             try:
                 child.kill()
             except (psutil.NoSuchProcess, psutil.AccessDenied):
                 pass
         
-        # 终止父进程
         try:
             parent.terminate()
-            parent.wait(5)  # 等待父进程退出
+            parent.wait(5)
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             pass
         except psutil.TimeoutExpired:
@@ -108,14 +100,12 @@ def get_target(target):
         return target
 
 def execute_build_command(command, targets=None, use_shell=False):
-    """执行构建命令并等待其完成"""
     if targets:
-        if len(targets) > 1000:  # 假设1000个目标为阈值
+        if len(targets) > 1000:
             temp_file = tempfile.NamedTemporaryFile(mode='w+', delete=False)
             temp_file.write(targets)
             temp_file.close()
             
-            print(f"使用临时文件存储构建目标: {temp_file.name}")
             command.append(f"@{temp_file.name}")
             cleanup_file = temp_file.name
         else:
@@ -123,8 +113,6 @@ def execute_build_command(command, targets=None, use_shell=False):
             cleanup_file = None
     else:
         cleanup_file = None
-    
-    print(f"执行完整构建命令: {' '.join(command)}")
     
     try:
         process = subprocess.Popen(
@@ -152,22 +140,13 @@ def execute_build_command(command, targets=None, use_shell=False):
 
 def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, check_interval=1, 
                          use_shell=False, timeout=None):
-    """
-    执行shell脚本并监控目标文件，当文件生成后停止执行
-    然后处理文件并重新执行完整的构建命令
-    """
+
     if isinstance(shell_args, str):
         command = [shell_script_path] + shlex.split(shell_args)
     elif shell_args:
         command = [shell_script_path] + shell_args
     else:
         command = [shell_script_path]
-    
-    print(f"执行初始命令: {' '.join(command)}")
-    print(f"监控文件: {target_file}")
-    print(f"检查间隔: {check_interval}秒")
-    if timeout:
-        print(f"超时设置: {timeout}秒")
     
     process = subprocess.Popen(
         command,
@@ -177,7 +156,6 @@ def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, check
     )
     
     pid = process.pid
-    print(f"主进程 PID: {pid}")
     
     start_time = time.time()
     last_dot_time = start_time
@@ -195,16 +173,11 @@ def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, check
                 break
                 
             if process.poll() is not None:
-                print("\nshell脚本已自行结束")
                 if os.path.exists(target_file):
-                    print(f"检测到目标文件已生成: {target_file}")
                     file_detected = True
-                else:
-                    print(f"警告: 目标文件未生成: {target_file}")
                 break
 
             if timeout and (current_time - start_time) > timeout:
-                print(f"\n超时 ({timeout}秒) 未检测到文件生成")
                 terminate_manually = True
                 break
 
@@ -219,17 +192,14 @@ def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, check
     
     finally:
         if terminate_manually:
-            print("终止整个进程树...")
             kill_process_tree(pid)
             
             wait_attempts = 0
             while wait_attempts < 5 and psutil.pid_exists(pid):
-                print(f"等待进程 {pid} 退出...")
                 time.sleep(0.5)
                 wait_attempts += 1
             
             if psutil.pid_exists(pid):
-                print(f"警告: 进程 {pid} 仍在运行，强制杀死")
                 try:
                     os.kill(pid, signal.SIGKILL)
                 except:
@@ -300,7 +270,6 @@ def read_json(path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description='执行shell脚本并监控文件生成，文件生成后停止脚本，处理文件，然后执行完整构建',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         add_help=False
     )
@@ -336,8 +305,6 @@ if __name__ == "__main__":
     try:
         import psutil
     except ImportError:
-        print("错误：需要psutil库来识别Python子进程")
-        print("请安装：pip install psutil")
         exit(1)
     
     success = monitor_file_and_stop(
