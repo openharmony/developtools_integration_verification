@@ -13,7 +13,8 @@
         "//foundation/arkui/ace_engine/test/unittest/core/image:ImageCompressorTest",
         "//foundation/multimodalinput/input/service:TwoFingerLongTouchTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchpadGestureTest",
-        "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchPadTransformProcessorMockTest"
+        "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchPadTransformProcessorMockTest",
+        "//foundation/multimodalinput/input/service/touch_event_normalize/test:TabletToolTranformTest"
     ],
     "max_range_list": [],
     "modify_files_path": "modify_files.json",
