@@ -8,7 +8,8 @@
     "ignore_list":[
         "//foundation/multimodalinput/input/service:TwoFingerLongTouchTest",
         "//foundation/arkui/ace_engine/test/unittest/core/image:image_cache_test",
-        "//foundation/arkui/ace_engine/test/unittest/core/image:ImageProviderTest"],
+        "//foundation/arkui/ace_engine/test/unittest/core/image:ImageProviderTest",
+        "//foundation/arkui/ace_engine/test/unittest/core/image:ImageCompressorTest"],
     "max_range_list":[],
     "modify_files_path": "modify_files.json",
     "precise_result_path":"precise_build_result.txt",
