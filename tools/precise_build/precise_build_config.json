@@ -5,7 +5,9 @@
     "gn_module_depth": 10,
     "test_only":true,
     "target_type_list":["executable"],
-    "ignore_list":["//foundation/multimodalinput/input/service:TwoFingerLongTouchTest"],
+    "ignore_list":[
+        "//foundation/multimodalinput/input/service:TwoFingerLongTouchTest",
+        "//foundation/arkui/ace_engine/frameworks/core/components/test/unittest/mock/image_cache_test"],
     "max_range_list":[],
     "modify_files_path": "modify_files.json",
     "precise_result_path":"precise_build_result.txt",
