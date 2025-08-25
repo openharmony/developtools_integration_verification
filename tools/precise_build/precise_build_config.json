@@ -12,6 +12,7 @@
         "//foundation/arkui/ace_engine/test/unittest/core/image:ImageProviderTest",
         "//foundation/arkui/ace_engine/test/unittest/core/image:ImageCompressorTest",
         "//foundation/multimodalinput/input/service:TwoFingerLongTouchTest",
+        "//foundation/multimodalinput/input/service/touch_event_normalize/test:GestureTransformTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchpadGestureTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchPadTransformProcessorMockTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TabletToolTranformTest"
