@@ -6,13 +6,13 @@
     "test_only":true,
     "target_type_list":["executable"],
     "ignore_list":[
-        "//foundation/multimodalinput/input/service:TwoFingerLongTouchTest",
         "//foundation/arkui/ace_engine/test/unittest/core/image:image_cache_test",
         "//foundation/arkui/ace_engine/test/unittest/core/image:ImageProviderTest",
-        "//foundation/arkui/ace_engine/test/unittest/core/image:ImageCompressorTest"],
+        "//foundation/arkui/ace_engine/test/unittest/core/image:ImageCompressorTest",
+        "//foundation/multimodalinput/input/service:TwoFingerLongTouchTest",
+        "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchpadGestureTest"],
     "max_range_list":[],
     "modify_files_path": "modify_files.json",
     "precise_result_path":"precise_build_result.txt",
     "precise_log_path":"out/rk3568/precise_build_log.txt"
 }
-
