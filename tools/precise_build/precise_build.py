@@ -167,7 +167,6 @@ def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, check
             current_time = time.time()
             
             if os.path.exists(target_file):
-                print(f"\n检测到目标文件已生成: {target_file}")
                 file_detected = True
                 terminate_manually = True
                 break
@@ -213,7 +212,9 @@ def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, check
     if file_detected:
         
         time.sleep(1)
-        
+        if os.stat(target_file).st_size == 0:
+            print("No changes to the unittest detected, skipping compilation directly.")
+            sys.exit()
         command.extend(["--build-target", "precise_module_build"])
         return execute_build_command(command, use_shell=use_shell)
     
@@ -275,22 +276,22 @@ if __name__ == "__main__":
     )
     
     parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
-                        help='显示帮助信息并退出')
+                        help='display help information and exit')
     
     parser.add_argument('-s', '--script', required=True, 
-                        help='要执行的shell脚本路径')
+                        help='the path to the shell script to be executed')
     parser.add_argument('-f', '--file', required=True,
-                        help='要监控的目标文件路径')
+                        help='the path of the target file to be monitored')
     
     parser.add_argument('-i', '--interval', type=float, default=1.0,
-                        help='文件检查间隔时间（秒）')
+                        help='file check interval time (seconds)')
     parser.add_argument('-t', '--timeout', type=float, default=None,
-                        help='最大等待时间（秒）')
+                        help='maximum waiting time (seconds)')
     parser.add_argument('--use-shell', action='store_true',
-                        help='使用shell执行命令（处理复杂命令）')
+                        help='execute commands using the shell (handle complex commands)')
     
     parser.add_argument('shell_args', nargs=argparse.REMAINDER,
-                        help='传递给shell脚本的参数（在--之后）')
+                        help='parameters passed to the shell script (after --)')
     
     args = parser.parse_args()
     process_changes()
