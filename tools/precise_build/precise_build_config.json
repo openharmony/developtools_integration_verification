@@ -24,7 +24,8 @@
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:GestureTransformTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchpadGestureTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchPadTransformProcessorMockTest",
-        "//foundation/multimodalinput/input/service/touch_event_normalize/test:TabletToolTranformTest"
+        "//foundation/multimodalinput/input/service/touch_event_normalize/test:TabletToolTranformTest",
+        "//foundation/window/window_manager/test/systemtest/dms:dms_screen_gamut_test"
     ],
     "max_range_list": [],
     "modify_files_path": "modify_files.json",
