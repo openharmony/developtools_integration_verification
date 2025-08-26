@@ -8,6 +8,7 @@
         "executable"
     ],
     "ignore_list": [
+        "//foundation/arkui/ace_engine/test/unittest/core/accessibility:accessibility_adapter_test_web_ng",
         "//foundation/arkui/ace_engine/test/unittest/core/base:force_split_base_test_ng",
         "//foundation/arkui/ace_engine/test/unittest/core/image:ImageCompressorTest",
         "//foundation/arkui/ace_engine/test/unittest/core/image:ImageProviderTest",
