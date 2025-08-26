@@ -11,6 +11,7 @@
         "//foundation/arkui/ace_engine/test/unittest/core/image:image_cache_test",
         "//foundation/arkui/ace_engine/test/unittest/core/image:ImageProviderTest",
         "//foundation/arkui/ace_engine/test/unittest/core/image:ImageCompressorTest",
+        "//foundation/graphic/graphic_2d/rosen/test/render_service/render_service_client/unittest/feature:RSCompositeLayerUtilsTest",
         "//foundation/multimodalinput/input/service:TwoFingerLongTouchTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:GestureTransformTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchpadGestureTest",
