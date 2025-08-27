@@ -10,6 +10,7 @@
     "ignore_list": [
         "//base/hiviewdfx/hiview/plugins/eventlogger/test:EventloggerPluginTest",
         "//base/inputmethod/imf/test/fuzztest/systemabilitystubfuzztest:ImsCmdLastFuzzTest",
+        "//foundation/ability/ability_runtime/test/unittest/frameworks_kits_ability_native_test:ability_impl_active_test",
         "//foundation/arkui/ace_engine/test/unittest/core/accessibility:accessibility_adapter_test_web_ng",
         "//foundation/arkui/ace_engine/test/unittest/core/base:force_split_base_test_ng",
         "//foundation/arkui/ace_engine/test/unittest/core/base:view_abstract_test_resetposition_ng",
