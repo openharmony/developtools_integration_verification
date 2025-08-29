@@ -47,10 +47,12 @@ class UserGroupModuleRule(BaseRule):
         if len(repeat_name):
             passed = False
             self.error("repeat uid name list:  %s" % repeat_name)
+            raise Exception("repeat uid name list:  %s" % repeat_name)
 
         if len(repeat_uid):
             passed = False
             self.error("repeat uid value list:  %s" % repeat_uid)
+            raise Exception("repeat uid value list:  %s" % repeat_uid)
 
         if (self._check_gid_in_passwd(passwd_id._passwd) == -1):
             passed = False
