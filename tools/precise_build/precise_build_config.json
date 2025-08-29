@@ -25,6 +25,7 @@
         "//foundation/multimedia/image_framework/frameworks/innerkitsimpl/test:picture_ext_test",
         "//foundation/multimedia/audio_framework/services/audio_service/test/unittest:audio_process_in_client_second_unit_test",
         "//foundation/multimodalinput/input/service:TwoFingerLongTouchTest",
+        "//foundation/multimodalinput/input/service/mouse_event_normalize/test:MouseTransformProcessorMockTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:GestureTransformTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchpadGestureTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchPadTransformProcessorMockTest",
