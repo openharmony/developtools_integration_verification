@@ -54,5 +54,9 @@
   {
     "case_file": "testcases/test_hap.py",
     "description": "hap包测试"
+  },
+  {
+    "case_file": "testcases/test_ui_hap.py",
+    "description": "ui_hap包测试"
   }
 ]
