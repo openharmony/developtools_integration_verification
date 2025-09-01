@@ -313,6 +313,14 @@
         "headers": []
     },
     {
+        "name": "pulseaudio:speexresampler",
+        "so_file_name": "libspeexresampler.z.so",
+        "path": "//third_party/pulseaudio/speex:speexresampler",
+        "headers": [
+            "//third_party/pulseaudio/speex/include/"
+        ]
+    },
+    {
         "name": "libsnd:sndfile",
         "so_file_name": "libsndfile.z.so",
         "path": "//third_party/libsnd:sndfile",
