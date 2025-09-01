@@ -31,6 +31,7 @@
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchpadGestureTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchPadTransformProcessorMockTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TabletToolTranformTest",
+        "//foundation/multimodalinput/input/test/fuzztest/setcustomcursor_fuzzer:SetCustomCursorFuzzTest",
         "//foundation/window/window_manager/test/systemtest/dms:dms_screen_gamut_test",
         "//foundation/window/window_manager/wmserver/test/unittest:wmserver_avoid_area_controller_test",
         "//foundation/window/window_manager/wmserver/test/unittest:wmserver_window_manager_service_test",
