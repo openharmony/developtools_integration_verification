@@ -357,5 +357,11 @@
     "acls": [
         "ohos.permission.HIVIEW_TRACE_MANAGE"
     ]
+  },
+  {
+    "processName": "mechbody",
+    "acls": [
+        "ohos.permission.INJECT_INPUT_EVENT"
+    ]
   }
 ]
