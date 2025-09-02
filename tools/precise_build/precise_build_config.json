@@ -22,6 +22,7 @@
         "//foundation/arkui/ace_engine/test/unittest/core/image:image_cache_test",
         "//foundation/arkui/ace_engine/test/unittest/core/pattern/stage:force_split_stage_test_ng",
         "//foundation/communication/netmanager_base/test/netstatsmanager/unittest/net_stats_manager_test:net_stats_cached_service_test",
+        "//foundation/distributeddatamgr/pasteboard/services/test:PasteServGetLocalDataTest",
         "//foundation/distributeddatamgr/pasteboard/services/test:PasteServNotifyTest",
         "//foundation/graphic/graphic_2d/rosen/test/render_service/render_service_client/unittest/feature:RSCompositeLayerUtilsTest",
         "//foundation/multimedia/image_framework/frameworks/innerkitsimpl/test:picture_ext_test",
