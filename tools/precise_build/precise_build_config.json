@@ -41,6 +41,7 @@
         "//foundation/window/window_manager/wmserver/test/unittest:wmserver_window_manager_service_test",
         "//foundation/window/window_manager/wmserver/test/unittest:wmserver_window_node_test",
         "//foundation/window/window_manager/wmserver/test/unittest:wmserver_window_pair_test",
+        "//foundation/window/window_manager/wm/test/unittest:wm_window_adapter_lite_test",
         "//foundation/window/window_manager/wm/test/unittest:wm_window_manager_lite_test"
     ],
     "max_range_list": [],
