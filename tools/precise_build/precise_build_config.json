@@ -25,6 +25,7 @@
         "//foundation/distributeddatamgr/pasteboard/services/test:PasteServGetDataTest",
         "//foundation/distributeddatamgr/pasteboard/services/test:PasteServGetLocalDataTest",
         "//foundation/distributeddatamgr/pasteboard/services/test:PasteServNotifyTest",
+        "//foundation/distributeddatamgr/pasteboard/services/test:PasteServSetDataTest",
         "//foundation/graphic/graphic_2d/rosen/test/render_service/render_service_client/unittest/feature:RSCompositeLayerUtilsTest",
         "//foundation/multimedia/image_framework/frameworks/innerkitsimpl/test:picture_ext_test",
         "//foundation/multimedia/audio_framework/services/audio_service/test/unittest:audio_process_in_client_second_unit_test",
