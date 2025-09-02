@@ -28,7 +28,7 @@ class Test:
         time.sleep(15)
         logging.info('start app')
         device.start_ability(self.bundle_name, self.ability_name)
-        time.sleep(2)
+        time.sleep(10)
         main_page = device.save_snapshot_to_local('{}_hap.jpeg'.format(device.sn))
         crop_picture(picture=main_page, x1=0, y1=72, x2=297, y2=290)
         stand_pic = os.path.join(device.resource_path, 'hap.jpeg')
