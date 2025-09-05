@@ -39,6 +39,7 @@
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchPadTransformProcessorMockTest",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchTransformProcessorTestWithMock",
         "//foundation/multimodalinput/input/service/touch_event_normalize/test:TouchpadGestureTest",
+        "//foundation/multimodalinput/input/service:KeyGestureManagerEXTest",
         "//foundation/multimodalinput/input/test/fuzztest/setcustomcursor_fuzzer:SetCustomCursorFuzzTest",
         "//foundation/multimodalinput/input/test/fuzztest/stubsetmouseicon_fuzzer:StubSetMouseIconFuzzTest",
         "//foundation/window/window_manager/test/systemtest/dms:dms_screen_gamut_test",
