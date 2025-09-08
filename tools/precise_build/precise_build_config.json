@@ -48,6 +48,7 @@
         "//foundation/window/window_manager/window_scene/test/dms_unittest:ws_screen_session_manager_proxy_test",
         "//foundation/window/window_manager/window_scene/test/dms_unittest:ws_screen_session_manager_test",
         "//foundation/window/window_manager/window_scene/test/dms_unittest:ws_screen_session_manager_test2",
+        "//foundation/window/window_manager/window_scene/test/unittest:ws_session_test",
         "//foundation/window/window_manager/window_scene/test/unittest:ws_scene_session_lifecycle_test",
         "//foundation/window/window_manager/window_scene/test/unittest:ws_scene_session_manager_one_test",
         "//foundation/window/window_manager/wmserver/test/unittest:wmserver_avoid_area_controller_test",
