@@ -13,6 +13,7 @@
         "//base/notification/distributed_notification_service/services/distributed/test/unittest:distributed_base_test",
         "//base/notification/distributed_notification_service/services/distributed/test/unittest:distributed_device_service_test",
         "//base/notification/distributed_notification_service/services/distributed/test/unittest:distributed_helper_test",
+        "////base/notification/distributed_notification_service/services/distributed/test/unittest:distributed_service_test",
         "//base/print/print_fwk/test/unittest/service_test:scan_service_test",
         "//base/web/webview/test/unittest/ohos_adapter/ohos_image_adapter:ohos_image_decoder_adapter_test",
         "//foundation/ability/ability_runtime/test/unittest/frameworks_kits_ability_native_test:ability_impl_active_test",
