@@ -11,6 +11,7 @@
         "//base/hiviewdfx/hiview/plugins/eventlogger/test:EventloggerPluginTest",
         "//base/inputmethod/imf/test/fuzztest/systemabilitystubfuzztest:ImsCmdLastFuzzTest",
         "//base/print/print_fwk/test/unittest/service_test:scan_service_test",
+        "//base/web/webview/test/unittest/ohos_adapter/ohos_image_adapter:ohos_image_decoder_adapter_test",
         "//foundation/ability/ability_runtime/test/unittest/frameworks_kits_ability_native_test:ability_impl_active_test",
         "//foundation/ability/dmsfwk/frameworks/native/distributed_extension/test/unittest/distributed_extension:distributed_connection_test",
         "//foundation/arkui/ace_engine/test/unittest/core/accessibility:accessibility_adapter_test_web_ng",
