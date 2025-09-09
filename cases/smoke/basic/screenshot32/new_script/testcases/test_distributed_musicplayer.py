@@ -16,6 +16,7 @@ class Test:
         device.start_ability(self.bundle_name, self.ability_name)
         device.save_snapshot_to_local('{}_music_step1.jpeg'.format(device.sn))
         # 弹窗
+        device.click(504, 708)
         device.stop_permission()
         logging.info('compare image similarity')
         standard_pic = os.path.join(device.resource_path, 'distributedmusicplayer.jpeg')
