@@ -33,6 +33,7 @@
         "//foundation/communication/netmanager_base/test/netstatsmanager/unittest/net_stats_manager_test:net_stats_cached_service_test",
         "//foundation/distributeddatamgr/pasteboard/services/test:PasteServGetDataTest",
         "//foundation/distributeddatamgr/pasteboard/services/test:PasteServGetLocalDataTest",
+        "//foundation/distributeddatamgr/pasteboard/services/test:PasteServInterfaceTest",
         "//foundation/distributeddatamgr/pasteboard/services/test:PasteServNotifyTest",
         "//foundation/distributeddatamgr/pasteboard/services/test:PasteServSetDataTest",
         "//foundation/distributeddatamgr/pasteboard/services/test:PasteServSubscribeTest",
