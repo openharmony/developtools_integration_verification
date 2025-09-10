@@ -72,5 +72,8 @@
     "max_range_list": [],
     "modify_files_path": "modify_files.json",
     "precise_result_path": "precise_build_result.txt",
-    "precise_log_path": "out/rk3568/precise_build_log.txt"
+    "precise_log_path": "out/rk3568/precise_build_log.txt",
+    "root_target": [
+        "//build/core/gn:build_all_test_pkg"
+    ]
 }
