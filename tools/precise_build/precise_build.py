@@ -91,47 +91,59 @@ def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, check
 
 
 def process_changes():
-        change_info = read_json("change_info.json")
-        openharmony_fields = [v["name"] for v in change_info.values() if "name" in v]
-        
-        change_files = []
-        file_operations = {
-            "added": lambda x: x,
-            "rename": lambda x: [item for pair in x for item in pair],
-            "modified": lambda x: x,
-            "deleted": lambda x: x
-        }
-        gns = []
-        cs = []
-        hs = []
-        for key, value in change_info.items():
-            print(value)
-            changed_files = value.get("changed_file_list", {})
-            print(changed_files)
-            for op, processor in file_operations.items():
-                if op in changed_files:
-                    print(processor(changed_files[op]))
-                    for modified_file in processor(changed_files[op]):
-                        if modified_file.endswith(".h"):
-                            hs.append("//" + os.path.join(key, modified_file))
-                        elif modified_file.endswith(".gn"):
-                            gns.append("//" + os.path.join(key, modified_file))
-                        elif modified_file.endswith(".c") or modified_file.endswith(".cpp"):
-                            cs.append("//" + os.path.join(key, modified_file))
-        modified_files = {
-            "h_file":hs,
-            "c_file":cs,
-            "gn_file":gns,
-            "gn_module":[]
-        }
-        print(modified_files)
-        with open('modify_files.json', 'w') as json_file:
-            json.dump(modified_files, json_file, indent=4)
-        return (
-            [os.path.join(self.ace_root, f) for f in change_files],
-            openharmony_fields
-        )
+    change_info = read_json("change_info.json")
+    openharmony_fields = [v["name"] for v in change_info.values() if "name" in v]    
+    change_files = []
+    file_operations = {
+        "added": lambda x: x,
+        "rename": lambda x: [item for pair in x for item in pair],
+        "modified": lambda x: x,
+        "deleted": lambda x: x
+    }
+    gns = []
+    cs = []
+    hs = []
+    file_type_map = {
+        'h': hs,
+        'hh': hs,
+        'hpp': hs,
+        'gn': gns,
+        'c': cs,
+        'cpp': cs,
+        'cc': cs,
+        'cxx': cs,
+    }
+    
+    for key, value in change_info.items():
+        changed_files = value.get("changed_file_list", {})
+        for op, processor in file_operations.items():
+            if op not in changed_files:
+                continue                
+            for modified_file in processor(changed_files[op]):
+                ext = get_file_extension(modified_file)
+                target_list = file_type_map.get(ext)
+                if target_list is not None:
+                    target_list.append("//" + os.path.join(key, modified_file))
 
+    modified_files = {
+        "h_file": hs,
+        "c_file": cs,
+        "gn_file": gns,
+        "gn_module":[]
+    }
+
+    with open('modify_files.json', 'w') as json_file:
+        json.dump(modified_files, json_file, indent=4)
+    return (
+        [os.path.join(self.ace_root, f) for f in change_files],
+        openharmony_fields
+    )
+
+def get_file_extension(filename):
+    if '.' in filename:
+        return filename.split(".")[-1]
+    else:
+        return None
 
 def read_json(path):
         try:
