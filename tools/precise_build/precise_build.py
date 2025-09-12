@@ -56,7 +56,7 @@ def execute_build_command(command, use_shell=False):
     return return_code == 0
 
 
-def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, check_interval=1, 
+def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, 
                          use_shell=False):
 
     if isinstance(shell_args, str):
@@ -84,7 +84,6 @@ def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, check
             sys.exit()
         command.remove("--build-only-gn")
         command.extend(["--build-target", "precise_module_build"])
-        print(command)
         return execute_build_command(command, use_shell=use_shell)
     
     return False
@@ -100,35 +99,33 @@ def process_changes():
         "modified": lambda x: x,
         "deleted": lambda x: x
     }
-    gns = []
-    cs = []
-    hs = []
+    gn_files, c_files, h_files = [], [], []
     file_type_map = {
-        'h': hs,
-        'hh': hs,
-        'hpp': hs,
-        'gn': gns,
-        'c': cs,
-        'cpp': cs,
-        'cc': cs,
-        'cxx': cs,
+        'h': h_files,
+        'hh': h_files,
+        'hpp': h_files,
+        'gn': gn_files,
+        'c': c_files,
+        'cpp': c_files,
+        'cc': c_files,
+        'cxx': c_files,
     }
     
     for key, value in change_info.items():
         changed_files = value.get("changed_file_list", {})
-        for op, processor in file_operations.items():
-            if op not in changed_files:
+        for operation, processor in file_operations.items():
+            if operation not in changed_files:
+                print(f"unknown file operation: {operation}")
                 continue                
-            for modified_file in processor(changed_files[op]):
-                ext = get_file_extension(modified_file)
-                target_list = file_type_map.get(ext)
+            for modified_file in processor(changed_files[operation]):
+                target_list = file_type_map.get(get_file_extension(modified_file))
                 if target_list is not None:
                     target_list.append("//" + os.path.join(key, modified_file))
 
     modified_files = {
-        "h_file": hs,
-        "c_file": cs,
-        "gn_file": gns,
+        "h_file": h_files,
+        "c_file": c_files,
+        "gn_file": gn_files,
         "gn_module":[]
     }
 
@@ -160,17 +157,12 @@ if __name__ == "__main__":
     
     parser.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
                         help='display help information and exit')
-    
     parser.add_argument('-s', '--script', required=True, 
                         help='the path to the shell script to be executed')
     parser.add_argument('-f', '--file', required=True,
                         help='the path of the target file to be monitored')
-    
-    parser.add_argument('-i', '--interval', type=float, default=1.0,
-                        help='file check interval time (seconds)')
     parser.add_argument('--use-shell', action='store_true',
                         help='execute commands using the shell (handle complex commands)')
-    
     parser.add_argument('shell_args', nargs=argparse.REMAINDER,
                         help='parameters passed to the shell script (after --)')
     
@@ -188,7 +180,7 @@ if __name__ == "__main__":
         shell_script_path=args.script,
         target_file=args.file,
         shell_args=shell_args,
-        check_interval=args.interval,
         use_shell=args.use_shell,
     )
+
     exit(0 if success else 1)
