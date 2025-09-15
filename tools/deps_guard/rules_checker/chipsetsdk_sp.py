@@ -30,7 +30,7 @@ class ChipsetsdkSPRule(BaseRule):
         self.__out_path = mgr.get_product_out_path()
         self.__white_lists = self.load_chipsetsdk_json("chipsetsdk_sp_info.json")
         self.__ignored_tags = ["platformsdk", "sasdk", "platformsdk_indirect", "ndk"]
-        self.__valid_mod_tags = ["llndk", "chipsetsdk_sp", "chipsetsdk_sp_indirect"] + self.__ignored_tags
+        self.__valid_mod_tags = ["llndk", "chipsetsdk_sp", "chipsetsdk_sp_indirect", "passthrough"] + self.__ignored_tags
 
     def get_white_lists(self):
         return self.__white_lists
@@ -62,18 +62,13 @@ class ChipsetsdkSPRule(BaseRule):
         return res
 
     def check(self):
-        self.__load_chipsetsdk_indirects()
-        white_lists = self.get_white_lists()
+        self.__load_chipsetsdk_sps()
+        self.__load_chipsetsdk_sp_indirects()
+        white_lists = self.get_dep_whitelist()
 
         # Check if all chipset modules depends on chipsetsdk_sp modules only
         passed = self.__check_depends_on_chipsetsdk_sp()
-        self.log(f"****check_depends_on_chipsetsdk result:{passed}****")
-        if not passed:
-            return passed
-
-        # Check if all chipsetsdk_sp modules are correctly tagged by innerapi_tags
-        passed = self.__check_if_tagged_correctly()
-        self.log(f"****check_if_tagged_correctly result:{passed}****")
+        self.log(f"****check_depends_on_chipsetsdk_sp result:{passed}****")
         if not passed:
             return passed
         
@@ -84,12 +79,15 @@ class ChipsetsdkSPRule(BaseRule):
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_chipsetsdk_sp_indirect_tag, self.__valid_mod_tags, self.__valid_mod_tags, self.__indirects)
+            self.__modules_with_chipsetsdk_sp_indirect_tag, self.__valid_mod_tags, self.__valid_mod_tags, white_lists)
         self.log(f"****check_if_deps_correctly indirect result:{passed}****")
         if not passed:
             return passed
-
-        self.__write_innerkits_header_files()
+        
+        passed = self.__check_if_tagged_correctly()
+        self.log(f"****check_tagged_correctly result:{passed}****")
+        if not passed:
+            return passed
 
         return True
 
@@ -125,40 +123,11 @@ class ChipsetsdkSPRule(BaseRule):
             return True
         return False
 
-    def __write_innerkits_header_files(self):
-        inner_kits_info = os.path.join(self.get_mgr().get_product_out_path(), 
-                                       "build_configs/parts_info/inner_kits_info.json")
-        with open(inner_kits_info, "r") as f:
-            info = json.load(f)
-
-        headers = []
-        for sdk in self.__chipsetsdk_sps:
-            path = sdk["labelPath"][:sdk["labelPath"].find(":")]
-            target_name = sdk["labelPath"][sdk["labelPath"].find(":") + 1:]
-            item = {"name": sdk["componentName"] + ":" + target_name, "so_file_name":
-                    sdk["name"], "path": sdk["labelPath"], "headers": []}
-            if sdk["componentName"] not in info:
-                headers.append(item)
-                continue
-
-            for name, innerapi in info[sdk["componentName"]].items():
-                if innerapi["label"] != sdk["labelPath"]:
-                    continue
-                got_headers = True
-                base = innerapi["header_base"]
-                for f in innerapi["header_files"]:
-                    item["headers"].append(os.path.join(base, f))
-            headers.append(item)
-        return headers
-
     def __check_depends_on_chipsetsdk_sp(self):
-        lists = self.get_white_lists()
-
-        passed = True
-
-        self.__chipsetsdk_sps = []
         self.__modules_with_chipsetsdk_sp_tag = []
         self.__modules_with_chipsetsdk_sp_indirect_tag = []
+
+        passed = True
 
         # Check if any napi modules has dependedBy
         for mod in self.get_mgr().get_all():
@@ -170,61 +139,41 @@ class ChipsetsdkSPRule(BaseRule):
             if self.__is_chipsetsdk_sp_indirect(mod):
                 self.__modules_with_chipsetsdk_sp_indirect_tag.append(mod)
 
-            # Check chipset modules only
-            if mod["path"].startswith("system"):
+            if not mod["name"].endswith(".so"):
                 continue
-
-            # Check chipset modules depends
-            for dep in mod["deps"]:
-                callee = dep["callee"]
-
-                # If callee is chipset module, it is OK
-                if not callee["path"].startswith("system"):
+            
+            # check if all path in chipset-sdk-sp so contains sp/indirect innerapi_tags
+            if "chipset-sdk-sp" in mod["path"]:
+                if mod["name"] not in self.__chipsetsdk_sps and mod["name"] not in self.__indirects:
+                    # Not allowed
+                    passed = False
+                    self.error("NEED MODIFY: so file %s in %s should be add in file chipsetsdk_sp_info.json or chipsetsdk_sp_indirect_info.json"
+                        % (mod["name"], mod["labelPath"]))
                     continue
-
-                # Add to list
-                if callee not in self.__chipsetsdk_sps:
-                    if "hdiType" not in callee or callee["hdiType"] != "hdi_proxy":
-                        self.__chipsetsdk_sps.append(callee)
-
-                # If callee is in ChipsetSDKSP white list module, it is OK
-                if callee["name"] in lists:
-                    continue
-
-                # If callee is asan library, it is OK
-                if callee["name"].endswith(".asan.so"):
-                    continue
-
-                # If callee is hdi proxy module, it is OK
-                if "hdiType" in callee and callee["hdiType"] == "hdi_proxy":
-                    continue
-
-                # Not allowed
-                passed = True
-                self.warn("NEED MODIFY: chipset_sp module %s in %s depends on non ChipsetSDKSP module %s in %s"
-                           % (mod["name"], mod["labelPath"], callee["name"], mod["labelPath"]))
-
+        
         return passed
-
+    
     def __check_if_tagged_correctly(self):
         passed = True
-        for mod in self.__chipsetsdk_sps:
-            if not self.__is_chipsetsdk_sp_tagged(mod):
-                self.warn('ChipsetSDK module %s has no innerapi_tags with "chipsetsdk_sp", add it in %s'
-                          % (mod["name"], mod["labelPath"]))
+        chipsetsdk_sps = [mod for mod in self.__modules_with_chipsetsdk_sp_tag if mod["name"] in self.__chipsetsdk_sps]
+        sp_indirects = [mod for mod in self.__modules_with_chipsetsdk_sp_indirect_tag if mod["name"] in self.__indirects]
 
-        for mod in self.__modules_with_chipsetsdk_sp_tag:
-            if mod["name"] not in self.get_white_lists():
-                passed = True
-                self.warn('NEED MODIFY: non chipsetsdk_sp module %s with innerapi_tags="chipsetsdk_sp", %s'
-                           % (mod["name"], mod["labelPath"]))
+        for mod in chipsetsdk_sps:
+            if "chipsetsdk_sp" not in mod["innerapi_tags"]:
+                passed = False
+                self.error('ChipsetSP SDK module %s in chipsetsdk_sp_info.json should add innerapi_tags with "chipsetsdk_sp"'
+                          % mod["name"])
 
-        for mod in self.__modules_with_chipsetsdk_sp_indirect_tag:
-            if mod["name"] not in self.__indirects and mod["name"] not in self.get_white_lists():
-                self.warn('non chipsetsdk_sp_indirect module %s with innerapi_tags="chipsetsdk_sp_indirect", %s'
-                          % (mod["name"], mod["labelPath"]))
+        for mod in sp_indirects:
+            if "chipsetsdk_sp_indirect" not in mod["innerapi_tags"]:
+                passed = False
+                self.error('chipsetsdk_sp_indirect module %s in chipsetsdk_sp_indirect_info.json should add innerapi_tags "chipsetsdk_sp_indirect"'
+                          % mod["name"])
 
         return passed
+    
+    def __load_chipsetsdk_sps(self):
+        self.__chipsetsdk_sps = self.load_chipsetsdk_json("chipsetsdk_sp_info.json")
 
-    def __load_chipsetsdk_indirects(self):
-        self.__indirects = self.load_chipsetsdk_json("chipsetsdk_sp_indirect.json")
+    def __load_chipsetsdk_sp_indirects(self):
+        self.__indirects = self.load_chipsetsdk_json("chipsetsdk_sp_indirect_info.json")

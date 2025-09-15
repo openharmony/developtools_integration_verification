@@ -42,15 +42,15 @@ class PassthroughRule(BaseRule):
         rules_dir = []
         rules_dir.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules"))
         if self._args and self._args.rules:
-            self.log("****add more ChipsetSDK info in:{}****".format(self._args.rules))
+            self.log("****add more passthrough info in:{}****".format(self._args.rules))
             rules_dir = rules_dir + self._args.rules
 
         chipsetsdk_rules_path = self.get_out_path().replace("out", "out/products_ext")
         if os.path.exists(chipsetsdk_rules_path):
-            self.log("****add more ChipsetSDK info in dir:{}****".format(chipsetsdk_rules_path))
+            self.log("****add more passthrough info in dir:{}****".format(chipsetsdk_rules_path))
             rules_dir.append(chipsetsdk_rules_path)
         else:
-            self.warn("****add chipsetsdk_rules_path path not exist: {}****".format(chipsetsdk_rules_path))
+            self.warn("****add passthrough_rules_path path not exist: {}****".format(chipsetsdk_rules_path))
         res = []
         for d in rules_dir:
             rules_file = os.path.join(d, self.__class__.RULE_NAME, name)
@@ -62,18 +62,13 @@ class PassthroughRule(BaseRule):
         return res
 
     def check(self):
+        self.__load_passthroughs()
         self.__load_passthrough_indirects()
-        white_lists = self.get_white_lists()
+        white_lists = self.get_dep_whitelist()
 
         # Check if all chipset modules depends on chipsetsdk modules only
         passed = self.__check_depends_on_passthrough()
-        self.log(f"****check_depends_on_chipsetsdk result:{passed}****")
-        if not passed:
-            return passed
-
-        # Check if all ChipsetSDK modules are correctly tagged by innerapi_tags
-        passed = self.__check_if_passthrough_tagged_correctly()
-        self.log(f"****check_if_tagged_correctly result:{passed}****")
+        self.log(f"****check_depends_on_passthrough result:{passed}****")
         if not passed:
             return passed
         
@@ -84,12 +79,15 @@ class PassthroughRule(BaseRule):
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_passthrough_tag, self.__valid_mod_tags, self.__valid_mod_tags, self.__indirects)
+            self.__modules_with_passthrough_indirect_tag, self.__valid_mod_tags, self.__valid_mod_tags, white_lists)
         self.log(f"****check_if_deps_correctly indirect result:{passed}****")
         if not passed:
             return passed
-
-        self.__write_innerkits_header_files()
+        
+        passed = self.__check_if_tagged_correctly()
+        self.log(f"****check_tagged_correctly result:{passed}****")
+        if not passed:
+            return passed
 
         return True
 
@@ -125,36 +123,7 @@ class PassthroughRule(BaseRule):
             return True
         return False
 
-    def __write_innerkits_header_files(self):
-        inner_kits_info = os.path.join(self.get_mgr().get_product_out_path(), 
-                                       "build_configs/parts_info/inner_kits_info.json")
-        with open(inner_kits_info, "r") as f:
-            info = json.load(f)
-
-        headers = []
-        for sdk in self.__passthroughs:
-            path = sdk["labelPath"][:sdk["labelPath"].find(":")]
-            target_name = sdk["labelPath"][sdk["labelPath"].find(":") + 1:]
-            item = {"name": sdk["componentName"] + ":" + target_name, "so_file_name":
-                    sdk["name"], "path": sdk["labelPath"], "headers": []}
-            if sdk["componentName"] not in info:
-                headers.append(item)
-                continue
-
-            for name, innerapi in info[sdk["componentName"]].items():
-                if innerapi["label"] != sdk["labelPath"]:
-                    continue
-                got_headers = True
-                base = innerapi["header_base"]
-                for f in innerapi["header_files"]:
-                    item["headers"].append(os.path.join(base, f))
-            headers.append(item)
-
-        return headers
-
     def __check_depends_on_passthrough(self):
-        lists = self.get_white_lists()
-
         passed = True
 
         self.__passthroughs = []
@@ -179,57 +148,45 @@ class PassthroughRule(BaseRule):
             if not mod["path"].endswith("so"):
                 continue
 
-            # Check chipset modules depends
-            for dep in mod["deps"]:
-                callee = dep["callee"]
-
-                # If callee is chipset module, it is OK
-                if not callee["path"].startswith("vendor"):
+            if "passthrough" in mod["path"] and "passthrough/indirect" not in mod["path"]:
+                if mod["name"] not in self.__passthroughs:
+                    # Not allowed
+                    passed = False
+                    self.error("NEED MODIFY: so file %s should be add in file passthrough_info.json"
+                            % (mod["name"], mod["labelPath"]))
                     continue
 
-                # Add to list
-                if callee not in self.__passthroughs:
-                    if "hdiType" not in callee or callee["hdiType"] != "hdi_proxy":
-                        self.__passthroughs.append(callee)
-
-                # If callee is in passthroughwhite list module, it is OK
-                if callee["name"] in lists:
+            if "passthrough/indirect" in mod["path"]:
+                if mod["name"] not in self.__indirects:
+                    # Not allowed
+                    passed = False
+                    self.error("NEED MODIFY: so file %s in %s should be add in file passthrough_indirect_info.json"
+                            % (mod["name"], mod["labelPath"]))
                     continue
-
-                # If callee is asan library, it is OK
-                if callee["name"].endswith(".asan.so"):
-                    continue
-
-                # If callee is hdi proxy module, it is OK
-                if "hdiType" in callee and callee["hdiType"] == "hdi_proxy":
-                    continue
-
-                # Not allowed
-                passed = True
-                self.error("NEED MODIFY: passthrough module %s in %s depends on non passthrough module %s in %s"
-                           % (mod["name"], mod["labelPath"], callee["name"], mod["labelPath"]))
 
         return passed
 
-    def __check_if_passthrough_tagged_correctly(self):
+    def __check_if_tagged_correctly(self):
         passed = True
-        for mod in self.__passthroughs:
-            if not self.__is_passthrough_tagged(mod):
-                self.warn('passthrough module %s has no innerapi_tags with "passthrough", add it in %s'
-                          % (mod["name"], mod["labelPath"]))
+        passthroughs = [mod for mod in self.__modules_with_passthrough_tag if mod["name"] in self.__passthroughs]
+        indirects = [mod for mod in self.__modules_with_passthrough_indirect_tag if mod["name"] in self.__indirects]
 
-        for mod in self.__modules_with_passthrough_tag:
-            if mod["name"] not in self.get_white_lists():
-                passed = True
-                self.error('NEED MODIFY: non passthrough %s with innerapi_tags="passthrough", %s'
-                           % (mod["name"], mod["labelPath"]))
+        for mod in passthroughs:
+            if "passthrough" not in mod["innerapi_tags"]:
+                passed = False
+                self.error('Passthrough module %s in passthrough_info.json should add innerapi_tags with "passthrough"'
+                          % mod["name"])
 
-        for mod in self.__modules_with_passthrough_indirect_tag:
-            if mod["name"] not in self.__indirects and mod["name"] not in self.get_white_lists():
-                self.warn('non passthrough_indirect module %s with innerapi_tags="passthrough_indirect", %s'
-                          % (mod["name"], mod["labelPath"]))
+        for mod in indirects:
+            if "passthrough_indirect" not in mod["innerapi_tags"]:
+                passed = False
+                self.error('passthrough_indirect module %s in passthrough_indirect_info.json should add innerapi_tags "passthrough_indirect"'
+                          % mod["name"])
 
         return passed
+
+    def __load_passthroughs(self):
+        self.__passthroughs = self.load_passthrough_json("passthrough_info.json")
 
     def __load_passthrough_indirects(self):
-        self.__indirects = self.load_passthrough_json("passthrough_indirect.json")
+        self.__indirects = self.load_passthrough_json("passthrough_indirect_info.json")

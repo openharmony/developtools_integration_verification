@@ -1,8 +1,80 @@
 [
     {
-        "name": "hdf:drivers_peripheral_input",
+        "name": "device_rk3568:libmpp",
+        "so_file_name": "librockchip_mpp.z.so",
+        "path": "//device/soc/rockchip/rk3568/hardware/mpp:libmpp",
+        "headers": []
+    },
+    {
+        "name": "hdf:librockchip_vpu",
+        "so_file_name": "librockchip_vpu.z.so",
+        "path": "//device/soc/rockchip/rk3568/hardware/mpp/mpp/legacy:librockchip_vpu",
+        "headers": []
+    },
+    {
+        "name": "hdf:libomxvpu_dec",
+        "so_file_name": "libomxvpu_dec.z.so",
+        "path": "//device/soc/rockchip/rk3568/hardware/omx_il/component/video/dec:libomxvpu_dec",
+        "headers": []
+    },
+    {
+        "name": "hdf:libOMX_Core",
+        "so_file_name": "libOMX_Core.z.so",
+        "path": "//device/soc/rockchip/rk3568/hardware/omx_il/core:libOMX_Core",
+        "headers": []
+    },
+    {
+        "name": "rockchip_products:librga",
+        "so_file_name": "librga.z.so",
+        "path": "//device/soc/rockchip/rk3568/hardware/rga:librga",
+        "headers": []
+    },
+    {
+        "name": "hdf:libusb_adapter",
+        "so_file_name": "libusb_adapter.z.so",
+        "path": "//drivers/peripheral/usb/libusb_adapter:libusb_adapter",
+        "headers": []
+    },
+    {
+        "name": "hdf:libomxvpu_enc",
+        "so_file_name": "libomxvpu_enc.z.so",
+        "path": "//device/soc/rockchip/rk3568/hardware/omx_il/component/video/enc:libomxvpu_enc",
+        "headers": []
+    },
+    {
+        "name": "hdf:libOMX_Pluginhw",
+        "so_file_name": "libOMX_Pluginhw.z.so",
+        "path": "//device/soc/rockchip/rk3568/hardware/omx_il/libOMXPlugin:libOMX_Pluginhw",
+        "headers": []
+    },
+    {
+        "name": "hdf:libserial_interface_service_1.0",
+        "so_file_name": "libserial_interface_service_1.0.z.so",
+        "path": "//drivers/peripheral/usb/serial:libserial_interface_service_1.0",
+        "headers": []
+    },
+    {
+        "name": "hdf:hdi_input",
         "so_file_name": "libhdi_input.z.so",
         "path": "//drivers/peripheral/input/hal:hdi_input",
+        "headers": []
+    },
+    {
+        "name": "hdf:libhuks_hdi_service_1.1",
+        "so_file_name": "libhuks_hdi_service_1.1.z.so",
+        "path": "//drivers/peripheral/huks/hdi_service:libhuks_hdi_service_1.1",
+        "headers": []
+    },
+    {
+        "name": "hdf:libRkOMX_Resourcemanager",
+        "so_file_name": "libRkOMX_Resourcemanager.z.so",
+        "path": "//device/soc/rockchip/rk3568/hardware/omx_il/component/common:libRkOMX_Resourcemanager",
+        "headers": []
+    },
+    {
+        "name": "hdf:libusb_ddk_device",
+        "so_file_name": "libusb_ddk_device.z.so",
+        "path": "//drivers/peripheral/usb/ddk:libusb_ddk_device",
         "headers": []
     }
 ]

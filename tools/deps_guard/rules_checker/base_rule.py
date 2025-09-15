@@ -63,6 +63,26 @@ class BaseRule(object):
 
     def get_help_url(self):
         return "https://gitee.com/openharmony/developtools_integration_verification/tree/master/tools/deps_guard/rules/%s/README.md" % self.__class__.RULE_NAME
+    
+    def get_dep_whitelist(self):
+        whitelist_file =  os.path.join(os.path.dirname(os.path.realpath(__file__)), f"../rules/dep_whitelist.json")
+        if os.path.exists(whitelist_file):
+            self.log("****dep_whitelist.json is {}****".format(whitelist_file))
+            res = []
+            with open(whitelist_file, "r") as f:
+                contents = f.read()
+            if not contents:
+                self.log("****system/vendor only whitelist.json {} is null****".format(whitelist_file))
+                return res
+            json_data = json.loads(contents)
+            for so in json_data:
+                dep_file_name = so.get("dep_file_name")
+                if dep_file_name and dep_file_name not in res:
+                    res.append(dep_file_name)
+            return res
+        else:
+            self.log("****dep_whitelist.json {} not exist****".format(whitelist_file))
+            return []
 
     # To be override
     def check(self):
@@ -70,7 +90,7 @@ class BaseRule(object):
         return True
 
     def check_if_deps_correctly(self, check_modules, valid_mod_tags, valid_dep_tags, white_lists):
-        # check if mod and callee have wrong innerapi tags 
+        # check if mod and callee have wrong innerapi tags
         passed = True
         for mod in check_modules:
             innerapi_tags = mod["innerapi_tags"]
@@ -87,14 +107,14 @@ class BaseRule(object):
                     if callee["name"] in white_lists:
                         continue
 
-                    passed = True
+                    passed = False
                     wrong_tags = [item for item in dep_innerapi_tags if item not in valid_dep_tags]
-                    self.warn("NEED MODIFY: %s's dep file %s with %s contains wrong dep innerapi_tags [%s] in innerapi_tags [%s]" 
-                        %(mod["name"], callee["name"], callee["labelPath"], ",".join(wrong_tags), ",".join(dep_innerapi_tags)))
+                    self.error("NEED MODIFY: %s with innerapi_tags [%s] has dep file %s with %s contains wrong dep innerapi_tags [%s] in innerapi_tags [%s]" 
+                        % (mod["name"], ",".join(innerapi_tags), callee["name"], callee["labelPath"], ",".join(wrong_tags), ",".join(dep_innerapi_tags)))
             else:
                 wrong_tags = [item for item in innerapi_tags if item not in valid_mod_tags]
-                self.warn("NEED MODIFY: module %s with %s contains wrong mod innerapi_tags [%s] in innerapi_tags [%s]" 
-                           %(mod["name"], mod["labelPath"], ",".join(wrong_tags), ",".join(innerapi_tags)))
-                return True
+                self.error("NEED MODIFY: module %s with %s contains wrong mod innerapi_tags [%s] in innerapi_tags [%s]" 
+                           % (mod["name"], mod["path"], ",".join(wrong_tags), ",".join(innerapi_tags)))
+                return False
 
         return passed
