@@ -30,7 +30,7 @@ class Test:
         device.start_ability(self.bundle_name, self.ability_name)
         time.sleep(10)
         main_page = device.save_snapshot_to_local('{}_hap.jpeg'.format(device.sn))
-        crop_picture(picture=main_page, x1=0, y1=50, x2=700, y2=1150)
+        crop_picture(picture=main_page, x1=0, y1=50, x2=700, y2=1190)
         stand_pic = os.path.join(device.resource_path, 'ui_hap.jpeg')
 
         similarity = compare_image_similarity(main_page, stand_pic)
