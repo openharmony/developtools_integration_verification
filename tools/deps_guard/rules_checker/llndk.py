@@ -30,7 +30,7 @@ class LLndkRule(BaseRule):
         self.__out_path = mgr.get_product_out_path()
         self.__white_lists = self.load_llndk_json("llndk_info.json")
         self.__ignored_tags = ["platformsdk", "sasdk", "platformsdk_indirect", "ndk"]
-        self.__valid_mod_tags = ["llndk"] + self.__ignored_tags
+        self.__valid_mod_tags = ["llndk", "passthrough"] + self.__ignored_tags
 
     def get_white_lists(self):
         return self.__white_lists
@@ -63,11 +63,21 @@ class LLndkRule(BaseRule):
 
     def check(self):
         self.__modules_with_llndk_tag = []
-        white_lists = self.get_white_lists()
-
+        white_lists = self.get_dep_whitelist()
+        
+        passed = True
         for mod in self.get_mgr().get_all():
             if self.__is_llndk_tagged(mod):
                 self.__modules_with_llndk_tag.append(mod)
+            
+            if "llndk" in mod["path"] and "llndk" not in mod["innerapi_tags"]:
+                # Not allowed
+                self.error("NEED MODIFY: so file %s should add innerapi_tags llndk in %s"
+                           % (mod["name"], mod["labelPath"]))
+                passed = False
+                continue
+        if not passed:
+            return passed
 
         # Check if all llndk modules are correctly tagged by innerapi_tags
         passed = self.__check_if_tagged_correctly()

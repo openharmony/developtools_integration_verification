@@ -6,9 +6,75 @@
         "headers": []
     },
     {
-        "name": "build_framework:musl-libcxx.so",
-        "so_file_name": "libcxx.so",
-        "path": "//build/common/musl:musl-libcxx.so",
+        "name": "build_framework:ld-musl-arm.so.1",
+        "so_file_name": "libc.so",
+        "path": "//build/common/musl:musl-libc.so",
+        "headers": []
+    },
+    {
+        "name": "ffrt:libffrt",
+        "so_file_name": "libffrt.so",
+        "path": "//foundation/resourceschedule/ffrt:libffrt",
+        "headers": []
+    },
+    {
+        "name": "ffrt:libffrt",
+        "so_file_name": "libffrt.so",
+        "path": "//foundation/resourceschedule/ffrt:libffrt",
+        "headers": []
+    },
+    {
+        "name": "hitrace:hitrace_ndk",
+        "so_file_name": "libhitrace_ndk.z.so",
+        "path": "//base/hiviewdfx/hitrace/frameworks/hitrace_ndk:hitrace_ndk",
+        "headers": []
+    },
+    {
+        "name": "graphic_2d:EGL",
+        "so_file_name": "libEGL.so",
+        "path": "//foundation/graphic/graphic_2d/frameworks/opengl_wrapper:EGL",
+        "headers": []
+    },
+    {
+        "name": "graphic_2d:GLESv2",
+        "so_file_name": "libGLESv2.so",
+        "path": "//foundation/graphic/graphic_2d/frameworks/opengl_wrapper:GLESv2",
+        "headers": []
+    },
+    {
+        "name": "graphic_2d:GLESv3",
+        "so_file_name": "libGLESv3.so",
+        "path": "//foundation/graphic/graphic_2d/frameworks/opengl_wrapper:GLESv3",
+        "headers": []
+    },
+    {
+        "name": "graphic_2d:libnative_color_space_manager",
+        "so_file_name": "libnative_color_space_manager.so",
+        "path": "//foundation/graphic/graphic_2d/utils/color_manager/ndk:libnative_color_space_manager",
+        "headers": []
+    },
+    {
+        "name": "image_framework:image_source",
+        "so_file_name": "libimage_source.so",
+        "path": "//foundation/multimedia/image_framework/frameworks/kits/js/common/ndk:image_source",
+        "headers": []
+    },
+    {
+        "name": "image_framework:pixelmap",
+        "so_file_name": "libpixelmap.so",
+        "path": "//foundation/multimedia/image_framework/frameworks/kits/js/common/pixelmap_ndk:pixelmap",
+        "headers": []
+    },
+    {
+        "name": "mindspore:mindspore_ndk",
+        "so_file_name": "libmindspore_lite_ndk.so",
+        "path": "//third_party/mindspore/mindspore-src/source/mindspore/lite:mindspore_ndk",
+        "headers": []
+    },
+    {
+        "name": "vulkan-loader:vulkan_loader",
+        "so_file_name": "libvulkan.so",
+        "path": "//third_party/vulkan-loader:vulkan_loader",
         "headers": []
     }
 ]

@@ -1,62 +1,128 @@
 [
     {
-        "name": "faultloggerd:libdfx_dumpcatcher",
-        "so_file_name": "libdfx_dumpcatcher.z.so",
-        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/dump_catcher:libdfx_dumpcatcher",
-        "headers": []
-    },
-    {
-        "name": "faultloggerd:libfaultloggerd",
-        "so_file_name": "libfaultloggerd.z.so",
-        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/faultloggerd_client:libfaultloggerd",
-        "headers": []
-    },
-    {
-        "name": "faultloggerd:libdfx_procinfo",
-        "so_file_name": "libdfx_procinfo.z.so",
-        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/procinfo:libdfx_procinfo",
-        "headers": []
-    },
-    {
-        "name": "faultloggerd:libunwinder",
-        "so_file_name": "libunwinder.z.so",
-        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/unwinder:libunwinder",
-        "headers": []
-    },
-    {
-        "name": "hitrace:libhitracechain",
-        "so_file_name": "libhitracechain.so",
-        "path": "//base/hiviewdfx/hitrace/interfaces/innerkits/native/innerkits:libhitracechain",
-        "headers": []
-    },
-    {
-        "name": "hiview:libucollection_client",
-        "so_file_name": "libucollection_client.z.so",
-        "path": "//base/hiviewdfx/hiview/interfaces/inner_api/unified_collection/client:libcollection_client",
-        "headers": []
-    },
-    {
-        "name": "eventhandler:libeventhandler",
-        "so_file_name": "libeventhandler.z.so",
-        "path": "//base/notification/eventhandler/frameworks/eventhandler:libeventhandler",
-        "headers": []
-    },
-    {
-        "name": "storage_service:storage_manager_acl",
-        "so_file_name": "libstorage_manager_acl.z.so",
-        "path": "//foundation/filemanagement/storage_service/interfaces/innerkits/acl/native:storage_manager_acl",
-        "headers": []
-    },
-    {
-        "name": "resource_schedule_service:ressched_client",
+        "name": "resourceschedule:ressched_client",
         "so_file_name": "libressched_client.z.so",
         "path": "//foundation/resourceschedule/resource_schedule_service/ressched/interfaces/innerkits/ressched_client:ressched_client",
         "headers": []
     },
     {
-        "name": "lzma:lzma_shared",
-        "so_file_name": "lzma_shared.z.so",
+        "name": "hiviewdfx:libdfx_procinfo",
+        "so_file_name": "libdfx_procinfo.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/procinfo:libdfx_procinfo",
+        "headers": []
+    },
+    {
+        "name": "filemanagement:storage_manager_acl",
+        "so_file_name": "libstorage_manager_acl.z.so",
+        "path": "//foundation/filemanagement/storage_service/interfaces/innerkits/acl/native:storage_manager_acl",
+        "headers": []
+    },
+    {
+        "name": "hiviewdfx:libdfx_dumpcatcher",
+        "so_file_name": "libdfx_dumpcatcher.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/dump_catcher:libdfx_dumpcatcher",
+        "headers": []
+    },
+    {
+        "name": "hiviewdfx:libucollection_client",
+        "so_file_name": "libucollection_client.z.so",
+        "path": "//base/hiviewdfx/hiview/interfaces/inner_api/unified_collection/client:libucollection_client",
+        "headers": []
+    },
+    {
+        "name": "hdf:libdisplay_buffer_proxy_1.0",
+        "so_file_name": "libdisplay_buffer_proxy_1.0.z.so",
+        "path": "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_proxy_1.0",
+        "headers": []
+    },
+    {
+        "name": "hdf:libdisplay_buffer_proxy_1.1",
+        "so_file_name": "libdisplay_buffer_proxy_1.1.z.so",
+        "path": "//drivers/interface/display/buffer/v1_1:libdisplay_buffer_proxy_1.1",
+        "headers": []
+    },
+    {
+        "name": "hiviewdfx:libfaultloggerd",
+        "so_file_name": "libfaultloggerd.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/faultloggerd_client:libfaultloggerd",
+        "headers": []
+    },
+    {
+        "name": "hiviewdfx:dfx_signalhandler",
+        "so_file_name": "libdfx_signalhandler.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/signal_handler:dfx_signalhandler",
+        "headers": []
+    },
+    {
+        "name": "thirdparty:libpcre2",
+        "so_file_name": "libpcre2.z.so",
+        "path": "//third_party/pcre2:libpcre2",
+        "headers": []
+    },
+    {
+        "name": "hiviewdfx:libthread_sampler",
+        "so_file_name": "libthread_sampler.z.so",
+        "path": "//base/hiviewdfx/hicollie/frameworks/native/thread_sampler:libthread_sampler",
+        "headers": []
+    },
+    {
+        "name": "thirdparty:lzma_shared",
+        "so_file_name": "liblzma.z.so",
         "path": "//third_party/lzma:lzma_shared",
+        "headers": []
+    },
+    {
+        "name": "notification:libeventhandler",
+        "so_file_name": "libeventhandler.z.so",
+        "path": "//base/notification/eventhandler/frameworks/eventhandler:libeventhandler",
+        "headers": []
+    },
+    {
+        "name": "hdf:libdisplay_buffer_proxy_1.2",
+        "so_file_name": "libdisplay_buffer_proxy_1.2.z.so",
+        "path": "//drivers/interface/display/buffer/v1_2:libdisplay_buffer_proxy_1.2",
+        "headers": []
+    },
+    {
+        "name": "communication:ipc_common",
+        "so_file_name": "libipc_common.z.so",
+        "path": "//foundation/communication/ipc/ipc/native/src/core:ipc_common",
+        "headers": []
+    },
+    {
+        "name": "hdf:libdisplay_buffer_hdi_impl_v1_2",
+        "so_file_name": "libdisplay_buffer_hdi_impl_v1_2.z.so",
+        "path": "//drivers/interface/display/buffer/v1_2:libdisplay_buffer_hdi_impl_v1_2",
+        "headers": []
+    },
+    {
+        "name": "hiviewdfx:rustc_demangle",
+        "so_file_name": "librustc_demangle.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/rust/rustc_demangle:rustc_demangle",
+        "headers": []
+    },
+    {
+        "name": "hiviewdfx:libstack_printer",
+        "so_file_name": "libstack_printer.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/stack_printer:libstack_printer",
+        "headers": []
+    },
+    {
+        "name": "hiviewdfx:libasync_stack",
+        "so_file_name": "libasync_stack.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/async_stack:libasync_stack",
+        "headers": []
+    },
+    {
+        "name": "thirdparty:libselinux",
+        "so_file_name": "libselinux.z.so",
+        "path": "//third_party/selinux:libselinux",
+        "headers": []
+    },
+    {
+        "name": "hiviewdfx:libunwinder",
+        "so_file_name": "libunwinder.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/unwinder:libunwinder",
         "headers": []
     }
 ]
