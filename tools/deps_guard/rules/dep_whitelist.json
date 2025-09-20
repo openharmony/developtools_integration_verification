@@ -322,6 +322,13 @@
         "description": "all vendor lib deps system only lib libc.so, which is a softlink of ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "all vendor lib so",
+        "so_file_path": "all vendor lib so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "all vendor lib deps system only lib libutils.z.so"
+    },
+    {
         "so_file_name": "libusb_port_interface_service_2.0.z.so",
         "so_file_path": "vendor/lib/libusb_port_interface_service_2.0.z.so",
         "dep_file_name": "libusb_proxy_2.0.z.so",
