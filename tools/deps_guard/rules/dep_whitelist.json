@@ -317,6 +317,13 @@
     {
         "so_file_name": "all vendor lib so",
         "so_file_path": "all vendor lib so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "all vendor lib deps system only lib ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "all vendor lib so",
+        "so_file_path": "all vendor lib so",
         "dep_file_name": "libc.so",
         "dep_file_path": "system/lib/chipset-sdk-sp/libutils.z.so",
         "description": "all vendor lib deps system only lib libc.so, which is a softlink of ld-musl-arm.so.1"
