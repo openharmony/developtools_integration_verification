@@ -66,7 +66,7 @@ def monitor_file_and_stop(shell_script_path, target_file, shell_args=None,
     else:
         command = [shell_script_path]
     
-    command += ["--build-only-gn"]
+    command += ["--build-only-gn", "--no-prebuilt-sdk"]
 
     execute_build_command(command, use_shell=use_shell)
     
@@ -83,6 +83,7 @@ def monitor_file_and_stop(shell_script_path, target_file, shell_args=None,
             print("No changes to the unittest detected, skipping compilation directly.")
             sys.exit()
         command.remove("--build-only-gn")
+        command.remove("--no-prebuilt-sdk")
         command.extend(["--build-target", "precise_module_build"])
         return execute_build_command(command, use_shell=use_shell)
     
