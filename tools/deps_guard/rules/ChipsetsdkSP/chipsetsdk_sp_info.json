@@ -60,6 +60,12 @@
         "headers": []
     },
     {
+        "name": "hdf:libhdi_base",
+        "so_file_name": "libhdi_base.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/hdi:libhdi_base",
+        "headers": []
+    },
+    {
         "name": "systemabilitymgr:samgr_proxy",
         "so_file_name": "libsamgr_proxy.z.so",
         "path": "//foundation/systemabilitymgr/samgr/interfaces/innerkits/samgr_proxy:samgr_proxy",
