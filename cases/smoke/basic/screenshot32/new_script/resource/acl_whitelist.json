@@ -302,7 +302,9 @@
     "acls": [
       "ohos.permission.MANAGE_WIFI_CONNECTION",
       "ohos.permission.MANAGE_RGM",
-      "ohos.permission.FILTER_INPUT_EVENT"
+      "ohos.permission.FILTER_INPUT_EVENT",
+      "ohos.permission.NOTIFICATION_CONTROLLER",
+      "ohos.permission.GET_PAGE_INFO"
     ]
   },
   {
