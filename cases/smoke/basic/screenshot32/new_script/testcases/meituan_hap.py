@@ -29,7 +29,7 @@ class Test:
         logging.info('start app')
         device.start_ability(self.bundle_name, self.ability_name)
         time.sleep(10)
-        main_page = device.save_snapshot_to_local('{}_hap.jpeg'.format(device.sn))
+        main_page = device.save_snapshot_to_local('{}_meituan.jpeg'.format(device.sn))
         stand_pic = os.path.join(device.resource_path, 'meituan_hap.jpeg')
         similarity = compare_image_similarity(main_page, stand_pic)
         assert similarity > 0.8, '截图对比失败'
