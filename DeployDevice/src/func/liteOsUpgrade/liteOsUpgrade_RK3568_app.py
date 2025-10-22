@@ -103,7 +103,7 @@ class liteOsUpgrade_RK3568(BaseApp):
             lock_file = '/home/openharmony/deviceupgrade/task.lock'
         # 如果上一个任务没执行完成，不往下继续执行
         if not is_can_exec(lock_file):
-            return False
+            return 98
         version_savepath = self.params_dict.get("img_path")
         upgrade_test_type = self.params_dict.get("UpgradeTestType")
         sn = self.params_dict.get("sn")
@@ -627,6 +627,7 @@ def is_can_exec(lock_file):
             return True  
         if (current_time - lock_time) < lock_duration:
             logger.error("ask is already running. Exiting.")
+            time.sleep(lock_duration)
             return False
         else:
             logger.warning("ask running time is more than %s second, can exec" % lock_duration)
