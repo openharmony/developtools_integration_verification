@@ -40,17 +40,18 @@ class LLndkRule(BaseRule):
 
     def load_llndk_json(self, name):
         rules_dir = []
-        rules_dir.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules"))
         if self._args and self._args.rules:
             self.log("****add more llndk info in:{}****".format(self._args.rules))
             rules_dir = rules_dir + self._args.rules
 
         llndk_rules_path = self.get_out_path().replace("out", "out/products_ext")
+        new_rule_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules")
         if os.path.exists(llndk_rules_path):
             self.log("****add more llndk info in dir:{}****".format(llndk_rules_path))
             rules_dir.append(llndk_rules_path)
-        else:
-            self.warn("****add llndk_rules_path path not exist: {}****".format(llndk_rules_path))
+        elif os.path.exists(new_rule_path):
+            self.log("****add more llndk info in dir:{}****".format(new_rule_path))
+            rules_dir.append(new_rule_path)
         res = []
         for d in rules_dir:
             rules_file = os.path.join(d, self.__class__.RULE_NAME, name)
@@ -63,13 +64,17 @@ class LLndkRule(BaseRule):
 
     def check(self):
         self.__modules_with_llndk_tag = []
+        self.__all_mods = []
         white_lists = self.get_dep_whitelist()
+        self.__load_llndks()
         
         passed = True
         for mod in self.get_mgr().get_all():
             if self.__is_llndk_tagged(mod):
                 self.__modules_with_llndk_tag.append(mod)
             
+            self.__all_mods.append(mod["name"])
+
             if "llndk" in mod["path"] and "llndk" not in mod["innerapi_tags"]:
                 # Not allowed
                 self.error("NEED MODIFY: so file %s should add innerapi_tags llndk in %s"
@@ -120,11 +125,16 @@ class LLndkRule(BaseRule):
 
     def __check_if_tagged_correctly(self):
         passed = True
+        llndk_tags = [mod["name"] for mod in self.__modules_with_llndk_tag]
 
-        for mod in self.__modules_with_llndk_tag:
-            if mod["name"] not in self.get_white_lists():
+        for mod in self.__llndks:
+            if mod not in self.__all_mods:
+                continue
+            if mod not in llndk_tags:
                 passed = False
-                self.error('non llndk module %s with innerapi_tags="llndk", %s'
-                           % (mod["name"], mod["labelPath"]))
+                self.error('llndk module %s in llndk_info.json should add innerapi_tags with "llndk"' % mod)
 
         return passed
+
+    def __load_llndks(self):
+        self.__llndks = self.load_llndk_json("llndk_info.json")

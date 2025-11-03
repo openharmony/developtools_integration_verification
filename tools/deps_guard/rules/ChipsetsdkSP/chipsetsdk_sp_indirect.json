@@ -48,12 +48,6 @@
         "headers": []
     },
     {
-        "name": "hiviewdfx:dfx_signalhandler",
-        "so_file_name": "libdfx_signalhandler.z.so",
-        "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/signal_handler:dfx_signalhandler",
-        "headers": []
-    },
-    {
         "name": "thirdparty:libpcre2",
         "so_file_name": "libpcre2.z.so",
         "path": "//third_party/pcre2:libpcre2",

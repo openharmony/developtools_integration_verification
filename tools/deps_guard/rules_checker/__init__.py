@@ -26,17 +26,21 @@ from .llndk import LLndkRule
 from .passthrough import PassthroughRule
 
 
-def check_all_rules(mgr, args):
+def check_all_rules(mgr, args, check_all):
     rules = [
         NapiRule,
         SaRule,
-        HdiRule,
-        ChipsetSDKRule,
-        BaseInnerapiRule,
-        ChipsetsdkSPRule,
-        LLndkRule,
-        PassthroughRule
+        HdiRule
     ]
+
+    if check_all:
+        rules += [
+            ChipsetSDKRule,
+            BaseInnerapiRule,
+            ChipsetsdkSPRule,
+            LLndkRule,
+            PassthroughRule
+        ]
 
     passed = True
     for rule in rules:
