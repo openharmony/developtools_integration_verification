@@ -62,5 +62,9 @@
   {
     "case_file": "testcases/weixin_hap.py",
     "description": "weixin_hap包测试"
+  },
+  {
+  "case_file": "testcases/test_xts.py",
+  "description": "xts测试"
   }
 ]
