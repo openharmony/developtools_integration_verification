@@ -74,7 +74,8 @@
       "ohos.permission.PUBLISH_DISPLAY_ROTATION_EVENT",
       "ohos.permission.PUBLISH_CAST_PLUGGED_EVENT",
       "ohos.permission.NOTIFICATION_CONTROLLER",
-      "ohos.permission.NOTIFICATION_AGENT_CONTROLLER"
+      "ohos.permission.NOTIFICATION_AGENT_CONTROLLER",
+      "ohos.permission.ACCESS_SCREEN_LOCK_INNER"
 
     ]
   },
