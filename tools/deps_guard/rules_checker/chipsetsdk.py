@@ -41,25 +41,26 @@ class ChipsetSDKRule(BaseRule):
 
     def load_chipsetsdk_json(self, name):
         rules_dir = []
-        rules_dir.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules"))
         if self._args and self._args.rules:
-            self.log("****add more ChipsetSDK info in:{}****".format(self._args.rules))
+            self.log("****add more chipsetsdk info in:{}****".format(self._args.rules))
             rules_dir = rules_dir + self._args.rules
 
         chipsetsdk_rules_path = self.get_out_path().replace("out", "out/products_ext")
+        new_rule_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules")
         if os.path.exists(chipsetsdk_rules_path):
-            self.log("****add more ChipsetSDK info in dir:{}****".format(chipsetsdk_rules_path))
             rules_dir.append(chipsetsdk_rules_path)
-        else:
-            self.warn("****add chipsetsdk_rules_path path not exist: {}****".format(chipsetsdk_rules_path))
+            self.log("****add more chipsetsdk info in dir:{}****".format(chipsetsdk_rules_path))
+        elif os.path.exists(new_rule_path):
+            rules_dir.append(new_rule_path)
+            self.log("****add chipsetsdk_rules_path path:{}****".format(new_rule_path))
         res = []
         for d in rules_dir:
             rules_file = os.path.join(d, self.__class__.RULE_NAME, name)
             if os.path.isfile(rules_file):
                 res = self.__parser_rules_file(rules_file, res)
             else:
-                self.warn("****rules path not exist: {}****".format(rules_file))
-
+                self.warn("****rules path not exist: {}****".format(rules_file))        
+        
         return res
 
     def check(self):
@@ -74,13 +75,13 @@ class ChipsetSDKRule(BaseRule):
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_chipsetsdk_tag, self.__valid_mod_tags, self.__valid_mod_tags, white_lists)
+            self.__modules_with_chipsetsdk_tag, ["chipsetsdk"] + self.__ignored_tags, self.__valid_mod_tags, white_lists)
         self.log(f"****check_if_deps_correctly result:{passed}****")
         if not passed:
             return passed
         
         passed = self.check_if_deps_correctly(
-            self.__modules_with_chipsetsdk_indirect_tag, self.__valid_mod_tags, self.__valid_mod_tags, white_lists)
+            self.__modules_with_chipsetsdk_indirect_tag, ["chipsetsdk_indirect"] + self.__ignored_tags, self.__valid_mod_tags, white_lists)
         self.log(f"****check_if_deps_correctly indirect result:{passed}****")
         if not passed:
             return passed
@@ -167,6 +168,7 @@ class ChipsetSDKRule(BaseRule):
         passed = True
 
         self.__chipsetsdk_mods = []
+        self.__all_mods = []
         self.__modules_with_chipsetsdk_tag = []
         self.__modules_with_chipsetsdk_indirect_tag = []
 
@@ -187,6 +189,8 @@ class ChipsetSDKRule(BaseRule):
             # If callee is chipset module, it is OK
             if not mod["path"].endswith(".so"):
                 continue
+
+            self.__all_mods.append(mod["name"])
             
             # Check if all chipsetsdk/chisetsdk_indirect module are tagged correctly
             if "chipset-sdk/" in mod["path"]:
@@ -230,20 +234,24 @@ class ChipsetSDKRule(BaseRule):
 
     def __check_if_tagged_correctly(self):
         passed = True
-        chipsetsdks = [mod for mod in self.__modules_with_chipsetsdk_tag if mod["name"] in self.__chipsetsdks]
-        indirects = [mod for mod in self.__modules_with_chipsetsdk_indirect_tag if mod["name"] in self.__indirects]
+        modules_with_chipsetsdk_tags = [mod["name"] for mod in self.__modules_with_chipsetsdk_tag]
+        indirect_tags = [mod["name"] for mod in self.__modules_with_chipsetsdk_indirect_tag]
 
-        for mod in chipsetsdks:
-            if "chipsetsdk" not in mod["innerapi_tags"]:
+        for mod in self.__chipsetsdks:
+            if mod not in self.__all_mods:
+                continue
+            if mod not in modules_with_chipsetsdk_tags:
                 passed = False
                 self.error('Chipset SDK module %s in chipsetsdk_info.json should add innerapi_tags with "chipsetsdk"'
-                          % mod["name"])
+                          % mod)
 
-        for mod in indirects:
-            if "chipsetsdk_indirect" not in mod["innerapi_tags"]:
+        for mod in self.__indirects:
+            if mod not in self.__all_mods:
+                continue
+            if mod not in indirect_tags:
                 passed = False
                 self.error('chipsetsdk_indirect module %s in chipsetsdk_indirect_info.json should add innerapi_tags "chipsetsdk_indirect"'
-                          % mod["name"])
+                          % mod)
 
         return passed
 

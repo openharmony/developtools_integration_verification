@@ -3,5 +3,8 @@
    "remote_file_share_native",
    "medialibrary",
    "utils",
-   "usbmanager"
+   "usbmanager",
+   "pasteboard_napi",
+   "ets_interop_js_napi",
+   "camera_napi"
 ]
