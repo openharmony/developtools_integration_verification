@@ -76,27 +76,31 @@ class BaseRule(object):
                          "passthrough", "passthrough_indirect"]
         is_system = False
         is_vendor = False
-        if mod["name"].endswith(".so") or mod["name"].endswith(".so.1"):
-            mod_path = mod["path"]
-            for system_path in system_paths:
-                if system_path in mod_path:
-                    is_system = True
-                    break
-            for vendor_path in vendor_paths:
-                if vendor_path in mod_path:
-                    is_vendor = True
-                    break
-            mod_innerapi_tags = mod["innerapi_tags"]
-            if all(item not in mod_innerapi_tags for item in innerapi_tags):
-                if is_system:
-                    return "system"
-                elif is_vendor:
-                    return "vendor"
+    
+        if not (mod["name"].endswith(".so") or mod["name"].endswith(".so.1")):
+            return "other"
+    
+        mod_path = mod["path"]
+        for system_path in system_paths:
+            if system_path in mod_path:
+                is_system = True
+                break
+        for vendor_path in vendor_paths:
+            if vendor_path in mod_path:
+                is_vendor = True
+                break
+    
+        mod_innerapi_tags = mod["innerapi_tags"]
+        if all(item not in mod_innerapi_tags for item in innerapi_tags):
+            if is_system:
+                return "system"
+            elif is_vendor:
+                return "vendor"
             else:
                 return "other"
         else:
-            return "other"
-    
+            return "other"   
+ 
     def get_dep_whitelist(self):   
         whitelist_file = os.path.join(self.get_out_path().replace("out", "out/products_ext"), "chipsetsdk_dep_whitelist.json")
         if not os.path.exists(whitelist_file):
