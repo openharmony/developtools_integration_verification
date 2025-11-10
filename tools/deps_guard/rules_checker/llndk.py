@@ -65,6 +65,7 @@ class LLndkRule(BaseRule):
     def check(self):
         self.__modules_with_llndk_tag = []
         self.__all_mods = []
+        self.__all_paths = {}
         white_lists = self.get_dep_whitelist()
         self.__load_llndks()
         
@@ -74,6 +75,7 @@ class LLndkRule(BaseRule):
                 self.__modules_with_llndk_tag.append(mod)
             
             self.__all_mods.append(mod["name"])
+            self.__all_paths[mod["name"]] = mod["path"]
 
             if "llndk" in mod["path"] and "llndk" not in mod["innerapi_tags"]:
                 # Not allowed
@@ -130,6 +132,9 @@ class LLndkRule(BaseRule):
         for mod in self.__llndks:
             if mod not in self.__all_mods:
                 continue
+            if mod in self.__all_paths:
+                if "llndk/" not in self.__all_paths[mod]:
+                    continue
             if mod not in llndk_tags:
                 passed = False
                 self.error('llndk module %s in llndk_info.json should add innerapi_tags with "llndk"' % mod)
