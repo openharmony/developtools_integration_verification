@@ -169,6 +169,7 @@ class ChipsetSDKRule(BaseRule):
 
         self.__chipsetsdk_mods = []
         self.__all_mods = []
+        self.__all_paths = {}
         self.__modules_with_chipsetsdk_tag = []
         self.__modules_with_chipsetsdk_indirect_tag = []
 
@@ -191,6 +192,7 @@ class ChipsetSDKRule(BaseRule):
                 continue
 
             self.__all_mods.append(mod["name"])
+            self.__all_paths[mod["name"]] = mod["path"]
             
             # Check if all chipsetsdk/chisetsdk_indirect module are tagged correctly
             if "chipset-sdk/" in mod["path"]:
@@ -240,6 +242,9 @@ class ChipsetSDKRule(BaseRule):
         for mod in self.__chipsetsdks:
             if mod not in self.__all_mods:
                 continue
+            if mod in self.__all_paths:
+                if "chipset-sdk/" not in self.__all_paths[mod]:
+                    continue
             if mod not in modules_with_chipsetsdk_tags:
                 passed = False
                 self.error('Chipset SDK module %s in chipsetsdk_info.json should add innerapi_tags with "chipsetsdk"'
@@ -248,6 +253,9 @@ class ChipsetSDKRule(BaseRule):
         for mod in self.__indirects:
             if mod not in self.__all_mods:
                 continue
+            if mod in self.__all_paths:
+                if "chipset-sdk/" not in self.__all_paths[mod]:
+                    continue
             if mod not in indirect_tags:
                 passed = False
                 self.error('chipsetsdk_indirect module %s in chipsetsdk_indirect_info.json should add innerapi_tags "chipsetsdk_indirect"'

@@ -58,6 +58,13 @@ class BaseInnerapiRule(BaseRule):
                             (callee_innerapi_tags and all(item in self.__valid_system_tags for item in callee_innerapi_tags)) or in_whitelist:
                         continue
                     else:
+                        print(json.dumps({
+                            "so_file_name": mod["name"],
+                            "so_file_path": mod["path"],
+                            "dep_file_name": callee["name"],
+                            "dep_file_path": callee["path"],
+                            "description": f"system only lib {mod['name']} deps wrong lib {callee['name']} in {callee['path']}"
+                        }), end=",\n")
                         self.error("NEED MODIFY: system only module %s depends on wrong module as %s in %s, dep module path is %s" 
                                    %(mod["name"], callee["name"], mod["labelPath"], callee["path"]))
                         passed = False
@@ -80,6 +87,13 @@ class BaseInnerapiRule(BaseRule):
                             (callee_innerapi_tags and all(item in self.__valid_vendor_tags for item in callee_innerapi_tags)) or in_whitelist:
                         continue
                     else:
+                        print(json.dumps({
+                            "so_file_name": mod["name"],
+                            "so_file_path": mod["path"],
+                            "dep_file_name": callee["name"],
+                            "dep_file_path": callee["path"],
+                            "description": f"vendor only lib {mod['name']} deps wrong lib {callee['name']} in {callee['path']}"
+                        }), end=",\n")
                         self.error("NEED MODIFY: vendor only module %s depends on wrong module as %s in %s, dep module path is %s" 
                                    %(mod["name"], callee["name"], mod["labelPath"], callee["path"]))
                         passed = False

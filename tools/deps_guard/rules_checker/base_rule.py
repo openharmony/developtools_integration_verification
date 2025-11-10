@@ -137,6 +137,8 @@ class BaseRule(object):
                     callee = dep["callee"]
 
                     dep_innerapi_tags = callee["innerapi_tags"]
+                    innerapi_tags_str = ", ".join(innerapi_tags)
+                    dep_innerapi_tags_str = ", ".join(dep_innerapi_tags)
                     wrong_tags = [item for item in dep_innerapi_tags if item not in valid_dep_tags]
 
                     in_whitelist = False
@@ -152,6 +154,13 @@ class BaseRule(object):
                     # llndk can dep system only sofile
                     if "system" in valid_dep_tags and not self.is_only(callee) == "system":
                         passed = False
+                        print(json.dumps({
+                            "so_file_name": mod["name"],
+                            "so_file_path": mod["path"],
+                            "dep_file_name": callee["name"],
+                            "dep_file_path": callee["path"],
+                            "description": f"lib {mod['name']} with innerapi_tags [{innerapi_tags_str}] cannot deps system only lib {callee['name']} in {callee['path']}"
+                        }), end=",\n")
                         self.error("NEED MODIFY: %s with innerapi_tags [%s] cannot depend system only file %s with %s" 
                             % (mod["name"], ",".join(innerapi_tags), callee["name"], callee["labelPath"]))
 
@@ -160,10 +169,24 @@ class BaseRule(object):
                         passed = False
                         self.error("NEED MODIFY: %s with innerapi_tags [%s] cannot depend system only file %s with %s" 
                             % (mod["name"], ",".join(innerapi_tags), callee["name"], callee["labelPath"]))
+                        print(json.dumps({
+                            "so_file_name": mod["name"],
+                            "so_file_path": mod["path"],
+                            "dep_file_name": callee["name"],
+                            "dep_file_path": callee["path"],
+                            "description": f"lib {mod['name']} with innerapi_tags [{innerapi_tags_str}] cannot deps system only lib {callee['name']} in {callee['path']}"
+                        }), end=",\n")
                     elif self.is_only(callee) == "vendor":
                         passed = False
                         self.error("NEED MODIFY: %s with innerapi_tags [%s] cannot depend vendor only file %s with %s" 
                             % (mod["name"], ",".join(innerapi_tags), callee["name"], callee["labelPath"]))
+                        print(json.dumps({
+                            "so_file_name": mod["name"],
+                            "so_file_path": mod["path"],
+                            "dep_file_name": callee["name"],
+                            "dep_file_path": callee["path"],
+                            "description": f"lib {mod['name']} with innerapi_tags [{innerapi_tags_str}] deps wrong lib {callee['name']} contains innerapi_tags {callee['name']} contains"
+                        }), end=",\n")
 
                     if dep_innerapi_tags and all(item in valid_dep_tags for item in dep_innerapi_tags):
                         continue
@@ -171,10 +194,26 @@ class BaseRule(object):
                         continue
 
                     passed = False
+                    wrong_tags_str = ', '.join(wrong_tags)
+                    print(json.dumps({
+                        "so_file_name": mod["name"],
+                        "so_file_path": mod["path"],
+                        "dep_file_name": callee["name"],
+                        "dep_file_path": callee["path"],
+                        "description": f"lib {mod['name']} with innerapi_tags [{innerapi_tags_str}] deps wrong lib {callee['name']} contains innerapi_tags {wrong_tags_str}"
+                    }), end=",\n")
                     self.error("NEED MODIFY: %s with innerapi_tags [%s] has dep file %s with %s contains wrong dep innerapi_tags [%s] in innerapi_tags [%s]" 
                         % (mod["name"], ",".join(innerapi_tags), callee["name"], callee["labelPath"], ",".join(wrong_tags), ",".join(dep_innerapi_tags)))
             else:
                 wrong_tags = [item for item in innerapi_tags if item not in valid_mod_tags]
+                wrong_tags_str = ', '.join(wrong_tags)
+                print(json.dumps({
+                    "so_file_name": mod["name"],
+                    "so_file_path": mod["path"],
+                    "dep_file_name": callee["name"],
+                    "dep_file_path": callee["path"],
+                    "description": f"lib {mod['name']} with innerapi_tags [{innerapi_tags_str}] deps wrong lib {callee['name']} contains innerapi_tags {wrong_tags_str}"
+                }), end=",\n")
                 self.error("NEED MODIFY: module %s with %s contains wrong mod innerapi_tags [%s] in innerapi_tags [%s]" 
                            % (mod["name"], mod["path"], ",".join(wrong_tags), ",".join(innerapi_tags)))
                 return False

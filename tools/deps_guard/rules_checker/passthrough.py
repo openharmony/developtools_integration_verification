@@ -130,6 +130,7 @@ class PassthroughRule(BaseRule):
         self.__modules_with_passthrough_tag = []
         self.__modules_with_passthrough_indirect_tag = []
         self.__all_mods = []
+        self.__all_paths = {}
 
         # Check if any napi modules has dependedBy
         for mod in self.get_mgr().get_all():
@@ -146,6 +147,7 @@ class PassthroughRule(BaseRule):
                 continue
 
             self.__all_mods.append(mod["name"])
+            self.__all_paths[mod["name"]] = mod["path"]
 
             if "passthrough" in mod["path"] and "passthrough/indirect" not in mod["path"]:
                 if mod["name"] not in self.__passthroughs:
@@ -173,6 +175,9 @@ class PassthroughRule(BaseRule):
         for mod in self.__passthroughs:
             if mod not in self.__all_mods:
                 continue
+            if mod in self.__all_paths:
+                if "passthrough/" not in self.__all_paths[mod]:
+                    continue
             if mod not in passthrough_tags:
                 passed = False    
                 self.error('Passthrough module %s in passthrough_info.json should add innerapi_tags with "passthrough"'
@@ -181,6 +186,9 @@ class PassthroughRule(BaseRule):
         for mod in self.__indirects:
             if mod not in self.__all_mods:
                 continue
+            if mod in self.__all_paths:
+                if "passthrough/indirect" not in self.__all_paths[mod]:
+                    continue
             if mod not in indirect_tags:
                 passed = False
                 self.error('passthrough_indirect module %s in passthrough_indirect_info.json should add innerapi_tags "passthrough_indirect"'
