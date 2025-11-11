@@ -372,5 +372,12 @@
     "acls": [
         "ohos.permission.INJECT_INPUT_EVENT"
     ]
+  },
+  {
+    "processName": "huks_service",
+    "acls": [
+        "ohos.permission.START_INVISIBLE_ABILITY",
+        "ohos.permission.CRYPTO_EXTENSION_CONNECT"
+    ]
   }
 ]
