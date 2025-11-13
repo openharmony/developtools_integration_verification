@@ -1127,11 +1127,25 @@
         "description": "vendor only lib libdisplay_composer_service_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libdisplay_composer_service_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_service_1.4.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libdisplay_composer_service_1.4.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
         "so_file_name": "libdisplay_composer_stub_1.3.z.so",
         "so_file_path": "vendor/lib/libdisplay_composer_stub_1.3.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "vendor only lib libdisplay_composer_stub_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.4.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libdisplay_composer_stub_1.4.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
         "so_file_name": "libperipheral_camera_v4l2_adapter.z.so",
@@ -3108,6 +3122,13 @@
         "description": "vendor only lib libdisplay_composer_service_1.3.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
+        "so_file_name": "libdisplay_composer_service_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_service_1.4.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdisplay_composer_service_1.4.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
         "so_file_name": "libagnss_interface_service_2.0.z.so",
         "so_file_path": "vendor/lib/libagnss_interface_service_2.0.z.so",
         "dep_file_name": "libutils.z.so",
@@ -4044,6 +4065,13 @@
         "dep_file_name": "libutils.z.so",
         "dep_file_path": "system/lib/module/arkts/libutils.z.so",
         "description": "vendor only lib libdisplay_composer_stub_1.3.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.4.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdisplay_composer_stub_1.4.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
         "so_file_name": "libdisplay_composer_stub_1.2.z.so",
@@ -6586,11 +6614,25 @@
         "description": "vendor only lib libdisplay_composer_stub_1.3.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
     },
     {
+        "so_file_name": "libdisplay_composer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.4.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "vendor only lib libdisplay_composer_stub_1.4.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
         "so_file_name": "libdisplay_composer_stub_1.3.z.so",
         "so_file_path": "vendor/lib/libdisplay_composer_stub_1.3.z.so",
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "vendor only lib libdisplay_composer_stub_1.3.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.4.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "vendor only lib libdisplay_composer_stub_1.4.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
         "so_file_name": "libbluetooth_lp_ble_stub_1.0.z.so",
@@ -7524,11 +7566,25 @@
         "description": "vendor only lib libdisplay_composer_service_1.3.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
     },
     {
+        "so_file_name": "libdisplay_composer_service_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_service_1.4.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "vendor only lib libdisplay_composer_service_1.4.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
         "so_file_name": "libdisplay_composer_service_1.3.z.so",
         "so_file_path": "vendor/lib/libdisplay_composer_service_1.3.z.so",
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "vendor only lib libdisplay_composer_service_1.3.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libdisplay_composer_service_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_service_1.4.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "vendor only lib libdisplay_composer_service_1.4.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
         "so_file_name": "libril_service_1.5.z.so",
