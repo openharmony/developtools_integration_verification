@@ -238,6 +238,13 @@
         "description": "lib libdisplay_buffer_hdi_impl_v1_3.z.so with innerapi_tags [chipsetsdk, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libdisplay_buffer_hdi_impl_v1_4.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_hdi_impl_v1_4.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "lib libdisplay_buffer_hdi_impl_v1_4.z.so with innerapi_tags [chipsetsdk, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
         "so_file_name": "libohosffmpeg.z.so",
         "so_file_path": "system/lib/chipset-sdk/libohosffmpeg.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
@@ -903,6 +910,13 @@
         "description": "vendor only lib libdisplay_buffer_stub_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libdisplay_buffer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_buffer_stub_1.4.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libdisplay_buffer_stub_1.4.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
         "so_file_name": "libbluetooth_hci_stub_1.0.z.so",
         "so_file_path": "vendor/lib/libbluetooth_hci_stub_1.0.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
@@ -992,6 +1006,13 @@
         "dep_file_name": "ld-musl-arm.so.1",
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "vendor only lib liballocator_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liballocator_service_1.4.z.so",
+        "so_file_path": "vendor/lib/liballocator_service_1.4.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib liballocator_service_1.4.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
         "so_file_name": "libusb_stub_2.0.z.so",
@@ -2604,6 +2625,13 @@
         "description": "lib libdisplay_buffer_proxy_1.3.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libdisplay_buffer_proxy_1.4.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_proxy_1.4.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "lib libdisplay_buffer_proxy_1.4.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
         "so_file_name": "libpulsecore.z.so",
         "so_file_path": "system/lib/chipset-sdk/libpulsecore.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
@@ -2672,6 +2700,13 @@
         "dep_file_name": "libutils.z.so",
         "dep_file_path": "system/lib/module/arkts/libutils.z.so",
         "description": "lib libdisplay_buffer_hdi_impl_v1_3.z.so with innerapi_tags [chipsetsdk, platformsdk_indirect] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_hdi_impl_v1_4.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_hdi_impl_v1_4.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libdisplay_buffer_hdi_impl_v1_4.z.so with innerapi_tags [chipsetsdk, platformsdk_indirect] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
         "so_file_name": "libaudio_proxy_5.0.z.so",
@@ -3134,6 +3169,13 @@
         "dep_file_name": "libutils.z.so",
         "dep_file_path": "system/lib/module/arkts/libutils.z.so",
         "description": "vendor only lib libdisplay_buffer_stub_1.3.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_buffer_stub_1.4.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdisplay_buffer_stub_1.4.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
         "so_file_name": "libperipheral_camera_v4l2_adapter.z.so",
@@ -3785,6 +3827,13 @@
         "dep_file_name": "libutils.z.so",
         "dep_file_path": "system/lib/module/arkts/libutils.z.so",
         "description": "vendor only lib liballocator_service_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "liballocator_service_1.4.z.so",
+        "so_file_path": "vendor/lib/liballocator_service_1.4.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib liballocator_service_1.4.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
         "so_file_name": "libwpa_interface_service_2.0.z.so",
@@ -4865,6 +4914,13 @@
         "description": "lib libdisplay_buffer_proxy_1.3.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
+        "so_file_name": "libdisplay_buffer_proxy_1.4.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_proxy_1.4.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libdisplay_buffer_proxy_1.4.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
         "so_file_name": "libfaultlogger.z.so",
         "so_file_path": "system/lib/chipset-sdk/libfaultlogger.z.so",
         "dep_file_name": "libutils.z.so",
@@ -5170,6 +5226,20 @@
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "lib libdisplay_buffer_hdi_impl_v1_3.z.so with innerapi_tags [chipsetsdk, platformsdk_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_hdi_impl_v1_4.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_hdi_impl_v1_4.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "lib libdisplay_buffer_hdi_impl_v1_4.z.so with innerapi_tags [chipsetsdk, platformsdk_indirect] cannot deps system only lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_hdi_impl_v1_4.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_hdi_impl_v1_4.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "lib libdisplay_buffer_hdi_impl_v1_4.z.so with innerapi_tags [chipsetsdk, platformsdk_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
         "so_file_name": "libnl_share.z.so",
@@ -6047,18 +6117,18 @@
         "description": "vendor only lib libintell_voice_engine_stub_1.2.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
-        "so_file_name": "liballocator_service_1.0.z.so",
-        "so_file_path": "vendor/lib/liballocator_service_1.0.z.so",
+        "so_file_name": "liballocator_service_1.4.z.so",
+        "so_file_path": "vendor/lib/liballocator_service_1.4.z.so",
         "dep_file_name": "ld-musl-arm-asan.so.1",
         "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
-        "description": "vendor only lib liballocator_service_1.0.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+        "description": "vendor only lib liballocator_service_1.4.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
     },
     {
-        "so_file_name": "liballocator_service_1.0.z.so",
-        "so_file_path": "vendor/lib/liballocator_service_1.0.z.so",
+        "so_file_name": "liballocator_service_1.4.z.so",
+        "so_file_path": "vendor/lib/liballocator_service_1.4.z.so",
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
-        "description": "vendor only lib liballocator_service_1.0.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+        "description": "vendor only lib liballocator_service_1.4.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
         "so_file_name": "libdisplay_buffer_stub_1.3.z.so",
@@ -6073,6 +6143,20 @@
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "vendor only lib libdisplay_buffer_stub_1.3.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_buffer_stub_1.4.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "vendor only lib libdisplay_buffer_stub_1.4.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_buffer_stub_1.4.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "vendor only lib libdisplay_buffer_stub_1.4.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
         "so_file_name": "libcamera_stub_1.4.z.so",
@@ -9587,6 +9671,20 @@
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "lib libdisplay_buffer_proxy_1.3.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_proxy_1.4.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_proxy_1.4.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "lib libdisplay_buffer_proxy_1.4.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot deps system only lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_proxy_1.4.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_proxy_1.4.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "lib libdisplay_buffer_proxy_1.4.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
         "so_file_name": "libselinux.z.so",
