@@ -924,6 +924,13 @@
         "description": "vendor only lib libdrm_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libdrm_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libdrm_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libdrm_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
         "so_file_name": "libhid_ddk_driver.z.so",
         "so_file_path": "vendor/lib/libhid_ddk_driver.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
@@ -3043,6 +3050,13 @@
         "dep_file_name": "libutils.z.so",
         "dep_file_path": "system/lib/module/arkts/libutils.z.so",
         "description": "vendor only lib libdrm_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdrm_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libdrm_stub_1.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdrm_stub_1.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
         "so_file_name": "libwifi_hal_default.z.so",
@@ -6803,11 +6817,25 @@
         "description": "vendor only lib libdrm_stub_1.0.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
     },
     {
+        "so_file_name": "libdrm_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libdrm_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "vendor only lib libdrm_stub_1.1.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
         "so_file_name": "libdrm_stub_1.0.z.so",
         "so_file_path": "vendor/lib/libdrm_stub_1.0.z.so",
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "vendor only lib libdrm_stub_1.0.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libdrm_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libdrm_stub_1.1.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "vendor only lib libdrm_stub_1.1.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
         "so_file_name": "liblight_stub_1.0.z.so",
