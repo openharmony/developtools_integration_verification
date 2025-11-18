@@ -377,7 +377,7 @@
     "processName": "huks_service",
     "acls": [
         "ohos.permission.START_INVISIBLE_ABILITY",
-        "ohos.permission.CRYPTO_EXTENSION_CONNECT"
+        "ohos.permission.CONNECT_CRYPTO_EXTENSION"
     ]
   }
 ]
