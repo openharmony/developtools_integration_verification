@@ -245,6 +245,13 @@
         "description": "lib libdisplay_buffer_hdi_impl_v1_4.z.so with innerapi_tags [chipsetsdk, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libdisplay_buffer_hdi_impl_v1_4.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_hdi_impl_v1_4.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
+        "description": "lib libdisplay_buffer_hdi_impl_v1_4 with innerapi_tags [chipsetsdk_sp_indirect] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
+    },
+    {
         "so_file_name": "libohosffmpeg.z.so",
         "so_file_path": "system/lib/chipset-sdk/libohosffmpeg.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
