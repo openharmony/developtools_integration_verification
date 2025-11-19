@@ -28,6 +28,7 @@ class BaseRule(object):
         self._args = args
         self.__white_lists = self.load_files("whitelist.json")
         self.__out_path = mgr.get_product_out_path()
+        self.__base_sofiles = ["libc.so", "libutils.z.so", "ld-musl-aarch64.so.1"]
 
     def load_files(self, name):
         rules_dir = []
@@ -147,6 +148,9 @@ class BaseRule(object):
                                 break
 
                     if in_whitelist:
+                        continue
+
+                    if callee["name"] in self.__base_sofiles:
                         continue
                     
                     # llndk can dep system only sofile
