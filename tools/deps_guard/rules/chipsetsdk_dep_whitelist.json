@@ -2648,6 +2648,13 @@
     {
         "so_file_name": "libdisplay_buffer_proxy_1.4.z.so",
         "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_proxy_1.4.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
+        "description": "lib libdisplay_buffer_proxy_1.3.z.so with innerapi_tags [chipsetsdk_sp_indirect] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_proxy_1.4.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libdisplay_buffer_proxy_1.4.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "lib libdisplay_buffer_proxy_1.4.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
