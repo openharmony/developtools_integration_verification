@@ -96,24 +96,6 @@
         "headers": []
     },
     {
-        "name": "hdf:libdisplay_buffer_hdi_impl_v1_2",
-        "so_file_name": "libdisplay_buffer_hdi_impl_v1_2.z.so",
-        "path": "//drivers/interface/display/buffer/v1_2:libdisplay_buffer_hdi_impl_v1_2",
-        "headers": []
-    },
-    {
-        "name": "hdf:libdisplay_buffer_hdi_impl_v1_3",
-        "so_file_name": "libdisplay_buffer_hdi_impl_v1_3.z.so",
-        "path": "//drivers/interface/display/buffer/v1_3:libdisplay_buffer_hdi_impl_v1_3",
-        "headers": []
-    },
-    {
-        "name": "hdf:libdisplay_buffer_hdi_impl_v1_4",
-        "so_file_name": "libdisplay_buffer_hdi_impl_v1_4.z.so",
-        "path": "//drivers/interface/display/buffer/v1_4:libdisplay_buffer_hdi_impl_v1_4",
-        "headers": []
-    },
-    {
         "name": "hiviewdfx:rustc_demangle",
         "so_file_name": "librustc_demangle.z.so",
         "path": "//base/hiviewdfx/faultloggerd/interfaces/rust/rustc_demangle:rustc_demangle",
