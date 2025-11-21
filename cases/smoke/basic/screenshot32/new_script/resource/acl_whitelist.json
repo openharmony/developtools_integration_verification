@@ -379,5 +379,11 @@
         "ohos.permission.START_INVISIBLE_ABILITY",
         "ohos.permission.CONNECT_CRYPTO_EXTENSION"
     ]
+  },
+  {
+    "processName": "bgtaskmgr_service",
+    "acls": [
+        "ohos.permission.NOTIFICATION_CONTROLLER"
+    ]
   }
 ]
