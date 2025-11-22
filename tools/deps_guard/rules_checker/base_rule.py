@@ -137,6 +137,13 @@ class BaseRule(object):
                 for dep in mod["deps"]:
                     callee = dep["callee"]
 
+                    if callee["name"] in self.__base_sofiles:
+                        continue
+
+                    if "duplicate" in callee.keys() and callee["duplicate"]:
+                        passed = False
+                        self.error("NEED MODIFY: %s has the same name in other package path, sofile name should be modified" % (callee["name"]))
+
                     dep_innerapi_tags = callee["innerapi_tags"]
                     wrong_tags = [item for item in dep_innerapi_tags if item not in valid_dep_tags]
 
@@ -148,9 +155,6 @@ class BaseRule(object):
                                 break
 
                     if in_whitelist:
-                        continue
-
-                    if callee["name"] in self.__base_sofiles:
                         continue
                     
                     # llndk can dep system only sofile

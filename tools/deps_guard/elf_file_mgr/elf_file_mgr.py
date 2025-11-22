@@ -173,7 +173,7 @@ class ElfFileMgr(object):
 
     def get_elf_by_name(self, name):
         if name in self._basename_dict:
-            return self._basename_dict[name][0]
+            return self._basename_dict[name]
 
         return self.__get_link_file(name)
 
@@ -251,7 +251,12 @@ class ElfFileMgr(object):
                 print("Warning: can not find depended library [" + lib + "] for " + elf["name"])
                 break
 
-            self.add_dependence(elf, dep_elf)
+            if not isinstance(dep_elf, list):
+                self.add_dependence(elf, dep_elf)
+            else:
+                if len(dep_elf) > 1:
+                    dep_elf[0]["duplicate"] = True
+                self.add_dependence(elf, dep_elf[0])
 
     def __get_link_file(self, name):
         for src, target in self._link_file_map.items():
