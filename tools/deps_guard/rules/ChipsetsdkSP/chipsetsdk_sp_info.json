@@ -232,5 +232,17 @@
         "so_file_name": "libdisplay_buffer_hdi_impl_v1_4.z.so",
         "path": "//drivers/interface/display/buffer/v1_4:libdisplay_buffer_hdi_impl_v1_4",
         "headers": []
+    },
+    {
+        "name": "hdf:libdisplay_buffer_proxy_1.3",
+        "so_file_name": "libdisplay_buffer_proxy_1.3.z.so",
+        "path": "//drivers/interface/display/buffer/v1_3:libdisplay_buffer_proxy_1.3",
+        "headers": []
+    },
+    {
+        "name": "hdf:libdisplay_buffer_proxy_1.4",
+        "so_file_name": "libdisplay_buffer_proxy_1.4.z.so",
+        "path": "//drivers/interface/display/buffer/v1_4:libdisplay_buffer_proxy_1.4",
+        "headers": []
     }
 ]
