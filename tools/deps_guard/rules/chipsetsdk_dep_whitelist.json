@@ -211,7 +211,7 @@
     },
     {
         "so_file_name": "libclang_rt.ubsan_minimal.so",
-        "so_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "dep_file_name": "ld-musl-arm.so.1",
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "lib libclang_rt.ubsan_minimal.so with innerapi_tags [platformsdk, chipsetsdk] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
@@ -1977,7 +1977,7 @@
         "so_file_name": "libsurface.z.so",
         "so_file_path": "system/lib/chipset-sdk-sp/libsurface.z.so",
         "dep_file_name": "libclang_rt.ubsan_minimal.so",
-        "dep_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "dep_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "description": "lib libsurface.z.so with innerapi_tags [chipsetsdk_sp, platformsdk] deps wrong lib libclang_rt.ubsan_minimal.so contains innerapi_tags [chipsetsdk]"
     },
     {
@@ -2152,7 +2152,7 @@
         "so_file_name": "libipc_single.z.so",
         "so_file_path": "system/lib/chipset-sdk-sp/libipc_single.z.so",
         "dep_file_name": "libclang_rt.ubsan_minimal.so",
-        "dep_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "dep_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "description": "lib libipc_single.z.so with innerapi_tags [chipsetsdk_sp, platformsdk, sasdk] deps wrong lib libclang_rt.ubsan_minimal.so contains innerapi_tags [chipsetsdk]"
     },
     {
@@ -2208,7 +2208,7 @@
         "so_file_name": "libutils.z.so",
         "so_file_path": "system/lib/chipset-sdk-sp/libutils.z.so",
         "dep_file_name": "libclang_rt.ubsan_minimal.so",
-        "dep_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "dep_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "description": "lib libutils.z.so with innerapi_tags [chipsetsdk_sp, platformsdk, sasdk] deps wrong lib libclang_rt.ubsan_minimal.so contains innerapi_tags [chipsetsdk]"
     },
     {
@@ -2376,7 +2376,7 @@
         "so_file_name": "libstorage_manager_acl.z.so",
         "so_file_path": "system/lib/chipset-sdk-sp/libstorage_manager_acl.z.so",
         "dep_file_name": "libclang_rt.ubsan_minimal.so",
-        "dep_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "dep_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "description": "lib libstorage_manager_acl.z.so with innerapi_tags [chipsetsdk_sp_indirect] deps wrong lib libclang_rt.ubsan_minimal.so contains innerapi_tags [chipsetsdk]"
     },
     {
@@ -2502,7 +2502,7 @@
         "so_file_name": "libeventhandler.z.so",
         "so_file_path": "system/lib/chipset-sdk-sp/libeventhandler.z.so",
         "dep_file_name": "libclang_rt.ubsan_minimal.so",
-        "dep_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "dep_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "description": "lib libeventhandler.z.so with innerapi_tags [platformsdk, chipsetsdk_sp_indirect, sasdk] deps wrong lib libclang_rt.ubsan_minimal.so contains innerapi_tags [chipsetsdk]"
     },
     {
@@ -2544,7 +2544,7 @@
         "so_file_name": "libipc_common.z.so",
         "so_file_path": "system/lib/chipset-sdk-sp/libipc_common.z.so",
         "dep_file_name": "libclang_rt.ubsan_minimal.so",
-        "dep_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "dep_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "description": "lib libipc_common.z.so with innerapi_tags [chipsetsdk_sp_indirect, platformsdk_indirect] deps wrong lib libclang_rt.ubsan_minimal.so contains innerapi_tags [chipsetsdk]"
     },
     {
@@ -4679,7 +4679,7 @@
         "so_file_name": "libusb_host_interface_service_2.0.z.so",
         "so_file_path": "vendor/lib/passthrough/libusb_host_interface_service_2.0.z.so",
         "dep_file_name": "libclang_rt.ubsan_minimal.so",
-        "dep_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "dep_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "description": "lib libusb_host_interface_service_2.0.z.so with innerapi_tags [passthrough] deps wrong lib libclang_rt.ubsan_minimal.so contains innerapi_tags [chipsetsdk]"
     },
     {
@@ -4868,7 +4868,7 @@
         "so_file_name": "libusb_adapter.z.so",
         "so_file_path": "vendor/lib/passthrough/indirect/libusb_adapter.z.so",
         "dep_file_name": "libclang_rt.ubsan_minimal.so",
-        "dep_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "dep_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "description": "lib libusb_adapter.z.so with innerapi_tags [passthrough_indirect] deps wrong lib libclang_rt.ubsan_minimal.so contains innerapi_tags [chipsetsdk]"
     },
     {
@@ -4917,7 +4917,7 @@
         "so_file_name": "libserial_interface_service_1.0.z.so",
         "so_file_path": "vendor/lib/passthrough/indirect/libserial_interface_service_1.0.z.so",
         "dep_file_name": "libclang_rt.ubsan_minimal.so",
-        "dep_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "dep_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "description": "lib libserial_interface_service_1.0.z.so with innerapi_tags [passthrough_indirect] deps wrong lib libclang_rt.ubsan_minimal.so contains innerapi_tags [chipsetsdk]"
     },
     {
@@ -5161,7 +5161,7 @@
         "so_file_name": "libusb_ddk_device.z.so",
         "so_file_path": "vendor/lib/passthrough/indirect/libusb_ddk_device.z.so",
         "dep_file_name": "libclang_rt.ubsan_minimal.so",
-        "dep_file_path": "system/lib/chipset-sdk/libclang_rt.ubsan_minimal.so",
+        "dep_file_path": "system/lib/chipset-sdk-sp/libclang_rt.ubsan_minimal.so",
         "description": "lib libusb_ddk_device.z.so with innerapi_tags [passthrough_indirect] deps wrong lib libclang_rt.ubsan_minimal.so contains innerapi_tags [chipsetsdk]"
     },
     {

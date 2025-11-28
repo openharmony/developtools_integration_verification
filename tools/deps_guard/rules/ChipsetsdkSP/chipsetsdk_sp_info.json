@@ -232,5 +232,11 @@
         "so_file_name": "libdisplay_buffer_hdi_impl_v1_4.z.so",
         "path": "//drivers/interface/display/buffer/v1_4:libdisplay_buffer_hdi_impl_v1_4",
         "headers": []
-    }
+    },
+    {
+        "name": "build:libclang_rt.ubsan_minimal.so",
+        "so_file_name": "libclang_rt.ubsan_minimal.so",
+        "path": "//build/common/ubsan:libclang_rt.ubsan_minimal.so",
+        "headers": []
+     }
 ]
