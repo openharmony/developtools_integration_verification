@@ -22,8 +22,7 @@ class Test:
         passed_num = int(passed.group('pass'))
         assert run_num == passed_num, '失败'
 
-    @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
-    def test(self, setup_teardown, device):
+    def test_Notification(self, setup_teardown, device):
         logging.info('ActsNotificationCallbackStaticTest.hap start')
         hap_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(device.resource_path))), 'suites', 'acts', 'acts', 'testcases', 'ActsNotificationCallbackStaticTest.hap')
         device.install_hap(hap_path)
@@ -36,8 +35,7 @@ class Test:
         passed_num = int(passed.group('pass'))
         assert run_num == passed_num, '失败'
 
-    @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
-    def test(self, setup_teardown, device):
+    def test_Powermgr(self, setup_teardown, device):
         logging.info('ActsPowermgrDisplayStaticTest.hap start')
         hap_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(device.resource_path))), 'suites', 'acts', 'acts', 'testcases', 'ActsPowermgrDisplayStaticTest.hap')
         device.install_hap(hap_path)
