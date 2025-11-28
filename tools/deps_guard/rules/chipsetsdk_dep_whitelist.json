@@ -10112,5 +10112,12 @@
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "lib libomxvpu_enc.z.so with innerapi_tags [passthrough_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
-    }    
+    },
+    {
+        "so_file_name": "libpulse.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libpulse.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "lib libpulse.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    }
 ]

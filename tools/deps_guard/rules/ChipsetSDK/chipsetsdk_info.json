@@ -208,5 +208,23 @@
         "so_file_name": "libturbojpeg.z.so",
         "path": "//third_party/libjpeg-turbo:turbojpeg",
         "headers": []
+    },
+    {
+        "name": "pulseaudio:pulsecommon",
+        "so_file_name": "libpulsecommon.z.so",
+        "path": "//third_party/pulseaudio/ohosbuild/src:pulsecommon",
+        "headers": []
+    },
+    {
+        "name": "pulseaudio:pulsecore",
+        "so_file_name": "libpulsecore.z.so",
+        "path": "//third_party/pulseaudio/ohosbuild/src/pulsecore:pulsecore",
+        "headers": []
+    },
+    {
+        "name": "pulseaudio:pulse",
+        "so_file_name": "libpulse.z.so",
+        "path": "//third_party/pulseaudio/ohosbuild/src/pulse:pulse",
+        "headers": []
     }
 ]
