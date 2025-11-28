@@ -26,7 +26,7 @@ class Test:
         logging.info('ActsNotificationCallbackStaticTest.hap start')
         hap_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(device.resource_path))), 'suites', 'acts', 'acts', 'testcases', 'ActsNotificationCallbackStaticTest.hap')
         device.install_hap(hap_path)
-        output = device.hdc_shell('aa test -b com.acts.startabilitytest.staticcom.example.actsnotificationmanagerrequestenablenotificationcallbacktest.static -m entry -s unittest /ets/testrunner/OpenHarmonyTestRunner -s timeout 15000')
+        output = device.hdc_shell('aa test -b com.example.actsnotificationmanagerrequestenablenotificationcallbacktest.static -m entry -s unittest /ets/testrunner/OpenHarmonyTestRunner -s timeout 15000')
         run = re.search(r'run: (?P<run>\d+),', output)
         passed = re.search(r'Pass: (?P<pass>\d+),', output)
         assert run, '失败'
