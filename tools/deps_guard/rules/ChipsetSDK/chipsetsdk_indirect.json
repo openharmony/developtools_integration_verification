@@ -36,21 +36,9 @@
         "headers": []
     },
     {
-        "name": "pulseaudio:pulsecore",
-        "so_file_name": "libpulsecore.z.so",
-        "path": "//third_party/pulseaudio/ohosbuild/src/pulsecore:pulsecore",
-        "headers": []
-    },
-    {
         "name": "brotli:brotli_shared",
         "so_file_name": "libbrotli_shared.z.so",
         "path": "//third_party/brotli:brotli_shared",
-        "headers": []
-    },
-    {
-        "name": "pulseaudio:pulsecommon",
-        "so_file_name": "libpulsecommon.z.so",
-        "path": "//third_party/pulseaudio/ohosbuild/src:pulsecommon",
         "headers": []
     },
     {
