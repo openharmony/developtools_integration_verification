@@ -10105,5 +10105,1756 @@
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "lib libomxvpu_enc.z.so with innerapi_tags [passthrough_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
-    }    
+    },
+    {
+        "so_file_name": "all vendor lib so",
+        "so_file_path": "all vendor lib so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "all vendor lib deps system only lib ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "all vendor lib so",
+        "so_file_path": "all vendor lib so",
+        "dep_file_name": "ld-musl-aarch64-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64-asan.so.1",
+        "description": "all vendor lib deps system only lib ld-musl-aarch64-asan.so.1"
+    },
+    {
+        "so_file_name": "libGLES_mali.z.so",
+        "so_file_path": "vendor/lib64/libGLES_mali.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libGLES_mali.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libagnss_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libagnss_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libagnss_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liballocator.z.so",
+        "so_file_path": "vendor/lib64/liballocator.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liballocator.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liballocator2.0.z.so",
+        "so_file_path": "vendor/lib64/liballocator2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liballocator2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liballocator3.0.z.so",
+        "so_file_path": "vendor/lib64/liballocator3.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liballocator3.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liballocator4.0.z.so",
+        "so_file_path": "vendor/lib64/liballocator4.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liballocator4.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liballocator_driver_1.0.z.so",
+        "so_file_path": "vendor/lib64/liballocator_driver_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liballocator_driver_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liballocator_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/liballocator_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liballocator_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaosp_base.z.so",
+        "so_file_path": "vendor/lib64/libaosp_base.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaosp_base.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaosp_cutils.z.so",
+        "so_file_path": "vendor/lib64/libaosp_cutils.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaosp_cutils.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaosp_dmabufheap.z.so",
+        "so_file_path": "vendor/lib64/libaosp_dmabufheap.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaosp_dmabufheap.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaosp_utils.z.so",
+        "so_file_path": "vendor/lib64/libaosp_utils.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaosp_utils.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_bluetooth_hdi_adapter_server.z.so",
+        "so_file_path": "vendor/lib64/libaudio_bluetooth_hdi_adapter_server.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaudio_bluetooth_hdi_adapter_server.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_capture_adapter.z.so",
+        "so_file_path": "vendor/lib64/libaudio_capture_adapter.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaudio_capture_adapter.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_manager_daudio_primary_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libaudio_manager_daudio_primary_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaudio_manager_daudio_primary_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_manager_service_5.0.z.so",
+        "so_file_path": "vendor/lib64/libaudio_manager_service_5.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaudio_manager_service_5.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_path_select.z.so",
+        "so_file_path": "vendor/lib64/libaudio_path_select.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaudio_path_select.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_primary_driver.z.so",
+        "so_file_path": "vendor/lib64/libaudio_primary_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaudio_primary_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_primary_impl_vendor.z.so",
+        "so_file_path": "vendor/lib64/libaudio_primary_impl_vendor.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaudio_primary_impl_vendor.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_render_adapter.z.so",
+        "so_file_path": "vendor/lib64/libaudio_render_adapter.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaudio_render_adapter.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_stub_5.0.z.so",
+        "so_file_path": "vendor/lib64/libaudio_stub_5.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libaudio_stub_5.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libbattery_driver.z.so",
+        "so_file_path": "vendor/lib64/libbattery_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libbattery_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libbattery_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libbattery_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libbattery_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libbattery_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/libbattery_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libbattery_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libbluetooth_a2dp_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/libbluetooth_a2dp_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libbluetooth_a2dp_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libbluetooth_hci_hdi_driver.z.so",
+        "so_file_path": "vendor/lib64/libbluetooth_hci_hdi_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libbluetooth_hci_hdi_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libbluetooth_hci_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libbluetooth_hci_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libbluetooth_hci_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libbluetooth_lp_ble_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libbluetooth_lp_ble_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libbluetooth_lp_ble_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcamera_host_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libcamera_host_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcamera_host_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcamera_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libcamera_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcamera_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcamera_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libcamera_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcamera_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcamera_stub_1.2.z.so",
+        "so_file_path": "vendor/lib64/libcamera_stub_1.2.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcamera_stub_1.2.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcamera_stub_1.3.z.so",
+        "so_file_path": "vendor/lib64/libcamera_stub_1.3.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcamera_stub_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcamera_stub_1.4.z.so",
+        "so_file_path": "vendor/lib64/libcamera_stub_1.4.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcamera_stub_1.4.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libchip_controller_chip_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libchip_controller_chip_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libchip_controller_chip_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libchip_hdi_driver.z.so",
+        "so_file_path": "vendor/lib64/libchip_hdi_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libchip_hdi_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libchip_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/libchip_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libchip_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libclearplay_driver.z.so",
+        "so_file_path": "vendor/lib64/libclearplay_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libclearplay_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcodec_driver.z.so",
+        "so_file_path": "vendor/lib64/libcodec_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcodec_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcodec_image_driver.z.so",
+        "so_file_path": "vendor/lib64/libcodec_image_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcodec_image_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcodec_image_service_2.1.z.so",
+        "so_file_path": "vendor/lib64/libcodec_image_service_2.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcodec_image_service_2.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcodec_stub_4.0.z.so",
+        "so_file_path": "vendor/lib64/libcodec_stub_4.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcodec_stub_4.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcommon-V3-ndk.z.so",
+        "so_file_path": "vendor/lib64/libcommon-V3-ndk.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcommon-V3-ndk.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libcomposer_buffer_cache.z.so",
+        "so_file_path": "vendor/lib64/libcomposer_buffer_cache.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcomposer_buffer_cache.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdaudio_ext_driver.z.so",
+        "so_file_path": "vendor/lib64/libdaudio_ext_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdaudio_ext_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdaudio_hdf_utils.z.so",
+        "so_file_path": "vendor/lib64/libdaudio_hdf_utils.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdaudio_hdf_utils.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdaudio_manager_daudio_ext_service_2.1.z.so",
+        "so_file_path": "vendor/lib64/libdaudio_manager_daudio_ext_service_2.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdaudio_manager_daudio_ext_service_2.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdaudio_primary_driver.z.so",
+        "so_file_path": "vendor/lib64/libdaudio_primary_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdaudio_primary_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdaudio_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libdaudio_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdaudio_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdaudioext_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libdaudioext_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdaudioext_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdaudioext_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/libdaudioext_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdaudioext_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdaudioext_stub_2.1.z.so",
+        "so_file_path": "vendor/lib64/libdaudioext_stub_2.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdaudioext_stub_2.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_buffer_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_buffer_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_buffer_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_buffer_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_stub_1.2.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_buffer_stub_1.2.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_buffer_stub_1.2.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_stub_1.3.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_buffer_stub_1.3.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_buffer_stub_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_vdi_impl.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_buffer_vdi_impl.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_buffer_vdi_impl.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_composer_driver_1.0.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_composer_driver_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_composer_driver_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_composer_service_1.4.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_composer_service_1.4.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_composer_service_1.4.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_composer_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_composer_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_composer_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_composer_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.2.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_composer_stub_1.2.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_composer_stub_1.2.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.3.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_composer_stub_1.3.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_composer_stub_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_composer_stub_1.4.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_composer_stub_1.4.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_composer_vdi_impl.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_composer_vdi_impl.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_composer_vdi_impl.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_device.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_device.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_device.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_gfx.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_gfx.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_gfx.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_gralloc.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_gralloc.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_gralloc.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdistributed_camera_hdf_service_1.1.z.so",
+        "so_file_path": "vendor/lib64/libdistributed_camera_hdf_service_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdistributed_camera_hdf_service_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdistributed_camera_host_config.z.so",
+        "so_file_path": "vendor/lib64/libdistributed_camera_host_config.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdistributed_camera_host_config.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdistributed_camera_provider_config.z.so",
+        "so_file_path": "vendor/lib64/libdistributed_camera_provider_config.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdistributed_camera_provider_config.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdistributed_camera_provider_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libdistributed_camera_provider_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdistributed_camera_provider_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libdrm_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libdrm_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdrm_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libeffect_model_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libeffect_model_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libeffect_model_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libeffect_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libeffect_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libeffect_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libemit_event_manager.z.so",
+        "so_file_path": "vendor/lib64/libemit_event_manager.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libemit_event_manager.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libethernet_hdi_c_device.z.so",
+        "so_file_path": "vendor/lib64/libethernet_hdi_c_device.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libethernet_hdi_c_device.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libethernet_hdi_client.z.so",
+        "so_file_path": "vendor/lib64/libethernet_hdi_client.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libethernet_hdi_client.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libethernet_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libethernet_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libethernet_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libethernet_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libethernet_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libethernet_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libface_auth_driver.z.so",
+        "so_file_path": "vendor/lib64/libface_auth_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libface_auth_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libface_auth_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libface_auth_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libface_auth_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libface_auth_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/libface_auth_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libface_auth_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libfingerprint_auth_driver.z.so",
+        "so_file_path": "vendor/lib64/libfingerprint_auth_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libfingerprint_auth_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libfingerprint_auth_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libfingerprint_auth_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libfingerprint_auth_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libfingerprint_auth_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/libfingerprint_auth_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libfingerprint_auth_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libgeofence_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libgeofence_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libgeofence_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libgnss_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libgnss_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libgnss_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libgralloc.default.z.so",
+        "so_file_path": "vendor/lib64/libgralloc.default.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libgralloc.default.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libgralloctypes.z.so",
+        "so_file_path": "vendor/lib64/libgralloctypes.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libgralloctypes.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhardware.z.so",
+        "so_file_path": "vendor/lib64/libhardware.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhardware.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhci_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libhci_interface_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhci_interface_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhdf_host.z.so",
+        "so_file_path": "vendor/lib64/libhdf_host.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhdf_host.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhdf_platform.z.so",
+        "so_file_path": "vendor/lib64/libhdf_platform.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhdf_platform.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhdi_audio_a2dp_server.z.so",
+        "so_file_path": "vendor/lib64/libhdi_audio_a2dp_server.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhdi_audio_a2dp_server.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhdi_audio_bluetooth.z.so",
+        "so_file_path": "vendor/lib64/libhdi_audio_bluetooth.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhdi_audio_bluetooth.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhdi_light.z.so",
+        "so_file_path": "vendor/lib64/libhdi_light.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhdi_light.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhdi_light_impl.z.so",
+        "so_file_path": "vendor/lib64/libhdi_light_impl.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhdi_light_impl.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhdi_sensor.z.so",
+        "so_file_path": "vendor/lib64/libhdi_sensor.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhdi_sensor.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhdi_sensor_impl.z.so",
+        "so_file_path": "vendor/lib64/libhdi_sensor_impl.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhdi_sensor_impl.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhdi_vibrator.z.so",
+        "so_file_path": "vendor/lib64/libhdi_vibrator.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhdi_vibrator.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhdi_vibrator_impl.z.so",
+        "so_file_path": "vendor/lib64/libhdi_vibrator_impl.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhdi_vibrator_impl.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhid_ddk_driver.z.so",
+        "so_file_path": "vendor/lib64/libhid_ddk_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhid_ddk_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhid_ddk_service_1.1.z.so",
+        "so_file_path": "vendor/lib64/libhid_ddk_service_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhid_ddk_service_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhid_ddk_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libhid_ddk_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhid_ddk_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhid_ddk_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libhid_ddk_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhid_ddk_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhidlbase.z.so",
+        "so_file_path": "vendor/lib64/libhidlbase.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhidlbase.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhostapd_hdi_c_device.z.so",
+        "so_file_path": "vendor/lib64/libhostapd_hdi_c_device.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhostapd_hdi_c_device.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhostapd_hdi_client.z.so",
+        "so_file_path": "vendor/lib64/libhostapd_hdi_client.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhostapd_hdi_client.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhostapd_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libhostapd_interface_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhostapd_interface_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhostapd_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libhostapd_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhostapd_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhril.z.so",
+        "so_file_path": "vendor/lib64/libhril.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhril.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhril_hdf.z.so",
+        "so_file_path": "vendor/lib64/libhril_hdf.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhril_hdf.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libhwbinder.z.so",
+        "so_file_path": "vendor/lib64/libhwbinder.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libhwbinder.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libimage_stub_2.1.z.so",
+        "so_file_path": "vendor/lib64/libimage_stub_2.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libimage_stub_2.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_driver.z.so",
+        "so_file_path": "vendor/lib64/libintell_voice_engine_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libintell_voice_engine_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_manager_service_1.2.z.so",
+        "so_file_path": "vendor/lib64/libintell_voice_engine_manager_service_1.2.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libintell_voice_engine_manager_service_1.2.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libintell_voice_engine_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libintell_voice_engine_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libintell_voice_engine_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libintell_voice_engine_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_stub_1.2.z.so",
+        "so_file_path": "vendor/lib64/libintell_voice_engine_stub_1.2.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libintell_voice_engine_stub_1.2.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libintell_voice_trigger_driver.z.so",
+        "so_file_path": "vendor/lib64/libintell_voice_trigger_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libintell_voice_trigger_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libintell_voice_trigger_manager_service_1.1.z.so",
+        "so_file_path": "vendor/lib64/libintell_voice_trigger_manager_service_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libintell_voice_trigger_manager_service_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libintell_voice_trigger_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libintell_voice_trigger_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libintell_voice_trigger_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libintell_voice_trigger_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libintell_voice_trigger_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libintell_voice_trigger_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libion.z.so",
+        "so_file_path": "vendor/lib64/libion.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libion.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liblight_driver.z.so",
+        "so_file_path": "vendor/lib64/liblight_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liblight_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liblight_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/liblight_interface_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liblight_interface_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liblight_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/liblight_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liblight_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liblocation_agnss_hdi_driver.z.so",
+        "so_file_path": "vendor/lib64/liblocation_agnss_hdi_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liblocation_agnss_hdi_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liblocation_agnss_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/liblocation_agnss_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liblocation_agnss_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liblocation_geofence_hdi_driver.z.so",
+        "so_file_path": "vendor/lib64/liblocation_geofence_hdi_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liblocation_geofence_hdi_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liblocation_geofence_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/liblocation_geofence_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liblocation_geofence_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liblocation_gnss_hdi_driver.z.so",
+        "so_file_path": "vendor/lib64/liblocation_gnss_hdi_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liblocation_gnss_hdi_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liblocation_gnss_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/liblocation_gnss_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liblocation_gnss_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "liblow_power_player_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/liblow_power_player_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib liblow_power_player_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmapper.z.so",
+        "so_file_path": "vendor/lib64/libmapper.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmapper.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmapper2.0.z.so",
+        "so_file_path": "vendor/lib64/libmapper2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmapper2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmapper2.1.z.so",
+        "so_file_path": "vendor/lib64/libmapper2.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmapper2.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmapper3.0.z.so",
+        "so_file_path": "vendor/lib64/libmapper3.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmapper3.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmapper4.0.z.so",
+        "so_file_path": "vendor/lib64/libmapper4.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmapper4.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmapper_driver_1.0.z.so",
+        "so_file_path": "vendor/lib64/libmapper_driver_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmapper_driver_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmedia_key_system_factory_clearplay_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libmedia_key_system_factory_clearplay_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmedia_key_system_factory_clearplay_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmemion.z.so",
+        "so_file_path": "vendor/lib64/libmemion.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmemion.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmemorytracker_driver.z.so",
+        "so_file_path": "vendor/lib64/libmemorytracker_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmemorytracker_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmemorytracker_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libmemorytracker_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmemorytracker_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmetadata_driver_1.1.z.so",
+        "so_file_path": "vendor/lib64/libmetadata_driver_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmetadata_driver_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmock_effect_lib.z.so",
+        "so_file_path": "vendor/lib64/libmock_effect_lib.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmock_effect_lib.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmotion_driver.z.so",
+        "so_file_path": "vendor/lib64/libmotion_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmotion_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmotion_interface_service_1.1.z.so",
+        "so_file_path": "vendor/lib64/libmotion_interface_service_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmotion_interface_service_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmotion_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libmotion_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmotion_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libmotion_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libmotion_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmotion_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libnativewindow.z.so",
+        "so_file_path": "vendor/lib64/libnativewindow.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libnativewindow.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libnnrt_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libnnrt_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libnnrt_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libnnrt_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/libnnrt_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libnnrt_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libnnrt_stub_2.1.z.so",
+        "so_file_path": "vendor/lib64/libnnrt_stub_2.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libnnrt_stub_2.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpartition_slot_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libpartition_slot_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpartition_slot_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpartitionslot_driver.z.so",
+        "so_file_path": "vendor/lib64/libpartitionslot_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpartitionslot_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpartitionslot_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libpartitionslot_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpartitionslot_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libperipheral_camera_buffer_manager.z.so",
+        "so_file_path": "vendor/lib64/libperipheral_camera_buffer_manager.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libperipheral_camera_buffer_manager.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libperipheral_camera_device_manager.z.so",
+        "so_file_path": "vendor/lib64/libperipheral_camera_device_manager.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libperipheral_camera_device_manager.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libperipheral_camera_metadata_manager.z.so",
+        "so_file_path": "vendor/lib64/libperipheral_camera_metadata_manager.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libperipheral_camera_metadata_manager.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libperipheral_camera_pipeline_core.z.so",
+        "so_file_path": "vendor/lib64/libperipheral_camera_pipeline_core.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libperipheral_camera_pipeline_core.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libperipheral_camera_utils.z.so",
+        "so_file_path": "vendor/lib64/libperipheral_camera_utils.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libperipheral_camera_utils.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libperipheral_camera_v4l2_adapter.z.so",
+        "so_file_path": "vendor/lib64/libperipheral_camera_v4l2_adapter.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libperipheral_camera_v4l2_adapter.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpin_auth_driver.z.so",
+        "so_file_path": "vendor/lib64/libpin_auth_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpin_auth_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpin_auth_interface_service_3.0.z.so",
+        "so_file_path": "vendor/lib64/libpin_auth_interface_service_3.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpin_auth_interface_service_3.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpin_auth_stub_3.0.z.so",
+        "so_file_path": "vendor/lib64/libpin_auth_stub_3.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpin_auth_stub_3.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpower_driver.z.so",
+        "so_file_path": "vendor/lib64/libpower_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpower_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpower_interface_service_1.3.z.so",
+        "so_file_path": "vendor/lib64/libpower_interface_service_1.3.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpower_interface_service_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpower_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libpower_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpower_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpower_stub_1.2.z.so",
+        "so_file_path": "vendor/lib64/libpower_stub_1.2.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpower_stub_1.2.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libpower_stub_1.3.z.so",
+        "so_file_path": "vendor/lib64/libpower_stub_1.3.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libpower_stub_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libril_driver.z.so",
+        "so_file_path": "vendor/lib64/libril_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libril_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libril_service_1.5.z.so",
+        "so_file_path": "vendor/lib64/libril_service_1.5.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libril_service_1.5.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libril_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libril_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libril_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libril_stub_1.2.z.so",
+        "so_file_path": "vendor/lib64/libril_stub_1.2.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libril_stub_1.2.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libril_stub_1.3.z.so",
+        "so_file_path": "vendor/lib64/libril_stub_1.3.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libril_stub_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libril_stub_1.4.z.so",
+        "so_file_path": "vendor/lib64/libril_stub_1.4.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libril_stub_1.4.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libril_stub_1.5.z.so",
+        "so_file_path": "vendor/lib64/libril_stub_1.5.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libril_stub_1.5.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libril_vendor.z.so",
+        "so_file_path": "vendor/lib64/libril_vendor.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libril_vendor.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libscsi_ddk_driver.z.so",
+        "so_file_path": "vendor/lib64/libscsi_ddk_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libscsi_ddk_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libscsi_ddk_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libscsi_ddk_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libscsi_ddk_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libscsi_peripheral_ddk_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libscsi_peripheral_ddk_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libscsi_peripheral_ddk_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libsensor_driver.z.so",
+        "so_file_path": "vendor/lib64/libsensor_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libsensor_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libsensor_interface_service_3.1.z.so",
+        "so_file_path": "vendor/lib64/libsensor_interface_service_3.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libsensor_interface_service_3.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libsensor_stub_3.0.z.so",
+        "so_file_path": "vendor/lib64/libsensor_stub_3.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libsensor_stub_3.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libsensor_stub_3.1.z.so",
+        "so_file_path": "vendor/lib64/libsensor_stub_3.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libsensor_stub_3.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libserial_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libserial_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libserial_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libsync_adapter.z.so",
+        "so_file_path": "vendor/lib64/libsync_adapter.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libsync_adapter.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libthermal_driver.z.so",
+        "so_file_path": "vendor/lib64/libthermal_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libthermal_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libthermal_interface_service_1.1.z.so",
+        "so_file_path": "vendor/lib64/libthermal_interface_service_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libthermal_interface_service_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libthermal_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libthermal_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libthermal_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libui.z.so",
+        "so_file_path": "vendor/lib64/libui.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libui.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_camera_buffer_manager.z.so",
+        "so_file_path": "vendor/lib64/libusb_camera_buffer_manager.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_camera_buffer_manager.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_camera_device_manager.z.so",
+        "so_file_path": "vendor/lib64/libusb_camera_device_manager.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_camera_device_manager.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_camera_metadata_manager.z.so",
+        "so_file_path": "vendor/lib64/libusb_camera_metadata_manager.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_camera_metadata_manager.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_camera_pipeline_core.z.so",
+        "so_file_path": "vendor/lib64/libusb_camera_pipeline_core.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_camera_pipeline_core.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_camera_v4l2_adapter.z.so",
+        "so_file_path": "vendor/lib64/libusb_camera_v4l2_adapter.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_camera_v4l2_adapter.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_ddk_driver.z.so",
+        "so_file_path": "vendor/lib64/libusb_ddk_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_ddk_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_ddk_dynamic_library_wrapper.z.so",
+        "so_file_path": "vendor/lib64/libusb_ddk_dynamic_library_wrapper.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_ddk_dynamic_library_wrapper.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_ddk_host.z.so",
+        "so_file_path": "vendor/lib64/libusb_ddk_host.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_ddk_host.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_ddk_service_1.1.z.so",
+        "so_file_path": "vendor/lib64/libusb_ddk_service_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_ddk_service_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_ddk_service_common.z.so",
+        "so_file_path": "vendor/lib64/libusb_ddk_service_common.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_ddk_service_common.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_ddk_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libusb_ddk_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_ddk_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_ddk_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libusb_ddk_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_ddk_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_device_driver.z.so",
+        "so_file_path": "vendor/lib64/libusb_device_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_device_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_device_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libusb_device_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_device_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_pnp_manager.z.so",
+        "so_file_path": "vendor/lib64/libusb_pnp_manager.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_pnp_manager.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_port_driver.z.so",
+        "so_file_path": "vendor/lib64/libusb_port_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_port_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_port_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libusb_port_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_port_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_serial_ddk_driver.z.so",
+        "so_file_path": "vendor/lib64/libusb_serial_ddk_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_serial_ddk_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_serial_ddk_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libusb_serial_ddk_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_serial_ddk_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_serial_ddk_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libusb_serial_ddk_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_serial_ddk_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libusb_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libusb_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_stub_1.2.z.so",
+        "so_file_path": "vendor/lib64/libusb_stub_1.2.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_stub_1.2.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusb_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/libusb_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusb_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusbfn.z.so",
+        "so_file_path": "vendor/lib64/libusbfn.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusbfn.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusbfn_cdcacm.z.so",
+        "so_file_path": "vendor/lib64/libusbfn_cdcacm.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusbfn_cdcacm.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusbfn_cdcecm.z.so",
+        "so_file_path": "vendor/lib64/libusbfn_cdcecm.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusbfn_cdcecm.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusbfn_mtp_driver.z.so",
+        "so_file_path": "vendor/lib64/libusbfn_mtp_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusbfn_mtp_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusbfn_mtp_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib64/libusbfn_mtp_interface_service_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusbfn_mtp_interface_service_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusbfn_mtp_stub_1.0.z.so",
+        "so_file_path": "vendor/lib64/libusbfn_mtp_stub_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusbfn_mtp_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusbhost_acm.z.so",
+        "so_file_path": "vendor/lib64/libusbhost_acm.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusbhost_acm.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusbhost_acm_rawapi.z.so",
+        "so_file_path": "vendor/lib64/libusbhost_acm_rawapi.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusbhost_acm_rawapi.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusbhost_ecm.z.so",
+        "so_file_path": "vendor/lib64/libusbhost_ecm.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusbhost_ecm.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libusbhost_rndis_rawapi.z.so",
+        "so_file_path": "vendor/lib64/libusbhost_rndis_rawapi.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libusbhost_rndis_rawapi.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libuser_auth_driver.z.so",
+        "so_file_path": "vendor/lib64/libuser_auth_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libuser_auth_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libuser_auth_interface_service_4.0.z.so",
+        "so_file_path": "vendor/lib64/libuser_auth_interface_service_4.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libuser_auth_interface_service_4.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libuser_auth_stub_4.0.z.so",
+        "so_file_path": "vendor/lib64/libuser_auth_stub_4.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libuser_auth_stub_4.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libvendor_intell_voice_engine.z.so",
+        "so_file_path": "vendor/lib64/libvendor_intell_voice_engine.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libvendor_intell_voice_engine.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libvibrator_driver.z.so",
+        "so_file_path": "vendor/lib64/libvibrator_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libvibrator_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libvibrator_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libvibrator_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libvibrator_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libvibrator_stub_2.0.z.so",
+        "so_file_path": "vendor/lib64/libvibrator_stub_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libvibrator_stub_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwifi_driver_client.z.so",
+        "so_file_path": "vendor/lib64/libwifi_driver_client.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwifi_driver_client.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwifi_hal.z.so",
+        "so_file_path": "vendor/lib64/libwifi_hal.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwifi_hal.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwifi_hal_default.z.so",
+        "so_file_path": "vendor/lib64/libwifi_hal_default.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwifi_hal_default.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwifi_hdi_c_device.z.so",
+        "so_file_path": "vendor/lib64/libwifi_hdi_c_device.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwifi_hdi_c_device.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwlan_interface_service_1.3.z.so",
+        "so_file_path": "vendor/lib64/libwlan_interface_service_1.3.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwlan_interface_service_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwlan_service_extend.z.so",
+        "so_file_path": "vendor/lib64/libwlan_service_extend.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwlan_service_extend.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwlan_stub_1.1.z.so",
+        "so_file_path": "vendor/lib64/libwlan_stub_1.1.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwlan_stub_1.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwlan_stub_1.2.z.so",
+        "so_file_path": "vendor/lib64/libwlan_stub_1.2.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwlan_stub_1.2.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwlan_stub_1.3.z.so",
+        "so_file_path": "vendor/lib64/libwlan_stub_1.3.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwlan_stub_1.3.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwpa.z.so",
+        "so_file_path": "vendor/lib64/libwpa.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwpa.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwpa_client_vendor.z.so",
+        "so_file_path": "vendor/lib64/libwpa_client_vendor.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwpa_client_vendor.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwpa_hdi_c_device.z.so",
+        "so_file_path": "vendor/lib64/libwpa_hdi_c_device.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwpa_hdi_c_device.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwpa_hdi_client.z.so",
+        "so_file_path": "vendor/lib64/libwpa_hdi_client.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwpa_hdi_client.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libwpa_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libwpa_interface_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libwpa_interface_service_2.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    }
+    
 ]
