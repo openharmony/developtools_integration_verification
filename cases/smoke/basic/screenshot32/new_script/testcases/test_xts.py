@@ -7,7 +7,7 @@ import sys
 import unittest
 
 
-class Test(unittest.testcases):
+class Test:
 
 
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
@@ -51,11 +51,3 @@ class Test(unittest.testcases):
         run_num = int(run.group('run'))
         passed_num = int(passed.group('pass'))
         assert run_num == passed_num, '失败'
-
-
-if __name__ == "__main__":
-    result = unittest.main(exit=False, verbosity=2)
-    if len(result.result.failures) > 0 or len(result.result.errors) > 0:
-        sys.exit(1)
-    else:
-        sys.exit(0)
