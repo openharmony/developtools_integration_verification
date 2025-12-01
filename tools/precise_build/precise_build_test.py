@@ -28,6 +28,9 @@ import shutil
 import json
 
 
+ROOT_PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+
+
 def get_target(target):
     if target.startswith("//"):
         return target[2:]
@@ -56,7 +59,7 @@ def execute_build_command(command, use_shell=False):
     return return_code == 0
 
 
-def monitor_file_and_stop(shell_script_path, shell_args=None, 
+def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, 
                          use_shell=False):
 
     if isinstance(shell_args, str):
@@ -68,24 +71,20 @@ def monitor_file_and_stop(shell_script_path, shell_args=None,
     
     command += ["--build-only-gn", "--no-prebuilt-sdk"]
 
-    #execute_build_command(command, use_shell=use_shell)
+    execute_build_command(command, use_shell=use_shell)
     
-    file_detected = True
+    file_detected = False
 
-    '''
     while True:
         if os.path.exists(target_file):
             file_detected = True
             break
         time.sleep(0.5)
-        '''
 
     if file_detected:
-        '''
         if os.stat(target_file).st_size == 0:
             print("No changes to the unittest detected, skipping compilation directly.")
             sys.exit()
-        '''
         command.remove("--build-only-gn")
         command.remove("--no-prebuilt-sdk")
         command.extend(["--build-target", "precise_module_build"])
@@ -106,42 +105,43 @@ def process_changes():
     }
     gn_files, c_files, h_files, other_files = [], [], [], []
     file_type_map = {
-        'h': h_files,
-        'hh': h_files,
-        'hpp': h_files,
-        'gn': gn_files,
-        'c': c_files,
-        'cpp': c_files,
-        'cc': c_files,
-        'cxx': c_files,
-        'js': c_files,
-        'ets': c_files,
-        'in': h_files,
-        'cl': h_files,
-        'cppm': h_files,
-        'cuh': h_files,
-        'def': h_files,
-        'gch': h_files,
-        'glsl': h_files,
-        'h++': h_files,
-        'hhu': h_files,
-        'hlsl': h_files,
-        'i': h_files,
-        'icc': h_files,
-        'impl': h_files,
-        'inl': h_files,
-        'ipp': h_files,
-        'ixx': h_files,
-        'mpp': h_files,
-        'mxx': h_files,
-        'pch': h_files,
-        'protp': h_files,
-        'swig': h_files,
-        'template': h_files,
-        'tcc': h_files,
-        'thrift': h_files,
-        'tpp': h_files,
-        'wgsl': h_files,
+        "h": h_files,
+        "hh": h_files,
+        "hpp": h_files,
+        "gn": gn_files,
+        "gni": gn_files,
+        "c": c_files,
+        "cpp": c_files,
+        "cc": c_files,
+        "cxx": c_files,
+        "js": c_files,
+        "ets": c_files,
+        "in": h_files,
+        "cl": h_files,
+        "cppm": h_files,
+        "cuh": h_files,
+        "def": h_files,
+        "gch": h_files,
+        "glsl": h_files,
+        "h++": h_files,
+        "hhu": h_files,
+        "hlsl": h_files,
+        "i": h_files,
+        "icc": h_files,
+        "impl": h_files,
+        "inl": h_files,
+        "ipp": h_files,
+        "ixx": h_files,
+        "mpp": h_files,
+        "mxx": h_files,
+        "pch": h_files,
+        "protp": h_files,
+        "swig": h_files,
+        "template": h_files,
+        "tcc": h_files,
+        "thrift": h_files,
+        "tpp": h_files,
+        "wgsl": h_files,
     }
     
     for key, value in change_info.items():
@@ -152,6 +152,14 @@ def process_changes():
                 continue                
             for modified_file in processor(changed_files[operation]):
                 target_list = file_type_map.get(get_file_extension(modified_file), other_files)
+                if target_list == gn_files:
+                    patch_file_content = generate_patch(os.path.join(ROOT_PATH, key), value.get("name"))
+                    print(patch_file_content)
+                    review_content = parse_patch_for_buildgn(patch_file_content)
+                    print("-"*100)
+                    print(review_content)
+                    print(ROOT_PATH)
+                    print("-"*100)
                 if target_list is not None:
                     target_list.append("//" + os.path.join(key, modified_file))
 
@@ -171,6 +179,102 @@ def process_changes():
         [os.path.join(self.ace_root, f) for f in change_files],
         openharmony_fields
     )
+
+
+def parse_patch_for_buildgn(content):
+    """
+    解析patch文件，提取BUILD.gn文件的修改行号
+    
+    特别注意：
+    1. 只提取以'+'开头的行（新增行）
+    2. 对于添加空行的情况，也要正确识别
+    """
+    
+    # 查找所有BUILD.gn文件的diff块
+    buildgn_diffs = re.findall(
+        r'diff --git a/(.*?BUILD\.gn.*?) b/(.*?BUILD\.gn.*?)\n(.*?)(?=\ndiff --git|\Z)',
+        content,
+        re.DOTALL
+    )
+    
+    if not buildgn_diffs:
+        return None
+    
+    results = []
+    
+    for old_file, new_file, diff_content in buildgn_diffs:
+        changed_lines = []
+        current_line_num = 0
+        
+        # 解析diff内容
+        lines = diff_content.split('\n')
+        
+        for line in lines:
+            # 查找行号信息
+            if line.startswith('@@'):
+                # 提取新文件起始行号
+                match = re.search(r'\+(\d+)(?:,(\d+))?', line)
+                if match:
+                    current_line_num = int(match.group(1))
+                continue
+            
+            # 如果是新增行（但不包括文件头）
+            if line.startswith('+') and not line.startswith('++'):
+                changed_lines.append(str(current_line_num))
+                current_line_num += 1
+                continue
+            
+            # 如果是上下文行或删除行，行号递增（但删除行不计入修改）
+            if line.startswith(' ') or line.startswith('-'):
+                if not line.startswith('---') and not line.startswith('--'):
+                    current_line_num += 1
+        
+        if changed_lines:
+            results.append(f"{new_file} {','.join(changed_lines)}")
+    
+    return results
+
+
+def generate_patch(part_path, part_name):
+    original_cwd = os.getcwd()
+    patch_file = ""
+    patch_content = ""
+    try:
+        os.chdir(part_path)  
+        # 生成patch文件名
+        repo_name = part_name
+        patch_file = f"{repo_name}.patch"
+            
+        cmd = f"git format-patch HEAD^ --stdout"
+            
+        try:
+            result = subprocess.run(
+                cmd,
+                shell=True,
+                capture_output=True,
+                text=True,
+                check=True
+            )
+                
+            # 将输出写入patch文件
+            if result.stdout.strip():
+                patch_content = result.stdout
+                with open(patch_file, 'w', encoding='utf-8') as pf:
+                    pf.write(result.stdout)
+            else:
+                print(f"  nothing change，no patch file")
+                    
+        except subprocess.CalledProcessError as e:
+            print(f"  git diff command shibai: {e}")
+            print(f"  generate patch error: {e.stderr}")
+                
+    except Exception as e:
+        print(f"  generate patch error: {e}")
+    finally:
+        os.chdir(original_cwd)
+    return patch_content
+
+
 
 def get_file_extension(filename):
     if '.' in filename:
@@ -195,8 +299,8 @@ if __name__ == "__main__":
                         help='display help information and exit')
     parser.add_argument('-s', '--script', required=True, 
                         help='the path to the shell script to be executed')
-    #parser.add_argument('-f', '--file', required=True,
-    #                    help='the path of the target file to be monitored')
+    parser.add_argument('-f', '--file', required=True,
+                        help='the path of the target file to be monitored')
     parser.add_argument('--use-shell', action='store_true',
                         help='execute commands using the shell (handle complex commands)')
     parser.add_argument('shell_args', nargs=argparse.REMAINDER,
@@ -214,7 +318,7 @@ if __name__ == "__main__":
     
     success = monitor_file_and_stop(
         shell_script_path=args.script,
-        #target_file=args.file,
+        target_file=args.file,
         shell_args=shell_args,
         use_shell=args.use_shell,
     )

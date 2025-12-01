@@ -1,11 +1,12 @@
 {
-    "h_file_depth": 3,
-    "c_file_depth": 3,
-    "gn_file_depth": 3,
+    "h_file_depth": 2,
+    "c_file_depth": 2,
+    "gn_file_depth": 2,
     "gn_module_depth": 3,
+    "other_file_depth": 3,
     "test_only": true,
     "target_type_list": [
-        "executable"
+        "executable", "copy", "action", "action_foreach", "group"
     ],
     "ignore_list": [
         "//base/hiviewdfx/hiview/plugins/eventlogger/test:EventloggerPluginTest",
@@ -68,16 +69,22 @@
         "//foundation/window/window_manager/wmserver/test/unittest:wmserver_window_pair_test",
         "//foundation/window/window_manager/wm/test/unittest:wm_window_adapter_lite_test",
         "//foundation/window/window_manager/wm/test/unittest:wm_window_manager_lite_test",
-
-	"//foundation/arkui/ace_engine/test/unittest/core/pattern/web:web_pattern_unit_test_ohos",
+	    "//foundation/arkui/test/unittest/capi/accessors:capi_all_accessors_test",
+	    "//foundation/communication/dsoftbus/tests/core/bus_center/lnn:LNNLaneHubTest",
+	    "//foundation/arkui/ace_engine/test/unittest/core/pattern/web:web_pattern_unit_test_ohos",
         "//foundation/arkui/ace_engine/test/unittest/core/pattern/web:web_accessibility_event_report_unit_test_ohos",
         "//foundation/arkui/ace_engine/test/unittest/core/pattern/web/ani:web_pattern_static_unit_test_ohos"
     ],
     "max_range_list": [],
     "modify_files_path": "modify_files.json",
     "precise_result_path": "precise_build_result.txt",
-    "precise_log_path": "out/rk3568/precise_build_log.txt",
-    "root_target": [
+    "precise_log_path": "precise_build_log.txt",
+    "precise_log_level": "DEBUG",
+    "include_parent_targets": [
         "//build/core/gn:build_all_test_pkg"
+    ],
+    "exclude_parent_targets": [
+        "//foundation/arkui/ace_engine/test/unittest:unittest"
     ]
 }
+
