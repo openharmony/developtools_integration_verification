@@ -52,5 +52,11 @@
         "so_file_name": "libstring_utils.z.so",
         "path": "//foundation/ability/ability_base:string_utils",
         "headers": []
+    },
+    {
+        "name": "drivers_interface_camera:libcamera_vendor_tag_proxy_1.0",
+        "so_file_name": "libcamera_vendor_tag_proxy_1.0.z.so",
+        "path": "//drivers/interface/camera/metadata/v1_0:libcamera_vendor_tag_proxy_1.0",
+        "headers": []
     }
 ]
