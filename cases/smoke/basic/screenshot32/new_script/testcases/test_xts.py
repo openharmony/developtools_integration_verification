@@ -7,7 +7,7 @@ import sys
 import unittest
 
 
-class Test(unittest.TestCases):
+class Test(unittest.testcases):
 
 
     @pytest.mark.parametrize('setup_teardown', [None], indirect=True)
