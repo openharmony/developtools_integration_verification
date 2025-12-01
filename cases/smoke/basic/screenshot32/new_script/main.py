@@ -68,6 +68,6 @@ if __name__ == '__main__':
         if passed == 19:
             print('SmokeTest: End of check, test succeeded!')
         else:
-            print('SmokeTest: End of check, SmokeTest find some fatal problems! passed {}/{}'.format(passed, 19)
+            print('SmokeTest: End of check, SmokeTest find some fatal problems! passed {}/{}'.format(passed, 19))
     except:
         print('SmokeTest: End of check, SmokeTest find some fatal problems! {}'.format(traceback.format_exc()))
