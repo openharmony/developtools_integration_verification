@@ -3,8 +3,6 @@ import os
 import time
 import re
 import pytest
-import sys
-import unittest
 
 
 class Test:
