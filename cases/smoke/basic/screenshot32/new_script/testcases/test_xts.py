@@ -53,7 +53,7 @@ class Test(unittest.TestCases):
         assert run_num == passed_num, '失败'
 
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     result = unittest.main(exit=False, verbosity=2)
     if len(result.result.failures) > 0 or len(result.result.errors) > 0:
         sys.exit(1)
