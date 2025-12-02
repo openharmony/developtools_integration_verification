@@ -386,5 +386,11 @@
     "acls": [
         "ohos.permission.NOTIFICATION_CONTROLLER"
     ]
+  },
+  {
+    "processName": "updater_sa",
+    "acls": [
+      "ohos.permission.STORAGE_MANAGER_CRYPT"
+    ]
   }
 ]
