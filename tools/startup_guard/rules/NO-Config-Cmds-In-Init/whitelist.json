@@ -62,7 +62,6 @@
                 "device_usage_stats_service",
                 "wifi_hal_service",
                 "hdcd",
-                "bgtaskmgr_service",
                 "module_update_service",
                 "hiprofilerd",
                 "hiprofiler_plugins",

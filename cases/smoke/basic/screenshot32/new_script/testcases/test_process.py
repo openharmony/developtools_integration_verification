@@ -24,7 +24,6 @@ class Test:
         'memmgrservice',
         'bluetooth_servi',
         'resource_schedu',
-        'bgtaskmgr_servi',
         'audio_server',
         'softbus_server',
         'faultloggerd',
