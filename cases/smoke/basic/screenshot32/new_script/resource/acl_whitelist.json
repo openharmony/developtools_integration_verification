@@ -380,5 +380,11 @@
         "ohos.permission.START_INVISIBLE_ABILITY",
         "ohos.permission.CONNECT_CRYPTO_EXTENSION"
     ]
+  },
+  {
+    "processName": "updater_sa",
+    "acls": [
+      "ohos.permission.STORAGE_MANAGER_CRYPT"
+    ]
   }
 ]
