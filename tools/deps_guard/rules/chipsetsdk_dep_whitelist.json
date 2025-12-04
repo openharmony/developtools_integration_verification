@@ -2114,6 +2114,13 @@
         "description": "lib libbacktrace_local.so with innerapi_tags [chipsetsdk_sp, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libsystemparam.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libsystemparam.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "NEED MODIFY: libsystemparam.z.so with innerapi_tags [chipsetsdk_sp,platformsdk] cannot depend system only file ld-musl-arm.so.1 with //build/common/musl:ld-musl-arm.so.1"
+    },
+    {
         "so_file_name": "libbegetutil.z.so",
         "so_file_path": "system/lib/chipset-sdk-sp/libbegetutil.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
