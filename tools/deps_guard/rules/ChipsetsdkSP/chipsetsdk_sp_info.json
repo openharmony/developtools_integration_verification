@@ -102,6 +102,12 @@
         "headers": []
     },
     {
+        "name": "startup:libsystemparam",
+        "so_file_name": "libsystemparam.z.so",
+        "path": "//base/startup/init/interfaces/innerkits:libsystemparam",
+        "headers": []
+    },
+    {
         "name": "startup:libbegetutil-pub-sdk",
         "so_file_name": "libbegetutil.z.so",
         "path": "//base/startup/init/interfaces/innerkits:libbegetutil-pub-sdk",
