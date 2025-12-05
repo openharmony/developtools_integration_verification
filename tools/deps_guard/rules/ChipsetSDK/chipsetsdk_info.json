@@ -174,12 +174,6 @@
         "headers": []
     },
     {
-        "name": "build:libclang_rt.ubsan_minimal.so",
-        "so_file_name": "libclang_rt.ubsan_minimal.so",
-        "path": "//build/common/ubsan:libclang_rt.ubsan_minimal.so",
-        "headers": []
-    },
-    {
         "name": "security:libhukssdk",
         "so_file_name": "libhukssdk.z.so",
         "path": "//base/security/huks/interfaces/inner_api/huks_standard/main:libhukssdk",
