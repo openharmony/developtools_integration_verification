@@ -224,6 +224,13 @@
         "description": "lib libhukssdk.z.so with innerapi_tags [platformsdk, sasdk, chipsetsdk] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libhukschipsetsdk.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libhukschipsetsdk.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "lib libhukschipsetsdk.z.so with innerapi_tags [chipsetsdk] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
         "so_file_name": "libcurl_shared.z.so",
         "so_file_path": "system/lib/chipset-sdk/libcurl_shared.z.so",
         "dep_file_name": "libc_ares.z.so",

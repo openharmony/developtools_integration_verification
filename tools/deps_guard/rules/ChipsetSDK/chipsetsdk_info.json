@@ -180,6 +180,12 @@
         "headers": []
     },
     {
+        "name": "security:libhukschipsetsdk",
+        "so_file_name": "libhukschipsetsdk.z.so",
+        "path": "//base/security/huks/interfaces/inner_api/huks_standard/main:libhukschipsetsdk",
+        "headers": []
+    },
+    {
         "name": "thirdparty:curl_shared",
         "so_file_name": "libcurl_shared.z.so",
         "path": "//third_party/curl:curl_shared",
