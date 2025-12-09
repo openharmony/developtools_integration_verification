@@ -73,6 +73,8 @@ class liteOsUpgrade_RK3568(BaseApp):
                 return 98
             if return_code == 99:
                 return 99
+            if return_code == 100:
+                return 100
             return True
         except Exception as e:
             logger.error(e)
@@ -105,6 +107,8 @@ class liteOsUpgrade_RK3568(BaseApp):
         if not is_can_exec(lock_file):
             return 98
         version_savepath = self.params_dict.get("img_path")
+        if not is_folder_greater_than_100MB(version_savepath):
+            return 100
         upgrade_test_type = self.params_dict.get("UpgradeTestType")
         sn = self.params_dict.get("sn")
         LocationID = self.params_dict.get("LocationID")
@@ -607,6 +611,23 @@ def exec_cmd(mini_path, sn, save_path, archive_path):
         return True
     logger.error("mini_system_test failed!")
     return 98
+
+def get_folder_size(folder_path):
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(folder_path):
+        for filename in filenames:
+            filepath = os.path.join(dirpath, filename)
+            total_size += os.path.getsize(filepath)
+    return total_size
+
+def is_folder_greater_than_100MB(folder_path):
+    folder_size = get_folder_size(folder_path)
+    if folder_size > 100 * 1024 * 1024:
+        logger.info(f"文件名{folder_path} 大于100M")
+        return True
+    else:
+        logger.info(f"文件名{folder_path} 小于100M")
+        return False
 
 @timeout(1000)
 def is_can_exec(lock_file):
