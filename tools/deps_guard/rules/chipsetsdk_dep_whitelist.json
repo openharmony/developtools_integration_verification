@@ -875,6 +875,13 @@
         "description": "vendor only lib libuser_auth_stub_4.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libuser_auth_stub_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_stub_4.1.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libuser_auth_stub_4.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
         "so_file_name": "libsensor_interface_service_3.0.z.so",
         "so_file_path": "vendor/lib/libsensor_interface_service_3.0.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
@@ -1517,6 +1524,13 @@
         "dep_file_name": "ld-musl-arm.so.1",
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "vendor only lib libuser_auth_interface_service_4.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libuser_auth_interface_service_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_interface_service_4.1.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libuser_auth_interface_service_4.1.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
         "so_file_name": "libcamera_ipp_algo_example.z.so",
@@ -4053,6 +4067,13 @@
         "description": "vendor only lib libuser_auth_stub_4.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
+        "so_file_name": "libuser_auth_stub_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_stub_4.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libuser_auth_stub_4.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
         "so_file_name": "libperipheral_camera_utils.z.so",
         "so_file_path": "vendor/lib/libperipheral_camera_utils.z.so",
         "dep_file_name": "libutils.z.so",
@@ -4408,6 +4429,13 @@
         "dep_file_name": "libutils.z.so",
         "dep_file_path": "system/lib/module/arkts/libutils.z.so",
         "description": "vendor only lib libuser_auth_interface_service_4.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libuser_auth_interface_service_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_interface_service_4.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libuser_auth_interface_service_4.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
         "so_file_name": "libintell_voice_engine_manager_service_1.2.z.so",
@@ -7762,6 +7790,20 @@
         "description": "vendor only lib libuser_auth_interface_service_4.0.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
+        "so_file_name": "libuser_auth_interface_service_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_interface_service_4.1.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "vendor only lib libuser_auth_interface_service_4.1.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libuser_auth_interface_service_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_interface_service_4.1.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "vendor only lib libuser_auth_interface_service_4.1.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
         "so_file_name": "libhdi_sensor.z.so",
         "so_file_path": "vendor/lib/libhdi_sensor.z.so",
         "dep_file_name": "ld-musl-arm-asan.so.1",
@@ -8635,6 +8677,20 @@
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "vendor only lib libuser_auth_stub_4.0.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libuser_auth_stub_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_stub_4.1.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "vendor only lib libuser_auth_stub_4.1.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libuser_auth_stub_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_stub_4.1.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "vendor only lib libuser_auth_stub_4.1.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
         "so_file_name": "libcodec_oem_interface.z.so",
