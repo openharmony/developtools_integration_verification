@@ -10114,6 +10114,13 @@
         "description": "all vendor lib deps system only lib ld-musl-aarch64.so.1"
     },
     {
+        "so_file_name": "libbt_vendor.z.so",
+        "so_file_path": "vendor/lib64/libbt_vendor.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libbt_vendor.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
         "so_file_name": "all vendor lib so",
         "so_file_path": "all vendor lib so",
         "dep_file_name": "ld-musl-aarch64-asan.so.1",
