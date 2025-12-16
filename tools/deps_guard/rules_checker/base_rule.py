@@ -28,7 +28,7 @@ class BaseRule(object):
         self._args = args
         self.__white_lists = self.load_files("whitelist.json")
         self.__out_path = mgr.get_product_out_path()
-        self.__base_fofiles = ["libc.so", "libutils.z.so", "ld-musl-aarch64.so.1", "libconfiguration.z.so", "libusbmanager.z.so",
+        self.__base_sofiles = ["libc.so", "libutils.z.so", "ld-musl-aarch64.so.1", "libconfiguration.z.so", "libusbmanager.z.so",
                                "libsms.z.so"]
     def load_files(self, name):
         rules_dir = []
