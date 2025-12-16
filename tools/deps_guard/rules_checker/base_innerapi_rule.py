@@ -32,7 +32,8 @@ class BaseInnerapiRule(BaseRule):
                                     "chipsetsdk_sp_indirect", "passthrough"] + self.__ignored_tags
         self.__valid_vendor_tags = ["llndk", "chipsetsdk", "chipsetsdk_sp", "llndk", "passthrough",
                                    "passthrough_indirect"] + self.__ignored_tags
-        self.__base_fofiles = ["libc.so", "libutils.z.so", "ld-musl-aarch64.so.1"]
+        self.__base_fofiles = ["libc.so", "libutils.z.so", "ld-musl-aarch64.so.1", "libconfiguration.z.so", "libusbmanager.z.so", 
+                               "libsms.z.so"]
 
     def check(self):
         passed = True
