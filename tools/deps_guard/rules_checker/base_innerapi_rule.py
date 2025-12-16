@@ -32,6 +32,8 @@ class BaseInnerapiRule(BaseRule):
                                     "chipsetsdk_sp_indirect", "passthrough"] + self.__ignored_tags
         self.__valid_vendor_tags = ["llndk", "chipsetsdk", "chipsetsdk_sp", "llndk", "passthrough",
                                    "passthrough_indirect"] + self.__ignored_tags
+        self.__base_sofiles = ["libc.so", "libutils.z.so", "ld-musl-aarch64.so.1", "libconfiguration.z.so", "libusbmanager.z.so", 
+                               "libsms.z.so"]
 
     def check(self):
         passed = True
@@ -45,6 +47,14 @@ class BaseInnerapiRule(BaseRule):
                 for dep in mod["deps"]:
                     callee = dep["callee"]
                     callee_innerapi_tags = callee["innerapi_tags"]
+                    
+                    if callee["name"] in self.__base_sofiles:
+                        continue
+
+                    if "duplicate" in callee.keys() and callee["duplicate"]:
+                        passed = False
+                        self.error("NEED MODIFY: %s has the same name in other package path, sofile name should be modified" % (callee["name"]))
+                        continue
 
                     # check if in whitelist
                     in_whitelist = False
@@ -59,6 +69,9 @@ class BaseInnerapiRule(BaseRule):
                         continue
                     else:
                         self.error("NEED MODIFY: system only module %s depends on wrong module as %s in %s, dep module path is %s" 
+
+
+
                                    %(mod["name"], callee["name"], mod["labelPath"], callee["path"]))
                         passed = False
             # mod is vendor only scene
@@ -67,6 +80,14 @@ class BaseInnerapiRule(BaseRule):
                 for dep in mod["deps"]:
                     callee = dep["callee"]
                     callee_innerapi_tags = callee["innerapi_tags"]
+
+                    if callee["name"] in self.__base_sofiles:
+                        continue
+
+                    if "duplicate" in callee.keys() and callee["duplicate"]:
+                        passed = False
+                        self.error("NEED MODIFY: %s has the same name in other package path, sofile name should be modified" % (callee["name"]))
+                        continue
 
                     # check if in whitelist
                     in_whitelist = False
