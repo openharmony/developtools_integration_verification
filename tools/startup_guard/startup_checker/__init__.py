@@ -2,7 +2,7 @@
 #coding=utf-8
 
 #
-# Copyright (c) 2023-2024 Huawei Device Co., Ltd.
+# Copyright (c) 2023-2025 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -20,6 +20,7 @@ from .cmds_rule import CmdRule
 from .system_parameter_rules import SystemParameterRule
 from .user_group_rule import UserGroupModuleRule
 from .plug_in_rule import PlugInModuleRule
+from .sa_directory_rule import SADirectoryRule
 
 def check_all_rules(mgr, args):
     rules = [
@@ -27,6 +28,7 @@ def check_all_rules(mgr, args):
         SystemParameterRule,
         UserGroupModuleRule,
         PlugInModuleRule,
+        SADirectoryRule,
     ]
 
     passed = True
