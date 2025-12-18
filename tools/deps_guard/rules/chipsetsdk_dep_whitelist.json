@@ -658,6 +658,13 @@
         "description": "vendor only lib libcamera_stub_1.4.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libcamera_stub_1.5.z.so",
+        "so_file_path": "vendor/lib/libcamera_stub_1.5.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libcamera_stub_1.5.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },    
+    {
         "so_file_name": "libhdi_light.z.so",
         "so_file_path": "vendor/lib/libhdi_light.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
