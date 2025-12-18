@@ -158,10 +158,8 @@ class BaseRule(object):
                         continue
                     
                     # llndk can dep system only sofile
-                    if "system" in valid_dep_tags and not self.is_only(callee) == "system":
-                        passed = False
-                        self.error("NEED MODIFY: %s with innerapi_tags [%s] cannot depend system only file %s with %s" 
-                            % (mod["name"], ",".join(innerapi_tags), callee["name"], callee["labelPath"]))
+                    if "system" in valid_dep_tags and self.is_only(callee) == "system":
+                        continue
 
                     # check system/vendor only
                     if self.is_only(callee) == "system":

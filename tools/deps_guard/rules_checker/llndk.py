@@ -30,7 +30,8 @@ class LLndkRule(BaseRule):
         self.__out_path = mgr.get_product_out_path()
         self.__white_lists = self.load_llndk_json("llndk_info.json")
         self.__ignored_tags = ["platformsdk", "sasdk", "platformsdk_indirect", "ndk"]
-        self.__valid_mod_tags = ["llndk", "passthrough"] + self.__ignored_tags
+        self.__valid_mod_tags = ["llndk", "chipsetsdk", "chipsetsdk_indirect", "chipsetsdk_sp",
+                                 "chipsetsdk_sp_indirect", "passthrough", "system"] + self.__ignored_tags
 
     def get_white_lists(self):
         return self.__white_lists
