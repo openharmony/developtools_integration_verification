@@ -10114,6 +10114,13 @@
         "description": "all vendor lib deps system only lib ld-musl-aarch64.so.1"
     },
     {
+        "so_file_name": "libbt_vendor.z.so",
+        "so_file_path": "vendor/lib64/libbt_vendor.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libbt_vendor.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
         "so_file_name": "all vendor lib so",
         "so_file_path": "all vendor lib so",
         "dep_file_name": "ld-musl-aarch64-asan.so.1",
@@ -12002,6 +12009,55 @@
         "dep_file_name": "libdisplay_buffer_vdi_impl.z.so",
         "dep_file_path": "vendor/lib64/libdisplay_buffer_vdi_impl.z.so",
         "description": "lib libmetadata_service_1.1.z.so with innerapi_tags [passthrough] cannot depend vendor only lib libdisplay_buffer_vdi_impl.z.so in vendor/lib64/libdisplay_buffer_vdi_impl.z.so"
+    },
+    {
+        "so_file_name": "libuniai.so",
+        "so_file_path": "vendor/lib64/libuniai.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only module libuniai.so depends on wrong module as ld-musl-aarch64.so.1 in libuniai.so"
+    },
+    {
+        "so_file_name": "libnnacompiler.so",
+        "so_file_path": "vendor/lib64/libnnacompiler.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only module libnnacompiler.so depends on wrong module as ld-musl-aarch64.so.1 in libnnacompiler.so"
+    },
+    {
+        "so_file_name": "libimgcustom.so",
+        "so_file_path": "vendor/lib64/libimgcustom.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only module libimgcustom.so depends on wrong module as ld-musl-aarch64.so.1 in libimgcustom.so"
+    },
+    {
+        "so_file_name": "libnnaruntime.so",
+        "so_file_path": "vendor/lib64/libnnaruntime.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only module libnnaruntime.so depends on wrong module as ld-musl-aarch64.so.1 in libnnaruntime.so"
+    },
+    {
+        "so_file_name": "libimgdnn.so",
+        "so_file_path": "vendor/lib64/libimgdnn.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only module libimgdnn.so depends on wrong module as ld-musl-aarch64.so.1 in libimgdnn.so"
+    },
+    {
+        "so_file_name": "libc++_shared.so",
+        "so_file_path": "vendor/lib64/libc++_shared.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only module libc++_shared.so depends on wrong module as ld-musl-aarch64.so.1 in libcxx_shared.so"
+    },
+    {
+        "so_file_name": "unisoc_NPU_backend.so",
+        "so_file_path": "vendor/lib64/unisoc_NPU_backend.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only module unisoc_NPU_backend.so depends on wrong module as ld-musl-aarch64.so.1 in unisoc_NPU_backend.so"
     },
     {
         "so_file_name": "libjpeg_vdi_impl.z.so",
