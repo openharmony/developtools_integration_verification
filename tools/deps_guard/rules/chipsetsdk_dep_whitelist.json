@@ -1526,6 +1526,34 @@
         "description": "vendor only lib libbt_vendor.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libsprd7885_tele_adapter_1.0.z.so",
+        "so_file_path": "vendor/lib64/libsprd7885_tele_adapter_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libsprd7885_tele_adapter_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libmodem_halo.z.so",
+        "so_file_path": "vendor/lib64/libmodem_halo.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmodem_halo.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libreadfixednv_lib.z.so",
+        "so_file_path": "vendor/lib64/libreadfixednv_lib.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libreadfixednv_lib.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libmodem-utils.z.so",
+        "so_file_path": "vendor/lib64/libmodem-utils.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libmodem-utils.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
         "so_file_name": "libface_auth_interface_service_2.0.z.so",
         "so_file_path": "vendor/lib/libface_auth_interface_service_2.0.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
