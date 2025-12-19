@@ -1,0 +1,19 @@
+[
+  "/data/bluetooth",
+  "/data/data",
+  "/data/dev",
+  "/data/local",
+  "/data/log",
+  "/data/misc",
+  "/data/module_update",
+  "/data/nfc",
+  "/data/power",
+  "/data/samgr",
+  "/data/storage/el1/bundle",
+  "/data/storage/el2/base",
+  "/data/storage/el2/database",
+  "/data/system",
+  "/data/update",
+  "/data/updater",
+  "/data/vendor"
+]
