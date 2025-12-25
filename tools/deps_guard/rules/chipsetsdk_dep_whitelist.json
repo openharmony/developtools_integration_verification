@@ -12086,5 +12086,89 @@
         "dep_file_name": "ld-musl-aarch64.so.1",
         "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
         "description": "vendor only module unisoc_NPU_backend.so depends on wrong module as ld-musl-aarch64.so.1 in unisoc_NPU_backend.so"
+    },
+    {
+        "so_file_name": "libjpeg_vdi_impl.z.so",
+        "so_file_path": "vendor/lib64/libjpeg_vdi_impl.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libjpeg_vdi_impl.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libcamera_ipp_algo_example.z.so",
+        "so_file_path": "vendor/lib64/libcamera_ipp_algo_example.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcamera_ipp_algo_example.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libcodec_oem_interface.z.so",
+        "so_file_path": "vendor/lib64/libcodec_oem_interface.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcodec_oem_interface.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libdisplay_composer_vendor.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_composer_vendor.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libdisplay_composer_vendor.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libcamera_pipeline_core.z.so",
+        "so_file_path": "vendor/lib64/libcamera_pipeline_core.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcamera_pipeline_core.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libbt_vendor.z.so",
+        "so_file_path": "vendor/lib64/libbt_vendor.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libbt_vendor.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "librkaiq.so",
+        "so_file_path": "vendor/lib64/librkaiq.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib librkaiq.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libcamera_device_manager.z.so",
+        "so_file_path": "vendor/lib64/libcamera_device_manager.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcamera_device_manager.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "librkaiq.z.so",
+        "so_file_path": "vendor/lib64/librkaiq.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib librkaiq.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "librga.z.so",
+        "so_file_path": "vendor/lib64/librga.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib librga.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libcamera_host_vdi_impl_1.0.z.so",
+        "so_file_path": "vendor/lib64/libcamera_host_vdi_impl_1.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libcamera_host_vdi_impl_1.0.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libomxvpu_dec.z.so",
+        "so_file_path": "vendor/lib64/passthrough/indirect/libomxvpu_dec.z.so",
+        "dep_file_name": "librga.z.so",
+        "dep_file_path": "vendor/lib64/librga.z.so",
+        "description": "lib libomxvpu_dec.z.so with innerapi_tags [passthrough_indirect] cannot depend vendor only lib librga.z.so in vendor/lib64/librga.z.so"
     }
 ]
