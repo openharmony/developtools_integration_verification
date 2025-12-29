@@ -197,6 +197,12 @@ class ChipsetSDKRule(BaseRule):
             # Check if all chipsetsdk/chisetsdk_indirect module are tagged correctly
             if "chipset-sdk/" in mod["path"]:
                 if mod["name"] not in self.__chipsetsdks and mod["name"] not in self.__indirects:
+                    print(json.dumps({
+                        "name": f"{mod['componentName']}:{mod['moduleName']}",
+                        "so_file_name": mod["name"],
+                        "path": mod['labelPath'],
+                        "headers": []
+                    }),end="\n")
                     # Not allowed
                     passed = False
                     self.error("NEED MODIFY: so file %s in %s should be add in file chipsetsdk_info.json or chipsetsdk_indirect_info.json"

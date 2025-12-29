@@ -151,6 +151,12 @@ class PassthroughRule(BaseRule):
 
             if "passthrough" in mod["path"] and "passthrough/indirect" not in mod["path"]:
                 if mod["name"] not in self.__passthroughs:
+                    print(json.dumps({
+                        "name": f"{mod['componentName']}:{mod['moduleName']}",
+                        "so_file_name": mod["name"],
+                        "path": mod['labelPath'],
+                        "headers": []
+                    }),end="\n")
                     # Not allowed
                     passed = False
                     self.error("NEED MODIFY: so file %s in %s should be add in file passthrough_info.json"
@@ -159,6 +165,12 @@ class PassthroughRule(BaseRule):
 
             if "passthrough/indirect" in mod["path"]:
                 if mod["name"] not in self.__indirects:
+                    print(json.dumps({
+                        "name": f"{mod['componentName']}:{mod['moduleName']}",
+                        "so_file_name": mod["name"],
+                        "path": mod['labelPath'],
+                        "headers": []
+                    }),end="\n")
                     # Not allowed
                     passed = False
                     self.error("NEED MODIFY: so file %s in %s should be add in file passthrough_indirect_info.json"
