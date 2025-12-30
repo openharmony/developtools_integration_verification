@@ -226,5 +226,11 @@
         "so_file_name": "libpulse.z.so",
         "path": "//third_party/pulseaudio/ohosbuild/src/pulse:pulse",
         "headers": []
+    },
+    {
+        "name": "hdf:libaudio_proxy_6.0",
+        "so_file_name": "libaudio_proxy_6.0.z.so",
+        "path": "//drivers/interface/audio/v6_0:libaudio_proxy_6.0",
+        "headers": []
     }
 ]
