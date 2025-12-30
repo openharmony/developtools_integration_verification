@@ -147,9 +147,10 @@ class ChipsetSDKRule(BaseRule):
                 if innerapi["label"] != sdk["labelPath"]:
                     continue
                 got_headers = True
-                base = innerapi["header_base"]
-                for f in innerapi["header_files"]:
-                    item["headers"].append(os.path.join(base, f))
+                base = innerapi.get("header_base", None)
+                if base:
+                    for f in innerapi["header_files"]:
+                        item["headers"].append(os.path.join(base, f))
             headers.append(item)
 
         try:
