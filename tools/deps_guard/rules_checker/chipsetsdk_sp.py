@@ -151,12 +151,6 @@ class ChipsetsdkSPRule(BaseRule):
             # check if all path in chipset-sdk-sp so contains sp/indirect innerapi_tags
             if "chipset-sdk-sp" in mod["path"]:
                 if mod["name"] not in self.__chipsetsdk_sps and mod["name"] not in self.__indirects:
-                    print(json.dumps({
-                        "name": f"{mod['componentName']}:{mod['moduleName']}",
-                        "so_file_name": mod["name"],
-                        "path": mod['labelPath'],
-                        "headers": []
-                    }),end="\n")
                     # Not allowed
                     passed = False
                     self.error("NEED MODIFY: so file %s in %s should be add in file chipsetsdk_sp_info.json or chipsetsdk_sp_indirect_info.json"
