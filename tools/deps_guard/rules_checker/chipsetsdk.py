@@ -183,10 +183,6 @@ class ChipsetSDKRule(BaseRule):
             if self.__is_chipsetsdk_indirect(mod):
                 self.__modules_with_chipsetsdk_indirect_tag.append(mod)
 
-            # Check chipset modules only
-            if mod["path"].startswith("system"):
-                continue
-
             # If callee is chipset module, it is OK
             if not mod["path"].endswith(".so"):
                 continue
