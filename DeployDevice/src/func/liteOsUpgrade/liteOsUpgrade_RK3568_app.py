@@ -10,6 +10,7 @@ import shutil
 import random
 import platform
 import socket
+import atexit
 
 from core.base import BaseApp, dec_stepmsg
 from util.file_locker import FileLock
@@ -26,6 +27,21 @@ lock_suffix = CONSTANT.File.LOCK_SUFFIX
 suc_file = CONSTANT.File.SUC_FILE
 failed_file = CONSTANT.File.FAILED_FILE
 REBOOT_TIMEOUT = 20000000
+
+
+class Monitor:
+    def __init__(self):
+        logger.printLog("...Monitor start...")
+        atexit.register(self.remove_lock_file)
+
+    def remove_lock_file(self):
+        system_type = platform.system()
+        if system_type == "Windows":
+            lock_file = r'C:/deviceupgrade/task.lock'
+        else:
+            lock_file = '/home/openharmony/deviceupgrade/task.lock'
+        delete_file_lock(lock_file)
+        logger.printLog("...Monitor end...")
 
 
 class liteOsUpgrade_RK3568(BaseApp):
@@ -64,6 +80,7 @@ class liteOsUpgrade_RK3568(BaseApp):
 
         # 执行升级
         try:
+            monitor = Monitor()
             return_code = self.upgrade()
             if not return_code:
                 CONSTANT.ENVERRMESSAGE = "board upgrade fail"
