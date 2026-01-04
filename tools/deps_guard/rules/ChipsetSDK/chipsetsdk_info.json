@@ -232,5 +232,11 @@
 	    "so_file_name": "libsensor_proxy_3.1.z.so",
     	"path": "//drivers/interface/sensor/v3_1:libsensor_proxy_3.1",
 	    "headers": []
-    } 
+    },
+    {
+        "name": "hdf:libaudio_proxy_6.0",
+        "so_file_name": "libaudio_proxy_6.0.z.so",
+        "path": "//drivers/interface/audio/v6_0:libaudio_proxy_6.0",
+        "headers": []
+    }
 ]
