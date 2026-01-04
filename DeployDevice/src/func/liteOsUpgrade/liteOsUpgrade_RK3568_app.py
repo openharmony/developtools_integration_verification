@@ -50,6 +50,7 @@ class liteOsUpgrade_RK3568(BaseApp):
     '''
 
     def __init__(self, param_file):
+        monitor = Monitor()
         super().__init__(param_file)
         self.param_List = ["upgrade_upgradeLocation", "sn"]
 
@@ -80,7 +81,6 @@ class liteOsUpgrade_RK3568(BaseApp):
 
         # 执行升级
         try:
-            monitor = Monitor()
             return_code = self.upgrade()
             if not return_code:
                 CONSTANT.ENVERRMESSAGE = "board upgrade fail"
@@ -93,6 +93,8 @@ class liteOsUpgrade_RK3568(BaseApp):
             if return_code == 100:
                 return 100
             return True
+        except KeyboardInterrupt:
+            logger.printLog("...程序被中止...")
         except Exception as e:
             logger.error(e)
             raise e
