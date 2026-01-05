@@ -10420,5 +10420,19 @@
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "vendor only lib libaudio_stub_6.0.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libusb_ddk_host.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libusb_ddk_host.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
+        "description": "lib libusb_ddk_host.z.so with innerapi_tags [passthrough_indirect] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
+    },
+    {
+        "so_file_name": "libusbfn_mtp_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libusbfn_mtp_interface_service_1.0.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
+        "description": "lib libusbfn_mtp_interface_service_1.0.z.so with innerapi_tags [passthrough_indirect] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
     }
 ]
