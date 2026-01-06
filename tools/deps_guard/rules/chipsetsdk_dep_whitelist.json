@@ -10434,5 +10434,12 @@
         "dep_file_name": "libhilog.so",
         "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
         "description": "lib libusbfn_mtp_interface_service_1.0.z.so with innerapi_tags [passthrough_indirect] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
+    },
+    {
+        "so_file_name": "libsensor_convert_proxy_1.0.z.so",
+        "so_file_path": "system/lib/libsensor_convert_proxy_1.0.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "libsensor_convert_proxy_1.0.z.so with innerapi_tags [chipsetsdk,platformsdk_indirect] cannot depend system only file ld-musl-arm.so.1 with //build/common/musl:ld-musl-arm.so.1"
     }
 ]
