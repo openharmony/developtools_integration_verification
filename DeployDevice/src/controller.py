@@ -12,11 +12,9 @@
 import os
 import sys
 import argparse
-import platform
 from core.run import *
 from aw.Common.Constant import CONSTANT
 from util.log_info import logger
-from func.liteOsUpgrade.liteOsUpgrade_RK3568_app import delete_file_lock
 
 
 if __name__ == "__main__":
@@ -36,11 +34,5 @@ if __name__ == "__main__":
             f.write("\nstatus=UPGRADE_STATUS_%s\nsmoke_duration=%s" % (errcode, total_time))
     except Exception as p:
         logger.error(p)
-    system_type = platform.system()
-    if system_type == "Windows":
-        lock_file = r'C:/deviceupgrade/task.lock'
-    else:
-        lock_file = '/home/openharmony/deviceupgrade/task.lock'
-    delete_file_lock(lock_file)
     os._exit(errcode)
         

@@ -10,7 +10,6 @@ import shutil
 import random
 import platform
 import socket
-import atexit
 
 from core.base import BaseApp, dec_stepmsg
 from util.file_locker import FileLock
@@ -29,28 +28,12 @@ failed_file = CONSTANT.File.FAILED_FILE
 REBOOT_TIMEOUT = 20000000
 
 
-class Monitor:
-    def __init__(self):
-        logger.printLog("...Monitor start...")
-        atexit.register(self.remove_lock_file)
-
-    def remove_lock_file(self):
-        system_type = platform.system()
-        if system_type == "Windows":
-            lock_file = r'C:/deviceupgrade/task.lock'
-        else:
-            lock_file = '/home/openharmony/deviceupgrade/task.lock'
-        delete_file_lock(lock_file)
-        logger.printLog("...Monitor end...")
-
-
 class liteOsUpgrade_RK3568(BaseApp):
     '''
     @author: cwx1076044
     '''
 
     def __init__(self, param_file):
-        monitor = Monitor()
         super().__init__(param_file)
         self.param_List = ["upgrade_upgradeLocation", "sn"]
 
@@ -93,8 +76,6 @@ class liteOsUpgrade_RK3568(BaseApp):
             if return_code == 100:
                 return 100
             return True
-        except KeyboardInterrupt:
-            logger.printLog("...程序被中止...")
         except Exception as e:
             logger.error(e)
             raise e
