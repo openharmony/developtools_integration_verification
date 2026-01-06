@@ -10345,6 +10345,104 @@
         "description": "libcamera_vendor_tag_service_1.0.z.so with innerapi_tags [passthrough] has dep file libhilog.so with //base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog contains wrong dep innerapi_tags [chipsetsdk] in innerapi_tags [chipsetsdk,platformsdk,sasdk]"
     },
     {
+        "so_file_name": "libaudio_proxy_6.0.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libaudio_proxy_6.0.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "lib libaudio_proxy_6.0.z.so with innerapi_tags [chipsetsdk] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_proxy_6.0.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libaudio_proxy_6.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libaudio_proxy_6.0.z.so with innerapi_tags [chipsetsdk] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libaudio_proxy_6.0.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libaudio_proxy_6.0.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "lib libaudio_proxy_6.0.z.so with innerapi_tags [chipsetsdk] cannot deps system only lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libaudio_proxy_6.0.z.so",
+        "so_file_path": "system/lib/chipset-sdk/libaudio_proxy_6.0.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "lib libaudio_proxy_6.0.z.so with innerapi_tags [chipsetsdk] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libaudio_manager_service_6.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_manager_service_6.0.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "vendor only lib libaudio_manager_service_6.0.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libaudio_manager_service_6.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_manager_service_6.0.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "vendor only lib libaudio_manager_service_6.0.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libaudio_manager_service_6.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_manager_service_6.0.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libaudio_manager_service_6.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_stub_6.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_stub_6.0.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libaudio_stub_6.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libaudio_stub_6.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_stub_6.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libaudio_stub_6.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libaudio_stub_6.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_stub_6.0.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "vendor only lib libaudio_stub_6.0.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libaudio_stub_6.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_stub_6.0.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "vendor only lib libaudio_stub_6.0.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libusb_ddk_host.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libusb_ddk_host.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
+        "description": "lib libusb_ddk_host.z.so with innerapi_tags [passthrough_indirect] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
+    },
+    {
+        "so_file_name": "libusbfn_mtp_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libusbfn_mtp_interface_service_1.0.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
+        "description": "lib libusbfn_mtp_interface_service_1.0.z.so with innerapi_tags [passthrough_indirect] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
+    },
+    {
+        "so_file_name": "libsensor_convert_proxy_1.0.z.so",
+        "so_file_path": "system/lib/libsensor_convert_proxy_1.0.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "libsensor_convert_proxy_1.0.z.so with innerapi_tags [chipsetsdk,platformsdk_indirect] cannot depend system only file ld-musl-arm.so.1 with //build/common/musl:ld-musl-arm.so.1"
+    },
+    {
         "so_file_name": "libsensor_convert_interfaces_service_1.0.z.so",
         "so_file_path": "vendor/lib/libsensor_convert_interfaces_service_1.0.z.so",
         "dep_file_name": "libhilog.so",

@@ -147,9 +147,10 @@ class ChipsetSDKRule(BaseRule):
                 if innerapi["label"] != sdk["labelPath"]:
                     continue
                 got_headers = True
-                base = innerapi["header_base"]
-                for f in innerapi["header_files"]:
-                    item["headers"].append(os.path.join(base, f))
+                base = innerapi.get("header_base", None)
+                if base:
+                    for f in innerapi["header_files"]:
+                        item["headers"].append(os.path.join(base, f))
             headers.append(item)
 
         try:
@@ -182,10 +183,6 @@ class ChipsetSDKRule(BaseRule):
             # Collect all modules with chipsetsdk_indirect tag
             if self.__is_chipsetsdk_indirect(mod):
                 self.__modules_with_chipsetsdk_indirect_tag.append(mod)
-
-            # Check chipset modules only
-            if mod["path"].startswith("system"):
-                continue
 
             # If callee is chipset module, it is OK
             if not mod["path"].endswith(".so"):

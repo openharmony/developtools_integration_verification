@@ -54,7 +54,7 @@ class ElfFile(dict):
         if not os.access(self._f, os.F_OK):
             raise Exception("Cannot find lib: " + self._f)
         file_name = self._f_safe.split("/")[-1].strip("'")
-        dynamics = command_without_error("strings", self._f_safe, f"|grep -E 'lib([-_/a-zA-Z0-9.]+)\.so$'|grep -v ':'|grep -v {file_name}")
+        dynamics = command_without_error("strings", self._f_safe, f"|grep -E 'lib[-_/a-zA-Z0-9.]+\.so$'|grep -v ':'|grep -v {file_name}")
         res = []
         if dynamics:
             for line in dynamics:
