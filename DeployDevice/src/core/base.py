@@ -52,9 +52,6 @@ class BaseApp(object):
             if ret == 99:
                 flash_two(nowtime, flash_type)
                 return 99
-            if ret == 100:
-                flash_two(nowtime, flash_type)
-                return 100
             if not ret:
                 flash_two(nowtime, flash_type)
                 return -1

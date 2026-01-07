@@ -82,9 +82,6 @@ def start(param):
             if errorcode == 98:
                 logger.error("upgrade success ,but Smoke failed, the key problem occurs.")
                 return 98
-            if errorcode == 100:
-                logger.error("img size less than 100M, please check")
-                return 100
             if errorcode == -1:
                 logger.error("upgrade failed.")
                 return 101

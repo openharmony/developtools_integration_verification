@@ -108,7 +108,7 @@ class liteOsUpgrade_RK3568(BaseApp):
             return 98
         version_savepath = self.params_dict.get("img_path")
         if not is_folder_greater_than_100MB(version_savepath):
-            return 100
+            return 98
         upgrade_test_type = self.params_dict.get("UpgradeTestType")
         sn = self.params_dict.get("sn")
         LocationID = self.params_dict.get("LocationID")
