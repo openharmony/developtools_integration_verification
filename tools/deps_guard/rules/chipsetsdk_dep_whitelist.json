@@ -10441,5 +10441,19 @@
         "dep_file_name": "ld-musl-arm.so.1",
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "libsensor_convert_proxy_1.0.z.so with innerapi_tags [chipsetsdk,platformsdk_indirect] cannot depend system only file ld-musl-arm.so.1 with //build/common/musl:ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libsensor_convert_interfaces_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libsensor_convert_interfaces_service_1.0.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
+        "description": "libsensor_convert_interfaces_service_1.0.z.so with innerapi_tags [passthrough] has dep file libhilog.so with //base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog contains wrong dep innerapi_tags [chipsetsdk] in innerapi_tags [chipsetsdk,platformsdk,sasdk]"
+    },
+    {
+        "so_file_name": "libsensor_convert_interfaces_service_1.0.z.so",
+        "so_file_path": "system/lib/libsensor_convert_interfaces_service_1.0.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "libsensor_convert_interfaces_service_1.0.z.so with innerapi_tags [chipsetsdk_indirect,platformsdk_indirect] cannot depend system only file ld-musl-arm.so.1 with //build/common/musl:ld-musl-arm.so.1"
     }
 ]
