@@ -73,8 +73,6 @@ class liteOsUpgrade_RK3568(BaseApp):
                 return 98
             if return_code == 99:
                 return 99
-            if return_code == 100:
-                return 100
             return True
         except Exception as e:
             logger.error(e)
