@@ -12,6 +12,42 @@
         "headers": []
     },
     {
+        "name": "hdf:libhdf_utils",
+        "so_file_name": "libhdf_utils.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/utils:libhdf_utils",
+        "headers": []
+    },
+    {
+        "name": "hdf:libhdi",
+        "so_file_name": "libhdi.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/hdi:libhdi",
+        "headers": []
+    },
+    {
+        "name": "hdf:libhdi_base",
+        "so_file_name": "libhdi_base.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/hdi:libhdi_base",
+        "headers": []
+    },
+    {
+        "name": "hdf:libpub_utils",
+        "so_file_name": "libpub_utils.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/pub_utils:libpub_utils",
+        "headers": []
+    },
+    {
+        "name": "hdf:libhdf_ipc_adapter",
+        "so_file_name": "libhdf_ipc_adapter.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/ipc:libhdf_ipc_adapter",
+        "headers": []
+    },
+    {
+        "name": "hdf:libhdf_host.z.so",
+        "so_file_name": "libhdf_host.z.so",
+        "path": "//drivers/hdf_core/adapter/uhdf2/host:libhdf_host",
+        "headers": []
+    },
+    {
         "name": "graphic:surface",
         "so_file_name": "libsurface.z.so",
         "path": "//foundation/graphic/graphic_surface/surface:surface",
@@ -36,12 +72,6 @@
         "headers": []
     },
     {
-        "name": "hdf:libhdf_utils",
-        "so_file_name": "libhdf_utils.z.so",
-        "path": "//drivers/hdf_core/adapter/uhdf2/utils:libhdf_utils",
-        "headers": []
-    },
-    {
         "name": "hiviewdfx:libhitracechain",
         "so_file_name": "libhitracechain.so",
         "path": "//base/hiviewdfx/hitrace/interfaces/native/innerkits:libhitracechain",
@@ -51,18 +81,6 @@
         "name": "thirdparty:protobuf_lite",
         "so_file_name": "libprotobuf_lite.z.so",
         "path": "//third_party/protobuf:protobuf_lite",
-        "headers": []
-    },
-    {
-        "name": "hdf:libhdi",
-        "so_file_name": "libhdi.z.so",
-        "path": "//drivers/hdf_core/adapter/uhdf2/hdi:libhdi",
-        "headers": []
-    },
-    {
-        "name": "hdf:libhdi_base",
-        "so_file_name": "libhdi_base.z.so",
-        "path": "//drivers/hdf_core/adapter/uhdf2/hdi:libhdi_base",
         "headers": []
     },
     {
@@ -132,12 +150,6 @@
         "headers": []
     },
     {
-        "name": "hdf:libpub_utils",
-        "so_file_name": "libpub_utils.z.so",
-        "path": "//drivers/hdf_core/adapter/uhdf2/pub_utils:libpub_utils",
-        "headers": []
-    },
-    {
         "name": "tee:libteec_vendor",
         "so_file_name": "libteec_vendor.so",
         "path": "//base/tee/tee_client/frameworks/build/standard:libteec_vendor",
@@ -147,12 +159,6 @@
         "name": "commonlibrary:utils",
         "so_file_name": "libutils.z.so",
         "path": "//commonlibrary/c_utils/base:utils",
-        "headers": []
-    },
-    {
-        "name": "hdf:libhdf_ipc_adapter",
-        "so_file_name": "libhdf_ipc_adapter.z.so",
-        "path": "//drivers/hdf_core/adapter/uhdf2/ipc:libhdf_ipc_adapter",
         "headers": []
     },
     {
@@ -244,5 +250,5 @@
         "so_file_name": "libclang_rt.ubsan_minimal.so",
         "path": "//build/common/ubsan:libclang_rt.ubsan_minimal.so",
         "headers": []
-     }
+    }
 ]

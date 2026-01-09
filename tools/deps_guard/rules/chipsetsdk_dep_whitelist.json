@@ -2037,6 +2037,13 @@
         "description": "lib libhdf_utils.z.so with innerapi_tags [chipsetsdk_sp] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
     },
     {
+        "so_file_name": "libhdf_host.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libhdf_host.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
+        "description": "lib libhdf_host.z.so with innerapi_tags [chipsetsdk_sp] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
+    },
+    {
         "so_file_name": "libhdf_utils.z.so",
         "so_file_path": "system/lib/chipset-sdk-sp/libhdf_utils.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
