@@ -12170,5 +12170,12 @@
         "dep_file_name": "librga.z.so",
         "dep_file_path": "vendor/lib64/librga.z.so",
         "description": "lib libomxvpu_dec.z.so with innerapi_tags [passthrough_indirect] cannot depend vendor only lib librga.z.so in vendor/lib64/librga.z.so"
+    },
+    {
+        "so_file_name": "libmali-g610-ohos.so",
+        "so_file_path": "vendor/lib64/chipsetsdk/libmali-g610-ohos.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only module libmali-g610-ohos.so depends on wrong module as ld-musl-aarch64.so.1 in //device/soc/rockchip/rk3588/hardware/gpu:mali-g610-ohos, dep module path is system/lib/ld-musl-aarch64.so.1"
     }
 ]
