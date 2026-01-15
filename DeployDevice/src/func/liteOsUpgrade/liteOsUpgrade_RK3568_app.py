@@ -10,6 +10,7 @@ import shutil
 import random
 import platform
 import socket
+import atexit
 
 from core.base import BaseApp, dec_stepmsg
 from util.file_locker import FileLock
@@ -26,6 +27,23 @@ lock_suffix = CONSTANT.File.LOCK_SUFFIX
 suc_file = CONSTANT.File.SUC_FILE
 failed_file = CONSTANT.File.FAILED_FILE
 REBOOT_TIMEOUT = 20000000
+lock_file = r'C:/deviceupgrade/task.lock'
+
+
+class Monitor:
+    def __init__(self):
+        logger.printLog("...Monitor start...")
+        atexit.register(self.remove_lock_file)
+
+    def remove_lock_file(self):
+        global lock_file
+        system_type = platform.system()
+        if system_type == "Windows":
+            lock_file = r'C:/deviceupgrade/task.lock'
+        else:
+            lock_file = '/home/openharmony/deviceupgrade/task.lock'
+        delete_file_lock(lock_file)
+        logger.printLog("...Monitor end...")
 
 
 class liteOsUpgrade_RK3568(BaseApp):
@@ -34,6 +52,7 @@ class liteOsUpgrade_RK3568(BaseApp):
     '''
 
     def __init__(self, param_file):
+        monitor = Monitor()
         super().__init__(param_file)
         self.param_List = ["upgrade_upgradeLocation", "sn"]
 
@@ -74,6 +93,8 @@ class liteOsUpgrade_RK3568(BaseApp):
             if return_code == 99:
                 return 99
             return True
+        except KeyboardInterrupt:
+            logger.printLog("...程序被中止...")
         except Exception as e:
             logger.error(e)
             raise e
@@ -97,10 +118,6 @@ class liteOsUpgrade_RK3568(BaseApp):
         ipaddress = socket.gethostbyname(hostname)
         logger.printLog("******系统ip为：%s ******" % ipaddress)
         logger.printLog("******系统为：%s ******" % system_type)
-        if system_type == "Windows":
-            lock_file = r'C:/deviceupgrade/task.lock'
-        else:
-            lock_file = '/home/openharmony/deviceupgrade/task.lock'
         # 如果上一个任务没执行完成，不往下继续执行
         if not is_can_exec(lock_file):
             return 98
