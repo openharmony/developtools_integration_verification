@@ -10436,6 +10436,13 @@
         "description": "lib libusb_proxy_2.0.z.so with innerapi_tags [chipsetsdk_sp] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
     },
     {
+        "so_file_name": "libusb_proxy_2.0.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libusb_proxy_2.0.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "lib libusb_proxy_2.0.z.so with innerapi_tags [chipsetsdk_sp] cannot depend system only file ld-musl-arm.so.1 with //build/common/musl:ld-musl-arm.so.1"
+    },
+    {
         "so_file_name": "libsensor_convert_proxy_1.0.z.so",
         "so_file_path": "system/lib/libsensor_convert_proxy_1.0.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
