@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 
 #
 # Copyright (c) 2025 Huawei Device Co., Ltd.
@@ -57,7 +57,7 @@ def execute_build_command(command, use_shell=False):
 
 
 def monitor_file_and_stop(shell_script_path, shell_args=None, 
-                         use_shell=False):
+                         use_shell=False, bundles=[]):
 
     if isinstance(shell_args, str):
         command = [shell_script_path] + shlex.split(shell_args)
@@ -70,7 +70,7 @@ def monitor_file_and_stop(shell_script_path, shell_args=None,
 
     #execute_build_command(command, use_shell=use_shell)
     
-    file_detected = True
+    file_detected = True 
 
     '''
     while True:
@@ -79,6 +79,18 @@ def monitor_file_and_stop(shell_script_path, shell_args=None,
             break
         time.sleep(0.5)
         '''
+    build_arkui = False
+    for bundle in bundles:
+        if "arkui" in bundle:
+            build_arkui = True
+            break
+    
+    if not build_arkui:
+        command = [
+            'ohos_precise_config=developtools/integration_verification/tools/precise_build/precise_build_tdd_config.json'
+            if c == 'ohos_precise_config=developtools/integration_verification/tools/precise_build/precise_build_tdd_test_config.json'
+            else c for c in command
+            ]
 
     if file_detected:
         '''
@@ -144,8 +156,11 @@ def process_changes():
         'wgsl': h_files,
     }
     
+
+    bundles = []
     for key, value in change_info.items():
         changed_files = value.get("changed_file_list", {})
+        bundles.append(key)
         for operation, processor in file_operations.items():
             if operation not in changed_files:
                 print(f"unknown file operation: {operation}")
@@ -167,10 +182,7 @@ def process_changes():
     write_file = os.path.join(root_path, "modify_files.json")
     with open(write_file, 'w') as json_file:
         json.dump(modified_files, json_file, indent=4)
-    return (
-        [os.path.join(self.ace_root, f) for f in change_files],
-        openharmony_fields
-    )
+    return bundles
 
 def get_file_extension(filename):
     if '.' in filename:
@@ -203,7 +215,8 @@ if __name__ == "__main__":
                         help='parameters passed to the shell script (after --)')
     
     args = parser.parse_args()
-    process_changes()
+    bundles = []
+    bundles = process_changes()
     shell_args = []
     if args.shell_args:
         try:
@@ -217,6 +230,7 @@ if __name__ == "__main__":
         #target_file=args.file,
         shell_args=shell_args,
         use_shell=args.use_shell,
+        bundles=bundles
     )
 
     exit(0 if success else 1)
