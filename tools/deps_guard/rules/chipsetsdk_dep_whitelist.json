@@ -10466,13 +10466,6 @@
     {
         "so_file_name": "libmidi_interface_service_1.0.z.so",
         "so_file_path": "vendor/lib/passthrough/libmidi_interface_service_1.0.z.so",
-        "dep_file_name": "libasound.so",
-        "dep_file_path": "vendor/lib/libasound.so",
-        "description": "libmidi_interface_service_1.0.z.so with innerapi_tags [passthrough] cannot depend vendor only file libasound.so with //third_party/alsa-lib:libasound"
-    },
-    {
-        "so_file_name": "libmidi_interface_service_1.0.z.so",
-        "so_file_path": "vendor/lib/passthrough/libmidi_interface_service_1.0.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "libmidi_interface_service_1.0.z.so with innerapi_tags [passthrough] cannot depend system only file ld-musl-arm.so.1 with //build/common/musl:ld-musl-arm.so.1"
