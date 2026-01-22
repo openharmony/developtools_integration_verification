@@ -76,17 +76,5 @@
         "so_file_name": "libusb_ddk_device.z.so",
         "path": "//drivers/peripheral/usb/ddk:libusb_ddk_device",
         "headers": []
-    },
-    {
-        "name": "hdf:libusb_ddk_host",
-        "so_file_name": "libusb_ddk_host.z.so",
-        "path": "//drivers/peripheral/usb/ddk:libusb_ddk_host",
-        "headers": []
-    },
-    {
-        "name": "hdf:libusbfn_mtp_interface_service_1.0",
-        "so_file_name": "libusbfn_mtp_interface_service_1.0.z.so",
-        "path": "//drivers/peripheral/usb/ddk:libusbfn_mtp_interface_service_1.0",
-        "headers": []
     }
 ]
