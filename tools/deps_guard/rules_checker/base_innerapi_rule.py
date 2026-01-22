@@ -39,6 +39,9 @@ class BaseInnerapiRule(BaseRule):
 
         for mod in self.get_mgr().get_all():
             innerapi_tags = mod["innerapi_tags"]
+            if not innerapi_tags or len(innerapi_tags) == 0:
+                return passed
+
             # mod is system only scene
             if self.is_only(mod) == "system" and \
                     all(item in self.__valid_system_tags for item in innerapi_tags):
