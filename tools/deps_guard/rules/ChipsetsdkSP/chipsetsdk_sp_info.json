@@ -244,5 +244,11 @@
         "so_file_name": "libclang_rt.ubsan_minimal.so",
         "path": "//build/common/ubsan:libclang_rt.ubsan_minimal.so",
         "headers": []
-     }
+    },
+    {
+        "name": "hdf:libusb_proxy_2.0.z.so",
+        "so_file_name": "libusb_proxy_2.0.z.so",
+        "path": "//drivers/interface/usb/v2_0:libusb_proxy_2.0.z.so",
+        "headers": []
+    }
 ]
