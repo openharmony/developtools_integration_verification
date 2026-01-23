@@ -10476,5 +10476,12 @@
         "dep_file_name": "ld-musl-arm.so.1",
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "libmidi_interface_service_1.0.z.so with innerapi_tags [passthrough] cannot depend system only file ld-musl-arm.so.1 with //build/common/musl:ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libalsa_midi.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libalsa_midi.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "libalsa_midi.so with innerapi_tags [passthrough_indirect] cannot depend system only file ld-musl-arm.so.1 with //build/common/musl:ld-musl-arm.so.1"
     }
 ]
