@@ -121,8 +121,10 @@ class liteOsUpgrade_RK3568(BaseApp):
         # 如果上一个任务没执行完成，不往下继续执行
         if not is_can_exec(lock_file):
             return 98
+        upgrade_upgradeLocation = self.params_dict.get("upgrade_upgradeLocation")
         version_savepath = self.params_dict.get("img_path")
-        if not is_folder_greater_than_100MB(version_savepath):
+        version_savepath_tar = os.path.join(version_savepath, os.path.basename(upgrade_upgradeLocation))
+        if not is_folder_greater_than_100MB(version_savepath_tar):
             return 98
         upgrade_test_type = self.params_dict.get("UpgradeTestType")
         sn = self.params_dict.get("sn")
