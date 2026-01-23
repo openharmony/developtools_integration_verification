@@ -88,5 +88,11 @@
         "so_file_name": "libusbfn_mtp_interface_service_1.0.z.so",
         "path": "//drivers/peripheral/usb/ddk:libusbfn_mtp_interface_service_1.0",
         "headers": []
+    },
+    {
+        "name": "thirdparty:libalsa_midi",
+        "so_file_name": "libalsa_midi.so",
+        "path": "//thirdparty/alsa-lib:libalsa_midi",
+        "headers": []
     }
 ]
