@@ -629,16 +629,8 @@ def exec_cmd(mini_path, sn, save_path, archive_path):
     logger.error("mini_system_test failed!")
     return 98
 
-def get_folder_size(folder_path):
-    total_size = 0
-    for dirpath, dirnames, filenames in os.walk(folder_path):
-        for filename in filenames:
-            filepath = os.path.join(dirpath, filename)
-            total_size += os.path.getsize(filepath)
-    return total_size
-
 def is_folder_greater_than_100MB(folder_path):
-    folder_size = get_folder_size(folder_path)
+    folder_size = os.path.getsize(folder_path)
     if folder_size > 100 * 1024 * 1024:
         logger.info(f"文件名{folder_path} 大于100M")
         return True
