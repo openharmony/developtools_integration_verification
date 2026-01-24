@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 
 #
 # Copyright (c) 2025 Huawei Device Co., Ltd.
@@ -56,8 +56,8 @@ def execute_build_command(command, use_shell=False):
     return return_code == 0
 
 
-def monitor_file_and_stop(shell_script_path, target_file, shell_args=None, 
-                         use_shell=False):
+def monitor_file_and_stop(shell_script_path, shell_args=None, 
+                         use_shell=False, bundles=[]):
 
     if isinstance(shell_args, str):
         command = [shell_script_path] + shlex.split(shell_args)
@@ -68,20 +68,36 @@ def monitor_file_and_stop(shell_script_path, target_file, shell_args=None,
     
     command += ["--build-only-gn", "--no-prebuilt-sdk"]
 
-    execute_build_command(command, use_shell=use_shell)
+    #execute_build_command(command, use_shell=use_shell)
     
-    file_detected = False
+    file_detected = True 
 
+    '''
     while True:
         if os.path.exists(target_file):
             file_detected = True
             break
-        sleep(0.5)
+        time.sleep(0.5)
+        '''
+    build_arkui = False
+    for bundle in bundles:
+        if "arkui" in bundle:
+            build_arkui = True
+            break
+    
+    if not build_arkui:
+        command = [
+            'ohos_precise_config=developtools/integration_verification/tools/precise_build/precise_build_tdd_config.json'
+            if c == 'ohos_precise_config=developtools/integration_verification/tools/precise_build/precise_build_tdd_test_config.json'
+            else c for c in command
+            ]
 
     if file_detected:
+        '''
         if os.stat(target_file).st_size == 0:
             print("No changes to the unittest detected, skipping compilation directly.")
             sys.exit()
+        '''
         command.remove("--build-only-gn")
         command.remove("--no-prebuilt-sdk")
         command.extend(["--build-target", "precise_module_build"])
@@ -100,7 +116,7 @@ def process_changes():
         "modified": lambda x: x,
         "deleted": lambda x: x
     }
-    gn_files, c_files, h_files = [], [], []
+    gn_files, c_files, h_files, other_files = [], [], [], []
     file_type_map = {
         'h': h_files,
         'hh': h_files,
@@ -110,16 +126,47 @@ def process_changes():
         'cpp': c_files,
         'cc': c_files,
         'cxx': c_files,
+        'js': c_files,
+        'ets': c_files,
+        'in': h_files,
+        'cl': h_files,
+        'cppm': h_files,
+        'cuh': h_files,
+        'def': h_files,
+        'gch': h_files,
+        'glsl': h_files,
+        'h++': h_files,
+        'hhu': h_files,
+        'hlsl': h_files,
+        'i': h_files,
+        'icc': h_files,
+        'impl': h_files,
+        'inl': h_files,
+        'ipp': h_files,
+        'ixx': h_files,
+        'mpp': h_files,
+        'mxx': h_files,
+        'pch': h_files,
+        'protp': h_files,
+        'swig': h_files,
+        'template': h_files,
+        'tcc': h_files,
+        'thrift': h_files,
+        'tpp': h_files,
+        'wgsl': h_files,
     }
     
+
+    bundles = []
     for key, value in change_info.items():
         changed_files = value.get("changed_file_list", {})
+        bundles.append(key)
         for operation, processor in file_operations.items():
             if operation not in changed_files:
                 print(f"unknown file operation: {operation}")
                 continue                
             for modified_file in processor(changed_files[operation]):
-                target_list = file_type_map.get(get_file_extension(modified_file))
+                target_list = file_type_map.get(get_file_extension(modified_file), other_files)
                 if target_list is not None:
                     target_list.append("//" + os.path.join(key, modified_file))
 
@@ -127,15 +174,15 @@ def process_changes():
         "h_file": h_files,
         "c_file": c_files,
         "gn_file": gn_files,
+        "other_file": other_files,
         "gn_module":[]
     }
-
-    with open('modify_files.json', 'w') as json_file:
+    file_path = os.path.abspath(__file__)
+    root_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(file_path)))))
+    write_file = os.path.join(root_path, "modify_files.json")
+    with open(write_file, 'w') as json_file:
         json.dump(modified_files, json_file, indent=4)
-    return (
-        [os.path.join(self.ace_root, f) for f in change_files],
-        openharmony_fields
-    )
+    return bundles
 
 def get_file_extension(filename):
     if '.' in filename:
@@ -160,15 +207,16 @@ if __name__ == "__main__":
                         help='display help information and exit')
     parser.add_argument('-s', '--script', required=True, 
                         help='the path to the shell script to be executed')
-    parser.add_argument('-f', '--file', required=True,
-                        help='the path of the target file to be monitored')
+    #parser.add_argument('-f', '--file', required=True,
+    #                    help='the path of the target file to be monitored')
     parser.add_argument('--use-shell', action='store_true',
                         help='execute commands using the shell (handle complex commands)')
     parser.add_argument('shell_args', nargs=argparse.REMAINDER,
                         help='parameters passed to the shell script (after --)')
     
     args = parser.parse_args()
-    process_changes()
+    bundles = []
+    bundles = process_changes()
     shell_args = []
     if args.shell_args:
         try:
@@ -179,9 +227,11 @@ if __name__ == "__main__":
     
     success = monitor_file_and_stop(
         shell_script_path=args.script,
-        target_file=args.file,
+        #target_file=args.file,
         shell_args=shell_args,
         use_shell=args.use_shell,
+        bundles=bundles
     )
 
     exit(0 if success else 1)
+
