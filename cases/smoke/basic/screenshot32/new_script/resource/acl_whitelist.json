@@ -387,5 +387,11 @@
     "acls": [
       "ohos.permission.STORAGE_MANAGER_CRYPT"
     ]
+  },
+  {
+    "processName": "selection_service",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING"
+    ]
   }
 ]
