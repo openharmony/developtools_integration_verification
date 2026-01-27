@@ -10483,5 +10483,12 @@
         "dep_file_name": "ld-musl-arm.so.1",
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "libalsa_midi.so with innerapi_tags [passthrough_indirect] cannot depend system only file ld-musl-arm.so.1 with //build/common/musl:ld-musl-arm.so.1"
+    },
+    {
+ 	   	"so_file_name": "libEGL.so",
+ 	   	"so_file_path": "system/lib/platformsdk/libEGL.so",
+ 	    "dep_file_name": "libmali-bifrost-g52-g7p0-ohos.so",
+ 	   	"dep_file_path": "vendor/lib/chipsetsdk/libmali-bifrost-g52-g7p0-ohos.so",
+ 	    "description": "system_only cannot depend system only lib libmali-bifrost-g52-g7p0-ohos.so in vendor/lib/chipsetsdk/libmali-bifrost-g52-g7p0-ohos.so"
     }
 ]
