@@ -249,7 +249,7 @@ class ElfFileMgr(object):
             if not dep_elf:
                 self._not_found_depened_files.append({"caller": elf["name"], "callee": lib})
                 print("Warning: can not find depended library [" + lib + "] for " + elf["name"])
-                break
+                continue
 
             if not isinstance(dep_elf, list):
                 self.add_dependence(elf, dep_elf)
