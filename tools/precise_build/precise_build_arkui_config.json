@@ -1,7 +1,7 @@
 {
-    "h_file_depth": 3,
-    "c_file_depth": 3,
-    "gn_file_depth": 3,
+    "h_file_depth": 2,
+    "c_file_depth": 2,
+    "gn_file_depth": 2,
     "gn_module_depth": 3,
     "other_file_depth": 3,
     "test_only": true,
@@ -71,14 +71,17 @@
         "//foundation/window/window_manager/wmserver/test/unittest:wmserver_window_node_test",
         "//foundation/window/window_manager/wmserver/test/unittest:wmserver_window_pair_test",
         "//foundation/window/window_manager/wm/test/unittest:wm_window_adapter_lite_test",
-        "//foundation/window/window_manager/wm/test/unittest:wm_window_manager_lite_test"
+        "//foundation/window/window_manager/wm/test/unittest:wm_window_manager_lite_test",
+	"//foundation/arkui/test/unittest/capi/accessors:capi_all_accessors_test"
     ],
     "max_range_list": [],
     "modify_files_path": "modify_files.json",
     "precise_result_path": "precise_build_result.txt",
     "precise_log_path": "precise_build_log.txt",
     "precise_log_level": "INFO",
-    "root_target": [
+    "include_parent_targets": [
         "//build/core/gn:build_all_test_pkg"
+    ],
+    "exclude_parent_targets": [
     ]
 }

@@ -42,8 +42,7 @@ class BaseInnerapiRule(BaseRule):
         for mod in self.get_mgr().get_all():
             innerapi_tags = mod["innerapi_tags"]
             # mod is system only scene
-            if self.is_only(mod) == "system" and \
-                    all(item in self.__valid_system_tags for item in innerapi_tags):
+            if self.is_only(mod) == "system" and all(item in self.__valid_system_tags for item in innerapi_tags):
                 for dep in mod["deps"]:
                     callee = dep["callee"]
                     callee_innerapi_tags = callee["innerapi_tags"]
@@ -69,9 +68,6 @@ class BaseInnerapiRule(BaseRule):
                         continue
                     else:
                         self.error("NEED MODIFY: system only module %s depends on wrong module as %s in %s, dep module path is %s" 
-
-
-
                                    %(mod["name"], callee["name"], mod["labelPath"], callee["path"]))
                         passed = False
             # mod is vendor only scene
@@ -105,3 +101,4 @@ class BaseInnerapiRule(BaseRule):
                                    %(mod["name"], callee["name"], mod["labelPath"], callee["path"]))
                         passed = False
         return passed
+
