@@ -10,5 +10,35 @@
         "so_file_name": "libc.so",
         "path": "//build/common/musl:musl-libc.so",
         "headers": []
+    },
+    {
+        "name": "thirdparty:openhitls_bsl",
+        "so_file_name": "libopenhitls_bsl.z.so",
+        "path": "//third_party/openhitls:openhitls_bsl",
+        "headers": []
+    },
+    {
+        "name": "thirdparty:openhitls_crypto",
+        "so_file_name": "libopenhitls_crypto.z.so",
+        "path": "//third_party/openhitls:openhitls_crypto",
+        "headers": []
+    },
+    {
+        "name": "thirdparty:openhitls_pki",
+        "so_file_name": "libopenhitls_pki.z.so",
+        "path": "//third_party/openhitls:openhitls_pki",
+        "headers": []
+    },
+    {
+        "name": "thirdparty:openhitls_tls",
+        "so_file_name": "libopenhitls_tls.z.so",
+        "path": "//third_party/openhitls:openhitls_tls",
+        "headers": []
+    },
+    {
+        "name": "thirdparty:openhitls_auth",
+        "so_file_name": "libopenhitls_auth.z.so",
+        "path": "//third_party/openhitls:openhitls_auth",
+        "headers": []
     }
 ]
