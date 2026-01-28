@@ -40,5 +40,11 @@
         "so_file_name": "libopenhitls_auth.z.so",
         "path": "//third_party/openhitls:openhitls_auth",
         "headers": []
+    },
+    {
+        "name": "thirdparty:vulkan-loader",
+        "so_file_name": "libvulkan.so",
+        "path": "//third_party/vulkan-loader:vulkan-loader",
+        "headers": []
     }
 ]
