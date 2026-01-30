@@ -49,6 +49,13 @@
         "description": "lib libaccesstoken_compat_sdk.z.so with innerapi_tags [chipsetsdk, platformsdk, sasdk] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
+        "so_file_name": "libaccesstoken_compat_sdk.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libaccesstoken_compat_sdk.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
+        "description": "lib libaccesstoken_compat_sdk.z.so with innerapi_tags [chipsetsdk_sp] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
+    },
+    {
         "so_file_name": "libsensor_proxy_3.0.z.so",
         "so_file_path": "system/lib/chipset-sdk/libsensor_proxy_3.0.z.so",
         "dep_file_name": "ld-musl-arm.so.1",

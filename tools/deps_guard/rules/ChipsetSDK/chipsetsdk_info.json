@@ -36,12 +36,6 @@
         "headers": []
     },
     {
-        "name": "security:libaccesstoken_compat_sdk",
-        "so_file_name": "libaccesstoken_compat_sdk.z.so",
-        "path": "//base/security/access_token/interfaces/innerkits/accesstoken:libaccesstoken_compat_sdk",
-        "headers": []
-    },
-    {
         "name": "hdf:libsensor_proxy_3.0",
         "so_file_name": "libsensor_proxy_3.0.z.so",
         "path": "//drivers/interface/sensor/v3_0:libsensor_proxy_3.0",
