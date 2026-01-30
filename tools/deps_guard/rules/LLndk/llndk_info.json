@@ -12,6 +12,12 @@
         "headers": []
     },
     {
+        "name": "graphic:sync_fence",
+        "so_file_name": "libsync_fence.z.so",
+        "path": "//foundation/graphic/graphic_surface/sync_fence:sync_fence",
+        "headers": []
+    },
+    {
         "name": "hitrace:hitrace_ndk",
         "so_file_name": "libhitrace_ndk.z.so",
         "path": "//base/hiviewdfx/hitrace/frameworks/hitrace_ndk:hitrace_ndk",
