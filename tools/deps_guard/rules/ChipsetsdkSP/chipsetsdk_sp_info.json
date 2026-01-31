@@ -216,12 +216,6 @@
         "headers": []
     },
     {
-        "name": "graphic:sync_fence",
-        "so_file_name": "libsync_fence.z.so",
-        "path": "//foundation/graphic/graphic_surface/sync_fence:sync_fence",
-        "headers": []
-    },
-    {
         "name": "resourceschedule:libffrt",
         "so_file_name": "libffrt.so",
         "path": "//foundation/resourceschedule/ffrt:libffrt",
