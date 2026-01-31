@@ -10504,5 +10504,40 @@
  	    "dep_file_name": "libmali-bifrost-g52-g7p0-ohos.so",
  	   	"dep_file_path": "vendor/lib/chipsetsdk/libmali-bifrost-g52-g7p0-ohos.so",
  	    "description": "system_only cannot depend system only lib libmali-bifrost-g52-g7p0-ohos.so in vendor/lib/chipsetsdk/libmali-bifrost-g52-g7p0-ohos.so"
+    },
+    {
+        "so_file_name": "libusb_adapter.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libusb_adapter.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "lib libusb_adapter.z.so with innerapi_tags [passthrough_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "libserial_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libserial_interface_service_1.0.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "lib libserial_interface_service_1.0.z.so with innerapi_tags [passthrough_indirect] cannot deps system only lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libserial_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libserial_interface_service_1.0.z.so",
+        "dep_file_name": "libclang_rt.asan.so",
+        "dep_file_path": "system/lib/libclang_rt.asan.so",
+        "description": "lib libserial_interface_service_1.0.z.so with innerapi_tags [passthrough_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
+    },
+    {
+        "so_file_name": "librga.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/librga.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "lib librga.z.so with innerapi_tags [passthrough_indirect] cannot deps system only lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libOMX_Core.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libOMX_Core.z.so",
+        "dep_file_name": "ld-musl-arm-asan.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
+        "description": "lib libOMX_Core.z.so with innerapi_tags [passthrough_indirect] cannot deps system only lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
     }
 ]
