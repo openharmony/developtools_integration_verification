@@ -58,5 +58,11 @@
         "so_file_name": "libvulkan.so",
         "path": "//third_party/vulkan-loader:vulkan-loader",
         "headers": []
+    },
+    {
+        "name": "thirdparty:mindspore",
+        "so_file_name": "libmindspore_lite_ndk.so",
+        "path": "//third_party/mindspore/mindspore-src/source/mindspore-lite:mindspore_ndk",
+        "headers": []
     }
 ]
