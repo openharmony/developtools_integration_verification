@@ -1,5 +1,11 @@
 [
     {
+        "name": "resourceschedule:libffrt",
+        "so_file_name": "libffrt.so",
+        "path": "//foundation/resourceschedule/ffrt:libffrt",
+        "headers": []
+    },
+    {
         "name": "build_framework:ld-musl-arm.so.1",
         "so_file_name": "ld-musl-aarch64.so.1",
         "path": "//build/common/musl:ld-musl-arm.so.1",
