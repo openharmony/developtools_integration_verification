@@ -7,8 +7,20 @@
     },
     {
         "name": "build_framework:ld-musl-arm.so.1",
+        "so_file_name": "ld-musl-arm.so.1",
+        "path": "//build/common/musl:ld-musl-arm.so.1",
+        "headers": []
+    },
+    {
+        "name": "build_framework:ld-musl-arm.so.1",
         "so_file_name": "libc.so",
         "path": "//build/common/musl:musl-libc.so",
+        "headers": []
+    },
+    {
+        "name": "build_framework:ld-musl-arm.so.1_arm64e",
+        "so_file_name": "ld-musl-aarch64.so.1",
+        "path": "//build/common/musl:ld-musl-arm.so.1_arm64e",
         "headers": []
     },
     {
