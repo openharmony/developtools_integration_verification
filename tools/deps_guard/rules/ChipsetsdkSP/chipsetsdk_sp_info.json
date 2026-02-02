@@ -216,12 +216,6 @@
         "headers": []
     },
     {
-        "name": "resourceschedule:libffrt",
-        "so_file_name": "libffrt.so",
-        "path": "//foundation/resourceschedule/ffrt:libffrt",
-        "headers": []
-    },
-    {
         "name": "thirdparty:libusb",
         "so_file_name": "libusb_shared.z.so",
         "path": "//third_party/libusb:libusb",
