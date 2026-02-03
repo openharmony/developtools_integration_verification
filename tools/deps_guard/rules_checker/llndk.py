@@ -78,9 +78,9 @@ class LLndkRule(BaseRule):
             self.__all_mods.append(mod["name"])
             self.__all_paths[mod["name"]] = mod["path"]
 
-            if "llndk" in mod["path"] and "llndk" not in mod["innerapi_tags"]:
+            if self.__is_llndk_tagged(mod) and mod["name"] not in self.__llndks:
                 # Not allowed
-                self.error("NEED MODIFY: so file %s should add innerapi_tags llndk in %s"
+                self.error("NEED MODIFY: so file %s in %s should be add in file llndk_info.json"
                            % (mod["name"], mod["labelPath"]))
                 passed = False
                 continue
@@ -133,9 +133,6 @@ class LLndkRule(BaseRule):
         for mod in self.__llndks:
             if mod not in self.__all_mods:
                 continue
-            if mod in self.__all_paths:
-                if "llndk/" not in self.__all_paths[mod]:
-                    continue
             if mod not in llndk_tags:
                 passed = False
                 self.error('llndk module %s in llndk_info.json should add innerapi_tags with "llndk"' % mod)
