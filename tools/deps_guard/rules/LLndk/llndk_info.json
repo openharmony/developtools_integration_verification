@@ -82,5 +82,23 @@
         "so_file_name": "libmindspore_lite_ndk.so",
         "path": "//third_party/mindspore/mindspore-src/source/mindspore-lite:mindspore_ndk",
         "headers": []
+    },
+    {
+        "name": "graphic_2d:EGL",
+        "so_file_name": "libEGL.so",
+        "path": "//foundation/graphic/graphic_2d/frameworks/opengl_wrapper:EGL",
+        "headers": []
+    },
+    {
+        "name": "graphic_2d:GLESv2",
+        "so_file_name": "libGLESv2.so",
+        "path": "//foundation/graphic/graphic_2d/frameworks/opengl_wrapper:GLESv2",
+        "headers": []
+    },
+    {
+        "name": "graphic_2d:GLESv3",
+        "so_file_name": "libGLESv3.so",
+        "path": "//foundation/graphic/graphic_2d/frameworks/opengl_wrapper:GLESv3",
+        "headers": []
     }
 ]
