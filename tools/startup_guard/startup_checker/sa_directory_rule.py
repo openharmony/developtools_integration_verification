@@ -207,7 +207,7 @@ class SADirectoryRule(BaseRule):
         last_illegal_index = illegal_indices[-1]
         path_up_to_last_illegal = '/'.join(path_components[:last_illegal_index+1])
         for white_path in self._mkdir_cmd_whitelist:
-            if path_up_to_last_illegal == white_path:
+            if path_up_to_last_illegal == white_path or normalized_dir_path == white_path:
                 return True
 
         # Last illegal directory path is not in the whitelist
