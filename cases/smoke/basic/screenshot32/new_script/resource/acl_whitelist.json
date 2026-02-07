@@ -307,7 +307,8 @@
       "ohos.permission.MANAGE_RGM",
       "ohos.permission.FILTER_INPUT_EVENT",
       "ohos.permission.NOTIFICATION_CONTROLLER",
-      "ohos.permission.GET_PAGE_INFO"
+      "ohos.permission.GET_PAGE_INFO",
+      "ohos.permission.ACCESS_EXT_SYSTEM_ABILITY"
     ]
   },
   {
