@@ -339,7 +339,7 @@
     "Name": "benchmark",
     "License": "Apache-2.0",
     "Version Number": "1.9.4",
-    "Upstream URL": "https://github.com/google/benchmark/releases/tag/v1.9.4"
+    "Upstream URL": "https://github.com/benchmark/releases/tag/v1.9.4"
   },
   {
     "Name": "bindgen",
@@ -357,7 +357,7 @@
     "Name": "brotli",
     "License": "MIT",
     "Version Number": "v1.1.0",
-    "Upstream URL": "http://github.com/google/brotli"
+    "Upstream URL": "http://github.com/brotli"
   },
   {
     "Name": "c-ares",
@@ -501,7 +501,7 @@
     "Name": "flatbuffers",
     "License": "Apache-2.0",
     "Version Number": "v25.2.10",
-    "Upstream URL": "https://github.com/google/flatbuffers/archive/refs/tags/v25.2.10.tar.gz"
+    "Upstream URL": "https://github.com/flatbuffers/archive/refs/tags/v25.2.10.tar.gz"
   },
   {
     "Name": "foreign-types",
@@ -542,11 +542,11 @@
   {
     "Name": "gn",
     "License": "BSD-3-Clause",
-    "Version Number": "d823fd85da3fb83146f734377da454473b93a2b2",
+    "Version Number": "2024-04-10",
     "Upstream URL": "https://gn.googlesource.com/gn.git"
   },
   {
-    "Name": "google/protobuf",
+    "Name": "protobuf",
     "License": "BSD-3-Clause",
     "Version Number": "5.29.4",
     "Upstream URL": "https://github.com/protocolbuffers/protobuf"
@@ -555,7 +555,7 @@
     "Name": "googletest",
     "License": "BSD-3-Clause",
     "Version Number": "1.16.0",
-    "Upstream URL": "https://github.com/google/googletest/releases/tag/v1.16.0"
+    "Upstream URL": "https://github.com/googletest/releases/tag/v1.16.0"
   },
   {
     "Name": "heck",
@@ -681,7 +681,7 @@
     "Name": "libphonenumber",
     "License": "Apache-2.0",
     "Version Number": "8.13.31",
-    "Upstream URL": "https://github.com/google/libphonenumber.git"
+    "Upstream URL": "https://github.com/libphonenumber.git"
   },
   {
     "Name": "libpng",
@@ -939,7 +939,7 @@
     "Name": "re2",
     "License": "BSD-3-Clause",
     "Version Number": "2024-07-02",
-    "Upstream URL": "https://github.com/google/re2"
+    "Upstream URL": "https://github.com/re2"
   },
   {
     "Name": "regex",
