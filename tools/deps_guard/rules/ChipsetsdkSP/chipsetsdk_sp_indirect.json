@@ -90,12 +90,6 @@
         "headers": []
     },
     {
-        "name": "communication:ipc_common",
-        "so_file_name": "libipc_common.z.so",
-        "path": "//foundation/communication/ipc/ipc/native/src/core:ipc_common",
-        "headers": []
-    },
-    {
         "name": "hiviewdfx:rustc_demangle",
         "so_file_name": "librustc_demangle.z.so",
         "path": "//base/hiviewdfx/faultloggerd/interfaces/rust/rustc_demangle:rustc_demangle",
