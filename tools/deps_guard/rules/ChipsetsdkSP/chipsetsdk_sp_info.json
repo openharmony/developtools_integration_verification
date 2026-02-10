@@ -138,12 +138,6 @@
         "headers": []
     },
     {
-        "name": "communication:ipc_core",
-        "so_file_name": "libipc_single.z.so",
-        "path": "//foundation/communication/ipc/interfaces/innerkits/ipc_core:ipc_core",
-        "headers": []
-    },
-    {
         "name": "thirdparty:libunwind",
         "so_file_name": "libunwind.z.so",
         "path": "//third_party/libunwind:libunwind",
