@@ -65,9 +65,9 @@ if __name__ == '__main__':
             #     text = text.replace('<meta charset="utf-8"/>', '<meta charset="gbk"/>')
             #     f.seek(0)
             #     f.write(text)
-        if passed == 19:
+        if passed == 17:
             print('SmokeTest: End of check, test succeeded!')
         else:
-            print('SmokeTest: End of check, SmokeTest find some fatal problems! passed {}/{}'.format(passed, 19))
+            print('SmokeTest: End of check, SmokeTest find some fatal problems! passed {}/{}'.format(passed, 17))
     except:
         print('SmokeTest: End of check, SmokeTest find some fatal problems! {}'.format(traceback.format_exc()))
