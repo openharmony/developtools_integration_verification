@@ -1,14 +1,1112 @@
 [
   {
-    "Name": "elfutils",
-    "License": "LGPL-2.1, LGPL-3.0, GPL-2.0",
-    "Version Number": "0.188",
-    "Upstream URL": "https://sourceware.org/elfutils/"
+    "Name": "7 Zip - LZMA SDK",
+    "License": "0BSD",
+    "Version Number": "25.01",
+    "Upstream URL": "https://7-zip.org/a/lzma2501.7z"
+  },
+  {
+    "Name": "BurntSushi/aho-corasick",
+    "License": "MIT",
+    "Version Number": "0.7.20",
+    "Upstream URL": "https://github.com/BurntSushi/aho-corasick"
+  },
+  {
+    "Name": "BurntSushi/termcolor",
+    "License": "MIT",
+    "Version Number": "1.2.0",
+    "Upstream URL": "https://github.com/BurntSushi/termcolor"
+  },
+  {
+    "Name": "Bzip2",
+    "License": "bzip2-1.0.6",
+    "Version Number": "1.0.8",
+    "Upstream URL": "https://sourceware.org/bzip2/"
+  },
+  {
+    "Name": "CMSIS",
+    "License": "Apache-2.0",
+    "Version Number": "5.7.0",
+    "Upstream URL": "http://www.arm.com/zh/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php"
+  },
+  {
+    "Name": "CMSIS_6",
+    "License": "Apache-2.0",
+    "Version Number": "6.0.0",
+    "Upstream URL": "http://www.arm.com/zh/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php"
+  },
+  {
+    "Name": "CUPS",
+    "License": "Apache-2.0",
+    "Version Number": "v2.4.14",
+    "Upstream URL": "https://github.com/OpenPrinting/cups/releases/download/v2.4.14/cups-2.4.14-source.tar.gz"
+  },
+  {
+    "Name": "EXIF Tag Parsing Library - libexif",
+    "License": "LGPL-2.1-or-later",
+    "Version Number": "v0.6.25",
+    "Upstream URL": "https://github.com/libexif/libexif/releases/tag/v0.6.25"
+  },
+  {
+    "Name": "Editline Library - libedit",
+    "License": "BSD-3-Clause",
+    "Version Number": "3.1-20250104",
+    "Upstream URL": "https://www.thrysoee.dk/editline/libedit-20250104-3.1.tar.gz"
+  },
+  {
+    "Name": "FFmpeg",
+    "License": "LGPL-2.1-only",
+    "Version Number": "7.1.1",
+    "Upstream URL": "http://www.ffmpeg.org/"
+  },
+  {
+    "Name": "FatFs",
+    "License": "BSD-3-Clause",
+    "Version Number": "R0.15a",
+    "Upstream URL": "http://elm-chan.org/fsw/ff/00index_e.html"
+  },
+  {
+    "Name": "FreeBSD",
+    "License": "BSD-2-Clause-Patent",
+    "Version Number": "14.3",
+    "Upstream URL": "http://www.freebsd.org/"
+  },
+  {
+    "Name": "GPT fdisk",
+    "License": "GPL-2.0-only",
+    "Version Number": "1.0.10",
+    "Upstream URL": "https://sourceforge.net/projects/gptfdisk"
+  },
+  {
+    "Name": "HarfBuzz",
+    "License": "MIT",
+    "Version Number": "11.0.0",
+    "Upstream URL": "https://github.com/harfbuzz/harfbuzz"
+  },
+  {
+    "Name": "Human Time",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "2.1.0",
+    "Upstream URL": "https://github.com/tailhook/humantime"
+  },
+  {
+    "Name": "ICU - International Components for Unicode",
+    "License": "Unicode-DFS-2022",
+    "Version Number": "74.2",
+    "Upstream URL": "https://github.com/unicode-org/icu"
+  },
+  {
+    "Name": "JSON for Modern C++",
+    "License": "MIT",
+    "Version Number": "3.11.3",
+    "Upstream URL": "https://github.com/nlohmann/json"
+  },
+  {
+    "Name": "Jinja2",
+    "License": "BSD-3-Clause",
+    "Version Number": "3.1.6",
+    "Upstream URL": "https://github.com/pallets/jinja"
+  },
+  {
+    "Name": "Khronos Group - EGL",
+    "License": "Apache-2.0",
+    "Version Number": "1.5",
+    "Upstream URL": "https://github.com/KhronosGroup/EGL-Registry.git"
+  },
+  {
+    "Name": "Khronos Group - OpenCL - Headers",
+    "License": "Apache-2.0",
+    "Version Number": "v2024.05.08",
+    "Upstream URL": "https://github.com/KhronosGroup/OpenCL-Headers/archive/v2024.05.08.tar.gz"
+  },
+  {
+    "Name": "Khronos Group - OpenGL ES",
+    "License": "Apache-2.0",
+    "Version Number": "31db35a53f7e64d3e03e35ec47ccfd6079b792d7",
+    "Upstream URL": "https://github.com/KhronosGroup/OpenGL-Registry.git"
+  },
+  {
+    "Name": "Khronos Group - OpenMAX IL",
+    "License": "MIT",
+    "Version Number": "1.1.2",
+    "Upstream URL": "https://github.com/KhronosGroup/OpenMAX-IL-Registry/tree/main/api/1.1.2"
+  },
+  {
+    "Name": "Khronos Group - OpenSL ES",
+    "License": "null",
+    "Version Number": "1.0.1",
+    "Upstream URL": "https://github.com/KhronosGroup/OpenSL-ES-Registry.git"
+  },
+  {
+    "Name": "Khronos Group - Vulkan",
+    "License": "Apache-2.0",
+    "Version Number": "v1.4.309",
+    "Upstream URL": "https://github.com/KhronosGroup/Vulkan-Headers.git"
+  },
+  {
+    "Name": "Khronos Group - Vulkan-Loader",
+    "License": "Apache-2.0",
+    "Version Number": "v1.4.309",
+    "Upstream URL": "https://github.com/KhronosGroup/Vulkan-Loader.git"
+  },
+  {
+    "Name": "Lame - Lame Aint an MP3 Encoder",
+    "License": "LGPL-2.0-only",
+    "Version Number": "3.100",
+    "Upstream URL": "https://github.com/lameproject/lame.git"
+  },
+  {
+    "Name": "LibTIFF - TIFF Library and Utilities",
+    "License": "libtiff",
+    "Version Number": "4.7.0",
+    "Upstream URL": "https://gitlab.com/libtiff/libtiff"
+  },
+  {
+    "Name": "Libunwind",
+    "License": "MIT",
+    "Version Number": "1.8.1",
+    "Upstream URL": "https://github.com/libunwind/libunwind.git"
+  },
+  {
+    "Name": "MarkupSafe",
+    "License": "BSD-3-Clause",
+    "Version Number": "2.1.5",
+    "Upstream URL": "https://palletsprojects.com/p/markupsafe/"
+  },
+  {
+    "Name": "Mesa3D - MesaLib",
+    "License": "Apache-2.0; BSL-1.0; GPL-1.0-or-later; GPL-2.0-only; MIT; SGI-B-2.0",
+    "Version Number": "25.0.1",
+    "Upstream URL": "https://gitlab.freedesktop.org/mesa/mesa"
+  },
+  {
+    "Name": "MindSpore",
+    "License": "Apache-2.0",
+    "Version Number": "v2.7.0",
+    "Upstream URL": "https://gitee.com/mindspore/mindspore-lite/repository/archive/v2.7.0.zip"
+  },
+  {
+    "Name": "NTFS-3G Read/Write Driver",
+    "License": "GPL-2.0-or-later",
+    "Version Number": "2022.10.3",
+    "Upstream URL": "https://github.com/tuxera/ntfs-3g"
+  },
+  {
+    "Name": "Node.js",
+    "License": "ISC; 0BSD; MIT; MIT; Apache-2.0; ICU; Zlib; Libpng; BSD-2-Clause; BSD-3-Clause",
+    "Version Number": "v18.20.1",
+    "Upstream URL": "http://www.nodejs.org/"
+  },
+  {
+    "Name": "Noto Fonts",
+    "License": "Apache-2.0",
+    "Version Number": "NotoSansMath-v2.539",
+    "Upstream URL": "https://github.com/notofonts/notofonts.github.io"
+  },
+  {
+    "Name": "NuttX",
+    "License": "Apache-2.0",
+    "Version Number": "12.10.0",
+    "Upstream URL": "http://www.nuttx.org"
   },
   {
     "Name": "OpenSSL",
     "License": "Apache-2.0",
     "Version Number": "3.0.9",
-    "Upstream URL": "https://www.openssl.org/"
+    "Upstream URL": "https://www.openssl.org/source/openssl-3.0.9.tar.gz"
+  },
+  {
+    "Name": "PCRE2",
+    "License": "BSD-3-Clause WITH PCRE2-exception",
+    "Version Number": "pcre2-10.46",
+    "Upstream URL": "https://github.com/PhilipHazel/pcre2.git"
+  },
+  {
+    "Name": "Popt",
+    "License": "MIT",
+    "Version Number": "1.19",
+    "Upstream URL": "https://github.com/rpm-software-management/popt/tree/popt-1.19-release"
+  },
+  {
+    "Name": "PyYAML",
+    "License": "MIT",
+    "Version Number": "6.0.2",
+    "Upstream URL": "https://github.com/yaml/pyyaml"
+  },
+  {
+    "Name": "QR-Code-generator",
+    "License": "MIT",
+    "Version Number": "1.8.0",
+    "Upstream URL": "https://www.nayuki.io/page/qr-code-generator-library"
+  },
+  {
+    "Name": "Rust",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.72.0",
+    "Upstream URL": "https://github.com/rust-lang/rust"
+  },
+  {
+    "Name": "Rust Quasi-Quoting",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.0.37",
+    "Upstream URL": "https://github.com/dtolnay/quote"
+  },
+  {
+    "Name": "SPIRV-Headers",
+    "License": "Apache-2.0",
+    "Version Number": "vulkan-sdk-1.3.275.0",
+    "Upstream URL": "https://github.com/KhronosGroup/SPIRV-Headers.git"
+  },
+  {
+    "Name": "SPIRV-Tools",
+    "License": "Apache-2.0",
+    "Version Number": "vulkan-sdk-1.3.275.0",
+    "Upstream URL": "https://github.com/KhronosGroup/SPIRV-Tools.git"
+  },
+  {
+    "Name": "SQLite",
+    "License": "0BSD",
+    "Version Number": "version-3.44.4",
+    "Upstream URL": "https://github.com/sqlite/sqlite/archive/refs/tags/version-3.44.4.zip"
+  },
+  {
+    "Name": "Static Assertions",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.1.0",
+    "Upstream URL": "https://github.com/nvzqz/static-assertions-rs"
+  },
+  {
+    "Name": "TEX hyphenation patterns",
+    "License": "MIT; CNRI-Python-GPL-Compatible; GPL-2.0-only; LGPL-2.1-only; LGPL-3.0-only; LPPL-1.0; LPPL-1.2; LPPL-1.3c; MPL-1.1",
+    "Version Number": "CTAN-2024.12.31",
+    "Upstream URL": "https://github.com/hyphenation/tex-hyphen"
+  },
+  {
+    "Name": "ThrowTheSwitch/Unity",
+    "License": "MIT",
+    "Version Number": "v2.6.0",
+    "Upstream URL": "https://github.com/ThrowTheSwitch/Unity/tree/v2.6.0"
+  },
+  {
+    "Name": "VK-GL-CTS",
+    "License": "Apache-2.0",
+    "Version Number": "vulkan-cts-1.3.7.3",
+    "Upstream URL": "https://github.com/KhronosGroup/VK-GL-CTS"
+  },
+  {
+    "Name": "WPA Supplicant",
+    "License": "BSD-3-Clause",
+    "Version Number": "2.11",
+    "Upstream URL": "https://w1.fi/releases/wpa_supplicant-2.11.tar.gz"
+  },
+  {
+    "Name": "abseil-cpp",
+    "License": "Apache-2.0",
+    "Version Number": "20250127.0",
+    "Upstream URL": "https://github.com/abseil/abseil-cpp"
+  },
+  {
+    "Name": "alsa-lib",
+    "License": "LGPL-2.1-only",
+    "Version Number": "v1.2.11",
+    "Upstream URL": "https://github.com/alsa-project/alsa-lib"
+  },
+  {
+    "Name": "alsa-utils",
+    "License": "GPL-2.0-only",
+    "Version Number": "v1.2.11",
+    "Upstream URL": "https://github.com/alsa-project/alsa-utils"
+  },
+  {
+    "Name": "astc-encoder",
+    "License": "Apache-2.0",
+    "Version Number": "4.7.0",
+    "Upstream URL": "https://github.com/ARM-software/astc-encoder.git"
+  },
+  {
+    "Name": "atty",
+    "License": "MIT",
+    "Version Number": "0.2.14",
+    "Upstream URL": "https://github.com/softprops/atty"
+  },
+  {
+    "Name": "autocfg",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.4.0",
+    "Upstream URL": "https://github.com/cuviper/autocfg"
+  },
+  {
+    "Name": "benchmark",
+    "License": "Apache-2.0",
+    "Version Number": "1.9.4",
+    "Upstream URL": "https://github.com/google/benchmark/releases/tag/v1.9.4"
+  },
+  {
+    "Name": "bindgen",
+    "License": "BSD-3-Clause-LBNL",
+    "Version Number": "v0.70.1",
+    "Upstream URL": "https://github.com/rust-lang/rust-bindgen"
+  },
+  {
+    "Name": "bitflags",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "2.9.1",
+    "Upstream URL": "https://github.com/bitflags/bitflags"
+  },
+  {
+    "Name": "brotli",
+    "License": "MIT",
+    "Version Number": "v1.1.0",
+    "Upstream URL": "http://github.com/google/brotli"
+  },
+  {
+    "Name": "c-ares",
+    "License": "MIT",
+    "Version Number": "cares-1_34_5",
+    "Upstream URL": "https://gitee.com/c-ares/c-ares"
+  },
+  {
+    "Name": "cJSON",
+    "License": "MIT",
+    "Version Number": "1.7.19",
+    "Upstream URL": "https://github.com/DaveGamble/cJSON/releases"
+  },
+  {
+    "Name": "cangjie_compiler",
+    "License": "Apache-2.0 WITH LLVM-exception",
+    "Version Number": "1.1.0-alpha.69",
+    "Upstream URL": "https://cangjie-lang.cn/"
+  },
+  {
+    "Name": "cangjie_runtime",
+    "License": "Apache-2.0 WITH LLVM-exception",
+    "Version Number": "1.1.0-alpha.69",
+    "Upstream URL": "https://cangjie-lang.cn/"
+  },
+  {
+    "Name": "cangjie_tools",
+    "License": "Apache-2.0 WITH LLVM-exception",
+    "Version Number": "1.1.0-alpha.69",
+    "Upstream URL": "https://cangjie-lang.cn/"
+  },
+  {
+    "Name": "cfg-if",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.0.0",
+    "Upstream URL": "https://github.com/rust-lang/cfg-if"
+  },
+  {
+    "Name": "clang-sys",
+    "License": "Apache-2.0",
+    "Version Number": "v1.4.0",
+    "Upstream URL": "https://github.com/KyleMayes/clang-sys"
+  },
+  {
+    "Name": "clap",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "4.1.13",
+    "Upstream URL": "https://github.com/clap-rs/clap"
+  },
+  {
+    "Name": "cmake",
+    "License": "BSD-3-Clause",
+    "Version Number": "3.28.2",
+    "Upstream URL": "https://cmake.org/"
+  },
+  {
+    "Name": "cmake.exe",
+    "License": "BSD-3-Clause",
+    "Version Number": "3.28.2",
+    "Upstream URL": "https://cmake.org/"
+  },
+  {
+    "Name": "codespan-reporting",
+    "License": "Apache-2.0",
+    "Version Number": "0.11.1",
+    "Upstream URL": "https://github.com/brendanzab/codespan"
+  },
+  {
+    "Name": "css-what",
+    "License": "BSD-2-Clause",
+    "Version Number": "v7.0.0",
+    "Upstream URL": "https://github.com/fb55/css-what"
+  },
+  {
+    "Name": "cups-filters",
+    "License": "Apache-2.0",
+    "Version Number": "1.28.17",
+    "Upstream URL": "https://github.com/OpenPrinting/cups-filter/releases/download/1.28.17/cups-filter-1.28.17.tar.gz"
+  },
+  {
+    "Name": "curl",
+    "License": "Apache-2.0",
+    "Version Number": "8.8.0",
+    "Upstream URL": "http://curl.haxx.se/"
+  },
+  {
+    "Name": "cxx",
+    "License": "Apache-2.0",
+    "Version Number": "1.0.130",
+    "Upstream URL": "https://github.com/dtolnay/cxx"
+  },
+  {
+    "Name": "decimal.js",
+    "License": "MIT",
+    "Version Number": "v10.5.0",
+    "Upstream URL": "https://github.com/MikeMcl/decimal.js.git"
+  },
+  {
+    "Name": "e2fsprogs",
+    "License": "LGPL-2.0-only; BSD-3-Clause; GPL-2.0-only; MIT",
+    "Version Number": "1.47.2",
+    "Upstream URL": "https://web.git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git/snapshot/e2fsprogs-1.47.2.tar.gz"
+  },
+  {
+    "Name": "either",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.8.1",
+    "Upstream URL": "https://github.com/bluss/either"
+  },
+  {
+    "Name": "elfio",
+    "License": "MIT",
+    "Version Number": "Release_3.12",
+    "Upstream URL": "http://elfio.sourceforge.net/"
+  },
+  {
+    "Name": "elfutils",
+    "License": "LGPL-3.0-only",
+    "Version Number": "0.193",
+    "Upstream URL": "https://sourceware.org/elfutils/"
+  },
+  {
+    "Name": "env_logger",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "v0.10.2",
+    "Upstream URL": "https://github.com/rust-cli/env_logger"
+  },
+  {
+    "Name": "exfatprogs",
+    "License": "GPL-2.0-or-later",
+    "Version Number": "1.2.5",
+    "Upstream URL": "https://github.com/exfatprogs/exfatprogs/archive/refs/tags/1.2.5.tar.gz"
+  },
+  {
+    "Name": "f2fs-tools",
+    "License": "GPL-2.0-only",
+    "Version Number": "v1.16.0",
+    "Upstream URL": "https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git/tag/?h=v1.16.0"
+  },
+  {
+    "Name": "flatbuffers",
+    "License": "Apache-2.0",
+    "Version Number": "v25.2.10",
+    "Upstream URL": "https://github.com/google/flatbuffers/archive/refs/tags/v25.2.10.tar.gz"
+  },
+  {
+    "Name": "foreign-types",
+    "License": "Apache-2.0",
+    "Version Number": "0.3.2",
+    "Upstream URL": "https://github.com/sfackler/foreign-types"
+  },
+  {
+    "Name": "freetype",
+    "License": "FTL",
+    "Version Number": "2.13.3",
+    "Upstream URL": "https://gitlab.freedesktop.org/freetype"
+  },
+  {
+    "Name": "fsverity-utils",
+    "License": "MIT",
+    "Version Number": "v1.6",
+    "Upstream URL": "https://git.kernel.org/pub/scm/fs/fsverity/fsverity-utils.git"
+  },
+  {
+    "Name": "gRPC",
+    "License": "Apache-2.0",
+    "Version Number": "v1.73.0",
+    "Upstream URL": "https://github.com/grpc/grpc"
+  },
+  {
+    "Name": "glfw",
+    "License": "Zlib",
+    "Version Number": "3.4",
+    "Upstream URL": "https://github.com/glfw/glfw"
+  },
+  {
+    "Name": "glslang",
+    "License": "Apache-2.0",
+    "Version Number": "vulkan-sdk-1.3.275.0",
+    "Upstream URL": "https://github.com/KhronosGroup/glslang.git"
+  },
+  {
+    "Name": "gn",
+    "License": "BSD-3-Clause",
+    "Version Number": "d823fd85da3fb83146f734377da454473b93a2b2",
+    "Upstream URL": "https://gn.googlesource.com/gn.git"
+  },
+  {
+    "Name": "google/protobuf",
+    "License": "BSD-3-Clause",
+    "Version Number": "5.29.4",
+    "Upstream URL": "https://github.com/protocolbuffers/protobuf"
+  },
+  {
+    "Name": "googletest",
+    "License": "BSD-3-Clause",
+    "Version Number": "1.16.0",
+    "Upstream URL": "https://github.com/google/googletest/releases/tag/v1.16.0"
+  },
+  {
+    "Name": "heck",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "0.4.1",
+    "Upstream URL": "https://github.com/withoutboats/heck"
+  },
+  {
+    "Name": "hostapd",
+    "License": "BSD-3-Clause",
+    "Version Number": "2.11",
+    "Upstream URL": "https://w1.fi/releases/hostapd-2.11.tar.gz"
+  },
+  {
+    "Name": "io-lifetimes",
+    "License": "Apache-2.0 WITH LLVM-exception; Apache-2.0; MIT",
+    "Version Number": "1.0.5",
+    "Upstream URL": "https://github.com/sunfishcode/io-lifetimes"
+  },
+  {
+    "Name": "iptables",
+    "License": "GPL-2.0-only",
+    "Version Number": "1.8.11",
+    "Upstream URL": "https://netfilter.org/"
+  },
+  {
+    "Name": "is-terminal",
+    "License": "MIT",
+    "Version Number": "v0.4.3",
+    "Upstream URL": "https://github.com/sunfishcode/is-terminal"
+  },
+  {
+    "Name": "jerryscript",
+    "License": "Apache-2.0",
+    "Version Number": "v2.3.0",
+    "Upstream URL": "https://github.com/jerryscript-project/jerryscript.git"
+  },
+  {
+    "Name": "jsoncpp",
+    "License": "MIT",
+    "Version Number": "1.9.6",
+    "Upstream URL": "https://github.com/open-source-parsers/jsoncpp/-/archive/resf/tags/1.9.6.zip"
+  },
+  {
+    "Name": "lazy_static",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.4.0",
+    "Upstream URL": "https://github.com/rust-lang-nursery/lazy-static.rs"
+  },
+  {
+    "Name": "lazycell",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.2.1",
+    "Upstream URL": "https://github.com/indiv0/lazycell"
+  },
+  {
+    "Name": "libabigail",
+    "License": "Apache-2.0 WITH LLVM-exception",
+    "Version Number": "2.8",
+    "Upstream URL": "https://sourceware.org/libabigail/"
+  },
+  {
+    "Name": "libbpf",
+    "License": "BSD-2-Clause",
+    "Version Number": "v1.3.4",
+    "Upstream URL": "https://github.com/libbpf/libbpf"
+  },
+  {
+    "Name": "libc",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "0.2.153",
+    "Upstream URL": "https://github.com/rust-lang/libc"
+  },
+  {
+    "Name": "libcoap: C-Implementation of CoAP",
+    "License": "BSD-2-Clause",
+    "Version Number": "4.3.5",
+    "Upstream URL": "https://github.com/obgm/libcoap"
+  },
+  {
+    "Name": "libdrm",
+    "License": "MIT",
+    "Version Number": "2.4.120",
+    "Upstream URL": "https://dri.freedesktop.org/libdrm/libdrm-2.4.120.tar.xz"
+  },
+  {
+    "Name": "libevdev",
+    "License": "MIT",
+    "Version Number": "1.13.1",
+    "Upstream URL": "https://gitlab.freedesktop.org/libevdev/libevdev"
+  },
+  {
+    "Name": "libfuse",
+    "License": "GPL-2.0-only; LGPL-2.1-only",
+    "Version Number": "fuse-3.17.3",
+    "Upstream URL": "https://github.com/libfuse/libfuse/releases/tag/fuse-3.17.3"
+  },
+  {
+    "Name": "libinput",
+    "License": "MIT",
+    "Version Number": "1.25.0",
+    "Upstream URL": "https://github.com/wayland-project/libinput"
+  },
+  {
+    "Name": "libjpeg-turbo",
+    "License": "IJG",
+    "Version Number": "3.1.0",
+    "Upstream URL": "https://libjpeg-turbo.org/"
+  },
+  {
+    "Name": "libloading",
+    "License": "MIT",
+    "Version Number": "0.7.4",
+    "Upstream URL": "https://github.com/nagisa/rust_libloading"
+  },
+  {
+    "Name": "libnl",
+    "License": "LGPL-2.1-only",
+    "Version Number": "3.11.0",
+    "Upstream URL": "https://github.com/thom311/libnl/archive/refs/tags/libnl3_11_0.tar.gz"
+  },
+  {
+    "Name": "libphonenumber",
+    "License": "Apache-2.0",
+    "Version Number": "8.13.31",
+    "Upstream URL": "https://github.com/google/libphonenumber.git"
+  },
+  {
+    "Name": "libpng",
+    "License": "Libpng",
+    "Version Number": "1.6.44",
+    "Upstream URL": "http://www.libpng.org/pub/png/libpng.html"
+  },
+  {
+    "Name": "libsndfile",
+    "License": "LGPL-2.1-only; Apache-1.0; SunPro",
+    "Version Number": "1.2.0",
+    "Upstream URL": "https://github.com/libsndfile/libsndfile/tree/1.2.0"
+  },
+  {
+    "Name": "liburing",
+    "License": "MIT",
+    "Version Number": "2.7",
+    "Upstream URL": "https://github.com/axboe/liburing"
+  },
+  {
+    "Name": "libusb",
+    "License": "LGPL-2.1-only",
+    "Version Number": "1.0.28",
+    "Upstream URL": "https://github.com/libusb/libusb.git"
+  },
+  {
+    "Name": "libuv",
+    "License": "MIT",
+    "Version Number": "v1.48.0",
+    "Upstream URL": "https://github.com/libuv/libuv"
+  },
+  {
+    "Name": "libwebsockets",
+    "License": "MIT",
+    "Version Number": "4.3.3",
+    "Upstream URL": "https://libwebsockets.org"
+  },
+  {
+    "Name": "libxml2",
+    "License": "MIT",
+    "Version Number": "2.14.0",
+    "Upstream URL": "https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.14.0/libxml2-v2.14.0.zip"
+  },
+  {
+    "Name": "link-cplusplus",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.0.12",
+    "Upstream URL": "https://github.com/dtolnay/link-cplusplus"
+  },
+  {
+    "Name": "linux-5.10",
+    "License": "GPL-2.0-or-later",
+    "Version Number": "5.10.210",
+    "Upstream URL": "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=linux-5.10.y"
+  },
+  {
+    "Name": "linux-6.6",
+    "License": "GPL-2.0-or-later",
+    "Version Number": "6.6.89",
+    "Upstream URL": "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/?h=linux-6.6.y"
+  },
+  {
+    "Name": "linux-raw-sys",
+    "License": "Apache-2.0 WITH LLVM-exception; Apache-2.0; MIT",
+    "Version Number": "0.1.4",
+    "Upstream URL": "https://github.com/sunfishcode/linux-raw-sys"
+  },
+  {
+    "Name": "littlefs",
+    "License": "BSD-3-Clause",
+    "Version Number": "v2.11",
+    "Upstream URL": "https://github.com/littlefs-project/littlefs"
+  },
+  {
+    "Name": "log",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "0.4.17",
+    "Upstream URL": "https://github.com/rust-lang/log"
+  },
+  {
+    "Name": "ltp",
+    "License": "GPL-2.0-only",
+    "Version Number": "20250930",
+    "Upstream URL": "https://github.com/linux-test-project/ltp"
+  },
+  {
+    "Name": "lwip",
+    "License": "BSD-3-Clause",
+    "Version Number": "STABLE-2_2_1_RELEASE",
+    "Upstream URL": "https://savannah.nongnu.org/projects/lwip/"
+  },
+  {
+    "Name": "lz4",
+    "License": "BSD-2-Clause",
+    "Version Number": "1.10.0",
+    "Upstream URL": "https://github.com/lz4/lz4"
+  },
+  {
+    "Name": "mbed TLS",
+    "License": "Apache-2.0",
+    "Version Number": "v3.6.5",
+    "Upstream URL": "https://www.trustedfirmware.org/projects/mbed-tls/"
+  },
+  {
+    "Name": "memchr",
+    "License": "MIT",
+    "Version Number": "2.5.0",
+    "Upstream URL": "https://github.com/BurntSushi/memchr"
+  },
+  {
+    "Name": "memoffset",
+    "License": "Apache-2.0",
+    "Version Number": "v0.9.1",
+    "Upstream URL": "https://github.com/Gilnaa/memoffset"
+  },
+  {
+    "Name": "meshoptimizer",
+    "License": "MIT",
+    "Version Number": "v0.22",
+    "Upstream URL": "https://github.com/zeux/meshoptimizer"
+  },
+  {
+    "Name": "minimal-lexical",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "0.2.1",
+    "Upstream URL": "https://github.com/Alexhuszagh/minimal-lexical"
+  },
+  {
+    "Name": "mksh",
+    "License": "MirOS",
+    "Version Number": "R59c",
+    "Upstream URL": "https://www.mirbsd.org/mksh.htm"
+  },
+  {
+    "Name": "mtdev",
+    "License": "MIT",
+    "Version Number": "1.1.7",
+    "Upstream URL": "http://bitmath.org/git/mtdev"
+  },
+  {
+    "Name": "musl",
+    "License": "MIT",
+    "Version Number": "1.2.5",
+    "Upstream URL": "https://musl.libc.org"
+  },
+  {
+    "Name": "ncurses",
+    "License": "MIT",
+    "Version Number": "6.5",
+    "Upstream URL": "https://invisible-mirror.net/archives/ncurses/ncurses-6.5.tar.gz"
+  },
+  {
+    "Name": "nghttp2",
+    "License": "MIT",
+    "Version Number": "v1.66.0",
+    "Upstream URL": "https://nghttp2.org"
+  },
+  {
+    "Name": "ninja",
+    "License": "Apache-2.0",
+    "Version Number": "1.12.0",
+    "Upstream URL": "https://ninja-build.org/"
+  },
+  {
+    "Name": "nix",
+    "License": "MIT",
+    "Version Number": "0.30.1",
+    "Upstream URL": "https://github.com/nix-rust/nix"
+  },
+  {
+    "Name": "nom",
+    "License": "MIT",
+    "Version Number": "7.1.3",
+    "Upstream URL": "https://github.com/rust-bakery/nom"
+  },
+  {
+    "Name": "noto-cjk",
+    "License": "OFL-1.1-RFN",
+    "Version Number": "Serif2.003",
+    "Upstream URL": "https://github.com/googlefonts/noto-cjk"
+  },
+  {
+    "Name": "once_cell",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.17.0",
+    "Upstream URL": "https://github.com/matklad/once_cell"
+  },
+  {
+    "Name": "openEuler:libboundscheck",
+    "License": "MulanPSL-2.0",
+    "Version Number": "v1.1.16",
+    "Upstream URL": "https://gitee.com/openeuler/libboundscheck"
+  },
+  {
+    "Name": "openHiTLS",
+    "License": "MulanPSL-2.0",
+    "Version Number": "0.2.1",
+    "Upstream URL": "https://raw.gitcode.com/openHiTLS/openhitls/archive/refs/heads/openhitls-0.2.1.zip"
+  },
+  {
+    "Name": "optimized-routines",
+    "License": "MIT; Apache-2.0 WITH LLVM-exception",
+    "Version Number": "v25.01",
+    "Upstream URL": "https://github.com/ARM-software/optimized-routines"
+  },
+  {
+    "Name": "os_str_bytes",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "6.4.1",
+    "Upstream URL": "https://github.com/dylni/os_str_bytes"
+  },
+  {
+    "Name": "parse5",
+    "License": "MIT",
+    "Version Number": "v7.2.1",
+    "Upstream URL": "https://github.com/inikulin/parse5.git"
+  },
+  {
+    "Name": "peeking_take_while",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "0.1.2",
+    "Upstream URL": "https://github.com/fitzgen/peeking_take_while"
+  },
+  {
+    "Name": "pin-utils",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "0.1.0",
+    "Upstream URL": "https://github.com/rust-lang/pin-utils"
+  },
+  {
+    "Name": "proc-macro-error",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.0.4",
+    "Upstream URL": "https://gitlab.com/CreepySkeleton/proc-macro-error"
+  },
+  {
+    "Name": "proc-macro2",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.0.92",
+    "Upstream URL": "https://github.com/dtolnay/proc-macro2"
+  },
+  {
+    "Name": "pulseaudio",
+    "License": "LGPL-2.1-only",
+    "Version Number": "17.0",
+    "Upstream URL": "https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/tree/v17.0"
+  },
+  {
+    "Name": "python",
+    "License": "Python-2.0",
+    "Version Number": "3.11.4",
+    "Upstream URL": "https://www.python.org/ftp/python/3.11.4/Python-3.11.4.tgz"
+  },
+  {
+    "Name": "re2",
+    "License": "BSD-3-Clause",
+    "Version Number": "2024-07-02",
+    "Upstream URL": "https://github.com/google/re2"
+  },
+  {
+    "Name": "regex",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.7.1",
+    "Upstream URL": "https://github.com/rust-lang/regex"
+  },
+  {
+    "Name": "rust-cexpr",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "0.6.0",
+    "Upstream URL": "https://github.com/jethrogb/rust-cexpr"
+  },
+  {
+    "Name": "rust-lang/glob",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "0.3.1",
+    "Upstream URL": "https://github.com/rust-lang/glob"
+  },
+  {
+    "Name": "rust-openssl",
+    "License": "Apache-2.0",
+    "Version Number": "0.10.73",
+    "Upstream URL": "https://github.com/sfackler/rust-openssl"
+  },
+  {
+    "Name": "rust-shlex",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.1.0",
+    "Upstream URL": "https://github.com/comex/rust-shlex"
+  },
+  {
+    "Name": "rustc-hash",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "1.1.0",
+    "Upstream URL": "https://github.com/rust-lang/rustc-hash"
+  },
+  {
+    "Name": "rustix",
+    "License": "Apache-2.0 WITH LLVM-exception; Apache-2.0; MIT",
+    "Version Number": "0.36.16",
+    "Upstream URL": "https://github.com/bytecodealliance/rustix"
+  },
+  {
+    "Name": "sane-airscan",
+    "License": "GPL-2.0-only",
+    "Version Number": "0.99.35",
+    "Upstream URL": "https://github.com/alexpevzner/sane-airscan/releases/tag/0.99.35"
+  },
+  {
+    "Name": "sane-backends",
+    "License": "GPL-2.0-only",
+    "Version Number": "1.4.0",
+    "Upstream URL": "http://gitlab.com/sane-project/backends/-/archive/1.4.0/backends-1.4.0.tar.gz"
+  },
+  {
+    "Name": "selinux",
+    "License": "GPL-2.0-only; 0BSD; LGPL-2.1-only; BSD-2-Clause-Views",
+    "Version Number": "3.7",
+    "Upstream URL": "https://github.com/SELinuxProject/selinux"
+  },
+  {
+    "Name": "serde",
+    "License": "Apache-2.0",
+    "Version Number": "v1.0.197",
+    "Upstream URL": "https://github.com/serde-rs/serde"
+  },
+  {
+    "Name": "skia",
+    "License": "BSD-3-Clause",
+    "Version Number": "m133",
+    "Upstream URL": "https://skia.googlesource.com/skia.git"
+  },
+  {
+    "Name": "sonic",
+    "License": "Apache-2.0",
+    "Version Number": "0.2",
+    "Upstream URL": "https://github.com/waywardgeek/sonic/tree/release-0.2.0"
+  },
+  {
+    "Name": "strsim-rs",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "0.10.0",
+    "Upstream URL": "https://github.com/dguo/strsim-rs"
+  },
+  {
+    "Name": "syn",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "2.0.48",
+    "Upstream URL": "https://github.com/dtolnay/syn"
+  },
+  {
+    "Name": "toybox",
+    "License": "0BSD",
+    "Version Number": "0.8.12",
+    "Upstream URL": "http://landley.net/toybox"
+  },
+  {
+    "Name": "typescript",
+    "License": "Apache-2.0",
+    "Version Number": "4.9.5",
+    "Upstream URL": "https://github.com/Microsoft/TypeScript.git"
+  },
+  {
+    "Name": "tzdata",
+    "License": "0BSD",
+    "Version Number": "2025b",
+    "Upstream URL": "https://github.com/eggert/tz"
+  },
+  {
+    "Name": "unicode-ident",
+    "License": "Unicode-3.0; Apache-2.0; MIT",
+    "Version Number": "1.0.14",
+    "Upstream URL": "https://github.com/dtolnay/unicode-ident.git"
+  },
+  {
+    "Name": "unicode-width",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "v0.1.14",
+    "Upstream URL": "https://github.com/unicode-rs/unicode-width"
+  },
+  {
+    "Name": "uniproton",
+    "License": "MulanPSL-2.0",
+    "Version Number": "1.0.1",
+    "Upstream URL": "https://gitee.com/openeuler/UniProton"
+  },
+  {
+    "Name": "version_check",
+    "License": "Apache-2.0; MIT",
+    "Version Number": "0.9.4",
+    "Upstream URL": "https://github.com/SergioBenitez/version_check"
+  },
+  {
+    "Name": "vixl",
+    "License": "BSD-3-Clause",
+    "Version Number": "7.0.0",
+    "Upstream URL": "https://github.com/Linaro/vixl"
+  },
+  {
+    "Name": "waywardgeek/sonic",
+    "License": "Apache-2.0",
+    "Version Number": "0.2.0",
+    "Upstream URL": "https://github.com/waywardgeek/sonic"
+  },
+  {
+    "Name": "weex",
+    "License": "Apache-2.0",
+    "Version Number": "0.30.0",
+    "Upstream URL": "https://weex.apache.org"
+  },
+  {
+    "Name": "weex-loader",
+    "License": "Apache-2.0",
+    "Version Number": "v0.7.12",
+    "Upstream URL": "https://github.com/apache/weex-loader.git"
+  },
+  {
+    "Name": "which",
+    "License": "MIT",
+    "Version Number": "4.4.0",
+    "Upstream URL": "https://github.com/harryfei/which-rs"
+  },
+  {
+    "Name": "zlib",
+    "License": "Zlib; Libpng",
+    "Version Number": "1.3.1",
+    "Upstream URL": "https://github.com/madler/zlib/archive/refs/tags/v1.3.1.tar.gz"
   }
 ]
