@@ -25,6 +25,8 @@ class SADirectoryRule(BaseRule):
     RULE_NAME = "NO-Illegal-SA-Directory-Creation"
     # Allowed base directories for SA directory creation
     ALLOWED_BASE_DIRECTORIES = ["/data/service", "/data/app", "/data/chipset"] # noqa: rule5.1.3.1
+    # Illegal directory names (100-105)
+    ILLEGAL_DIR_NAMES = {'100', '101', '102', '103', '104', '105'}
 
     def __init__(self, mgr, args):
         super().__init__(mgr, args)
@@ -131,10 +133,8 @@ class SADirectoryRule(BaseRule):
         illegal_component = None
         # Only check normalized path components to avoid false positives
         path_components = normalized_dir_path.split('/')
-        # Define illegal directory names
-        illegal_dir_names = {'100', '101', '102', '103', '104', '105'}
         for component in path_components:
-            if component in illegal_dir_names:
+            if component in self.ILLEGAL_DIR_NAMES:
                 has_illegal_dir = True
                 illegal_component = component
                 break
@@ -175,6 +175,23 @@ class SADirectoryRule(BaseRule):
         # All checks passed
         return True
 
+    def _has_illegal_dir(self, path):
+        """Check if a path contains illegal directory names (100-105)"""
+        path_components = path.split('/')
+        for component in path_components:
+            if component in self.ILLEGAL_DIR_NAMES:
+                return True
+        return False
+
+    def _get_last_illegal_dir_index(self, path):
+        """Get the index of the last illegal directory in the path"""
+        path_components = path.split('/')
+        last_illegal_index = -1
+        for i, component in enumerate(path_components):
+            if component in self.ILLEGAL_DIR_NAMES:
+                last_illegal_index = i
+        return last_illegal_index
+
     def _check_illegal_dir_whitelist(self, normalized_dir_path):
         """
         Check if a path containing 100-105 directories is allowed based on whitelist rules.
@@ -191,12 +208,11 @@ class SADirectoryRule(BaseRule):
         # 2. Get the last illegal directory component
         # 3. Check if the full path up to the last illegal directory is in the whitelist
         path_components = normalized_dir_path.split('/')
-        illegal_dir_names = {'100', '101', '102', '103', '104', '105'}
 
         # Find all indices of illegal directory components
         illegal_indices = []
         for i, component in enumerate(path_components):
-            if component in illegal_dir_names:
+            if component in self.ILLEGAL_DIR_NAMES:
                 illegal_indices.append(i)
 
         # If no illegal directories found, return True (but this should have been handled earlier)
@@ -209,6 +225,11 @@ class SADirectoryRule(BaseRule):
         for white_path in self._mkdir_cmd_whitelist:
             if path_up_to_last_illegal == white_path or normalized_dir_path == white_path:
                 return True
+            white_path_has_illegal = self._has_illegal_dir(white_path)
+            if white_path_has_illegal and normalized_dir_path.startswith(f'{white_path}/'):
+                white_path_last_illegal_index = self._get_last_illegal_dir_index(white_path)
+                if white_path_last_illegal_index == last_illegal_index:
+                    return True
 
         # Last illegal directory path is not in the whitelist
         return False
