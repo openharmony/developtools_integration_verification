@@ -48,7 +48,7 @@
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "lib libaccesstoken_compat_sdk.z.so with innerapi_tags [chipsetsdk, platformsdk, sasdk] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
-{
+    {
         "so_file_name": "libaccesstoken_compat_sdk.z.so",
         "so_file_path": "system/lib/chipset-sdk-sp/libaccesstoken_compat_sdk.z.so",
         "dep_file_name": "libhilog.so",
@@ -664,7 +664,7 @@
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "vendor only lib libcamera_stub_1.4.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
-{
+    {
         "so_file_name": "libcamera_stub_1.5.z.so",
         "so_file_path": "vendor/lib/libcamera_stub_1.5.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
@@ -986,7 +986,7 @@
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "vendor only lib libdrm_stub_1.0.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
-{
+    {
         "so_file_name": "libdrm_stub_1.1.z.so",
         "so_file_path": "vendor/lib/libdrm_stub_1.1.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
@@ -2064,7 +2064,7 @@
         "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
         "description": "lib libhdf_utils.z.so with innerapi_tags [chipsetsdk_sp] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
     },
-{
+    {
         "so_file_name": "libhdf_host.z.so",
         "so_file_path": "system/lib/chipset-sdk-sp/libhdf_host.z.so",
         "dep_file_name": "libhilog.so",
@@ -3191,7 +3191,7 @@
         "dep_file_path": "system/lib/module/arkts/libutils.z.so",
         "description": "vendor only lib libdrm_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
-{
+    {
         "so_file_name": "libdrm_stub_1.1.z.so",
         "so_file_path": "vendor/lib/libdrm_stub_1.1.z.so",
         "dep_file_name": "libutils.z.so",
@@ -7026,7 +7026,7 @@
         "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
         "description": "vendor only lib libdrm_stub_1.0.z.so deps wrong lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
     },
-{
+    {
         "so_file_name": "libdrm_stub_1.1.z.so",
         "so_file_path": "vendor/lib/libdrm_stub_1.1.z.so",
         "dep_file_name": "ld-musl-arm-asan.so.1",
@@ -7040,7 +7040,7 @@
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "vendor only lib libdrm_stub_1.0.z.so deps wrong lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
-{
+    {
         "so_file_name": "libdrm_stub_1.1.z.so",
         "so_file_path": "vendor/lib/libdrm_stub_1.1.z.so",
         "dep_file_name": "libclang_rt.asan.so",
