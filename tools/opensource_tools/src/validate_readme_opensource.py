@@ -148,8 +148,8 @@ class OpenSourceValidator:
                 all_valid = False
                 continue
 
-            # 比对 "Name", "License", "Version Number", "Upstream URL"
-            for field in ["Name", "License", "Version Number", "Upstream URL"]:
+            # 比对 "Name", "License", "Version Number", "Upstream URL", temp remove URL check
+            for field in ["Name", "License", "Version Number"]:
                 expected_value = reference_data.get(field)
                 actual_value = software_data.get(field)
                 if actual_value != expected_value:

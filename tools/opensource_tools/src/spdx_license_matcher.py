@@ -13,75 +13,199 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import re
+"""
+SPDX License Matcher for Excel files.
+
+This tool processes Excel files containing license information and
+matches them to SPDX standard license identifiers.
+"""
+
+import argparse
+import logging
 import sys
-import json
+from typing import Optional
+
 import pandas as pd
 
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logging.getLogger(__name__)
+
+# Try to import SPDX converter, fallback to basic implementation
+try:
+    from spdx_converter import SPDXLicenseConverter
+    SPDX_AVAILABLE = True
+except ImportError:
+    SPDX_AVAILABLE = False
+    logger.warning("SPDX converter not available, using basic matching")
+
+
 class SPDXLicenseMatcher:
-    def __init__(self, input_excel_path, input_json_path):
-        # Load Excel and SPDX JSON data
+    """
+    Match license names in Excel files to SPDX standard identifiers.
+
+    This class processes Excel files containing license information,
+    converts license names to SPDX standard identifiers, and outputs
+    the results to a new Excel file.
+    """
+
+    def __init__(
+        self,
+        input_excel_path: str,
+        input_json_path: Optional[str] = None
+    ) -> None:
+        """
+        Initialize the SPDX License Matcher.
+
+        Args:
+            input_excel_path: Path to input Excel file.
+            input_json_path: Path to SPDX license mapping JSON file.
+                            If None, uses default path from SPDXLicenseConverter.
+        """
         self.df = pd.read_excel(input_excel_path)
-        self.spdx_mapping = self._load_spdx_data(input_json_path)
 
-    @staticmethod
-    def _load_spdx_data(json_path):
-        # Load SPDX JSON data with enhanced standardization on keys (case-insensitive, punctuation-free)
-        with open(json_path, 'r', encoding='utf-8') as f:
-            spdx_data = json.load(f)
-            spdx_mapping = {re.sub(r'[^a-zA-Z0-9 ]', '', key.lower()): value for key, value in spdx_data.items()}
-            return spdx_mapping
+        # Initialize SPDX converter
+        if SPDX_AVAILABLE:
+            self.converter = SPDXLicenseConverter(input_json_path)
+        else:
+            self.converter = None
+            logger.warning("SPDX conversion disabled")
 
-    @staticmethod
-    def _normalize_license_name(name):
-        """Further normalize license names by removing non-alphanumeric characters."""
-        normalized_name = re.sub(r'[^a-zA-Z0-9 ]', '', name).lower()
-        return normalized_name
+    def copy_url_column(self) -> None:
+        """Copy cc_url to match_url for reference."""
+        if "cc_url" in self.df.columns:
+            self.df["match_url"] = self.df["cc_url"]
+        else:
+            logger.warning("cc_url column not found")
 
-    def copy_url_column(self):
-        # Copy cc_url to match_url for reference
-        self.df['match_url'] = self.df['cc_url']
+    def match_license_column(self, license_column: str = "spdx_fixed_license_name") -> None:
+        """
+        Match licenses in specified column to SPDX standard identifiers.
 
-    def match_license_column(self):
-        # Map spdx_fixed_license_name column against SPDX data
-        self.df['match_license'] = self.df['spdx_fixed_license_name'].apply(self._map_license)
+        Args:
+            license_column: Name of column containing license names.
+                          Default is "spdx_fixed_license_name".
+        """
+        if license_column not in self.df.columns:
+            logger.error(f"Column '{license_column}' not found in Excel file")
+            logger.info(f"Available columns: {list(self.df.columns)}")
+            return
 
-    def _map_license(self, license_names):
-        # Process multiple license names separated by semicolons
-        license_keys = [self._normalize_license_name(name) for name in license_names.split(';')]
-        matched_licenses = [self._find_license_match(key) for key in license_keys]
-        
-        # Filter out any None results and join by ';' to mimic input format
-        matched_licenses = [license for license in matched_licenses if license]
-        return ';'.join(matched_licenses) if matched_licenses else "No Match"
+        if self.converter:
+            self.df["match_license"] = self.df[license_column].apply(self._convert_with_spdx)
+        else:
+            self.df["match_license"] = self.df[license_column].apply(
+                lambda x: x if pd.notna(x) else "No Match"
+            )
 
-    def _find_license_match(self, key):
-        # Attempt to find an exact match first
-        if key in self.spdx_mapping:
-            return self.spdx_mapping[key]
-        
-        # Fallback to fuzzy matching if no exact match found
-        for spdx_key in self.spdx_mapping.keys():
-            if all(word in spdx_key for word in key.split()):
-                return self.spdx_mapping[spdx_key]
-        return None
+        # Log summary
+        matched = (self.df["match_license"] != "No Match").sum()
+        total = len(self.df)
+        logger.info(f"Matched {matched}/{total} licenses ({matched*100//total}%)")
 
-    def save_to_excel(self, output_excel_path):
-        # Save the DataFrame to an Excel file
+    def _convert_with_spdx(self, license_names: str) -> str:
+        """
+        Convert license names to SPDX standard identifiers.
+
+        Args:
+            license_names: License names string (may contain multiple licenses).
+
+        Returns:
+            SPDX-standardized license string or "No Match".
+        """
+        if pd.isna(license_names):
+            return "No Match"
+
+        try:
+            return self.converter.convert(str(license_names))
+        except Exception as e:
+            logger.debug(f"Conversion error for '{license_names}': {e}")
+            return "No Match"
+
+    def save_to_excel(self, output_excel_path: str) -> None:
+        """
+        Save the processed DataFrame to an Excel file.
+
+        Args:
+            output_excel_path: Path to output Excel file.
+        """
         self.df.to_excel(output_excel_path, index=False)
-        print(f"[INFO] Final processed results saved to {output_excel_path}")
+        logger.info(f"Results saved to {output_excel_path}")
+
+    def print_summary(self) -> None:
+        """Print a summary of the matching results."""
+        if "match_license" not in self.df.columns:
+            logger.warning("No matching results to display")
+            return
+
+        print("\n" + "=" * 60)
+        print("匹配结果摘要")
+        print("=" * 60)
+
+        # Count unique licenses
+        original_licenses = self.df["spdx_fixed_license_name"].dropna().unique()
+        matched_licenses = self.df["match_license"][self.df["match_license"] != "No Match"].unique()
+
+        print(f"原始许可证数量: {len(original_licenses)}")
+        print(f"匹配到的 SPDX 标识符: {len(matched_licenses)}")
+        print(f"未匹配: {(self.df['match_license'] == 'No Match').sum()}")
+
+        # Show unmatched licenses
+        unmatched = self.df[self.df["match_license"] == "No Match"]["spdx_fixed_license_name"].unique()
+        if len(unmatched) > 0:
+            print(f"\n未匹配的许可证 ({len(unmatched)}):")
+            for lic in sorted(unmatched):
+                print(f"  - {lic}")
 
 
+def main():
+    """Main entry point."""
+    parser = argparse.ArgumentParser(
+        description="Match OpenHarmony license names to SPDX standard licenses"
+    )
+    parser.add_argument(
+        "input_excel",
+        help="Path to input Excel file containing license data"
+    )
+    parser.add_argument(
+        "input_json",
+        nargs="?",
+        default=None,
+        help="Path to JSON file containing SPDX license mappings (optional)"
+    )
+    parser.add_argument(
+        "output_excel",
+        help="Path to output Excel file for matched results"
+    )
+    parser.add_argument(
+        "-c", "--column",
+        default="spdx_fixed_license_name",
+        help="Name of column containing license names (default: spdx_fixed_license_name)"
+    )
+    parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Enable verbose logging"
+    )
 
-def main(input_excel_path, input_json_path, output_excel_path):
-    matcher = SPDXLicenseMatcher(input_excel_path, input_json_path)
-    #matcher.copy_url_column()
-    matcher.match_license_column()
-    matcher.save_to_excel(output_excel_path)
+    args = parser.parse_args()
+
+    if args.verbose:
+        logging.getLogger().setLevel(logging.DEBUG)
+
+    try:
+        matcher = SPDXLicenseMatcher(args.input_excel, args.input_json)
+        # matcher.copy_url_column()  # Uncomment if needed
+        matcher.match_license_column(args.column)
+        matcher.save_to_excel(args.output_excel)
+        matcher.print_summary()
+    except FileNotFoundError as e:
+        logger.error(f"File not found: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"Error: {e}")
+        sys.exit(1)
+
 
 if __name__ == "__main__":
-    input_excel_path = sys.argv[1]
-    input_json_path = sys.argv[2]
-    output_excel_path = sys.argv[3]
-    main(input_excel_path, input_json_path, output_excel_path)
-
+    main()
