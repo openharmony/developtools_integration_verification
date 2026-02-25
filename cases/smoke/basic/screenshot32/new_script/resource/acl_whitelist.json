@@ -393,5 +393,13 @@
     "acls": [
       "ohos.permission.INPUT_MONITORING"
     ]
+  },
+  {
+    "processName": "telecom",
+    "acls": [
+      "ohos.permission.SET_SUPER_PRIVACY",
+      "ohos.permission.START_INVISIBLE_ABILITY",
+      "ohos.permission.NOTIFICATION_CONTROLLER"
+    ]
   }
 ]
