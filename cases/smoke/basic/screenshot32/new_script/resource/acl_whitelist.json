@@ -352,7 +352,8 @@
     "processName": "testserver",
     "acls": [
         "ohos.permission.DUMP",
-        "ohos.permission.MANAGE_MISSIONS"
+        "ohos.permission.MANAGE_MISSIONS",
+        "ohos.permission.CONNECT_IME_ABILITY"
     ]
   },
   {
