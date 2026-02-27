@@ -10623,5 +10623,649 @@
         "dep_file_name": "ld-musl-arm-asan.so.1",
         "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
         "description": "lib libOMX_Core.z.so with innerapi_tags [passthrough_indirect] cannot deps system only lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
+    },
+    {
+        "so_file_name": "libusb_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libusb_stub_1.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libusb_stub_1.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdaudio_ext_driver.z.so",
+        "so_file_path": "vendor/lib/libdaudio_ext_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdaudio_ext_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libusb_ddk_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libusb_ddk_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libusb_ddk_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhdi_sensor.z.so",
+        "so_file_path": "vendor/lib/libhdi_sensor.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libhdi_sensor.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "liblight_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib/liblight_interface_service_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib liblight_interface_service_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhdi_light.z.so",
+        "so_file_path": "vendor/lib/libhdi_light.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libhdi_light.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhdf_host.z.so",
+        "so_file_path": "vendor/lib/libhdf_host.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libhdf_host.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libusb_camera_device_manager.z.so",
+        "so_file_path": "vendor/lib/libusb_camera_device_manager.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libusb_camera_device_manager.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libvibrator_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libvibrator_stub_2.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libvibrator_stub_2.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libpower_driver.z.so",
+        "so_file_path": "vendor/lib/libpower_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libpower_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhdi_vibrator.z.so",
+        "so_file_path": "vendor/lib/libhdi_vibrator.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libhdi_vibrator.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdisplay_composer_vendor.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_vendor.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdisplay_composer_vendor.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libbluetooth_hci_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libbluetooth_hci_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libbluetooth_hci_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libril_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libril_stub_1.2.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libril_stub_1.2.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libdisplay_buffer_stub_1.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdisplay_buffer_stub_1.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libril_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libril_stub_1.4.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libril_stub_1.4.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libuser_auth_driver.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libuser_auth_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdaudio_primary_driver.z.so",
+        "so_file_path": "vendor/lib/libdaudio_primary_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdaudio_primary_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libeffect_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libeffect_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libeffect_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libuser_auth_stub_4.0.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_stub_4.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libuser_auth_stub_4.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libuser_auth_stub_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_stub_4.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libuser_auth_stub_4.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libperipheral_camera_utils.z.so",
+        "so_file_path": "vendor/lib/libperipheral_camera_utils.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libperipheral_camera_utils.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libmotion_driver.z.so",
+        "so_file_path": "vendor/lib/libmotion_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libmotion_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libbluetooth_lp_ble_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libbluetooth_lp_ble_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libbluetooth_lp_ble_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libril_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libril_stub_1.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libril_stub_1.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libintell_voice_trigger_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_trigger_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libintell_voice_trigger_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "liblocation_gnss_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/liblocation_gnss_stub_2.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib liblocation_gnss_stub_2.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdaudioext_stub_2.1.z.so",
+        "so_file_path": "vendor/lib/libdaudioext_stub_2.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdaudioext_stub_2.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libusb_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libusb_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libusb_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libusb_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libusb_stub_1.2.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libusb_stub_1.2.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libwpa.z.so",
+        "so_file_path": "vendor/lib/libwpa.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libwpa.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdistributed_camera_hdf_service_1.1.z.so",
+        "so_file_path": "vendor/lib/libdistributed_camera_hdf_service_1.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdistributed_camera_hdf_service_1.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libusb_pnp_manager.z.so",
+        "so_file_path": "vendor/lib/libusb_pnp_manager.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libusb_pnp_manager.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libusb_port_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libusb_port_interface_service_2.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libusb_port_interface_service_2.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libjpeg_vdi_impl.z.so",
+        "so_file_path": "vendor/lib/libjpeg_vdi_impl.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libjpeg_vdi_impl.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libimage_stub_2.1.z.so",
+        "so_file_path": "vendor/lib/libimage_stub_2.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libimage_stub_2.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.3.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.3.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdisplay_composer_stub_1.3.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.4.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdisplay_composer_stub_1.4.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.2.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdisplay_composer_stub_1.2.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libbattery_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libbattery_stub_2.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libbattery_stub_2.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libbluetooth_a2dp_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libbluetooth_a2dp_stub_2.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libbluetooth_a2dp_stub_2.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libril_stub_1.3.z.so",
+        "so_file_path": "vendor/lib/libril_stub_1.3.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libril_stub_1.3.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "liblow_power_player_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/liblow_power_player_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib liblow_power_player_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdisplay_composer_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libaudio_primary_driver.z.so",
+        "so_file_path": "vendor/lib/libaudio_primary_driver.z.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libaudio_primary_driver.z.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libsensor_driver.z.so",
+        "so_file_path": "vendor/lib/libsensor_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libsensor_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libclearplay_driver.z.so",
+        "so_file_path": "vendor/lib/libclearplay_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libclearplay_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libusb_ddk_driver.z.so",
+        "so_file_path": "vendor/lib/libusb_ddk_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libusb_ddk_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libbt_vendor.z.so",
+        "so_file_path": "vendor/lib/libbt_vendor.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libbt_vendor.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libwifi_driver_client.z.so",
+        "so_file_path": "vendor/lib/libwifi_driver_client.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libwifi_driver_client.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libbluetooth_hci_hdi_driver.z.so",
+        "so_file_path": "vendor/lib/libbluetooth_hci_hdi_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libbluetooth_hci_hdi_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libvibrator_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libvibrator_interface_service_2.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libvibrator_interface_service_2.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "liblocation_geofence_hdi_driver.z.so",
+        "so_file_path": "vendor/lib/liblocation_geofence_hdi_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib liblocation_geofence_hdi_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdaudio_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libdaudio_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdaudio_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libpower_interface_service_1.3.z.so",
+        "so_file_path": "vendor/lib/libpower_interface_service_1.3.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libpower_interface_service_1.3.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libaudio_stub_5.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_stub_5.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libaudio_stub_5.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libintell_voice_trigger_manager_service_1.1.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_trigger_manager_service_1.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libintell_voice_trigger_manager_service_1.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libethernet_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libethernet_service_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libethernet_service_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libmotion_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libmotion_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libmotion_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhostapd_hdi_client.z.so",
+        "so_file_path": "vendor/lib/libhostapd_hdi_client.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libhostapd_hdi_client.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libaudio_manager_daudio_primary_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_manager_daudio_primary_service_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libaudio_manager_daudio_primary_service_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "liblocation_gnss_hdi_driver.z.so",
+        "so_file_path": "vendor/lib/liblocation_gnss_hdi_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib liblocation_gnss_hdi_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libusb_ddk_service_1.1.z.so",
+        "so_file_path": "vendor/lib/libusb_ddk_service_1.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libusb_ddk_service_1.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "liballocator_driver_1.0.z.so",
+        "so_file_path": "vendor/lib/liballocator_driver_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib liballocator_driver_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libcomposer_buffer_cache.z.so",
+        "so_file_path": "vendor/lib/libcomposer_buffer_cache.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libcomposer_buffer_cache.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhdi_light_impl.z.so",
+        "so_file_path": "vendor/lib/libhdi_light_impl.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libhdi_light_impl.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libcamera_stub_1.3.z.so",
+        "so_file_path": "vendor/lib/libcamera_stub_1.3.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libcamera_stub_1.3.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhdi_sensor_impl.z.so",
+        "so_file_path": "vendor/lib/libhdi_sensor_impl.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libhdi_sensor_impl.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libmock_effect_lib.z.so",
+        "so_file_path": "vendor/lib/libmock_effect_lib.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libmock_effect_lib.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdistributed_camera_provider_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libdistributed_camera_provider_stub_1.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdistributed_camera_provider_stub_1.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libusbhost_acm_rawapi.z.so",
+        "so_file_path": "vendor/lib/libusbhost_acm_rawapi.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libusbhost_acm_rawapi.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libuser_auth_interface_service_4.0.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_interface_service_4.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libuser_auth_interface_service_4.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libuser_auth_interface_service_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_interface_service_4.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libuser_auth_interface_service_4.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_manager_service_1.2.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_engine_manager_service_1.2.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libintell_voice_engine_manager_service_1.2.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libpartitionslot_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libpartitionslot_stub_1.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libpartitionslot_stub_1.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_engine_stub_1.2.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libintell_voice_engine_stub_1.2.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libwlan_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libwlan_stub_1.2.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libwlan_stub_1.2.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libbattery_driver.z.so",
+        "so_file_path": "vendor/lib/libbattery_driver.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libbattery_driver.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libdisplay_composer_stub_1.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libcodec_stub_4.0.z.so",
+        "so_file_path": "vendor/lib/libcodec_stub_4.0.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libcodec_stub_4.0.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_engine_stub_1.1.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "vendor only lib libintell_voice_engine_stub_1.1.z.so deps wrong lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libmali-bifrost-g52-g7p0-ohos.so",
+        "so_file_path": "vendor/lib/chipsetsdk/libmali-bifrost-g52-g7p0-ohos.so",
+        "dep_file_name": "ld-musl-arm.so.1",
+        "dep_file_path": "system/lib/ld-musl-arm.so.1",
+        "description": "vendor only lib libmali-bifrost-g52-g7p0-ohos.so deps wrong lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
+    },
+    {
+        "so_file_name": "libsync_fence.z.so",
+        "so_file_path": "system/lib/ndk/libsync_fence.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libsync_fence.z.so with innerapi_tags [chipsetsdk_sp, platformsdk_indirect, ndk] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhdf_utils.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libhdf_utils.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libhdf_utils.z.so with innerapi_tags [chipsetsdk_sp] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libsurface.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libsurface.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libsurface.z.so with innerapi_tags [chipsetsdk_sp, platformsdk] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libipc_single.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libipc_single.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libipc_single.z.so with innerapi_tags [chipsetsdk_sp, platformsdk, sasdk] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhdf_ipc_adapter.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libhdf_ipc_adapter.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libhdf_ipc_adapter.z.so with innerapi_tags [chipsetsdk_sp, platformsdk_indirect] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libsamgr_proxy.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libsamgr_proxy.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libsamgr_proxy.z.so with innerapi_tags [chipsetsdk_sp, platformsdk, sasdk] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhdifd_parcelable.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libhdifd_parcelable.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libhdifd_parcelable.z.so with innerapi_tags [chipsetsdk_sp] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libbeget_proxy.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libbeget_proxy.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libbeget_proxy.z.so with innerapi_tags [chipsetsdk_sp, platformsdk] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libpub_utils.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libpub_utils.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libpub_utils.z.so with innerapi_tags [chipsetsdk_sp, platformsdk_indirect] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+    {
+        "so_file_name": "libhicollie.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libhicollie.z.so",
+        "dep_file_name": "libutils.z.so",
+        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
+        "description": "lib libhicollie.z.so with innerapi_tags [chipsetsdk_sp, platformsdk] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     }
 ]
