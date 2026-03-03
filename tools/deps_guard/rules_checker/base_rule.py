@@ -179,6 +179,31 @@ class BaseRule(object):
                     passed = False
                     self.error("NEED MODIFY: %s with innerapi_tags [%s] has dep file %s with %s contains wrong dep innerapi_tags [%s] in innerapi_tags [%s]" 
                         % (mod["name"], ",".join(innerapi_tags), callee["name"], callee["labelPath"], ",".join(wrong_tags), ",".join(dep_innerapi_tags)))
+                # dep is missing, not sure if it's correct. need verify it
+                for dep_name in mod["missing"]:
+                    if dep_name in self.__base_sofiles:
+                        continue
+                    in_whitelist = False
+                    for so_dict in white_lists:
+                        for k, v in so_dict.items():
+                            if k == mod["name"] and v == dep_name:
+                                in_whitelist = True
+                                break
+
+                    if in whitelist:
+                        continue
+                    else:
+                        print(json.dumps({
+                            "so_file_name": mod["name"],
+                            "so_file_path": mod["path"],
+                            "dep_file_name": dep_name,
+                            "dep_file_path": "",
+                            "description": f"system only module {mod['name']} depends on {dep_name} which is unknown so type"
+                        }), end="\n")
+                        self.error("NEED MODIFY: system only module %s depends on %s which is unknown so type"
+                                   %(mod["name"], dep_name))
+                        passed = False
+
             else:
                 wrong_tags = [item for item in innerapi_tags if item not in valid_mod_tags]
                 self.error("NEED MODIFY: module %s with %s contains wrong mod innerapi_tags [%s] in innerapi_tags [%s]" 
@@ -186,3 +211,58 @@ class BaseRule(object):
                 return False
 
         return passed
+
+    def get_allow_list(self):
+        passthroughs = self.load_list.json("Passthrough", "passthrough_info.json")
+        llndk = self.load_list.json("LLndk", "llndk_info.json")
+        chipsetsdk_sp = self.load_list.json("ChipsetsdkSP", "chipsetsdk_sp_info.json")
+        return passthroughs + llndk + chipsetsdk_sp
+
+    def get_vendor_allow_list(self):
+        passthroughs = self.load_list.json("Passthrough", "passthrough_info.json")
+        llndk = self.load_list.json("LLndk", "llndk_info.json")
+        chipsetsdk_sp = self.load_list.json("ChipsetsdkSP", "chipsetsdk_sp_info.json")
+        chipsetsdk = self.load_list.json("Chipsetsdk", "chipsetsdk_info.json")
+        return passthroughs + llndk + chipsetsdk_sp + chipsetsdk
+
+    def parser_rules_file(self, rules_file, res):
+        try:
+            self.log("****Parsing rules file in {}****".format(rules_file))
+            with open(rules_file, "r") as f:
+                contents = f.read()
+            if not contents:
+                self.log("****rules file {} is null****".format(rules_file))
+                return res
+            json_data = json.loads(contents)
+            for so in json_data:
+                so_file_name = so.get("so_file_name")
+                if so_file_name and so_file_name not in res:
+                    res.append(so_file_name)
+        except (FileNotFoundError, IOError, UnicodeDecodeError) as file_open_or_decode_err:
+            self.error(file_open_or_decode_err)
+        
+        return res
+
+    def load_list_json(self, rule_name, name):
+        rules_dir = []
+        if self._args and self._args.rules:
+            self.log("****add more chipsetsdk info in:{}****".format(self._args.rules))
+            rules_dir = rules_dir + self._args.rules
+
+        chipsetsdk_rules_path = self.get_out_path().replace("out", "out/products_ext")
+        new_rule_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules")
+        if os.path.exists(chipsetsdk_rules_path):
+            rules_dir.append(chipsetsdk_rules_path)
+            self.log("****add more chipsetsdk info in dir:{}****".format(chipsetsdk_rules_path))
+        elif os.path.exists(new_rule_path):
+            rules_dir.append(new_rule_path)
+            self.log("****add chipsetsdk_rules_path path:{}****".format(new_rule_path))
+        res = []
+        for d in rules_dir:
+            rules_file = os.path.join(d, rule_name, name)
+            if os.path.isfile(rules_file):
+                res = self.__parser_rules_file(rules_file, res)
+            else:
+                self.warn("****rules path not exist: {}****".format(rules_file))        
+        
+        return res

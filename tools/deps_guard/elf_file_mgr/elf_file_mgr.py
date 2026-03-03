@@ -244,10 +244,11 @@ class ElfFileMgr(object):
         print("    Got %d dependencies" % self._dep_idx)
 
     def __build_deps_tree_for_one_elf(self, elf):
-        for lib in elf.library_depends():
+        for lib, line in elf.library_depends():
             dep_elf = self.get_elf_by_name(lib)
             if not dep_elf:
                 self._not_found_depened_files.append({"caller": elf["name"], "callee": lib})
+                elf["missing"].append(lib)
                 print("Warning: can not find depended library [" + lib + "] for " + elf["name"])
                 continue
 
