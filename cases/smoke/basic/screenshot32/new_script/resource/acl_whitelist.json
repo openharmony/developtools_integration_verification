@@ -251,7 +251,9 @@
     "acls": [
       "ohos.permission.INPUT_MONITORING",
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
-      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED"
+      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED",
+      "ohos.permission.GET_WIFI_INFO",
+      "ohos.permission.MANAGE_WIFI_CONNECTION"
     ]
   },
   {
