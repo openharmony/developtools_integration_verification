@@ -82,7 +82,7 @@ class BaseInnerapiRule(BaseRule):
                             in_whitelist = True
                             break
 
-                if in whitelist:
+                if in_whitelist:
                     continue
                 else:
                     print(json.dumps({
@@ -138,7 +138,7 @@ class BaseInnerapiRule(BaseRule):
                             in_whitelist = True
                             break
 
-                if in whitelist:
+                if in_whitelist:
                     continue
                 else:
                     print(json.dumps({
