@@ -29,7 +29,7 @@ class NapiRule(BaseRule):
 
     def __check_depends_on_napi(self):
         lists = self.get_white_lists()
-
+        white_lists = ["featureability", "rdb", "dataability", "image_napi", "hint2type"]
         passed = True
 
         # Check if any napi modules has dependedBy
@@ -42,6 +42,9 @@ class NapiRule(BaseRule):
 
             target_name = mod["labelPath"][mod["labelPath"].find(":")+1:]
             if target_name in lists:
+                continue
+
+            if target_name in white_lists:
                 continue
 
             self.error("napi module %s depended by:" % mod["name"])
