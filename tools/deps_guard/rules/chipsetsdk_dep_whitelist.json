@@ -11267,5 +11267,2658 @@
         "dep_file_name": "libutils.z.so",
         "dep_file_path": "system/lib/module/arkts/libutils.z.so",
         "description": "lib libhicollie.z.so with innerapi_tags [chipsetsdk_sp, platformsdk] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
+    },
+        {
+      "so_file_name": "libans.z.so",
+      "so_file_path": "system/lib/libans.z.so",
+      "dep_file_name": "libans_ext.z.so",
+      "dep_file_path": "",
+      "description": "system only module libans.z.so depends on libans_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libans.z.so",
+        "so_file_path": "system/lib/libans.z.so",
+        "dep_file_name": "libtelephony_cust_api.z.so",
+        "dep_file_path": "",
+        "description": "system only module libans.z.so depends on libtelephony_cust_api.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libans.z.so",
+        "so_file_path": "system/lib/libans.z.so",
+        "dep_file_name": "libnotification_ai.z.so",
+        "dep_file_path": "",
+        "description": "system only module libans.z.so depends on libnotification_ai.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_policy_service.z.so",
+        "so_file_path": "system/lib/libaudio_policy_service.z.so",
+        "dep_file_name": "libmodule-effect-sink.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaudio_policy_service.z.so depends on libmodule-effect-sink.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_policy_service.z.so",
+        "so_file_path": "system/lib/libaudio_policy_service.z.so",
+        "dep_file_name": "libmodule-receiver-sink.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaudio_policy_service.z.so depends on libmodule-receiver-sink.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_policy_service.z.so",
+        "so_file_path": "system/lib/libaudio_policy_service.z.so",
+        "dep_file_name": "libmodule-cluster-sink.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaudio_policy_service.z.so depends on libmodule-cluster-sink.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_policy_service.z.so",
+        "so_file_path": "system/lib/libaudio_policy_service.z.so",
+        "dep_file_name": "libmodule-inner-capturer-sink.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaudio_policy_service.z.so depends on libmodule-inner-capturer-sink.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_policy_service.z.so",
+        "so_file_path": "system/lib/libaudio_policy_service.z.so",
+        "dep_file_name": "libmodule-split-stream-sink.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaudio_policy_service.z.so depends on libmodule-split-stream-sink.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_policy_service.z.so",
+        "so_file_path": "system/lib/libaudio_policy_service.z.so",
+        "dep_file_name": "libmodule-hdi-sink.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaudio_policy_service.z.so depends on libmodule-hdi-sink.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_policy_service.z.so",
+        "so_file_path": "system/lib/libaudio_policy_service.z.so",
+        "dep_file_name": "libmodule-pipe-sink.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaudio_policy_service.z.so depends on libmodule-pipe-sink.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_policy_service.z.so",
+        "so_file_path": "system/lib/libaudio_policy_service.z.so",
+        "dep_file_name": "libmodule-hdi-source.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaudio_policy_service.z.so depends on libmodule-hdi-source.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_policy_service.z.so",
+        "so_file_path": "system/lib/libaudio_policy_service.z.so",
+        "dep_file_name": "libmodule-pipe-source.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaudio_policy_service.z.so depends on libmodule-pipe-source.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libspatialawareness_ani.z.so",
+        "so_file_path": "system/lib/libspatialawareness_ani.z.so",
+        "dep_file_name": "libspatial_awareness_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libspatialawareness_ani.z.so depends on libspatial_awareness_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhevc_decoder.z.so",
+        "so_file_path": "system/lib/libhevc_decoder.z.so",
+        "dep_file_name": "libhevcdec_ohos.z.so",
+        "dep_file_path": "",
+        "description": "system only module libhevc_decoder.z.so depends on libhevcdec_ohos.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libarkweb_core_loader_glue.z.so",
+        "so_file_path": "system/lib/libarkweb_core_loader_glue.z.so",
+        "dep_file_name": "libarkweb_engine.so",
+        "dep_file_path": "",
+        "description": "system only module libarkweb_core_loader_glue.z.so depends on libarkweb_engine.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_state_registry.z.so",
+        "so_file_path": "system/lib/libtel_state_registry.z.so",
+        "dep_file_name": "libtel_ext_symbol.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_state_registry.z.so depends on libtel_ext_symbol.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libupms.z.so",
+        "so_file_path": "system/lib/libupms.z.so",
+        "dep_file_name": "libams_broker_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libupms.z.so depends on libams_broker_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libintelligentvoice_engine.z.so",
+        "so_file_path": "system/lib/libintelligentvoice_engine.z.so",
+        "dep_file_name": "libaam_connection_inner_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libintelligentvoice_engine.z.so depends on libaam_connection_inner_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libintelligentvoice_engine.z.so",
+        "so_file_path": "system/lib/libintelligentvoice_engine.z.so",
+        "dep_file_name": "libswing_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libintelligentvoice_engine.z.so depends on libswing_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_sms_mms.z.so",
+        "so_file_path": "system/lib/libtel_sms_mms.z.so",
+        "dep_file_name": "libtelephony_ext_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_sms_mms.z.so depends on libtelephony_ext_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdeviceauth_service.z.so",
+        "so_file_path": "system/lib/libdeviceauth_service.z.so",
+        "dep_file_name": "libdevice_auth_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdeviceauth_service.z.so depends on libdevice_auth_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "librender_service.z.so",
+        "so_file_path": "system/lib/librender_service.z.so",
+        "dep_file_name": "libchipset_vsync.z.so",
+        "dep_file_path": "",
+        "description": "system only module librender_service.z.so depends on libchipset_vsync.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "librender_service.z.so",
+        "so_file_path": "system/lib/librender_service.z.so",
+        "dep_file_name": "libprevalidate_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module librender_service.z.so depends on libprevalidate_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libstandby_utils_policy.z.so",
+        "so_file_path": "system/lib/libstandby_utils_policy.z.so",
+        "dep_file_name": "libsuspend_manager_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libstandby_utils_policy.z.so depends on libsuspend_manager_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsecurity_component_sdk.z.so",
+        "so_file_path": "system/lib/libsecurity_component_sdk.z.so",
+        "dep_file_name": "libsecurity_component_client_enhance.z.so",
+        "dep_file_path": "",
+        "description": "system only module libsecurity_component_sdk.z.so depends on libsecurity_component_client_enhance.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsecurity_component_sdk.z.so",
+        "so_file_path": "system/lib/libsecurity_component_sdk.z.so",
+        "dep_file_name": "libsecurity_component_service_enhance.z.so",
+        "dep_file_path": "",
+        "description": "system only module libsecurity_component_sdk.z.so depends on libsecurity_component_service_enhance.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributed_camera_channel.z.so",
+        "so_file_path": "system/lib/libdistributed_camera_channel.z.so",
+        "dep_file_name": "libcfwk_allconnect_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributed_camera_channel.z.so depends on libcfwk_allconnect_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libavc_encoder.z.so",
+        "so_file_path": "system/lib/libavc_encoder.z.so",
+        "dep_file_name": "libavcenc_ohos.z.so",
+        "dep_file_path": "",
+        "description": "system only module libavc_encoder.z.so depends on libavcenc_ohos.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvideoprocessingengine.z.so",
+        "so_file_path": "system/lib/libvideoprocessingengine.z.so",
+        "dep_file_name": "libvideoprocessingengine_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libvideoprocessingengine.z.so depends on libvideoprocessingengine_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvideoprocessingengine.z.so",
+        "so_file_path": "system/lib/libvideoprocessingengine.z.so",
+        "dep_file_name": "libGLES_mali.so",
+        "dep_file_path": "",
+        "description": "system only module libvideoprocessingengine.z.so depends on libGLES_mali.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributedhardwarefwksvr.z.so",
+        "so_file_path": "system/lib/libdistributedhardwarefwksvr.z.so",
+        "dep_file_name": "libdistributedmodem_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributedhardwarefwksvr.z.so depends on libdistributedmodem_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_core_service.z.so",
+        "so_file_path": "system/lib/libtel_core_service.z.so",
+        "dep_file_name": "libtel_vsim_symbol.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_core_service.z.so depends on libtel_vsim_symbol.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_core_service.z.so",
+        "so_file_path": "system/lib/libtel_core_service.z.so",
+        "dep_file_name": "libtelephony_ext_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_core_service.z.so depends on libtelephony_ext_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_core_service.z.so",
+        "so_file_path": "system/lib/libtel_core_service.z.so",
+        "dep_file_name": "libtel_dynamic_load_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_core_service.z.so depends on libtel_dynamic_load_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsecurity_component_common.z.so",
+        "so_file_path": "system/lib/libsecurity_component_common.z.so",
+        "dep_file_name": "libsecurity_component_client_enhance.z.so",
+        "dep_file_path": "",
+        "description": "system only module libsecurity_component_common.z.so depends on libsecurity_component_client_enhance.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsecurity_component_common.z.so",
+        "so_file_path": "system/lib/libsecurity_component_common.z.so",
+        "dep_file_name": "libsecurity_component_service_enhance.z.so",
+        "dep_file_path": "",
+        "description": "system only module libsecurity_component_common.z.so depends on libsecurity_component_service_enhance.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaccessibleabilityms.z.so",
+        "so_file_path": "system/lib/libaccessibleabilityms.z.so",
+        "dep_file_name": "libuser_status_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaccessibleabilityms.z.so depends on libuser_status_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libarkruntime.so",
+        "so_file_path": "system/lib/libarkruntime.so",
+        "dep_file_name": "libimonitor.so",
+        "dep_file_path": "",
+        "description": "system only module libarkruntime.so depends on libimonitor.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributed_device_profile_svr.z.so",
+        "so_file_path": "system/lib/libdistributed_device_profile_svr.z.so",
+        "dep_file_name": "libdeviceprofileadapter.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributed_device_profile_svr.z.so depends on libdeviceprofileadapter.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libavsession_item.z.so",
+        "so_file_path": "system/lib/libavsession_item.z.so",
+        "dep_file_name": "libha_client_lite.z.so",
+        "dep_file_path": "",
+        "description": "system only module libavsession_item.z.so depends on libha_client_lite.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libpowermgrservice.z.so",
+        "so_file_path": "system/lib/libpowermgrservice.z.so",
+        "dep_file_name": "libpower_manager_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libpowermgrservice.z.so depends on libpower_manager_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libunderageModel_so.z.so",
+        "so_file_path": "system/lib/libunderageModel_so.z.so",
+        "dep_file_name": "libuser_status_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libunderageModel_so.z.so depends on libuser_status_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libans_base.z.so",
+        "so_file_path": "system/lib/libans_base.z.so",
+        "dep_file_name": "libliveview.z.so",
+        "dep_file_path": "",
+        "description": "system only module libans_base.z.so depends on libliveview.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libavsession_service.z.so",
+        "so_file_path": "system/lib/libavsession_service.z.so",
+        "dep_file_name": "libavsession_migration.z.so",
+        "dep_file_path": "",
+        "description": "system only module libavsession_service.z.so depends on libavsession_migration.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libedmservice.z.so",
+        "so_file_path": "system/lib/libedmservice.z.so",
+        "dep_file_name": "libedmplugin.z.so",
+        "dep_file_path": "",
+        "description": "system only module libedmservice.z.so depends on libedmplugin.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedialibrary_data_extension.z.so",
+        "so_file_path": "system/lib/libmedialibrary_data_extension.z.so",
+        "dep_file_name": "libabnormal_mgr.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedialibrary_data_extension.z.so depends on libabnormal_mgr.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedialibrary_data_extension.z.so",
+        "so_file_path": "system/lib/libmedialibrary_data_extension.z.so",
+        "dep_file_name": "libarkdata_db_core.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedialibrary_data_extension.z.so depends on libarkdata_db_core.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedialibrary_data_extension.z.so",
+        "so_file_path": "system/lib/libmedialibrary_data_extension.z.so",
+        "dep_file_name": "libfile_monitor_ipc_interface.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedialibrary_data_extension.z.so depends on libfile_monitor_ipc_interface.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedialibrary_data_extension.z.so",
+        "so_file_path": "system/lib/libmedialibrary_data_extension.z.so",
+        "dep_file_name": "libarkweb_engine.so",
+        "dep_file_path": "",
+        "description": "system only module libmedialibrary_data_extension.z.so depends on libarkweb_engine.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_call_manager.z.so",
+        "so_file_path": "system/lib/libtel_call_manager.z.so",
+        "dep_file_name": "libdistributed_call_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_call_manager.z.so depends on libdistributed_call_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_call_manager.z.so",
+        "so_file_path": "system/lib/libtel_call_manager.z.so",
+        "dep_file_name": "libtelephony_ext_innerkits.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_call_manager.z.so depends on libtelephony_ext_innerkits.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_call_manager.z.so",
+        "so_file_path": "system/lib/libtel_call_manager.z.so",
+        "dep_file_name": "libdia_sdk.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_call_manager.z.so depends on libdia_sdk.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_call_manager.z.so",
+        "so_file_path": "system/lib/libtel_call_manager.z.so",
+        "dep_file_name": "libtelephony_cust_api.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_call_manager.z.so depends on libtelephony_cust_api.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_call_manager.z.so",
+        "so_file_path": "system/lib/libtel_call_manager.z.so",
+        "dep_file_name": "libanti_fraud_service_client.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_call_manager.z.so depends on libanti_fraud_service_client.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_cellular_data.z.so",
+        "so_file_path": "system/lib/libtel_cellular_data.z.so",
+        "dep_file_name": "libtel_vsim_symbol.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_cellular_data.z.so depends on libtel_vsim_symbol.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_cellular_data.z.so",
+        "so_file_path": "system/lib/libtel_cellular_data.z.so",
+        "dep_file_name": "libtelephony_ext_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_cellular_data.z.so depends on libtelephony_ext_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_cellular_data.z.so",
+        "so_file_path": "system/lib/libtel_cellular_data.z.so",
+        "dep_file_name": "libtel_dynamic_load_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_cellular_data.z.so depends on libtel_dynamic_load_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdans.z.so",
+        "so_file_path": "system/lib/libdans.z.so",
+        "dep_file_name": "libliveview.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdans.z.so depends on libliveview.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvulkan_swapchain.so",
+        "so_file_path": "system/lib/libvulkan_swapchain.so",
+        "dep_file_name": "libaps_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libvulkan_swapchain.so depends on libaps_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvulkan_swapchain.so",
+        "so_file_path": "system/lib/libvulkan_swapchain.so",
+        "dep_file_name": "libgameservice_graphic_plugin.z.so",
+        "dep_file_path": "",
+        "description": "system only module libvulkan_swapchain.so depends on libgameservice_graphic_plugin.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwifi_manager_service.z.so",
+        "so_file_path": "system/lib/libwifi_manager_service.z.so",
+        "dep_file_name": "libwifi_self_cure.z.so",
+        "dep_file_path": "",
+        "description": "system only module libwifi_manager_service.z.so depends on libwifi_self_cure.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwifi_manager_service.z.so",
+        "so_file_path": "system/lib/libwifi_manager_service.z.so",
+        "dep_file_name": "libwifi_scan_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libwifi_manager_service.z.so depends on libwifi_scan_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwifi_manager_service.z.so",
+        "so_file_path": "system/lib/libwifi_manager_service.z.so",
+        "dep_file_name": "libwifi_aware_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libwifi_manager_service.z.so depends on libwifi_aware_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwifi_manager_service.z.so",
+        "so_file_path": "system/lib/libwifi_manager_service.z.so",
+        "dep_file_name": "libwifi_sta_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libwifi_manager_service.z.so depends on libwifi_sta_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwifi_manager_service.z.so",
+        "so_file_path": "system/lib/libwifi_manager_service.z.so",
+        "dep_file_name": "libwifi_enhance_interface.z.so",
+        "dep_file_path": "",
+        "description": "system only module libwifi_manager_service.z.so depends on libwifi_enhance_interface.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libets_sdk_native.so",
+        "so_file_path": "system/lib/libets_sdk_native.so",
+        "dep_file_name": "libdwarf.so",
+        "dep_file_path": "",
+        "description": "system only module libets_sdk_native.so depends on libdwarf.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmmi-server.z.so",
+        "so_file_path": "system/lib/libmmi-server.z.so",
+        "dep_file_name": "libinfrared_emitter_adapter.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmmi-server.z.so depends on libinfrared_emitter_adapter.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libresschedexesvc.z.so",
+        "so_file_path": "system/lib/libresschedexesvc.z.so",
+        "dep_file_name": "libsuspend_manager_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libresschedexesvc.z.so depends on libsuspend_manager_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libconcurrentsvc.z.so",
+        "so_file_path": "system/lib/libconcurrentsvc.z.so",
+        "dep_file_name": "libtask_controller.z.so",
+        "dep_file_path": "",
+        "description": "system only module libconcurrentsvc.z.so depends on libtask_controller.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributed_screen_sourcetrans.z.so",
+        "so_file_path": "system/lib/libdistributed_screen_sourcetrans.z.so",
+        "dep_file_name": "libdistributed_screen_dbg_itf.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributed_screen_sourcetrans.z.so depends on libdistributed_screen_dbg_itf.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdevicemanagerservicetest.z.so",
+        "so_file_path": "system/lib/libdevicemanagerservicetest.z.so",
+        "dep_file_name": "libdevicemanagerriskdetect.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdevicemanagerservicetest.z.so depends on libdevicemanagerriskdetect.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdevicemanagerservicetest.z.so",
+        "so_file_path": "system/lib/libdevicemanagerservicetest.z.so",
+        "dep_file_name": "libdevicemanagerresident.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdevicemanagerservicetest.z.so depends on libdevicemanagerresident.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libohos_adapter_glue_source.z.so",
+        "so_file_path": "system/lib/libohos_adapter_glue_source.z.so",
+        "dep_file_name": "libarkweb_engine.so",
+        "dep_file_path": "",
+        "description": "system only module libohos_adapter_glue_source.z.so depends on libarkweb_engine.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaccountmgr.z.so",
+        "so_file_path": "system/lib/libaccountmgr.z.so",
+        "dep_file_name": "libtheme_manager_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaccountmgr.z.so depends on libtheme_manager_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaccountmgr.z.so",
+        "so_file_path": "system/lib/libaccountmgr.z.so",
+        "dep_file_name": "librecovery_key_service_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaccountmgr.z.so depends on librecovery_key_service_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaccountmgr.z.so",
+        "so_file_path": "system/lib/libaccountmgr.z.so",
+        "dep_file_name": "libactivation_lock_sdk.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaccountmgr.z.so depends on libactivation_lock_sdk.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaccountmgr.z.so",
+        "so_file_path": "system/lib/libaccountmgr.z.so",
+        "dep_file_name": "libdomain_account_plugin.z.so",
+        "dep_file_path": "",
+        "description": "system only module libaccountmgr.z.so depends on libdomain_account_plugin.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributedfiledaemon.z.so",
+        "so_file_path": "system/lib/libdistributedfiledaemon.z.so",
+        "dep_file_name": "libcfwk_allconnect_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributedfiledaemon.z.so depends on libcfwk_allconnect_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbtservice.z.so",
+        "so_file_path": "system/lib/libbtservice.z.so",
+        "dep_file_name": "libble_scan_filter.z.so",
+        "dep_file_path": "",
+        "description": "system only module libbtservice.z.so depends on libble_scan_filter.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvideoprocessingserviceimpl.z.so",
+        "so_file_path": "system/lib/libvideoprocessingserviceimpl.z.so",
+        "dep_file_name": "libvideoprocessingengineservice_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libvideoprocessingserviceimpl.z.so depends on libvideoprocessingengineservice_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdevicemanagerservice.z.so",
+        "so_file_path": "system/lib/libdevicemanagerservice.z.so",
+        "dep_file_name": "libdevicemanagerresident.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdevicemanagerservice.z.so depends on libdevicemanagerresident.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdevicemanagerservice.z.so",
+        "so_file_path": "system/lib/libdevicemanagerservice.z.so",
+        "dep_file_name": "libdevicemanagerriskdetect.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdevicemanagerservice.z.so depends on libdevicemanagerriskdetect.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributed_camera_utils.z.so",
+        "so_file_path": "system/lib/libdistributed_camera_utils.z.so",
+        "dep_file_name": "libyuv.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributed_camera_utils.z.so depends on libyuv.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhuks_service.z.so",
+        "so_file_path": "system/lib/libhuks_service.z.so",
+        "dep_file_name": "libhuks_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libhuks_service.z.so depends on libhuks_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhpae_engine_manager.z.so",
+        "so_file_path": "system/lib/libhpae_engine_manager.z.so",
+        "dep_file_name": "libmodule-inner-capturer-sink.z.so",
+        "dep_file_path": "",
+        "description": "system only module libhpae_engine_manager.z.so depends on libmodule-inner-capturer-sink.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhpae_engine_manager.z.so",
+        "so_file_path": "system/lib/libhpae_engine_manager.z.so",
+        "dep_file_name": "libmodule-split-stream-sink.z.so",
+        "dep_file_path": "",
+        "description": "system only module libhpae_engine_manager.z.so depends on libmodule-split-stream-sink.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhpae_engine_manager.z.so",
+        "so_file_path": "system/lib/libhpae_engine_manager.z.so",
+        "dep_file_name": "libmodule-hdi-source.z.so",
+        "dep_file_path": "",
+        "description": "system only module libhpae_engine_manager.z.so depends on libmodule-hdi-source.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbgtaskmgr_service.z.so",
+        "so_file_path": "system/lib/libbgtaskmgr_service.z.so",
+        "dep_file_name": "libresource_quota_manager.z.so",
+        "dep_file_path": "",
+        "description": "system only module libbgtaskmgr_service.z.so depends on libresource_quota_manager.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbdfr_base.z.so",
+        "so_file_path": "system/lib/libbdfr_base.z.so",
+        "dep_file_name": "libipc_core.z.so",
+        "dep_file_path": "",
+        "description": "system only module libbdfr_base.z.so depends on libipc_core.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbdfr_base.z.so",
+        "so_file_path": "system/lib/libbdfr_base.z.so",
+        "dep_file_name": "libart.so",
+        "dep_file_path": "",
+        "description": "system only module libbdfr_base.z.so depends on libart.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbdfr_base.z.so",
+        "so_file_path": "system/lib/libbdfr_base.z.so",
+        "dep_file_name": "libc_fdleak_debug.so",
+        "dep_file_path": "",
+        "description": "system only module libbdfr_base.z.so depends on libc_fdleak_debug.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdevicemanagerserviceimpl.z.so",
+        "so_file_path": "system/lib/libdevicemanagerserviceimpl.z.so",
+        "dep_file_name": "libdm_auth_cert.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdevicemanagerserviceimpl.z.so depends on libdm_auth_cert.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdevicemanagerserviceimpl.z.so",
+        "so_file_path": "system/lib/libdevicemanagerserviceimpl.z.so",
+        "dep_file_name": "libdevicemanagerext_decision.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdevicemanagerserviceimpl.z.so depends on libdevicemanagerext_decision.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libarktsbase.so",
+        "so_file_path": "system/lib/libarktsbase.so",
+        "dep_file_name": "libdwarf.so",
+        "dep_file_path": "",
+        "description": "system only module libarktsbase.so depends on libdwarf.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbms.z.so",
+        "so_file_path": "system/lib/libbms.z.so",
+        "dep_file_name": "libuser_status_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libbms.z.so depends on libuser_status_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcgroup_sched.z.so",
+        "so_file_path": "system/lib/libcgroup_sched.z.so",
+        "dep_file_name": "libcgroup_sched_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libcgroup_sched.z.so depends on libcgroup_sched_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_cellular_call.z.so",
+        "so_file_path": "system/lib/libtel_cellular_call.z.so",
+        "dep_file_name": "libtelephony_ext_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_cellular_call.z.so depends on libtelephony_ext_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libresschedsvc.z.so",
+        "so_file_path": "system/lib/libresschedsvc.z.so",
+        "dep_file_name": "libcgroup_sched_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libresschedsvc.z.so depends on libcgroup_sched_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libresschedsvc.z.so",
+        "so_file_path": "system/lib/libresschedsvc.z.so",
+        "dep_file_name": "libapp_preload_plugin.z.so",
+        "dep_file_path": "",
+        "description": "system only module libresschedsvc.z.so depends on libapp_preload_plugin.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libresschedsvc.z.so",
+        "so_file_path": "system/lib/libresschedsvc.z.so",
+        "dep_file_name": "libsuspend_manager_service.z.so",
+        "dep_file_path": "",
+        "description": "system only module libresschedsvc.z.so depends on libsuspend_manager_service.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libpasteboard_service.z.so",
+        "so_file_path": "system/lib/libpasteboard_service.z.so",
+        "dep_file_name": "libai_nlu_innerapi.z.so",
+        "dep_file_path": "",
+        "description": "system only module libpasteboard_service.z.so depends on libai_nlu_innerapi.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libuserstatus_napi.z.so",
+        "so_file_path": "system/lib/module/multimodalawareness/libuserstatus_napi.z.so",
+        "dep_file_name": "libuser_status_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libuserstatus_napi.z.so depends on libuser_status_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libspatialawareness_napi.z.so",
+        "so_file_path": "system/lib/module/multimodalawareness/libspatialawareness_napi.z.so",
+        "dep_file_name": "libspatial_awareness_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libspatialawareness_napi.z.so depends on libspatial_awareness_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libinsightintentdriver_napi.z.so",
+        "so_file_path": "system/lib/module/app/ability/libinsightintentdriver_napi.z.so",
+        "dep_file_name": "libhmos_distribute.z.so",
+        "dep_file_path": "",
+        "description": "system only module libinsightintentdriver_napi.z.so depends on libhmos_distribute.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbackground_process_manager.z.so",
+        "so_file_path": "system/lib/ndk/libbackground_process_manager.z.so",
+        "dep_file_name": "libapp_nap_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libbackground_process_manager.z.so depends on libapp_nap_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libqos.so",
+        "so_file_path": "system/lib/ndk/libqos.so",
+        "dep_file_name": "libgewu_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libqos.so depends on libgewu_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libneural_network_core.so",
+        "so_file_path": "system/lib/ndk/libneural_network_core.so",
+        "dep_file_name": "libneural_network_runtime_ext.so",
+        "dep_file_path": "",
+        "description": "system only module libneural_network_core.so depends on libneural_network_runtime_ext.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libneural_network_core.so",
+        "so_file_path": "system/lib/ndk/libneural_network_core.so",
+        "dep_file_name": "libdllite_service_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libneural_network_core.so depends on libdllite_service_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_forward_compatibility.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_forward_compatibility.z.so",
+        "dep_file_name": "libace.z.so",
+        "dep_file_path": "",
+        "description": "system only module libace_forward_compatibility.z.so depends on libace.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libnative_rdb.z.so",
+        "so_file_path": "system/lib/platformsdk/libnative_rdb.z.so",
+        "dep_file_name": "libaip_knowledge_processor.z.so",
+        "dep_file_path": "",
+        "description": "system only module libnative_rdb.z.so depends on libaip_knowledge_processor.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libnative_rdb.z.so",
+        "so_file_path": "system/lib/platformsdk/libnative_rdb.z.so",
+        "dep_file_name": "libarkdata_db_core.z.so",
+        "dep_file_path": "",
+        "description": "system only module libnative_rdb.z.so depends on libarkdata_db_core.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "librender_service_base.z.so",
+        "so_file_path": "system/lib/platformsdk/librender_service_base.z.so",
+        "dep_file_name": "libhianimation_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module librender_service_base.z.so depends on libhianimation_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "librender_service_base.z.so",
+        "so_file_path": "system/lib/platformsdk/librender_service_base.z.so",
+        "dep_file_name": "libgraphic_innovation.z.so",
+        "dep_file_path": "",
+        "description": "system only module librender_service_base.z.so depends on libgraphic_innovation.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "librender_service_base.z.so",
+        "so_file_path": "system/lib/platformsdk/librender_service_base.z.so",
+        "dep_file_name": "libmhc_client.so",
+        "dep_file_path": "",
+        "description": "system only module librender_service_base.z.so depends on libmhc_client.so which is unknown so type"
+    },
+    {
+        "so_file_name": "librender_service_base.z.so",
+        "so_file_path": "system/lib/platformsdk/librender_service_base.z.so",
+        "dep_file_name": "libaps_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module librender_service_base.z.so depends on libaps_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcustomtokenizer.z.so",
+        "so_file_path": "system/lib/platformsdk/libcustomtokenizer.z.so",
+        "dep_file_name": "libarkdata_tokenizer.z.so",
+        "dep_file_path": "",
+        "description": "system only module libcustomtokenizer.z.so depends on libarkdata_tokenizer.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libav_codec_client.z.so",
+        "so_file_path": "system/lib/platformsdk/libav_codec_client.z.so",
+        "dep_file_name": "libav_codec_ext_base.z.so",
+        "dep_file_path": "",
+        "description": "system only module libav_codec_client.z.so depends on libav_codec_ext_base.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributedfileutils.z.so",
+        "so_file_path": "system/lib/platformsdk/libdistributedfileutils.z.so",
+        "dep_file_name": "libcloudfile_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributedfileutils.z.so depends on libcloudfile_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributedfileutils.z.so",
+        "so_file_path": "system/lib/platformsdk/libdistributedfileutils.z.so",
+        "dep_file_name": "libcloudfile_ext_core.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributedfileutils.z.so depends on libcloudfile_ext_core.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libopencl_wrapper.so",
+        "so_file_path": "system/lib/platformsdk/libopencl_wrapper.so",
+        "dep_file_name": "libGLES_mali.so",
+        "dep_file_path": "",
+        "description": "system only module libopencl_wrapper.so depends on libGLES_mali.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libopencl_wrapper.so",
+        "so_file_path": "system/lib/platformsdk/libopencl_wrapper.so",
+        "dep_file_name": "libhvgr_v200.so",
+        "dep_file_path": "",
+        "description": "system only module libopencl_wrapper.so depends on libhvgr_v200.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcj_environment.z.so",
+        "so_file_path": "system/lib/platformsdk/libcj_environment.z.so",
+        "dep_file_name": "libohosadaptor.so",
+        "dep_file_path": "",
+        "description": "system only module libcj_environment.z.so depends on libohosadaptor.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcj_environment.z.so",
+        "so_file_path": "system/lib/platformsdk/libcj_environment.z.so",
+        "dep_file_name": "libclang_rt.tsan.so",
+        "dep_file_path": "",
+        "description": "system only module libcj_environment.z.so depends on libclang_rt.tsan.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcj_environment.z.so",
+        "so_file_path": "system/lib/platformsdk/libcj_environment.z.so",
+        "dep_file_name": "libm.so",
+        "dep_file_path": "",
+        "description": "system only module libcj_environment.z.so depends on libm.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcj_environment.z.so",
+        "so_file_path": "system/lib/platformsdk/libcj_environment.z.so",
+        "dep_file_name": "libdl.so",
+        "dep_file_path": "",
+        "description": "system only module libcj_environment.z.so depends on libdl.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcj_environment.z.so",
+        "so_file_path": "system/lib/platformsdk/libcj_environment.z.so",
+        "dep_file_name": "libcangjie-runtime.so",
+        "dep_file_path": "",
+        "description": "system only module libcj_environment.z.so depends on libcangjie-runtime.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcj_environment.z.so",
+        "so_file_path": "system/lib/platformsdk/libcj_environment.z.so",
+        "dep_file_name": "libcj_debugger.z.so",
+        "dep_file_path": "",
+        "description": "system only module libcj_environment.z.so depends on libcj_debugger.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libimage_utils.z.so",
+        "so_file_path": "system/lib/platformsdk/libimage_utils.z.so",
+        "dep_file_name": "libyuv.z.so",
+        "dep_file_path": "",
+        "description": "system only module libimage_utils.z.so depends on libyuv.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libimage_utils.z.so",
+        "so_file_path": "system/lib/platformsdk/libimage_utils.z.so",
+        "dep_file_name": "libimage_codec_ext_native.so",
+        "dep_file_path": "",
+        "description": "system only module libimage_utils.z.so depends on libimage_codec_ext_native.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libimage_utils.z.so",
+        "so_file_path": "system/lib/platformsdk/libimage_utils.z.so",
+        "dep_file_name": "libhispeed_image.so",
+        "dep_file_path": "",
+        "description": "system only module libimage_utils.z.so depends on libhispeed_image.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsqlitecompressvfs.z.so",
+        "so_file_path": "system/lib/platformsdk/libsqlitecompressvfs.z.so",
+        "dep_file_name": "libzstd.z.so",
+        "dep_file_path": "",
+        "description": "system only module libsqlitecompressvfs.z.so depends on libzstd.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_napi.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_napi.z.so",
+        "dep_file_name": "libohosadaptor.so",
+        "dep_file_path": "",
+        "description": "system only module libace_napi.z.so depends on libohosadaptor.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_napi.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_napi.z.so",
+        "dep_file_name": "libclang_rt.tsan.so",
+        "dep_file_path": "",
+        "description": "system only module libace_napi.z.so depends on libclang_rt.tsan.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_napi.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_napi.z.so",
+        "dep_file_name": "libclang_rt.hwasan.so",
+        "dep_file_path": "",
+        "description": "system only module libace_napi.z.so depends on libclang_rt.hwasan.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_napi.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_napi.z.so",
+        "dep_file_name": "libm.so",
+        "dep_file_path": "",
+        "description": "system only module libace_napi.z.so depends on libm.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_napi.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_napi.z.so",
+        "dep_file_name": "libdl.so",
+        "dep_file_path": "",
+        "description": "system only module libace_napi.z.so depends on libdl.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_napi.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_napi.z.so",
+        "dep_file_name": "libOpenCL.so",
+        "dep_file_path": "",
+        "description": "system only module libace_napi.z.so depends on libOpenCL.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libpage_config_manager.z.so",
+        "so_file_path": "system/lib/platformsdk/libpage_config_manager.z.so",
+        "dep_file_name": "libhmos_pageconfig.z.so",
+        "dep_file_path": "",
+        "description": "system only module libpage_config_manager.z.so depends on libhmos_pageconfig.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributeddb.z.so",
+        "so_file_path": "system/lib/platformsdk/libdistributeddb.z.so",
+        "dep_file_name": "libarkdata_db_core.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributeddb.z.so depends on libarkdata_db_core.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributeddb.z.so",
+        "so_file_path": "system/lib/platformsdk/libdistributeddb.z.so",
+        "dep_file_name": "libdataflow_engine.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributeddb.z.so depends on libdataflow_engine.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributeddb.z.so",
+        "so_file_path": "system/lib/platformsdk/libdistributeddb.z.so",
+        "dep_file_name": "libgaussdb_rd.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributeddb.z.so depends on libgaussdb_rd.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributeddb_client.z.so",
+        "so_file_path": "system/lib/platformsdk/libdistributeddb_client.z.so",
+        "dep_file_name": "libarkdata_db_core.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributeddb_client.z.so depends on libarkdata_db_core.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_compatible.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_compatible.z.so",
+        "dep_file_name": "libaps_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libace_compatible.z.so depends on libaps_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_compatible.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_compatible.z.so",
+        "dep_file_name": "libace_engine_ark.z.so",
+        "dep_file_path": "",
+        "description": "system only module libace_compatible.z.so depends on libace_engine_ark.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_compatible.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_compatible.z.so",
+        "dep_file_name": "libace_engine_declarative_ark.z.so",
+        "dep_file_path": "",
+        "description": "system only module libace_compatible.z.so depends on libace_engine_declarative_ark.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_compatible.z.so",
+        "so_file_path": "system/lib/platformsdk/libace_compatible.z.so",
+        "dep_file_name": "libace_engine_declarative_ark.z.so",
+        "dep_file_path": "",
+        "description": "system only module libace_compatible.z.so depends on libace_engine_declarative_ark.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmindspore-lite.so",
+        "so_file_path": "system/lib/platformsdk/libmindspore-lite.so",
+        "dep_file_name": "libdeobfuscator_lib.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmindspore-lite.so depends on libdeobfuscator_lib.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libasan_logger.z.so",
+        "so_file_path": "system/lib/platformsdk/libasan_logger.z.so",
+        "dep_file_name": "libclang_rt.hwasan.so",
+        "dep_file_path": "",
+        "description": "system only module libasan_logger.z.so depends on libclang_rt.hwasan.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libucollection_utility.z.so",
+        "so_file_path": "system/lib/platformsdk/libucollection_utility.z.so",
+        "dep_file_name": "libhiai_infra_proxy_1.0.z.so",
+        "dep_file_path": "",
+        "description": "system only module libucollection_utility.z.so depends on libhiai_infra_proxy_1.0.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libucollection_utility.z.so",
+        "so_file_path": "system/lib/platformsdk/libucollection_utility.z.so",
+        "dep_file_name": "libucollection_utility_ex.z.so",
+        "dep_file_path": "",
+        "description": "system only module libucollection_utility.z.so depends on libucollection_utility_ex.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libextplugin.z.so",
+        "so_file_path": "system/lib/platformsdk/libextplugin.z.so",
+        "dep_file_name": "libimage_cuva_parser.z.so",
+        "dep_file_path": "",
+        "description": "system only module libextplugin.z.so depends on libimage_cuva_parser.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libextplugin.z.so",
+        "so_file_path": "system/lib/platformsdk/libextplugin.z.so",
+        "dep_file_name": "libyuv.z.so",
+        "dep_file_path": "",
+        "description": "system only module libextplugin.z.so depends on libyuv.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libarkweb_utils.z.so",
+        "so_file_path": "system/lib/platformsdk/libarkweb_utils.z.so",
+        "dep_file_name": "libarkweb_engine.so",
+        "dep_file_path": "",
+        "description": "system only module libarkweb_utils.z.so depends on libarkweb_engine.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributedfileutils_lite.z.so",
+        "so_file_path": "system/lib/platformsdk/libdistributedfileutils_lite.z.so",
+        "dep_file_name": "libcloudfile_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributedfileutils_lite.z.so depends on libcloudfile_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributedfileutils_lite.z.so",
+        "so_file_path": "system/lib/platformsdk/libdistributedfileutils_lite.z.so",
+        "dep_file_name": "libcloudfile_ext_core.z.so",
+        "dep_file_path": "",
+        "description": "system only module libdistributedfileutils_lite.z.so depends on libcloudfile_ext_core.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libimage_effect_impl.so",
+        "so_file_path": "system/lib/platformsdk/libimage_effect_impl.so",
+        "dep_file_name": "libimage_effect_ext.so",
+        "dep_file_path": "",
+        "description": "system only module libimage_effect_impl.so depends on libimage_effect_ext.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwmutil.z.so",
+        "so_file_path": "system/lib/platformsdk/libwmutil.z.so",
+        "dep_file_name": "libams_broker_ext.z.so",
+        "dep_file_path": "",
+        "description": "system only module libwmutil.z.so depends on libams_broker_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libtel_common.z.so",
+        "so_file_path": "system/lib/platformsdk/libtel_common.z.so",
+        "dep_file_name": "libtelephony_ext_innerkits.z.so",
+        "dep_file_path": "",
+        "description": "system only module libtel_common.z.so depends on libtelephony_ext_innerkits.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsqlite.z.so",
+        "so_file_path": "system/lib/platformsdk/libsqlite.z.so",
+        "dep_file_name": "libarkdata_db_core.z.so",
+        "dep_file_path": "",
+        "description": "system only module libsqlite.z.so depends on libarkdata_db_core.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libstack_utils_common.z.so",
+        "so_file_path": "system/lib/platformsdk/libstack_utils_common.z.so",
+        "dep_file_name": "libapipolicy_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libstack_utils_common.z.so depends on libapipolicy_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libruntime.z.so",
+        "so_file_path": "system/lib/platformsdk/libruntime.z.so",
+        "dep_file_name": "libda_register.z.so",
+        "dep_file_path": "",
+        "description": "system only module libruntime.z.so depends on libda_register.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libruntime.z.so",
+        "so_file_path": "system/lib/platformsdk/libruntime.z.so",
+        "dep_file_name": "libcangjie-runtime.so",
+        "dep_file_path": "",
+        "description": "system only module libruntime.z.so depends on libcangjie-runtime.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvsync.z.so",
+        "so_file_path": "system/lib/platformsdk/libvsync.z.so",
+        "dep_file_name": "libdvsync.z.so",
+        "dep_file_path": "",
+        "description": "system only module libvsync.z.so depends on libdvsync.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libark_jsruntime.so",
+        "so_file_path": "system/lib/platformsdk/libark_jsruntime.so",
+        "dep_file_name": "libark_jsoptimizer.so",
+        "dep_file_path": "",
+        "description": "system only module libark_jsruntime.so depends on libark_jsoptimizer.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libark_jsruntime.so",
+        "so_file_path": "system/lib/platformsdk/libark_jsruntime.so",
+        "dep_file_name": "libunwind.so",
+        "dep_file_path": "",
+        "description": "system only module libark_jsruntime.so depends on libunwind.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libappspawn_nweb.z.so",
+        "so_file_path": "system/lib/appspawn/nwebspawn/libappspawn_nweb.z.so",
+        "dep_file_name": "libarkweb_render.so",
+        "dep_file_path": "",
+        "description": "system only module libappspawn_nweb.z.so depends on libarkweb_render.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libappspawn_nweb.z.so",
+        "so_file_path": "system/lib/appspawn/nwebspawn/libappspawn_nweb.z.so",
+        "dep_file_name": "libarkweb_engine.so",
+        "dep_file_path": "",
+        "description": "system only module libappspawn_nweb.z.so depends on libarkweb_engine.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedia_engine_histreamer.z.so",
+        "so_file_path": "system/lib/media/libmedia_engine_histreamer.z.so",
+        "dep_file_name": "libvideo_dragging_player.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedia_engine_histreamer.z.so depends on libvideo_dragging_player.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedia_plugin_FFmpegDemuxer.z.so",
+        "so_file_path": "system/lib/media/media_plugins/libmedia_plugin_FFmpegDemuxer.z.so",
+        "dep_file_name": "libav_codec_reference_parser.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedia_plugin_FFmpegDemuxer.z.so depends on libav_codec_reference_parser.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedia_plugin_FFmpegDemuxer.z.so",
+        "so_file_path": "system/lib/media/media_plugins/libmedia_plugin_FFmpegDemuxer.z.so",
+        "dep_file_name": "libav_codec_vvc_parser.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedia_plugin_FFmpegDemuxer.z.so depends on libav_codec_vvc_parser.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedia_plugin_FFmpegDemuxer.z.so",
+        "so_file_path": "system/lib/media/media_plugins/libmedia_plugin_FFmpegDemuxer.z.so",
+        "dep_file_name": "libav_codec_hevc_parser.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedia_plugin_FFmpegDemuxer.z.so depends on libav_codec_hevc_parser.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedia_plugin_FFmpegMuxer.z.so",
+        "so_file_path": "system/lib/media/media_plugins/libmedia_plugin_FFmpegMuxer.z.so",
+        "dep_file_name": "libav_codec_hevc_parser.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedia_plugin_FFmpegMuxer.z.so depends on libav_codec_hevc_parser.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedia_plugin_Mpeg4Muxer.z.so",
+        "so_file_path": "system/lib/media/media_plugins/libmedia_plugin_Mpeg4Muxer.z.so",
+        "dep_file_name": "libav_codec_hevc_parser.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedia_plugin_Mpeg4Muxer.z.so depends on libav_codec_hevc_parser.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libpartner_agent_extension_module.z.so",
+        "so_file_path": "system/lib/extensionability/libpartner_agent_extension_module.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "system only module libpartner_agent_extension_module.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsensor_interface_service_3.1.z.so",
+        "so_file_path": "vendor/lib/libsensor_interface_service_3.1.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libsensor_interface_service_3.1.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.4.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_composer_stub_1.4.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwpa_hdi_c_device.z.so",
+        "so_file_path": "vendor/lib/libwpa_hdi_c_device.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwpa_hdi_c_device.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libintell_voice_trigger_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_trigger_stub_1.2.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libintell_voice_trigger_stub_1.2.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcamera_ipp_algo_example.z.so",
+        "so_file_path": "vendor/lib/libcamera_ipp_algo_example.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcamera_ipp_algo_example.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_commontype_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libdisplay_commontype_stub_2.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_commontype_stub_2.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libuser_auth_driver.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_driver.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libuser_auth_driver.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhostapd_hdi_client.z.so",
+        "so_file_path": "vendor/lib/libhostapd_hdi_client.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhostapd_hdi_client.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_commontype_stub_2.2.z.so",
+        "so_file_path": "vendor/lib/libdisplay_commontype_stub_2.2.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_commontype_stub_2.2.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_engine_stub_1.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libintell_voice_engine_stub_1.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liballocator_service_1.4.z.so",
+        "so_file_path": "vendor/lib/liballocator_service_1.4.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liballocator_service_1.4.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusbfn_cdcacm.z.so",
+        "so_file_path": "vendor/lib/libusbfn_cdcacm.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusbfn_cdcacm.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusbhost_acm_rawapi.z.so",
+        "so_file_path": "vendor/lib/libusbhost_acm_rawapi.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusbhost_acm_rawapi.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmotion_driver.z.so",
+        "so_file_path": "vendor/lib/libmotion_driver.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libmotion_driver.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liblocation_agnss_stub_2.1.z.so",
+        "so_file_path": "vendor/lib/liblocation_agnss_stub_2.1.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liblocation_agnss_stub_2.1.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libethernet_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libethernet_service_1.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libethernet_service_1.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdrm_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libdrm_stub_1.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdrm_stub_1.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libperipheral_camera_v4l2_adapter.z.so",
+        "so_file_path": "vendor/lib/libperipheral_camera_v4l2_adapter.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libperipheral_camera_v4l2_adapter.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcamera_external_usb_camera.so",
+        "so_file_path": "vendor/lib/libcamera_external_usb_camera.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcamera_external_usb_camera.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhdi_audio_bluetooth.z.so",
+        "so_file_path": "vendor/lib/libhdi_audio_bluetooth.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhdi_audio_bluetooth.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedia_key_system_factory_clearplay_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libmedia_key_system_factory_clearplay_service_1.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libmedia_key_system_factory_clearplay_service_1.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_camera_v4l2_adapter.z.so",
+        "so_file_path": "vendor/lib/libusb_camera_v4l2_adapter.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_camera_v4l2_adapter.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_engine_stub_1.2.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libintell_voice_engine_stub_1.2.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libnnrt_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libnnrt_stub_2.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libnnrt_stub_2.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_commontype_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libdisplay_commontype_stub_1.1.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_commontype_stub_1.1.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusbfn_mtp_driver.z.so",
+        "so_file_path": "vendor/lib/libusbfn_mtp_driver.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusbfn_mtp_driver.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_serial_ddk_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libusb_serial_ddk_stub_1.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_serial_ddk_stub_1.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwlan_stub_1.3.z.so",
+        "so_file_path": "vendor/lib/libwlan_stub_1.3.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwlan_stub_1.3.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_ddk_driver.z.so",
+        "so_file_path": "vendor/lib/libusb_ddk_driver.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_ddk_driver.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libril_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libril_stub_1.2.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libril_stub_1.2.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.2.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_composer_stub_1.2.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvendor_intell_voice_engine.z.so",
+        "so_file_path": "vendor/lib/libvendor_intell_voice_engine.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libvendor_intell_voice_engine.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libagnss_interface_service_2.1.z.so",
+        "so_file_path": "vendor/lib/libagnss_interface_service_2.1.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libagnss_interface_service_2.1.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwifi_hal.z.so",
+        "so_file_path": "vendor/lib/libwifi_hal.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwifi_hal.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmotion_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libmotion_stub_1.1.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libmotion_stub_1.1.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libpartitionslot_driver.z.so",
+        "so_file_path": "vendor/lib/libpartitionslot_driver.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libpartitionslot_driver.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_ddk_service_common.z.so",
+        "so_file_path": "vendor/lib/libusb_ddk_service_common.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_ddk_service_common.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhid_ddk_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libhid_ddk_stub_1.1.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhid_ddk_stub_1.1.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_port_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libusb_port_interface_service_2.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_port_interface_service_2.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libuser_auth_interface_service_4.1.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_interface_service_4.1.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libuser_auth_interface_service_4.1.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liblight_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib/liblight_interface_service_1.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liblight_interface_service_1.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdaudio_primary_driver.z.so",
+        "so_file_path": "vendor/lib/libdaudio_primary_driver.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdaudio_primary_driver.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liblocation_geofence_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/liblocation_geofence_stub_2.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liblocation_geofence_stub_2.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libuser_auth_stub_4.0.z.so",
+        "so_file_path": "vendor/lib/libuser_auth_stub_4.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libuser_auth_stub_4.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhdi_vibrator_impl.z.so",
+        "so_file_path": "vendor/lib/libhdi_vibrator_impl.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhdi_vibrator_impl.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_ddk_service_1.1.z.so",
+        "so_file_path": "vendor/lib/libusb_ddk_service_1.1.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_ddk_service_1.1.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_pnp_manager.z.so",
+        "so_file_path": "vendor/lib/libusb_pnp_manager.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_pnp_manager.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_commontype_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libdisplay_commontype_stub_1.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_commontype_stub_1.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liblocation_gnss_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/liblocation_gnss_stub_2.0.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liblocation_gnss_stub_2.0.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libthermal_driver.z.so",
+        "so_file_path": "vendor/lib/libthermal_driver.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libthermal_driver.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libface_auth_driver.z.so",
+        "so_file_path": "vendor/lib/libface_auth_driver.z.so",
+        "dep_file_name": "libpartner_agent_extension_ani.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libface_auth_driver.z.so depends on libpartner_agent_extension_ani.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liballocator_service_1.0.z.so",
+        "so_file_path": "vendor/lib/liballocator_service_1.0.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liballocator_service_1.0.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libdisplay_buffer_stub_1.2.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_buffer_stub_1.2.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libemit_event_manager.z.so",
+        "so_file_path": "vendor/lib/libemit_event_manager.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libemit_event_manager.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libnnrt_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libnnrt_stub_1.0.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libnnrt_stub_1.0.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libusb_stub_1.2.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_stub_1.2.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libintell_voice_trigger_manager_service_1.1.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_trigger_manager_service_1.1.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libintell_voice_trigger_manager_service_1.1.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liballocator_driver_1.0.z.so",
+        "so_file_path": "vendor/lib/liballocator_driver_1.0.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liballocator_driver_1.0.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liblight_driver.z.so",
+        "so_file_path": "vendor/lib/liblight_driver.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liblight_driver.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libusb_stub_1.1.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_stub_1.1.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libimage_stub_2.1.z.so",
+        "so_file_path": "vendor/lib/libimage_stub_2.1.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libimage_stub_2.1.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbt_vendor.z.so",
+        "so_file_path": "vendor/lib/libbt_vendor.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libbt_vendor.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhid_ddk_driver.z.so",
+        "so_file_path": "vendor/lib/libhid_ddk_driver.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhid_ddk_driver.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libface_auth_interface_service_3.0.z.so",
+        "so_file_path": "vendor/lib/libface_auth_interface_service_3.0.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libface_auth_interface_service_3.0.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwifi_driver_client.z.so",
+        "so_file_path": "vendor/lib/libwifi_driver_client.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwifi_driver_client.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcodec_oem_interface.z.so",
+        "so_file_path": "vendor/lib/libcodec_oem_interface.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcodec_oem_interface.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdaudio_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libdaudio_stub_1.0.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdaudio_stub_1.0.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusbhost_rndis_rawapi.z.so",
+        "so_file_path": "vendor/lib/libusbhost_rndis_rawapi.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusbhost_rndis_rawapi.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcamera_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libcamera_stub_1.2.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcamera_stub_1.2.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_composer_driver_1.0.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_driver_1.0.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_composer_driver_1.0.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liblocation_geofence_hdi_driver.z.so",
+        "so_file_path": "vendor/lib/liblocation_geofence_hdi_driver.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liblocation_geofence_hdi_driver.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_ddk_host.z.so",
+        "so_file_path": "vendor/lib/libusb_ddk_host.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_ddk_host.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libril_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libril_stub_1.1.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libril_stub_1.1.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libril_driver.z.so",
+        "so_file_path": "vendor/lib/libril_driver.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libril_driver.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libfingerprint_auth_driver.z.so",
+        "so_file_path": "vendor/lib/libfingerprint_auth_driver.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libfingerprint_auth_driver.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwpa_hdi_client.z.so",
+        "so_file_path": "vendor/lib/libwpa_hdi_client.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwpa_hdi_client.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_stub_6.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_stub_6.0.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libaudio_stub_6.0.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libclearplay_driver.z.so",
+        "so_file_path": "vendor/lib/libclearplay_driver.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libclearplay_driver.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcodec_image_driver.z.so",
+        "so_file_path": "vendor/lib/libcodec_image_driver.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcodec_image_driver.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsensor_driver.z.so",
+        "so_file_path": "vendor/lib/libsensor_driver.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libsensor_driver.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.0.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_composer_stub_1.0.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_composer_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_stub_1.1.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_composer_stub_1.1.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusbhost_acm.z.so",
+        "so_file_path": "vendor/lib/libusbhost_acm.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusbhost_acm.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwlan_service_extend.z.so",
+        "so_file_path": "vendor/lib/libwlan_service_extend.z.so",
+        "dep_file_name": "libhdi_wlan_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwlan_service_extend.z.so depends on libhdi_wlan_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_device_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libusb_device_interface_service_2.0.z.so",
+        "dep_file_name": "libhdi_wlan_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_device_interface_service_2.0.z.so depends on libhdi_wlan_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbattery_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libbattery_interface_service_2.0.z.so",
+        "dep_file_name": "libhdi_wlan_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libbattery_interface_service_2.0.z.so depends on libhdi_wlan_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhostapd_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libhostapd_interface_service_1.0.z.so",
+        "dep_file_name": "libhdi_wlan_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhostapd_interface_service_1.0.z.so depends on libhdi_wlan_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libgeofence_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libgeofence_interface_service_2.0.z.so",
+        "dep_file_name": "libhdi_wlan_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libgeofence_interface_service_2.0.z.so depends on libhdi_wlan_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liblocation_agnss_hdi_driver.z.so",
+        "so_file_path": "vendor/lib/liblocation_agnss_hdi_driver.z.so",
+        "dep_file_name": "libhdi_wlan_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liblocation_agnss_hdi_driver.z.so depends on libhdi_wlan_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmapper_driver_1.0.z.so",
+        "so_file_path": "vendor/lib/libmapper_driver_1.0.z.so",
+        "dep_file_name": "libhdi_wlan_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libmapper_driver_1.0.z.so depends on libhdi_wlan_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libscsi_ddk_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libscsi_ddk_stub_1.0.z.so",
+        "dep_file_name": "libhdi_wlan_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libscsi_ddk_stub_1.0.z.so depends on libhdi_wlan_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcodec_image_service_2.1.z.so",
+        "so_file_path": "vendor/lib/libcodec_image_service_2.1.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcodec_image_service_2.1.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmemorytracker_driver.z.so",
+        "so_file_path": "vendor/lib/libmemorytracker_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libmemorytracker_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhdi_light.z.so",
+        "so_file_path": "vendor/lib/libhdi_light.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhdi_light.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhid_ddk_service_1.1.z.so",
+        "so_file_path": "vendor/lib/libhid_ddk_service_1.1.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhid_ddk_service_1.1.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhril_innerkits.z.so",
+        "so_file_path": "vendor/lib/libhril_innerkits.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhril_innerkits.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libeffect_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libeffect_stub_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libeffect_stub_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libpin_auth_stub_3.0.z.so",
+        "so_file_path": "vendor/lib/libpin_auth_stub_3.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libpin_auth_stub_3.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_manager_daudio_primary_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libaudio_manager_daudio_primary_service_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libaudio_manager_daudio_primary_service_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libnnrt_stub_2.1.z.so",
+        "so_file_path": "vendor/lib/libnnrt_stub_2.1.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libnnrt_stub_2.1.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcamera_device_manager.z.so",
+        "so_file_path": "vendor/lib/libcamera_device_manager.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcamera_device_manager.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhdi_sensor_impl.z.so",
+        "so_file_path": "vendor/lib/libhdi_sensor_impl.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhdi_sensor_impl.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwlan_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libwlan_stub_1.1.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwlan_stub_1.1.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdaudio_ext_driver.z.so",
+        "so_file_path": "vendor/lib/libdaudio_ext_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdaudio_ext_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributed_camera_host_config.z.so",
+        "so_file_path": "vendor/lib/libdistributed_camera_host_config.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdistributed_camera_host_config.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcamera_host_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libcamera_host_service_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcamera_host_service_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_device_driver.z.so",
+        "so_file_path": "vendor/lib/libusb_device_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_device_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_port_driver.z.so",
+        "so_file_path": "vendor/lib/libusb_port_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_port_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liblocation_agnss_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/liblocation_agnss_stub_2.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liblocation_agnss_stub_2.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusbhost_ecm.z.so",
+        "so_file_path": "vendor/lib/libusbhost_ecm.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusbhost_ecm.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_ddk_dynamic_library_wrapper.z.so",
+        "so_file_path": "vendor/lib/libusb_ddk_dynamic_library_wrapper.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_ddk_dynamic_library_wrapper.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvibrator_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libvibrator_interface_service_2.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libvibrator_interface_service_2.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmemorytracker_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libmemorytracker_stub_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libmemorytracker_stub_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdaudioext_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libdaudioext_stub_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdaudioext_stub_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcamera_host_vdi_impl_1.0.z.so",
+        "so_file_path": "vendor/lib/libcamera_host_vdi_impl_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcamera_host_vdi_impl_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libscsi_ddk_driver.z.so",
+        "so_file_path": "vendor/lib/libscsi_ddk_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libscsi_ddk_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_ddk_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libusb_ddk_stub_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_ddk_stub_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcamera_stub_1.3.z.so",
+        "so_file_path": "vendor/lib/libcamera_stub_1.3.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcamera_stub_1.3.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libpin_auth_interface_service_3.0.z.so",
+        "so_file_path": "vendor/lib/libpin_auth_interface_service_3.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libpin_auth_interface_service_3.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_manager_service_1.2.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_engine_manager_service_1.2.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libintell_voice_engine_manager_service_1.2.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libjpeg_vdi_impl.z.so",
+        "so_file_path": "vendor/lib/libjpeg_vdi_impl.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libjpeg_vdi_impl.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributed_camera_provider_stub_1.1.z.so",
+        "so_file_path": "vendor/lib/libdistributed_camera_provider_stub_1.1.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdistributed_camera_provider_stub_1.1.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liblight_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/liblight_stub_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liblight_stub_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libintell_voice_trigger_driver.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_trigger_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libintell_voice_trigger_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbluetooth_hci_hdi_driver.z.so",
+        "so_file_path": "vendor/lib/libbluetooth_hci_hdi_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libbluetooth_hci_hdi_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_composer_vdi_impl.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_vdi_impl.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_composer_vdi_impl.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwifi_hal_default.z.so",
+        "so_file_path": "vendor/lib/libwifi_hal_default.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwifi_hal_default.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libfingerprint_auth_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libfingerprint_auth_interface_service_2.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libfingerprint_auth_interface_service_2.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhid_ddk_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libhid_ddk_stub_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhid_ddk_stub_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributed_camera_hdf_service_1.1.z.so",
+        "so_file_path": "vendor/lib/libdistributed_camera_hdf_service_1.1.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdistributed_camera_hdf_service_1.1.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libface_auth_stub_3.0.z.so",
+        "so_file_path": "vendor/lib/libface_auth_stub_3.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libface_auth_stub_3.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_gfx.z.so",
+        "so_file_path": "vendor/lib/libdisplay_gfx.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_gfx.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_commontype_stub_2.1.z.so",
+        "so_file_path": "vendor/lib/libdisplay_commontype_stub_2.1.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_commontype_stub_2.1.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsensor_stub_3.0.z.so",
+        "so_file_path": "vendor/lib/libsensor_stub_3.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libsensor_stub_3.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_commontype_stub_2.3.z.so",
+        "so_file_path": "vendor/lib/libdisplay_commontype_stub_2.3.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_commontype_stub_2.3.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcamera_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libcamera_stub_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcamera_stub_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwlan_interface_service_1.3.z.so",
+        "so_file_path": "vendor/lib/libwlan_interface_service_1.3.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwlan_interface_service_1.3.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libperipheral_camera_utils.z.so",
+        "so_file_path": "vendor/lib/libperipheral_camera_utils.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libperipheral_camera_utils.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvibrator_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libvibrator_stub_2.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libvibrator_stub_2.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_camera_pipeline_core.z.so",
+        "so_file_path": "vendor/lib/libusb_camera_pipeline_core.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_camera_pipeline_core.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_composer_vendor.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_vendor.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_composer_vendor.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcamera_pipeline_core.z.so",
+        "so_file_path": "vendor/lib/libcamera_pipeline_core.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcamera_pipeline_core.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libethernet_hdi_client.z.so",
+        "so_file_path": "vendor/lib/libethernet_hdi_client.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libethernet_hdi_client.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_serial_ddk_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libusb_serial_ddk_service_1.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_serial_ddk_service_1.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwpa_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libwpa_stub_2.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwpa_stub_2.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libgnss_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libgnss_interface_service_2.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libgnss_interface_service_2.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_serial_ddk_driver.z.so",
+        "so_file_path": "vendor/lib/libusb_serial_ddk_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_serial_ddk_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwpa_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libwpa_interface_service_2.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwpa_interface_service_2.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhdi_vibrator.z.so",
+        "so_file_path": "vendor/lib/libhdi_vibrator.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhdi_vibrator.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_camera_device_manager.z.so",
+        "so_file_path": "vendor/lib/libusb_camera_device_manager.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_camera_device_manager.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libperipheral_camera_buffer_manager.z.so",
+        "so_file_path": "vendor/lib/libperipheral_camera_buffer_manager.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libperipheral_camera_buffer_manager.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libintell_voice_engine_driver.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_engine_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libintell_voice_engine_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcodec_driver.z.so",
+        "so_file_path": "vendor/lib/libcodec_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcodec_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusbfn_cdcecm.z.so",
+        "so_file_path": "vendor/lib/libusbfn_cdcecm.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusbfn_cdcecm.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libchip_hdi_driver.z.so",
+        "so_file_path": "vendor/lib/libchip_hdi_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libchip_hdi_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbluetooth_a2dp_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libbluetooth_a2dp_stub_2.0.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libbluetooth_a2dp_stub_2.0.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhdi_sensor.z.so",
+        "so_file_path": "vendor/lib/libhdi_sensor.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhdi_sensor.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdistributed_camera_provider_config.z.so",
+        "so_file_path": "vendor/lib/libdistributed_camera_provider_config.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdistributed_camera_provider_config.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libpin_auth_driver.z.so",
+        "so_file_path": "vendor/lib/libpin_auth_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libpin_auth_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "liblocation_gnss_hdi_driver.z.so",
+        "so_file_path": "vendor/lib/liblocation_gnss_hdi_driver.z.so",
+        "dep_file_name": "libheifdecode_vdi_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module liblocation_gnss_hdi_driver.z.so depends on libheifdecode_vdi_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhci_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libhci_interface_service_1.0.z.so",
+        "dep_file_name": "libnb_mac.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhci_interface_service_1.0.z.so depends on libnb_mac.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhdi_light_impl.z.so",
+        "so_file_path": "vendor/lib/libhdi_light_impl.z.so",
+        "dep_file_name": "libnb_mac.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhdi_light_impl.z.so depends on libnb_mac.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_composer_service_1.4.z.so",
+        "so_file_path": "vendor/lib/libdisplay_composer_service_1.4.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_composer_service_1.4.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libusb_stub_1.0.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_stub_1.0.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwifi_hdi_c_device.z.so",
+        "so_file_path": "vendor/lib/libwifi_hdi_c_device.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwifi_hdi_c_device.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libril_service_1.5.z.so",
+        "so_file_path": "vendor/lib/libril_service_1.5.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libril_service_1.5.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libusb_stub_2.0.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_stub_2.0.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libwlan_stub_1.2.z.so",
+        "so_file_path": "vendor/lib/libwlan_stub_1.2.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libwlan_stub_1.2.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libpower_driver.z.so",
+        "so_file_path": "vendor/lib/libpower_driver.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libpower_driver.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libscsi_peripheral_ddk_service_1.0.z.so",
+        "so_file_path": "vendor/lib/libscsi_peripheral_ddk_service_1.0.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libscsi_peripheral_ddk_service_1.0.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libintell_voice_trigger_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libintell_voice_trigger_stub_1.0.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libintell_voice_trigger_stub_1.0.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libperipheral_camera_pipeline_core.z.so",
+        "so_file_path": "vendor/lib/libperipheral_camera_pipeline_core.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libperipheral_camera_pipeline_core.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvibrator_driver.z.so",
+        "so_file_path": "vendor/lib/libvibrator_driver.z.so",
+        "dep_file_name": "libdisplay_composer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libvibrator_driver.z.so depends on libdisplay_composer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libchip_controller_chip_interface_service_2.0.z.so",
+        "so_file_path": "vendor/lib/libchip_controller_chip_interface_service_2.0.z.so",
+        "dep_file_name": "libwifi_hal_hw.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libchip_controller_chip_interface_service_2.0.z.so depends on libwifi_hal_hw.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libaudio_bluetooth_hdi_adapter_server.z.so",
+        "so_file_path": "vendor/lib/libaudio_bluetooth_hdi_adapter_server.z.so",
+        "dep_file_name": "libwifi_hal_hw.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libaudio_bluetooth_hdi_adapter_server.z.so depends on libwifi_hal_hw.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusbfn.z.so",
+        "so_file_path": "vendor/lib/libusbfn.z.so",
+        "dep_file_name": "libwifi_hal_hw.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusbfn.z.so depends on libwifi_hal_hw.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmotion_interface_service_1.1.z.so",
+        "so_file_path": "vendor/lib/libmotion_interface_service_1.1.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libmotion_interface_service_1.1.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdaudioext_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libdaudioext_stub_2.0.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdaudioext_stub_2.0.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libusb_camera_buffer_manager.z.so",
+        "so_file_path": "vendor/lib/libusb_camera_buffer_manager.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libusb_camera_buffer_manager.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libethernet_hdi_c_device.z.so",
+        "so_file_path": "vendor/lib/libethernet_hdi_c_device.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libethernet_hdi_c_device.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdaudio_hdf_utils.z.so",
+        "so_file_path": "vendor/lib/libdaudio_hdf_utils.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdaudio_hdf_utils.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdaudioext_stub_2.1.z.so",
+        "so_file_path": "vendor/lib/libdaudioext_stub_2.1.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdaudioext_stub_2.1.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmetadata_driver_1.1.z.so",
+        "so_file_path": "vendor/lib/libmetadata_driver_1.1.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libmetadata_driver_1.1.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libhostapd_hdi_c_device.z.so",
+        "so_file_path": "vendor/lib/libhostapd_hdi_c_device.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libhostapd_hdi_c_device.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libvendor_intell_voice_trigger.z.so",
+        "so_file_path": "vendor/lib/libvendor_intell_voice_trigger.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libvendor_intell_voice_trigger.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libfingerprint_auth_stub_2.0.z.so",
+        "so_file_path": "vendor/lib/libfingerprint_auth_stub_2.0.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libfingerprint_auth_stub_2.0.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcodec_stub_4.0.z.so",
+        "so_file_path": "vendor/lib/libcodec_stub_4.0.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcodec_stub_4.0.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libthermal_interface_service_1.1.z.so",
+        "so_file_path": "vendor/lib/libthermal_interface_service_1.1.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libthermal_interface_service_1.1.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcomposer_buffer_cache.z.so",
+        "so_file_path": "vendor/lib/libcomposer_buffer_cache.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libcomposer_buffer_cache.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libperipheral_camera_device_manager.z.so",
+        "so_file_path": "vendor/lib/libperipheral_camera_device_manager.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libperipheral_camera_device_manager.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdaudio_manager_daudio_ext_service_2.1.z.so",
+        "so_file_path": "vendor/lib/libdaudio_manager_daudio_ext_service_2.1.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdaudio_manager_daudio_ext_service_2.1.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_stub_1.0.z.so",
+        "so_file_path": "vendor/lib/libdisplay_buffer_stub_1.0.z.so",
+        "dep_file_name": "libhdi_motion_impl.z.so",
+        "dep_file_path": "",
+        "description": "vendor only module libdisplay_buffer_stub_1.0.z.so depends on libhdi_motion_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsurface.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libsurface.z.so",
+        "dep_file_name": "libgame_acc_sched_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libsurface.z.so depends on libgame_acc_sched_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsurface.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libsurface.z.so",
+        "dep_file_name": "libdelegator.z.so",
+        "dep_file_path": "",
+        "description": "system only module libsurface.z.so depends on libdelegator.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libsurface.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libsurface.z.so",
+        "dep_file_name": "libaps_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libsurface.z.so depends on libaps_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "ld-musl-arm.so.1",
+        "so_file_path": "system/lib/ld-musl-arm.so.1",
+        "dep_file_name": "libmemleak_tracker.so",
+        "dep_file_path": "",
+        "description": "system only module ld-musl-arm.so.1 depends on libmemleak_tracker.so which is unknown so type"
+    },
+    {
+        "so_file_name": "ld-musl-arm.so.1",
+        "so_file_path": "system/lib/ld-musl-arm.so.1",
+        "dep_file_name": "libfdleak_tracker.so",
+        "dep_file_path": "",
+        "description": "system only module ld-musl-arm.so.1 depends on libfdleak_tracker.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libffrt.so",
+        "so_file_path": "system/lib/ndk/libffrt.so",
+        "dep_file_name": "lib_cpuboost.so",
+        "dep_file_path": "",
+        "description": "system only module libffrt.so depends on lib_cpuboost.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmindspore_lite_ndk.so",
+        "so_file_path": "system/lib/ndk/libmindspore_lite_ndk.so",
+        "dep_file_name": "libmindspore-lite-turbo.so",
+        "dep_file_path": "",
+        "description": "system only module libmindspore_lite_ndk.so depends on libmindspore-lite-turbo.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libEGL.so",
+        "so_file_path": "system/lib/platformsdk/libEGL.so",
+        "dep_file_name": "libaps_client.z.so",
+        "dep_file_path": "",
+        "description": "system only module libEGL.so depends on libaps_client.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libEGL.so",
+        "so_file_path": "system/lib/platformsdk/libEGL.so",
+        "dep_file_name": "libgameservice_graphic_plugin.z.so",
+        "dep_file_path": "",
+        "description": "system only module libEGL.so depends on libgameservice_graphic_plugin.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libEGL.so",
+        "so_file_path": "system/lib/platformsdk/libEGL.so",
+        "dep_file_name": "libsquid.so",
+        "dep_file_path": "",
+        "description": "system only module libEGL.so depends on libsquid.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmapper_service_1.0.z.so",
+        "so_file_path": "vendor/lib/passthrough/libmapper_service_1.0.z.so",
+        "dep_file_name": "libdisplay_buffer_vdi_impl_default.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmapper_service_1.0.z.so depends on libdisplay_buffer_vdi_impl_default.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmemory_tracker_interface_service_1.0.z.so",
+        "so_file_path": "vendor/lib/passthrough/libmemory_tracker_interface_service_1.0.z.so",
+        "dep_file_name": "libmemorytracker.default.so",
+        "dep_file_path": "",
+        "description": "system only module libmemory_tracker_interface_service_1.0.z.so depends on libmemorytracker.default.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcodec_component_manager_service_4.0.z.so",
+        "so_file_path": "vendor/lib/passthrough/libcodec_component_manager_service_4.0.z.so",
+        "dep_file_name": "libomx_audio_codec.z.so",
+        "dep_file_path": "",
+        "description": "system only module libcodec_component_manager_service_4.0.z.so depends on libomx_audio_codec.z.so which is unknown so type"
     }
 ]
