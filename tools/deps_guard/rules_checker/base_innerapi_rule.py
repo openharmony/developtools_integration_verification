@@ -71,30 +71,30 @@ class BaseInnerapiRule(BaseRule):
                                    %(mod["name"], callee["name"], mod["labelPath"], callee["path"]))
                         passed = False
             
-            # dep is missing, not sure if it's correct. need verify it
-            for dep_name in mod["missing"]:
-                if dep_name in self.__base_sofiles:
-                    continue
-                in_whitelist = False
-                for so_dict in white_lists:
-                    for k, v in so_dict.items():
-                        if k == mod["name"] and v == dep_name:
-                            in_whitelist = True
-                            break
+                # dep is missing, not sure if it's correct. need verify it
+                for dep_name in mod["missing"]:
+                    if dep_name in self.__base_sofiles:
+                        continue
+                    in_whitelist = False
+                    for so_dict in white_lists:
+                        for k, v in so_dict.items():
+                            if k == mod["name"] and v == dep_name:
+                                in_whitelist = True
+                                break
 
-                if in_whitelist:
-                    continue
-                else:
-                    print(json.dumps({
-                        "so_file_name": mod["name"],
-                        "so_file_path": mod["path"],
-                        "dep_file_name": dep_name,
-                        "dep_file_path": "",
-                        "description": f"system only module {mod['name']} depends on {dep_name} which is unknown so type"
-                    }), end="\n")
-                    self.error("NEED MODIFY: system only module %s depends on %s which is unknown so type"
-                               %(mod["name"], dep_name))
-                    passed = False
+                    if in_whitelist:
+                        continue
+                    else:
+                        print(json.dumps({
+                            "so_file_name": mod["name"],
+                            "so_file_path": mod["path"],
+                            "dep_file_name": dep_name,
+                            "dep_file_path": "",
+                            "description": f"system only module {mod['name']} depends on {dep_name} which is unknown so type"
+                        }), end="\n")
+                        self.error("NEED MODIFY: system only module %s depends on %s which is unknown so type"
+                                   %(mod["name"], dep_name))
+                        passed = False
 
             # mod is vendor only scene
             elif self.is_only(mod) == "vendor" and \
@@ -127,15 +127,15 @@ class BaseInnerapiRule(BaseRule):
                                    %(mod["name"], callee["name"], mod["labelPath"], callee["path"]))
                         passed = False
 
-            # dep is missing, not sure if it's correct. need verify it
-            for dep_name in mod["missing"]:
-                if dep_name in self.__base_sofiles:
-                    continue
-                in_whitelist = False
-                for so_dict in white_lists:
-                    for k, v in so_dict.items():
-                        if k == mod["name"] and v == dep_name:
-                            in_whitelist = True
+                # dep is missing, not sure if it's correct. need verify it
+                for dep_name in mod["missing"]:
+                    if dep_name in self.__base_sofiles:
+                        continue
+                    in_whitelist = False
+                    for so_dict in white_lists:
+                        for k, v in so_dict.items():
+                            if k == mod["name"] and v == dep_name:
+                                in_whitelist = True
                             break
 
                 if in_whitelist:
