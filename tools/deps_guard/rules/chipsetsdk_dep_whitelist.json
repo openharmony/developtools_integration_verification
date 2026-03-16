@@ -13920,5 +13920,47 @@
         "dep_file_name": "libomx_audio_codec.z.so",
         "dep_file_path": "",
         "description": "system only module libcodec_component_manager_service_4.0.z.so depends on libomx_audio_codec.z.so which is unknown so type"
-    }
+    },
+    	{
+		"so_file_name": "libcodec_image_service_2.1.z.so",
+		"so_file_path": "vendor/lib/libcodec_image_service_2.1.z.so",
+		"dep_file_name": "libheif_vdi_impl.z.so",
+		"dep_file_path": "",
+		"description": "vendor only module libcodec_image_service_2.1.z.so depends on libheif_vdi_impl.z.so which is unknown so type"
+	}, 
+	{
+		"so_file_name": "libunwinder.z.so",
+		"so_file_path": "system/lib/chipset-sdk-sp/libunwinder.z.so",
+		"dep_file_name": "libjsvm.so",
+		"dep_file_path": "",
+		"description": "system only module libunwinder.z.so depends on libjsvm.so which is unknown so type"
+	}, 
+	{
+		"so_file_name": "libunwinder.z.so",
+		"so_file_path": "system/lib/chipset-sdk-sp/libunwinder.z.so",
+		"dep_file_name": "libarkweb_engine.so",
+		"dep_file_path": "",
+		"description": "system only module libunwinder.z.so depends on libarkweb_engine.so which is unknown so type"
+	}, 
+	{
+		"so_file_name": "libunwinder.z.so",
+		"so_file_path": "system/lib/chipset-sdk-sp/libunwinder.z.so",
+		"dep_file_name": "libv8_shared.so",
+		"dep_file_path": "",
+		"description": "system only module libunwinder.z.so depends on libv8_shared.so which is unknown so type"
+	}, 
+	{
+		"so_file_name": "libomxvpu_dec.z.so",
+		"so_file_path": "vendor/lib/passthrough/indirect/libomxvpu_dec.z.so",
+		"dep_file_name": "librk_vpuapi.so",
+		"dep_file_path": "",
+		"description": "system only module libomxvpu_dec.z.so depends on librk_vpuapi.so which is unknown so type"
+	}, 
+	{
+		"so_file_name": "libomxvpu_enc.z.so",
+		"so_file_path": "vendor/lib/passthrough/indirect/libomxvpu_enc.z.so",
+		"dep_file_name": "librk_vpuapi.so",
+		"dep_file_path": "",
+		"description": "system only module libomxvpu_enc.z.so depends on librk_vpuapi.so which is unknown so type"
+    }	
 ]

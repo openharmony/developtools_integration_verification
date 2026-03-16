@@ -85,13 +85,6 @@ class BaseInnerapiRule(BaseRule):
                     if in_whitelist:
                         continue
                     else:
-                        print(json.dumps({
-                            "so_file_name": mod["name"],
-                            "so_file_path": mod["path"],
-                            "dep_file_name": dep_name,
-                            "dep_file_path": "",
-                            "description": f"system only module {mod['name']} depends on {dep_name} which is unknown so type"
-                        }), end="\n")
                         self.error("NEED MODIFY: system only module %s depends on %s which is unknown so type"
                                    %(mod["name"], dep_name))
                         passed = False
@@ -138,18 +131,11 @@ class BaseInnerapiRule(BaseRule):
                                 in_whitelist = True
                             break
 
-                if in_whitelist:
-                    continue
-                else:
-                    print(json.dumps({
-                        "so_file_name": mod["name"],
-                        "so_file_path": mod["path"],
-                        "dep_file_name": dep_name,
-                        "dep_file_path": "",
-                        "description": f"vendor only module {mod['name']} depends on {dep_name} which is unknown so type"
-                    }), end="\n")
-                    self.error("NEED MODIFY: vendor only module %s depends on %s which is unknown so type"
-                               %(mod["name"], dep_name))
-                    passed = False
+                    if in_whitelist:
+                        continue
+                    else:
+                        self.error("NEED MODIFY: vendor only module %s depends on %s which is unknown so type"
+                                   %(mod["name"], dep_name))
+                        passed = False
         return passed
 
