@@ -58,8 +58,9 @@ class ElfFile(dict):
         res = []
         if dynamics:
             for line in dynamics:
+                name = line.split("/")[-1].strip()
                 if line.startswith("lib") and line.endswith(".so"):
-                    res.append(line)
+                    res.append([name, line])
 
         return res
 

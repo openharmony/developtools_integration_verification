@@ -70,6 +70,25 @@ class BaseInnerapiRule(BaseRule):
                         self.error("NEED MODIFY: system only module %s depends on wrong module as %s in %s, dep module path is %s" 
                                    %(mod["name"], callee["name"], mod["labelPath"], callee["path"]))
                         passed = False
+            
+                # dep is missing, not sure if it's correct. need verify it
+                for dep_name in mod["missing"]:
+                    if dep_name in self.__base_sofiles:
+                        continue
+                    in_whitelist = False
+                    for so_dict in white_lists:
+                        for k, v in so_dict.items():
+                            if k == mod["name"] and v == dep_name:
+                                in_whitelist = True
+                                break
+
+                    if in_whitelist:
+                        continue
+                    else:
+                        self.error("NEED MODIFY: system only module %s depends on %s which is unknown so type"
+                                   %(mod["name"], dep_name))
+                        passed = False
+
             # mod is vendor only scene
             elif self.is_only(mod) == "vendor" and \
                     all(item in self.__valid_vendor_tags for item in innerapi_tags):
@@ -99,6 +118,24 @@ class BaseInnerapiRule(BaseRule):
                     else:
                         self.error("NEED MODIFY: vendor only module %s depends on wrong module as %s in %s, dep module path is %s" 
                                    %(mod["name"], callee["name"], mod["labelPath"], callee["path"]))
+                        passed = False
+
+                # dep is missing, not sure if it's correct. need verify it
+                for dep_name in mod["missing"]:
+                    if dep_name in self.__base_sofiles:
+                        continue
+                    in_whitelist = False
+                    for so_dict in white_lists:
+                        for k, v in so_dict.items():
+                            if k == mod["name"] and v == dep_name:
+                                in_whitelist = True
+                            break
+
+                    if in_whitelist:
+                        continue
+                    else:
+                        self.error("NEED MODIFY: vendor only module %s depends on %s which is unknown so type"
+                                   %(mod["name"], dep_name))
                         passed = False
         return passed
 

@@ -7,5 +7,8 @@
 	"libquickfix_engine_service.z.so",
 	"libscreenlock_server.z.so",
 	"libdistributedhardwarefwksvr.z.so",
-	"libscreen_session_manager.z.so"
+	"libscreen_session_manager.z.so",
+    "libindex_insert_service.z.so",
+    "libconcurrentsvc.z.so",
+    "libsoftbus_server.z.so"
 ]
