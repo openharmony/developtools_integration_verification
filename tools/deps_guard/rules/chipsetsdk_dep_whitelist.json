@@ -13962,5 +13962,33 @@
 		"dep_file_name": "librk_vpuapi.so",
 		"dep_file_path": "",
 		"description": "system only module libomxvpu_enc.z.so depends on librk_vpuapi.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcj_environment.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libomxvpu_enc.z.so",
+        "dep_file_name": "libz.so",
+        "dep_file_path": "",
+        "description": "system only module libomxvpu_enc.z.so depends on librk_vpuapi.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libcj_environment.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libomxvpu_enc.z.so",
+        "dep_file_name": "libnative_buffer.so",
+        "dep_file_path": "",
+        "description": "system only module libomxvpu_enc.z.so depends on librk_vpuapi.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_napi.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libomxvpu_enc.z.so",
+        "dep_file_name": "libz.so",
+        "dep_file_path": "",
+        "description": "system only module libomxvpu_enc.z.so depends on librk_vpuapi.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libace_napi.z.so",
+        "so_file_path": "vendor/lib/passthrough/indirect/libomxvpu_enc.z.so",
+        "dep_file_name": "libnative_buffer.so",
+        "dep_file_path": "",
+        "description": "system only module libomxvpu_enc.z.so depends on librk_vpuapi.so which is unknown so type"
     }	
 ]

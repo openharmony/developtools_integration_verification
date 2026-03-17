@@ -34,6 +34,7 @@ class BaseInnerapiRule(BaseRule):
                                    "passthrough_indirect"] + self.__ignored_tags
         self.__base_sofiles = ["libc.so", "libutils.z.so", "ld-musl-aarch64.so.1", "libconfiguration.z.so", "libusbmanager.z.so", 
                                "libsms.z.so"]
+        self.load_lists()
 
     def check(self):
         passed = True
@@ -74,6 +75,8 @@ class BaseInnerapiRule(BaseRule):
                 # dep is missing, not sure if it's correct. need verify it
                 for dep_name in mod["missing"]:
                     if dep_name in self.__base_sofiles:
+                        continue
+                    if dep_name in self.get_allow_list():
                         continue
                     in_whitelist = False
                     for so_dict in white_lists:
@@ -123,6 +126,8 @@ class BaseInnerapiRule(BaseRule):
                 # dep is missing, not sure if it's correct. need verify it
                 for dep_name in mod["missing"]:
                     if dep_name in self.__base_sofiles:
+                        continue
+                    if dep_name in self.get_vendor_allow_list():
                         continue
                     in_whitelist = False
                     for so_dict in white_lists:
