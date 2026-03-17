@@ -30,6 +30,13 @@ class BaseRule(object):
         self.__out_path = mgr.get_product_out_path()
         self.__base_sofiles = ["libc.so", "libutils.z.so", "ld-musl-aarch64.so.1", "libconfiguration.z.so", "libusbmanager.z.so",
                                "libsms.z.so"]
+    
+    def load_lists(self):
+        self.__passthroughs_lists = self.load_list_json("Passthrough", "passthrough_info.json")
+        self.__llndk_lists = self.load_list_json("LLndk", "llndk_info.json")
+        self.__chipsetsdksp_lists = self.load_list_json("ChipsetsdkSP", "chipsetsdk_sp_info.json")
+        self.__chipsetsdk_lists = self.load_list_json("ChipsetSDK", "chipsetsdk_info.json")
+
     def load_files(self, name):
         rules_dir = []
         rules_dir.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules"))
@@ -130,6 +137,7 @@ class BaseRule(object):
 
     def check_if_deps_correctly(self, check_modules, valid_mod_tags, valid_dep_tags, white_lists):
         # check if mod and callee have wrong innerapi tags
+        self.load_lists()
         passed = True
         for mod in check_modules:
             innerapi_tags = mod["innerapi_tags"]
@@ -206,17 +214,10 @@ class BaseRule(object):
         return passed
 
     def get_allow_list(self):
-        passthroughs = self.load_list.json("Passthrough", "passthrough_info.json")
-        llndk = self.load_list.json("LLndk", "llndk_info.json")
-        chipsetsdk_sp = self.load_list.json("ChipsetsdkSP", "chipsetsdk_sp_info.json")
-        return passthroughs + llndk + chipsetsdk_sp
+        return self.__passthroughs_lists + self.__llndk_lists + self.__chipsetsdksp_lists
 
     def get_vendor_allow_list(self):
-        passthroughs = self.load_list.json("Passthrough", "passthrough_info.json")
-        llndk = self.load_list.json("LLndk", "llndk_info.json")
-        chipsetsdk_sp = self.load_list.json("ChipsetsdkSP", "chipsetsdk_sp_info.json")
-        chipsetsdk = self.load_list.json("Chipsetsdk", "chipsetsdk_info.json")
-        return passthroughs + llndk + chipsetsdk_sp + chipsetsdk
+        return self.__passthroughs_lists + self.__llndk_lists + self.__chipsetsdksp_lists + self.__chipsetsdk_lists
 
     def parser_rules_file(self, rules_file, res):
         try:
@@ -239,22 +240,22 @@ class BaseRule(object):
     def load_list_json(self, rule_name, name):
         rules_dir = []
         if self._args and self._args.rules:
-            self.log("****add more chipsetsdk info in:{}****".format(self._args.rules))
+            self.log("****add more info in:{}****".format(self._args.rules))
             rules_dir = rules_dir + self._args.rules
 
         chipsetsdk_rules_path = self.get_out_path().replace("out", "out/products_ext")
         new_rule_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../rules")
         if os.path.exists(chipsetsdk_rules_path):
             rules_dir.append(chipsetsdk_rules_path)
-            self.log("****add more chipsetsdk info in dir:{}****".format(chipsetsdk_rules_path))
+            self.log("****add more info in dir:{}****".format(chipsetsdk_rules_path))
         elif os.path.exists(new_rule_path):
             rules_dir.append(new_rule_path)
-            self.log("****add chipsetsdk_rules_path path:{}****".format(new_rule_path))
+            self.log("****add path:{}****".format(new_rule_path))
         res = []
         for d in rules_dir:
             rules_file = os.path.join(d, rule_name, name)
             if os.path.isfile(rules_file):
-                res = self.__parser_rules_file(rules_file, res)
+                res = self.parser_rules_file(rules_file, res)
             else:
                 self.warn("****rules path not exist: {}****".format(rules_file))        
         
