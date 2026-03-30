@@ -12466,6 +12466,27 @@
         "description": "system only module libmedia_plugin_FFmpegDemuxer.z.so depends on libav_codec_hevc_parser.z.so which is unknown so type"
     },
     {
+        "so_file_name": "libmedia_plugin_Mpeg4Demuxer.z.so",
+        "so_file_path": "system/lib/media/media_plugins/libmedia_plugin_Mpeg4Demuxer.z.so",
+        "dep_file_name": "libav_codec_reference_parser.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedia_plugin_Mpeg4Demuxer.z.so depends on libav_codec_reference_parser.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedia_plugin_Mpeg4Demuxer.z.so",
+        "so_file_path": "system/lib/media/media_plugins/libmedia_plugin_Mpeg4Demuxer.z.so",
+        "dep_file_name": "libav_codec_vvc_parser.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedia_plugin_Mpeg4Demuxer.z.so depends on libav_codec_vvc_parser.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libmedia_plugin_Mpeg4Demuxer.z.so",
+        "so_file_path": "system/lib/media/media_plugins/libmedia_plugin_Mpeg4Demuxer.z.so",
+        "dep_file_name": "libav_codec_hevc_parser.z.so",
+        "dep_file_path": "",
+        "description": "system only module libmedia_plugin_Mpeg4Demuxer.z.so depends on libav_codec_hevc_parser.z.so which is unknown so type"
+    },
+    {
         "so_file_name": "libmedia_plugin_FFmpegMuxer.z.so",
         "so_file_path": "system/lib/media/media_plugins/libmedia_plugin_FFmpegMuxer.z.so",
         "dep_file_name": "libav_codec_hevc_parser.z.so",
