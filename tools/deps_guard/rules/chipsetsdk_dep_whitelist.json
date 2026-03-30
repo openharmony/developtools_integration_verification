@@ -13990,5 +13990,12 @@
         "dep_file_name": "libnative_buffer.so",
         "dep_file_path": "",
         "description": "system only module libomxvpu_enc.z.so depends on librk_vpuapi.so which is unknown so type"
-    }	
+    },
+    {
+        "so_file_name": "libnative_media_core.so",
+        "so_file_path": "system/lib/libnative_media_core.so",
+        "dep_file_name": "libAudioVividMetaBuilder.z.so",
+        "dep_file_path": "",
+        "description": "system only module libnative_media_core.so depends on libAudioVividMetaBuilder.z.so which is unknown so type"
+    }
 ]
