@@ -14018,5 +14018,12 @@
         "dep_file_name": "libAudioVividMetaBuilder.z.so",
         "dep_file_path": "",
         "description": "system only module libnative_media_core.so depends on libAudioVividMetaBuilder.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libbackup_sa.z.so",
+        "so_file_path": "system/lib/libbackup_sa.z.so",
+        "dep_file_name": "libbackup_ext_interface.z.so",
+        "dep_file_path": "",
+        "description": "system only module libbackup_sa.z.so depends on libbackup_ext_interface.z.so which is unknown so type"
     }
 ]
