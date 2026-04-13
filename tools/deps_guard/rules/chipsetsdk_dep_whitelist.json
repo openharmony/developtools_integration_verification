@@ -13874,21 +13874,21 @@
     },
     {
         "so_file_name": "libmedia_service.z.so",
-        "so_file_path": "system/lib/chipset-sdk-sp/libmedia_service.z.so",
+        "so_file_path": "system/lib/libmedia_service.z.so",
         "dep_file_name": "libgame_acc_sched_client.z.so",
         "dep_file_path": "",
         "description": "system only module libmedia_service.z.so depends on libgame_acc_sched_client.z.so which is unknown so type"
     },
     {
         "so_file_name": "libmedia_service.z.so",
-        "so_file_path": "system/lib/chipset-sdk-sp/libmedia_service.z.so",
+        "so_file_path": "system/lib/libmedia_service.z.so",
         "dep_file_name": "libdelegator.z.so",
         "dep_file_path": "",
         "description": "system only module libmedia_service.z.so depends on libdelegator.z.so which is unknown so type"
     },
     {
         "so_file_name": "libmedia_service.z.so",
-        "so_file_path": "system/lib/chipset-sdk-sp/libmedia_service.z.so",
+        "so_file_path": "system/lib/libmedia_service.z.so",
         "dep_file_name": "libaps_client.z.so",
         "dep_file_path": "",
         "description": "system only module libmedia_service.z.so depends on libaps_client.z.so which is unknown so type"
