@@ -405,5 +405,12 @@
       "ohos.permission.START_INVISIBLE_ABILITY",
       "ohos.permission.NOTIFICATION_CONTROLLER"
     ]
+  },
+  {
+    "processName": "object_editor_service",
+    "acls": [
+      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED",
+      "ohos.permission.GET_DEFAULT_APPLICATION"
+    ]
   }
 ]
