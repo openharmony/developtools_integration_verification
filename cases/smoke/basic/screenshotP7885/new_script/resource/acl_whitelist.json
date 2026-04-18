@@ -1,0 +1,415 @@
+[
+  {
+    "processName": "hiview",
+    "acls": [
+      "ohos.permission.DUMP",
+      "ohos.permission.GET_WIFI_PEERS_MAC",
+      "ohos.permission.MANAGE_RGM",
+      "ohos.permission.MANAGE_WIFI_CONNECTION",
+      "ohos.permission.CAPTURE_SCREEN"
+    ]
+  },
+  {
+    "processName": "privacy_service",
+    "acls": [
+      "ohos.permission.CAMERA_CONTROL",
+      "ohos.permission.MANAGE_DISPOSED_APP_STATUS",
+      "ohos.permission.MICROPHONE_CONTROL",
+      "ohos.permission.PERMISSION_RECORD_TOGGLE",
+     "ohos.permission.USE_SECURITY_PRIVACY_MESSAGER",
+      "ohos.permission.SET_SUPER_PRIVACY"
+    ]
+  },
+  {
+    "processName": "inputmethod_service",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING"
+    ]
+  },
+  {
+    "processName": "memmgrservice",
+    "acls": [
+      "ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION"
+    ]
+  },
+  {
+    "processName": "locationhub",
+    "acls": [
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+      "ohos.permission.GET_WIFI_PEERS_MAC"
+    ]
+  },
+  {
+    "processName": "useriam",
+    "acls": [
+      "ohos.permission.ACCESS_AUTH_RESPOOL",
+      "ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION"
+    ]
+  },
+  {
+    "processName": "pinauth",
+    "acls": [
+      "ohos.permission.ACCESS_AUTH_RESPOOL"
+    ]
+  },
+  {
+    "processName": "foundation",
+    "acls": [
+      "ohos.permission.PUBLISH_SYSTEM_COMMON_EVENT",
+      "ohos.permission.PERMISSION_START_ABILITIES_FROM_BACKGROUND",
+      "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
+      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED",
+      "ohos.permission.SET_SANDBOX_POLICY",
+      "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS",
+      "ohos.permission.MANAGE_HAP_TOKENID",
+      "ohos.permission.START_INVISIBLE_ABILITY",
+      "ohos.permission.INPUT_MONITORING",
+      "ohos.permission.INSTALL_SANDBOX_BUNDLE",
+      "ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS_EXTENSION",
+      "ohos.permission.MANAGE_USER_ACCOUNT_INFO",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.SET_SUPER_PRIVACY",
+      "ohos.permission.MANAGE_MISSIONS",
+      "ohos.permission.CAPTURE_SCREEN",
+      "ohos.permission.PUBLISH_DISPLAY_ROTATION_EVENT",
+      "ohos.permission.PUBLISH_CAST_PLUGGED_EVENT",
+      "ohos.permission.NOTIFICATION_CONTROLLER",
+      "ohos.permission.NOTIFICATION_AGENT_CONTROLLER",
+      "ohos.permission.ACCESS_SCREEN_LOCK_INNER"
+
+    ]
+  },
+  {
+    "processName": "dscreen",
+    "acls": [
+      "ohos.permission.CAPTURE_SCREEN"
+    ]
+  },
+  {
+    "processName": "sensors",
+    "acls": [
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+    ]
+  },
+  {
+    "processName": "camera_service",
+    "acls": [
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+      "ohos.permission.SET_MUTE_POLICY"
+    ]
+  },
+  {
+    "processName": "audio_server",
+    "acls": [
+      "ohos.permission.SET_FOREGROUND_HAP_REMINDER",
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.SET_MUTE_POLICY"
+    ]
+  },
+  {
+    "processName": "msdp",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING",
+      "ohos.permission.ACCESS_DISTRIBUTED_HARDWARE",
+      "ohos.permission.INTERCEPT_INPUT_EVENT",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.MANAGE_MOUSE_CURSOR",
+      "ohos.permission.INJECT_INPUT_EVENT",
+      "ohos.permission.FILTER_INPUT_EVENT",
+      "ohos.permission.CAPTURE_SCREEN",
+      "ohos.permission.QUERY_ACCESSIBILITY_ELEMENT",
+      "ohos.permission.ACCESS_EXT_SYSTEM_ABILITY",
+      "ohos.permission.GET_PAGE_INFO"
+    ]
+  },
+  {
+    "processName": "dslm_service",
+    "acls": [
+      "ohos.permission.ACCESS_IDS"
+    ]
+  },
+  {
+    "processName": "accountmgr",
+    "acls": [
+      "ohos.permission.ENFORCE_USER_IDM",
+      "ohos.permission.STORAGE_MANAGER_CRYPT",
+      "ohos.permission.CAPTURE_SCREEN"
+    ]
+  },
+  {
+    "processName": "hdcd",
+    "acls": [
+      "ohos.permission.GET_BUNDLE_INFO_PRIVILEGED",
+      "ohos.permission.INSTALL_BUNDLE",
+      "ohos.permission.LISTEN_BUNDLE_CHANGE",
+      "ohos.permission.CHANGE_ABILITY_ENABLED_STATE",
+      "ohos.permission.REMOVE_CACHE_FILES",
+      "ohos.permission.START_ABILITIES_FROM_BACKGROUND",
+      "ohos.permission.PERMISSION_USED_STATS",
+      "ohos.permission.DUMP",
+      "ohos.permission.NOTIFICATION_CONTROLLER",
+      "ohos.permission.PUBLISH_SYSTEM_COMMON_EVENT",
+      "ohos.permission.CLEAN_APPLICATION_DATA",
+      "ohos.permission.START_SYSTEM_DIALOG",
+      "ohos.permission.GET_RUNNING_INFO",
+      "ohos.permission.CONTROL_SVC_CMD",
+      "ohos.permission.MANAGE_WIFI_CONNECTION",
+      "ohos.permission.INSTALL_PLUGIN_BUNDLE",
+      "ohos.permission.UNINSTALL_PLUGIN_BUNDLE",
+      "ohos.permission.HIVIEW_TRACE_MANAGE",
+      "ohos.permission.NETWORK_SIMULATE",
+      "ohos.permission.GET_WIFI_INFO",
+      "ohos.permission.SET_WIFI_CONFIG",
+      "ohos.permission.GET_WIFI_INFO_INTERNAL",
+      "ohos.permission.MANAGE_ENTERPRISE_WIFI_CONNECTION",
+      "ohos.permission.INSTALL_ALLOW_DOWNGRADE",
+      "ohos.permission.START_INVISIBLE_ABILITY"
+    ]
+  },
+  {
+    "processName": "softbus_server",
+    "acls": [
+      "ohos.permission.GET_SENSITIVE_PERMISSIONS",
+      "ohos.permission.ACCESS_IDS",
+      "ohos.permission.MANAGE_WIFI_CONNECTION",
+      "ohos.permission.GET_WIFI_PEERS_MAC",
+      "ohos.permission.GET_WIFI_INFO_INTERNAL",
+      "ohos.permission.ACCESS_DEVAUTH_CRED_PRIVILEGE"
+    ]
+  },
+  {
+    "processName": "backup_sa",
+    "acls": [
+      "ohos.permission.INSTALL_BUNDLE",
+      "ohos.permission.ACCESS_EXT_SYSTEM_ABILITY"
+    ]
+  },
+  {
+    "processName": "media_service",
+    "acls": [
+      "ohos.permission.CAPTURE_SCREEN"
+    ]
+  },
+  {
+    "processName": "security_component_service",
+    "acls": [
+      "ohos.permission.GRANT_SENSITIVE_PERMISSIONS",
+      "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS"
+    ]
+  },
+  {
+    "processName": "distributedsched",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING",
+      "ohos.permission.MANAGE_MISSIONS",
+      "ohos.permission.MANAGE_WIFI_CONNECTION",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.START_INVISIBLE_ABILITY",
+      "ohos.permission.CONNECT_DISTRIBUTED_EXTENSION"
+    ]
+  },
+  {
+    "processName": "accessibility",
+    "acls": [
+      "ohos.permission.INTERCEPT_INPUT_EVENT",
+      "ohos.permission.MANAGE_MOUSE_CURSOR",
+      "ohos.permission.FILTER_INPUT_EVENT",
+      "ohos.permission.INJECT_INPUT_EVENT"
+    ]
+  },
+  {
+    "processName": "dlp_permission_service",
+    "acls": [
+      "ohos.permission.INSTALL_SANDBOX_BUNDLE",
+      "ohos.permission.UNINSTALL_SANDBOX_BUNDLE"
+    ]
+  },
+  {
+    "processName": "quick_fix",
+    "acls": [
+      "ohos.permission.INSTALL_QUICK_FIX_BUNDLE",
+      "ohos.permission.UNINSTALL_QUICK_FIX_BUNDLE"
+    ]
+  },
+  {
+    "processName": "hidumper_service",
+    "acls": [
+      "ohos.permission.DUMP"
+    ]
+  },
+  {
+    "processName": "sharing_service",
+    "acls": [
+      "ohos.permission.CAPTURE_SCREEN",
+      "ohos.permission.GET_WIFI_PEERS_MAC",
+      "ohos.permission.MANAGE_WIFI_CONNECTION"
+    ]
+  },
+  {
+    "processName": "pasteboard_service",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING",
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED",
+      "ohos.permission.GET_WIFI_INFO",
+      "ohos.permission.MANAGE_WIFI_CONNECTION"
+    ]
+  },
+  {
+    "processName": "token_sync_service",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
+  },
+  {
+    "processName": "deviceprofile",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE"
+    ]
+  },
+  {
+    "processName": "distributedfiledaemon",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.NOTIFICATION_CONTROLLER"
+    ]
+  },
+  {
+    "processName": "distributeddata",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED"
+    ]
+  },
+  {
+    "processName": "dhardware",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.SYNC_PROFILE_DP"
+    ]
+  },
+  {
+    "processName": "netmanager",
+    "acls": [
+      "ohos.permission.MANAGE_WIFI_HOTSPOT"
+    ]
+  },
+  {
+    "processName": "samgr",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.MANAGE_SYSTEM_ABILITY"
+    ]
+  },
+  {
+    "processName": "resource_schedule_service",
+    "acls": [
+      "ohos.permission.MANAGE_WIFI_CONNECTION",
+      "ohos.permission.MANAGE_RGM",
+      "ohos.permission.FILTER_INPUT_EVENT",
+      "ohos.permission.NOTIFICATION_CONTROLLER",
+      "ohos.permission.GET_PAGE_INFO",
+      "ohos.permission.ACCESS_EXT_SYSTEM_ABILITY"
+    ]
+  },
+  {
+    "processName": "el5_filekey_manager",
+    "acls": [
+      "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
+      "ohos.permission.STORAGE_MANAGER_CRYPT"
+    ]
+  },
+  {
+    "processName": "security_guard",
+    "acls": [
+      "ohos.permission.COLLECT_SECURITY_EVENT"
+    ]  
+  },
+  {
+    "processName": "telephony",
+    "acls": [
+      "ohos.permission.MANAGE_WIFI_CONNECTION"
+    ]
+  },
+  {
+    "processName": "netsysnative",
+    "acls": [
+        "ohos.permission.ACCESS_USER_TRUSTED_CERT",
+        "ohos.permission.ACCESS_SYSTEM_APP_CERT"
+    ]
+  },
+  {
+    "processName": "storage_daemon",
+    "acls": [
+      "ohos.permission.ACCESS_SCREEN_LOCK_INNER"
+    ]
+  },
+  {
+    "processName": "storage_manager",
+    "acls": [
+        "ohos.permission.ACCESS_SCREEN_LOCK_INNER"
+    ]
+  },
+  {
+    "processName": "testserver",
+    "acls": [
+        "ohos.permission.DUMP",
+        "ohos.permission.MANAGE_MISSIONS",
+        "ohos.permission.CONNECT_IME_ABILITY"
+    ]
+  },
+  {
+    "processName": "device_manager",
+    "acls": [
+        "ohos.permission.MANAGE_SOFTBUS_NETWORK",
+        "ohos.permission.ACCESS_DEVAUTH_CRED_PRIVILEGE",
+        "ohos.permission.ACCESS_IDS"
+    ]
+  },
+  {
+    "processName": "hiprofiler_plugins",
+    "acls": [
+        "ohos.permission.HIVIEW_TRACE_MANAGE"
+    ]
+  },
+  {
+    "processName": "mechbody",
+    "acls": [
+        "ohos.permission.INJECT_INPUT_EVENT"
+    ]
+  },
+  {
+    "processName": "huks_service",
+    "acls": [
+        "ohos.permission.START_INVISIBLE_ABILITY",
+        "ohos.permission.CONNECT_CRYPTO_EXTENSION"
+    ]
+  },
+  {
+    "processName": "updater_sa",
+    "acls": [
+      "ohos.permission.STORAGE_MANAGER_CRYPT"
+    ]
+  },
+  {
+    "processName": "selection_service",
+    "acls": [
+      "ohos.permission.INPUT_MONITORING"
+    ]
+  },
+  {
+    "processName": "telecom",
+    "acls": [
+      "ohos.permission.SET_SUPER_PRIVACY",
+      "ohos.permission.START_INVISIBLE_ABILITY",
+      "ohos.permission.NOTIFICATION_CONTROLLER"
+    ]
+  },
+  {
+    "processName": "bgtaskmgr_service",
+    "acls": [
+      "ohos.permission.NOTIFICATION_CONTROLLER"
+    ]
+  }
+]

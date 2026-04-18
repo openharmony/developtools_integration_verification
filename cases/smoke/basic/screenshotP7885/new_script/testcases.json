@@ -1,0 +1,54 @@
+[
+  {
+    "case_file": "testcases/test_launcher.py",
+    "description": "开机测试"
+  },
+  {
+    "case_file": "testcases/test_process.py",
+    "description": "进程检查"
+  },
+  {
+    "case_file": "testcases/test_apl_check.py",
+    "description": "外部用例APL白名单检查"
+  },
+  {
+    "case_file": "testcases/test_acl_check.py",
+    "description": "外部用例ACL白名单检查"
+  },
+  {
+    "case_file": "testcases/test_settings_wifi.py",
+    "description": "设置和wlan开关测试"
+  },
+  {
+    "case_file": "testcases/test_crash_check.py",
+    "description": "crash检查"
+  },
+  {
+    "case_file": "testcases/test_photos.py",
+    "description": "图库测试"
+  },
+  {
+    "case_file": "testcases/test_contacts.py",
+    "description": "联系人测试"
+  },
+  {
+    "case_file": "testcases/test_mms.py",
+    "description": "短信息测试"
+  },
+  {
+    "case_file": "testcases/test_distributed_musicplayer.py",
+    "description": "音乐测试"
+  },
+  {
+    "case_file": "testcases/test_camera.py",
+    "description": "照相机测试"
+  },
+  {
+    "case_file": "testcases/test_controller_center.py",
+    "description": "控制中心测试"
+  },
+  {
+    "case_file": "testcases/test_note.py",
+    "description": "备忘录应用测试"
+  }
+]
