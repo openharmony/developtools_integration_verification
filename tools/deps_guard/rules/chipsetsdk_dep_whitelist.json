@@ -12424,6 +12424,13 @@
         "description": "system only module libark_jsruntime.so depends on libunwind.so which is unknown so type"
     },
     {
+        "so_file_name": "libark_jsruntime.so",
+        "so_file_path": "system/lib/platformsdk/libark_jsruntime.so",
+        "dep_file_name": "libclang_rt.hwasan.so",
+        "dep_file_path": "",
+        "description": "system only module libark_jsruntime.so depends on libclang_rt.hwasan.so which is unknown so type"
+    },
+    {
         "so_file_name": "libappspawn_nweb.z.so",
         "so_file_path": "system/lib/appspawn/nwebspawn/libappspawn_nweb.z.so",
         "dep_file_name": "libarkweb_render.so",
