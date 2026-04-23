@@ -12212,5 +12212,26 @@
         "dep_file_name": "libGLES_mali.z.so",
         "dep_file_path": "vendor/lib64/chipsetsdk/libGLES_mali.z.so",
         "description": "libEGL.so with innerapi_tags [llndk] cannot depend vendor only file libGLES_mali.z.so with //device/soc/unisoc/p7885/hardware/gpu:GLES_mali"
+    },
+    {
+        "so_file_name": "libnnrt_device_service_2.0.z.so",
+        "so_file_path": "vendor/lib64/libnnrt_device_service_2.0.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libnnrt_device_service_2.0.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libnnrt_driver.z.so",
+        "so_file_path": "vendor/lib64/libnnrt_driver.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libnnrt_driver.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
+    },
+    {
+        "so_file_name": "libnpu_vdi_impl.z.so",
+        "so_file_path": "vendor/lib64/libnpu_vdi_impl.z.so",
+        "dep_file_name": "ld-musl-aarch64.so.1",
+        "dep_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "description": "vendor only lib libnpu_vdi_impl.z.so deps wrong lib ld-musl-aarch64.so.1 in system/lib/ld-musl-aarch64.so.1"
     }
 ]
