@@ -82,5 +82,23 @@
         "so_file_name": "libalsa_midi.so",
         "path": "//thirdparty/alsa-lib:libalsa_midi",
         "headers": []
+    },
+    {
+        "name": "soc_p7885:libstagefrighthw",
+        "so_file_name": "libstagefrighthw.z.so",
+        "path": "//device/soc/unisoc/p7885/hardware/omx_il/libstagefrighthw:libstagefrighthw",
+        "headers": []
+    },
+    {
+        "name": "soc_p7885:libomx_memion",
+        "so_file_name": "libomx_memion.z.so",
+        "path": "//device/soc/unisoc/p7885/hardware/omx_il/libutils/memory/libmemion:libomx_memion",
+        "headers": []
+    },
+    {
+        "name": "soc_p7885:libomx_utils",
+        "so_file_name": "libomx_utils.z.so",
+        "path": "//device/soc/unisoc/p7885/hardware/omx_il/libutils:libomx_utils",
+        "headers": []
     }
 ]
