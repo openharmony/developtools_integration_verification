@@ -14060,5 +14060,68 @@
         "dep_file_name": "libhiretrieval_ext.z.so",
         "dep_file_path": "",
         "description": "system only module libhiretrieval.z.so depends on libhiretrieval_ext.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "ld-musl-aarch64.so.1",
+        "so_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "dep_file_name": "libmemleak_tracker.so",
+        "dep_file_path": "",
+        "description": "system only module ld-musl-aarch64.so.1 depends on libmemleak_tracker.so which is unknown so type"
+    },
+    {
+        "so_file_name": "ld-musl-aarch64.so.1",
+        "so_file_path": "system/lib/ld-musl-aarch64.so.1",
+        "dep_file_name": "libfdleak_tracker.so",
+        "dep_file_path": "",
+        "description": "system only module ld-musl-aarch64.so.1 depends on libfdleak_tracker.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libunwinder.z.so",
+        "so_file_path": "system/lib64/platformsdk/libunwinder.z.so",
+        "dep_file_name": "libcangjie-demangle.so",
+        "dep_file_path": "",
+        "description": "system only module libunwinder.z.so depends on libcangjie-demangle.so which is unknown so type"
+    },
+    {
+      "so_file_name": "libdisplay_gralloc.z.so",
+      "so_file_path": "vendor/lib64/libdisplay_gralloc.z.so",
+      "dep_file_name": "libdisplay_adapter_impl.z.so",
+      "dep_file_path": "",
+      "description": "system only module libdisplay_gralloc.z.so depends on libdisplay_adapter_impl.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libstagefrighthw.z.so",
+        "so_file_path": "vendor/lib64/passthrough/indirect/libstagefrighthw.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib64/chipset-sdk/libhilog.so",
+        "description": "libstagefrighthw.z.so with innerapi_tags [passthrough_indirect] has dep file libhilog.so with //base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog contains wrong dep innerapi_tags [chipsetsdk] in innerapi_tags [chipsetsdk,platformsdk,sasdk]"
+    },
+    {
+        "so_file_name": "libomx_memion.z.so",
+        "so_file_path": "vendor/lib64/passthrough/indirect/libomx_memion.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib64/chipset-sdk/libhilog.so",
+        "description": "libomx_memion.z.so with innerapi_tags [passthrough_indirect] has dep file libhilog.so with //base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog contains wrong dep innerapi_tags [chipsetsdk] in innerapi_tags [chipsetsdk,platformsdk,sasdk]"
+    },
+    {
+        "so_file_name": "libomx_utils.z.so",
+        "so_file_path": "vendor/lib64/passthrough/indirect/libomx_utils.z.so",
+        "dep_file_name": "libhilog.so",
+        "dep_file_path": "system/lib64/chipset-sdk/libhilog.so",
+        "description": "libomx_utils.z.so with innerapi_tags [passthrough_indirect] has dep file libhilog.so with //base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog contains wrong dep innerapi_tags [chipsetsdk] in innerapi_tags [chipsetsdk,platformsdk,sasdk]"
+    },
+    {
+        "so_file_name": "libdisplay_buffer_vdi_impl.z.so",
+        "so_file_path": "vendor/lib64/libdisplay_buffer_vdi_impl.z.so",
+        "dep_file_name": "libdisplay_gralloc.z.so",
+        "dep_file_path": "vendor/lib64/libdisplay_gralloc.z.so",
+        "description": "libdisplay_buffer_vdi_impl.z.so with innerapi_tags [passthrough] cannot depend vendor only file libdisplay_gralloc.z.so with //device/soc/unisoc/p7885/hardware/display:display_gralloc"
+    },
+    {
+        "so_file_name": "libEGL.so",
+        "so_file_path": "system/lib64/platformsdk/libEGL.so",
+        "dep_file_name": "libGLES_mali.z.so",
+        "dep_file_path": "vendor/lib64/chipsetsdk/libGLES_mali.z.so",
+        "description": "libEGL.so with innerapi_tags [llndk] cannot depend vendor only file libGLES_mali.z.so with //device/soc/unisoc/p7885/hardware/gpu:GLES_mali"
     }
 ]
