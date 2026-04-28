@@ -10,5 +10,6 @@
 	"libscreen_session_manager.z.so",
     "libindex_insert_service.z.so",
     "libconcurrentsvc.z.so",
+	"libmemory_profiler.z.so",
     "libsoftbus_server.z.so"
 ]
