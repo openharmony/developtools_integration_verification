@@ -5,6 +5,7 @@
 	"libsg_collect_service.z.so",
 	"libabnormal_efficiency_mgr_service.z.so",
 	"libquickfix_engine_service.z.so",
+	"libmemory_profiler.z.so",
 	"libscreenlock_server.z.so",
 	"libdistributedhardwarefwksvr.z.so",
 	"libscreen_session_manager.z.so",
