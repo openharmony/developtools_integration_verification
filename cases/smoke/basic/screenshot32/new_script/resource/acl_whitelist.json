@@ -412,5 +412,11 @@
       "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED",
       "ohos.permission.GET_DEFAULT_APPLICATION"
     ]
+  },
+  {
+    "processName": "aimgr",
+    "acls": [
+      "ohos.permission.MANAGE_TOOL_TOKENID"
+    ]
   }
 ]
