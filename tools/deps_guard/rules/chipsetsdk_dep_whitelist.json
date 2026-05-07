@@ -14090,6 +14090,13 @@
       "description": "system only module libdisplay_gralloc.z.so depends on libdisplay_adapter_impl.z.so which is unknown so type"
     },
     {
+      "so_file_name": "libhilog.so",
+      "so_file_path": "system/lib64/chipset-sdk/libhilog.so",
+      "dep_file_name": "libsandboxlog.so",
+      "dep_file_path": "",
+      "description": "libhilog.so with innerapi_tags [chipsetsdk,platformsdk,sasdk] cannot depend system only file libsandboxlog.so with //base/hiviewdfx/hilog/interfaces/sandbox_log:libsandboxlog"
+    },
+    {
         "so_file_name": "libstagefrighthw.z.so",
         "so_file_path": "vendor/lib64/passthrough/indirect/libstagefrighthw.z.so",
         "dep_file_name": "libhilog.so",
