@@ -132,12 +132,6 @@
         "headers": []
     },
     {
-        "name": "hiviewdfx:libhilog",
-        "so_file_name": "libhilog.so",
-        "path": "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog",
-        "headers": []
-    },
-    {
         "name": "hdf:libdisplay_buffer_hdi_impl",
         "so_file_name": "libdisplay_buffer_hdi_impl.z.so",
         "path": "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_hdi_impl",

@@ -76,5 +76,11 @@
         "so_file_name": "libGLESv3.so",
         "path": "//foundation/graphic/graphic_2d/frameworks/opengl_wrapper:GLESv3",
         "headers": []
+    },
+    {
+        "name": "hiviewdfx:libhilog",
+        "so_file_name": "libhilog.so",
+        "path": "//base/hiviewdfx/hilog/interfaces/native/innerkits:libhilog",
+        "headers": []
     }
 ]
