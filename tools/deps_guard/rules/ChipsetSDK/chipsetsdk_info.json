@@ -162,6 +162,12 @@
         "headers": []
     },
     {
+        "name": "hdf:libserials_proxy_1.0",
+        "so_file_name": "libserials_proxy_1.0.z.so",
+        "path": "//drivers/interface/serials/v1_0:libserials_proxy_1.0",
+        "headers": []
+    },
+    {
         "name": "developtools:libffrt_profiler",
         "so_file_name": "libffrt_profiler.z.so",
         "path": "//developtools/profiler/device/plugins/ffrt_profiler/client:libffrt_profiler",

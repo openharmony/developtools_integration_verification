@@ -88,5 +88,11 @@
         "so_file_name": "libmidi_interface_service_1.0.z.so",
         "path": "//drivers/peripheral/midi/hdi_service:midi_interface_service_1.0",
         "headers": []
+    },
+    {
+        "name": "hdf:libserials_service_1.0",
+        "so_file_name": "libserials_service_1.0.z.so",
+        "path": "//drivers/peripheral/serials:libserials_service_1.0",
+        "headers": []
     }
 ]
