@@ -13952,6 +13952,13 @@
     {
         "so_file_name": "libEGL.so",
         "so_file_path": "system/lib/platformsdk/libEGL.so",
+        "dep_file_name": "libiGraphicsCore.z.so",
+        "dep_file_path": "",
+        "description": "system only module libEGL.so depends on libiGraphicsCore.z.so which is unknown so type"
+    },
+    {
+        "so_file_name": "libEGL.so",
+        "so_file_path": "system/lib/platformsdk/libEGL.so",
         "dep_file_name": "libsquid.so",
         "dep_file_path": "",
         "description": "system only module libEGL.so depends on libsquid.so which is unknown so type"
