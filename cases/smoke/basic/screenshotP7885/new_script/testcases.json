@@ -1,0 +1,22 @@
+[
+  {
+    "case_file": "testcases/test_launcher.py",
+    "description": "开机测试"
+  },
+  {
+    "case_file": "testcases/test_process.py",
+    "description": "进程检查"
+  },
+  {
+    "case_file": "testcases/test_apl_check.py",
+    "description": "外部用例APL白名单检查"
+  },
+  {
+    "case_file": "testcases/test_acl_check.py",
+    "description": "外部用例ACL白名单检查"
+  },
+  {
+    "case_file": "testcases/test_crash_check.py",
+    "description": "crash检查"
+  }
+]
