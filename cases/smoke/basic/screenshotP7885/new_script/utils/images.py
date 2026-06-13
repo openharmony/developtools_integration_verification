@@ -18,12 +18,11 @@ def crop_picture(picture, width=720, height=1280):
     img_height, img_width = img.shape[:2]
     
     # 顶部状态栏、底部导航栏需要去除的高度
-    status_bar_height = 120
-    navigation_bar_height = 1800
+    status_bar_height = 90
     
     # 裁剪去除状态栏，保留完整屏幕内容
     x1, y1 = 0, status_bar_height
-    x2, y2 = img_width, navigation_bar_height
+    x2, y2 = img_width, img_height
     
     img = img[y1:y2, x1:x2]
     cv2.imwrite(picture, img)
