@@ -17,17 +17,19 @@ class Test:
         # 截取笔记主页面
         device.save_snapshot_to_local('{}_note_mainpage.jpeg'.format(device.sn))
 
-        # 点击左侧笔记进入内容页
-        logging.info('click note bookmark')
-        device.click(242, 367)
-        time.sleep(4)
+        # 点击数学公式
+        logging.info('click shuxue gongshi')
+        device.refresh_layout()
+        math_formula_element = device.get_element_by_text('数学公式')
+        assert math_formula_element, '数学公式 component not found'
+        device.click_element(math_formula_element)
+
+        # 点击内容区
         logging.info('click note content area')
         device.refresh_layout()
         for i in range(5):
-            device.click(360, 325)
+            device.click(600, 600)
             time.sleep(2)
-            device.click(360, 324)
-            time.sleep(3)
             if device.is_soft_keyboard_on():
                 break
         time.sleep(3)

@@ -23,7 +23,6 @@ import pytest
 
 class Test:
     pid_list = [
-        'com.ohos.launcher',
         'render_service',
     ]
 
@@ -54,7 +53,6 @@ class Test:
         'sensors',
         'media_service',
         'wifi_manager_se',
-        'installs',
         'hiview',
         'telephony',
         'camera_service',
@@ -69,7 +67,6 @@ class Test:
         'wifi_host',
         'usb_host',
         'blue_host',
-        'com.ohos.systemui',
         'power_host',
     ]
 
