@@ -54,7 +54,6 @@ class Test:
         'sensors',
         'media_service',
         'wifi_manager_se',
-        'installs',
         'hiview',
         'telephony',
         'camera_service',
