@@ -164,7 +164,8 @@
       "ohos.permission.GET_WIFI_INFO_INTERNAL",
       "ohos.permission.MANAGE_ENTERPRISE_WIFI_CONNECTION",
       "ohos.permission.INSTALL_ALLOW_DOWNGRADE",
-      "ohos.permission.START_INVISIBLE_ABILITY"
+      "ohos.permission.START_INVISIBLE_ABILITY",
+      "ohos.permission.HDC_REPORT_INFO"
     ]
   },
   {
