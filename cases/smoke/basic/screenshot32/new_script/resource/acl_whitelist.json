@@ -279,7 +279,8 @@
     "processName": "distributeddata",
     "acls": [
       "ohos.permission.MONITOR_DEVICE_NETWORK_STATE",
-      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED"
+      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED",
+      "ohos.permission.ACCESS_EXT_SYSTEM_ABILITY"
     ]
   },
   {
