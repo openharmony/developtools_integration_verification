@@ -10602,5 +10602,19 @@
         "dep_file_name": "libGLES_mali.z.so",
         "dep_file_path": "vendor/lib64/chipsetsdk/libGLES_mali.z.so",
         "description": "libEGL.so with innerapi_tags [llndk] cannot depend vendor only file libGLES_mali.z.so with //device/soc/unisoc/p7885/hardware/gpu:GLES_mali"
+    },
+    {
+        "so_file_name": "libunwinder.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libunwinder.z.so",
+        "dep_file_name": "libjsvm.so",
+        "dep_file_path": "system/lib64/ndk/libjsvm.so",
+        "description": "libunwinder.so with innerapi_tags [chipsetsdk_sp_indirect,platformsdk_indirect] cannot depend system only file libjsvm.so with //arkcompiler/jsvm:libjsvm"
+    },
+    {
+        "so_file_name": "libunwinder.z.so",
+        "so_file_path": "system/lib/chipset-sdk-sp/libunwinder.z.so",
+        "dep_file_name": "libv8_shared.so",
+        "dep_file_path": "system/lib64/libv8_shared.so",
+        "description": "libunwinder.so with innerapi_tags [chipsetsdk_sp_indirect,platformsdk_indirect] cannot depend system only file libv8_shared.so with //arkcompiler/jsvm:libv8"
     }
 ]
