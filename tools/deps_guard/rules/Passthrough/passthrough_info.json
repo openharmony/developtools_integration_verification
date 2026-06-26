@@ -94,5 +94,11 @@
         "so_file_name": "libserials_service_1.0.z.so",
         "path": "//drivers/peripheral/serials:libserials_service_1.0",
         "headers": []
+    },
+    {
+        "name": "hdf:libhuks_hdi_service_1.2",
+        "so_file_name": "libhuks_hdi_service_1.2.z.so",
+        "path": "//drivers/peripheral/huks/hdi_service:libhuks_hdi_service_1.2",
+        "headers": []
     }
 ]
