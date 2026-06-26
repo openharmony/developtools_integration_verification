@@ -304,7 +304,6 @@
     "const.SystemCapability.Msdp.DeviceStatus.Stationary",
     "const.SystemCapability.FileManagement.File.FileIO",
     "const.SystemCapability.FileManagement.File.Environment",
-    "const.SystemCapability.FileManagement.File.DistributedFile",
     "const.SystemCapability.FileManagement.DistributedFileService.CloudSyncManager",
     "const.SystemCapability.FileManagement.UserFileService",
     "const.SystemCapability.FileManagement.AppFileService",
