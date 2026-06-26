@@ -4,7 +4,7 @@ import os.path
 import platform
 import re
 import traceback
-
+import winreg
 import pytest
 
 BASE_DIR = os.path.dirname(__file__)
@@ -20,7 +20,6 @@ def distribute_testcase(test_num):
     else:
         selected = test_cases_list
     return selected
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='manual to this scription')
@@ -52,7 +51,14 @@ if __name__ == '__main__':
 
         system = platform.system().lower()
         if system.startswith('win'):
-            encoding = 'gbk'
+            #encoding = 'gbk'
+            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Control\Nls\CodePage")
+            value, reg_type = winreg.QueryValueEx(key, "ACP")
+            winreg.CloseKey(key)
+            if "65001" == value:
+                encoding = 'utf-8'
+            else:
+                encoding = 'gbk'
         else:
             encoding = 'utf-8'
 
