@@ -14165,12 +14165,5 @@
         "dep_file_name": "libGLES_mali.z.so",
         "dep_file_path": "vendor/lib64/chipsetsdk/libGLES_mali.z.so",
         "description": "libEGL.so with innerapi_tags [llndk] cannot depend vendor only file libGLES_mali.z.so with //device/soc/unisoc/p7885/hardware/gpu:GLES_mali"
-    },
-    {
-        "so_file_name": "libhuks_hdi_service_1.2.z.so",
-        "so_file_path": "vendor/lib/passthrough/libhuks_hdi_service_1.2.z.so",
-        "dep_file_name": "libhuks_engine_core_standard.z.so",
-        "dep_file_path": "system/lib/libhuks_engine_core_standard.z.so",
-        "description": "libhuks_hdi_service_1.2.z.so with innerapi_tags [passthrough] cannot depend system only file libhuks_engine_core_standard.z.so with //base/security/huks/services/huks_standard/huks_engine/main/core:huks_engine_core_standard"
     }
 ]
