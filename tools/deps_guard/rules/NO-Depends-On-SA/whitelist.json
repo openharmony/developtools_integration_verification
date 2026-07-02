@@ -11,5 +11,6 @@
 	"libscreen_session_manager.z.so",
     "libindex_insert_service.z.so",
     "libconcurrentsvc.z.so",
-    "libsoftbus_server.z.so"
+    "libsoftbus_server.z.so",
+	"libshare_service.z.so"
 ]
