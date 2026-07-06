@@ -1,11 +1,5 @@
 [
     {
-        "name": "access_token:accesstoken_common_cxx",
-        "so_file_name": "libaccesstoken_common_cxx.z.so",
-        "path": "//base/security/access_token/frameworks/common:accesstoken_common_cxx",
-        "headers": []
-    },
-    {
         "name": "ability_base:extractortool",
         "so_file_name": "libextractortool.z.so",
         "path": "//foundation/ability/ability_base:extractortool",
@@ -21,12 +15,6 @@
         "name": "hiview:libfaultlogger",
         "so_file_name": "libfaultlogger.z.so",
         "path": "//base/hiviewdfx/hiview/plugins/faultlogger:libfaultlogger",
-        "headers": []
-    },
-    {
-        "name": "access_token:accesstoken_communication_adapter_cxx",
-        "so_file_name": "libaccesstoken_communication_adapter_cxx.z.so",
-        "path": "//base/security/access_token/frameworks/accesstoken:accesstoken_communication_adapter_cxx",
         "headers": []
     },
     {

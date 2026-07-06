@@ -35,13 +35,6 @@
         "description": "lib libdisplay_buffer_hdi_impl_v1_1.z.so with innerapi_tags [chipsetsdk, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
-        "so_file_name": "libaccesstoken_sdk.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_sdk.z.so",
-        "dep_file_name": "ld-musl-arm.so.1",
-        "dep_file_path": "system/lib/ld-musl-arm.so.1",
-        "description": "lib libaccesstoken_sdk.z.so with innerapi_tags [chipsetsdk, platformsdk, sasdk] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
-    },
-    {
         "so_file_name": "libaccesstoken_compat_sdk.z.so",
         "so_file_path": "system/lib/chipset-sdk/libaccesstoken_compat_sdk.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
@@ -2688,13 +2681,6 @@
         "description": "lib libunwinder.z.so with innerapi_tags [chipsetsdk_sp_indirect, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
-        "so_file_name": "libaccesstoken_common_cxx.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_common_cxx.z.so",
-        "dep_file_name": "ld-musl-arm.so.1",
-        "dep_file_path": "system/lib/ld-musl-arm.so.1",
-        "description": "lib libaccesstoken_common_cxx.z.so with innerapi_tags [platformsdk_indirect, chipsetsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
-    },
-    {
         "so_file_name": "libextractortool.z.so",
         "so_file_path": "system/lib/chipset-sdk/libextractortool.z.so",
         "dep_file_name": "ld-musl-arm.so.1",
@@ -2714,13 +2700,6 @@
         "dep_file_name": "ld-musl-arm.so.1",
         "dep_file_path": "system/lib/ld-musl-arm.so.1",
         "description": "lib libfaultlogger.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
-    },
-    {
-        "so_file_name": "libaccesstoken_communication_adapter_cxx.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_communication_adapter_cxx.z.so",
-        "dep_file_name": "ld-musl-arm.so.1",
-        "dep_file_path": "system/lib/ld-musl-arm.so.1",
-        "description": "lib libaccesstoken_communication_adapter_cxx.z.so with innerapi_tags [platformsdk_indirect, chipsetsdk_indirect] cannot depend system only lib ld-musl-arm.so.1 in system/lib/ld-musl-arm.so.1"
     },
     {
         "so_file_name": "libdisplay_buffer_proxy_1.3.z.so",
@@ -2966,13 +2945,6 @@
         "dep_file_name": "libutils.z.so",
         "dep_file_path": "system/lib/module/arkts/libutils.z.so",
         "description": "lib libbuffer_producer_sequenceable_1.0.z.so with innerapi_tags [chipsetsdk] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
-    },
-    {
-        "so_file_name": "libaccesstoken_sdk.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_sdk.z.so",
-        "dep_file_name": "libutils.z.so",
-        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
-        "description": "lib libaccesstoken_sdk.z.so with innerapi_tags [chipsetsdk, platformsdk, sasdk] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
         "so_file_name": "libdisplay_buffer_hdi_impl.z.so",
@@ -4951,13 +4923,6 @@
     {
         "so_file_name": "libusb_adapter.z.so",
         "so_file_path": "vendor/lib/passthrough/indirect/libusb_adapter.z.so",
-        "dep_file_name": "libaccesstoken_sdk.z.so",
-        "dep_file_path": "system/lib/chipset-sdk/libaccesstoken_sdk.z.so",
-        "description": "lib libusb_adapter.z.so with innerapi_tags [passthrough_indirect] deps wrong lib libaccesstoken_sdk.z.so contains innerapi_tags [chipsetsdk]"
-    },
-    {
-        "so_file_name": "libusb_adapter.z.so",
-        "so_file_path": "vendor/lib/passthrough/indirect/libusb_adapter.z.so",
         "dep_file_name": "libhilog.so",
         "dep_file_path": "system/lib/chipset-sdk/libhilog.so",
         "description": "lib libusb_adapter.z.so with innerapi_tags [passthrough_indirect] deps wrong lib libhilog.so contains innerapi_tags [chipsetsdk]"
@@ -5101,20 +5066,6 @@
         "dep_file_name": "libutils.z.so",
         "dep_file_path": "system/lib/module/arkts/libutils.z.so",
         "description": "lib libpulsecore.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
-    },
-    {
-        "so_file_name": "libaccesstoken_communication_adapter_cxx.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_communication_adapter_cxx.z.so",
-        "dep_file_name": "libutils.z.so",
-        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
-        "description": "lib libaccesstoken_communication_adapter_cxx.z.so with innerapi_tags [platformsdk_indirect, chipsetsdk_indirect] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
-    },
-    {
-        "so_file_name": "libaccesstoken_common_cxx.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_common_cxx.z.so",
-        "dep_file_name": "libutils.z.so",
-        "dep_file_path": "system/lib/module/arkts/libutils.z.so",
-        "description": "lib libaccesstoken_common_cxx.z.so with innerapi_tags [platformsdk_indirect, chipsetsdk_indirect] cannot depend system only lib libutils.z.so in system/lib/module/arkts/libutils.z.so"
     },
     {
         "so_file_name": "libdfx_dumpcatcher.z.so",
@@ -5422,20 +5373,6 @@
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "lib libnl_share.z.so with innerapi_tags [chipsetsdk] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
-    },
-    {
-        "so_file_name": "libaccesstoken_sdk.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_sdk.z.so",
-        "dep_file_name": "ld-musl-arm-asan.so.1",
-        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
-        "description": "lib libaccesstoken_sdk.z.so with innerapi_tags [chipsetsdk, platformsdk, sasdk] cannot deps system only lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
-    },
-    {
-        "so_file_name": "libaccesstoken_sdk.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_sdk.z.so",
-        "dep_file_name": "libclang_rt.asan.so",
-        "dep_file_path": "system/lib/libclang_rt.asan.so",
-        "description": "lib libaccesstoken_sdk.z.so with innerapi_tags [chipsetsdk, platformsdk, sasdk] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
         "so_file_name": "libpower_proxy_1.3.z.so",
@@ -9785,20 +9722,6 @@
         "description": "lib libmapper_service_1.2.z.so with innerapi_tags [passthrough] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
-        "so_file_name": "libaccesstoken_common_cxx.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_common_cxx.z.so",
-        "dep_file_name": "ld-musl-arm-asan.so.1",
-        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
-        "description": "lib libaccesstoken_common_cxx.z.so with innerapi_tags [platformsdk_indirect, chipsetsdk_indirect] cannot deps system only lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
-    },
-    {
-        "so_file_name": "libaccesstoken_common_cxx.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_common_cxx.z.so",
-        "dep_file_name": "libclang_rt.asan.so",
-        "dep_file_path": "system/lib/libclang_rt.asan.so",
-        "description": "lib libaccesstoken_common_cxx.z.so with innerapi_tags [platformsdk_indirect, chipsetsdk_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
-    },
-    {
         "so_file_name": "libcrash_exception.z.so",
         "so_file_path": "system/lib/chipset-sdk/libcrash_exception.z.so",
         "dep_file_name": "ld-musl-arm-asan.so.1",
@@ -9867,20 +9790,6 @@
         "dep_file_name": "libclang_rt.asan.so",
         "dep_file_path": "system/lib/libclang_rt.asan.so",
         "description": "lib libfaultlogger.z.so with innerapi_tags [chipsetsdk_indirect, platformsdk_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
-    },
-    {
-        "so_file_name": "libaccesstoken_communication_adapter_cxx.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_communication_adapter_cxx.z.so",
-        "dep_file_name": "ld-musl-arm-asan.so.1",
-        "dep_file_path": "system/lib/ld-musl-arm-asan.so.1",
-        "description": "lib libaccesstoken_communication_adapter_cxx.z.so with innerapi_tags [platformsdk_indirect, chipsetsdk_indirect] cannot deps system only lib ld-musl-arm-asan.so.1 in system/lib/ld-musl-arm-asan.so.1"
-    },
-    {
-        "so_file_name": "libaccesstoken_communication_adapter_cxx.z.so",
-        "so_file_path": "system/lib/chipset-sdk/libaccesstoken_communication_adapter_cxx.z.so",
-        "dep_file_name": "libclang_rt.asan.so",
-        "dep_file_path": "system/lib/libclang_rt.asan.so",
-        "description": "lib libaccesstoken_communication_adapter_cxx.z.so with innerapi_tags [platformsdk_indirect, chipsetsdk_indirect] cannot deps system only lib libclang_rt.asan.so in system/lib/libclang_rt.asan.so"
     },
     {
         "so_file_name": "libpulsecommon.z.so",

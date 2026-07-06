@@ -49,7 +49,6 @@
 	"libsync_fence.z.so",
 
 	// chipset modules can be depended by system directly
-	"libaccesstoken_sdk.z.so",
 	"libmetadata.z.so",
 
 	"libhdi_input.z.so",
