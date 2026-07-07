@@ -118,5 +118,11 @@
         "so_file_name": "libunwinder.z.so",
         "path": "//base/hiviewdfx/faultloggerd/interfaces/innerkits/unwinder:libunwinder",
         "headers": []
+    },
+    {
+        "name": "hiviewdfx:libdfx_util",
+        "so_file_name": "libdfx_util.z.so",
+        "path": "//base/hiviewdfx/faultloggerd/common/dfxutil:libdfx_util",
+        "headers": []
     }
 ]
