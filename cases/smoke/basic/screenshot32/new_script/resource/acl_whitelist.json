@@ -382,6 +382,12 @@
     ]
   },
   {
+     "processName": "hiprofilerd",
+     "acls": [
+        "ohos.permission.DUMP"
+     ]
+  },
+  {
     "processName": "mechbody",
     "acls": [
         "ohos.permission.INJECT_INPUT_EVENT"
