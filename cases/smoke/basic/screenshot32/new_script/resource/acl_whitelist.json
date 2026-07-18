@@ -384,7 +384,8 @@
   {
      "processName": "hiprofilerd",
      "acls": [
-        "ohos.permission.DUMP"
+        "ohos.permission.DUMP",
+        "ohos.permission.GET_BUNDLE_INFO"
      ]
   },
   {
