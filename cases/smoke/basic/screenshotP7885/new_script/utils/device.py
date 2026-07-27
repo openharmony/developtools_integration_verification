@@ -401,6 +401,7 @@ class Device:
         self.hdc_file_recv(tmp_file, self.report_path)
         
         # 根据实际屏幕分辨率裁剪截图
+        logging.info(f'截图分辨率: {self.width}x{self.height}')
         crop_picture(save_file, self.width, self.height)
         return save_file
 
