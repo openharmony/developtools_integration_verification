@@ -24,12 +24,12 @@
     "description": "设置和wlan开关测试"
   },
   {
-    "case_file": "testcases/test_camera.py",
-    "description": "照相机测试"
-  },
-  {
     "case_file": "testcases/test_photos.py",
     "description": "图库测试"
+  },
+  {
+    "case_file": "testcases/test_camera.py",
+    "description": "照相机测试"
   },
   {
     "case_file": "testcases/test_contacts.py",
