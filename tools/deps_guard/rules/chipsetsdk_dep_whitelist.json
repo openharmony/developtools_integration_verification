@@ -12039,6 +12039,13 @@
         "description": "lib libmetadata_service_1.1.z.so with innerapi_tags [passthrough] cannot depend vendor only lib libdisplay_buffer_vdi_impl.z.so in vendor/lib64/libdisplay_buffer_vdi_impl.z.so"
     },
     {
+        "so_file_name": "libcodec_component_manager_service_4.0.z.so",
+        "so_file_path": "vendor/lib/passthrough/libcodec_component_manager_service_4.0.z.so",
+        "dep_file_name": "libOMX_Core.z.so",
+        "dep_file_path": "vendor/lib/libOMX_Core.z.so",
+        "description": "libcodec_component_manager_service_4.0.z.so with innerapi_tags [passthrough] cannot depend vendor only file libOMX_Core.z.so with //device/soc/phytium/D3000M/common/gpu_model/ftg340/vpu:libOMX_Core"
+     },
+    {
         "so_file_name": "libuniai.so",
         "so_file_path": "vendor/lib64/libuniai.so",
         "dep_file_name": "ld-musl-aarch64.so.1",
