@@ -376,6 +376,19 @@
     ]
   },
   {
+    "processName": "hiprofilerd",
+    "acls": [
+        "ohos.permission.DUMP",
+        "ohos.permission.GET_BUNDLE_INFO"
+    ]
+  },
+  {
+    "processName": "aimgr",
+    "acls": [
+        "ohos.permission.MANAGE_TOOL_TOKENID"
+    ]
+  },
+  {
     "processName": "mechbody",
     "acls": [
         "ohos.permission.INJECT_INPUT_EVENT"
