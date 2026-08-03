@@ -433,11 +433,5 @@
     "acls": [
       "ohos.permission.MANAGE_TOOL_TOKENID"
     ]
-  },
-  {
-    "processName": "secure_access_fence",
-    "acls": [
-      "ohos.permission.REMOVE_PERMISSION_USED_RECORD"
-    ]
   }
 ]
