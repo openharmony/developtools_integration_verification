@@ -426,5 +426,18 @@
     "acls": [
       "ohos.permission.NOTIFICATION_CONTROLLER"
     ]
+  },
+  {
+    "processName": "secure_access_fence",
+    "acls": [
+      "ohos.permission.REMOVE_PERMISSION_USED_RECORD"
+    ]
+  },
+  {
+    "processName": "object_editor_service",
+    "acls": [
+      "ohos.permission.GRANT_URI_PERMISSION_PRIVILEGED",
+      "ohos.permission.GET_DEFAULT_APPLICATION"
+    ]
   }
 ]
