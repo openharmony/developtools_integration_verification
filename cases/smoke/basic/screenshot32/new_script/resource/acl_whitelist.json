@@ -378,7 +378,8 @@
   {
     "processName": "hiprofiler_plugins",
     "acls": [
-        "ohos.permission.HIVIEW_TRACE_MANAGE"
+        "ohos.permission.HIVIEW_TRACE_MANAGE",
+        "ohos.permission.DUMP"
     ]
   },
   {
