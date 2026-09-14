@@ -120,7 +120,8 @@
       "ohos.permission.CAPTURE_SCREEN",
       "ohos.permission.QUERY_ACCESSIBILITY_ELEMENT",
       "ohos.permission.ACCESS_EXT_SYSTEM_ABILITY",
-      "ohos.permission.GET_PAGE_INFO"
+      "ohos.permission.GET_PAGE_INFO",
+      "ohos.permission.CAMERA_SHARED"
     ]
   },
   {
