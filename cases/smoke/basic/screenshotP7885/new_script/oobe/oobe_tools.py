@@ -5,6 +5,7 @@ import socket
 import logging
 import argparse
 import re
+import shlex
 import shutil
 
 
@@ -72,7 +73,7 @@ class RpcCall:
 
 def shell(*args, **kwargs):
     logging.debug("run_command: %s" % args[0])
-    return subprocess.check_output(*args, shell=True, **kwargs).decode(encoding="utf-8", errors="ignore")
+    return subprocess.check_output(shlex.split(args[0]), shell=False, **kwargs).decode(encoding="utf-8", errors="ignore")
 
 
 class Hdc:
@@ -91,6 +92,12 @@ class Hdc:
         self.hdc_shell_head = " ".join(self.hdc_shell_head)
         self.hdc_cmd_head = " ".join(self.hdc_cmd_head)
 
+    def __call__(self, cmd: str):
+        return shell(self.hdc_cmd_head + " " + cmd)
+
+    def shell(self, cmd: str):
+        return shell(self.hdc_shell_head + " " + '"%s"' % cmd)
+
     def _find_connector_command(self):
         if shutil.which("hdc_std"):
             return "hdc_std"
@@ -108,12 +115,6 @@ class Hdc:
             self.hdc_shell_head = self.hdc_cmd_head.copy()
             self.hdc_shell_head.append("shell")
 
-    def __call__(self, cmd: str):
-        return shell(self.hdc_cmd_head + " " + cmd)
-
-    def shell(self, cmd: str):
-        return shell(self.hdc_shell_head + " " + '"%s"' % cmd)
-
 
 class RpcClient:
 
@@ -124,6 +125,9 @@ class RpcClient:
         self.local_port = get_unused_local_port()
         self.addr = ("127.0.0.1", self.local_port)
         self.fport_item = ""
+
+    def __del__(self):
+        self.clear_fport()
 
     def setup_agent(self):
         result = self.hdc.shell(f"bm dump -a|grep {AGENT_BUNDLE}")
@@ -193,9 +197,6 @@ class RpcClient:
     def clear_fport(self):
         if self.fport_item:
             self.hdc("fport rm %s" % self.fport_item)
-
-    def __del__(self):
-        self.clear_fport()
 
 
 def disable_startup_guide(client: RpcClient):
