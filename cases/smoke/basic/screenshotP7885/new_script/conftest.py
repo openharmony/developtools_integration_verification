@@ -1,5 +1,7 @@
 import logging
 import os.path
+import subprocess
+import sys
 import time
 
 import pytest
@@ -7,6 +9,37 @@ import pytest
 from utils.device import Device
 
 BASE_DIR = os.path.dirname(__file__)
+
+DISABLE_OOBE_SCRIPT_DIR = os.path.join(BASE_DIR, 'oobe')
+DISABLE_OOBE_SCRIPT = 'oobe_tools.py'
+
+
+def skip_startup_guide(sn):
+    script_path = os.path.join(DISABLE_OOBE_SCRIPT_DIR, DISABLE_OOBE_SCRIPT)
+    if not os.path.exists(script_path):
+        logging.info('StartupGuide: 跳过开机导航脚本不存在: {}, 跳过此步骤'.format(script_path))
+        return
+    logging.info('StartupGuide: 开始执行脚本跳过开机导航程序...')
+    cmd = [sys.executable, script_path, '-f', 'disable_oobe']
+    if sn:
+        cmd.extend(['--sn', sn])
+    try:
+        rst = subprocess.run(cmd, cwd=DISABLE_OOBE_SCRIPT_DIR, capture_output=True,
+                             encoding='utf-8', timeout=180)
+    except subprocess.TimeoutExpired:
+        logging.info('StartupGuide: 跳过开机导航程序超时')
+        return
+    except Exception as e:
+        logging.info('StartupGuide: 跳过开机导航程序异常: {}'.format(e))
+        return
+    if rst.stdout:
+        logging.info('StartupGuide: {}'.format(rst.stdout))
+    if rst.stderr:
+        logging.info('StartupGuide: {}'.format(rst.stderr))
+    if rst.returncode != 0:
+        logging.info('StartupGuide: 跳过开机导航程序失败, 返回码: {}'.format(rst.returncode))
+    else:
+        logging.info('StartupGuide: 跳过开机导航程序完成')
 
 
 def pytest_addoption(parser):
@@ -37,6 +70,9 @@ def setup_teardown(request, device):
     device.set_screen_timeout()
     device.unlock()
     time.sleep(5)
+    if not getattr(device, '_startup_guide_skipped', False):
+        skip_startup_guide(device.sn)
+        device._startup_guide_skipped = True
     #device.go_home()
     time.sleep(1)
     if device.get_focus_window() == 'SystemDialog1':
